@@ -18,6 +18,68 @@ document.addEventListener("partialsLoaded", () => {
 
   let CHAT_API_URL = null;
 
+  /* ================= WEBSITE CONTEXT ================= */
+  const WEBSITE_CONTEXT = `You are an AI assistant for HSBTE PYQ website (hsbtepyq.com). Your role is to help students with information about:
+
+**Website Content:**
+- HSBTE (Haryana State Board of Technical Education) Previous Year Question Papers (PYQ)
+- Haryana LEET (Lateral Entry Engineering Test) - BTech LEET and B.Pharmacy LEET
+- All branches offered by Haryana Polytechnic (HSBTE): Computer Engineering, Civil Engineering, Mechanical Engineering, Electronics & Communication (ECE), Electrical Engineering, Automobile Engineering, Chemical Engineering, Agriculture Engineering, Food Technology, D.Pharmacy, Business Management (DBM), Medical Laboratory Technology, Office Management & Computer Application, Adv. Diploma in Tool & Die, Automation & Robotics, Fashion Design, Fashion Technology, Textile Design, Textile Processing, Textile Technology, Ceramic Engineering, Architectural Assistantship, AI & Machine Learning, Finance Accounts & Auditing, Hotel Management, Instrumentation & Control, Library & Information Science, Medical Electronics, Plastic Technology
+
+- Semesters: 1st, 2nd, 3rd, 4th, 5th, and 6th semester question papers
+- Exam sessions: Jan-Feb, Jul-Aug, Dec-Jan, Jun-Jul, Nov-Dec for various years (2023, 2024, 2025)
+- LEET sample papers for BTech and B.Pharmacy
+- Syllabus, exam patterns, cutoffs, prospectus, key dates
+
+**Important Guidelines:**
+1. ONLY answer questions related to HSBTE, PYQ, LEET, branches, semesters, exam papers, syllabus, or related educational topics
+2. For basic greetings (hi, hello, hey, good morning, etc.), respond politely and ask how you can help with HSBTE/LEET
+3. If asked about topics NOT related to HSBTE, PYQ, LEET, or education (like cooking, sports, politics, general knowledge, etc.), respond: "I am not trained for this task. I can only help you with HSBTE PYQ, LEET, and related educational topics. How can I assist you with that?"
+4. Be helpful, friendly, and informative about HSBTE and LEET topics
+5. Guide users to find question papers, understand exam patterns, and prepare for exams
+
+**Key Information:**
+- The website provides free PDF downloads of previous year question papers
+- Almost 90% of questions repeat from previous years
+- Students should practice last 4-5 years' papers for best results
+- LEET allows diploma students direct admission into BTech/B.Pharmacy courses`;
+
+  /* ================= RELEVANCE CHECK ================= */
+  function isRelevantQuestion(text) {
+    const lowerText = text.toLowerCase();
+    
+    // Basic greetings - always allowed
+    const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'namaste', 'thanks', 'thank you', 'bye', 'goodbye'];
+    if (greetings.some(g => lowerText.includes(g) && lowerText.length < 30)) {
+      return true;
+    }
+    
+    // Relevant keywords
+    const relevantKeywords = [
+      'hsbte', 'pyq', 'previous year', 'question paper', 'leet', 'lateral entry',
+      'btech', 'b.tech', 'pharmacy', 'b.pharmacy', 'diploma', 'polytechnic',
+      'computer', 'civil', 'mechanical', 'ece', 'electrical', 'automobile',
+      'chemical', 'agriculture', 'food tech', 'dbm', 'semester', 'exam',
+      'syllabus', 'cutoff', 'prospectus', 'sample paper', 'result', 'admission',
+      'haryana', 'hstes', 'tech admission', 'aicte', 'dcrust', 'ymca',
+      'engineering', 'branch', 'subject', 'paper', 'download', 'pdf'
+    ];
+    
+    return relevantKeywords.some(keyword => lowerText.includes(keyword));
+  }
+
+  /* ================= BASIC GREETING CHECK ================= */
+  function isBasicGreeting(text) {
+    const lowerText = text.toLowerCase().trim();
+    const greetings = [
+      'hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening',
+      'greetings', 'namaste', 'namaskar', 'hi there', 'hello there',
+      'hey there', 'howdy', 'what\'s up', 'sup'
+    ];
+    
+    return greetings.some(g => lowerText === g || lowerText.startsWith(g + ' ') || lowerText === g + '!');
+  }
+
   /* ================= CHAT UI ================= */
   toggleBtn.onclick = () => {
     chatBox.style.display = "flex";
@@ -112,24 +174,53 @@ true
     addMessage(text, "user");
     input.value = "";
 
+    // Check if question is relevant
+    if (!isRelevantQuestion(text)) {
+      addMessage("I am not trained for this task. I can only help you with HSBTE PYQ, LEET, and related educational topics. How can I assist you with that?", "bot", true);
+      return;
+    }
+
+    // Handle basic greetings
+    if (isBasicGreeting(text)) {
+      addMessage("Hello! 👋 I'm here to help you with HSBTE PYQ, LEET, and related questions. What would you like to know?", "bot", true);
+      return;
+    }
+
     try {
+      // Create prompt with context
+      const prompt = `${WEBSITE_CONTEXT}\n\nUser Question: ${text}\n\nProvide a helpful answer based on the website content. If the question is not fully covered by the website information, say what you know and guide them to explore the website.`;
+
       const res = await fetch(CHAT_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [{ parts: [{ text }] }]
+          contents: [{
+            parts: [{
+              text: prompt
+            }]
+          }],
+          generationConfig: {
+            temperature: 0.7,
+            topK: 40,
+            topP: 0.95,
+            maxOutputTokens: 1024,
+          }
         })
       });
 
       const data = await res.json();
-      const reply =
-        data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "Try asking differently 🙂";
+      let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Try asking differently 🙂";
+      
+      // Additional safety check - if reply seems off-topic, provide default response
+      if (!isRelevantQuestion(reply) && reply.length > 50) {
+        reply = "I can help you with HSBTE PYQ, LEET, branches, semesters, and exam-related questions. Could you please ask something specific about these topics?";
+      }
 
       addMessage(reply, "bot", true);
 
-    } catch {
-      addMessage("⚠️ Network issue", "bot", true);
+    } catch (err) {
+      console.error("Chatbot error:", err);
+      addMessage("⚠️ Network issue. Please try again.", "bot", true);
     }
   }
 
