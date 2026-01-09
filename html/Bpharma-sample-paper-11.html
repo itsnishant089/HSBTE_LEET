@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OCET B.Pharmacy (Lateral Entry) 2025 – Final Mock</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#f2f2f2}
+.wrapper{max-width:1200px;margin:10px auto;background:#eaeaea;border:2px solid #999}
+.header{display:grid;grid-template-columns:1fr 1fr 1fr;padding:8px}
+.box{border:1px solid #1e40af;background:#fff;padding:6px;font-size:13px}
+.main{display:grid;grid-template-columns:220px 1fr 220px;gap:6px;padding:6px}
+.left,.center,.right{background:#fff;border:1px solid #999}
+.left{height:520px;overflow:auto}
+.left table{width:100%;border-collapse:collapse;font-size:12px}
+.left td,.left th{border:1px solid #ccc;padding:3px;text-align:center;cursor:pointer}
+.center{padding:12px}
+.right{padding:10px}
+.options label{display:block;margin:8px 0}
+.controls{text-align:center;padding:10px}
+.controls button{padding:6px 14px;margin:4px}
+.timer{color:red;font-weight:bold}
+.final{display:none;text-align:center;padding:60px;font-size:22px}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+<div class="header">
+<div class="box"><b>OCET 2025</b><br>B.Pharmacy (Lateral Entry)</div>
+<div class="box" style="text-align:center"><b>Haryana – Online Common Entrance Test</b></div>
+<div class="box" style="text-align:right">Time Left: <span id="time" class="timer">90:00</span></div>
+</div>
+
+<div class="main" id="exam">
+<div class="left">
+<table>
+<tr><th>Q</th><th>A</th></tr>
+<tbody id="nav"></tbody>
+</table>
+</div>
+
+<div class="center">
+<div id="qno" style="font-weight:bold;color:#1e40af"></div>
+<div id="qtext" style="margin-top:14px"></div>
+</div>
+
+<div class="right">
+<b>Select Answer</b>
+<div id="opts" class="options"></div>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<button onclick="firstQ()">First</button>
+<button onclick="prevQ()">Previous</button>
+<button onclick="nextQ()">Next</button>
+<button onclick="lastQ()">Last</button><br>
+<button onclick="clearAns()">DeSelect</button>
+<button onclick="endTest()">End Test</button>
+</div>
+
+<div class="final" id="final">
+<h2>TEST COMPLETED</h2>
+<p>Total Questions: 90</p>
+<p><b>Your Score:</b> <span id="score"></span></p>
+</div>
+
+</div>
+
+<script>
+/* ================= QUESTIONS (90) ================= */
+const questions = [
+/* Pharmaceutics (10) */
+{q:"Angle of repose is an indicator of",o:["Particle size","Flow property","Density","Porosity"],a:1},
+{q:"Blister packaging mainly protects against",o:["Light","Moisture","Microbes","Heat"],a:1},
+{q:"Lyophilization is suitable for drugs which are",o:["Heat stable","Thermolabile","Volatile","Insoluble"],a:1},
+{q:"Preservative efficacy testing evaluates",o:["Sterility","Antimicrobial effectiveness","pH","Clarity"],a:1},
+{q:"Most suitable filter for sterilizing injections",o:["0.45 µm","0.22 µm","1 µm","5 µm"],a:1},
+{q:"Granulation improves tablets by enhancing",o:["Solubility","Flow & compressibility","Taste","Stability"],a:1},
+{q:"Disintegration time for uncoated tablets (IP)",o:["15 min","30 min","45 min","60 min"],a:1},
+{q:"Primary packaging material for injections",o:["Plastic","Glass","Rubber","Aluminium"],a:1},
+{q:"Quality assurance mainly ensures",o:["Testing","Consistency","Manufacturing","Sampling"],a:1},
+{q:"Controlled release dosage forms reduce",o:["Dose","Dosing frequency","Side effects","Potency"],a:1},
+
+/* Pharmaceutical Chemistry (12) */
+{q:"Limit test for chloride depends on formation of",o:["Precipitate","Color","Turbidity","Complex"],a:2},
+{q:"Major source of pharmaceutical impurities",o:["Containers","Manufacturing","Transport","Storage"],a:1},
+{q:"Sulfonamide drug is",o:["Ampicillin","Sulfamethoxazole","Ciprofloxacin","Isoniazid"],a:1},
+{q:"Benzodiazepines act on",o:["NMDA","GABA-A","Dopamine","Serotonin"],a:1},
+{q:"Drug used in hypertensive emergency",o:["Amlodipine","Hydralazine","Propranolol","Enalapril"],a:1},
+{q:"Thiazide diuretics act on",o:["PCT","DCT","Loop","CD"],a:1},
+{q:"NSAIDs inhibit",o:["LOX","COX","PLA2","Protease"],a:1},
+{q:"Antimalarial quinine source",o:["Cinchona","Artemisia","Rauwolfia","Digitalis"],a:0},
+{q:"Beta-lactam antibiotic",o:["Gentamicin","Erythromycin","Penicillin","Tetracycline"],a:2},
+{q:"First pass metabolism occurs in",o:["Kidney","Liver","Lung","Heart"],a:1},
+{q:"Insulin sensitizer drug",o:["Glibenclamide","Metformin","Insulin","Acarbose"],a:1},
+{q:"Cytotoxic drugs treat",o:["Infections","Cancer","Diabetes","Hypertension"],a:1},
+
+/* Pharmacognosy (10) */
+{q:"Alkaloids are",o:["Acidic","Basic nitrogenous","Neutral","Glycosidic"],a:1},
+{q:"Cardiotonic glycosides source",o:["Senna","Digitalis","Ginger","Cinchona"],a:1},
+{q:"Major constituent of clove oil",o:["Menthol","Eugenol","Camphor","Cineole"],a:1},
+{q:"Senna is used as",o:["Carminative","Laxative","Astringent","Diuretic"],a:1},
+{q:"Volatile oils obtained by",o:["Maceration","Steam distillation","Expression","Percolation"],a:1},
+{q:"Morphine source",o:["Belladonna","Opium","Hyoscyamus","Coca"],a:1},
+{q:"Adulteration causes",o:["High potency","Low quality","Stability","No change"],a:1},
+{q:"Rauwolfia is antihypertensive due to",o:["Reserpine","Quinine","Morphine","Caffeine"],a:0},
+{q:"Tannins are",o:["Alkaloids","Polyphenols","Terpenes","Resins"],a:1},
+{q:"Surgical dressing fiber",o:["Jute","Cotton","Coir","Flax"],a:1},
+
+/* HAP (8) */
+{q:"Functional unit of kidney",o:["Neuron","Nephron","Alveoli","Glomerulus"],a:1},
+{q:"Normal adult heart rate",o:["60–80","72","90","100"],a:1},
+{q:"RBC lifespan",o:["60 days","90 days","120 days","180 days"],a:2},
+{q:"Main respiratory muscle",o:["Intercostal","Diaphragm","Lung","Trachea"],a:1},
+{q:"Hormone regulating blood sugar",o:["Thyroxine","Insulin","Adrenaline","Cortisol"],a:1},
+{q:"Bile is secreted by",o:["Gall bladder","Liver","Pancreas","Duodenum"],a:1},
+{q:"Neuron impulse direction",o:["Axon→Dendrite","Dendrite→Axon","Bidirectional","Random"],a:1},
+{q:"Largest bone",o:["Femur","Humerus","Tibia","Skull"],a:0},
+
+/* Social Pharmacy (8) */
+{q:"WHO defines health as",o:["Absence of disease","Complete wellbeing","Fitness","Longevity"],a:1},
+{q:"National Health Mission launched in",o:["2000","2005","2010","2015"],a:1},
+{q:"Primary prevention focuses on",o:["Early diagnosis","Treatment","Prevention","Rehabilitation"],a:2},
+{q:"Herd immunity is achieved by",o:["Treatment","Vaccination","Isolation","Sanitation"],a:1},
+{q:"BMI indicates",o:["Nutrition","Obesity","Health status","All"],a:3},
+{q:"Pharmacoeconomics studies",o:["Drug cost","Health outcomes","Cost vs benefit","Manufacturing"],a:2},
+{q:"SDGs replaced",o:["MDGs","NHP","NHM","WHO"],a:0},
+{q:"Junk food causes",o:["Malnutrition","Obesity","Deficiency","All"],a:3},
+
+/* Pharmacology (12) */
+{q:"Therapeutic index is ratio of",o:["ED50/TD50","TD50/ED50","LD50/ED50","ED50/LD50"],a:1},
+{q:"Drug antagonism example",o:["Agonist","Synergism","Competitive","Additive"],a:2},
+{q:"Beta blockers used in",o:["Asthma","Hypertension","Diabetes","Ulcer"],a:1},
+{q:"Heparin is",o:["Anticoagulant","Antiplatelet","Fibrinolytic","Coagulant"],a:0},
+{q:"Drug for Parkinson’s disease",o:["Haloperidol","Levodopa","Diazepam","Fluoxetine"],a:1},
+{q:"Antihistamines block",o:["H1","H2","H3","H4"],a:0},
+{q:"Digoxin acts on",o:["Heart","Kidney","Lung","Liver"],a:0},
+{q:"Salbutamol is",o:["Beta agonist","Beta blocker","Alpha agonist","Alpha blocker"],a:0},
+{q:"Antibiotics act by",o:["Immunity","Bactericidal","Protein synthesis","All"],a:3},
+{q:"Morphine causes",o:["Diarrhea","Constipation","Cough","Alertness"],a:1},
+{q:"NSAIDs cause gastric ulcer by inhibiting",o:["COX-2","COX-1","PLA2","LOX"],a:1},
+{q:"Insulin is degraded in",o:["Stomach","Blood","Liver","Kidney"],a:2},
+
+/* Community Pharmacy & Management (6) */
+{q:"OTC drugs are",o:["Prescription","Non-prescription","Controlled","Schedule H"],a:1},
+{q:"Patient counseling improves",o:["Compliance","Errors","Cost","Side effects"],a:0},
+{q:"Good pharmacy practice ensures",o:["Profit","Safety","Speed","Promotion"],a:1},
+{q:"SOP stands for",o:["Standard Operating Procedure","System of Pharmacy","Safety Operating Plan","None"],a:0},
+{q:"Medication adherence means",o:["Correct intake","Overuse","Misuse","Non-use"],a:0},
+{q:"Inventory control prevents",o:["Expiry","Loss","Shortage","All"],a:3},
+
+/* Biochemistry & Clinical Pathology (8) */
+{q:"Glucose is a",o:["Disaccharide","Monosaccharide","Polysaccharide","Oligosaccharide"],a:1},
+{q:"Protein deficiency causes",o:["Scurvy","Kwashiorkor","Rickets","Beriberi"],a:1},
+{q:"Cholesterol transported by",o:["HDL","LDL","VLDL","All"],a:3},
+{q:"DNA sugar is",o:["Ribose","Deoxyribose","Glucose","Fructose"],a:1},
+{q:"Enzymes are",o:["Proteins","Carbohydrates","Lipids","Vitamins"],a:0},
+{q:"Normal blood glucose fasting",o:["60–100","70–110","80–120","90–140"],a:1},
+{q:"Urea formed in",o:["Kidney","Liver","Muscle","Blood"],a:1},
+{q:"Electrolyte imbalance affects",o:["Heart","Muscle","Nerves","All"],a:3},
+
+/* Pharmacotherapeutics (8) */
+{q:"Hypertension first line therapy includes",o:["Diuretics","Steroids","NSAIDs","Antibiotics"],a:0},
+{q:"Asthma treatment includes",o:["Bronchodilators","Antibiotics","Antivirals","Diuretics"],a:0},
+{q:"Diabetes type-1 requires",o:["Oral drugs","Diet","Insulin","Exercise"],a:2},
+{q:"Peptic ulcer caused by",o:["NSAIDs","H. pylori","Stress","All"],a:3},
+{q:"Anemia treated with",o:["Iron","Calcium","Zinc","Magnesium"],a:0},
+{q:"Depression treated with",o:["Antipsychotics","Antidepressants","Sedatives","Analgesics"],a:1},
+{q:"Epilepsy managed by",o:["Antibiotics","Anticonvulsants","Steroids","Diuretics"],a:1},
+{q:"Rheumatoid arthritis treated with",o:["NSAIDs","Antibiotics","Insulin","Antivirals"],a:0},
+
+/* Hospital & Clinical Pharmacy (6) */
+{q:"GPP in hospitals ensures",o:["Profit","Safety","Speed","Promotion"],a:1},
+{q:"Clinical pharmacist role includes",o:["Dispensing","Therapy monitoring","Billing","Marketing"],a:1},
+{q:"Medication error means",o:["Wrong drug","Wrong dose","Wrong route","All"],a:3},
+{q:"Pharmacovigilance monitors",o:["Efficacy","ADR","Cost","Quality"],a:1},
+{q:"NABH relates to",o:["Hospital quality","Drug quality","Education","Research"],a:0},
+{q:"Inventory control method",o:["ABC","FIFO","LIFO","All"],a:3},
+
+/* Pharmacy Law & Ethics (4) */
+{q:"Pharmacy Act enacted in",o:["1940","1948","1954","1960"],a:1},
+{q:"Schedule H drugs sold by",o:["Any store","Prescription only","OTC","Online"],a:1},
+{q:"NDPS Act deals with",o:["Cosmetics","Narcotics","Food","Medical devices"],a:1},
+{q:"Code of ethics focuses on",o:["Profit","Professional conduct","Marketing","Promotion"],a:1}
+];
+
+/* ================= LOGIC ================= */
+let idx=0, ans=Array(90).fill(null), time=90*60;
+let timerInterval, finished=false;
+
+const nav=document.getElementById("nav"),
+qno=document.getElementById("qno"),
+qtext=document.getElementById("qtext"),
+opts=document.getElementById("opts");
+
+function renderNav(){
+ nav.innerHTML="";
+ for(let i=0;i<90;i++){
+  nav.innerHTML+=`<tr onclick="go(${i})"><td>${i+1}</td><td>${ans[i]==null?"x":["a","b","c","d"][ans[i]]}</td></tr>`;
+ }
+}
+
+function render(){
+ let q=questions[idx];
+ qno.innerText="Question "+(idx+1);
+ qtext.innerText=q.q;
+ opts.innerHTML="";
+ q.o.forEach((x,i)=>{
+  opts.innerHTML+=`<label><input type="radio" name="o" ${ans[idx]==i?"checked":""} onclick="ans[${idx}]=${i};renderNav()"> ${x}</label>`;
+ });
+ renderNav();
+}
+
+function go(i){idx=i;render();}
+function nextQ(){if(idx<89){idx++;render();}}
+function prevQ(){if(idx>0){idx--;render();}}
+function firstQ(){idx=0;render();}
+function lastQ(){idx=89;render();}
+function clearAns(){ans[idx]=null;render();}
+function endTest(){if(!finished && confirm("End Test?"))finish();}
+
+function finish(){
+ if(finished)return;
+ finished=true;
+ clearInterval(timerInterval);
+ document.getElementById("exam").style.display="none";
+ document.getElementById("controls").style.display="none";
+ document.getElementById("final").style.display="block";
+ let score=0;
+ questions.forEach((q,i)=>{if(ans[i]===q.a)score++;});
+ document.getElementById("score").innerText=score;
+}
+
+timerInterval=setInterval(()=>{
+ let m=Math.floor(time/60),s=time%60;
+ document.getElementById("time").innerText=`${m}:${s.toString().padStart(2,"0")}`;
+ if(--time<0)finish();
+},1000);
+
+render();
+</script>
+</body>
+</html>

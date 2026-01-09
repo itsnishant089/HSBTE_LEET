@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haryana LEET 2025 - 90 Question Real Mock</title>
+    <style>
+        :root {
+            --primary: #2c3e50; --accent: #3498db; --success: #27ae60;
+            --danger: #e74c3c; --warning: #f39c12; --bg: #f4f7f6;
+        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        header { position: sticky; top: 0; background: white; padding: 15px; border-bottom: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .timer-box { font-size: 1.6rem; font-weight: bold; color: var(--danger); background: #fff0f0; padding: 8px 20px; border-radius: 8px; border: 2px solid var(--danger); }
+        .section-title { background: var(--primary); color: white; padding: 10px 20px; margin: 30px 0 15px 0; border-radius: 5px; font-size: 1rem; text-transform: uppercase; }
+        .question-card { margin-bottom: 25px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background: #fff; }
+        .q-text { font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 15px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .option-label { display: block; padding: 12px; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .option-label:hover { background: #f0f7ff; }
+        .submit-btn { background: var(--success); color: white; border: none; padding: 15px 45px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; width: 100%; max-width: 350px; display: block; margin: 20px auto; font-weight: bold; }
+        #results { display: none; text-align: center; }
+        .stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 25px 0; }
+        .stat-card { padding: 20px; border-radius: 10px; color: white; font-weight: bold; }
+        .bg-cor { background: var(--success); } .bg-att { background: var(--accent); } .bg-wro { background: var(--danger); } .bg-skp { background: var(--warning); }
+        .review-q { text-align: left; margin-top: 20px; }
+        .correct-ans { border: 2px solid var(--success); background: #f0fff0; }
+        .wrong-ans { border: 2px solid var(--danger); background: #fff5f5; }
+        .skipped-ans { border: 2px solid var(--warning); background: #fffcf0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1 style="margin:0; font-size: 1.5rem;">LEET 2025 Official Mock</h1>
+            <p style="margin:0; color: #666;">Full Syllabus 90 Questions</p>
+        </div>
+        <div id="timer" class="timer-box">90:00</div>
+    </header>
+
+    <div id="quiz-screen">
+        <form id="quizForm"><div id="questions-list"></div><button type="button" class="submit-btn" onclick="submitExam()">Submit Exam</button></form>
+    </div>
+
+    <div id="results">
+        <h2>Results Dashboard</h2>
+        <div class="stats-dashboard">
+            <div class="stat-card bg-cor">Correct: <span id="res-cor">0</span></div>
+            <div class="stat-card bg-att">Attempted: <span id="res-att">0</span></div>
+            <div class="stat-card bg-wro">Wrong: <span id="res-wro">0</span></div>
+            <div class="stat-card bg-skp">Skipped: <span id="res-skp">0</span></div>
+        </div>
+        <button class="submit-btn" style="background:#e67e22" onclick="downloadQAPDF()">Download Question & Answer PDF</button>
+        <button onclick="location.reload()" class="submit-btn" style="background: var(--accent);">Restart</button>
+        <div id="review-area" class="review-q"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    const questions = [
+        // a-1 MATHEMATICS (8)
+        { s: "a-1 Mathematics", q: "The value of log(10) to the base 10 is:", o: ["0", "1", "10", "e"], a: 1 },
+        { s: "a-1 Mathematics", q: "The derivative of tan x is:", o: ["sec x", "sec^2 x", "cot x", "-sec^2 x"], a: 1 },
+        { s: "a-1 Mathematics", q: "The nth term of an AP is 3n+1. The common difference is:", o: ["1", "3", "4", "2"], a: 1 },
+        { s: "a-1 Mathematics", q: "If A is a square matrix, then (A + A') is always:", o: ["Symmetric", "Skew-symmetric", "Identity", "Null"], a: 0 },
+        { s: "a-1 Mathematics", q: "The integration of 1/x dx is:", o: ["x", "log x", "e^x", "1"], a: 1 },
+        { s: "a-1 Mathematics", q: "i^2 is equal to:", o: ["1", "0", "-1", "i"], a: 2 },
+        { s: "a-1 Mathematics", q: "The probability of getting a sum 7 with two dice is:", o: ["1/6", "1/12", "5/36", "1/3"], a: 0 },
+        { s: "a-1 Mathematics", q: "The median of 10, 12, 14, 16, 18 is:", o: ["12", "14", "16", "15"], a: 1 },
+
+        // a-2 PHYSICS (8)
+        { s: "a-2 Physics", q: "The S.I. unit of viscosity is:", o: ["Pascal", "Newton", "Poise", "Joule"], a: 2 },
+        { s: "a-2 Physics", q: "Work done is a ____ quantity:", o: ["Scalar", "Vector", "Both", "None"], a: 0 },
+        { s: "a-2 Physics", q: "The refractive index of diamond is approximately:", o: ["1.33", "1.5", "2.42", "1.0"], a: 2 },
+        { s: "a-2 Physics", q: "Newton's first law of motion defines:", o: ["Energy", "Force", "Inertia", "Power"], a: 2 },
+        { s: "a-2 Physics", q: "A convex lens acts as a ____ lens:", o: ["Diverging", "Converging", "Plane", "None"], a: 1 },
+        { s: "a-2 Physics", q: "Unit of capacitance is:", o: ["Henry", "Farad", "Ohm", "Tesla"], a: 1 },
+        { s: "a-2 Physics", q: "Laser stands for Light Amplification by ____ Emission of Radiation:", o: ["Spontaneous", "Stimulated", "Spread", "None"], a: 1 },
+        { s: "a-2 Physics", q: "The dimension of force is:", o: ["MLT-1", "MLT-2", "ML2T-2", "ML-1T-2"], a: 1 },
+
+        // a-3 CHEMISTRY (3)
+        { s: "a-3 Chemistry", q: "pH of pure water is:", o: ["0", "1", "7", "14"], a: 2 },
+        { s: "a-3 Chemistry", q: "Temporary hardness of water is due to:", o: ["Chlorides", "Sulphates", "Bicarbonates", "Nitrates"], a: 2 },
+        { s: "a-3 Chemistry", q: "Atomic number of Calcium (Ca) is:", o: ["10", "15", "20", "25"], a: 2 },
+
+        // a-4 COMM SKILLS (3)
+        { s: "a-4 Communication Skills", q: "Antonym of 'Success' is:", o: ["Victory", "Failure", "Win", "Gain"], a: 1 },
+        { s: "a-4 Communication Skills", q: "He is fond ___ music:", o: ["at", "of", "in", "to"], a: 1 },
+        { s: "a-4 Communication Skills", q: "Passive voice of 'I eat an apple':", o: ["An apple is eaten by me", "An apple was eaten by me", "Apple eaten", "None"], a: 0 },
+
+        // a-5 GK HARYANA (3)
+        { s: "a-5 General Awareness", q: "How many districts are in Haryana?", o: ["20", "22", "25", "28"], a: 1 },
+        { s: "a-5 General Awareness", q: "The capital of Haryana is:", o: ["Hisar", "Rohtak", "Chandigarh", "Delhi"], a: 2 },
+        { s: "a-5 General Awareness", q: "Admission to B.E/B.Tech through LEET is in:", o: ["1st Year", "2nd Year", "3rd Year", "None"], a: 1 },
+
+        // b-1 ELECTRICAL (9)
+        { s: "b-1 Electrical", q: "Kirchhoff's Current Law (KCL) is based on conservation of:", o: ["Energy", "Charge", "Mass", "Momentum"], a: 1 },
+        { s: "b-1 Electrical", q: "Unit of resistance is:", o: ["Volt", "Ampere", "Ohm", "Watt"], a: 2 },
+        { s: "b-1 Electrical", q: "A transformer works on the principle of:", o: ["Self induction", "Mutual induction", "Lorentz law", "None"], a: 1 },
+        { s: "b-1 Electrical", q: "In a 3-phase system, the phases are displaced by:", o: ["90°", "120°", "180°", "360°"], a: 1 },
+        { s: "b-1 Electrical", q: "DC motor converts:", o: ["Mech to Elec", "Elec to Mech", "Elec to Heat", "None"], a: 1 },
+        { s: "b-1 Electrical", q: "The frequency of DC is:", o: ["50Hz", "60Hz", "0Hz", "100Hz"], a: 2 },
+        { s: "b-1 Electrical", q: "Power factor of a pure resistor is:", o: ["0", "0.5", "1", "Infinite"], a: 2 },
+        { s: "b-1 Electrical", q: "A step-up transformer increases:", o: ["Current", "Voltage", "Power", "Frequency"], a: 1 },
+        { s: "b-1 Electrical", q: "Laminated cores in transformers reduce:", o: ["Copper loss", "Eddy current loss", "Hysteresis", "None"], a: 1 },
+
+        // b-2 ELECTRONICS (8)
+        { s: "b-2 Electronics", q: "Zener diode is used for:", o: ["Rectification", "Amplification", "Voltage Regulation", "Oscillation"], a: 2 },
+        { s: "b-2 Electronics", q: "NAND is a ____ gate:", o: ["Basic", "Universal", "Special", "None"], a: 1 },
+        { s: "b-2 Electronics", q: "Full form of CRO is:", o: ["Cathode Ray Output", "Cathode Ray Oscilloscope", "Current Ray Output", "None"], a: 1 },
+        { s: "b-2 Electronics", q: "In binary, 1 + 1 equals:", o: ["2", "10", "11", "0"], a: 1 },
+        { s: "b-2 Electronics", q: "Ideal OPAMP input impedance is:", o: ["Zero", "Low", "Infinite", "1k Ohm"], a: 2 },
+        { s: "b-2 Electronics", q: "BJT has how many terminals?", o: ["2", "3", "4", "5"], a: 1 },
+        { s: "b-2 Electronics", q: "LED works in ____ bias:", o: ["Forward", "Reverse", "Both", "None"], a: 0 },
+        { s: "b-2 Electronics", q: "SCR is a ____ layer device:", o: ["2", "3", "4", "5"], a: 2 },
+
+        // b-3 COMPUTER (8)
+        { s: "b-3 Computer", q: "Primary memory is:", o: ["Hard Disk", "RAM", "CD", "Pen Drive"], a: 1 },
+        { s: "b-3 Computer", q: "OSI model has ____ layers:", o: ["5", "6", "7", "8"], a: 2 },
+        { s: "b-3 Computer", q: "In C, which loop executes at least once?", o: ["for", "while", "do-while", "None"], a: 2 },
+        { s: "b-3 Computer", q: "LAN stands for:", o: ["Local Area Network", "Large Area Network", "Linked Area", "None"], a: 0 },
+        { s: "b-3 Computer", q: "Binary number system has base:", o: ["10", "8", "2", "16"], a: 2 },
+        { s: "b-3 Computer", q: "Brain of computer is:", o: ["Monitor", "ALU", "CPU", "RAM"], a: 2 },
+        { s: "b-3 Computer", q: "Which is a volatile memory?", o: ["ROM", "RAM", "HDD", "SSD"], a: 1 },
+        { s: "b-3 Computer", q: "In C, symbol for bitwise AND is:", o: ["&", "&&", "|", "!"], a: 0 },
+
+        // c-1 MECHANICAL (8)
+        { s: "c-1 Mechanical", q: "The ratio of stress to strain within elastic limit is:", o: ["Poisson ratio", "Young's Modulus", "Bulk Modulus", "None"], a: 1 },
+        { s: "c-1 Mechanical", q: "Bernoulli's theorem deals with conservation of:", o: ["Mass", "Momentum", "Energy", "Force"], a: 2 },
+        { s: "c-1 Mechanical", q: "The first law of thermodynamics is law of conservation of:", o: ["Mass", "Momentum", "Energy", "Heat"], a: 2 },
+        { s: "c-1 Mechanical", q: "A screw jack works on the principle of:", o: ["Lever", "Inclined Plane", "Pulley", "Wheel"], a: 1 },
+        { s: "c-1 Mechanical", q: "Unit of power is:", o: ["Joule", "Watt", "Newton", "Pascal"], a: 1 },
+        { s: "c-1 Mechanical", q: "Hooke's law is valid up to:", o: ["Yield point", "Elastic limit", "Plastic limit", "None"], a: 1 },
+        { s: "c-1 Mechanical", q: "Otto cycle is used in:", o: ["Petrol engine", "Diesel engine", "Steam engine", "None"], a: 0 },
+        { s: "c-1 Mechanical", q: "Heat transfer in solids is by:", o: ["Conduction", "Convection", "Radiation", "None"], a: 0 },
+
+        // c-2 PRODUCTION (6)
+        { s: "c-2 Production", q: "Lathe bed is made of:", o: ["Cast Iron", "Mild Steel", "HSS", "Aluminum"], a: 0 },
+        { s: "c-2 Production", q: "In milling, material is removed by:", o: ["Single point tool", "Multi point tool", "Abrasive", "None"], a: 1 },
+        { s: "c-2 Production", q: "Annealing is used for:", o: ["Hardening", "Soften", "Refining", "None"], a: 1 },
+        { s: "c-2 Production", q: "Least count of vernier caliper is generally:", o: ["0.1 mm", "0.02 mm", "1 mm", "0.5 mm"], a: 1 },
+        { s: "c-2 Production", q: "First angle projection: object is in:", o: ["1st Quadrant", "2nd Quadrant", "3rd Quadrant", "4th Quadrant"], a: 0 },
+        { s: "c-2 Production", q: "Welding is a ____ joint:", o: ["Temporary", "Permanent", "Semi-permanent", "None"], a: 1 },
+
+        // c-3 AUTO (6)
+        { s: "c-3 Automobile", q: "Clutch is located between:", o: ["Engine & Gearbox", "Gearbox & Axle", "Axle & Wheel", "None"], a: 0 },
+        { s: "c-3 Automobile", q: "ABS stands for:", o: ["Anti-lock Braking System", "Auto Brake System", "Active Brake", "None"], a: 0 },
+        { s: "c-3 Automobile", q: "In a 4-stroke engine, one cycle is completed in:", o: ["1 Rev", "2 Rev", "3 Rev", "4 Rev"], a: 1 },
+        { s: "c-3 Automobile", q: "Differential allows wheels to:", o: ["Stop", "Rotate at different speeds", "Rotate same speed", "None"], a: 1 },
+        { s: "c-3 Automobile", q: "Battery used in cars is usually:", o: ["Lead-Acid", "Lithium", "Dry cell", "None"], a: 0 },
+        { s: "c-3 Automobile", q: "Firing order of 4 cylinder engine is usually:", o: ["1-2-3-4", "1-3-4-2", "1-4-3-2", "None"], a: 1 },
+
+        // d-1 CIVIL (5)
+        { s: "d-1 Civil", q: "Standard size of brick is:", o: ["19x9x9 cm", "20x10x10 cm", "15x15x15 cm", "None"], a: 0 },
+        { s: "d-1 Civil", q: "RCC stands for:", o: ["Reinforced Cement Concrete", "Roller Cement", "Ready Concrete", "None"], a: 0 },
+        { s: "d-1 Civil", q: "Bench Mark in surveying is:", o: ["Reference point", "Measuring tape", "Instrument", "None"], a: 0 },
+        { s: "d-1 Civil", q: "Most commonly used cement is:", o: ["OPC", "White", "Rapid", "None"], a: 0 },
+        { s: "d-1 Civil", q: "Surveying used to find elevations is:", o: ["Chain", "Compass", "Levelling", "None"], a: 2 },
+
+        // d-2 TEXTILE (5)
+        { s: "d-2 Textile", q: "Cotton is a ____ fiber:", o: ["Natural", "Synthetic", "Mineral", "Animal"], a: 0 },
+        { s: "d-2 Textile", q: "The process of making yarn is:", o: ["Ginning", "Spinning", "Weaving", "Dyeing"], a: 1 },
+        { s: "d-2 Textile", q: "Golden fiber is:", o: ["Cotton", "Jute", "Silk", "Wool"], a: 1 },
+        { s: "d-2 Textile", q: "Process of interlacing two sets of yarn is:", o: ["Spinning", "Weaving", "Knitting", "None"], a: 1 },
+        { s: "d-2 Textile", q: "Synthetic fiber is:", o: ["Cotton", "Nylon", "Silk", "Wool"], a: 1 },
+
+        // d-3 CHEM/PRINT (2)
+        { s: "d-3 Chemical/Printing", q: "Offset printing uses:", o: ["Metal plates", "Rubber blankets", "Wooden blocks", "None"], a: 1 },
+        { s: "d-3 Chemical/Printing", q: "Agro-based industry is:", o: ["Steel", "Sugar", "Cement", "None"], a: 1 },
+
+        // d-4 CERAMIC (2)
+        { s: "d-4 Ceramic", q: "Primary material for ceramic is:", o: ["Metal", "Clay", "Plastic", "Wood"], a: 1 },
+        { s: "d-4 Ceramic", q: "Ceramics are generally:", o: ["Good conductors", "Brittle", "Malleable", "Soft"], a: 1 },
+
+        // d-5 FOOD TECH (2)
+        { s: "d-5 Food Tech", q: "Vitamin C is found in:", o: ["Milk", "Citrus fruits", "Meat", "Wheat"], a: 1 },
+        { s: "d-5 Food Tech", q: "Pasteurization is used for:", o: ["Water", "Milk", "Oil", "None"], a: 1 },
+
+        // d-6 OTHERS (4)
+        { s: "d-6 Others", q: "Tractor is used in:", o: ["Agriculture", "Textile", "Food", "None"], a: 0 },
+        { s: "d-6 Others", q: "Fashion technology deals with:", o: ["Buildings", "Apparels", "Roads", "None"], a: 1 },
+        { s: "d-6 Others", q: "Soil erosion is prevented by:", o: ["Cutting trees", "Planting trees", "Mining", "None"], a: 1 },
+        { s: "d-6 Others", q: "DPI in printing stands for:", o: ["Dots Per Inch", "Data Per Inch", "Digital Print", "None"], a: 0 }
+    ];
+
+    let timeRem = 90 * 60;
+    let timerInt;
+
+    function renderExam() {
+        const list = document.getElementById('questions-list');
+        let curSec = "";
+        questions.forEach((q, i) => {
+            if(q.s !== curSec) {
+                curSec = q.s;
+                const h = document.createElement('div');
+                h.className = "section-title";
+                h.innerText = curSec;
+                list.appendChild(h);
+            }
+            const div = document.createElement('div');
+            div.className = 'question-card';
+            div.innerHTML = `<span class="q-text">${i+1}. ${q.q}</span>
+                <div class="options-grid">
+                    ${q.o.map((opt, oi) => `<label class="option-label"><input type="radio" name="q${i}" value="${oi}"> <span>${opt}</span></label>`).join('')}
+                </div>`;
+            list.appendChild(div);
+        });
+        timerInt = setInterval(() => {
+            timeRem--;
+            let m = Math.floor(timeRem/60);
+            let s = timeRem%60;
+            document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            if(timeRem <= 0) submitExam();
+        }, 1000);
+    }
+
+    function submitExam() {
+        clearInterval(timerInt);
+        let cor=0, att=0, wro=0, skp=0;
+        const review = document.getElementById('review-area');
+        review.innerHTML = "<h3>Performance Review</h3>";
+        questions.forEach((q, i) => {
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const div = document.createElement('div');
+            div.className = "question-card";
+            if(!sel) {
+                skp++;
+                div.classList.add('skipped-ans');
+                div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--warning)">Skipped</span><br>Correct: ${q.o[q.a]}`;
+            } else {
+                att++;
+                const val = parseInt(sel.value);
+                if(val === q.a) { cor++; div.classList.add('correct-ans'); div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--success)">Correct</span>`; }
+                else { wro++; div.classList.add('wrong-ans'); div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--danger)">Wrong</span><br>Correct: ${q.o[q.a]}`; }
+            }
+            review.appendChild(div);
+        });
+        document.getElementById('res-cor').innerText = cor;
+        document.getElementById('res-att').innerText = att;
+        document.getElementById('res-wro').innerText = wro;
+        document.getElementById('res-skp').innerText = skp;
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    async function downloadQAPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        let y = 20;
+        doc.setFontSize(16); doc.text("LEET 2025: Exam Result & Q/A Report", 15, y);
+        y += 10;
+        doc.setFontSize(12); doc.text(`Total Score: ${document.getElementById('res-cor').innerText} / 90`, 15, y);
+        y += 15;
+        questions.forEach((q, i) => {
+            if (y > 270) { doc.addPage(); y = 20; }
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const status = sel ? (parseInt(sel.value) === q.a ? "CORRECT" : "WRONG") : "SKIPPED";
+            doc.setFont("helvetica", "bold");
+            doc.text(`Q${i+1}: ${q.q}`, 15, y, { maxWidth: 180 });
+            y += 7; doc.setFont("helvetica", "normal");
+            doc.text(`Correct Ans: ${q.o[q.a]} | Status: ${status}`, 20, y);
+            y += 10;
+        });
+        doc.save("LEET_Study_Guide.pdf");
+    }
+
+    window.onload = renderExam;
+</script>
+</body>
+</html>

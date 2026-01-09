@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haryana LEET 2025 - HARD REAL MOCK</title>
+    <style>
+        :root {
+            --primary: #2c3e50; --accent: #3498db; --success: #27ae60;
+            --danger: #e74c3c; --warning: #f39c12; --bg: #f4f7f6;
+        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        header { position: sticky; top: 0; background: white; padding: 15px; border-bottom: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .timer-box { font-size: 1.6rem; font-weight: bold; color: var(--danger); background: #fff0f0; padding: 8px 20px; border-radius: 8px; border: 2px solid var(--danger); }
+        .section-title { background: var(--primary); color: white; padding: 10px 20px; margin: 30px 0 15px 0; border-radius: 5px; font-size: 1rem; text-transform: uppercase; }
+        .question-card { margin-bottom: 25px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background: #fff; }
+        .q-text { font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 15px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .option-label { display: block; padding: 12px; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .option-label:hover { background: #f0f7ff; }
+        .submit-btn { background: var(--success); color: white; border: none; padding: 15px 45px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; width: 100%; max-width: 350px; display: block; margin: 20px auto; font-weight: bold; }
+        #results { display: none; text-align: center; }
+        .stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 25px 0; }
+        .stat-card { padding: 20px; border-radius: 10px; color: white; font-weight: bold; }
+        .bg-cor { background: var(--success); } .bg-att { background: var(--accent); } .bg-wro { background: var(--danger); } .bg-skp { background: var(--warning); }
+        .review-q { text-align: left; margin-top: 20px; }
+        .correct-ans { border: 2px solid var(--success); background: #f0fff0; }
+        .wrong-ans { border: 2px solid var(--danger); background: #fff5f5; }
+        .skipped-ans { border: 2px solid var(--warning); background: #fffcf0; }
+        
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+            .timer-box { font-size: 1.2rem; padding: 5px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1 style="margin:0; font-size: 1.5rem;">LEET 2025 HARD MOCK</h1>
+            <p style="margin:0; color: #666;">90 Questions | High Difficulty</p>
+        </div>
+        <div id="timer" class="timer-box">90:00</div>
+    </header>
+
+    <div id="quiz-screen">
+        <form id="quizForm">
+            <div id="questions-list"></div>
+            <button type="button" class="submit-btn" onclick="submitExam()">Submit Exam</button>
+        </form>
+    </div>
+
+    <div id="results">
+        <h2>Results Dashboard</h2>
+        <div class="stats-dashboard">
+            <div class="stat-card bg-cor">Correct: <span id="res-cor">0</span></div>
+            <div class="stat-card bg-att">Attempted: <span id="res-att">0</span></div>
+            <div class="stat-card bg-wro">Wrong: <span id="res-wro">0</span></div>
+            <div class="stat-card bg-skp">Skipped: <span id="res-skp">0</span></div>
+        </div>
+        <button class="submit-btn" style="background:#e67e22" onclick="downloadQAPDF()">Download Question & Answer PDF</button>
+        <button onclick="location.reload()" class="submit-btn" style="background: var(--accent);">Restart</button>
+        <div id="review-area" class="review-q"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    const questions = [
+        /* ================= SECTION A ================= */
+        {s:"a-1 Mathematics",q:"If the sum of first n terms of an AP is Sₙ = 2n² − 3n, then the first term is:",o:["-1","1","2","-3"],a:0},
+        {s:"a-1 Mathematics",q:"The modulus of complex number (3−4i) is:",o:["5","7","1","√7"],a:0},
+        {s:"a-1 Mathematics",q:"If logₐ(16)=4, then a equals:",o:["2","4","8","16"],a:0},
+        {s:"a-1 Mathematics",q:"Number of permutations of word ENGINEERING is:",o:["151200","453600","907200","None"],a:1},
+        {s:"a-1 Mathematics",q:"If P(A)=0.3, P(B)=0.4 and A,B independent, P(A∩B) is:",o:["0.12","0.7","0.1","0.3"],a:0},
+        {s:"a-1 Mathematics",q:"If det(A)=5, then det(2A) equals:",o:["10","20","25","40"],a:3},
+        {s:"a-1 Mathematics",q:"The maximum value of y=4x−x² is:",o:["4","6","8","16"],a:1},
+        {s:"a-1 Mathematics",q:"Solution of dy/dx = x/y is:",o:["y²=x²+C","y=x²+C","y²=2x+C","y=x+C"],a:0},
+
+        {s:"a-2 Physics",q:"Which quantity remains conserved in perfectly inelastic collision?",o:["KE","Momentum","Velocity","Energy"],a:1},
+        {s:"a-2 Physics",q:"The unit of angular momentum is:",o:["kg m² s⁻¹","kg m s⁻¹","N m","J"],a:0},
+        {s:"a-2 Physics",q:"Escape velocity depends on:",o:["Mass only","Radius only","Both mass & radius","Density"],a:2},
+        {s:"a-2 Physics",q:"Efficiency of Carnot engine is maximum when:",o:["T₂=0","T₁=T₂","T₁<T₂","Any"],a:0},
+        {s:"a-2 Physics",q:"Dimension of Planck’s constant is:",o:["ML²T⁻¹","MLT⁻²","ML²T⁻²","MLT⁻¹"],a:0},
+        {s:"a-2 Physics",q:"Energy of photon is proportional to:",o:["λ","1/λ","v","v²"],a:2},
+        {s:"a-2 Physics",q:"In SHM, restoring force is proportional to:",o:["Velocity","Displacement","Acceleration","Energy"],a:1},
+        {s:"a-2 Physics",q:"Critical angle exists when light travels:",o:["Rarer→denser","Denser→rarer","Vacuum","Any"],a:1},
+
+        {s:"a-3 Chemistry",q:"Permanent hardness of water is due to:",o:["Chlorides","Bicarbonates","Carbonates","Hydroxides"],a:0},
+        {s:"a-3 Chemistry",q:"pH of acidic solution is:",o:["<7",">7","=7","14"],a:0},
+        {s:"a-3 Chemistry",q:"Electronic configuration of Cr is:",o:["4s²3d⁴","4s¹3d⁵","4s²3d⁶","3d⁶4s²"],a:1},
+
+        {s:"a-4 Communication",q:"Choose correct sentence:",o:["Each boys are ready","Each boy is ready","Each are ready","Each boy ready"],a:1},
+        {s:"a-4 Communication",q:"Antonym of ‘Transparent’:",o:["Clear","Opaque","Visible","Bright"],a:1},
+        {s:"a-4 Communication",q:"Correct passive: She writes a letter.",o:["A letter is written","A letter was written","A letter written","Letter writes"],a:0},
+
+        {s:"a-5 General Awareness",q:"District with lowest sex ratio in Haryana:",o:["Gurugram","Panipat","Sonipat","Mewat"],a:0},
+        {s:"a-5 General Awareness",q:"LEET admission is for:",o:["B.Tech 1st year","B.Tech lateral entry","MBA","Diploma"],a:1},
+        {s:"a-5 General Awareness",q:"Total districts in Haryana:",o:["20","21","22","23"],a:2},
+
+        /* ================= SECTION B ================= */
+        {s:"b-1 Electrical",q:"In RLC circuit at resonance, impedance is:",o:["Maximum","Minimum","Zero","Infinite"],a:1},
+        {s:"b-1 Electrical",q:"Transformer efficiency is maximum when:",o:["Iron loss=Copper loss","Iron loss zero","Copper loss zero","Load zero"],a:0},
+        {s:"b-1 Electrical",q:"Slip of induction motor at synchronous speed is:",o:["0","1","∞","Negative"],a:1},
+        {s:"b-1 Electrical",q:"Back EMF in DC motor opposes:",o:["Current","Flux","Supply voltage","Torque"],a:2},
+        {s:"b-1 Electrical",q:"Power factor of pure inductive circuit is:",o:["0","0.5","1","Leading"],a:0},
+        {s:"b-1 Electrical",q:"Ferranti effect occurs in:",o:["Short lines","Medium lines","Long lines","DC lines"],a:2},
+        {s:"b-1 Electrical",q:"Skin effect increases with:",o:["Frequency","Voltage","Current","Resistance"],a:0},
+        {s:"b-1 Electrical",q:"Star-delta starter reduces:",o:["Voltage","Starting current","Speed","Loss"],a:1},
+        {s:"b-1 Electrical",q:"DC shunt motor speed is approximately:",o:["Constant","Variable","Zero","Infinite"],a:0},
+
+        {s:"b-2 Electronics",q:"CMRR of ideal OPAMP is:",o:["0","1","∞","100"],a:2},
+        {s:"b-2 Electronics",q:"Which gate is universal?",o:["AND","OR","NAND","XOR"],a:2},
+        {s:"b-2 Electronics",q:"SCR turns OFF when:",o:["Gate removed","Anode current zero","Voltage increases","Gate reversed"],a:1},
+        {s:"b-2 Electronics",q:"Binary of decimal 25 is:",o:["11001","10101","11100","10011"],a:0},
+        {s:"b-2 Electronics",q:"Bandwidth of AM signal is:",o:["fm","2fm","fc","2fc"],a:1},
+        {s:"b-2 Electronics",q:"Flip-flop stores:",o:["1 bit","1 byte","1 word","1 nibble"],a:0},
+        {s:"b-2 Electronics",q:"Zener diode operates in:",o:["Forward","Reverse breakdown","Reverse","Cut-off"],a:1},
+        {s:"b-2 Electronics",q:"ADC converts:",o:["Analog→Digital","Digital→Analog","AC→DC","DC→AC"],a:0},
+
+        {s:"b-3 Computer",q:"IPv4 address size is:",o:["16 bits","32 bits","64 bits","128 bits"],a:1},
+        {s:"b-3 Computer",q:"Number of host bits in Class C:",o:["8","16","24","32"],a:0},
+        {s:"b-3 Computer",q:"Which scheduling may cause starvation?",o:["FCFS","Round Robin","Priority","FIFO"],a:2},
+        {s:"b-3 Computer",q:"Which memory is fastest?",o:["Cache","RAM","ROM","HDD"],a:0},
+        {s:"b-3 Computer",q:"ARP resolves:",o:["IP→MAC","MAC→IP","Port→IP","DNS"],a:0},
+        {s:"b-3 Computer",q:"Deadlock necessary condition:",o:["Mutual exclusion","Circular wait","Starvation","Preemption"],a:1},
+        {s:"b-3 Computer",q:"C language is:",o:["Procedural","OOP","Functional","Script"],a:0},
+        {s:"b-3 Computer",q:"Which is volatile memory?",o:["RAM","ROM","SSD","HDD"],a:0},
+
+        /* ================= SECTION C ================= */
+        {s:"c-1 Mechanical",q:"Young’s modulus equals:",o:["Stress/strain","Strain/stress","Load/area","Area/load"],a:0},
+        {s:"c-1 Mechanical",q:"Reynolds number indicates:",o:["Pressure","Flow nature","Velocity","Density"],a:1},
+        {s:"c-1 Mechanical",q:"Most efficient cycle is:",o:["Otto","Diesel","Carnot","Brayton"],a:2},
+        {s:"c-1 Mechanical",q:"Viscosity unit is:",o:["Ns/m²","N/m²","kg/m","m²/s"],a:0},
+        {s:"c-1 Mechanical",q:"Bearing supporting axial load:",o:["Ball","Journal","Thrust","Roller"],a:2},
+        {s:"c-2 Production",q:"Lathe cutting tool is:",o:["Single point","Multi point","Abrasive","None"],a:0},
+        {s:"c-2 Production",q:"Casting defect due to trapped gas:",o:["Blow hole","Cold shut","Shrinkage","Misrun"],a:0},
+        {s:"c-2 Production",q:"Annealing increases:",o:["Ductility","Hardness","Brittleness","Strength"],a:0},
+        {s:"c-2 Production",q:"Least count of micrometer:",o:["0.01 mm","0.02 mm","0.1 mm","1 mm"],a:0},
+        {s:"c-3 Automobile",q:"Clutch transmits power using:",o:["Friction","Hydraulics","Magnet","Gear"],a:0},
+        {s:"c-3 Automobile",q:"ABS prevents:",o:["Wheel lock","Overheating","Noise","Wear"],a:0},
+        {s:"c-3 Automobile",q:"Four-stroke engine completes cycle in:",o:["1 rev","2 rev","3 rev","4 rev"],a:1},
+        {s:"c-3 Automobile",q:"Differential allows wheels to:",o:["Same speed","Different speeds","Stop","Brake"],a:1},
+        {s:"c-3 Automobile",q:"Battery used in cars:",o:["Lead-acid","Lithium","Dry cell","NiMH"],a:0},
+        {s:"c-1 Mechanical",q:"Bernoulli theorem based on:",o:["Energy","Momentum","Mass","Force"],a:0},
+        {s:"c-1 Mechanical",q:"Heat transfer in solids:",o:["Conduction","Convection","Radiation","All"],a:0},
+        {s:"c-1 Mechanical",q:"Flywheel stores:",o:["Kinetic energy","Potential","Heat","Power"],a:0},
+        {s:"c-1 Mechanical",q:"Otto cycle used in:",o:["Petrol engine","Diesel","Steam","Jet"],a:0},
+        {s:"c-1 Mechanical",q:"Centroid of triangle lies at:",o:["Midpoint","Incenter","Circumcenter","Intersection of medians"],a:3},
+        {s:"c-1 Mechanical",q:"Normal stress acts:",o:["Perpendicular","Parallel","Tangential","None"],a:0},
+
+        /* ================= SECTION D ================= */
+        {s:"d-1 Civil",q:"Standard brick size is:",o:["19×9×9 cm","20×10×10","18×8×8","None"],a:0},
+        {s:"d-1 Civil",q:"Best cement for sulphate soil:",o:["OPC","SRC","PPC","White"],a:1},
+        {s:"d-1 Civil",q:"Flexible pavement uses:",o:["Bitumen","Concrete","Steel","Stone"],a:0},
+        {s:"d-1 Civil",q:"Benchmark provides:",o:["Elevation","Direction","Distance","Angle"],a:0},
+        {s:"d-1 Civil",q:"Levelling finds:",o:["Height","Area","Volume","Distance"],a:0},
+        {s:"d-2 Textile",q:"Golden fibre is:",o:["Cotton","Jute","Silk","Wool"],a:1},
+        {s:"d-2 Textile",q:"Weaving produces:",o:["Fabric","Yarn","Fiber","Thread"],a:0},
+        {s:"d-2 Textile",q:"Synthetic fibre:",o:["Nylon","Cotton","Wool","Silk"],a:0},
+        {s:"d-2 Textile",q:"Spinning converts:",o:["Fiber→Yarn","Yarn→Fabric","Fabric→Cloth","None"],a:0},
+        {s:"d-2 Textile",q:"Staple length affects:",o:["Yarn quality","Color","Weight","Density"],a:0},
+        {s:"d-3 Chemical/Printing",q:"Offset printing uses:",o:["Rubber blanket","Wood block","Metal plate","Inkjet"],a:0},
+        {s:"d-3 Chemical/Printing",q:"Agro-based industry:",o:["Sugar","Steel","Cement","Plastic"],a:0},
+        {s:"d-4 Ceramic",q:"Ceramics are:",o:["Brittle","Ductile","Malleable","Elastic"],a:0},
+        {s:"d-4 Ceramic",q:"Refractoriness means:",o:["High temp resistance","Hardness","Density","Strength"],a:0},
+        {s:"d-5 Food Tech",q:"Pasteurization kills:",o:["Harmful bacteria","All bacteria","Nutrients","Enzymes"],a:0},
+        {s:"d-5 Food Tech",q:"Vitamin C deficiency causes:",o:["Scurvy","Rickets","Anemia","Night blindness"],a:0},
+        {s:"d-6 Others",q:"Plough improves:",o:["Soil aeration","Irrigation","Harvest","Fertilizer"],a:0},
+        {s:"d-6 Others",q:"Tractor used in:",o:["Agriculture","Textile","Mining","Food"],a:0},
+        {s:"d-6 Others",q:"DPI means:",o:["Dots per inch","Data per inch","Digital print","Density"],a:0},
+        {s:"d-6 Others",q:"Soil erosion reduced by:",o:["Plantation","Mining","Cutting trees","Construction"],a:0}
+    ];
+
+    let timeRem = 90 * 60;
+    let timerInt;
+
+    function renderExam() {
+        const list = document.getElementById('questions-list');
+        let curSec = "";
+        questions.forEach((q, i) => {
+            if(q.s !== curSec) {
+                curSec = q.s;
+                const h = document.createElement('div');
+                h.className = "section-title";
+                h.innerText = curSec;
+                list.appendChild(h);
+            }
+            const div = document.createElement('div');
+            div.className = 'question-card';
+            div.innerHTML = `<span class="q-text">${i+1}. ${q.q}</span>
+                <div class="options-grid">
+                    ${q.o.map((opt, oi) => `<label class="option-label"><input type="radio" name="q${i}" value="${oi}"> <span>${opt}</span></label>`).join('')}
+                </div>`;
+            list.appendChild(div);
+        });
+        timerInt = setInterval(() => {
+            timeRem--;
+            let m = Math.floor(timeRem/60);
+            let s = timeRem%60;
+            document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            if(timeRem <= 0) submitExam();
+        }, 1000);
+    }
+
+    function submitExam() {
+        clearInterval(timerInt);
+        let cor=0, att=0, wro=0, skp=0;
+        const review = document.getElementById('review-area');
+        review.innerHTML = "<h3>Performance Review</h3>";
+        questions.forEach((q, i) => {
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const div = document.createElement('div');
+            div.className = "question-card";
+            if(!sel) {
+                skp++;
+                div.classList.add('skipped-ans');
+                div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--warning)">Skipped</span><br>Correct: ${q.o[q.a]}`;
+            } else {
+                att++;
+                const val = parseInt(sel.value);
+                if(val === q.a) { 
+                    cor++; 
+                    div.classList.add('correct-ans'); 
+                    div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--success)">Correct</span>`; 
+                }
+                else { 
+                    wro++; 
+                    div.classList.add('wrong-ans'); 
+                    div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--danger)">Wrong</span><br>Correct: ${q.o[q.a]}`; 
+                }
+            }
+            review.appendChild(div);
+        });
+        document.getElementById('res-cor').innerText = cor;
+        document.getElementById('res-att').innerText = att;
+        document.getElementById('res-wro').innerText = wro;
+        document.getElementById('res-skp').innerText = skp;
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    async function downloadQAPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        let y = 20;
+        doc.setFontSize(16); doc.text("LEET 2025: Exam Result & Q/A Report", 15, y);
+        y += 10;
+        doc.setFontSize(12); doc.text(`Total Score: ${document.getElementById('res-cor').innerText} / 90`, 15, y);
+        y += 15;
+        questions.forEach((q, i) => {
+            if (y > 270) { doc.addPage(); y = 20; }
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const status = sel ? (parseInt(sel.value) === q.a ? "CORRECT" : "WRONG") : "SKIPPED";
+            doc.setFont("helvetica", "bold");
+            doc.text(`Q${i+1}: ${q.q}`, 15, y, { maxWidth: 180 });
+            y += 7; doc.setFont("helvetica", "normal");
+            doc.text(`Correct Ans: ${q.o[q.a]} | Status: ${status}`, 20, y);
+            y += 10;
+        });
+        doc.save("LEET_Study_Guide.pdf");
+    }
+
+    window.onload = renderExam;
+</script>
+</body>
+</html>

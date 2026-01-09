@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.E./B.Tech. (LEET) Entrance Test - 2025</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --correct-color: #2ecc71;
+            --wrong-color: #e74c3c;
+            --unanswered-color: #f39c12;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .quiz-info, .quiz-timer, .quiz-attempt-status {
+            flex: 1; /* Distribute space */
+            min-width: 150px; /* Ensure elements don't get too small */
+            margin-bottom: 10px; /* Spacing for wrapped items */
+        }
+
+        .quiz-timer {
+            text-align: right;
+        }
+         .quiz-attempt-status {
+            text-align: center;
+        }
+
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: #ecf0f1;
+            color: var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d5dbdb;
+        }
+
+        .btn-complete {
+            background-color: var(--correct-color);
+            color: white;
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+
+        .btn-complete:hover {
+            background-color: #27ae60;
+        }
+
+        .result-container {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stat-box {
+            padding: 20px;
+            border-radius: 8px;
+            width: 30%;
+        }
+
+        .correct {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--correct-color);
+        }
+
+        .wrong {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--wrong-color);
+        }
+
+        .unanswered {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--unanswered-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-details {
+            margin-top: 30px;
+        }
+
+        .result-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: var(--light-gray);
+        }
+        
+        /* New style for correct answer details */
+        .result-item.correct-detail {
+            background-color: rgba(46, 204, 113, 0.15); /* Slightly darker green background */
+            border: 1px solid var(--correct-color);
+        }
+
+        .correct-answer {
+            color: var(--correct-color);
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            color: var(--wrong-color);
+            font-weight: bold;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .result-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat-box {
+                width: 80%;
+                margin-bottom: 15px;
+            }
+             .quiz-header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .quiz-info, .quiz-timer, .quiz-attempt-status {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>B.E./B.Tech. (LEET) Entrance Test - 2025</h1>
+        <div class="quiz-header">
+            <div class="quiz-info" id="quiz-info">Total Questions: <span id="total-questions"></span></div>
+            <div class="quiz-attempt-status">
+                Attempted: <span id="attempted-count-display">0</span> | Unattempted: <span id="unattempted-count-display">0</span>
+            </div>
+            <div class="quiz-timer">Time: <span id="time-remaining">70:00</span></div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+        </div>
+
+        <div id="quiz-content">
+            </div>
+
+        <div class="navigation">
+            <button class="btn-secondary" id="prev-btn">Previous</button>
+            <button class="btn-primary" id="next-btn">Next</button>
+        </div>
+
+        <button class="btn-complete" id="complete-btn">Complete Quiz</button>
+
+        <div class="result-container" id="result-container">
+            <div class="result-header">
+                <h2>Quiz Results</h2>
+            </div>
+
+            <div class="result-stats">
+                <div class="stat-box correct">
+                    <div class="stat-number" id="correct-count">0</div>
+                    <div>Correct</div>
+                </div>
+                <div class="stat-box wrong">
+                    <div class="stat-number" id="wrong-count">0</div>
+                    <div>Wrong</div>
+                </div>
+                <div class="stat-box unanswered">
+                    <div class="stat-number" id="unanswered-count">0</div>
+                    <div>Unanswered</div>
+                </div>
+                    <button class="btn-primary" style="background: #e67e22; margin-right: 10px;" onclick="downloadPDF()">Download PDF Report</button>
+            </div>
+
+            <div class="result-details" id="result-details">
+                </div>
+            <button class="btn-primary" onclick="location.reload()">Restart Quiz</button>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Quiz data - all questions
+        const questions = [
+            {
+                question: "If z=3−4i, what is z⋅zˉ?",
+                options: ["A. 5", "B. 25", "C. 7", "D. 1"],
+                answer: "B. 25",
+                explanation: "For a complex number z = a + bi, its conjugate is zˉ = a - bi. Then z⋅zˉ = (a + bi)(a - bi) = a² - (bi)² = a² - b²i² = a² + b². Here, a=3, b=-4. So, z⋅zˉ = 3² + (-4)² = 9 + 16 = 25."
+            },
+            {
+                question: "The sum of roots of the equation x²−5x+6=0 is:",
+                options: ["A. 5", "B. –5", "C. 6", "D. –6"],
+                answer: "A. 5",
+                explanation: "For a quadratic equation ax² + bx + c = 0, the sum of the roots is given by -b/a. Here, a=1, b=-5, c=6. So, sum of roots = -(-5)/1 = 5."
+            },
+            {
+                question: "log₅ 25 =?",
+                options: ["A. 2", "B. 1", "C. 0.5", "D. 3"],
+                answer: "A. 2",
+                explanation: "log₅ 25 asks 'to what power must 5 be raised to get 25?'. Since 5² = 25, the answer is 2."
+            },
+            {
+                question: "Find the number of permutations of the word 'DELHI'.",
+                options: ["A. 120", "B. 60", "C. 100", "D. 240"],
+                answer: "A. 120",
+                explanation: "The word 'DELHI' has 5 distinct letters. The number of permutations of n distinct objects is n!. So, 5! = 5 × 4 × 3 × 2 × 1 = 120."
+            },
+            {
+                question: "Coefficient of x² in (x+1)⁴:",
+                options: ["A. 4", "B. 6", "C. 3", "D. 5"],
+                answer: "B. 6",
+                explanation: "Using the binomial theorem, (a+b)ⁿ = Σ [C(n, k) * a^(n-k) * b^k]. For (x+1)⁴, n=4, a=x, b=1. We want the term with x², so n-k=2, which means k=2. The coefficient is C(4, 2) = 4! / (2! * (4-2)!) = (4 × 3 × 2 × 1) / ((2 × 1) × (2 × 1)) = 24 / 4 = 6."
+            },
+            {
+                question: "The variance of first 5 natural numbers is:",
+                options: ["A. 2", "B. 2.5", "C. 1", "D. 3.5"],
+                answer: "A. 2",
+                explanation: "The first 5 natural numbers are 1, 2, 3, 4, 5. Their mean (μ) = (1+2+3+4+5)/5 = 15/5 = 3. Variance (σ²) = Σ(xi - μ)² / n = ((1-3)² + (2-3)² + (3-3)² + (4-3)² + (5-3)²) / 5 = ((-2)² + (-1)² + 0² + 1² + 2²) / 5 = (4 + 1 + 0 + 1 + 4) / 5 = 10 / 5 = 2."
+            },
+            {
+                question: "∫₀¹ x² dx = ?",
+                options: ["A. 1/2", "B. 1/3", "C. 1/4", "D. 2/3"],
+                answer: "B. 1/3",
+                explanation: "∫x² dx = x³/3. Evaluating from 0 to 1: (1)³/3 - (0)³/3 = 1/3 - 0 = 1/3."
+            },
+            {
+                question: "Mean of 5, 7, 3, 2, and 8 is:",
+                options: ["A. 5", "B. 6", "C. 4.5", "D. 3.5"],
+                answer: "A. 5",
+                explanation: "Mean = Sum of observations / Number of observations = (5 + 7 + 3 + 2 + 8) / 5 = 25 / 5 = 5."
+            },
+            {
+                question: "Unit of pressure in SI is:",
+                options: ["A. pascal", "B. bar", "C. atm", "D. torr"],
+                answer: "A. pascal",
+                explanation: "The SI unit of pressure is the pascal (Pa)."
+            },
+            {
+                question: "Acceleration of a body moving in SHM is proportional to:",
+                options: ["A. square of displacement", "B. displacement", "C. velocity", "D. time"],
+                answer: "B. displacement",
+                explanation: "In Simple Harmonic Motion (SHM), the acceleration of the oscillating body is directly proportional to its displacement from the equilibrium position and is always directed towards the equilibrium position (a ∝ -x)."
+            },
+            {
+                question: "Surface tension is measured in:",
+                options: ["A. N/m", "B. N/m²", "C. J", "D. N"],
+                answer: "A. N/m",
+                explanation: "Surface tension is defined as force per unit length, so its SI unit is Newtons per meter (N/m). Alternatively, it can be defined as energy per unit area, J/m²."
+            },
+            {
+                question: "Energy stored in a stretched spring is:",
+                options: ["A. mv²/2", "B. ½ kx²", "C. mgx", "D. none"],
+                answer: "B. ½ kx²",
+                explanation: "The potential energy stored in a stretched or compressed spring is given by the formula PE = ½ kx², where k is the spring constant and x is the displacement from its equilibrium position."
+            },
+            {
+                question: "What is the moment of inertia of a ring about its diameter?",
+                options: ["A. MR²", "B. ½MR²", "C. ¼MR²", "D. 0"],
+                answer: "B. ½MR²",
+                explanation: "The moment of inertia of a thin circular ring of mass M and radius R about an axis passing through its center and perpendicular to its plane is MR². By the perpendicular axis theorem, the moment of inertia about its diameter is ½MR²."
+            },
+            {
+                question: "Lens formula is:",
+                options: ["A. 1/f = 1/v + 1/u", "B. 1/f = 1/v - 1/u", "C. 1/f = v + u", "D. f = v/u"],
+                answer: "B. 1/f = 1/v - 1/u",
+                explanation: "The lens formula (or thin lens equation) is 1/f = 1/v - 1/u, where f is the focal length, v is the image distance, and u is the object distance."
+            },
+            {
+                question: "If net external torque is zero, angular momentum is:",
+                options: ["A. Increased", "B. Decreased", "C. Zero", "D. Constant"],
+                answer: "D. Constant",
+                explanation: "According to the principle of conservation of angular momentum, if the net external torque acting on a system is zero, the total angular momentum of the system remains constant."
+            },
+            {
+                question: "Unit of work is:",
+                options: ["A. N", "B. J", "C. kg", "D. Pa"],
+                answer: "B. J",
+                explanation: "The SI unit of work (and energy) is the Joule (J)."
+            },
+            {
+                question: "Which acid is responsible for acidity of lemon?",
+                options: ["A. Acetic", "B. Citric", "C. Hydrochloric", "D. Tartaric"],
+                answer: "B. Citric",
+                explanation: "Citric acid is the primary acid found in citrus fruits like lemons and oranges, responsible for their sour taste."
+            },
+            {
+                question: "Which chemical is used to soften hard water?",
+                options: ["A. NaOH", "B. Washing soda", "C. Bleaching powder", "D. Salt"],
+                answer: "B. Washing soda",
+                explanation: "Washing soda (sodium carbonate, Na₂CO₃) is commonly used to soften hard water by precipitating the calcium and magnesium ions that cause hardness."
+            },
+            {
+                question: "pH < 7 indicates:",
+                options: ["A. Neutral", "B. Basic", "C. Acidic", "D. Salty"],
+                answer: "C. Acidic",
+                explanation: "On the pH scale, a pH value less than 7 indicates an acidic solution. A pH of 7 is neutral, and a pH greater than 7 is basic (alkaline)."
+            },
+            {
+                question: "Identify the correct indirect speech: He said, “I will go.”",
+                options: ["A. He said that he will go.", "B. He said that he would go.", "C. He said he go.", "D. He said that he goes."],
+                answer: "B. He said that he would go.",
+                explanation: "When converting direct speech to indirect speech, 'will' changes to 'would' in the reported clause if the reporting verb is in the past tense ('said')."
+            },
+            {
+                question: "Choose the synonym of “Rapid”:",
+                options: ["A. Slow", "B. Weak", "C. Fast", "D. Lazy"],
+                answer: "C. Fast",
+                explanation: "The word 'rapid' means happening quickly or moving with great speed. 'Fast' is a synonym."
+            },
+            {
+                question: "Fill in the blank: She has been working here ____ 2010.",
+                options: ["A. for", "B. from", "C. since", "D. on"],
+                answer: "C. since",
+                explanation: "'Since' is used to refer to a specific point in time from which an action has been continuing. 'For' is used for a duration of time."
+            },
+            {
+                question: "Haryana was formed in:",
+                options: ["A. 1947", "B. 1956", "C. 1966", "D. 1971"],
+                answer: "C. 1966",
+                explanation: "Haryana was carved out of the former state of East Punjab on 1 November 1966."
+            },
+            {
+                question: "Haryana shares border with how many states?",
+                options: ["A. 3", "B. 5", "C. 6", "D. 4"],
+                answer: "B. 5",
+                explanation: "Haryana shares its border with five Indian states: Punjab, Rajasthan, Uttar Pradesh, Himachal Pradesh, and Uttarakhand, plus the Union Territories of Delhi and Chandigarh."
+            },
+            {
+                question: "LEET exam is for:",
+                options: ["A. Class 10 students", "B. Diploma holders", "C. School teachers", "D. Army candidates"],
+                answer: "B. Diploma holders",
+                explanation: "LEET (Lateral Entry Entrance Test) is for diploma holders to gain admission directly into the second year of B.E./B.Tech. courses."
+            },
+            {
+                question: "In a closed circuit, the sum of EMFs and voltage drops is zero. This is:",
+                options: ["A. Ohm’s Law", "B. KCL", "C. KVL", "D. Thevenin’s Theorem"],
+                answer: "C. KVL",
+                explanation: "Kirchhoff’s Voltage Law (KVL) states that the algebraic sum of all voltages (potential differences) around any closed loop in a circuit is equal to zero. This is based on the conservation of energy."
+            },
+            {
+                question: "A coil of resistance 10Ω and inductance 2H is connected to 10V DC. What is the initial current?",
+                options: ["A. 0 A", "B. 2 A", "C. 10 A", "D. 5 A"],
+                answer: "A. 0 A",
+                explanation: "At the moment a DC voltage is applied to an inductor (t=0+), an inductor acts as an open circuit because the current cannot change instantaneously through an inductor. Therefore, the initial current is 0 A."
+            },
+            {
+                question: "In an RLC circuit, resonance occurs when:",
+                options: ["A. XL = XC", "B. R = XL", "C. R = XC", "D. XL + XC = 0"],
+                answer: "A. XL = XC",
+                explanation: "In an RLC series circuit, resonance occurs when the inductive reactance (XL) is equal to the capacitive reactance (XC). At this frequency, the impedance is purely resistive and minimum."
+            },
+            {
+                question: "Which is NOT a network theorem?",
+                options: ["A. Thevenin", "B. Norton", "C. Lenz", "D. Superposition"],
+                answer: "C. Lenz",
+                explanation: "Thevenin's, Norton's, and Superposition theorems are all network theorems used for circuit analysis. Lenz's law is a principle related to electromagnetic induction, not a network theorem."
+            },
+            {
+                question: "A 3-phase system is preferred over single-phase because:",
+                options: ["A. More losses", "B. Less efficiency", "C. Continuous power", "D. Complex wiring"],
+                answer: "C. Continuous power",
+                explanation: "A 3-phase system provides a more constant and continuous power output, smoother torque for motors, and is more efficient for power generation and transmission compared to single-phase."
+            },
+            {
+                question: "The efficiency of an ideal transformer is:",
+                options: ["A. 50%", "B. 80%", "C. 100%", "D. 90%"],
+                answer: "C. 100%",
+                explanation: "An ideal transformer is assumed to have no losses (no winding resistance, no core losses, no leakage flux), thus its efficiency is 100%."
+            },
+            {
+                question: "In DC generator, commutator is used to:",
+                options: ["A. Convert AC to DC", "B. Reduce friction", "C. Cool the motor", "D. Transfer heat"],
+                answer: "A. Convert AC to DC",
+                explanation: "In a DC generator, the commutator acts as a mechanical rectifier, converting the alternating voltage induced in the armature coils into a unidirectional (DC) voltage at the brushes."
+            },
+            {
+                question: "A DC motor is used where:",
+                options: ["A. Constant speed is required", "B. AC only is allowed", "C. No load is present", "D. Large inertia is needed"],
+                answer: "A. Constant speed is required",
+                explanation: "DC motors are often preferred for applications requiring precise speed control over a wide range, including constant speed operation, due to their excellent torque-speed characteristics."
+            },
+            {
+                question: "In a 3-phase induction motor, rotor rotates at:",
+                options: ["A. Synchronous speed", "B. Above sync speed", "C. Below sync speed", "D. Zero speed"],
+                answer: "C. Below sync speed",
+                explanation: "A 3-phase induction motor's rotor always rotates at a speed slightly less than the synchronous speed (the speed of the rotating magnetic field) to enable induction of current in the rotor conductors."
+            },
+            {
+                question: "The least count of a multimeter for voltage is:",
+                options: ["A. 1V", "B. 0.1V", "C. 0.01V", "D. 0.001V"],
+                answer: "D. 0.001V",
+                explanation: "The least count of a digital multimeter depends on its range setting. However, modern digital multimeters can typically measure voltage with a resolution of 0.001V (1mV) or even finer, especially on lower ranges."
+            },
+            {
+                question: "Which instrument is used to measure frequency?",
+                options: ["A. Ammeter", "B. CRO", "C. Voltmeter", "D. Energy meter"],
+                answer: "B. CRO",
+                explanation: "A Cathode Ray Oscilloscope (CRO) is a versatile instrument that can be used to measure various parameters of an electrical signal, including frequency, amplitude, and phase difference, by observing its waveform."
+            },
+            {
+                question: "A Zener diode works in:",
+                options: ["A. Forward bias", "B. Reverse bias", "C. Zero bias", "D. Any bias"],
+                answer: "B. Reverse bias",
+                explanation: "A Zener diode is specifically designed to operate in the reverse breakdown region to maintain a constant voltage across its terminals, making it useful for voltage regulation."
+            },
+            {
+                question: "An OPAMP has how many inputs?",
+                options: ["A. 1", "B. 2", "C. 3", "D. 4"],
+                answer: "B. 2",
+                explanation: "An operational amplifier (OPAMP) typically has two input terminals: an inverting input and a non-inverting input."
+            },
+            {
+                question: "Which device converts analog to digital signal?",
+                options: ["A. DAC", "B. ADC", "C. Rectifier", "D. OPAMP"],
+                answer: "B. ADC",
+                explanation: "An Analog-to-Digital Converter (ADC) is an electronic integrated circuit that converts a continuous analog signal (like voltage or current) into a discrete digital signal."
+            },
+            {
+                question: "In Boolean algebra, the expression A + AB equals:",
+                options: ["A. A", "B. B", "C. AB", "D. A + B"],
+                answer: "A. A",
+                explanation: "Using the absorption law in Boolean algebra: A + AB = A(1 + B). Since 1 + B = 1 (Boolean identity), A(1 + B) = A * 1 = A."
+            },
+            {
+                question: "Flip-flop is used as a:",
+                options: ["A. Oscillator", "B. Timer", "C. Memory", "D. Transducer"],
+                answer: "C. Memory",
+                explanation: "A flip-flop is a fundamental sequential logic circuit that can store a single bit of binary information (0 or 1). It forms the basic building block of memory registers, counters, and other sequential logic circuits."
+            },
+            {
+                question: "SCR stands for:",
+                options: ["A. Solid Core Rectifier", "B. Silicon Controlled Rectifier", "C. Static Current Relay", "D. Single Cell Resistor"],
+                answer: "B. Silicon Controlled Rectifier",
+                explanation: "SCR is the abbreviation for Silicon Controlled Rectifier, a four-layer solid-state current-controlling device."
+            },
+            {
+                question: "The main function of ALU in a computer is:",
+                options: ["A. Store data", "B. Perform calculations", "C. Control memory", "D. Output"],
+                answer: "B. Perform calculations",
+                explanation: "ALU stands for Arithmetic Logic Unit. Its primary function in a computer's central processing unit (CPU) is to perform arithmetic operations (addition, subtraction, etc.) and logical operations (AND, OR, NOT, etc.)."
+            },
+            {
+                question: "Which language is closest to machine language?",
+                options: ["A. Assembly", "B. C", "C. Java", "D. HTML"],
+                answer: "A. Assembly",
+                explanation: "Assembly language is a low-level programming language that is very close to machine language (binary code). Each assembly instruction typically corresponds to a single machine instruction, unlike high-level languages like C, Java, or HTML."
+            },
+            {
+                question: "The cache memory is used to:",
+                options: ["A. Store OS", "B. Backup files", "C. Speed up access", "D. Delete viruses"],
+                answer: "C. Speed up access",
+                explanation: "Cache memory is a small, fast memory that stores copies of data from frequently used main memory locations. It is used to speed up data access for the CPU, reducing the time the CPU has to wait for data from slower main memory."
+            },
+            {
+                question: "Which of these is NOT an operating system?",
+                options: ["A. Linux", "B. Windows", "C. Python", "D. macOS"],
+                answer: "C. Python",
+                explanation: "Linux, Windows, and macOS are all operating systems. Python is a high-level programming language, not an operating system."
+            },
+            {
+                question: "Pointers in C are used for:",
+                options: ["A. Output", "B. Math", "C. Address handling", "D. String operations"],
+                answer: "C. Address handling",
+                explanation: "Pointers in C are variables that store memory addresses. They are fundamentally used for direct memory access and manipulation, including dynamic memory allocation and efficient array/string handling."
+            },
+            {
+                question: "File handling in C includes:",
+                options: ["A. fopen", "B. readfile", "C. openfile", "D. execute"],
+                answer: "A. fopen",
+                explanation: "The `fopen()` function is a standard C library function used to open a file. Other common file handling functions include `fclose()`, `fprintf()`, `fscanf()`, `fread()`, `fwrite()`, etc."
+            },
+            {
+                question: "A process in OS is:",
+                options: ["A. A file", "B. A program in execution", "C. A database", "D. A virus"],
+                answer: "B. A program in execution",
+                explanation: "In an operating system, a process is an instance of a computer program that is being executed. It includes the program code and its current activity."
+            },
+            {
+                question: "WAN stands for:",
+                options: ["A. Wireless Area Network", "B. Wide Area Network", "C. Web Access Network", "D. Wired Area Node"],
+                answer: "B. Wide Area Network",
+                explanation: "WAN is an acronym for Wide Area Network, which is a telecommunications network that extends over a large geographic area, connecting smaller local area networks (LANs)."
+            },
+            {
+                question: "The centroid of a semicircle lies at:",
+                options: ["A. Center", "B. Radius", "C. 4R/3π from base", "D. R/2 from base"],
+                answer: "C. 4R/3π from base",
+                explanation: "For a semicircle, the centroid lies along the axis of symmetry at a distance of 4R/3π from the base (diameter)."
+            },
+            {
+                question: "Work done by a force of 10 N moving an object by 5 m is:",
+                options: ["A. 50 J", "B. 5 J", "C. 0 J", "D. 500 J"],
+                answer: "A. 50 J",
+                explanation: "Work done (W) = Force (F) × Displacement (d). W = 10 N × 5 m = 50 Joules."
+            },
+            {
+                question: "The law of conservation of energy states:",
+                options: ["A. Energy is destroyed", "B. Energy is constant", "C. Energy is created", "D. Energy depends on friction"],
+                answer: "B. Energy is constant",
+                explanation: "The law of conservation of energy states that energy cannot be created or destroyed, but it can be transformed from one form to another. Therefore, the total energy in an isolated system remains constant."
+            },
+            {
+                question: "A simply supported beam of 4 m has a 20 N load in the center. The max bending moment is:",
+                options: ["A. 10 Nm", "B. 20 Nm", "C. 40 Nm", "D. 80 Nm"],
+                answer: "B. 20 Nm",
+                explanation: "For a simply supported beam with a central point load (P), the maximum bending moment (M_max) occurs at the center and is given by M_max = PL/4. Here, P=20 N, L=4 m. So, M_max = (20 × 4) / 4 = 20 Nm."
+            },
+            {
+                question: "Which of the following is a scalar quantity?",
+                options: ["A. Force", "B. Displacement", "C. Power", "D. Velocity"],
+                answer: "C. Power",
+                explanation: "A scalar quantity has only magnitude, while a vector quantity has both magnitude and direction. Force, displacement, and velocity are vector quantities. Power is a scalar quantity."
+            },
+            {
+                question: "Bernoulli's equation assumes:",
+                options: ["A. Viscous flow", "B. Steady, incompressible flow", "C. Turbulent flow", "D. Thermal conduction"],
+                answer: "B. Steady, incompressible flow",
+                explanation: "Bernoulli's equation is derived with several assumptions, including steady, incompressible, inviscid (non-viscous), and irrotational flow along a streamline."
+            },
+            {
+                question: "Which of these is an example of a non-Newtonian fluid?",
+                options: ["A. Water", "B. Air", "C. Paint", "D. Kerosene"],
+                answer: "C. Paint",
+                explanation: "Non-Newtonian fluids do not obey Newton's law of viscosity, meaning their viscosity can change under stress. Paint, ketchup, and blood are common examples. Water, air, and kerosene are generally considered Newtonian fluids."
+            },
+            {
+                question: "Thermodynamic process at constant pressure is called:",
+                options: ["A. Isochoric", "B. Adiabatic", "C. Isobaric", "D. Isothermal"],
+                answer: "C. Isobaric",
+                explanation: "An isobaric process is a thermodynamic process in which the pressure remains constant (ΔP = 0). Isochoric is constant volume, adiabatic is no heat exchange, isothermal is constant temperature."
+            },
+            {
+                question: "The main operation on a shaper is:",
+                options: ["A. Rotating", "B. Milling", "C. Cutting straight lines", "D. Drilling"],
+                answer: "C. Cutting straight lines",
+                explanation: "A shaper machine is primarily used to produce flat surfaces, grooves, and slots by cutting straight lines using a single-point cutting tool in a reciprocating motion."
+            },
+            {
+                question: "Heat treatment that increases ductility:",
+                options: ["A. Quenching", "B. Tempering", "C. Annealing", "D. Hardening"],
+                answer: "C. Annealing",
+                explanation: "Annealing is a heat treatment process that increases the ductility and reduces the hardness of a material by altering its microstructure, typically through heating and slow cooling."
+            },
+            {
+                question: "Sine bar is used to measure:",
+                options: ["A. Radius", "B. Weight", "C. Angle", "D. Diameter"],
+                answer: "C. Angle",
+                explanation: "A sine bar is a precision tool used in conjunction with gauge blocks to measure or set angles accurately."
+            },
+            {
+                question: "Which plastic process uses molds and is suitable for thermosets?",
+                options: ["A. Extrusion", "B. Compression molding", "C. Injection molding", "D. Blow molding"],
+                answer: "B. Compression molding",
+                explanation: "Compression molding is a manufacturing process that uses heat and pressure to form a material (often thermosetting plastics) within a mold cavity. It is particularly suitable for thermosets because they undergo an irreversible chemical change upon heating."
+            },
+            {
+                question: "Vernier calipers can measure up to:",
+                options: ["A. 0.1 mm", "B. 0.02 mm", "C. 1 mm", "D. 0.5 mm"],
+                answer: "B. 0.02 mm",
+                explanation: "Standard Vernier calipers typically have a least count (accuracy) of 0.02 mm, allowing for precise measurements."
+            },
+            {
+                question: "Snap gauges are used to check:",
+                options: ["A. Internal diameter", "B. Thread pitch", "C. External dimension", "D. Hardness"],
+                answer: "C. External dimension",
+                explanation: "Snap gauges are fixed gauges used for rapidly checking external dimensions, such as diameters or thicknesses, of manufactured parts to ensure they are within tolerance limits."
+            },
+            {
+                question: "Differential is located between:",
+                options: ["A. Engine and gearbox", "B. Gearbox and clutch", "C. Clutch and brake", "D. Two rear wheels"],
+                answer: "D. Two rear wheels",
+                explanation: "The differential is a mechanical device, part of the drivetrain, typically located between the two drive wheels (rear wheels in most RWD cars) or between the front wheels in FWD cars. It allows the wheels to rotate at different speeds when turning."
+            },
+            {
+                question: "Purpose of radiator in car:",
+                options: ["A. Cool brakes", "B. Cool engine", "C. Heat interior", "D. Supply fuel"],
+                answer: "B. Cool engine",
+                explanation: "The radiator is a vital component of a car's cooling system. It dissipates heat from the engine coolant into the air, preventing the engine from overheating."
+            },
+            {
+                question: "Friction clutch transmits power by:",
+                options: ["A. Magnetic field", "B. Frictional contact", "C. Oil pressure", "D. Gears"],
+                answer: "B. Frictional contact",
+                explanation: "A friction clutch transmits power from the engine to the gearbox through the friction between the clutch plate and the flywheel, allowing smooth engagement and disengagement of power."
+            },
+            {
+                question: "Which is NOT a type of brake?",
+                options: ["A. Disc", "B. Drum", "C. Centrifugal", "D. Magnetic"],
+                answer: "C. Centrifugal",
+                explanation: "Disc brakes, drum brakes, and magnetic brakes (or electromagnetic brakes) are all types of braking systems. Centrifugal is related to force, not a brake type."
+            },
+            {
+                question: "Ackermann mechanism is related to:",
+                options: ["A. Braking", "B. Steering", "C. Gearbox", "D. Exhaust"],
+                answer: "B. Steering",
+                explanation: "The Ackermann steering geometry is a geometric arrangement of linkages in the steering of a vehicle designed to solve the problem of wheels turning at different angles when cornering, ensuring smooth turns without tire scrubbing."
+            },
+            {
+                question: "E-vehicles are powered by:",
+                options: ["A. Petrol", "B. Diesel", "C. Electricity", "D. Hydrogen"],
+                answer: "C. Electricity",
+                explanation: "E-vehicles, or electric vehicles, are powered by electric motors, which get energy from batteries or other electrical sources."
+            },
+            {
+                question: "Which of the following is used for leveling in surveying?",
+                options: ["A. Compass", "B. Bench Mark", "C. Dumpy level", "D. Clinometer"],
+                answer: "C. Dumpy level",
+                explanation: "A dumpy level (or automatic level) is a surveying instrument used to establish or verify points in the same horizontal plane, crucial for leveling work. A benchmark is a reference point for elevation, a compass measures bearings, and a clinometer measures angles of slope/inclination."
+            },
+            {
+                question: "The most commonly used cement in construction is:",
+                options: ["A. Rapid hardening", "B. Sulphate resistant", "C. Portland Pozzolana", "D. Ordinary Portland Cement"],
+                answer: "D. Ordinary Portland Cement",
+                explanation: "Ordinary Portland Cement (OPC) is the most widely used type of cement for general construction purposes due to its versatility and balanced properties."
+            },
+            {
+                question: "A flexible pavement consists of:",
+                options: ["A. Rigid layer", "B. Cement concrete", "C. Bituminous layers", "D. Granite block"],
+                answer: "C. Bituminous layers",
+                explanation: "Flexible pavements consist of a series of bituminous (asphalt) layers resting on a granular base and sub-base. They distribute loads through granular action."
+            },
+            {
+                question: "The process of treating water to remove suspended particles is called:",
+                options: ["A. Coagulation", "B. Disinfection", "C. Filtration", "D. Aeration"],
+                answer: "C. Filtration",
+                explanation: "Filtration is the process of physically removing suspended particles from water by passing it through a porous medium. Coagulation and flocculation often precede filtration to clump smaller particles together."
+            },
+            {
+                question: "Which of the following is used for measuring the flow of water in irrigation?",
+                options: ["A. Sluice", "B. V-Notch", "C. Gauge", "D. Pipe"],
+                answer: "B. V-Notch",
+                explanation: "A V-notch (or triangular weir) is a common device used to measure the discharge or flow rate of water in open channels, particularly in irrigation systems, based on the height of water flowing over the notch."
+            },
+            {
+                question: "Yarn hairiness is tested using a:",
+                options: ["A. Lea tester", "B. Uster tester", "C. Shirley tester", "D. Wrap reel"],
+                answer: "B. Uster tester",
+                explanation: "Uster instruments, particularly the Uster Tester, are widely used in the textile industry to measure various yarn properties, including hairiness, evenness, and strength."
+            },
+            {
+                question: "Reactive dyes are used for:",
+                options: ["A. Polyester", "B. Cotton", "C. Nylon", "D. Acrylic"],
+                answer: "B. Cotton",
+                explanation: "Reactive dyes form a covalent bond with the fiber molecule, making them highly permanent. They are primarily used for cellulose fibers like cotton, linen, and viscose rayon."
+            },
+            {
+                question: "Twisting in spinning improves:",
+                options: ["A. Color", "B. Luster", "C. Strength", "D. Elasticity"],
+                answer: "C. Strength",
+                explanation: "Twisting fibers together during spinning increases the cohesive forces between them, which significantly improves the strength and tenacity of the resulting yarn."
+            },
+            {
+                question: "The device that removes neps from yarn is:",
+                options: ["A. Carding machine", "B. Comber", "C. Blowroom", "D. Draw frame"],
+                answer: "B. Comber",
+                explanation: "A comber machine is used in spinning to remove short fibers and impurities, including neps (small knots of tangled fibers), from cotton or other staple fibers, producing a smoother and stronger yarn."
+            },
+            {
+                question: "In printing, the roller method used for fine designs is:",
+                options: ["A. Rotary", "B. Block", "C. Stencil", "D. Screen"],
+                answer: "A. Rotary",
+                explanation: "Rotary screen printing (a type of roller method) is well-suited for printing fine designs and continuous patterns at high speeds on textiles and other substrates."
+            },
+            {
+                question: "An example of petrochemical product is:",
+                options: ["A. PVC", "B. Jute", "C. Sugar", "D. Nylon"],
+                answer: "A. PVC",
+                explanation: "Petrochemicals are chemical products derived from petroleum (crude oil) or natural gas. PVC (Polyvinyl Chloride) is a synthetic plastic polymer derived from petroleum, making it a petrochemical product. Nylon is also a petrochemical product. The question has a single best answer. Jute and Sugar are agro-based."
+            },
+            {
+                question: "Gravure printing is mostly used for:",
+                options: ["A. Books", "B. Newspapers", "C. Plastic packaging", "D. Posters"],
+                answer: "C. Plastic packaging",
+                explanation: "Gravure printing is known for its high quality, excellent image reproduction, and consistency, making it widely used for long print runs on flexible materials like plastic films for packaging (e.g., food packaging, laminates)."
+            },
+            {
+                question: "Earthenware is a type of:",
+                options: ["A. Cement", "B. Concrete", "C. Pottery", "D. Stone"],
+                answer: "C. Pottery",
+                explanation: "Earthenware refers to ceramic ware made from clay that has been fired at relatively low temperatures, typically porous, and is a common type of pottery."
+            },
+            {
+                question: "Which property makes ceramics ideal for electrical insulators?",
+                options: ["A. Transparency", "B. Low thermal conductivity", "C. High porosity", "D. High dielectric strength"],
+                answer: "D. High dielectric strength",
+                explanation: "High dielectric strength (the ability to withstand electric fields without breaking down) is a crucial property that makes ceramics excellent electrical insulators, preventing the flow of electricity."
+            },
+            {
+                question: "Vitamin responsible for night vision is:",
+                options: ["A. A", "B. B1", "C. D", "D. C"],
+                answer: "A. A",
+                explanation: "Vitamin A (Retinol) is essential for good vision, particularly in low light conditions (night vision). Deficiency in Vitamin A can lead to night blindness."
+            },
+            {
+                question: "Milk powder is made using which process?",
+                options: ["A. Pasteurization", "B. Homogenization", "C. Spray drying", "D. Freezing"],
+                answer: "C. Spray drying",
+                explanation: "Spray drying is the most common method for producing milk powder. Liquid milk concentrate is sprayed into a chamber of hot air, which rapidly evaporates the water, leaving dry milk solids."
+            },
+            {
+                question: "A rotavator is a:",
+                options: ["A. Soil cutter", "B. Seeder", "C. Harvester", "D. Sprayer"],
+                answer: "A. Soil cutter",
+                explanation: "A rotavator (rotary tiller) is a power-tiller or tractor implement used for primary and secondary tillage, which cuts, pulverizes, and mixes the soil using rotating blades."
+            },
+            {
+                question: "The temple of Kailasa at Ellora is an example of:",
+                options: ["A. Buddhist", "B. Hindu", "C. Islamic", "D. Modern"],
+                answer: "B. Hindu",
+                explanation: "The Kailasa Temple at Ellora Caves is a magnificent example of rock-cut architecture dedicated to Lord Shiva, representing Hindu religious art and architecture."
+            },
+            {
+                question: "Fashion draping is used in:",
+                options: ["A. Knitting", "B. Garment fitting", "C. Embroidery", "D. Dyeing"],
+                answer: "B. Garment fitting",
+                explanation: "Fashion draping is a technique used in garment design where fabric is manipulated and pinned directly on a dress form to create a garment's pattern, helping to visualize and achieve a desired fit and silhouette."
+            },
+            {
+                question: "A lockstitch machine is used in:",
+                options: ["A. Leatherwork", "B. Tailoring", "C. Weaving", "D. Packaging"],
+                answer: "B. Tailoring",
+                explanation: "A lockstitch sewing machine is the most common type of sewing machine used for general sewing and tailoring, producing a strong, secure stitch by interlocking two threads."
+            }
+        ];
+
+        // DOM elements
+        const quizContent = document.getElementById('quiz-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const completeBtn = document.getElementById('complete-btn');
+        const resultContainer = document.getElementById('result-container');
+        const progressBar = document.getElementById('progress-bar');
+        const correctCount = document.getElementById('correct-count');
+        const wrongCount = document.getElementById('wrong-count');
+        const unansweredCount = document.getElementById('unanswered-count');
+        const resultDetails = document.getElementById('result-details');
+        const timeRemainingSpan = document.getElementById('time-remaining');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        // New DOM elements for attempted/unattempted counts
+        const attemptedCountDisplay = document.getElementById('attempted-count-display');
+        const unattemptedCountDisplay = document.getElementById('unattempted-count-display');
+
+
+        // Quiz state
+        let currentQuestion = 0;
+        const userAnswers = new Array(questions.length).fill(null);
+        let timeLimit = 90 * 60; // 90 minutes in seconds (as per brochure)
+        let timerInterval;
+
+        // Function to update attempted and unattempted counts
+        function updateQuestionCountsDisplay() {
+            let attempted = 0;
+            let unattempted = 0;
+            userAnswers.forEach(answer => {
+                if (answer !== null) {
+                    attempted++;
+                } else {
+                    unattempted++;
+                }
+            });
+            attemptedCountDisplay.textContent = attempted;
+            unattemptedCountDisplay.textContent = unattempted;
+        }
+
+        // Initialize quiz
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+
+            // Update progress bar
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+            // Create question HTML
+            let optionsHTML = q.options.map((option, index) => `
+                <label class="option">
+                    <input type="radio" name="question" value="${option}"
+                        ${userAnswers[currentQuestion] === option ? 'checked' : ''}>
+                    ${option}
+                </label>
+            `).join('');
+
+            quizContent.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                </div>
+            `;
+
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = currentQuestion === questions.length - 1;
+
+            updateQuestionCountsDisplay(); // Update counts after rendering
+        }
+
+        // Timer function
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(timeLimit / 60);
+                const seconds = timeLimit % 60;
+                timeRemainingSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLimit <= 0) {
+                    clearInterval(timerInterval);
+                    showResults(); // Automatically complete quiz when time runs out
+                    alert("Time's up! The quiz has been completed automatically.");
+                } else {
+                    timeLimit--;
+                }
+            }, 1000);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', () => {
+            saveAnswer();
+            currentQuestion--;
+            renderQuestion();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            saveAnswer();
+            currentQuestion++;
+            renderQuestion();
+        });
+
+        completeBtn.addEventListener('click', showResults);
+
+        // Save the user's answer
+        function saveAnswer() {
+            const selectedOption = document.querySelector('input[name="question"]:checked');
+            userAnswers[currentQuestion] = selectedOption ? selectedOption.value : null;
+            updateQuestionCountsDisplay(); // Update counts after saving an answer
+        }
+
+        // Show quiz results
+        function showResults() {
+            clearInterval(timerInterval); // Stop the timer
+
+            saveAnswer(); // Save the answer for the current question before showing results
+
+            let correct = 0;
+            let wrong = 0;
+            let unanswered = 0;
+            let detailsHTML = '';
+
+            questions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+
+                if (!userAnswer) {
+                    unanswered++;
+                    detailsHTML += `
+                        <div class="result-item">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="wrong-answer">You did not answer this question.</div>
+                            <div class="correct-answer">Correct answer: ${q.answer}</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                } else if (userAnswer === q.answer) {
+                    correct++;
+                    // Add this block to display correct questions
+                    detailsHTML += `
+                        <div class="result-item correct-detail">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="correct-answer">Your answer: ${userAnswer} (Correct)</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                } else {
+                    wrong++;
+                    detailsHTML += `
+                        <div class="result-item">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="wrong-answer">Your answer: ${userAnswer}</div>
+                            <div class="correct-answer">Correct answer: ${q.answer}</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            // Update result counts
+            correctCount.textContent = correct;
+            wrongCount.textContent = wrong;
+            unansweredCount.textContent = unanswered;
+
+            // Add details to results
+            resultDetails.innerHTML = detailsHTML;
+
+            // Show results and hide quiz
+            document.getElementById('quiz-content').style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.getElementById('complete-btn').style.display = 'none';
+            document.querySelector('.quiz-header').style.display = 'none'; // Hide the header during results
+            resultContainer.style.display = 'block';
+
+            // Scroll to results
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initial setup
+        totalQuestionsSpan.textContent = questions.length;
+        renderQuestion();
+        startTimer();
+        updateQuestionCountsDisplay(); // Initial update of attempted/unattempted counts
+          function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const correct = document.getElementById('correct-count').textContent;
+            
+            doc.setFontSize(18);
+            doc.setTextColor(52, 152, 219);
+            doc.text("LEET 2025 Mock Test Report", 15, 20);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`Final Score: ${correct} / ${questions.length}`, 15, 30);
+            doc.text(`Date: ${new Date().toLocaleDateString()}`, 15, 37);
+            
+            let y = 50;
+            questions.forEach((q, i) => {
+                if (y > 260) { doc.addPage(); y = 20; }
+                
+                doc.setFont("helvetica", "bold");
+                const splitTitle = doc.splitTextToSize(`Q${i+1}: ${q.question}`, 180);
+                doc.text(splitTitle, 15, y);
+                y += (splitTitle.length * 7);
+                
+                doc.setFont("helvetica", "normal");
+                doc.text(`Your Answer: ${userAnswers[i] || 'Not Answered'}`, 20, y);
+                y += 6;
+                doc.setTextColor(46, 204, 113);
+                doc.text(`Correct Answer: ${q.answer}`, 20, y);
+                doc.setTextColor(0, 0, 0);
+                
+                y += 12;
+            });
+            
+            doc.save("LEET_mock_sample_paper_5");
+        }
+    </script>
+</body>
+</html>

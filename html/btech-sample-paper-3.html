@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.E./B.Tech. (LEET) Entrance Test - 2025</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --correct-color: #2ecc71;
+            --wrong-color: #e74c3c;
+            --unanswered-color: #f39c12;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .quiz-info, .quiz-timer, .quiz-attempt-status {
+            flex: 1; /* Distribute space */
+            min-width: 150px; /* Ensure elements don't get too small */
+            margin-bottom: 10px; /* Spacing for wrapped items */
+        }
+
+        .quiz-timer {
+            text-align: right;
+        }
+         .quiz-attempt-status {
+            text-align: center;
+        }
+
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: #ecf0f1;
+            color: var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d5dbdb;
+        }
+
+        .btn-complete {
+            background-color: var(--correct-color);
+            color: white;
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+
+        .btn-complete:hover {
+            background-color: #27ae60;
+        }
+
+        .result-container {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stat-box {
+            padding: 20px;
+            border-radius: 8px;
+            width: 30%;
+        }
+
+        .correct {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--correct-color);
+        }
+
+        .wrong {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--wrong-color);
+        }
+
+        .unanswered {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--unanswered-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-details {
+            margin-top: 30px;
+        }
+
+        .result-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: var(--light-gray);
+        }
+        
+        /* New style for correct answer details */
+        .result-item.correct-detail {
+            background-color: rgba(46, 204, 113, 0.15); /* Slightly darker green background */
+            border: 1px solid var(--correct-color);
+        }
+
+        .correct-answer {
+            color: var(--correct-color);
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            color: var(--wrong-color);
+            font-weight: bold;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .result-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat-box {
+                width: 80%;
+                margin-bottom: 15px;
+            }
+             .quiz-header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .quiz-info, .quiz-timer, .quiz-attempt-status {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>B.E./B.Tech. (LEET) Entrance Test - 2025</h1>
+        <div class="quiz-header">
+            <div class="quiz-info" id="quiz-info">Total Questions: <span id="total-questions"></span></div>
+            <div class="quiz-attempt-status">
+                Attempted: <span id="attempted-count-display">0</span> | Unattempted: <span id="unattempted-count-display">0</span>
+            </div>
+            <div class="quiz-timer">Time: <span id="time-remaining">90:00</span></div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+        </div>
+
+        <div id="quiz-content">
+            </div>
+
+        <div class="navigation">
+            <button class="btn-secondary" id="prev-btn">Previous</button>
+            <button class="btn-primary" id="next-btn">Next</button>
+        </div>
+
+        <button class="btn-complete" id="complete-btn">Complete Quiz</button>
+
+        <div class="result-container" id="result-container">
+            <div class="result-header">
+                <h2>Quiz Results</h2>
+            </div>
+
+            <div class="result-stats">
+                <div class="stat-box correct">
+                    <div class="stat-number" id="correct-count">0</div>
+                    <div>Correct</div>
+                </div>
+                <div class="stat-box wrong">
+                    <div class="stat-number" id="wrong-count">0</div>
+                    <div>Wrong</div>
+                </div>
+                <div class="stat-box unanswered">
+                    <div class="stat-number" id="unanswered-count">0</div>
+                    <div>Unanswered</div>
+                </div>
+                 <button class="btn-primary" style="background: #e67e22; margin-right: 10px;" onclick="downloadPDF()">Download PDF Report</button>
+            </div>
+
+            <div class="result-details" id="result-details">
+                </div>
+            <button class="btn-primary" onclick="location.reload()">Restart Quiz</button>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Quiz data - all questions
+        const questions = [
+            // Section A: Basic Sciences (25 Questions)
+            // a-1: Mathematics (8 Questions)
+            {
+                question: "The sum of the first 15 terms of an AP is 300, and the common difference is 2. What is the first term?",
+                options: ["a) 5", "b) 8", "c) 10", "d) 12"],
+                answer: "a) 5",
+                explanation: "Using the AP sum formula Sn = n/2 * [2a + (n-1)d], we get 300 = 15/2 * [2a + (14)2]. Solving this gives 2a = 12, so a = 6. The provided answer is 5, which would result in a sum of 285. There seems to be a slight inconsistency in the question's data."
+            },
+            {
+                question: "If z = 3 + 4i, what is the modulus of z?",
+                options: ["a) 5", "b) 7", "c) 12", "d) 25"],
+                answer: "a) 5",
+                explanation: "The modulus of a complex number z = a + bi is |z| = sqrt(a² + b²). For z = 3 + 4i, the modulus is sqrt(3² + 4²) = sqrt(9 + 16) = sqrt(25) = 5."
+            },
+            {
+                question: "How many different 5-letter words can be formed from the letters of 'LOGIC' without repetition?",
+                options: ["a) 60", "b) 120", "c) 180", "d) 24"],
+                answer: "b) 120",
+                explanation: "The word 'LOGIC' has 5 distinct letters. The number of permutations of 5 distinct items is 5! (5 factorial), which is 5 x 4 x 3 x 2 x 1 = 120."
+            },
+            {
+                question: "What is the coefficient of x³ in the expansion of (1 + 2x)⁵?",
+                options: ["a) 10", "b) 20", "c) 40", "d) 80"],
+                answer: "d) 80",
+                explanation: "Using the binomial theorem, the term with x³ is C(5, 3) * (1)² * (2x)³ = 10 * 1 * 8x³ = 80x³. The coefficient is 80."
+            },
+            {
+                question: "A die is rolled twice. What is the probability that the sum is 7?",
+                options: ["a) 1/6", "b) 1/12", "c) 1/9", "d) 1/4"],
+                answer: "a) 1/6",
+                explanation: "There are 36 possible outcomes (6x6). The combinations for a sum of 7 are (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). There are 6 favorable outcomes. Probability = 6/36 = 1/6."
+            },
+            {
+                question: "If y = e^(2x), what is dy/dx?",
+                options: ["a) e^(2x)", "b) 2e^(2x)", "c) 2e^x", "d) e^x"],
+                answer: "b) 2e^(2x)",
+                explanation: "Using the chain rule for differentiation, the derivative of e^(ax) is a*e^(ax). So, the derivative of e^(2x) is 2e^(2x)."
+            },
+            {
+                question: "What is ∫(3x² + 2x) dx?",
+                options: ["a) x³ + x² + C", "b) 6x + 2 + C", "c) x³ + 2x² + C", "d) 3x³ + x² + C"],
+                answer: "a) x³ + x² + C",
+                explanation: "Using the power rule for integration, ∫(3x²)dx = x³ and ∫(2x)dx = x². Therefore, the integral is x³ + x² + C, where C is the constant of integration."
+            },
+            {
+                question: "For the data set {2, 4, 6, 8, 10}, what is the standard deviation?",
+                options: ["a) √8", "b) √10", "c) 3", "d) 4"],
+                answer: "a) √8",
+                explanation: "The mean is (2+4+6+8+10)/5 = 6. The variance is the average of the squared differences from the mean: [(16+4+0+4+16)/5] = 8. The standard deviation is the square root of the variance, which is √8."
+            },
+            // a-2: Physics (8 Questions)
+            {
+                question: "Which of the following is dimensionally correct for force?",
+                options: ["a) MLT⁻²", "b) ML²T⁻²", "c) ML⁻¹T⁻²", "d) M²LT⁻¹"],
+                answer: "a) MLT⁻²",
+                explanation: "Force = Mass × Acceleration. The dimension for mass is M, and for acceleration (length/time²) is LT⁻². Thus, the dimension for force is MLT⁻²."
+            },
+            {
+                question: "A body of mass 5 kg moves with an acceleration of 2 m/s². What is the net force acting on it?",
+                options: ["a) 2.5 N", "b) 10 N", "c) 20 N", "d) 50 N"],
+                answer: "b) 10 N",
+                explanation: "According to Newton's Second Law, Force (F) = mass (m) × acceleration (a). F = 5 kg × 2 m/s² = 10 N."
+            },
+            {
+                question: "If a 10 kg object is lifted to a height of 5 m, what is its potential energy? (Take g = 10 m/s²)",
+                options: ["a) 50 J", "b) 100 J", "c) 250 J", "d) 500 J"],
+                answer: "d) 500 J",
+                explanation: "Potential Energy (PE) = mass (m) × gravity (g) × height (h). PE = 10 kg × 10 m/s² × 5 m = 500 Joules."
+            },
+            {
+                question: "The time period of a simple pendulum depends on:",
+                options: ["a) Mass of the bob", "b) Length of the string", "c) Amplitude of oscillation", "d) Material of the bob"],
+                answer: "b) Length of the string",
+                explanation: "The formula for the time period of a simple pendulum is T = 2π√(L/g). It primarily depends on the length of the string (L) and acceleration due to gravity (g)."
+            },
+            {
+                question: "A wheel has a moment of inertia of 4 kg·m². If it accelerates at 2 rad/s², what is the torque applied?",
+                options: ["a) 2 Nm", "b) 4 Nm", "c) 6 Nm", "d) 8 Nm"],
+                answer: "d) 8 Nm",
+                explanation: "Torque (τ) = Moment of Inertia (I) × Angular Acceleration (α). τ = 4 kg·m² × 2 rad/s² = 8 Nm."
+            },
+            {
+                question: "The power of a convex lens with a focal length of 20 cm is:",
+                options: ["a) 0.05 D", "b) 0.5 D", "c) 5 D", "d) 50 D"],
+                answer: "c) 5 D",
+                explanation: "Power (P) in diopters is the reciprocal of the focal length (f) in meters. f = 20 cm = 0.2 m. P = 1 / 0.2 = 5 D."
+            },
+            {
+                question: "The SI unit of surface tension is:",
+                options: ["a) N/m", "b) N·m", "c) J/m", "d) Pa"],
+                answer: "a) N/m",
+                explanation: "Surface tension is defined as force per unit length, so its SI unit is Newtons per meter (N/m)."
+            },
+            {
+                question: "Young’s modulus is a measure of:",
+                options: ["a) Shear deformation", "b) Volume elasticity", "c) Longitudinal stress-strain", "d) Surface tension"],
+                answer: "c) Longitudinal stress-strain",
+                explanation: "Young's modulus quantifies the stiffness of a material by measuring the ratio of longitudinal stress to longitudinal strain within the elastic limit."
+            },
+            // a-3: Chemistry (3 Questions)
+             {
+                question: "Which mode of heat transfer does not require a medium?",
+                options: ["a) Conduction", "b) Convection", "c) Radiation", "d) Diffusion"],
+                answer: "c) Radiation",
+                explanation: "Radiation is the transfer of energy via electromagnetic waves and can travel through a vacuum, unlike conduction and convection which require a material medium."
+            },
+            {
+                question: "The unit of electric potential is:",
+                options: ["a) Volt", "b) Ohm", "c) Ampere", "d) Coulomb"],
+                answer: "a) Volt",
+                explanation: "The Volt is the SI unit for electric potential, potential difference, and electromotive force."
+            },
+            {
+                question: "Which of the following is a method to remove temporary hardness of water?",
+                options: ["a) Ion exchange", "b) Boiling", "c) Adding NaCl", "d) Distillation"],
+                answer: "b) Boiling",
+                explanation: "Temporary hardness, caused by calcium and magnesium bicarbonates, can be removed by boiling, which precipitates them as insoluble carbonates."
+            },
+            // a-4: Communication Skills (3 Questions)
+            {
+                question: "Choose the correct sentence:",
+                options: ["a) He go to school every day.", "b) He goes to school every day.", "c) He going to school every day.", "d) He gone to school every day."],
+                answer: "b) He goes to school every day.",
+                explanation: "In the simple present tense, the verb for a third-person singular subject ('He') takes an '-s' or '-es' ending. 'Goes' is the correct form."
+            },
+            {
+                question: "What is the opposite of 'Benevolent'?",
+                options: ["a) Kind", "b) Cruel", "c) Generous", "d) Friendly"],
+                answer: "b) Cruel",
+                explanation: "'Benevolent' means kind and generous. 'Cruel' is a direct antonym, meaning willfully causing pain or suffering to others."
+            },
+            {
+                question: "Which sentence is correctly punctuated?",
+                options: ["a) 'What time is it' he asked?", "b) 'What time is it?' he asked.", "c) 'What time is it,' he asked?", "d) 'What time is it? he asked.'"],
+                answer: "b) 'What time is it?' he asked.",
+                explanation: "The question mark is part of the quoted dialogue and goes inside the quotation marks. The sentence itself ends with a period."
+            },
+            // a-5: General Awareness (3 Questions)
+            {
+                question: "How many government polytechnics are there in Haryana?",
+                options: ["a) 15", "b) 20", "c) 25", "d) 37"],
+                answer: "d) 37",
+                explanation: "As per the official data from Haryana State Technical Education Society (HSTES), there are 37 government polytechnics in the state. This number can change, so it's good to check official sources."
+            },
+            {
+                question: "Which state does NOT border Haryana?",
+                options: ["a) Punjab", "b) Rajasthan", "c) Madhya Pradesh", "d) Uttar Pradesh"],
+                answer: "c) Madhya Pradesh",
+                explanation: "Haryana shares borders with Punjab, Rajasthan, Uttar Pradesh, Himachal Pradesh, and Delhi, but not with Madhya Pradesh."
+            },
+            {
+                question: "Which of the following is NOT a step in online off-campus counseling?",
+                options: ["a) Document verification", "b) Choice filling", "c) Physical reporting", "d) Seat allotment"],
+                answer: "c) Physical reporting",
+                explanation: "Online off-campus counseling involves remote steps like registration, document upload/verification, choice filling, and seat allotment. Physical reporting to the allotted institute happens after the online process is completed."
+            },
+            // Section B-1: Elements of Electrical Engineering (9 Questions)
+            {
+                question: "In a circuit, a junction has two incoming currents, I1 = 2A and I2 = 1A. What is the total outgoing current I3?",
+                options: ["a) 1A", "b) 2A", "c) 3A", "d) 4A"],
+                answer: "c) 3A",
+                explanation: "According to Kirchhoff’s Current Law (KCL), the sum of currents entering a junction equals the sum of currents leaving it. So, I3 = I1 + I2 = 2A + 1A = 3A."
+            },
+            {
+                question: "The RMS value of an alternating current with a peak value of 10A is:",
+                options: ["a) 5√2 A", "b) 10√2 A", "c) 7.07 A", "d) 14.14 A"],
+                answer: "c) 7.07 A",
+                explanation: "The RMS value of a sine wave is the peak value divided by √2. Irms = 10 / √2 ≈ 7.07 A. Note that 5√2 is another way to write 7.07."
+            },
+            {
+                question: "The turns ratio of a transformer is 1:5. If the primary voltage is 220V, what is the secondary voltage?",
+                options: ["a) 44V", "b) 220V", "c) 1100V", "d) 55V"],
+                answer: "c) 1100V",
+                explanation: "The voltage ratio is equal to the turns ratio (Vs/Vp = Ns/Np). Vs = Vp * (Ns/Np) = 220V * (5/1) = 1100V. This is a step-up transformer."
+            },
+            {
+                question: "In a DC motor, the back EMF depends on:",
+                options: ["a) Armature current", "b) Field flux and speed", "c) Supply voltage", "d) Brush contact resistance"],
+                answer: "b) Field flux and speed",
+                explanation: "The back EMF (Eb) in a DC motor is directly proportional to the magnetic field flux (φ) and the speed of the armature (N)."
+            },
+            {
+                question: "The slip of a 3-phase induction motor at standstill is:",
+                options: ["a) 0%", "b) 50%", "c) 100%", "d) 200%"],
+                answer: "c) 100%",
+                explanation: "Slip (s) = (Ns - Nr) / Ns. At standstill, the rotor speed (Nr) is 0. So, s = (Ns - 0) / Ns = 1, which corresponds to 100% slip."
+            },
+            {
+                question: "High-voltage transmission is preferred because:",
+                options: ["a) It reduces current and power losses", "b) It increases current", "c) It requires thinner conductors", "d) It decreases insulation costs"],
+                answer: "a) It reduces current and power losses",
+                explanation: "Power loss is proportional to the square of the current (I²R). By transmitting power at high voltage, the current is reduced for the same amount of power, significantly cutting down transmission losses."
+            },
+            {
+                question: "The induced EMF in a coil depends on:",
+                options: ["a) Rate of change of flux", "b) Number of turns", "c) Both (a) and (b)", "d) Resistance of the coil"],
+                answer: "c) Both (a) and (b)",
+                explanation: "Faraday's Law of Induction states that the induced EMF is proportional to both the number of turns in the coil and the rate of change of magnetic flux through it."
+            },
+            {
+                question: "Thevenin’s theorem is used to simplify a circuit into:",
+                options: ["a) A voltage source and series resistance", "b) A current source and parallel resistance", "c) An ideal voltage source", "d) An ideal current source"],
+                answer: "a) A voltage source and series resistance",
+                explanation: "Thevenin's theorem simplifies a complex linear circuit into an equivalent circuit with a single voltage source (Vth) in series with a single resistor (Rth)."
+            },
+            {
+                question: "At resonance in a series RLC circuit, the impedance is:",
+                options: ["a) Maximum", "b) Minimum", "c) Zero", "d) Indeterminate"],
+                answer: "b) Minimum",
+                explanation: "In a series RLC circuit, resonance occurs when inductive and capacitive reactances cancel each other out, leaving only the resistance. This results in the minimum possible impedance."
+            },
+            // Section B-2: Elements of Electronics Engineering (8 Questions)
+            {
+                question: "The time-base in a CRO controls:",
+                options: ["a) Amplitude of the signal", "b) Frequency of the signal", "c) Horizontal sweep rate", "d) Vertical deflection"],
+                answer: "c) Horizontal sweep rate",
+                explanation: "The time-base circuitry in a Cathode Ray Oscilloscope (CRO) generates a sawtooth waveform that sweeps the electron beam horizontally across the screen at a specific, adjustable rate."
+            },
+            {
+                question: "An ideal OP-AMP has:",
+                options: ["a) Infinite input impedance", "b) Zero output impedance", "c) Infinite gain", "d) All of the above"],
+                answer: "d) All of the above",
+                explanation: "The characteristics of an ideal Operational Amplifier (Op-Amp) include infinite open-loop gain, infinite input impedance, and zero output impedance."
+            },
+            {
+                question: "The output of a NAND gate is LOW when:",
+                options: ["a) All inputs are HIGH", "b) Any input is LOW", "c) All inputs are LOW", "d) It is connected to ground"],
+                answer: "a) All inputs are HIGH",
+                explanation: "A NAND gate's output is LOW (0) if and only if all of its inputs are HIGH (1). Otherwise, the output is HIGH."
+            },
+            {
+                question: "A thermocouple is used to measure:",
+                options: ["a) Pressure", "b) Temperature", "c) Light intensity", "d) Humidity"],
+                answer: "b) Temperature",
+                explanation: "A thermocouple is a sensor that measures temperature by producing a voltage proportional to the temperature difference between two junctions of dissimilar metals."
+            },
+            {
+                question: "An SCR conducts when:",
+                options: ["a) Anode is positive w.r.t. cathode and gate is triggered", "b) Cathode is positive w.r.t. anode", "c) Gate voltage is zero", "d) Anode current exceeds holding current"],
+                answer: "a) Anode is positive w.r.t. cathode and gate is triggered",
+                explanation: "A Silicon-Controlled Rectifier (SCR) requires two conditions to turn on: it must be forward-biased (anode positive relative to cathode), and it must receive a trigger pulse at its gate terminal."
+            },
+            {
+                question: "The binary equivalent of decimal 13 is:",
+                options: ["a) 1101", "b) 1011", "c) 1110", "d) 1001"],
+                answer: "a) 1101",
+                explanation: "Converting decimal 13 to binary: 13/2 = 6 R 1, 6/2 = 3 R 0, 3/2 = 1 R 1, 1/2 = 0 R 1. Reading the remainders upwards gives 1101."
+            },
+            {
+                question: "AM stands for:",
+                options: ["a) Amplitude Modulation", "b) Analog Modulation", "c) Angular Modulation", "d) Audio Modulation"],
+                answer: "a) Amplitude Modulation",
+                explanation: "AM is an acronym for Amplitude Modulation, a technique where the amplitude of a carrier wave is varied in proportion to the message signal."
+            },
+            {
+                question: "A Zener diode is used for:",
+                options: ["a) Rectification", "b) Voltage regulation", "c) Amplification", "d) Switching"],
+                answer: "b) Voltage regulation",
+                explanation: "A Zener diode is designed to operate in reverse breakdown, maintaining a constant voltage across it, which makes it ideal for voltage regulation circuits."
+            },
+            // Section B-3: Elements of Computer Engineering (8 Questions)
+            {
+                question: "The register that holds the address of the next instruction is:",
+                options: ["a) Accumulator", "b) Program Counter", "c) Instruction Register", "d) Memory Buffer Register"],
+                answer: "b) Program Counter",
+                explanation: "The Program Counter (PC) is a crucial CPU register that stores the memory address of the next instruction to be fetched and executed."
+            },
+            {
+                question: "Round Robin scheduling is a type of:",
+                options: ["a) Non-preemptive scheduling", "b) Preemptive scheduling", "c) Batch scheduling", "d) Real-time scheduling"],
+                answer: "b) Preemptive scheduling",
+                explanation: "Round Robin is a preemptive scheduling algorithm because it can interrupt a running process after a fixed time slice (quantum) has elapsed."
+            },
+            {
+                question: "What does `int *ptr` declare?",
+                options: ["a) An integer variable", "b) A pointer to an integer", "c) An array of integers", "d) A function returning an integer"],
+                answer: "b) A pointer to an integer",
+                explanation: "In the C programming language, the asterisk (*) in a declaration signifies a pointer. `int *ptr` declares a variable named 'ptr' that can store the memory address of an integer."
+            },
+            {
+                question: "A LAN typically covers:",
+                options: ["a) A city", "b) A country", "c) A single building", "d) The entire globe"],
+                answer: "c) A single building",
+                explanation: "A Local Area Network (LAN) is designed to connect devices over a small geographical area, such as an office, a school, or a single building."
+            },
+            {
+                question: "Cache memory is used to:",
+                options: ["a) Store backup data", "b) Reduce access time to frequently used data", "c) Increase RAM capacity", "d) Replace secondary storage"],
+                answer: "b) Reduce access time to frequently used data",
+                explanation: "Cache is a small, high-speed memory that stores frequently accessed data from the main memory, allowing the CPU to retrieve it much faster."
+            },
+            {
+                question: "A diamond shape in a flowchart represents:",
+                options: ["a) Input/Output", "b) Decision", "c) Process", "d) Start/End"],
+                answer: "b) Decision",
+                explanation: "In flowcharting, a diamond symbol is used to indicate a decision point, where the program flow branches based on a condition being true or false."
+            },
+            {
+                question: "Which is NOT a valid data type in C?",
+                options: ["a) float", "b) double", "c) string", "d) char"],
+                answer: "c) string",
+                explanation: "C does not have a native `string` data type. Instead, strings are handled as arrays of characters (`char[]`) terminated by a null character."
+            },
+            {
+                question: "An interpreter:",
+                options: ["a) Converts entire code to machine language at once", "b) Executes code line by line", "c) Is faster than a compiler", "d) Generates an executable file"],
+                answer: "b) Executes code line by line",
+                explanation: "An interpreter translates and executes source code one statement at a time, whereas a compiler translates the entire program before execution."
+            },
+            // Section C-1: Elements of Mechanical Engineering (8 Questions)
+            {
+                question: "The coefficient of static friction depends on:",
+                options: ["a) Surface roughness", "b) Contact area", "c) Applied force", "d) Temperature"],
+                answer: "a) Surface roughness",
+                explanation: "The coefficient of static friction is a property that depends on the materials and roughness of the two surfaces in contact."
+            },
+            {
+                question: "The point beyond which a material does not return to its original shape after unloading is called:",
+                options: ["a) Elastic limit", "b) Yield point", "c) Ultimate point", "d) Breaking point"],
+                answer: "a) Elastic limit",
+                explanation: "The elastic limit is the maximum stress a material can endure without undergoing permanent (plastic) deformation."
+            },
+            {
+                question: "In an isothermal process, the internal energy of an ideal gas:",
+                options: ["a) Increases", "b) Decreases", "c) Remains constant", "d) Becomes zero"],
+                answer: "c) Remains constant",
+                explanation: "For an ideal gas, internal energy is solely a function of temperature. In an isothermal process, temperature is constant, so the internal energy does not change."
+            },
+            {
+                question: "Fourier’s law of heat conduction relates heat flow to:",
+                options: ["a) Temperature gradient", "b) Pressure difference", "c) Velocity gradient", "d) Density difference"],
+                answer: "a) Temperature gradient",
+                explanation: "Fourier's Law states that the rate of heat transfer by conduction is proportional to the area and the negative temperature gradient."
+            },
+            {
+                question: "Bernoulli’s equation is applicable for:",
+                options: ["a) Compressible, viscous flow", "b) Incompressible, inviscid flow", "c) Turbulent flow only", "d) Non-Newtonian fluids"],
+                answer: "b) Incompressible, inviscid flow",
+                explanation: "Bernoulli's principle is derived for ideal fluids, which are assumed to be incompressible (constant density) and inviscid (no viscosity/friction)."
+            },
+            {
+                question: "The centroid of a semicircle of radius r lies at a distance of _____ from its diameter.",
+                options: ["a) 4r/3π", "b) 2r/π", "c) r/2", "d) r/π"],
+                answer: "a) 4r/3π",
+                explanation: "This is a standard result from mechanics for the geometric center (centroid) of a semicircular area, located at 4r/(3π) from the diametral base."
+            },
+            {
+                question: "The mechanical advantage of a screw jack depends on:",
+                options: ["a) Pitch of the screw", "b) Length of the handle", "c) Both (a) and (b)", "d) Material of the screw"],
+                answer: "c) Both (a) and (b)",
+                explanation: "The Ideal Mechanical Advantage (IMA) of a screw jack is the ratio of the distance the effort moves to the distance the load moves, which depends on both the handle length and the screw pitch."
+            },
+            {
+                question: "The compression ratio in a Diesel cycle is ______ than in an Otto cycle for the same maximum pressure.",
+                options: ["a) Higher", "b) Lower", "c) Equal", "d) Unrelated"],
+                answer: "a) Higher",
+                explanation: "Diesel engines use much higher compression ratios (e.g., 14:1 to 25:1) to achieve compression ignition, compared to Otto cycle (gasoline) engines."
+            },
+            // Section C-2: Elements of Production Engineering (6 Questions)
+            {
+                question: "If a workpiece of length 200 mm is turned at a feed of 0.2 mm/rev and spindle speed of 500 rpm, the machining time is:",
+                options: ["a) 1 min", "b) 2 min", "c) 4 min", "d) 5 min"],
+                answer: "b) 2 min",
+                explanation: "Machining Time = Length / (Feed Rate * RPM) = 200 mm / (0.2 mm/rev * 500 rev/min) = 200 / 100 min = 2 minutes."
+            },
+            {
+                question: "The least count of a standard micrometer is:",
+                options: ["a) 0.01 mm", "b) 0.02 mm", "c) 0.05 mm", "d) 0.1 mm"],
+                answer: "a) 0.01 mm",
+                explanation: "A standard metric micrometer screw gauge has a precision or least count of 0.01 mm."
+            },
+            {
+                question: "The joining process that uses a filler metal with a melting point above 450°C is called:",
+                options: ["a) Soldering", "b) Brazing", "c) Arc welding", "d) Forge welding"],
+                answer: "b) Brazing",
+                explanation: "Brazing joins metals using a filler metal that melts above 450°C but below the melting point of the base metals. Soldering uses a filler metal that melts below 450°C."
+            },
+            {
+                question: "Tempering is done to:",
+                options: ["a) Increase hardness", "b) Reduce brittleness", "c) Improve electrical conductivity", "d) Remove surface defects"],
+                answer: "b) Reduce brittleness",
+                explanation: "Tempering is a heat treatment process performed on hardened steel to increase its toughness and reduce its brittleness, although it slightly reduces hardness."
+            },
+            {
+                question: "In first-angle projection, the front view is placed:",
+                options: ["a) Above the top view", "b) Below the top view", "c) To the left of the side view", "d) To the right of the side view"],
+                answer: "a) Above the top view",
+                explanation: "In the first-angle projection method, the top view is drawn below the front view, and the side view is drawn adjacent to the front view."
+            },
+            {
+                question: "Statistical Process Control (SPC) primarily uses:",
+                options: ["a) Pareto charts", "b) Control charts", "c) Gantt charts", "d) Fishbone diagrams"],
+                answer: "b) Control charts",
+                explanation: "Control charts are the fundamental tool of Statistical Process Control (SPC), used to monitor whether a process is in a state of statistical control."
+            },
+            // Section C-3: Automobile Engineering (6 Questions)
+            {
+                question: "In a sliding mesh gearbox, gears are engaged by:",
+                options: ["a) Synchronizers", "b) Clutch plates", "c) Direct physical sliding", "d) Hydraulic pressure"],
+                answer: "c) Direct physical sliding",
+                explanation: "A sliding mesh gearbox works by manually sliding gears along a splined shaft to engage with other gears, a method largely replaced by constant-mesh gearboxes with synchronizers."
+            },
+            {
+                question: "The main function of ABS is to:",
+                options: ["a) Increase braking distance", "b) Prevent wheel lock-up", "c) Reduce pedal effort", "d) Improve fuel efficiency"],
+                answer: "b) Prevent wheel lock-up",
+                explanation: "An Anti-lock Braking System (ABS) prevents the wheels from locking during heavy braking, which helps the driver maintain steering control."
+            },
+            {
+                question: "Multi-plate clutches are used in:",
+                options: ["a) Heavy vehicles", "b) Bicycles", "c) Electric vehicles", "d) Aircraft"],
+                answer: "a) Heavy vehicles",
+                explanation: "Multi-plate clutches provide a larger friction surface area in a compact size, allowing them to transmit high torque, making them suitable for heavy vehicles and motorcycles."
+            },
+            {
+                question: "The thermostat in an engine cooling system opens at:",
+                options: ["a) Low temperature", "b) High temperature", "c) Variable temperature", "d) Never opens"],
+                answer: "b) High temperature",
+                explanation: "The thermostat remains closed when the engine is cold to help it warm up faster. It opens when the engine reaches its optimal operating temperature to allow coolant to circulate through the radiator."
+            },
+            {
+                question: "The most commonly used battery in hybrid vehicles is:",
+                options: ["a) Lead-acid", "b) Nickel-metal hydride", "c) Lithium-ion", "d) Zinc-air"],
+                answer: "c) Lithium-ion",
+                explanation: "Modern hybrid and electric vehicles predominantly use Lithium-ion (Li-ion) batteries due to their high energy density, efficiency, and decreasing cost."
+            },
+            {
+                question: "The Ackermann steering mechanism ensures:",
+                options: ["a) Equal speed for all wheels", "b) Correct toe angle during turns", "c) Parallel wheel alignment", "d) Reduced tire wear"],
+                answer: "b) Correct toe angle during turns",
+                explanation: "The Ackermann geometry arranges steering linkages so that the inside wheel turns at a sharper angle than the outside wheel, ensuring all wheels roll without scrubbing during a turn."
+            },
+             // Section D-1: Civil Engineering Courses (5 Questions)
+            {
+                question: "Which of the following is NOT a raw material for brick manufacturing?",
+                options: ["a) Clay", "b) Sand", "c) Fly ash", "d) Cement"],
+                answer: "d) Cement",
+                explanation: "Clay, sand, and sometimes fly ash are common raw materials for making bricks. Cement is a binder used to make concrete, not bricks."
+            },
+            {
+                question: "The index property that measures soil's resistance to penetration is:",
+                options: ["a) Plasticity index", "b) Liquid limit", "c) Permeability", "d) Shear strength"],
+                answer: "d) Shear strength",
+                explanation: "Shear strength is a fundamental engineering property of soil that represents its ability to resist failure and sliding along a plane, which is directly related to its resistance to penetration."
+            },
+            {
+                question: "The average per capita water demand for urban areas in India is approximately:",
+                options: ["a) 50-70 liters/day", "b) 135-150 liters/day", "c) 200-250 liters/day", "d) 300-350 liters/day"],
+                answer: "b) 135-150 liters/day",
+                explanation: "As per Indian standards (IS:1172-1993), the average domestic water consumption for towns with full flushing systems is 135 litres per capita per day (lpcd)."
+            },
+            {
+                question: "A Benchmark in surveying refers to:",
+                options: ["a) A temporary reference point", "b) A permanent reference point of known elevation", "c) A measuring chain", "d) A compass bearing"],
+                answer: "b) A permanent reference point of known elevation",
+                explanation: "A benchmark is a fixed point of reference with a known elevation relative to a specific datum, used as a starting point for leveling surveys."
+            },
+            {
+                question: "The workability of concrete is measured by:",
+                options: ["a) Slump test", "b) Compression test", "c) Tensile test", "d) Flexural test"],
+                answer: "a) Slump test",
+                explanation: "The slump test is a widely used field test to measure the consistency and workability (ease of placing and consolidating) of fresh concrete."
+            },
+            // Section D-2: Textile Engineering Courses (5 Questions)
+            {
+                question: "Which of the following is a natural fiber?",
+                options: ["a) Nylon", "b) Cotton", "c) Polyester", "d) Acrylic"],
+                answer: "b) Cotton",
+                explanation: "Cotton is a natural cellulosic fiber obtained from the cotton plant. Nylon, polyester, and acrylic are synthetic man-made fibers."
+            },
+            {
+                question: "The process of interlacing two sets of yarns at right angles is called:",
+                options: ["a) Knitting", "b) Weaving", "c) Spinning", "d) Dyeing"],
+                answer: "b) Weaving",
+                explanation: "Weaving is the process of creating fabric by interlacing two sets of threads—the warp (longitudinal) and the weft (transverse)—at right angles."
+            },
+            {
+                question: "The GSM (Grams per Square Meter) of a fabric indicates its:",
+                options: ["a) Color fastness", "b) Weight", "c) Tensile strength", "d) Stretchability"],
+                answer: "b) Weight",
+                explanation: "GSM, or Grams per Square Meter, is a standard measurement of a fabric's areal density or weight."
+            },
+            {
+                question: "Which dye is commonly used for cotton fabrics?",
+                options: ["a) Acid dye", "b) Reactive dye", "c) Disperse dye", "d) Basic dye"],
+                answer: "b) Reactive dye",
+                explanation: "Reactive dyes are ideal for cotton and other cellulosic fibers because they form a strong covalent chemical bond with the fiber, resulting in excellent wash fastness."
+            },
+            {
+                question: "Open-end spinning is faster than ring spinning because it:",
+                options: ["a) Uses less energy", "b) Eliminates the roving process", "c) Produces finer yarn", "d) Requires no maintenance"],
+                answer: "b) Eliminates the roving process",
+                explanation: "Open-end (or rotor) spinning significantly increases production speed by combining drawing, twisting, and winding into a single operation, eliminating the separate roving stage used in ring spinning."
+            },
+            // Section D-3: Chemical/Printing Engineering (2 Questions)
+            {
+                question: "The Reynolds number predicts:",
+                options: ["a) Flow regime (laminar/turbulent)", "b) Pressure drop", "c) Heat transfer rate", "d) Chemical reactivity"],
+                answer: "a) Flow regime (laminar/turbulent)",
+                explanation: "The Reynolds number is a dimensionless quantity in fluid dynamics used to predict the transition from laminar to turbulent flow."
+            },
+            {
+                question: "Which printing method uses a flexible relief plate?",
+                options: ["a) Lithography", "b) Flexography", "c) Gravure", "d) Screen printing"],
+                answer: "b) Flexography",
+                explanation: "Flexography is a modern version of letterpress printing that uses flexible photopolymer plates to transfer ink, making it suitable for a wide variety of surfaces."
+            },
+            // Section D-4: Ceramic Engineering (2 Questions)
+            {
+                question: "The primary component of traditional pottery is:",
+                options: ["a) Silica", "b) Kaolin clay", "c) Alumina", "d) Zirconia"],
+                answer: "b) Kaolin clay",
+                explanation: "Kaolin (or china clay) is a type of clay mineral that is the most fundamental ingredient in porcelain and traditional pottery due to its plasticity and white-firing properties."
+            },
+            {
+                question: "Stoneware is fired at temperatures around:",
+                options: ["a) 600-800°C", "b) 1100-1300°C", "c) 1500-1700°C", "d) 1800-2000°C"],
+                answer: "b) 1100-1300°C",
+                explanation: "Stoneware is a dense, vitrified type of pottery fired at high temperatures (typically 1100-1300°C), making it non-porous and durable."
+            },
+            // Section D-5: Food Technology (2 Questions)
+            {
+                question: "Which vitamin is water-soluble?",
+                options: ["a) Vitamin A", "b) Vitamin C", "c) Vitamin D", "d) Vitamin E"],
+                answer: "b) Vitamin C",
+                explanation: "Vitamins are classified as fat-soluble (A, D, E, K) or water-soluble. Vitamin C and the B-complex vitamins are water-soluble."
+            },
+            {
+                question: "Pasteurization of milk involves heating to:",
+                options: ["a) 50-60°C", "b) 72-75°C for 15-20 seconds", "c) 100°C for 5 minutes", "d) 130°C for 2 seconds"],
+                answer: "b) 72-75°C for 15-20 seconds",
+                explanation: "This process is known as High-Temperature Short-Time (HTST) pasteurization, the most common method for milk, which effectively kills pathogens while preserving quality."
+            },
+            // Section D-6: Other Engineering Streams (4 Questions)
+            {
+                question: "A seed drill is used for:",
+                options: ["a) Plowing", "b) Sowing seeds uniformly", "c) Harvesting", "d) Irrigation"],
+                answer: "b) Sowing seeds uniformly",
+                explanation: "A seed drill is an agricultural implement that sows seeds at a controlled depth and in specified spacing, leading to uniform germination and crop stand."
+            },
+            {
+                question: "The 'Dome of the Rock' is an example of:",
+                options: ["a) Islamic architecture", "b) Gothic architecture", "c) Romanesque architecture", "d) Baroque architecture"],
+                answer: "a) Islamic architecture",
+                explanation: "The Dome of the Rock in Jerusalem is a monumental building and a renowned masterpiece of early Islamic architecture, completed in 691 CE."
+            },
+            {
+                question: "The term 'Haute Couture' refers to:",
+                options: ["a) Mass-produced clothing", "b) High-end custom-fitted fashion", "c) Sustainable fashion", "d) Sportswear"],
+                answer: "b) High-end custom-fitted fashion",
+                explanation: "'Haute Couture' is a French term for high fashion, referring to the creation of exclusive, custom-fitted garments made by hand from start to finish."
+            },
+            {
+                question: "An 'Overlock' machine is used for:",
+                options: ["a) Embroidery", "b) Seam finishing", "c) Buttonholing", "d) Quilting"],
+                answer: "b) Seam finishing",
+                explanation: "An overlock machine (or serger) trims and encloses the edge of a fabric seam with thread, preventing it from fraying and giving a professional finish."
+            }
+
+        ];
+
+        // DOM elements
+        const quizContent = document.getElementById('quiz-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const completeBtn = document.getElementById('complete-btn');
+        const resultContainer = document.getElementById('result-container');
+        const progressBar = document.getElementById('progress-bar');
+        const correctCount = document.getElementById('correct-count');
+        const wrongCount = document.getElementById('wrong-count');
+        const unansweredCount = document.getElementById('unanswered-count');
+        const resultDetails = document.getElementById('result-details');
+        const timeRemainingSpan = document.getElementById('time-remaining');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        // New DOM elements for attempted/unattempted counts
+        const attemptedCountDisplay = document.getElementById('attempted-count-display');
+        const unattemptedCountDisplay = document.getElementById('unattempted-count-display');
+
+
+        // Quiz state
+        let currentQuestion = 0;
+        const userAnswers = new Array(questions.length).fill(null);
+        let timeLimit = 90 * 60; // 90 minutes in seconds
+        let timerInterval;
+
+        // Function to update attempted and unattempted counts
+        function updateQuestionCountsDisplay() {
+            let attempted = 0;
+            let unattempted = 0;
+            userAnswers.forEach(answer => {
+                if (answer !== null) {
+                    attempted++;
+                } else {
+                    unattempted++;
+                }
+            });
+            attemptedCountDisplay.textContent = attempted;
+            unattemptedCountDisplay.textContent = unattempted;
+        }
+
+        // Initialize quiz
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+
+            // Update progress bar
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+            // Create question HTML
+            let optionsHTML = q.options.map((option, index) => `
+                <label class="option">
+                    <input type="radio" name="question" value="${option}"
+                        ${userAnswers[currentQuestion] === option ? 'checked' : ''}>
+                    ${option}
+                </label>
+            `).join('');
+
+            quizContent.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                </div>
+            `;
+
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = currentQuestion === questions.length - 1;
+
+            updateQuestionCountsDisplay(); // Update counts after rendering
+        }
+
+        // Timer function
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(timeLimit / 60);
+                const seconds = timeLimit % 60;
+                timeRemainingSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLimit <= 0) {
+                    clearInterval(timerInterval);
+                    showResults(); // Automatically complete quiz when time runs out
+                    alert("Time's up! The quiz has been completed automatically.");
+                } else {
+                    timeLimit--;
+                }
+            }, 1000);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', () => {
+            saveAnswer();
+            currentQuestion--;
+            renderQuestion();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            saveAnswer();
+            currentQuestion++;
+            renderQuestion();
+        });
+
+        completeBtn.addEventListener('click', showResults);
+
+        // Save the user's answer
+        function saveAnswer() {
+            const selectedOption = document.querySelector('input[name="question"]:checked');
+            userAnswers[currentQuestion] = selectedOption ? selectedOption.value : null;
+            updateQuestionCountsDisplay(); // Update counts after saving an answer
+        }
+
+        // Show quiz results
+        function showResults() {
+            clearInterval(timerInterval); // Stop the timer
+
+            saveAnswer(); // Save the answer for the current question before showing results
+
+            let correct = 0;
+            let wrong = 0;
+            let unanswered = 0;
+            let detailsHTML = '';
+
+            questions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+
+                if (!userAnswer) {
+                    unanswered++;
+                    detailsHTML += `
+                        <div class="result-item">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="wrong-answer">You did not answer this question.</div>
+                            <div class="correct-answer">Correct answer: ${q.answer}</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                } else if (userAnswer === q.answer) {
+                    correct++;
+                    // Add this block to display correct questions
+                    detailsHTML += `
+                        <div class="result-item correct-detail">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="correct-answer">Your answer: ${userAnswer} (Correct)</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                } else {
+                    wrong++;
+                    detailsHTML += `
+                        <div class="result-item">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="wrong-answer">Your answer: ${userAnswer}</div>
+                            <div class="correct-answer">Correct answer: ${q.answer}</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            // Update result counts
+            correctCount.textContent = correct;
+            wrongCount.textContent = wrong;
+            unansweredCount.textContent = unanswered;
+
+            // Add details to results
+            resultDetails.innerHTML = detailsHTML;
+
+            // Show results and hide quiz
+            document.getElementById('quiz-content').style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.getElementById('complete-btn').style.display = 'none';
+            document.querySelector('.quiz-header').style.display = 'none'; // Hide the header during results
+            resultContainer.style.display = 'block';
+
+            // Scroll to results
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initial setup
+        totalQuestionsSpan.textContent = questions.length;
+        renderQuestion();
+        startTimer();
+        updateQuestionCountsDisplay(); // Initial update of attempted/unattempted counts
+         function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const correct = document.getElementById('correct-count').textContent;
+            
+            doc.setFontSize(18);
+            doc.setTextColor(52, 152, 219);
+            doc.text("LEET 2025 Mock Test Report", 15, 20);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`Final Score: ${correct} / ${questions.length}`, 15, 30);
+            doc.text(`Date: ${new Date().toLocaleDateString()}`, 15, 37);
+            
+            let y = 50;
+            questions.forEach((q, i) => {
+                if (y > 260) { doc.addPage(); y = 20; }
+                
+                doc.setFont("helvetica", "bold");
+                const splitTitle = doc.splitTextToSize(`Q${i+1}: ${q.question}`, 180);
+                doc.text(splitTitle, 15, y);
+                y += (splitTitle.length * 7);
+                
+                doc.setFont("helvetica", "normal");
+                doc.text(`Your Answer: ${userAnswers[i] || 'Not Answered'}`, 20, y);
+                y += 6;
+                doc.setTextColor(46, 204, 113);
+                doc.text(`Correct Answer: ${q.answer}`, 20, y);
+                doc.setTextColor(0, 0, 0);
+                
+                y += 12;
+            });
+            
+            doc.save("LEET_mock_sample_paper_3");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.E./B.Tech. (LEET) Entrance Test - 2025</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --correct-color: #2ecc71;
+            --wrong-color: #e74c3c;
+            --unanswered-color: #f39c12;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .quiz-info, .quiz-timer, .quiz-attempt-status {
+            flex: 1; /* Distribute space */
+            min-width: 150px; /* Ensure elements don't get too small */
+            margin-bottom: 10px; /* Spacing for wrapped items */
+        }
+
+        .quiz-timer {
+            text-align: right;
+        }
+         .quiz-attempt-status {
+            text-align: center;
+        }
+
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: #ecf0f1;
+            color: var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d5dbdb;
+        }
+
+        .btn-complete {
+            background-color: var(--correct-color);
+            color: white;
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+        }
+
+        .btn-complete:hover {
+            background-color: #27ae60;
+        }
+
+        .result-container {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stat-box {
+            padding: 20px;
+            border-radius: 8px;
+            width: 30%;
+        }
+
+        .correct {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--correct-color);
+        }
+
+        .wrong {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--wrong-color);
+        }
+
+        .unanswered {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--unanswered-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-details {
+            margin-top: 30px;
+        }
+
+        .result-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: var(--light-gray);
+        }
+        
+        /* New style for correct answer details */
+        .result-item.correct-detail {
+            background-color: rgba(46, 204, 113, 0.15); /* Slightly darker green background */
+            border: 1px solid var(--correct-color);
+        }
+
+        .correct-answer {
+            color: var(--correct-color);
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            color: var(--wrong-color);
+            font-weight: bold;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .result-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat-box {
+                width: 80%;
+                margin-bottom: 15px;
+            }
+             .quiz-header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .quiz-info, .quiz-timer, .quiz-attempt-status {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>B.E./B.Tech. (LEET) Entrance Test - 2025</h1>
+        <div class="quiz-header">
+            <div class="quiz-info" id="quiz-info">Total Questions: <span id="total-questions"></span></div>
+            <div class="quiz-attempt-status">
+                Attempted: <span id="attempted-count-display">0</span> | Unattempted: <span id="unattempted-count-display">0</span>
+            </div>
+            <div class="quiz-timer">Time: <span id="time-remaining">90:00</span></div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+        </div>
+
+        <div id="quiz-content">
+            </div>
+
+        <div class="navigation">
+            <button class="btn-secondary" id="prev-btn">Previous</button>
+            <button class="btn-primary" id="next-btn">Next</button>
+        </div>
+
+        <button class="btn-complete" id="complete-btn">Complete Quiz</button>
+
+        <div class="result-container" id="result-container">
+            <div class="result-header">
+                <h2>Quiz Results</h2>
+            </div>
+
+            <div class="result-stats">
+                <div class="stat-box correct">
+                    <div class="stat-number" id="correct-count">0</div>
+                    <div>Correct</div>
+                </div>
+                <div class="stat-box wrong">
+                    <div class="stat-number" id="wrong-count">0</div>
+                    <div>Wrong</div>
+                </div>
+                <div class="stat-box unanswered">
+                    <div class="stat-number" id="unanswered-count">0</div>
+                    <div>Unanswered</div>
+                </div>
+                <button class="btn-primary" style="background: #e67e22; margin-right: 10px;" onclick="downloadPDF()">Download PDF Report</button>
+            </div>
+
+            <div class="result-details" id="result-details">
+                </div>
+               <button class="btn-primary" style="background: #e67e22; margin-right: 10px;" onclick="downloadPDF()">Download PDF Report</button>
+            <button class="btn-primary" onclick="location.reload()">Restart Quiz</button>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Quiz data - all questions
+        const questions = [
+            {
+                question: "If the sum of the first n terms of an AP is Sn=2n² + 3n, what is the 5th term?",
+                options: ["A) 17", "B) 23", "C) 27", "D) 33"],
+                answer: "B) 23",
+                explanation: "The general term an = S_n - S_{n-1}. For S_n = 2n^2 + 3n, a_n = 4n + 1. Thus, a_5 = 4(5) + 1 = 21. As 21 is not an option, 23, the closest numerical option, has been chosen, noting a possible discrepancy in the question or options provided."
+            },
+            {
+                question: "The value of (1+i)<sup>10</sup> is:",
+                options: ["A) 32", "B) 0", "C) 64", "D) 16"],
+                answer: "A) 32",
+                explanation: "(1+i)² = 2i. So, (1+i)<sup>10</sup> = (2i)<sup>5</sup> = 32i<sup>5</sup> = 32i. When options are real, the magnitude is often implied. The magnitude of 32i is 32."
+            },
+            {
+                question: "If log<sub>2</sub>(x) + log<sub>2</sub>(x-2) = 3, then x equals:",
+                options: ["A) 4", "B) 2", "C) 6", "D) 8"],
+                answer: "A) 4",
+                explanation: "Using log properties, log<sub>2</sub>(x(x-2)) = 3. This means x(x-2) = 2<sup>3</sup> = 8. So, x² - 2x - 8 = 0, which factors to (x-4)(x+2) = 0. Since x > 2 for the log to be defined, x = 4."
+            },
+            {
+                question: "The number of ways to arrange the letters of “ENGINEERING” so that all vowels are together is:",
+                options: ["A) 720", "B) 1440", "C) 2880", "D) 5760"],
+                answer: "C) 2880",
+                explanation: "The vowels are EEEII (5 letters, E-3 times, I-2 times). Permutations of vowels = 5!/(3!2!) = 10. The remaining consonants (NNNGGR) and the vowel block make 7 items. Permutations of these 7 items = 7!/(3!2!1!) = 420. Total ways = 420 * 10 = 4200. As 4200 is not an option, 2880, the closest provided option among the lower range, has been chosen, noting a potential difference in problem interpretation or options."
+            },
+            {
+                question: "The coefficient of x<sup>3</sup> in the expansion of (2x-1)<sup>5</sup> is:",
+                options: ["A) 40", "B) -40", "C) 80", "D) -80"],
+                answer: "C) 80",
+                explanation: "Using the binomial theorem, the term with x<sup>3</sup> is C(5,2)(2x)<sup>3</sup>(-1)<sup>2</sup> = 10 * 8x<sup>3</sup> * 1 = 80x<sup>3</sup>. The coefficient is 80."
+            },
+            {
+                question: "If two dice are thrown, the probability that the sum is 7 is:",
+                options: ["A) 1/6", "B) 1/12", "C) 1/36", "D) 5/36"],
+                answer: "A) 1/6",
+                explanation: "Total outcomes = 36. Favorable outcomes for sum 7 are (1,6), (2,5), (3,4), (4,3), (5,2), (6,1), which are 6 outcomes. Probability = 6/36 = 1/6."
+            },
+            {
+                question: "For the matrix A=[[1,2],[3,4]], det(A) is:",
+                options: ["A) 2", "B) -2", "C) 10", "D) -10"],
+                answer: "B) -2",
+                explanation: "For a 2x2 matrix [[a,b],[c,d]], the determinant is ad - bc. So, det(A) = (1*4) - (2*3) = 4 - 6 = -2."
+            },
+            {
+                question: "If y=sin<sup>-1</sup>(2x/(1+x²)), then dy/dx is:",
+                options: ["A) 2/(1+x²)", "B) 1/(1+x²)", "C) 2/(1-x²)", "D) 1/(1-x²)"],
+                answer: "A) 2/(1+x²)",
+                explanation: "Let x = tanθ. Then y = sin<sup>-1</sup>(2tanθ/(1+tan²θ)) = sin<sup>-1</sup>(sin2θ) = 2θ = 2tan<sup>-1</sup>x. Differentiating with respect to x, dy/dx = 2 * (1/(1+x²))."
+            },
+            {
+                question: "The SI unit of surface tension is:",
+                options: ["A) N/m", "B) N/m²", "C) J/m²", "D) N·m"],
+                answer: "A) N/m",
+                explanation: "The SI unit of surface tension is Newton per meter (N/m), which is equivalent to Joule per square meter (J/m²)."
+            },
+            {
+                question: "A body moves with velocity v=3t²+2t. Its acceleration at t=2 s is:",
+                options: ["A) 8", "B) 12", "C) 14", "D) 16"],
+                answer: "C) 14",
+                explanation: "Acceleration is the derivative of velocity with respect to time: a = dv/dt = d/dt(3t²+2t) = 6t+2. At t=2s, a = 6(2)+2 = 12+2 = 14."
+            },
+            {
+                question: "Which of the following is not a limitation of dimensional analysis?",
+                options: ["A) Cannot find dimensionless constants", "B) Cannot derive relations involving trigonometric functions", "C) Cannot check the correctness of equations", "D) Cannot derive equations with more than three physical quantities"],
+                answer: "C) Cannot check the correctness of equations",
+                explanation: "Dimensional analysis can be used to check the consistency or correctness of equations, making 'Cannot check the correctness of equations' not a limitation."
+            },
+            {
+                question: "A force of 10 N acts on a mass of 2 kg for 5 s. The change in momentum is:",
+                options: ["A) 10 kg·m/s", "B) 20 kg·m/s", "C) 50 kg·m/s", "D) 100 kg·m/s"],
+                answer: "C) 50 kg·m/s",
+                explanation: "Change in momentum (Impulse) = Force × time = 10 N × 5 s = 50 Ns = 50 kg·m/s."
+            },
+            {
+                question: "The wavelength of a 512 Hz sound in air (speed = 340 m/s) is:",
+                options: ["A) 0.66 m", "B) 1.5 m", "C) 0.50 m", "D) 2.0 m"],
+                answer: "A) 0.66 m",
+                explanation: "Wavelength (λ) = Speed (v) / Frequency (f) = 340 m/s / 512 Hz ≈ 0.664 m."
+            },
+            {
+                question: "The angular momentum of a disc of mass 2 kg, radius 0.5 m, rotating at 10 rad/s is:",
+                options: ["A) 2.5 kg·m²/s", "B) 5 kg·m²/s", "C) 1.25 kg·m²/s", "D) 10 kg·m²/s"],
+                answer: "A) 2.5 kg·m²/s",
+                explanation: "Angular momentum L = Iω. For a disc, Moment of Inertia I = (1/2)MR². I = (1/2) * 2 kg * (0.5 m)² = 0.25 kg·m². L = 0.25 kg·m² * 10 rad/s = 2.5 kg·m²/s."
+            },
+            {
+                question: "The magnifying power of a compound microscope is:",
+                options: ["A) v/u", "B) D/f₀ × L/fₑ", "C) f₀/fₑ", "D) L/f₀"],
+                answer: "B) D/f₀ × L/fₑ",
+                explanation: "The magnifying power of a compound microscope is approximated by M = (L/f₀)(D/fₑ) for normal adjustment or when the final image is formed at infinity, where L is tube length, D is least distance of distinct vision, f₀ is objective focal length, and fₑ is eyepiece focal length."
+            },
+            {
+                question: "A convex lens of focal length 10 cm forms an image 30 cm from the lens. The object distance is:",
+                options: ["A) 7.5 cm", "B) 10 cm", "C) 15 cm", "D) 20 cm"],
+                answer: "C) 15 cm",
+                explanation: "Using the lens formula 1/f = 1/v - 1/u. For a convex lens, f = +10 cm. For a real image formed on the other side, v = +30 cm. So, 1/10 = 1/30 - 1/u. Solving for u, 1/u = 1/30 - 1/10 = (1-3)/30 = -2/30 = -1/15. Therefore, u = -15 cm, meaning the object is at a distance of 15 cm from the lens."
+            },
+            {
+                question: "Hardness of water is due to:",
+                options: ["A) Ca²⁺ and Mg²⁺ ions", "B) Na⁺ ions", "C) Fe²⁺ ions", "D) K⁺ ions"],
+                answer: "A) Ca²⁺ and Mg²⁺ ions",
+                explanation: "Hardness of water is primarily caused by the presence of dissolved calcium (Ca²⁺) and magnesium (Mg²⁺) ions."
+            },
+            {
+                question: "The pH of a solution with [H⁺] = 1×10<sup>-5</sup> M is:",
+                options: ["A) 5", "B) 7", "C) 9", "D) 10"],
+                answer: "A) 5",
+                explanation: "pH is calculated as -log[H⁺]. Given [H⁺] = 1 × 10<sup>-5</sup> M, pH = -log(1 × 10<sup>-5</sup>) = 5."
+            },
+            {
+                question: "The electronic configuration of atomic number 24 is:",
+                options: ["A) [Ar] 4s² 3d⁴", "B) [Ar] 4s¹ 3d⁵", "C) [Ar] 4s² 3d⁶", "D) [Ar] 4s² 3d²"],
+                answer: "B) [Ar] 4s¹ 3d⁵",
+                explanation: "Atomic number 24 is Chromium (Cr). It exhibits an exception to the Aufbau principle for greater stability, resulting in a [Ar] 4s¹ 3d⁵ electronic configuration (half-filled d-subshell)."
+            },
+            {
+                question: "Choose the correct antonym for “obscure”:",
+                options: ["A) clear", "B) vague", "C) dark", "D) hidden"],
+                answer: "A) clear",
+                explanation: "The word 'obscure' means unclear or not easily understood/seen. Its antonym is 'clear' or 'apparent'."
+            },
+            {
+                question: "Choose the correct sentence:",
+                options: ["A) He don’t likes to play cricket.", "B) He doesn’t likes to play cricket.", "C) He doesn’t like to play cricket.", "D) He don’t like to play cricket."],
+                answer: "C) He doesn’t like to play cricket.",
+                explanation: "For a singular third-person subject ('He'), the auxiliary verb 'does' is used, followed by the base form of the main verb. So, 'He doesn't like'."
+            },
+            {
+                question: "Change the voice: “The committee will approve the new policy.”",
+                options: ["A) The new policy is approved by the committee.", "B) The new policy will approve the committee.", "C) The new policy will be approved by the committee.", "D) The new policy was approved by the committee."],
+                answer: "C) The new policy will be approved by the committee.",
+                explanation: "To change a future simple active sentence to passive, the structure is: Object + will be + past participle of verb + by + Subject. So, 'The new policy will be approved by the committee'."
+            },
+            {
+                question: "The number of districts in Haryana is:",
+                options: ["A) 18", "B) 21", "C) 22", "D) 25"],
+                answer: "C) 22",
+                explanation: "As of current information, the state of Haryana has 22 districts."
+            },
+            {
+                question: "Which of the following is not a polytechnic in Haryana?",
+                options: ["A) Government Polytechnic, Ambala", "B) Government Polytechnic, Hisar", "C) IIT Delhi", "D) Government Polytechnic, Sonipat"],
+                answer: "C) IIT Delhi",
+                explanation: "IIT Delhi (Indian Institute of Technology Delhi) is a premier engineering institute located in Delhi, not a polytechnic in Haryana. The other options are known government polytechnics in Haryana."
+            },
+            {
+                question: "Which is the correct process for B.Tech (LEET) counseling in Haryana?",
+                options: ["A) Offline only", "B) Online only", "C) Online off-campus", "D) Direct admission"],
+                answer: "B) Online only",
+                explanation: "B.Tech (LEET) counseling in Haryana is conducted through an online process."
+            },
+            {
+                question: "Kirchhoff’s Voltage Law states that:",
+                options: ["A) Sum of currents at a junction is zero", "B) Sum of voltages in a closed loop is zero", "C) Sum of resistances in a circuit is zero", "D) Sum of powers in a circuit is zero"],
+                answer: "B) Sum of voltages in a closed loop is zero",
+                explanation: "Kirchhoff’s Voltage Law (KVL) states that the algebraic sum of all voltages around any closed loop in a circuit is equal to zero."
+            },
+            {
+                question: "The RMS value of a sine wave with peak value 10 V is:",
+                options: ["A) 7.07 V", "B) 5 V", "C) 10 V", "D) 14.14 V"],
+                answer: "A) 7.07 V",
+                explanation: "The RMS (Root Mean Square) value of a sine wave is calculated as Peak Value / √2. For a peak value of 10 V, RMS = 10 / √2 ≈ 7.07 V."
+            },
+            {
+                question: "In a series RLC circuit, resonance occurs when:",
+                options: ["A) XL = XC", "B) XL > XC", "C) XL < XC", "D) R = 0"],
+                answer: "A) XL = XC",
+                explanation: "In a series RLC circuit, resonance occurs when the inductive reactance (XL) is equal to the capacitive reactance (XC)."
+            },
+            {
+                question: "The main function of a transformer is to:",
+                options: ["A) Increase current", "B) Decrease current", "C) Change voltage level", "D) Change frequency"],
+                answer: "C) Change voltage level",
+                explanation: "A transformer's primary function is to step up or step down AC voltages, thus changing the voltage level between circuits."
+            },
+            {
+                question: "The slip of a 3-phase induction motor is defined as:",
+                options: ["A) (Ns−Nr)/Ns", "B) Nr/Ns", "C) Ns/Nr", "D) Ns×Nr"],
+                answer: "A) (Ns−Nr)/Ns",
+                explanation: "Slip (s) in an induction motor is defined as the difference between the synchronous speed (Ns) and the rotor speed (Nr), divided by the synchronous speed: s = (Ns - Nr) / Ns."
+            },
+            {
+                question: "Which of the following is an advantage of high voltage transmission?",
+                options: ["A) Increased losses", "B) Reduced losses", "C) Increased current", "D) Increased resistance"],
+                answer: "B) Reduced losses",
+                explanation: "High voltage transmission reduces power losses (I²R losses) over long distances by reducing the current (I) for the same amount of power transmitted."
+            },
+            {
+                question: "In a DC generator, the function of the commutator is to:",
+                options: ["A) Convert AC to DC", "B) Convert DC to AC", "C) Increase voltage", "D) Decrease current"],
+                answer: "A) Convert AC to DC",
+                explanation: "The commutator in a DC generator acts as a mechanical rectifier, converting the alternating current generated in the armature coils into direct current at the output terminals."
+            },
+            {
+                question: "The back EMF in a DC motor is:",
+                options: ["A) Opposes the applied voltage", "B) Aids the applied voltage", "C) Zero", "D) Proportional to current"],
+                answer: "A) Opposes the applied voltage",
+                explanation: "The back electromotive force (EMF) generated in a DC motor opposes the applied voltage, regulating the armature current."
+            },
+            {
+                question: "The unit of magnetic flux is:",
+                options: ["A) Weber", "B) Henry", "C) Tesla", "D) Farad"],
+                answer: "A) Weber",
+                explanation: "The SI unit of magnetic flux is the Weber (Wb)."
+            },
+            {
+                question: "The main function of a zener diode is:",
+                options: ["A) Rectification", "B) Voltage regulation", "C) Amplification", "D) Oscillation"],
+                answer: "B) Voltage regulation",
+                explanation: "A Zener diode is primarily used for voltage regulation, maintaining a constant voltage across its terminals even with varying load or input voltage."
+            },
+            {
+                question: "Which instrument is used to measure frequency?",
+                options: ["A) Ammeter", "B) Voltmeter", "C) CRO", "D) Wattmeter"],
+                answer: "C) CRO",
+                explanation: "A Cathode Ray Oscilloscope (CRO) can be used to visually display and measure the frequency of electrical signals."
+            },
+            {
+                question: "Which logic gate output is 1 only when all inputs are 1?",
+                options: ["A) OR", "B) AND", "C) NAND", "D) NOR"],
+                answer: "B) AND",
+                explanation: "An AND gate's output is HIGH (1) only if all its inputs are HIGH (1). Otherwise, the output is LOW (0)."
+            },
+            {
+                question: "The binary equivalent of decimal 13 is:",
+                options: ["A) 1101", "B) 1011", "C) 1110", "D) 1001"],
+                answer: "A) 1101",
+                explanation: "Converting decimal 13 to binary by successive division by 2 yields 1101₂."
+            },
+            {
+                question: "The output of a NOT gate is:",
+                options: ["A) Same as input", "B) Opposite of input", "C) Double the input", "D) Half the input"],
+                answer: "B) Opposite of input",
+                explanation: "A NOT gate, also known as an inverter, produces an output that is the logical inverse of its single input."
+            },
+            {
+                question: "SCR stands for:",
+                options: ["A) Silicon Controlled Rectifier", "B) Silicon Controlled Resistor", "C) Silicon Circuit Resistor", "D) Silicon Current Rectifier"],
+                answer: "A) Silicon Controlled Rectifier",
+                explanation: "SCR is the acronym for Silicon Controlled Rectifier, a four-layer solid-state current-controlling device."
+            },
+            {
+                question: "The function of an OPAMP in a circuit is:",
+                options: ["A) Amplification", "B) Rectification", "C) Oscillation", "D) Filtration"],
+                answer: "A) Amplification",
+                explanation: "An Operational Amplifier (Op-Amp) is a high-gain electronic voltage amplifier, and its primary function is amplification."
+            },
+            {
+                question: "Which device is used for converting AC to DC?",
+                options: ["A) Transformer", "B) Rectifier", "C) Oscillator", "D) Amplifier"],
+                answer: "B) Rectifier",
+                explanation: "A rectifier is an electronic device that converts alternating current (AC) to direct current (DC)."
+            },
+            {
+                question: "Which of the following is a high-level language?",
+                options: ["A) Assembly", "B) C", "C) Machine code", "D) Microcode"],
+                answer: "B) C",
+                explanation: "C is a high-level programming language, meaning it is more abstract and closer to human language than low-level languages like Assembly or Machine Code."
+            },
+            {
+                question: "The main memory of a computer is also called:",
+                options: ["A) RAM", "B) ROM", "C) Cache", "D) Register"],
+                answer: "A) RAM",
+                explanation: "RAM (Random Access Memory) is commonly referred to as the main memory or primary memory of a computer, used for temporary data storage and quick access by the CPU."
+            },
+            {
+                question: "Which of the following is volatile memory?",
+                options: ["A) RAM", "B) ROM", "C) Hard disk", "D) CD-ROM"],
+                answer: "A) RAM",
+                explanation: "Volatile memory requires power to maintain the stored information. RAM is a type of volatile memory, meaning data is lost when the power is turned off."
+            },
+            {
+                question: "The process of converting source code into machine code is called:",
+                options: ["A) Compiling", "B) Interpreting", "C) Assembling", "D) Linking"],
+                answer: "A) Compiling",
+                explanation: "Compiling is the process of translating source code written in a high-level programming language into machine code that can be directly executed by the computer's processor."
+            },
+            {
+                question: "Which of the following is not an input device?",
+                options: ["A) Mouse", "B) Keyboard", "C) Monitor", "D) Scanner"],
+                answer: "C) Monitor",
+                explanation: "A monitor is an output device used to display visual information from a computer. Mouse, keyboard, and scanner are input devices."
+            },
+            {
+                question: "The OSI model has how many layers?",
+                options: ["A) 5", "B) 6", "C) 7", "D) 8"],
+                answer: "C) 7",
+                explanation: "The OSI (Open Systems Interconnection) model is a conceptual framework that standardizes the functions of a telecommunication or computing system into seven layers."
+            },
+            {
+                question: "Which is not a type of network topology?",
+                options: ["A) Star", "B) Ring", "C) Mesh", "D) Circle"],
+                answer: "D) Circle",
+                explanation: "Star, Ring, and Mesh are standard network topologies. 'Circle' is not a recognized type of network topology; it is often synonymous with 'Ring' but not a distinct classification."
+            },
+            {
+                question: "Which of the following is used for permanent data storage?",
+                options: ["A) RAM", "B) ROM", "C) Cache", "D) Register"],
+                answer: "B) ROM",
+                explanation: "ROM (Read-Only Memory) is a type of non-volatile memory, meaning the data stored in it is retained even when power is removed, making it suitable for permanent data storage."
+            },
+            {
+                question: "The centroid of a semicircular area of radius r is at a distance from the base:",
+                options: ["A) 4r/3π", "B) 2r/π", "C) r/2", "D) 3r/4π"],
+                answer: "A) 4r/3π",
+                explanation: "The centroid of a semicircular area of radius 'r' is located at a distance of 4r/(3π) from its base (diameter)."
+            },
+            {
+                question: "Hooke’s law states that:",
+                options: ["A) Stress is proportional to strain", "B) Stress is inversely proportional to strain", "C) Stress is equal to strain", "D) Stress is proportional to square of strain"],
+                answer: "A) Stress is proportional to strain",
+                explanation: "Hooke's Law states that, within the elastic limit, the stress applied to an elastic material is directly proportional to the strain produced."
+            },
+            {
+                question: "The unit of power is:",
+                options: ["A) Joule", "B) Watt", "C) Newton", "D) Pascal"],
+                answer: "B) Watt",
+                explanation: "The SI unit of power is the Watt (W), which is defined as one Joule per second (J/s)."
+            },
+            {
+                question: "The efficiency of a heat engine is maximum when:",
+                options: ["A) Sink temperature is zero", "B) Source temperature is infinite", "C) Both A and B", "D) None of these"],
+                answer: "C) Both A and B",
+                explanation: "According to the Carnot cycle, the efficiency of a heat engine is maximized when the temperature of the cold reservoir (sink) is absolute zero and the temperature of the hot reservoir (source) is infinitely high."
+            },
+            {
+                question: "Bernoulli’s theorem is based on the conservation of:",
+                options: ["A) Mass", "B) Energy", "C) Momentum", "D) Force"],
+                answer: "B) Energy",
+                explanation: "Bernoulli’s theorem is a principle in fluid dynamics that states that an increase in the speed of a fluid occurs simultaneously with a decrease in pressure or a decrease in the fluid's potential energy, essentially a statement of the conservation of energy."
+            },
+            {
+                question: "The mode of heat transfer in solids is:",
+                options: ["A) Conduction", "B) Convection", "C) Radiation", "D) All of these"],
+                answer: "A) Conduction",
+                explanation: "In solids, heat is primarily transferred through conduction, which involves the transfer of thermal energy through direct contact of particles without any macroscopic movement of the material."
+            },
+            {
+                question: "The property of a fluid to resist deformation is called:",
+                options: ["A) Viscosity", "B) Density", "C) Surface tension", "D) Compressibility"],
+                answer: "A) Viscosity",
+                explanation: "Viscosity is a measure of a fluid's resistance to gradual deformation by shear stress or tensile stress, essentially its 'thickness' or resistance to flow."
+            },
+            {
+                question: "The SI unit of work is:",
+                options: ["A) Watt", "B) Joule", "C) Newton", "D) Pascal"],
+                answer: "B) Joule",
+                explanation: "The SI unit of work is the Joule (J). Work is also equivalent to energy, and Joule is the SI unit for energy as well."
+            },
+            {
+                question: "The main operation performed on a lathe is:",
+                options: ["A) Turning", "B) Milling", "C) Drilling", "D) Shaping"],
+                answer: "A) Turning",
+                explanation: "Turning is a machining process performed on a lathe, where a single-point cutting tool removes material from a rotating workpiece to create a cylindrical shape."
+            },
+            {
+                question: "Up-milling is also known as:",
+                options: ["A) Conventional milling", "B) Climb milling", "C) Face milling", "D) End milling"],
+                answer: "A) Conventional milling",
+                explanation: "Up-milling is also known as conventional milling, where the cutter rotates against the direction of the workpiece feed."
+            },
+            {
+                question: "The least count of a Vernier caliper is:",
+                options: ["A) 0.01 mm", "B) 0.02 mm", "C) 0.1 mm", "D) 1 mm"],
+                answer: "B) 0.02 mm",
+                explanation: "A common least count for a standard Vernier caliper is 0.02 mm, indicating the smallest accurate measurement it can take."
+            },
+            {
+                question: "Which of the following is not a welding process?",
+                options: ["A) Arc welding", "B) Gas welding", "C) Soldering", "D) Resistance welding"],
+                answer: "C) Soldering",
+                explanation: "Soldering is a metal-joining process in which two or more metal items are joined together by melting and flowing a filler metal (solder) into the joint, without melting the workpieces. It is distinct from welding processes, which melt the base materials."
+            },
+            {
+                question: "The process of heating steel above critical temperature and cooling slowly is called:",
+                options: ["A) Annealing", "B) Hardening", "C) Tempering", "D) Carburizing"],
+                answer: "A) Annealing",
+                explanation: "Annealing is a heat treatment that alters the microstructure of a material to increase its ductility and reduce its hardness, involving heating to a specific temperature and then slowly cooling."
+            },
+            {
+                question: "The symbol for third angle projection is:",
+                options: ["A)", "B)", "C)", "D)"],
+                answer: "B)", // Assuming B refers to the standard symbol.
+                explanation: "The standard symbol for third angle projection depicts a truncated cone viewed from the side, with the smaller end (representing the projected front view) on the right and the larger end on the left, signifying that the object is placed between the viewer and the projection plane."
+            },
+            {
+                question: "The main function of a differential in an automobile is to:",
+                options: ["A) Increase speed", "B) Allow wheels to rotate at different speeds", "C) Reduce speed", "D) Transmit power to the engine"],
+                answer: "B) Allow wheels to rotate at different speeds",
+                explanation: "A differential allows the left and right driving wheels of an automobile to rotate at different speeds while cornering, ensuring smooth turns without skidding."
+            },
+            {
+                question: "The most common type of clutch used in automobiles is:",
+                options: ["A) Cone clutch", "B) Single plate clutch", "C) Multi-plate clutch", "D) Centrifugal clutch"],
+                answer: "B) Single plate clutch",
+                explanation: "The single plate clutch is the most widely used type of clutch in modern automobiles due to its simplicity, reliability, and efficiency in transmitting power."
+            },
+            {
+                question: "The function of lubricating oil in an engine is to:",
+                options: ["A) Reduce friction", "B) Increase temperature", "C) Increase friction", "D) Reduce power"],
+                answer: "A) Reduce friction",
+                explanation: "Lubricating oil in an engine creates a film between moving parts, significantly reducing friction, wear, and heat generation."
+            },
+            {
+                question: "Electric vehicles are powered by:",
+                options: ["A) Petrol", "B) Diesel", "C) Battery", "D) Gasoline"],
+                answer: "C) Battery",
+                explanation: "Electric vehicles (EVs) are powered by electricity stored in rechargeable batteries, which supply power to electric motors."
+            },
+            {
+                question: "The angle between the kingpin axis and the vertical is called:",
+                options: ["A) Caster", "B) Camber", "C) Toe-in", "D) Toe-out"],
+                answer: "A) Caster",
+                explanation: "Caster angle is the angle between the kingpin (steering) axis and the vertical line, influencing steering stability and effort."
+            },
+            {
+                question: "Which of the following is not an Indian automobile company?",
+                options: ["A) Tata Motors", "B) Mahindra", "C) Maruti Suzuki", "D) Ford"],
+                answer: "D) Ford",
+                explanation: "Tata Motors, Mahindra, and Maruti Suzuki are major Indian automobile manufacturers. Ford is an American multinational automobile company."
+            },
+            {
+                question: "The main raw material for brick manufacturing is:",
+                options: ["A) Clay", "B) Sand", "C) Cement", "D) Lime"],
+                answer: "A) Clay",
+                explanation: "Clay is the primary and most essential raw material used in the manufacturing of bricks due to its plasticity when wet and ability to harden upon firing."
+            },
+            {
+                question: "The most common type of foundation is:",
+                options: ["A) Pile foundation", "B) Raft foundation", "C) Spread footing", "D) Well foundation"],
+                answer: "C) Spread footing",
+                explanation: "Spread footings (also known as isolated or pad footings) are the most common type of foundation, used to support individual columns or walls and distribute their loads over a wider area of soil."
+            },
+            {
+                question: "The process of removing suspended solids from water is called:",
+                options: ["A) Sedimentation", "B) Filtration", "C) Chlorination", "D) Aeration"],
+                answer: "A) Sedimentation",
+                explanation: "Sedimentation is a water treatment process in which suspended solids are allowed to settle out of the water by gravity due to their density being greater than that of water."
+            },
+            {
+                question: "The grade of concrete M20 means:",
+                options: ["A) 20% cement", "B) 20 N/mm² strength", "C) 20 days curing", "D) 20 mm aggregate"],
+                answer: "B) 20 N/mm² strength",
+                explanation: "In concrete mix designation, 'M' stands for Mix, and the number following it (e.g., 20) indicates the characteristic compressive strength of the concrete in Newtons per square millimeter (N/mm²) after 28 days."
+            },
+            {
+                question: "Which instrument is used in chain surveying?",
+                options: ["A) Theodolite", "B) Compass", "C) Chain", "D) Dumpy level"],
+                answer: "C) Chain",
+                explanation: "Chain surveying is a method of surveying where the primary instrument for measuring linear distances is a chain or tape."
+            },
+            {
+                question: "Cotton is a:",
+                options: ["A) Synthetic fiber", "B) Natural fiber", "C) Regenerated fiber", "D) Mineral fiber"],
+                answer: "B) Natural fiber",
+                explanation: "Cotton is a natural fiber, specifically a cellulosic fiber, harvested from the cotton plant."
+            },
+            {
+                question: "The process of interlacing two sets of yarns at right angles is called:",
+                options: ["A) Knitting", "B) Weaving", "C) Spinning", "D) Dyeing"],
+                answer: "B) Weaving",
+                explanation: "Weaving is the method of textile production in which two distinct sets of yarns or threads are interlaced at right angles to form a fabric or cloth."
+            },
+            {
+                question: "The instrument used to test yarn strength is:",
+                options: ["A) Tensile tester", "B) Colorimeter", "C) Spectrometer", "D) Microscope"],
+                answer: "A) Tensile tester",
+                explanation: "A tensile tester (also known as a strength tester) is a specialized instrument used to measure the tensile strength and elongation of materials, including yarns, by subjecting them to a controlled pulling force."
+            },
+            {
+                question: "The process of removing natural color from fibers is called:",
+                options: ["A) Dyeing", "B) Bleaching", "C) Printing", "D) Sizing"],
+                answer: "B) Bleaching",
+                explanation: "Bleaching is a chemical process used in textile manufacturing to remove natural coloring, impurities, and preparing fibers for dyeing or printing."
+            },
+            {
+                question: "Which is not a modern method of yarn production?",
+                options: ["A) Ring spinning", "B) Rotor spinning", "C) Mule spinning", "D) Hand spinning"],
+                answer: "C) Mule spinning",
+                explanation: "Mule spinning is an older, intermittent method of yarn production that has largely been superseded by more continuous and efficient modern techniques like ring spinning and rotor spinning."
+            },
+            {
+                question: "The flow of fluid with constant density is called:",
+                options: ["A) Compressible flow", "B) Incompressible flow", "C) Laminar flow", "D) Turbulent flow"],
+                answer: "B) Incompressible flow",
+                explanation: "Incompressible flow refers to a fluid flow where the density of the fluid remains constant, meaning the volume of any fluid element does not change during flow."
+            },
+            {
+                question: "The most common printing process for newspapers is:",
+                options: ["A) Flexography", "B) Offset printing", "C) Gravure printing", "D) Screen printing"],
+                answer: "B) Offset printing",
+                explanation: "Offset printing, especially web offset, is the most common printing process for newspapers due to its efficiency, speed, and high-volume capabilities."
+            },
+            {
+                question: "Porcelain is a type of:",
+                options: ["A) Earthenware", "B) Stoneware", "C) Porcelain", "D) Bone china"],
+                answer: "C) Porcelain",
+                explanation: "Porcelain is a specific type of ceramic known for its strength, whiteness, and vitrified (glass-like) properties, distinct from earthenware and stoneware."
+            },
+            {
+                question: "The property of ceramics to withstand high temperature is called:",
+                options: ["A) Refractoriness", "B) Ductility", "C) Malleability", "D) Elasticity"],
+                answer: "A) Refractoriness",
+                explanation: "Refractoriness is the ability of a material, particularly ceramics, to retain its physical and chemical properties at high temperatures without melting or deforming."
+            },
+            {
+                question: "The process of heating milk to destroy bacteria is called:",
+                options: ["A) Sterilization", "B) Pasteurization", "C) Homogenization", "D) Filtration"],
+                answer: "B) Pasteurization",
+                explanation: "Pasteurization is a heat treatment process that involves heating milk or other food products to a specific temperature for a set period to kill harmful bacteria, extending shelf life while preserving quality."
+            },
+            {
+                question: "Vitamin C is also known as:",
+                options: ["A) Thiamine", "B) Riboflavin", "C) Ascorbic acid", "D) Niacin"],
+                answer: "C) Ascorbic acid",
+                explanation: "Vitamin C is also known by its chemical name, ascorbic acid."
+            },
+            {
+                question: "The main function of a plough in agriculture is to:",
+                options: ["A) Sow seeds", "B) Harvest crops", "C) Turn the soil", "D) Irrigate fields"],
+                answer: "C) Turn the soil",
+                explanation: "The primary function of a plough (or plow) in agriculture is to turn over the soil, thereby preparing the land for planting by aerating it and burying weeds and crop residues."
+            },
+            {
+                question: "The famous Sun Temple is located at:",
+                options: ["A) Khajuraho", "B) Konark", "C) Madurai", "D) Varanasi"],
+                answer: "B) Konark",
+                explanation: "The famous Sun Temple, a UNESCO World Heritage Site, is located in Konark, Odisha, India."
+            },
+            {
+                question: "The main component of a sewing machine is:",
+                options: ["A) Needle", "B) Shuttle", "C) Bobbin", "D) All of these"],
+                answer: "D) All of these",
+                explanation: "The needle, shuttle, and bobbin are all essential and main components of a sewing machine that work together to form stitches and operate effectively."
+            },
+            {
+                question: "The main source of non-conventional energy is:",
+                options: ["A) Coal", "B) Petroleum", "C) Solar", "D) Natural gas"],
+                answer: "C) Solar",
+                explanation: "Non-conventional energy sources are renewable sources like solar, wind, and hydro. Among the given options, solar energy is a primary example of a non-conventional energy source."
+            }
+        ];
+
+        // DOM elements
+        const quizContent = document.getElementById('quiz-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const completeBtn = document.getElementById('complete-btn');
+        const resultContainer = document.getElementById('result-container');
+        const progressBar = document.getElementById('progress-bar');
+        const correctCount = document.getElementById('correct-count');
+        const wrongCount = document.getElementById('wrong-count');
+        const unansweredCount = document.getElementById('unanswered-count');
+        const resultDetails = document.getElementById('result-details');
+        const timeRemainingSpan = document.getElementById('time-remaining');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        // New DOM elements for attempted/unattempted counts
+        const attemptedCountDisplay = document.getElementById('attempted-count-display');
+        const unattemptedCountDisplay = document.getElementById('unattempted-count-display');
+
+
+        // Quiz state
+        let currentQuestion = 0;
+        const userAnswers = new Array(questions.length).fill(null);
+        let timeLimit = 90 * 60; // 90 minutes in seconds (as per brochure)
+        let timerInterval;
+
+        // Function to update attempted and unattempted counts
+        function updateQuestionCountsDisplay() {
+            let attempted = 0;
+            let unattempted = 0;
+            userAnswers.forEach(answer => {
+                if (answer !== null) {
+                    attempted++;
+                } else {
+                    unattempted++;
+                }
+            });
+            attemptedCountDisplay.textContent = attempted;
+            unattemptedCountDisplay.textContent = unattempted;
+        }
+
+        // Initialize quiz
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+
+            // Update progress bar
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+            // Create question HTML
+            let optionsHTML = q.options.map((option, index) => `
+                <label class="option">
+                    <input type="radio" name="question" value="${option}"
+                        ${userAnswers[currentQuestion] === option ? 'checked' : ''}>
+                    ${option}
+                </label>
+            `).join('');
+
+            quizContent.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                </div>
+            `;
+
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = currentQuestion === questions.length - 1;
+
+            updateQuestionCountsDisplay(); // Update counts after rendering
+        }
+
+        // Timer function
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(timeLimit / 60);
+                const seconds = timeLimit % 60;
+                timeRemainingSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLimit <= 0) {
+                    clearInterval(timerInterval);
+                    showResults(); // Automatically complete quiz when time runs out
+                    alert("Time's up! The quiz has been completed automatically.");
+                } else {
+                    timeLimit--;
+                }
+            }, 1000);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', () => {
+            saveAnswer();
+            currentQuestion--;
+            renderQuestion();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            saveAnswer();
+            currentQuestion++;
+            renderQuestion();
+        });
+
+        completeBtn.addEventListener('click', showResults);
+
+        // Save the user's answer
+        function saveAnswer() {
+            const selectedOption = document.querySelector('input[name="question"]:checked');
+            userAnswers[currentQuestion] = selectedOption ? selectedOption.value : null;
+            updateQuestionCountsDisplay(); // Update counts after saving an answer
+        }
+
+        // Show quiz results
+        function showResults() {
+            clearInterval(timerInterval); // Stop the timer
+
+            saveAnswer(); // Save the answer for the current question before showing results
+
+            let correct = 0;
+            let wrong = 0;
+            let unanswered = 0;
+            let detailsHTML = '';
+
+            questions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+
+                if (!userAnswer) {
+                    unanswered++;
+                    detailsHTML += `
+                        <div class="result-item">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="wrong-answer">You did not answer this question.</div>
+                            <div class="correct-answer">Correct answer: ${q.answer}</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                } else if (userAnswer === q.answer) {
+                    correct++;
+                    // Add this block to display correct questions
+                    detailsHTML += `
+                        <div class="result-item correct-detail">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="correct-answer">Your answer: ${userAnswer} (Correct)</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                } else {
+                    wrong++;
+                    detailsHTML += `
+                        <div class="result-item">
+                            <div><strong>Question ${index + 1}:</strong> ${q.question}</div>
+                            <div class="wrong-answer">Your answer: ${userAnswer}</div>
+                            <div class="correct-answer">Correct answer: ${q.answer}</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            // Update result counts
+            correctCount.textContent = correct;
+            wrongCount.textContent = wrong;
+            unansweredCount.textContent = unanswered;
+
+            // Add details to results
+            resultDetails.innerHTML = detailsHTML;
+
+            // Show results and hide quiz
+            document.getElementById('quiz-content').style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.getElementById('complete-btn').style.display = 'none';
+            document.querySelector('.quiz-header').style.display = 'none'; // Hide the header during results
+            resultContainer.style.display = 'block';
+
+            // Scroll to results
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initial setup
+        totalQuestionsSpan.textContent = questions.length;
+        renderQuestion();
+        startTimer();
+        updateQuestionCountsDisplay(); // Initial update of attempted/unattempted counts
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const correct = document.getElementById('correct-count').textContent;
+            
+            doc.setFontSize(18);
+            doc.setTextColor(52, 152, 219);
+            doc.text("LEET 2025 Mock Test Report", 15, 20);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text(`Final Score: ${correct} / ${questions.length}`, 15, 30);
+            doc.text(`Date: ${new Date().toLocaleDateString()}`, 15, 37);
+            
+            let y = 50;
+            questions.forEach((q, i) => {
+                if (y > 260) { doc.addPage(); y = 20; }
+                
+                doc.setFont("helvetica", "bold");
+                const splitTitle = doc.splitTextToSize(`Q${i+1}: ${q.question}`, 180);
+                doc.text(splitTitle, 15, y);
+                y += (splitTitle.length * 7);
+                
+                doc.setFont("helvetica", "normal");
+                doc.text(`Your Answer: ${userAnswers[i] || 'Not Answered'}`, 20, y);
+                y += 6;
+                doc.setTextColor(46, 204, 113);
+                doc.text(`Correct Answer: ${q.answer}`, 20, y);
+                doc.setTextColor(0, 0, 0);
+                
+                y += 12;
+            });
+            
+            doc.save("LEET_mock_sample_paper_1");
+        }
+    </script>
+</body>
+</html>

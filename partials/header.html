@@ -1,0 +1,59 @@
+<header>
+  <div class="top-header">
+    <div class="top-left">
+      <button id="darkModeToggle">🌙 Dark Mode</button>
+    </div>
+
+    <div class="top-center">
+      <form class="search-form" role="search" aria-label="Site search">
+        <label for="search-input" class="sr-only">Search for branches, semesters, or subjects</label>
+        <div class="search-container">
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search branches, semesters, subjects..."
+            aria-label="Search input"
+            autocomplete="off"
+            spellcheck="false">
+          <button
+            type="submit"
+            class="search-button"
+            aria-label="Search"
+            title="Search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div id="search-results" class="search-results" role="list" aria-live="polite" aria-atomic="true"></div>
+      </form>
+    </div>
+
+    <div class="top-right">
+      <div class="text-size-controls">
+        <button onclick="setTextSize('small')">A-</button>
+        <button onclick="setTextSize('medium')">A</button>
+        <button onclick="setTextSize('large')">A+</button>
+      </div>
+
+      <label for="languageSelect" class="sr-only">Select site language</label>
+      <select id="languageSelect">
+        <option value="">Select Language</option>
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+      </select>
+
+      <div id="google_translate_element" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="middle-header">
+    <div class="middle-left">
+      <a href="./index.html">
+        <img src="../image/banner bgremove.png" alt="banner">
+      </a>
+    </div>
+    <div class="middle-right">
+      <img src="../image/line bgremove.png" alt="warningline">
+    </div>
+  </div>
+</header>

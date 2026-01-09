@@ -1,0 +1,283 @@
+/* ================= BODY CONTENT ONLY ================= */
+
+body{
+  background:#f5f7fb;
+}
+
+/* SECTION WRAPPER */
+.computer-1-semester{
+  max-width:1200px;
+  margin:60px auto;  padding:20px;
+  text-align:center;
+}
+.computer-1-semester h2{
+    color:red;
+    font-size: 30px;
+}
+.computer-1-semester p{
+    
+    font-size: 20px;
+}
+/* HEADINGS */
+.semester-heading{
+  font-size:32px;
+  font-weight:700;
+  color:#0d6efd;
+  margin-bottom:10px;
+}
+
+.semester-subtext{
+  font-size:16px;
+  color:#555;
+  margin-bottom:35px;
+}
+
+/* GRID */
+.semester-subject-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:28px;
+  margin-top:40px;
+}
+
+/* COMMON CARD - ENHANCED STYLING */
+.semester-subject-card{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  text-decoration:none;
+  border-radius:16px;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:#ffffff;
+  font-weight:600;
+  font-size:18px;
+  padding:28px 20px;
+  min-height:100px;
+  box-shadow:0 10px 30px rgba(102, 126, 234, 0.3);
+  transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border:none;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  /* Staggered animation */
+  opacity:0;
+  animation:fadeInUp 0.6s ease forwards;
+}
+
+/* Staggered entrance animation */
+.semester-subject-card:nth-child(1) { animation-delay: 0.1s; }
+.semester-subject-card:nth-child(2) { animation-delay: 0.2s; }
+.semester-subject-card:nth-child(3) { animation-delay: 0.3s; }
+.semester-subject-card:nth-child(4) { animation-delay: 0.4s; }
+.semester-subject-card:nth-child(5) { animation-delay: 0.5s; }
+.semester-subject-card:nth-child(6) { animation-delay: 0.6s; }
+.semester-subject-card:nth-child(7) { animation-delay: 0.7s; }
+
+/* Shine effect on hover */
+.semester-subject-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.3),
+    transparent
+  );
+  transition:left 0.6s ease;
+}
+
+.semester-subject-card:hover::before{
+  left:100%;
+}
+
+/* Different gradient colors for each session button - Beautiful gradients */
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(1){
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow:0 10px 30px rgba(102, 126, 234, 0.4);
+}
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(2){
+  background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+  box-shadow:0 10px 30px rgba(245, 87, 108, 0.4);
+}
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(3){
+  background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+  box-shadow:0 10px 30px rgba(79, 172, 254, 0.4);
+}
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(4){
+  background:linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
+  box-shadow:0 10px 30px rgba(67, 233, 123, 0.4);
+}
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(5){
+  background:linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+  box-shadow:0 10px 30px rgba(250, 112, 154, 0.4);
+}
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(6){
+  background:linear-gradient(135deg, #30cfd0 0%, #330867 100%) !important;
+  box-shadow:0 10px 30px rgba(48, 207, 208, 0.4);
+}
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(7){
+  background:linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) !important;
+  color:#2d3748 !important;
+  box-shadow:0 10px 30px rgba(168, 237, 234, 0.4);
+}
+
+.semester-subject-grid .semester-subject-card:not(.main-subject):nth-child(7):hover{
+  color:#1a202c !important;
+}
+
+/* NORMAL HOVER (SESSION BUTTONS) - Enhanced */
+.semester-subject-card:hover{
+  transform:translateY(-12px) scale(1.08);
+  box-shadow:0 20px 40px rgba(102, 126, 234, 0.5);
+  color:#ffffff;
+}
+
+/* Active/Click state */
+.semester-subject-card:active{
+  transform:translateY(-8px) scale(1.05);
+}
+
+/* PDF link indicators */
+.semester-subject-card[href*=".pdf"]{
+  position:relative;
+}
+
+.semester-subject-card[href*=".pdf"]::after{
+  content:"📄";
+  position:absolute;
+  top:8px;
+  right:8px;
+  font-size:16px;
+  opacity:0.8;
+}
+
+/* Blank links (href="#") styling - Override gradient colors */
+.semester-subject-card[href="#"]{
+  opacity:0.85;
+  background:linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%) !important;
+  box-shadow:0 8px 25px rgba(149, 165, 166, 0.3) !important;
+  color:#ffffff !important;
+}
+
+.semester-subject-card[href="#"]:hover{
+  opacity:1;
+  background:linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%) !important;
+  box-shadow:0 15px 35px rgba(149, 165, 166, 0.4) !important;
+  color:#ffffff !important;
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ================= MAIN SUBJECT SPECIAL ================= */
+.main-subject{
+  font-size:18px !important;
+  min-height:115px !important;
+  padding:36px 22px !important;
+  background:linear-gradient(135deg,#f3f6ff,#e6ecff) !important;
+  color:#0d6efd !important;
+  border:2px solid #cdd9ff !important;
+  position:relative;
+  overflow:hidden;
+  opacity:1 !important;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12) !important;
+  transition:all 0.4s ease !important;
+  animation:none !important;
+}
+
+/* Ensure text is visible and above effects */
+.main-subject,
+.main-subject * {
+  position:relative;
+  z-index:2;
+  color:#0d6efd !important;
+}
+
+/* SHINE EFFECT */
+.main-subject::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:120%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(13,110,253,0.35),
+    transparent
+  );
+  transition:0.7s;
+}
+
+.main-subject:hover::before{
+  left:120%;
+}
+
+.main-subject:hover{
+  background:linear-gradient(135deg,orange ,red) !important;
+  color:#fff !important;
+  transform:translateY(-10px) scale(1.06);
+  box-shadow:0 18px 40px rgba(13,110,253,0.45);
+}
+
+/* DIVIDER */
+.section-divider{
+  width:100%;
+  height:3px;
+  background:#ddd;
+  margin:50px 0;
+}
+
+
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .semester-heading{font-size:26px;}
+  .main-subject{font-size:17px;}
+  .semester-subject-grid{
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:22px;
+  }
+  .semester-subject-card{
+    font-size:16px;
+    padding:24px 16px;
+    min-height:90px;
+  }
+}
+
+@media(max-width:480px){
+  .semester-heading{font-size:22px;}
+  .semester-subject-card{
+    font-size:15px;
+    padding:20px 14px;
+    min-height:85px;
+  }
+  .semester-subject-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+}
+
+/* Dark mode support */
+body.dark-mode .semester-subject-card[href="#"]{
+  background:linear-gradient(135deg, #2d3748 0%, #4a5568 100%) !important;
+}
+
+body.dark-mode .semester-subject-card[href="#"]:hover{
+  background:linear-gradient(135deg, #4a5568 0%, #718096 100%) !important;
+}

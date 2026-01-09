@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haryana LEET 2025 - 90 Question Real Mock</title>
+    <style>
+        :root {
+            --primary: #2c3e50; --accent: #3498db; --success: #27ae60;
+            --danger: #e74c3c; --warning: #f39c12; --bg: #f4f7f6;
+        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        header { position: sticky; top: 0; background: white; padding: 15px; border-bottom: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .timer-box { font-size: 1.6rem; font-weight: bold; color: var(--danger); background: #fff0f0; padding: 8px 20px; border-radius: 8px; border: 2px solid var(--danger); }
+        .section-title { background: var(--primary); color: white; padding: 10px 20px; margin: 30px 0 15px 0; border-radius: 5px; font-size: 1rem; text-transform: uppercase; }
+        .question-card { margin-bottom: 25px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background: #fff; }
+        .q-text { font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 15px; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .option-label { display: block; padding: 12px; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .option-label:hover { background: #f0f7ff; }
+        .submit-btn { background: var(--success); color: white; border: none; padding: 15px 45px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; width: 100%; max-width: 350px; display: block; margin: 20px auto; font-weight: bold; }
+        #results { display: none; text-align: center; }
+        .stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 25px 0; }
+        .stat-card { padding: 20px; border-radius: 10px; color: white; font-weight: bold; }
+        .bg-cor { background: var(--success); } .bg-att { background: var(--accent); } .bg-wro { background: var(--danger); } .bg-skp { background: var(--warning); }
+        .review-q { text-align: left; margin-top: 20px; }
+        .correct-ans { border: 2px solid var(--success); background: #f0fff0; }
+        .wrong-ans { border: 2px solid var(--danger); background: #fff5f5; }
+        .skipped-ans { border: 2px solid var(--warning); background: #fffcf0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1 style="margin:0; font-size: 1.5rem;">LEET 2025 Official Mock</h1>
+            <p style="margin:0; color: #666;">Full Syllabus 90 Questions</p>
+        </div>
+        <div id="timer" class="timer-box">90:00</div>
+    </header>
+
+    <div id="quiz-screen">
+        <form id="quizForm"><div id="questions-list"></div><button type="button" class="submit-btn" onclick="submitExam()">Submit Exam</button></form>
+    </div>
+
+    <div id="results">
+        <h2>Results Dashboard</h2>
+        <div class="stats-dashboard">
+            <div class="stat-card bg-cor">Correct: <span id="res-cor">0</span></div>
+            <div class="stat-card bg-att">Attempted: <span id="res-att">0</span></div>
+            <div class="stat-card bg-wro">Wrong: <span id="res-wro">0</span></div>
+            <div class="stat-card bg-skp">Skipped: <span id="res-skp">0</span></div>
+        </div>
+        <button class="submit-btn" style="background:#e67e22" onclick="downloadQAPDF()">Download Question & Answer PDF</button>
+        <button onclick="location.reload()" class="submit-btn" style="background: var(--accent);">Restart</button>
+        <div id="review-area" class="review-q"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+  const questions = [
+
+/* ================= PHARMACEUTICS (12) ================= */
+{s:"Pharmaceutics",q:"Indian Pharmacopoeia is published by:",o:["PCI","CDSCO","IP Commission","WHO"],a:2},
+{s:"Pharmaceutics",q:"Ideal packaging material for light-sensitive drugs:",o:["Plastic","Amber glass","Tin","Paper"],a:1},
+{s:"Pharmaceutics",q:"Preservatives are mainly added to:",o:["Tablets","Capsules","Liquid preparations","Powders"],a:2},
+{s:"Pharmaceutics",q:"Hammer mill is used for:",o:["Size separation","Mixing","Size reduction","Filtration"],a:2},
+{s:"Pharmaceutics",q:"Extraction using solvent under pressure is called:",o:["Infusion","Percolation","Maceration","Soxhlet"],a:3},
+{s:"Pharmaceutics",q:"Disintegration test is NOT required for:",o:["Tablets","Capsules","Enteric tablets","Syrups"],a:3},
+{s:"Pharmaceutics",q:"Granulation improves:",o:["Taste","Flow property","Color","Solubility"],a:1},
+{s:"Pharmaceutics",q:"Immunological products must be stored at:",o:["Room temperature","Below 25°C","2–8°C","Frozen"],a:2},
+{s:"Pharmaceutics",q:"Novel drug delivery aims to:",o:["Increase dose","Reduce bioavailability","Target drug delivery","Increase toxicity"],a:2},
+{s:"Pharmaceutics",q:"Suspensions require which agent?",o:["Sweetener","Preservative","Suspending agent","Antioxidant"],a:2},
+{s:"Pharmaceutics",q:"Quality assurance focuses on:",o:["Testing only","Manufacturing process","Finished product","Inspection"],a:1},
+{s:"Pharmaceutics",q:"Creams are:",o:["Monophasic","Biphasic","Triphasic","Solid"],a:1},
+
+/* ================= PHARMACEUTICAL CHEMISTRY (14) ================= */
+{s:"Pharmaceutical Chemistry",q:"Limit test for chloride is based on formation of:",o:["White precipitate","Yellow color","Turbidity","Blue complex"],a:2},
+{s:"Pharmaceutical Chemistry",q:"Major impurity in sodium chloride injection:",o:["Sulphate","Iron","Heavy metals","Potassium"],a:2},
+{s:"Pharmaceutical Chemistry",q:"Local anesthetics block:",o:["Na⁺ channels","K⁺ channels","Ca²⁺ channels","Cl⁻ channels"],a:0},
+{s:"Pharmaceutical Chemistry",q:"Sedative hypnotics mainly act on:",o:["NMDA","GABA","Dopamine","Serotonin"],a:1},
+{s:"Pharmaceutical Chemistry",q:"Beta blockers are used in:",o:["Asthma","Hypertension","Diabetes","Ulcer"],a:1},
+{s:"Pharmaceutical Chemistry",q:"ACE inhibitors act by blocking:",o:["Renin","Angiotensin I","Angiotensin II","Aldosterone"],a:2},
+{s:"Pharmaceutical Chemistry",q:"Loop diuretics act on:",o:["DCT","PCT","Loop of Henle","Collecting duct"],a:2},
+{s:"Pharmaceutical Chemistry",q:"Sulfonamides inhibit synthesis of:",o:["Protein","DNA","Folic acid","RNA"],a:2},
+{s:"Pharmaceutical Chemistry",q:"Tetracyclines chelate:",o:["Iron","Calcium","Magnesium","All"],a:3},
+{s:"Pharmaceutical Chemistry",q:"Macrolides inhibit:",o:["DNA gyrase","30S ribosome","50S ribosome","Cell wall"],a:2},
+{s:"Pharmaceutical Chemistry",q:"Anti-tubercular drug causing optic neuritis:",o:["INH","Rifampicin","Ethambutol","Pyrazinamide"],a:2},
+{s:"Pharmaceutical Chemistry",q:"Hypoglycemic drugs reduce:",o:["Blood pressure","Blood sugar","Cholesterol","Triglycerides"],a:1},
+{s:"Pharmaceutical Chemistry",q:"NSAIDs inhibit:",o:["LOX","COX","PLA₂","Histamine"],a:1},
+{s:"Pharmaceutical Chemistry",q:"Cisplatin is:",o:["Antibiotic","Antiviral","Antineoplastic","Analgesic"],a:2},
+
+/* ================= PHARMACOGNOSY (14) ================= */
+{s:"Pharmacognosy",q:"Pharmacognosy deals with:",o:["Synthetic drugs","Crude drugs","Biotechnology","Radiopharmacy"],a:1},
+{s:"Pharmacognosy",q:"Alkaloids are:",o:["Acidic","Neutral","Basic nitrogen compounds","Steroids"],a:2},
+{s:"Pharmacognosy",q:"Digitalis is used as:",o:["Antipyretic","Cardiotonic","Analgesic","Antibiotic"],a:1},
+{s:"Pharmacognosy",q:"Volatile oils evaporate at:",o:["Room temp","High temp","Low temp","Do not evaporate"],a:2},
+{s:"Pharmacognosy",q:"Tannins show which test?",o:["Borntrager","Ferric chloride","Biuret","Ninhydrin"],a:1},
+{s:"Pharmacognosy",q:"Source of morphine:",o:["Cinchona","Opium","Rauwolfia","Digitalis"],a:1},
+{s:"Pharmacognosy",q:"Senna is used as:",o:["Carminative","Laxative","Astringent","Diuretic"],a:1},
+{s:"Pharmacognosy",q:"Rauwolfia contains:",o:["Reserpine","Quinine","Atropine","Nicotine"],a:0},
+{s:"Pharmacognosy",q:"Clove oil contains:",o:["Eugenol","Menthol","Camphor","Citral"],a:0},
+{s:"Pharmacognosy",q:"Neem is mainly:",o:["Antidiabetic","Antiseptic","Analgesic","Antacid"],a:1},
+{s:"Pharmacognosy",q:"Glycosides on hydrolysis yield:",o:["Sugar","Aglycone","Both","None"],a:2},
+{s:"Pharmacognosy",q:"Aloe is used as:",o:["Diuretic","Laxative","Sedative","Antipyretic"],a:1},
+{s:"Pharmacognosy",q:"Herbal cosmetics are:",o:["Synthetic","Natural","Metallic","Biological"],a:1},
+{s:"Pharmacognosy",q:"Artemisia is used in:",o:["Cancer","Malaria","TB","Asthma"],a:1},
+
+/* ================= HUMAN ANATOMY & PHYSIOLOGY (12) ================= */
+{s:"HAP",q:"Functional unit of kidney:",o:["Neuron","Nephron","Alveoli","Hepatocyte"],a:1},
+{s:"HAP",q:"RBC life span is:",o:["60 days","90 days","120 days","150 days"],a:2},
+{s:"HAP",q:"Normal blood pH is:",o:["6.8","7.0","7.4","8.0"],a:2},
+{s:"HAP",q:"Largest organ of human body:",o:["Heart","Liver","Skin","Brain"],a:2},
+{s:"HAP",q:"Insulin is secreted by:",o:["Alpha cells","Beta cells","Delta cells","Gamma cells"],a:1},
+{s:"HAP",q:"Site of fertilization:",o:["Uterus","Ovary","Fallopian tube","Vagina"],a:2},
+{s:"HAP",q:"SA node is located in:",o:["Left atrium","Right atrium","Ventricle","Septum"],a:1},
+{s:"HAP",q:"Normal respiratory rate:",o:["6–8","12–16","20–24","30–40"],a:1},
+{s:"HAP",q:"Vitamin D deficiency causes:",o:["Scurvy","Rickets","Beriberi","Anemia"],a:1},
+{s:"HAP",q:"Bile is produced by:",o:["Gall bladder","Pancreas","Liver","Duodenum"],a:2},
+{s:"HAP",q:"Hemoglobin carries:",o:["CO₂","O₂","Both","None"],a:1},
+{s:"HAP",q:"CNS includes:",o:["Brain only","Spinal cord only","Brain & spinal cord","Nerves"],a:2},
+
+/* ================= PHARMACY LAW & ETHICS (12) ================= */
+{s:"Pharmacy Law",q:"Pharmacy Act was enacted in:",o:["1940","1948","1954","1960"],a:1},
+{s:"Pharmacy Law",q:"PCI regulates:",o:["Doctors","Nurses","Pharmacists","Hospitals"],a:2},
+{s:"Pharmacy Law",q:"Drugs & Cosmetics Act passed in:",o:["1930","1940","1950","1960"],a:1},
+{s:"Pharmacy Law",q:"Schedule H drugs require:",o:["No prescription","Prescription","OTC sale","Online sale"],a:1},
+{s:"Pharmacy Law",q:"NDPS Act controls:",o:["Cosmetics","Alcohol","Narcotics","Vaccines"],a:2},
+{s:"Pharmacy Law",q:"FSSAI governs:",o:["Drugs","Food","Cosmetics","Devices"],a:1},
+{s:"Pharmacy Law",q:"Code of ethics applies to:",o:["Doctors","Pharmacists","Nurses","Patients"],a:1},
+{s:"Pharmacy Law",q:"Poison Act enacted in:",o:["1919","1940","1954","1960"],a:0},
+{s:"Pharmacy Law",q:"Biomedical waste rules latest version:",o:["2000","2010","2016","2020"],a:2},
+{s:"Pharmacy Law",q:"Clinical Trials Rules updated in:",o:["2015","2017","2019","2021"],a:2},
+{s:"Pharmacy Law",q:"Generic medicines are:",o:["Costly","Brand-less","Illegal","Inferior"],a:1},
+{s:"Pharmacy Law",q:"Patent protection is governed by:",o:["D&C Act","Patent Act","IPC","PCI"],a:1},
+/* ================= PHARMACOLOGY (10) ================= */
+{s:"Pharmacology",q:"Bioavailability refers to:",o:["Dose administered","Rate & extent reaching systemic circulation","Drug metabolism","Drug excretion"],a:1},
+{s:"Pharmacology",q:"Drug showing zero-order kinetics:",o:["Phenytoin","Paracetamol","Aspirin","Penicillin"],a:0},
+{s:"Pharmacology",q:"Antidote for organophosphate poisoning:",o:["Naloxone","Atropine","Vitamin K","Flumazenil"],a:1},
+{s:"Pharmacology",q:"Beta-agonists are mainly used in:",o:["Hypertension","Asthma","Diabetes","Epilepsy"],a:1},
+{s:"Pharmacology",q:"Warfarin acts by inhibiting:",o:["Platelets","Vitamin K","Heparin","Fibrin"],a:1},
+{s:"Pharmacology",q:"Therapeutic index indicates:",o:["Safety margin","Potency","Efficacy","Bioavailability"],a:0},
+{s:"Pharmacology",q:"First pass metabolism occurs mainly in:",o:["Kidney","Liver","Lung","Brain"],a:1},
+{s:"Pharmacology",q:"Which drug causes respiratory depression?",o:["Morphine","Paracetamol","Aspirin","Ibuprofen"],a:0},
+{s:"Pharmacology",q:"Antihistamines are mainly used in:",o:["Hypertension","Allergy","Diabetes","Asthma"],a:1},
+{s:"Pharmacology",q:"Loading dose is given to:",o:["Increase toxicity","Achieve steady state quickly","Reduce half-life","Improve elimination"],a:1},
+
+/* ================= BIOCHEMISTRY & CLINICAL PATHOLOGY (8) ================= */
+{s:"Biochemistry",q:"Building blocks of proteins are:",o:["Fatty acids","Amino acids","Nucleotides","Sugars"],a:1},
+{s:"Biochemistry",q:"Normal fasting blood glucose level:",o:["40–60 mg/dL","70–110 mg/dL","120–150 mg/dL","150–200 mg/dL"],a:1},
+{s:"Biochemistry",q:"Enzymes are mostly:",o:["Lipids","Carbohydrates","Proteins","Minerals"],a:2},
+{s:"Biochemistry",q:"Vitamin B12 deficiency causes:",o:["Scurvy","Pellagra","Megaloblastic anemia","Rickets"],a:2},
+{s:"Biochemistry",q:"Cholesterol is mainly synthesized in:",o:["Kidney","Heart","Liver","Pancreas"],a:2},
+{s:"Biochemistry",q:"Benedict’s test detects:",o:["Proteins","Reducing sugars","Lipids","Enzymes"],a:1},
+{s:"Biochemistry",q:"Ketone bodies are increased in:",o:["Hypertension","Diabetes mellitus","Anemia","Asthma"],a:1},
+{s:"Biochemistry",q:"Normal urine should NOT contain:",o:["Urea","Creatinine","Glucose","Uric acid"],a:2},
+
+/* ================= HOSPITAL & CLINICAL PHARMACY (8) ================= */
+{s:"Hospital Pharmacy",q:"Unit dose system improves:",o:["Drug wastage","Medication errors","Cost","Inventory load"],a:1},
+{s:"Hospital Pharmacy",q:"Pharmacovigilance deals with:",o:["Drug pricing","Drug safety","Drug synthesis","Drug storage"],a:1},
+{s:"Hospital Pharmacy",q:"NABH stands for:",o:["National Accreditation Board for Hospitals","National Association of Boards","National Authority of Bio Health","None"],a:0},
+{s:"Hospital Pharmacy",q:"Medication error includes:",o:["Wrong drug","Wrong dose","Wrong route","All"],a:3},
+{s:"Hospital Pharmacy",q:"ADR monitoring is responsibility of:",o:["Doctor only","Nurse only","Pharmacist","Patient"],a:2},
+{s:"Hospital Pharmacy",q:"Clinical pharmacist works mainly in:",o:["Industry","Community","Hospital wards","Wholesale"],a:2},
+{s:"Hospital Pharmacy",q:"Poison information center provides:",o:["Treatment","Drug info","Emergency guidance","All"],a:3},
+{s:"Hospital Pharmacy",q:"Inventory control technique:",o:["ABC analysis","FIFO","LIFO","GMP"],a:0}
+
+];
+
+
+
+    let timeRem = 90 * 60;
+    let timerInt;
+
+    function renderExam() {
+        const list = document.getElementById('questions-list');
+        let curSec = "";
+        questions.forEach((q, i) => {
+            if(q.s !== curSec) {
+                curSec = q.s;
+                const h = document.createElement('div');
+                h.className = "section-title";
+                h.innerText = curSec;
+                list.appendChild(h);
+            }
+            const div = document.createElement('div');
+            div.className = 'question-card';
+            div.innerHTML = `<span class="q-text">${i+1}. ${q.q}</span>
+                <div class="options-grid">
+                    ${q.o.map((opt, oi) => `<label class="option-label"><input type="radio" name="q${i}" value="${oi}"> <span>${opt}</span></label>`).join('')}
+                </div>`;
+            list.appendChild(div);
+        });
+        timerInt = setInterval(() => {
+            timeRem--;
+            let m = Math.floor(timeRem/60);
+            let s = timeRem%60;
+            document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            if(timeRem <= 0) submitExam();
+        }, 1000);
+    }
+
+    function submitExam() {
+        clearInterval(timerInt);
+        let cor=0, att=0, wro=0, skp=0;
+        const review = document.getElementById('review-area');
+        review.innerHTML = "<h3>Performance Review</h3>";
+        questions.forEach((q, i) => {
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const div = document.createElement('div');
+            div.className = "question-card";
+            if(!sel) {
+                skp++;
+                div.classList.add('skipped-ans');
+                div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--warning)">Skipped</span><br>Correct: ${q.o[q.a]}`;
+            } else {
+                att++;
+                const val = parseInt(sel.value);
+                if(val === q.a) { cor++; div.classList.add('correct-ans'); div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--success)">Correct</span>`; }
+                else { wro++; div.classList.add('wrong-ans'); div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--danger)">Wrong</span><br>Correct: ${q.o[q.a]}`; }
+            }
+            review.appendChild(div);
+        });
+        document.getElementById('res-cor').innerText = cor;
+        document.getElementById('res-att').innerText = att;
+        document.getElementById('res-wro').innerText = wro;
+        document.getElementById('res-skp').innerText = skp;
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    async function downloadQAPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        let y = 20;
+        doc.setFontSize(16); doc.text("LEET 2025: Exam Result & Q/A Report", 15, y);
+        y += 10;
+        doc.setFontSize(12); doc.text(`Total Score: ${document.getElementById('res-cor').innerText} / 90`, 15, y);
+        y += 15;
+        questions.forEach((q, i) => {
+            if (y > 270) { doc.addPage(); y = 20; }
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const status = sel ? (parseInt(sel.value) === q.a ? "CORRECT" : "WRONG") : "SKIPPED";
+            doc.setFont("helvetica", "bold");
+            doc.text(`Q${i+1}: ${q.q}`, 15, y, { maxWidth: 180 });
+            y += 7; doc.setFont("helvetica", "normal");
+            doc.text(`Correct Ans: ${q.o[q.a]} | Status: ${status}`, 20, y);
+            y += 10;
+        });
+        doc.save("LEET_moock_paper_3.pdf");
+    }
+
+    window.onload = renderExam;
+</script>
+</body>
+</html>

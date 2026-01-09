@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haryana OCET 2025 - B.Pharm (LEET) Mock</title>
+    <style>
+        :root {
+            --primary: #2c3e50; --accent: #2980b9; --success: #27ae60;
+            --danger: #c0392b; --warning: #f39c12; --bg: #f8f9fa;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 0; }
+        .container { max-width: 950px; margin: 20px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        header { position: sticky; top: 0; background: white; padding: 15px; border-bottom: 5px solid var(--primary); display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .timer-box { font-size: 1.8rem; font-weight: bold; color: var(--danger); background: #fff5f5; padding: 10px 25px; border-radius: 10px; border: 3px solid var(--danger); }
+        .section-title { background: #34495e; color: white; padding: 12px 20px; margin: 40px 0 20px 0; border-radius: 8px; font-size: 1.1rem; letter-spacing: 1px; }
+        .question-card { margin-bottom: 30px; padding: 25px; border: 1.5px solid #eee; border-radius: 12px; transition: 0.3s; }
+        .question-card:hover { border-color: var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .q-text { font-weight: 700; font-size: 1.15rem; color: #2c3e50; display: block; margin-bottom: 15px; line-height: 1.4; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .option-label { display: flex; align-items: center; padding: 15px; border: 1px solid #dcdde1; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
+        .option-label:hover { background: #ebf5fb; border-color: var(--accent); }
+        input[type="radio"] { margin-right: 12px; transform: scale(1.2); }
+        .submit-btn { background: var(--success); color: white; border: none; padding: 20px 60px; font-size: 1.3rem; border-radius: 50px; cursor: pointer; width: 100%; max-width: 400px; display: block; margin: 40px auto; font-weight: bold; transition: 0.3s; }
+        .submit-btn:hover { background: #219150; transform: translateY(-2px); }
+        #results { display: none; text-align: center; animation: fadeIn 0.8s; }
+        .stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .stat-card { padding: 25px; border-radius: 15px; color: white; font-size: 1.2rem; }
+        .bg-cor { background: var(--success); } .bg-att { background: var(--accent); } .bg-wro { background: var(--danger); } .bg-skp { background: var(--warning); }
+        .correct-ans { border-left: 8px solid var(--success); background: #f0fff4; }
+        .wrong-ans { border-left: 8px solid var(--danger); background: #fff5f5; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1 style="margin:0; font-size: 1.6rem; color: var(--primary);">OCET B.Pharm Lateral Entry 2025</h1>
+            <p style="margin:5px 0 0 0; color: #7f8c8d; font-weight: 600;">Full Syllabus Real-Time Mock Test</p>
+        </div>
+        <div id="timer" class="timer-box">90:00</div>
+    </header>
+
+    <div id="quiz-screen">
+        <form id="quizForm">
+            <div id="questions-list"></div>
+            <button type="button" class="submit-btn" onclick="submitExam()">Final Submit Exam</button>
+        </form>
+    </div>
+
+    <div id="results">
+        <h2 style="font-size: 2.5rem; color: var(--primary);">Performance Summary</h2>
+        <div class="stats-dashboard">
+            <div class="stat-card bg-cor">Correct: <span id="res-cor">0</span></div>
+            <div class="stat-card bg-att">Attempted: <span id="res-att">0</span></div>
+            <div class="stat-card bg-wro">Wrong: <span id="res-wro">0</span></div>
+            <div class="stat-card bg-skp">Skipped: <span id="res-skp">0</span></div>
+        </div>
+         <button class="submit-btn" style="background:#e67e22" onclick="downloadQAPDF()">Download Question & Answer PDF</button>
+        <button onclick="location.reload()" class="submit-btn" style="background: var(--accent);">Re-Take Test</button>
+        <div id="review-area" style="text-align: left; margin-top: 50px;"></div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+    const questions = [
+        // I. PHARMACEUTICS (1-9)
+        { s: "Pharmaceutics", q: "The process of 'Levigation' is primarily used to:", o: ["Increase solubility", "Reduce particle size in ointments", "Sterilize ophthalmics", "Mix powders of different densities"], a: 1 },
+        { s: "Pharmaceutics", q: "Which IP grade of water is used for the manufacture of parenteral preparations?", o: ["Purified water", "Distilled water", "Water for Injection", "Potable water"], a: 2 },
+        { s: "Pharmaceutics", q: "The 'Bloom strength' of gelatin used for capsule shells is usually in the range of:", o: ["50-100g", "150-250g", "300-400g", "450-500g"], a: 1 },
+        { s: "Pharmaceutics", q: "In the BCG vaccine, the 'G' stands for:", o: ["Germ", "Glycerine", "Guerin", "Growth"], a: 2 },
+        { s: "Pharmaceutics", q: "Which of the following is used as a 'glidant' in tablet manufacturing?", o: ["Starch", "Talc", "Gelatin", "Lactose"], a: 1 },
+        { s: "Pharmaceutics", q: "What is the primary mechanism of action of an autoclave?", o: ["Dry heat oxidation", "Moist heat - protein coagulation", "Radiation-DNA damage", "Filtration"], a: 1 },
+        { s: "Pharmaceutics", q: "The HLB value of Sorbitan monooleate (Span 80) is approximately:", o: ["4.3", "8.6", "15.0", "1.8"], a: 0 },
+        { s: "Pharmaceutics", q: "Schedules of the Drugs and Cosmetics Act specify 'M' for:", o: ["Retail sale", "GMP", "Clinical trials", "Biologicals"], a: 1 },
+        { s: "Pharmaceutics", q: "A 'Linctus' is generally administered for:", o: ["Indigestion", "Cough relief", "Skin infection", "Eye irritation"], a: 1 },
+
+        // II. PHARMACEUTICAL CHEMISTRY (10-18)
+        { s: "Pharmaceutical Chemistry", q: "Which of the following is a 'Systemic Antacid'?", o: ["Aluminum Hydroxide", "Sodium Bicarbonate", "Magnesium Trisilicate", "Calcium Carbonate"], a: 1 },
+        { s: "Pharmaceutical Chemistry", q: "The chemical name of Aspirin is:", o: ["Methyl salicylate", "Acetylsalicylic acid", "Ethyl salicylate", "Salicylamide"], a: 1 },
+        { s: "Pharmaceutical Chemistry", q: "Which heterocyclic ring is present in Penicillin?", o: ["Thiazolidine and Beta-lactam", "Imidazole", "Pyridine", "Quinoline"], a: 0 },
+        { s: "Pharmaceutical Chemistry", q: "Nitrous Oxide (N2O) is stored in cylinders painted with which color?", o: ["Black", "Blue", "Gray", "White"], a: 1 },
+        { s: "Pharmaceutical Chemistry", q: "Which drug is used as the first-line treatment for Absence Seizures?", o: ["Phenytoin", "Ethosuximide", "Diazepam", "Carbamazepine"], a: 1 },
+        { s: "Pharmaceutical Chemistry", q: "The limit test for Lead (Pb) is based on the reaction with:", o: ["Silver Nitrate", "Dithizone", "Barium Chloride", "Thioglycolic acid"], a: 1 },
+        { s: "Pharmaceutical Chemistry", q: "Metformin belongs to which class of drugs?", o: ["Sulfonylureas", "Biguanides", "Meglitinides", "Thiazolidinediones"], a: 1 },
+        { s: "Pharmaceutical Chemistry", q: "Which agent is primarily used as an antidote in Cyanide poisoning?", o: ["Atropine", "Sodium Nitrite", "Naloxone", "EDTA"], a: 1 },
+        { s: "Pharmaceutical Chemistry", q: "Chlorpromazine is chemically a:", o: ["Butyrophenone", "Phenothiazine", "Thioxanthene", "Benzodiazepine"], a: 1 },
+
+        // III. PHARMACOGNOSY (19-27)
+        { s: "Pharmacognosy", q: "The presence of 'Lignified Trichomes' is a diagnostic feature of:", o: ["Digitalis", "Nux-vomica", "Senna", "Cinchona"], a: 1 },
+        { s: "Pharmacognosy", q: "Which of the following is a 'Cardiotonic' glycoside?", o: ["Aloe", "Digitalis", "Rhubarb", "Senna"], a: 1 },
+        { s: "Pharmacognosy", q: "The chemical test used to identify Anthraquinone glycosides is:", o: ["Mayer's test", "Borntrager's test", "Vitali-Morin test", "Dragendorff's test"], a: 1 },
+        { s: "Pharmacognosy", q: "Rauwolfia serpentina belongs to the family:", o: ["Solanaceae", "Apocynaceae", "Rubiaceae", "Liliaceae"], a: 1 },
+        { s: "Pharmacognosy", q: "Vinca alkaloids (Vincristine/Vinblastine) act by:", o: ["Inhibiting topoisomerase", "Inhibiting tubulin polymerization", "Alkylating DNA", "Antimetabolite activity"], a: 1 },
+        { s: "Pharmacognosy", q: "Asafoetida is obtained from the plant as a/an:", o: ["Dried leaf", "Oleogum resin", "Volatile oil", "Fixed oil"], a: 1 },
+        { s: "Pharmacognosy", q: "Modified Borntrager's test is specific for:", o: ["O-glycosides", "C-glycosides", "N-glycosides", "S-glycosides"], a: 1 },
+        { s: "Pharmacognosy", q: "Clove consists of the dried:", o: ["Fruits", "Flower buds", "Seeds", "Bark"], a: 1 },
+        { s: "Pharmacognosy", q: "The main chemical constituent of Garlic is:", o: ["Curcumin", "Allicin", "Reserpine", "Quinine"], a: 1 },
+
+        // IV. HUMAN ANATOMY AND PHYSIOLOGY (28-36)
+        { s: "Human Anatomy and Physiology", q: "Which valve prevents the backflow of blood from the Left Ventricle to the Left Atrium?", o: ["Tricuspid valve", "Mitral (Bicuspid) valve", "Aortic valve", "Pulmonary valve"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "The lifespan of a typical Human Red Blood Cell (RBC) is:", o: ["60 days", "120 days", "180 days", "10 days"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "Which part of the brain regulates body temperature and hunger?", o: ["Cerebrum", "Hypothalamus", "Medulla Oblongata", "Cerebellum"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "The functional unit of the Kidney is called:", o: ["Neuron", "Nephron", "Alveoli", "Osteon"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "Islets of Langerhans are found in the:", o: ["Liver", "Pancreas", "Spleen", "Adrenal gland"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "The 10th Cranial Nerve is the:", o: ["Optic nerve", "Vagus nerve", "Facial nerve", "Trigeminal nerve"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "Which hormone is responsible for 'Fight or Flight' response?", o: ["Insulin", "Adrenaline (Epinephrine)", "Thyroxine", "Oxytocin"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "The master gland of the endocrine system is the:", o: ["Thyroid", "Pituitary", "Thymus", "Pineal"], a: 1 },
+        { s: "Human Anatomy and Physiology", q: "In which part of the digestive tract does most nutrient absorption occur?", o: ["Stomach", "Small Intestine", "Large Intestine", "Esophagus"], a: 1 },
+
+        // V. SOCIAL PHARMACY (37-45)
+        { s: "Social Pharmacy", q: "The 'World Health Day' is celebrated every year on:", o: ["June 5th", "April 7th", "December 1st", "May 31st"], a: 1 },
+        { s: "Social Pharmacy", q: "Which of the following is a water-borne disease?", o: ["Tuberculosis", "Cholera", "Measles", "Malaria"], a: 1 },
+        { s: "Social Pharmacy", q: "Vitamin B1 deficiency causes which disease?", o: ["Scurvy", "Beriberi", "Rickets", "Pellagra"], a: 1 },
+        { s: "Social Pharmacy", q: "The primary causative agent of Syphilis is:", o: ["Mycobacterium", "Treponema pallidum", "HIV", "Neisseria"], a: 1 },
+        { s: "Social Pharmacy", q: "DOTS is a national program for the treatment of:", o: ["Leprosy", "Tuberculosis", "HIV", "Malaria"], a: 1 },
+        { s: "Social Pharmacy", q: "The Oral Polio Vaccine (OPV) is also known as:", o: ["Salk vaccine", "Sabin vaccine", "BCG", "DPT"], a: 1 },
+        { s: "Social Pharmacy", q: "Which nutrient is essential for preventing Neural Tube Defects (NTDs) in newborns?", o: ["Vitamin C", "Folic acid", "Calcium", "Iron"], a: 1 },
+        { s: "Social Pharmacy", q: "The term 'Demography' refers to the study of:", o: ["Plants", "Human populations", "Soil", "Insects"], a: 1 },
+        { s: "Social Pharmacy", q: "Which of the following is a 'Macronutrient'?", o: ["Vitamin A", "Proteins", "Iron", "Iodine"], a: 1 },
+
+        // VI. PHARMACOLOGY (46-54)
+        { s: "Pharmacology", q: "What is the mechanism of action of Heparin?", o: ["Inhibits Vit K", "Activates Antithrombin III", "Blocks COX-2", "Inhibits ADP"], a: 1 },
+        { s: "Pharmacology", q: "Which of the following is a 'Loop Diuretic'?", o: ["Hydrochlorothiazide", "Furosemide", "Spironolactone", "Acetazolamide"], a: 1 },
+        { s: "Pharmacology", q: "The specific antidote for Morphine poisoning is:", o: ["Atropine", "Naloxone", "Flumazenil", "Physostigmine"], a: 1 },
+        { s: "Pharmacology", q: "Which drug is a Proton Pump Inhibitor (PPI)?", o: ["Ranitidine", "Omeprazole", "Famotidine", "Sucralfate"], a: 1 },
+        { s: "Pharmacology", q: "The 'Red Man Syndrome' is a side effect associated with:", o: ["Penicillin", "Vancomycin", "Gentamicin", "Tetracycline"], a: 1 },
+        { s: "Pharmacology", q: "First-pass metabolism occurs primarily in the:", o: ["Kidney", "Liver", "Lungs", "Stomach"], a: 1 },
+        { s: "Pharmacology", q: "Which drug class is used to treat Myasthenia Gravis?", o: ["Anticholinergics", "Cholinesterase inhibitors", "Adrenergic blockers", "Opioids"], a: 1 },
+        { s: "Pharmacology", q: "Gray Baby Syndrome is caused by:", o: ["Tetracycline", "Chloramphenicol", "Streptomycin", "Ciprofloxacin"], a: 1 },
+        { s: "Pharmacology", q: "Teratogenicity refers to:", o: ["Liver toxicity", "Fetal abnormalities", "Kidney failure", "Hearing loss"], a: 1 },
+
+        // VII. COMMUNITY PHARMACY (55-63)
+        { s: "Community Pharmacy", q: "The 'GPP' in community pharmacy stands for:", o: ["Good Production Practice", "Good Pharmacy Practice", "General Pharmacy Procedure", "Good Pricing Policy"], a: 1 },
+        { s: "Community Pharmacy", q: "The term 'Medication Adherence' refers to:", o: ["Prescribing drugs", "Patient following the medicine schedule", "Mixing two drugs", "Drug manufacturing"], a: 1 },
+        { s: "Community Pharmacy", q: "Which of the following is an OTC medication?", o: ["Amoxicillin", "Paracetamol", "Warfarin", "Morphine"], a: 1 },
+        { s: "Community Pharmacy", q: "In a prescription, the instruction 't.i.d' means:", o: ["Twice a day", "Three times a day", "At bedtime", "Immediately"], a: 1 },
+        { s: "Community Pharmacy", q: "Patient counselling on 'Inhaler Technique' is critical for which condition?", o: ["Diabetes", "Asthma", "Hypertension", "Anaemia"], a: 1 },
+        { s: "Community Pharmacy", q: "What is the primary objective of 'Health Screening Services' in a pharmacy?", o: ["To diagnose diseases", "Early detection and referral", "To sell more medicines", "To conduct surgery"], a: 1 },
+        { s: "Community Pharmacy", q: "Which part of the prescription contains the names and quantities of ingredients?", o: ["Superscription", "Inscription", "Subscription", "Transcription"], a: 1 },
+        { s: "Community Pharmacy", q: "The 'FIFO' method in inventory management stands for:", o: ["First In First Out", "Fast In Fast Out", "Fixed In Fixed Out", "Final In First Out"], a: 0 },
+        { s: "Community Pharmacy", q: "SOAP analysis in pharmacy stands for:", o: ["Subjective, Objective, Assessment, Plan", "Source, Order, Action, Price", "Sales, Objective, Accounts, Payment", "None"], a: 0 },
+
+        // VIII. PHARMACOTHERAPEUTICS (64-72)
+        { s: "Pharmacotherapeutics", q: "The first-line drug for the management of Type 2 Diabetes is usually:", o: ["Glibenclamide", "Metformin", "Insulin", "Acarbose"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "Which condition is characterized by 'painless' loss of vision and high intraocular pressure?", o: ["Cataract", "Glaucoma", "Conjunctivitis", "Myopia"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "Etiopathogenesis refers to:", o: ["Treatment of disease", "Cause and development of disease", "Diagnosis of disease", "Symptoms of disease"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "Which of the following is a classic symptom of Parkinson’s disease?", o: ["Polyuria", "Resting Tremors", "High Fever", "Joint pain"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "The most common causative organism for Peptic Ulcer is:", o: ["E. coli", "H. pylori", "S. aureus", "V. cholerae"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "Psoriasis is a disease primarily of the:", o: ["Lungs", "Skin", "Joints", "Heart"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "ACE inhibitors like Enalapril are primarily used to treat:", o: ["Asthma", "Hypertension", "Epilepsy", "Diarrhea"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "Which diagnostic test is most specific for Myocardial Infarction?", o: ["Widal test", "Cardiac Troponins", "Blood Glucose", "Urine analysis"], a: 1 },
+        { s: "Pharmacotherapeutics", q: "The 'A' in the ABCD rule of hypertension treatment stands for:", o: ["Aspirin", "ACE Inhibitors", "Amlodipine", "Antacids"], a: 1 },
+
+        // IX. BIOCHEMISTRY (73-78)
+        { s: "Biochemistry", q: "Which test is used for the detection of Monosaccharides?", o: ["Biuret test", "Barfoed's test", "Ninhydrin test", "Molisch test"], a: 1 },
+        { s: "Biochemistry", q: "The primary structure of a protein is held by:", o: ["Hydrogen bonds", "Peptide bonds", "Ionic bonds", "Disulfide bonds"], a: 1 },
+        { s: "Biochemistry", q: "Deficiency of Vitamin D causes:", o: ["Scurvy", "Rickets", "Night blindness", "Beriberi"], a: 1 },
+        { s: "Biochemistry", q: "In the Glycolysis pathway, one molecule of glucose produces how many Net ATPs?", o: ["2", "4", "36", "38"], a: 0 },
+        { s: "Biochemistry", q: "Which of the following is a 'good cholesterol'?", o: ["LDL", "HDL", "VLDL", "Chylomicrons"], a: 1 },
+        { s: "Biochemistry", q: "Normal Blood Urea level is approximately:", o: ["5-10 mg/dL", "20-40 mg/dL", "80-120 mg/dL", "150-200 mg/dL"], a: 1 },
+
+        // X. HOSPITAL AND CLINICAL PHARMACY (79-84)
+        { s: "Hospital and Clinical Pharmacy", q: "The 'Pharmacy and Therapeutics Committee' (PTC) is responsible for:", o: ["Drug manufacturing", "Hospital Formulary", "Hospital billing", "Surgical procedures"], a: 1 },
+        { s: "Hospital and Clinical Pharmacy", q: "In the unit dose drug distribution system:", o: ["Patient gets a month's supply", "Patient gets a single dose at a time", "Wards keep bulk stock", "Only IV drugs are used"], a: 1 },
+        { s: "Hospital and Clinical Pharmacy", q: "Pharmacovigilance is the study of:", o: ["Drug discovery", "Adverse Drug Reactions (ADR)", "Drug pricing", "Drug marketing"], a: 1 },
+        { s: "Hospital and Clinical Pharmacy", q: "Which of the following is a 'Clinical Laboratory Test' for Liver function?", o: ["Creatinine", "SGPT/ALT", "T4/TSH", "HbA1c"], a: 1 },
+        { s: "Hospital and Clinical Pharmacy", q: "What is the primary role of a 'Clinical Pharmacist' during ward rounds?", o: ["Cleaning", "Monitoring drug therapy and interactions", "Changing bandages", "Performing surgery"], a: 1 },
+        { s: "Hospital and Clinical Pharmacy", q: "Hemodialysis is used to treat failure of which organ?", o: ["Liver", "Kidney", "Heart", "Lungs"], a: 1 },
+
+        // XI. PHARMACY LAW AND ETHICS (85-90)
+        { s: "Pharmacy Law and Ethics", q: "The Pharmacy Act was passed in the year:", o: ["1940", "1948", "1954", "1985"], a: 1 },
+        { s: "Pharmacy Law and Ethics", q: "Which of the following is a 'Prohibited Advertisement' under the Drugs and Magic Remedies Act?", o: ["Soap advertisement", "Cure for Cancer claim", "Vitamin supplement", "Antiseptic cream"], a: 1 },
+        { s: "Pharmacy Law and Ethics", q: "The 'Schedule H' drugs can be sold only against:", o: ["Oral request", "Prescription of a Registered Medical Practitioner", "Identity proof", "None"], a: 1 },
+        { s: "Pharmacy Law and Ethics", q: "How many members are elected by the UGC to the Central Council (PCI)?", o: ["1", "3", "6", "8"], a: 0 },
+        { s: "Pharmacy Law and Ethics", q: "The Narcotic Drugs and Psychotropic Substances (NDPS) Act was passed in:", o: ["1945", "1985", "1919", "2005"], a: 1 },
+        { s: "Pharmacy Law and Ethics", q: "Which body regulates the prices of essential drugs in India?", o: ["PCI", "NPPA", "AICTE", "CDSCO"], a: 1 }
+    ];
+
+    let timeRem = 90 * 60;
+    let timerInt;
+
+    function renderExam() {
+        const list = document.getElementById('questions-list');
+        let curSec = "";
+        questions.forEach((q, i) => {
+            if(q.s !== curSec) {
+                curSec = q.s;
+                const h = document.createElement('div');
+                h.className = "section-title";
+                h.innerText = `Subject: ${curSec}`;
+                list.appendChild(h);
+            }
+            const div = document.createElement('div');
+            div.className = 'question-card';
+            div.innerHTML = `<span class="q-text">Q${i+1}. ${q.q}</span>
+                <div class="options-grid">
+                    ${q.o.map((opt, oi) => `<label class="option-label"><input type="radio" name="q${i}" value="${oi}"> <span>${opt}</span></label>`).join('')}
+                </div>`;
+            list.appendChild(div);
+        });
+        
+        timerInt = setInterval(() => {
+            timeRem--;
+            let m = Math.floor(timeRem/60);
+            let s = timeRem%60;
+            document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            if(timeRem <= 0) submitExam();
+        }, 1000);
+    }
+
+    function submitExam() {
+        if(!confirm("Are you sure you want to finish the exam?")) return;
+        
+        clearInterval(timerInt);
+        let cor=0, att=0, wro=0, skp=0;
+        const review = document.getElementById('review-area');
+        review.innerHTML = "<h3 style='border-bottom: 2px solid #333; padding-bottom:10px;'>Detailed Review</h3>";
+        
+        questions.forEach((q, i) => {
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const div = document.createElement('div');
+            div.className = "question-card";
+            
+            if(!sel) {
+                skp++;
+                div.style.background = "#fff9db";
+                div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--warning); font-weight:bold;">[SKIPPED]</span><br>Correct Answer: <b style="color:var(--success)">${q.o[q.a]}</b>`;
+            } else {
+                att++;
+                const val = parseInt(sel.value);
+                if(val === q.a) { 
+                    cor++; 
+                    div.classList.add('correct-ans'); 
+                    div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--success); font-weight:bold;">[CORRECT]</span><br>Your Answer: ${q.o[val]}`; 
+                }
+                else { 
+                    wro++; 
+                    div.classList.add('wrong-ans'); 
+                    div.innerHTML = `<strong>Q${i+1}. ${q.q}</strong><br><span style="color:var(--danger); font-weight:bold;">[WRONG]</span><br>Your Answer: ${q.o[val]}<br>Correct Answer: <b style="color:var(--success)">${q.o[q.a]}</b>`; 
+                }
+            }
+            review.appendChild(div);
+        });
+
+        document.getElementById('res-cor').innerText = cor;
+        document.getElementById('res-att').innerText = att;
+        document.getElementById('res-wro').innerText = wro;
+        document.getElementById('res-skp').innerText = skp;
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+ async function downloadQAPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        let y = 20;
+        doc.setFontSize(16); doc.text("LEET 2025: Exam Result & Q/A Report", 15, y);
+        y += 10;
+        doc.setFontSize(12); doc.text(`Total Score: ${document.getElementById('res-cor').innerText} / 90`, 15, y);
+        y += 15;
+        questions.forEach((q, i) => {
+            if (y > 270) { doc.addPage(); y = 20; }
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            const status = sel ? (parseInt(sel.value) === q.a ? "CORRECT" : "WRONG") : "SKIPPED";
+            doc.setFont("helvetica", "bold");
+            doc.text(`Q${i+1}: ${q.q}`, 15, y, { maxWidth: 180 });
+            y += 7; doc.setFont("helvetica", "normal");
+            doc.text(`Correct Ans: ${q.o[q.a]} | Status: ${status}`, 20, y);
+            y += 10;
+        });
+        doc.save("LEET_moock_paper-2.pdf");
+    }
+    window.onload = renderExam;
+</script>
+</body>
+</html>

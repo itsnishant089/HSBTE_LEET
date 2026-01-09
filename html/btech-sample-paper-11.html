@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LEET 2025 – Final Exact Mock</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#f0f0f0}
+.wrapper{width:1200px;margin:10px auto;background:#eaeaea;border:2px solid #999}
+.header{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:8px}
+.box{border:1px solid #2563eb;padding:6px;font-size:13px;background:#fff}
+.main{display:grid;grid-template-columns:220px 1fr 220px;gap:5px;padding:5px}
+.left{border:1px solid #999;background:#fff;height:500px;overflow:auto}
+.left table{width:100%;border-collapse:collapse;font-size:12px}
+.left td,.left th{border:1px solid #ccc;padding:3px;text-align:center;cursor:pointer}
+.center{border:1px solid #999;background:#fff;padding:12px}
+.right{border:1px solid #999;background:#fff;padding:10px}
+.options label{display:block;margin:8px 0}
+.controls{text-align:center;padding:10px}
+.controls button{padding:6px 14px;margin:4px}
+.timer{color:red;font-weight:bold}
+.final{display:none;text-align:center;padding:60px;font-size:20px}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+<div class="header">
+<div class="box"><b>LEET 2025</b><br>Online Mock Test</div>
+<div class="box" style="text-align:center"><b>Haryana State Counseling Society</b></div>
+<div class="box" style="text-align:right">Time Left: <span id="time" class="timer">90:00</span></div>
+</div>
+
+<div class="main" id="exam">
+
+<div class="left">
+<table>
+<tr><th>Q</th><th>A</th></tr>
+<tbody id="nav"></tbody>
+</table>
+</div>
+
+<div class="center">
+<div id="qno" style="font-weight:bold;color:#1e40af"></div>
+<div id="qtext" style="margin-top:15px"></div>
+</div>
+
+<div class="right">
+<b>Select Answer</b>
+<div class="options" id="opts"></div>
+</div>
+
+</div>
+
+<div class="controls" id="controls">
+<button onclick="firstQ()">First</button>
+<button onclick="prevQ()">Previous</button>
+<button onclick="nextQ()">Next</button>
+<button onclick="lastQ()">Last</button><br>
+<button onclick="clearAns()">DeSelect</button>
+<button onclick="endTest()">End Test</button>
+</div>
+
+<div class="final" id="final">
+<h2>TEST COMPLETED</h2>
+<p>Total Questions: 90</p>
+<p><b>Your Score:</b> <span id="score"></span></p>
+</div>
+
+</div>
+
+<script>
+const questions = [
+/* ===== SECTION A ===== */
+{q:"If |z|=5 and z² + z̄² =14, then Re(z) equals",o:["3","4","1","2"],a:0},
+{q:"If coefficient of x³ in (1+ax)⁶ is 40, then a equals",o:["1","2","3","4"],a:1},
+{q:"Probability that a number from 1–100 is divisible by 2 or 5",o:["3/5","1/2","7/10","4/5"],a:2},
+{q:"Locus of a point equidistant from (2,3) and y-axis",o:["Parabola","Circle","Line","Ellipse"],a:0},
+{q:"If y=xˣ, then dy/dx at x=1 is",o:["0","1","e","ln2"],a:1},
+{q:"Mean deviation is minimum when taken about",o:["Mean","Median","Mode","Any"],a:1},
+{q:"If A is singular, |adj A| equals",o:["0","1","|A|","∞"],a:0},
+{q:"Integrating factor of dy/dx + y = eˣ",o:["e⁻ˣ","eˣ","x","1"],a:1},
+
+{q:"Rolling without slipping implies",o:["v=ωr","v>ωr","v<ωr","v=r/ω"],a:0},
+{q:"Dimensional formula of viscosity",o:["ML⁻¹T⁻¹","ML⁻²T⁻¹","ML⁻¹T⁻²","MLT⁻¹"],a:0},
+{q:"Escape velocity depends on",o:["Mass only","Radius only","Mass & radius","Density"],a:2},
+{q:"SHM has maximum acceleration at",o:["Mean","Extreme","Half","Same"],a:1},
+{q:"Brewster angle depends on",o:["Wavelength","Velocity","Refractive index","Intensity"],a:2},
+{q:"Energy in capacitor ∝",o:["C²","V²","CV","1/V"],a:1},
+{q:"Superconductivity occurs at",o:["High temp","Critical temp","Room temp","0 K only"],a:1},
+{q:"Laser light is",o:["Incoherent","Monochromatic & coherent","Polychromatic","Random"],a:1},
+
+{q:"Ion exchange replaces Ca²⁺ with",o:["Na⁺","K⁺","H⁺","Mg²⁺"],a:0},
+{q:"pH when [H⁺]=10⁻⁴",o:["2","4","6","10"],a:1},
+{q:"Equivalent weight of acid",o:["MW","MW/basicity","MW×basicity","Atomic wt"],a:1},
+
+{q:"Correct sentence",o:["Neither boys have","Neither boys has","Neither of boys has","Neither boy have"],a:2},
+{q:"Antonym of Explicit",o:["Clear","Obvious","Implicit","Direct"],a:2},
+{q:"Correct narration: He said, “I am tired”",o:["He said he was tired","He says he was","He said I am","He says I am"],a:0},
+
+{q:"Lowest sex ratio district in Haryana",o:["Gurugram","Rohtak","Sonipat","Hisar"],a:0},
+{q:"Largest onion producing state",o:["MP","Maharashtra","Gujarat","UP"],a:1},
+{q:"LEET admission after",o:["ITI","10+2","Diploma","Graduation"],a:2},
+
+/* ===== SECTION B ===== */
+{q:"RLC series circuit at resonance impedance is",o:["Max","Min","Infinite","Zero"],a:1},
+{q:"Eddy current loss reduced by",o:["High freq","Laminated core","High flux","Copper"],a:1},
+{q:"Convert current source to voltage source",o:["Superposition","Norton","Thevenin","MPT"],a:2},
+{q:"Slip at synchronous speed",o:["1","0","Max","Negative"],a:1},
+{q:"DC shunt motor used for",o:["Cranes","Elevators","Constant speed","Traction"],a:2},
+{q:"Transformer efficiency max when",o:["Cu=Fe loss","Cu>Fe","Fe>Cu","Zero loss"],a:0},
+{q:"Power factor of inductive circuit",o:["1","0","Leading","Lagging"],a:1},
+{q:"High voltage transmission reduces",o:["Regulation","Current","Power","Freq"],a:1},
+{q:"Unit of flux density",o:["Weber","Tesla","Henry","Ampere"],a:1},
+
+{q:"Zener breakdown due to",o:["Avalanche","Thermal","High E-field","Diffusion"],a:2},
+{q:"Efficiency of full wave rectifier",o:["40%","60%","81%","90%"],a:2},
+{q:"Voltage follower gain",o:["<1","1","∞","0"],a:1},
+{q:"Bits to represent 255",o:["7","8","9","10"],a:1},
+{q:"NAND preferred because",o:["Low power","Universal","Fast","Cheap"],a:1},
+{q:"Majority carriers in NPN emitter",o:["Holes","Electrons","Both","Equal"],a:1},
+{q:"SCR turns OFF when",o:["Gate off","Reverse voltage","I < holding","Supply off"],a:2},
+{q:"CRO frequency by",o:["Lissajous","Ammeter","Voltmeter","Bridge"],a:0},
+
+{q:"Fastest memory",o:["Cache","RAM","ROM","HDD"],a:0},
+{q:"Deadlock prevention by",o:["Scheduling","Memory","Sync","Protection"],a:2},
+{q:"Array index in C starts at",o:["1","0","-1","Compiler"],a:1},
+{q:"Compiler differs because it",o:["Exec line","Object code","Slower","No memory"],a:1},
+{q:"Email protocol",o:["HTTP","FTP","SMTP","TCP"],a:2},
+{q:"Virtual memory increases",o:["RAM","CPU","Storage","Effective memory"],a:3},
+{q:"1 XOR 1 =",o:["0","1","2","-1"],a:0},
+{q:"Most reliable topology",o:["Bus","Ring","Star","Mesh"],a:3},
+
+/* ===== SECTION C ===== */
+{q:"Friction depends on",o:["Area","Shape","Surface nature","Weight"],a:2},
+{q:"BM max at",o:["Fixed","Supported","Zero shear","Free"],a:2},
+{q:"Otto efficiency depends on",o:["Compression ratio","Pressure","Temp","Fuel"],a:0},
+{q:"Newtonian fluid obeys",o:["Hooke","Pascal","Viscosity law","Boyle"],a:2},
+{q:"Mach number =",o:["V/sound","P/V","ρ/V","F/m"],a:0},
+{q:"Unit of kinematic viscosity",o:["Poise","Stokes","Pa-s","Newton"],a:1},
+{q:"Centroid of semicircle from base",o:["r/2","4r/3π","r/3","πr/4"],a:1},
+{q:"Flywheel used to",o:["Store heat","Reduce energy fluctuation","Increase speed","Stop engine"],a:1},
+
+{q:"Up-milling causes",o:["Better finish","Less wear","More vibration","Reverse feed"],a:2},
+{q:"Carburizing increases",o:["Core hardness","Surface hardness","Toughness","Ductility"],a:1},
+{q:"Vernier least count",o:["1−0.9","1/10","0.1","0.02"],a:0},
+{q:"First angle projection quadrant",o:["1st","2nd","3rd","4th"],a:0},
+{q:"Shrinkage allowance",o:["Positive","Negative","Zero","Random"],a:0},
+{q:"Plastic deformation beyond",o:["Elastic","Proportional","Breaking","Yield"],a:3},
+
+{q:"Gearbox provides",o:["Speed","Torque","Direction","All"],a:3},
+{q:"Differential required while",o:["Braking","Turning","Accel","Clutch"],a:1},
+{q:"ABS prevents",o:["Skidding","Heat","Wear","Noise"],a:0},
+{q:"Hybrid vehicle uses",o:["Fuel","Battery","Both","Steam"],a:2},
+{q:"Lubrication reduces",o:["Friction","Wear","Heat","All"],a:3},
+{q:"Power flow starts from",o:["Gearbox","Engine","Diff","Wheels"],a:1},
+
+/* ===== SECTION D ===== */
+{q:"Initial setting time of cement ≥",o:["10","20","30","45"],a:2},
+{q:"Flexible pavement load by",o:["Slab","Grain","Arch","Shear"],a:1},
+{q:"Benchmark used in",o:["Levelling","Chain","Compass","Contour"],a:0},
+{q:"Min grade RCC",o:["M10","M15","M20","M25"],a:2},
+{q:"Bearing capacity depends on",o:["Cement","Soil","Brick","Steel"],a:1},
+
+{q:"Warp yarn runs along",o:["Width","Length","Diagonal","Edge"],a:1},
+{q:"Spinning converts",o:["Fiber→yarn","Yarn→fabric","Fabric→garment","Cotton→thread"],a:0},
+{q:"Mercerization improves",o:["Strength & luster","Length","Weight","Shrink"],a:0},
+{q:"GSM refers to",o:["Thickness","Weight/area","Length","Density"],a:1},
+{q:"Synthetic fiber produced by",o:["Animals","Plants","Chemical","Minerals"],a:2},
+
+{q:"Laminar flow when Re <",o:["4000","2000","3000","∞"],a:1},
+{q:"Offset printing principle",o:["Oil-water repulsion","Heat","Compression","Diffusion"],a:0},
+{q:"Ceramics are",o:["Ductile","Brittle","Elastic","Conductive"],a:1},
+{q:"Vitamin A deficiency causes",o:["Scurvy","Rickets","Night blindness","Anemia"],a:2},
+{q:"Pasteurization temp of milk",o:["50°C","63°C","100°C","150°C"],a:1},
+{q:"Irrigation increases",o:["Erosion","Yield","Pollution","Salinity"],a:1},
+{q:"Tractor is",o:["Transport","Farm equipment","Industrial","Machine"],a:1},
+{q:"Indian architecture style",o:["Dravidian","Gothic","Roman","Greek"],a:0},
+{q:"Garment manufacturing uses",o:["Lathe","Sewing","Milling","Drilling"],a:1},
+{q:"DPI means",o:["Data/in","Dots/in","Design/in","Density/in"],a:1}
+];
+
+let idx = 0;
+let ans = Array(90).fill(null);
+let time = 90 * 60;
+let timerInterval;
+let finished = false;
+
+const nav = document.getElementById("nav");
+const qno = document.getElementById("qno");
+const qtext = document.getElementById("qtext");
+const opts = document.getElementById("opts");
+
+function renderNav(){
+ nav.innerHTML = "";
+ for(let i = 0; i < 90; i++){
+  nav.innerHTML += `
+   <tr onclick="go(${i})">
+    <td>${i+1}</td>
+    <td>${ans[i] == null ? "x" : ["a","b","c","d"][ans[i]]}</td>
+   </tr>`;
+ }
+}
+
+function render(){
+ let q = questions[idx];
+ qno.innerText = "Question " + (idx + 1);
+ qtext.innerText = q.q;
+ opts.innerHTML = "";
+
+ q.o.forEach((x, i) => {
+  opts.innerHTML += `
+   <label>
+    <input type="radio" name="o"
+     ${ans[idx] === i ? "checked" : ""}
+     onclick="selectAns(${i})">
+    ${x}
+   </label>`;
+ });
+
+ renderNav();
+}
+
+function selectAns(i){
+ ans[idx] = i;
+ renderNav();
+}
+
+function go(i){ idx = i; render(); }
+function nextQ(){ if(idx < 89){ idx++; render(); } }
+function prevQ(){ if(idx > 0){ idx--; render(); } }
+function firstQ(){ idx = 0; render(); }
+function lastQ(){ idx = 89; render(); }
+
+function clearAns(){
+ ans[idx] = null;
+ render();
+}
+
+function endTest(){
+ if(finished) return;
+ if(confirm("Are you sure you want to END the test?")){
+  finish();
+ }
+}
+
+function finish(){
+ if(finished) return;
+ finished = true;
+
+ clearInterval(timerInterval);
+
+ document.getElementById("exam").style.display = "none";
+ document.getElementById("controls").style.display = "none";
+ document.getElementById("final").style.display = "block";
+
+ let score = 0;
+ questions.forEach((q, i) => {
+  if(ans[i] === q.a) score++;
+ });
+
+ document.getElementById("score").innerText = score;
+}
+
+timerInterval = setInterval(() => {
+ let m = Math.floor(time / 60);
+ let s = time % 60;
+
+ document.getElementById("time").innerText =
+  `${m}:${s.toString().padStart(2,"0")}`;
+
+ if(--time < 0){
+  finish();
+ }
+}, 1000);
+
+render();
+
+</script>
+</body>
+</html>

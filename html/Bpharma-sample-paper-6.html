@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCET 2025 - ELITE LEVEL B.PHARM (LEET)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: red; --accent: #b71c1c; --success: #1b5e20;
+            --bg: #f0f2f5; --card: #ffffff; --text: #1a1a1a;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; }
+        .container { max-width: 950px; margin: 0 auto; padding: 20px; }
+        header { 
+            background: var(--primary); color: white; padding: 25px; 
+            border-radius: 15px; display: flex; justify-content: space-between; 
+            align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: sticky; top: 10px; z-index: 1000;
+        }
+        .timer-display { font-size: 2rem; background: #fff; color: var(--accent); padding: 5px 25px; border-radius: 8px; font-weight: 800; border: 2px solid var(--accent); }
+        .section-header { 
+            background: orange; color: white; padding: 12px 20px; 
+            margin-top: 45px; border-radius: 8px; font-weight: bold; border-right: 10px solid var(--accent);
+        }
+        .q-card { 
+            background: var(--card); margin: 25px 0; padding: 30px; 
+            border-radius: 12px; border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .q-text { font-size: 1.15rem; font-weight: 700; color: #002366; margin-bottom: 20px; display: block; }
+        .options-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .opt-label { 
+            border: 1px solid #cfd8dc; padding: 15px; border-radius: 8px; 
+            cursor: pointer; display: flex; align-items: center; transition: 0.2s;
+        }
+        .opt-label:hover { background: #f1f3f9; border-color: var(--primary); }
+        .btn-final { 
+            background: var(--primary); color: white; padding: 22px; 
+            border: none; border-radius: 12px; font-size: 1.4rem; cursor: pointer; 
+            font-weight: 800; width: 100%; margin-top: 40px;
+        }
+        .download-btn {
+            background: #e67e22; color: white; padding: 15px 30px; 
+            border: none; border-radius: 8px; cursor: pointer; display: none;
+            margin: 20px auto; font-weight: bold;
+        }
+        #results-screen { display: none; background: white; padding: 50px; border-radius: 15px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .score-big { font-size: 5rem; color: var(--primary); font-weight: 900; }
+        .review-item { text-align: left; padding: 20px; border-bottom: 1px solid #eee; }
+        .status-correct { color: var(--success); font-weight: 800; }
+        .status-wrong { color: var(--accent); font-weight: 800; }
+        @media (max-width: 768px) { .options-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h2 style="margin:0">OCET 2025: ELITE MOCK</h2>
+            <small>Phase: Extreme Difficulty | 90 Minutes</small>
+        </div>
+        <div class="timer-display" id="clock">90:00</div>
+    </header>
+
+    <div id="exam-form">
+        <div id="questions-pool"></div>
+        <button class="btn-final" onclick="calculateResult()">SUBMIT FOR ELITE RANKING</button>
+    </div>
+
+    <div id="results-screen">
+        <h1>Performance Scorecard</h1>
+        <div class="score-big" id="final-score">0/90</div>
+        <p id="feedback-msg" style="font-size: 1.3rem;"></p>
+        <button id="dl-btn" class="download-btn" onclick="downloadQAPDF()">📄 DOWNLOAD EXTREME ANSWER KEY (PDF)</button>
+        <div id="detailed-review"></div>
+        <button onclick="location.reload()" style="padding:15px 40px; cursor:pointer;">Restart Challenge</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const examData = [
+    // 1. PHARMACEUTICS (Process Engineering & Rheology)
+    { s: "Pharmaceutics", q: "For a non-Newtonian fluid following the Power Law, if the flow behavior index (n) is < 1, the fluid is:", o: ["Dilatant", "Pseudoplastic", "Newtonian", "Bingham Plastic"], a: 1 },
+    { s: "Pharmaceutics", q: "The 'Z-value' in thermal sterilization represents:", o: ["Time for 1-log reduction", "Temperature increase to reduce D-value by 90%", "Inactivation rate constant", "Probability of non-sterility"], a: 1 },
+    { s: "Pharmaceutics", q: "Which formulation parameter is measured by the 'Higuchi Equation'?", o: ["Zero-order release", "Release from an insoluble matrix (Diffusion)", "Erosion rate", "Dissolution rate of powders"], a: 1 },
+    { s: "Pharmaceutics", q: "The moisture content of 'Empty Hard Gelatin Capsule' shells should be strictly between:", o: ["5-10%", "13-16%", "20-25%", "0-2%"], a: 1 },
+    { s: "Pharmaceutics", q: "In the 'USP Apparatus 4', the dissolution is carried out using:", o: ["Reciprocating Cylinder", "Flow-through cell", "Paddle over disk", "Rotating Basket"], a: 1 },
+    { s: "Pharmaceutics", q: "A 'Large Volume Parenteral' must not contain more than how many particles of size ≥ 25 µm per container (USP)?", o: ["6000", "600", "25", "2"], a: 1 },
+    { s: "Pharmaceutics", q: "The 'HLB' value of Polysorbate 80 (Tween 80) is:", o: ["4.3", "15.0", "1.8", "8.0"], a: 1 },
+    { s: "Pharmaceutics", q: "Which mechanism is used by 'Superdisintegrants' like Croscarmellose Sodium?", o: ["Capillary action/Wicking", "Gas evolution", "Melting", "Enzymatic degradation"], a: 0 },
+    { s: "Pharmaceutics", q: "What is the 'Cold' temperature limit according to Indian Pharmacopoeia (IP)?", o: ["0°C to 5°C", "2°C to 8°C", "8°C to 25°C", "-10°C to 0°C"], a: 1 },
+
+    // 2. PHARMACEUTICAL CHEMISTRY (Orbital & Computational)
+    { s: "Pharmaceutical Chemistry", q: "The stereochemical configuration of 'Natural Ephedrine' is:", o: ["(1R, 2R)", "(1R, 2S)", "(1S, 2R)", "(1S, 2S)"], a: 1 },
+    { s: "Pharmaceutical Chemistry", q: "In the assay of 'Aspirin', the back titration is performed using which standard solution?", o: ["0.1 M HCl", "0.5 M NaOH", "0.1 M NaOH", "0.1 M H2SO4"], a: 0 },
+    { s: "Pharmaceutical Chemistry", q: "Which heterocyclic ring is the core of the H2-receptor antagonist 'Cimetidine'?", o: ["Furan", "Thiazole", "Imidazole", "Pyridine"], a: 2 },
+    { s: "Pharmaceutical Chemistry", q: "The 'Pauly's Reagent' is used to detect which amino acid residue in protein-based drugs?", o: ["Tryptophan", "Histidine", "Proline", "Cysteine"], a: 1 },
+    { s: "Pharmaceutical Chemistry", q: "The 'Limit Test for Arsenic' uses which paper to detect Arsine gas?", o: ["Lead Acetate Paper", "Mercuric Chloride Paper", "Silver Nitrate Paper", "Starch Iodide Paper"], a: 1 },
+    { s: "Pharmaceutical Chemistry", q: "Which of the following is a 'Prodrug' of Adrenaline?", o: ["Dipivefrin", "Ephedrine", "Salbutamol", "Phenylephrine"], a: 0 },
+    { s: "Pharmaceutical Chemistry", q: "The 'Witting Reaction' is primarily used to synthesize:", o: ["Alcohols", "Alkenes", "Ketones", "Esters"], a: 1 },
+    { s: "Pharmaceutical Chemistry", q: "Which analytical technique is most appropriate for determining the 'Polymorphic' form of a drug?", o: ["UV Spectroscopy", "X-Ray Diffraction (XRD)", "HPLC", "Mass Spectrometry"], a: 1 },
+    { s: "Pharmaceutical Chemistry", q: "The 'Karl Fischer' titration is used to determine:", o: ["Heavy metals", "Alcohol content", "Water content", "Nitrogen content"], a: 2 },
+
+    // 3. PHARMACOGNOSY (Chemotaxonomy & Biosynthesis)
+    { s: "Pharmacogonsy", q: "The 'Van-Urk's Reagent' gives a blue-violet color with Ergot alkaloids due to the presence of:", o: ["Indole nucleus", "Quinoline nucleus", "Tropane nucleus", "Isoquinoline nucleus"], a: 0 },
+    { s: "Pharmacogonsy", q: "Which stomatal index is specific to 'Senna' (Cassia angustifolia)?", o: ["10.0 - 12.5", "17.0 - 20.0", "20.0 - 23.0", "12.5 - 15.0"], a: 1 },
+    { s: "Pharmacogonsy", q: "The precursor for the biosynthesis of 'Steroidal Saponins' is:", o: ["Mevalonic acid", "Shikimic acid", "Acetic acid", "Tryptophan"], a: 0 },
+    { s: "Pharmacogonsy", q: "Which test is used for the detection of 'Deoxy sugars' in Cardiac glycosides?", o: ["Legal Test", "Killer-Kiliani Test", "Baljet Test", "Raymond Test"], a: 1 },
+    { s: "Pharmacogonsy", q: "What is the concentration of magnesium in Chlorophyll-a?", o: ["1.0%", "2.7%", "5.5%", "0.5%"], a: 1 },
+    { s: "Pharmacogonsy", q: "The botanical source of 'Japanese Mint' is:", o: ["Mentha piperita", "Mentha arvensis", "Mentha spicata", "Mentha viridis"], a: 1 },
+    { s: "Pharmacogonsy", q: "Which category of tannins is 'Gallic acid' a part of?", o: ["Condensed Tannins", "Hydrolysable Tannins", "Pseudotannins", "Phlobatannins"], a: 1 },
+    { s: "Pharmacogonsy", q: "A 'Cystolith' (calcium carbonate deposit) is a diagnostic feature of which family?", o: ["Solanaceae", "Cannabinaceae", "Liliaceae", "Rubiaceae"], a: 1 },
+    { s: "Pharmacogonsy", q: "The biological source of 'Shatavari' is:", o: ["Asparagus racemosus", "Withania somnifera", "Aloe barbadensis", "Cassia fistula"], a: 0 },
+
+    // 4. HUMAN ANATOMY AND PHYSIOLOGY (Advanced Homeostasis)
+    { s: "HAP", q: "The 'Anion Gap' is calculated as:", o: ["[Na+ + K+] - [Cl- + HCO3-]", "[Na+] - [Cl- + HCO3-]", "[K+] - [Cl-]", "None of the above"], a: 1 },
+    { s: "HAP", q: "Which clotting factor has the shortest half-life in the human body?", o: ["Factor II", "Factor VII", "Factor IX", "Factor X"], a: 1 },
+    { s: "HAP", q: "The 'Bowman's Capsule' hydrostatic pressure is approximately:", o: ["10 mmHg", "55 mmHg", "15 mmHg", "30 mmHg"], a: 1 },
+    { s: "HAP", q: "Which neurotransmitter is primarily involved in the 'Inhibition' of the CNS?", o: ["Glutamate", "GABA", "Acetylcholine", "Dopamine"], a: 1 },
+    { s: "HAP", q: "The 'Normal' PR interval in a standard ECG is:", o: ["0.08 - 0.10 s", "0.12 - 0.20 s", "0.35 - 0.44 s", "0.04 - 0.08 s"], a: 1 },
+    { s: "HAP", q: "The 'Hering-Breuer Reflex' is related to:", o: ["Blood pressure", "Lung inflation", "Digestion", "Vision"], a: 1 },
+    { s: "HAP", q: "Which hormone is the primary regulator of 'Basal Metabolic Rate' (BMR)?", o: ["Insulin", "Thyroxine (T4)", "Growth Hormone", "Cortisol"], a: 1 },
+    { s: "HAP", q: "The volume of air remaining in the lungs after a maximal expiration is:", o: ["Tidal Volume", "Residual Volume", "Vital Capacity", "Inspiratory Reserve"], a: 1 },
+    { s: "HAP", q: "Which area of the brain is known as the 'Motor Speech Area'?", o: ["Wernicke's area", "Broca's area", "Limbic system", "Pons"], a: 1 },
+
+    // 5. SOCIAL PHARMACY (Advanced Stats & Policy)
+    { s: "Social Pharmacy", q: "The 'Quarantine' period for a disease is usually equal to:", o: ["Incubation period", "Longest incubation period", "Shortest incubation period", "Period of communicability"], a: 1 },
+    { s: "Social Pharmacy", q: "Which indicator measures the 'Quality of Life' more comprehensively than DALY?", o: ["BMI", "QALY", "PQLI", "GNP"], a: 1 },
+    { s: "Social Pharmacy", q: "The 'Alma-Ata' Declaration (1978) focused on:", o: ["Hospital care", "Primary Health Care", "Universal Vaccination", "HIV prevention"], a: 1 },
+    { s: "Social Pharmacy", q: "Which epidemiological study is 'Forward-looking' (Prospective)?", o: ["Case-control", "Cohort study", "Cross-sectional", "Case report"], a: 1 },
+    { s: "Social Pharmacy", q: "The 'Mantoux Test' is read after how many hours?", o: ["12-24 hours", "48-72 hours", "1 week", "Immediately"], a: 1 },
+    { s: "Social Pharmacy", q: "Which stage of 'Demographic Transition' is India currently in?", o: ["High stationary", "Late expanding", "Early expanding", "Low stationary"], a: 1 },
+    { s: "Social Pharmacy", q: "The 'AYUSH' ministry was established in which year?", o: ["2004", "2014", "1995", "2019"], a: 1 },
+    { s: "Social Pharmacy", q: "The 'Target Population' for the pulse polio immunization program is children up to age:", o: ["3 years", "5 years", "10 years", "12 years"], a: 1 },
+    { s: "Social Pharmacy", q: "What is the recommended daily intake of 'Iodine' for a normal adult?", o: ["50 µg", "150 µg", "500 µg", "1000 µg"], a: 1 },
+
+    // 6. PHARMACOLOGY (Pharmacokinetics & Toxicology)
+    { s: "Pharmacology", q: "The 'Steady State Concentration' is achieved after how many half-lives?", o: ["2", "4-5", "10", "1"], a: 1 },
+    { s: "Pharmacology", q: "Which drug inhibits 'P-glycoprotein' (P-gp)?", o: ["Rifampin", "Verapamil", "Phenobarbital", "St. John's Wort"], a: 1 },
+    { s: "Pharmacology", q: "The mechanism of 'Warfarin' resistance involves a mutation in:", o: ["COX-1", "VKORC1", "G6PD", "CYP3A4"], a: 1 },
+    { s: "Pharmacology", q: "Which drug is a 'Dopamine D2 Partial Agonist'?", o: ["Haloperidol", "Aripiprazole", "Clozapine", "Chlorpromazine"], a: 1 },
+    { s: "Pharmacology", q: "The 'Grey Baby Syndrome' is due to the lack of which enzyme in neonates?", o: ["Glucuronyl transferase", "Alcohol dehydrogenase", "MAO", "CYP2D6"], a: 0 },
+    { s: "Pharmacology", q: "What is the 'Bioavailability' of a drug administered via the Intra-arterial route?", o: ["50%", "100%", "80%", "0%"], a: 1 },
+    { s: "Pharmacology", q: "Which drug acts as an 'Endothelin Receptor Antagonist'?", o: ["Sildenafil", "Bosentan", "Enalapril", "Losartan"], a: 1 },
+    { s: "Pharmacology", q: "The 'Cheese Reaction' is an interaction between Tyramine and:", o: ["Tricyclic Antidepressants", "MAO Inhibitors", "SSRIs", "Benzodiazepines"], a: 1 },
+    { s: "Pharmacology", q: "The 'Herxheimer Reaction' is associated with the treatment of:", o: ["Malaria", "Syphilis", "Tuberculosis", "HIV"], a: 1 },
+
+    // 7. COMMUNITY PHARMACY (Logistics & Clinical Skills)
+    { s: "Community Pharmacy", q: "What is 'Economic Order Quantity' (EOQ) formula?", o: ["√(2AO/H)", "√(AO/2H)", "2AO/H", "AO/H"], a: 0 },
+    { s: "Community Pharmacy", q: "The 'Medication Therapy Management' (MTM) core elements include how many steps?", o: ["3", "5", "7", "10"], a: 1 },
+    { s: "Community Pharmacy", q: "In 'Patient Counseling', the Three Prime Questions approach was developed by:", o: ["WHO", "IHS (Indian Health Service)", "PCI", "FDA"], a: 1 },
+    { s: "Community Pharmacy", q: "Which 'Legal Schedule' requires a separate register for inventory and sale?", o: ["Schedule H", "Schedule X", "Schedule G", "Schedule M"], a: 1 },
+    { s: "Community Pharmacy", q: "What is the 'Cold Chain' temperature for most vaccines?", o: ["-20°C", "2°C to 8°C", "0°C to 4°C", "Below 0°C"], a: 1 },
+    { s: "Community Pharmacy", q: "The term 'Sentinel Event' in pharmacy refers to:", o: ["A daily sale", "An unexpected death or serious injury", "A stock-out", "A new drug launch"], a: 1 },
+    { s: "Community Pharmacy", q: "Which 'Software' is most common for pharmacy management in India?", o: ["Tally", "Pharmasuccess/Generic ERPs", "MS Excel", "None"], a: 1 },
+    { s: "Community Pharmacy", q: "What is the 'Lead Time' in inventory?", o: ["Time to sell stock", "Time between placing order and receiving it", "Time drug stays on shelf", "Time for bill payment"], a: 1 },
+    { s: "Community Pharmacy", q: "Which 'Visual Aid' is best for explaining dosage to illiterate patients?", o: ["Text leaflets", "Pictograms", "Audio recordings", "Verbal instructions only"], a: 1 },
+
+    // 8. PHARMACOTHERAPEUTICS (Guidelines-based)
+    { s: "Pharmacotherapeutics", q: "According to 'JNC-8' guidelines, the target BP for adults ≥ 60 years is:", o: ["< 130/80", "< 150/90", "< 140/90", "< 120/80"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "The 'Drug of Choice' for treating 'Trigeminal Neuralgia' is:", o: ["Phenytoin", "Carbamazepine", "Diazepam", "Gabapentin"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "Which 'Antiretroviral' class causes Lipodystrophy?", o: ["NRTIs", "Protease Inhibitors", "NNRTIs", "Integrase Inhibitors"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "The 'GOLD' classification is used for which disease assessment?", o: ["Asthma", "COPD", "Heart Failure", "Diabetes"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "What is the 'First-line' treatment for 'Clostridium difficile' infection?", o: ["Amoxicillin", "Oral Vancomycin", "Metronidazole", "Ciprofloxacin"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "In 'Chronic Kidney Disease' (CKD), Anemia is treated with:", o: ["Iron only", "Erythropoietin", "Vitamin B12", "Folic Acid"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "The 'CURB-65' score is used to predict severity in:", o: ["COPD", "Community-acquired Pneumonia", "Heart Failure", "Sepsis"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "Which drug is used for 'Prophylaxis' of Migraine?", o: ["Sumatriptan", "Propranolol", "Ergotamine", "Naproxen"], a: 1 },
+    { s: "Pharmacotherapeutics", q: "The 'NYHA' classification measures the severity of:", o: ["Hypertension", "Heart Failure", "Angina", "Diabetes"], a: 1 },
+
+    // 9. BIOCHEMISTRY (Signal Transduction & Genetics)
+    { s: "Biochemistry", q: "Which 'Second Messenger' is activated by Adenylate Cyclase?", o: ["IP3", "cAMP", "DAG", "Calcium"], a: 1 },
+    { s: "Biochemistry", q: "The 'Z-DNA' has a rotation that is:", o: ["Right-handed", "Left-handed", "Linear", "Triple-stranded"], a: 1 },
+    { s: "Biochemistry", q: "Which 'Co-enzyme' is derived from Riboflavin (Vitamin B2)?", o: ["NAD+", "FAD", "Coenzyme A", "TPP"], a: 1 },
+    { s: "Biochemistry", q: "The 'Urea Cycle' takes place in which two cellular compartments?", o: ["Cytosol and Mitochondria", "Cytosol and Lysosome", "Mitochondria and Nucleus", "Golgi and ER"], a: 0 },
+    { s: "Biochemistry", q: "Which enzyme is the 'Rate-limiting step' in Cholesterol biosynthesis?", o: ["HMG-CoA Reductase", "HMG-CoA Synthase", "Thiolase", "Squalene epoxidase"], a: 0 },
+    { s: "Biochemistry", q: "The 'Southern Blotting' technique is used to detect:", o: ["RNA", "DNA", "Proteins", "Lipids"], a: 1 },
+
+    // 10. HOSPITAL PHARMACY (Safety & Standards)
+    { s: "Hospital Pharmacy", q: "Which 'Schedule' drug records are required to be kept for 2 years?", o: ["Schedule H", "Schedule X", "Schedule G", "Schedule M"], a: 1 },
+    { s: "Hospital Pharmacy", q: "The 'Laminar Air Flow' velocity should be:", o: ["100 ± 20 fpm", "500 ± 50 fpm", "10 ± 2 fpm", "None"], a: 0 },
+    { s: "Hospital Pharmacy", q: "The 'Blue' colored bag in Biomedical Waste is for:", o: ["Anatomical waste", "Glassware/Metallic body implants", "Plastics", "Sharps"], a: 1 },
+    { s: "Hospital Pharmacy", q: "What is the 'Formula' for Fried's Rule for child dose?", o: ["(Age in years/20) x Adult dose", "(Age in months/150) x Adult dose", "(Weight/70) x Adult dose", "None"], a: 1 },
+    { s: "Hospital Pharmacy", q: "The 'In-patient' pharmacy in a 500-bed hospital should have how many pharmacists (minimum)?", o: ["2", "5", "8", "15"], a: 2 },
+    { s: "Hospital Pharmacy", q: "Which committee is responsible for making the 'Hospital Formulary'?", o: ["Ethics Committee", "Pharmacy and Therapeutics Committee", "Audit Committee", "Board of Directors"], a: 1 },
+
+    // 11. PHARMACY LAW AND ETHICS (Global & National Regulations)
+    { s: "Pharmacy Law", q: "Under the 'Hatch-Waxman Act', what is the period of data exclusivity for a new chemical entity?", o: ["2 years", "5 years", "10 years", "20 years"], a: 1 },
+    { s: "Pharmacy Law", q: "The 'Blood Bank' license is issued by:", o: ["State Licensing Authority", "Central License Approving Authority (CDSCO)", "PCI", "Health Ministry"], a: 1 },
+    { s: "Pharmacy Law", q: "Which 'Schedule' deals with 'Life Period' of drugs?", o: ["Schedule P", "Schedule M", "Schedule R", "Schedule S"], a: 0 },
+    { s: "Pharmacy Law", q: "What is the 'Fine' for a first conviction for a false claim to be a registered pharmacist?", o: ["Rs. 500", "Rs. 1000", "Rs. 5000", "Rs. 100"], a: 0 },
+    { s: "Pharmacy Law", q: "Which 'Regulatory Body' manages the 'ANDA' (Abbreviated New Drug Application) for generics in the US?", o: ["CDSCO", "US-FDA", "EMA", "TGA"], a: 1 },
+    { s: "Pharmacy Law", q: "The 'Orange Book' published by FDA contains info on:", o: ["Adverse reactions", "Approved Drug Products with Therapeutic Equivalence Evaluations", "Biologicals", "Prices"], a: 1 }
+];
+
+let timeLeft = 90 * 60;
+let examFinished = false;
+
+function startClock() {
+    const timer = setInterval(() => {
+        if(examFinished) { clearInterval(timer); return; }
+        timeLeft--;
+        let m = Math.floor(timeLeft/60);
+        let s = timeLeft % 60;
+        document.getElementById('clock').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        if(timeLeft <= 0) { clearInterval(timer); calculateResult(); }
+    }, 1000);
+}
+
+function initExam() {
+    const pool = document.getElementById('questions-pool');
+    let lastSub = "";
+    examData.forEach((q, i) => {
+        if(q.s !== lastSub) {
+            const h = document.createElement('div');
+            h.className = "section-header";
+            h.innerText = q.s;
+            pool.appendChild(h);
+            lastSub = q.s;
+        }
+        const card = document.createElement('div');
+        card.className = "q-card";
+        card.innerHTML = `<span class="q-text">Q${i+1}. ${q.q}</span>
+            <div class="options-container">
+                ${q.o.map((opt, oi) => `
+                    <label class="opt-label">
+                        <input type="radio" name="q${i}" value="${oi}">
+                        <span style="margin-left:10px">${opt}</span>
+                    </label>
+                `).join('')}
+            </div>`;
+        pool.appendChild(card);
+    });
+    startClock();
+}
+
+function calculateResult() {
+    if(!confirm("Elite Challenge Final Submission?")) return;
+    examFinished = true;
+    let score = 0;
+    const review = document.getElementById('detailed-review');
+    review.innerHTML = "<h2 style='margin-top:30px'>Post-Exam Review</h2>";
+    
+    examData.forEach((q, i) => {
+        const sel = document.querySelector(`input[name="q${i}"]:checked`);
+        const div = document.createElement('div');
+        div.className = "review-item";
+        let status = "SKIPPED";
+        let isCor = false;
+
+        if(sel) {
+            isCor = parseInt(sel.value) === q.a;
+            status = isCor ? "CORRECT" : "WRONG";
+            if(isCor) score++;
+        }
+
+        div.innerHTML = `<strong>Q${i+1}:</strong> ${q.q}<br>
+            <span class="${isCor ? 'status-correct' : 'status-wrong'}">${status}</span><br>
+            Correct Answer: ${q.o[q.a]}`;
+        review.appendChild(div);
+    });
+
+    document.getElementById('exam-form').style.display = 'none';
+    document.getElementById('results-screen').style.display = 'block';
+    document.getElementById('dl-btn').style.display = 'block';
+    document.getElementById('final-score').innerText = `${score} / 90`;
+    
+    let feedback = score > 80 ? "Legendary Level. You are likely an AIR 1 candidate." : 
+                   score > 60 ? "Superior. Excellent grasp of pharmaceutical sciences." :
+                   "Tough Challenge. This mock was 100% harder than standard; keep studying!";
+    document.getElementById('feedback-msg').innerText = feedback;
+    window.scrollTo(0,0);
+}
+
+async function downloadQAPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let y = 20;
+    doc.setFontSize(16); doc.text("OCET 2025 ELITE MOCK REPORT", 15, y);
+    y += 15;
+    doc.setFontSize(12); doc.text(`Final Score: ${document.getElementById('final-score').innerText}`, 15, y);
+    y += 15;
+
+    examData.forEach((q, i) => {
+        if(y > 270) { doc.addPage(); y = 20; }
+        const sel = document.querySelector(`input[name="q${i}"]:checked`);
+        const mark = sel ? (parseInt(sel.value) === q.a ? "[CORRECT]" : "[WRONG]") : "[SKIP]";
+        
+        doc.setFont("helvetica", "bold");
+        const lines = doc.splitTextToSize(`Q${i+1}: ${q.q}`, 175);
+        doc.text(lines, 15, y);
+        y += (lines.length * 7);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Ans: ${q.o[q.a]} | Result: ${mark}`, 15, y);
+        y += 10;
+    });
+    doc.save("Elite_OCET_2025_Solution.pdf");
+}
+
+window.onload = initExam;
+</script>
+</body>
+</html>
