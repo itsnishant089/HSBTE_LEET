@@ -56,9 +56,11 @@
    */
   async function extractSubjectsFromHtml(htmlFilePath) {
     try {
+      // Try to fetch the file
       const response = await fetch(htmlFilePath);
       if (!response.ok) {
-        console.warn(`Failed to fetch ${htmlFilePath}: ${response.status}`);
+        // Silently fail - file might not exist or path might be wrong
+        // Don't spam console with warnings for expected 404s
         return [];
       }
       
@@ -96,7 +98,7 @@
       
       return subjects;
     } catch (error) {
-      console.warn(`Could not load subjects from ${htmlFilePath}:`, error);
+      // Silently handle errors - file might not exist or be accessible
       return [];
     }
   }
@@ -108,14 +110,17 @@
     if (isIndexLoaded) return;
 
     // Determine base path - handle different page locations
-    let basePath = './';
     const currentPath = window.location.pathname;
-    if (currentPath.includes('/html/')) {
+    let basePath = './html/'; // Default: assume we're in root, need to go to html/
+    
+    // If we're already in the html/ directory, use relative path (same directory)
+    // Check if current path contains /html/ (meaning we're viewing a page inside html/)
+    // Examples: 
+    //   /html/hsbte-pyq.html -> contains '/html/' -> use './'
+    //   /index.html -> doesn't contain '/html/' -> use './html/'
+    //   / -> doesn't contain '/html/' -> use './html/'
+    if (currentPath.indexOf('/html/') !== -1) {
       basePath = './';
-    } else if (currentPath.endsWith('.html')) {
-      basePath = './';
-    } else {
-      basePath = './html/';
     }
 
     // Define all branches and their semesters
@@ -231,8 +236,9 @@
               semester: sem
             });
           });
-        }).catch(error => {
-          console.warn(`Could not load subjects for ${semesterUrl}:`, error);
+        }).catch(() => {
+          // Silently handle errors - file might not exist or be accessible
+          // This is expected for some files
         });
       });
     });
