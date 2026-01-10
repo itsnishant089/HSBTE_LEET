@@ -138,7 +138,7 @@
       { name: 'Electrical Engineering', url: 'Electrical-Engineering.html', semesters: [1, 2, 3, 4, 5, 6], key: 'electrical' },
       { name: 'Fashion Design', url: 'Fashion-Design.html', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-design' },
       { name: 'Fashion Technology', url: 'Fashion-Technology.html', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-technology' },
-      { name: 'Food Technology', url: 'food.html', semesters: [1, 2, 3, 4, 5, 6], key: 'food' },
+      { name: 'Food Technology', url: 'Food.html', semesters: [1, 2, 3, 4, 5, 6], key: 'food' },
       { name: 'Hotel Management', url: 'Hotel-Management.html', semesters: [1, 2, 3, 4, 5], key: 'hotel' },
       { name: 'Instrumentation & Control', url: 'Instrumentation-&-Control.html', semesters: [1, 2, 3, 4, 5, 6], key: 'instrumentation' },
       { name: 'Library & Information Science', url: 'Library.html', semesters: [1, 2, 3, 4, 5], key: 'library' },
