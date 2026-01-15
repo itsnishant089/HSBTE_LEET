@@ -1,8 +1,8 @@
 <!-- ================= ROBOT CHATBOT TOGGLE ================= -->
-<div id="robot-chatbot">
+<div id="robot-chatbot" role="button" tabindex="0" aria-label="Open HSBTE AI Chatbot">
   <div class="robot-glow"></div>
   <div class="robot-pulse"></div>
-  <img src="../image/robo.webp" alt="HSBTE Chatbot">
+  <img src="../image/robo.webp" alt="HSBTE AI Chatbot Assistant">
   <span class="robot-tooltip">
     <span class="tooltip-text">Let's Chat</span>
     <span class="tooltip-arrow"></span>
@@ -10,16 +10,20 @@
 </div>
 
 <!-- ================= CHATBOT BOX ================= -->
-<div id="chatbot-box">
+<div id="chatbot-box" role="dialog" aria-label="HSBTE AI Assistant Chat Window">
+
   <div class="chatbot-background-glow"></div>
   <div class="chatbot-grid-overlay"></div>
   
+  <!-- HEADER -->
   <div id="chatbot-header">
+
     <div class="header-content">
       <div class="header-icon">
         <div class="icon-pulse"></div>
-        <i class="fa-solid fa-robot"></i>
+        <i class="fa-solid fa-robot" aria-hidden="true"></i>
       </div>
+
       <div class="header-text">
         <span class="header-title">AI Assistant</span>
         <span class="header-status">
@@ -28,21 +32,37 @@
         </span>
       </div>
     </div>
-    <button id="chatbot-close">
-      <i class="fa-solid fa-times"></i>
+
+    <!-- CLOSE BUTTON -->
+    <button id="chatbot-close" aria-label="Close chatbot">
+      <i class="fa-solid fa-times" aria-hidden="true"></i>
     </button>
+
   </div>
 
-  <div id="chatbot-messages"></div>
+  <!-- MESSAGES -->
+  <div id="chatbot-messages" role="log" aria-live="polite"></div>
 
+  <!-- INPUT AREA -->
   <div id="chatbot-input">
     <div class="input-wrapper">
-      <i class="fa-solid fa-message input-icon"></i>
-      <input type="text" id="chatbot-text" placeholder="Ask about HSBTE, LEET, PYQ..." />
-      <button id="chatbot-send">
-        <i class="fa-solid fa-paper-plane"></i>
+
+      <i class="fa-solid fa-message input-icon" aria-hidden="true"></i>
+
+      <input 
+        type="text"
+        id="chatbot-text"
+        placeholder="Ask about HSBTE, LEET, PYQ..."
+        aria-label="Type your message about HSBTE, Haryana LEET, Polytechnic"
+      />
+
+      <!-- SEND BUTTON -->
+      <button id="chatbot-send" aria-label="Send message">
+        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
         <div class="send-ripple"></div>
       </button>
+
     </div>
   </div>
+
 </div>
