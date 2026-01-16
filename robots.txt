@@ -1,0 +1,50 @@
+# robots.txt for HSBTE LEET - Haryana Polytechnic
+# https://hsbteleet.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /search?
+
+
+# Allow important pages and resources
+Allow: /html/
+Allow: /index.html
+Allow: /image/
+Allow: /css/
+Allow: /js/
+Allow: /partials/
+
+# Allow specific file types
+Allow: /*.html$
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Sitemap location
+Sitemap: https://hsbteleet.com/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+# Set to 1 second to be respectful to server resources
+Crawl-delay: 1
+
+# Special rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
