@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/html/:page.html",
+      "destination": "/:page",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/:page([^/.]+)",
