@@ -19,7 +19,8 @@ document.addEventListener("partialsLoaded", () => {
   let CHAT_API_URL = null;
 
   /* ================= WEBSITE CONTEXT ================= */
-  const WEBSITE_CONTEXT = `You are an AI assistant for HSBTE PYQ website (hsbtepyq.com). Your role is to help students with information about:
+  const WEBSITE_CONTEXT = `You are an AI assistant for HSBTE LEET & PYQ website (hsbteleet.com).
+
 
 **Website Content:**
 - HSBTE (Haryana State Board of Technical Education) Previous Year Question Papers (PYQ)
@@ -56,14 +57,16 @@ document.addEventListener("partialsLoaded", () => {
     
     // Relevant keywords
     const relevantKeywords = [
-      'hsbte', 'pyq', 'previous year', 'question paper', 'leet', 'lateral entry',
-      'btech', 'b.tech', 'pharmacy', 'b.pharmacy', 'diploma', 'polytechnic',
-      'computer', 'civil', 'mechanical', 'ece', 'electrical', 'automobile',
-      'chemical', 'agriculture', 'food tech', 'dbm', 'semester', 'exam',
-      'syllabus', 'cutoff', 'prospectus', 'sample paper', 'result', 'admission',
-      'haryana', 'hstes', 'tech admission', 'aicte', 'dcrust', 'ymca',
-      'engineering', 'branch', 'subject', 'paper', 'download', 'pdf'
-    ];
+  'hsbte','pyq','previous year','question paper','leet','lateral entry',
+  'btech','b.tech','pharmacy','b.pharmacy','diploma','polytechnic',
+  'computer','civil','mechanical','ece','electrical','automobile',
+  'chemical','agriculture','food','dbm','business','management',
+  'semester','exam','syllabus','cutoff','prospectus','sample paper',
+  'result','admission','haryana','engineering','branch','subject','paper',
+  'download','pdf','ai','ml','machine learning','instrumentation',
+  'plastic','hotel','fashion','textile','library','medical','electronics'
+];
+
     
     return relevantKeywords.some(keyword => lowerText.includes(keyword));
   }
@@ -212,9 +215,9 @@ true
       let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Try asking differently 🙂";
       
       // Additional safety check - if reply seems off-topic, provide default response
-      if (!isRelevantQuestion(reply) && reply.length > 50) {
-        reply = "I can help you with HSBTE PYQ, LEET, branches, semesters, and exam-related questions. Could you please ask something specific about these topics?";
-      }
+      // if (!isRelevantQuestion(reply) && reply.length > 50) {
+      //   reply = "I can help you with HSBTE PYQ, LEET, branches, semesters, and exam-related questions. Could you please ask something specific about these topics?";
+      // }
 
       addMessage(reply, "bot", true);
 
