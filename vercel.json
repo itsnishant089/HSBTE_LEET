@@ -9,6 +9,11 @@
       "source": "/:page.html",
       "destination": "/:page",
       "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
