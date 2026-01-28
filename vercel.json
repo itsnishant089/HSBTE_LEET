@@ -4,6 +4,11 @@
       "source": "/html/:page.html",
       "destination": "/:page",
       "permanent": true
+    },
+    {
+      "source": "/:page.html",
+      "destination": "/:page",
+      "permanent": true
     }
   ],
   "rewrites": [
