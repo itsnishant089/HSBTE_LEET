@@ -1,1 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/:page",
+      "destination": "/html/:page.html"
+    }
+  ]
+}
 
