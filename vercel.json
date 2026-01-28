@@ -1,9 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/:page",
-      "destination": "/html/:page.html"
+      "source": "/hsbte-pyq",
+      "destination": "/html/hsbte-pyq.html"
+    },
+    {
+      "source": "/syllabus",
+      "destination": "/html/syllabus.html"
     }
   ]
 }
-
