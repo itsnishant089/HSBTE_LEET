@@ -84,7 +84,12 @@
     const baseUrl = window.location.origin;
     const apiPath = `${baseUrl}/api/analytics`;
     
-    fetch(`${apiPath}?password=${encodeURIComponent(currentPassword)}`)
+  fetch(apiPath, {
+  headers: {
+    "Authorization": currentPassword
+  }
+})
+
       .then(response => {
         // Check if response is actually JSON
         const contentType = response.headers.get('content-type');
@@ -243,3 +248,4 @@
   }, 30000);
 
 })();
+
