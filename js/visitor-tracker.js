@@ -32,30 +32,18 @@
     }
   }
 
-  // Initialize counter with default value
-  function initializeCounter() {
-    const counterElement = document.getElementById("visitor-counter");
-    if (counterElement && !counterElement.hasAttribute("data-initialized")) {
-      updateVisitorCounter(4000);
-      counterElement.setAttribute("data-initialized", "true");
-    }
-  }
-
   // Track page view (VISITOR COUNT)
   function trackPageView() {
     const page = window.location.pathname + window.location.search;
     const referrer = document.referrer || "";
 
-    fetch("/api/visitor-track", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        page: page,
-        referrer: referrer
-      })
-    })
+    const url =
+      "/api/visitor-track?page=" +
+      encodeURIComponent(page) +
+      "&referrer=" +
+      encodeURIComponent(referrer);
+
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         if (data && data.success) {
@@ -72,13 +60,9 @@
   let clickCount = 0;
   const sessionId = getSessionId();
 
-  document.addEventListener(
-    "click",
-    function () {
-      clickCount++;
-    },
-    true
-  );
+  document.addEventListener("click", function () {
+    clickCount++;
+  });
 
   // Send data before leaving
   window.addEventListener("beforeunload", function () {
@@ -95,7 +79,7 @@
     navigator.sendBeacon("/api/analytics/update", payload);
   });
 
-  // Periodic update every 30s
+  // Periodic update every 30 seconds
   setInterval(function () {
     const timeSpent = Math.floor((Date.now() - startTime) / 1000);
     const page = window.location.pathname + window.location.search;
@@ -103,9 +87,7 @@
     if (timeSpent > 0) {
       fetch("/api/analytics/update", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           page: page,
           timeSpent: timeSpent,
@@ -118,14 +100,9 @@
     }
   }, 30000);
 
-  // Init
-  initializeCounter();
-
+  // Init when page loads
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-      initializeCounter();
-      trackPageView();
-    });
+    document.addEventListener("DOMContentLoaded", trackPageView);
   } else {
     trackPageView();
   }
