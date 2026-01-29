@@ -20,18 +20,10 @@
 
   <div class="footer-right">
     <h1> ☎️ Contact Us</h1>
-    <p><i class="fa-solid fa-envelope"></i> 
-      <a href="mailto:nishant@hsbteleet.com">nishant@hsbteleet.com</a>
-    </p>
-    <p><i class="fa-brands fa-instagram"></i> 
-      <a href="https://www.instagram.com/nishant.089" target="_blank">Nishant.089</a>
-    </p>
-    <p><i class="fa-solid fa-user"></i> 
-      <a href="https://itsnishant.com" target="_blank">My Portfolio</a>
-    </p>
-    <p><i class="fa-brands fa-snapchat"></i> 
-      <a href="https://www.snapchat.com/add/nishant.089" target="_blank">nishant.089</a>
-    </p>
+    <p><i class="fa-solid fa-envelope"></i> <a href="mailto:nishant@hsbteleet.com">nishant@hsbteleet.com</a></p>
+    <p><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/nishant.089" target="_blank">Nishant.089</a></p>
+    <p><i class="fa-solid fa-user"></i> <a href="https://itsnishant.com" target="_blank">My Portfolio</a></p>
+    <p><i class="fa-brands fa-snapchat"></i> <a href="https://www.snapchat.com/add/nishant.089" target="_blank">nishant.089</a></p>
   </div>
 
   <div class="footer-bottom">
@@ -54,17 +46,20 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("/api/visitor-track?nocache=" + Date.now())
-    .then(r => r.json())
+  const counter = document.getElementById("visitor-counter");
+
+  fetch("https://hsbteleet.com/api/visitor-track?nocache=" + Date.now())
+    .then(res => res.json())
     .then(data => {
-      console.log("Visitor API:", data);
-      if (data.success) {
-        document.getElementById("visitor-counter").textContent = data.totalVisitors;
+      if (data && data.success) {
+        counter.textContent = data.totalVisitors;
+      } else {
+        counter.textContent = "Error";
       }
     })
     .catch(err => {
-      console.error("Visitor error:", err);
-      document.getElementById("visitor-counter").textContent = "Error";
+      console.error("Visitor counter error:", err);
+      counter.textContent = "Error";
     });
 });
 </script>
