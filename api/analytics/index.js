@@ -11,7 +11,7 @@ const ANALYTICS_DB_PATH = process.env.VERCEL
   : path.join(__dirname, "../../data/analytics.json");
 
 const PASSWORD = "Nishant@089";
-
+//ji
 // Ensure data directory exists
 const dataDir = process.env.VERCEL ? "/tmp" : path.join(__dirname, "../../data");
 if (!fs.existsSync(dataDir)) {
@@ -150,3 +150,4 @@ module.exports = async (req, res) => {
     });
   }
 };
+
