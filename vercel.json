@@ -22,6 +22,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/analytics-dashboard",
+      "destination": "/html/analytics-dashboard.html"
+    },
+    {
       "source": "/:path",
       "destination": "/html/:path.html",
       "has": [
