@@ -20,16 +20,16 @@
 
   <div class="footer-right">
     <h1> ☎️ Contact Us</h1>
-    <p><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp; 
+    <p><i class="fa-solid fa-envelope"></i> 
       <a href="mailto:nishant@hsbteleet.com">nishant@hsbteleet.com</a>
     </p>
-    <p><i class="fa-brands fa-instagram"></i>&nbsp;&nbsp; 
+    <p><i class="fa-brands fa-instagram"></i> 
       <a href="https://www.instagram.com/nishant.089" target="_blank">Nishant.089</a>
     </p>
-    <p><i class="fa-solid fa-user"></i>&nbsp;&nbsp; 
+    <p><i class="fa-solid fa-user"></i> 
       <a href="https://itsnishant.com" target="_blank">My Portfolio</a>
     </p>
-    <p><i class="fa-brands fa-snapchat"></i>&nbsp;&nbsp; 
+    <p><i class="fa-brands fa-snapchat"></i> 
       <a href="https://www.snapchat.com/add/nishant.089" target="_blank">nishant.089</a>
     </p>
   </div>
@@ -41,8 +41,8 @@
 
     <div class="footer-bottom-middle">
       <p>Visitor Counter:</p>
-      <div id="visitor-counter" class="visitor-counter" aria-live="polite">
-        00000
+      <div id="visitor-counter" style="font-size:20px;font-weight:bold;">
+        Loading...
       </div>
     </div>
 
@@ -52,5 +52,19 @@
   </div>
 </footer>
 
-<!-- Visitor Counter Script -->
-<script src="/js/visitor-tracker.js?v=FINAL" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("/api/visitor-track?nocache=" + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      console.log("Visitor API:", data);
+      if (data.success) {
+        document.getElementById("visitor-counter").textContent = data.totalVisitors;
+      }
+    })
+    .catch(err => {
+      console.error("Visitor error:", err);
+      document.getElementById("visitor-counter").textContent = "Error";
+    });
+});
+</script>
