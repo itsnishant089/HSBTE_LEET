@@ -7,7 +7,7 @@ const DB_PATH = process.env.VERCEL
   : path.join(__dirname, "../../data/visitors.json");
 
 const INITIAL_COUNT = 4000;
-
+//ji
 // Ensure directory exists
 const dataDir = process.env.VERCEL ? "/tmp" : path.join(__dirname, "../../data");
 if (!fs.existsSync(dataDir)) {
@@ -127,3 +127,4 @@ module.exports = async (req, res) => {
     });
   }
 };
+
