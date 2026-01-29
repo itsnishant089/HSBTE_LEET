@@ -32,10 +32,38 @@
       </div>
       <div class="footer-bottom-middle">
         <p> Visiter-Counter:-</p>
-        <a href="https://www.freecounterstat.com" title="free counters"><img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=szqdjndqwaa8hcjzrcufkuk7tbudugx4" border="0" title="free counters" alt="free counters"></a>
+        <div id="visitor-counter" class="visitor-counter" aria-live="polite" aria-label="Visitor counter">
+          <span class="counter-digit">0</span>
+          <span class="counter-digit">4</span>
+          <span class="counter-digit">0</span>
+          <span class="counter-digit">0</span>
+          <span class="counter-digit">0</span>
+        </div>
         </div>
       <div class="footer-bottom-right">
           <p> Design By:-Nishant</p>
           </div>
         </div>
 </footer>
+<script>
+  // Load visitor tracker script with correct path
+  (function() {
+    if (document.getElementById('visitor-tracker-loaded')) return;
+    const marker = document.createElement('div');
+    marker.id = 'visitor-tracker-loaded';
+    marker.style.display = 'none';
+    document.body.appendChild(marker);
+    
+    const script = document.createElement('script');
+    script.defer = true;
+    // Detect path - if we're in html/ folder, use ../js, otherwise use js/
+    const pathname = window.location.pathname;
+    const isInHtmlFolder = pathname.includes('/html/') || pathname.match(/\/[^\/]+\.html$/);
+    script.src = isInHtmlFolder ? '../js/visitor-tracker.js' : 'js/visitor-tracker.js';
+    script.onerror = function() {
+      // Fallback: try the other path
+      script.src = script.src.includes('../') ? 'js/visitor-tracker.js' : '../js/visitor-tracker.js';
+    };
+    document.body.appendChild(script);
+  })();
+</script>
