@@ -52,21 +52,23 @@ function getVisitorId(req) {
 function isNewVisitor(visitorId, visitors) {
   const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
   return !visitors.some(
-    v => v.visitorId === visitorId && new Date(v.timestamp).getTime() > oneDayAgo
+    v =>
+      v.visitorId === visitorId &&
+      new Date(v.timestamp).getTime() > oneDayAgo
   );
 }
 
 module.exports = async (req, res) => {
   // CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
 
-  if (req.method !== "POST") {
+  if (req.method !== "GET" && req.method !== "POST") {
     return res.status(405).json({ success: false, error: "Method not allowed" });
   }
 
@@ -74,8 +76,9 @@ module.exports = async (req, res) => {
     const db = initDatabase();
     const visitorId = getVisitorId(req);
 
-    const page = req.body?.page || "/";
-    const referrer = req.body?.referrer || "";
+    // Support GET and POST
+    const page = req.query?.page || req.body?.page || "/";
+    const referrer = req.query?.referrer || req.body?.referrer || "";
 
     const isNew = isNewVisitor(visitorId, db.visitors);
 
