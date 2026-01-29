@@ -26,7 +26,26 @@ function initDatabase() {
     fs.writeFileSync(DB_PATH, JSON.stringify(initialData, null, 2));
     return initialData;
   }
-  return JSON.parse(fs.readFileSync(DB_PATH, "utf8"));
+  
+  try {
+    const data = JSON.parse(fs.readFileSync(DB_PATH, "utf8"));
+    // Ensure totalVisitors is at least INITIAL_COUNT
+    if (!data.totalVisitors || data.totalVisitors < INITIAL_COUNT) {
+      data.totalVisitors = INITIAL_COUNT;
+      fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+    }
+    return data;
+  } catch (error) {
+    // If file is corrupted, recreate it
+    console.error("Error reading database, recreating:", error);
+    const initialData = {
+      totalVisitors: INITIAL_COUNT,
+      visitors: [],
+      lastUpdated: new Date().toISOString()
+    };
+    fs.writeFileSync(DB_PATH, JSON.stringify(initialData, null, 2));
+    return initialData;
+  }
 }
 
 // Generate visitor ID (IP + User-Agent)
@@ -117,6 +136,11 @@ module.exports = async (req, res) => {
 
     fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
 
+    // Ensure totalVisitors is at least INITIAL_COUNT
+    if (db.totalVisitors < INITIAL_COUNT) {
+      db.totalVisitors = INITIAL_COUNT;
+    }
+    
     // For dashboard: return actual count
     // For regular pages: return count + offset (4125 instead of 4000)
     const displayCount = isDashboard ? db.totalVisitors : (db.totalVisitors + DISPLAY_OFFSET);
