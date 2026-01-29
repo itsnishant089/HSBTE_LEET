@@ -20,7 +20,6 @@
     loadAnalytics();
   }
 
-  // Login form
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const password = passwordInput.value.trim();
@@ -44,26 +43,24 @@
     dashboardContent.style.display = "block";
   }
 
-  // Format number
   function formatNumber(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return Number(num || 0).toLocaleString();
   }
 
-  // Format time
   function formatTime(minutes) {
+    minutes = Number(minutes || 0);
     if (minutes < 60) return formatNumber(minutes) + " min";
     const hours = Math.floor(minutes / 60);
     const mins = Math.round(minutes % 60);
     return formatNumber(hours) + "h " + formatNumber(mins) + "m";
   }
 
-  // Truncate long page paths
   function truncatePage(page) {
+    if (!page) return "/";
     if (page.length > 50) return "..." + page.substring(page.length - 47);
-    return page || "/";
+    return page;
   }
 
-  // Load analytics
   function loadAnalytics() {
     if (!currentPassword) return;
 
@@ -73,9 +70,10 @@
     document.getElementById("monthVisitors").textContent = "Loading...";
     document.getElementById("totalTimeSpent").textContent = "Loading...";
 
-    fetch("/api/analytics", {
+    fetch("/api/analytics?nocache=" + Date.now(), {
       headers: {
-        Authorization: currentPassword
+        "Authorization": currentPassword,
+        "Cache-Control": "no-cache"
       }
     })
       .then(res => {
@@ -89,13 +87,12 @@
         }
         return res.json();
       })
-      .then(data => {
-        if (!data) return;
-        if (data.success && data.data) {
-          updateDashboard(data.data);
-        } else {
+      .then(result => {
+        if (!result || !result.success) {
           showError("Failed to load analytics data");
+          return;
         }
+        updateDashboard(result.data);
       })
       .catch(err => {
         console.error("Analytics fetch error:", err);
@@ -110,51 +107,48 @@
     document.getElementById("monthVisitors").textContent = formatNumber(data.monthVisitors);
     document.getElementById("totalTimeSpent").textContent = formatTime(data.totalTimeSpent);
 
-    const mostViewedTable = document.getElementById("mostViewedTable");
-    mostViewedTable.innerHTML = data.mostViewedPages.length
-      ? data.mostViewedPages.map(p => `
-        <tr>
-          <td title="${p.page}">${truncatePage(p.page)}</td>
-          <td>${formatNumber(p.views)}</td>
-          <td>${formatNumber(p.uniqueVisitors)}</td>
-        </tr>
-      `).join("")
-      : `<tr><td colspan="3">No data available</td></tr>`;
+    renderTable("mostViewedTable", data.mostViewedPages, p => `
+      <tr>
+        <td title="${p.page}">${truncatePage(p.page)}</td>
+        <td>${formatNumber(p.views)}</td>
+        <td>${formatNumber(p.uniqueVisitors)}</td>
+      </tr>
+    `, 3);
 
-    const mostTimeSpentTable = document.getElementById("mostTimeSpentTable");
-    mostTimeSpentTable.innerHTML = data.mostTimeSpentPages.length
-      ? data.mostTimeSpentPages.map(p => `
-        <tr>
-          <td title="${p.page}">${truncatePage(p.page)}</td>
-          <td>${formatTime(p.timeSpent)}</td>
-          <td>${formatNumber(p.views)}</td>
-        </tr>
-      `).join("")
-      : `<tr><td colspan="3">No data available</td></tr>`;
+    renderTable("mostTimeSpentTable", data.mostTimeSpentPages, p => `
+      <tr>
+        <td title="${p.page}">${truncatePage(p.page)}</td>
+        <td>${formatTime(p.timeSpent)}</td>
+        <td>${formatNumber(p.views)}</td>
+      </tr>
+    `, 3);
 
-    const mostClickedTable = document.getElementById("mostClickedTable");
-    mostClickedTable.innerHTML = data.mostClickedPages.length
-      ? data.mostClickedPages.map(p => `
-        <tr>
-          <td title="${p.page}">${truncatePage(p.page)}</td>
-          <td>${formatNumber(p.clicks)}</td>
-          <td>${formatNumber(p.views)}</td>
-        </tr>
-      `).join("")
-      : `<tr><td colspan="3">No data available</td></tr>`;
+    renderTable("mostClickedTable", data.mostClickedPages, p => `
+      <tr>
+        <td title="${p.page}">${truncatePage(p.page)}</td>
+        <td>${formatNumber(p.clicks)}</td>
+        <td>${formatNumber(p.views)}</td>
+      </tr>
+    `, 3);
 
-    const detailedTable = document.getElementById("detailedTable");
-    detailedTable.innerHTML = data.pageDetails.length
-      ? data.pageDetails.map(p => `
-        <tr>
-          <td title="${p.page}">${truncatePage(p.page)}</td>
-          <td>${formatNumber(p.views)}</td>
-          <td>${formatNumber(p.uniqueVisitors)}</td>
-          <td>${formatTime(p.timeSpent)}</td>
-          <td>${formatNumber(p.clicks)}</td>
-        </tr>
-      `).join("")
-      : `<tr><td colspan="5">No data available</td></tr>`;
+    renderTable("detailedTable", data.pageDetails, p => `
+      <tr>
+        <td title="${p.page}">${truncatePage(p.page)}</td>
+        <td>${formatNumber(p.views)}</td>
+        <td>${formatNumber(p.uniqueVisitors)}</td>
+        <td>${formatTime(p.timeSpent)}</td>
+        <td>${formatNumber(p.clicks)}</td>
+      </tr>
+    `, 5);
+  }
+
+  function renderTable(id, list, rowFn, colspan) {
+    const el = document.getElementById(id);
+    if (list && list.length) {
+      el.innerHTML = list.map(rowFn).join("");
+    } else {
+      el.innerHTML = `<tr><td colspan="${colspan}">No data available</td></tr>`;
+    }
   }
 
   function showError(message) {
