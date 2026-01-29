@@ -2,11 +2,10 @@
   "name": "hsbte-leet-visitor-counter",
   "version": "1.0.0",
   "description": "Visitor counter and analytics system for HSBTE LEET website",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [
     "visitor-counter",
