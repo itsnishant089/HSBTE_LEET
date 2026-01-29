@@ -1,15 +1,15 @@
-// Visitor Tracker - FINAL
+// Visitor Tracker - FINAL (FIXED)
 (function () {
   "use strict";
 
   function updateVisitorCounter(count) {
     const el = document.getElementById("visitor-counter");
     if (!el) {
-      console.warn("visitor-counter element not found");
+      console.warn("❌ visitor-counter element not found");
       return;
     }
 
-    const str = count.toString().padStart(5, "0");
+    const str = String(count).padStart(5, "0");
     el.innerHTML = "";
 
     for (let i = 0; i < str.length; i++) {
@@ -25,29 +25,25 @@
     const referrer = document.referrer || "";
 
     const url =
-      "/api/visitor-track?nocache=" +
-      Date.now() +
-      "&page=" +
+      "/api/visitor-track?page=" +
       encodeURIComponent(page) +
       "&referrer=" +
-      encodeURIComponent(referrer);
+      encodeURIComponent(referrer) +
+      "&t=" +
+      Date.now(); // cache buster
 
-    console.log("Calling:", url);
+    console.log("📡 Calling:", url);
 
-    fetch(url)
+    fetch(url, { cache: "no-store" })
       .then(r => r.json())
       .then(data => {
-        console.log("Visitor API response:", data);
+        console.log("✅ Visitor API:", data);
         if (data && data.success) {
           updateVisitorCounter(data.totalVisitors);
         }
       })
-      .catch(err => console.error("Visitor error:", err));
+      .catch(err => console.error("❌ Visitor error:", err));
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", trackPageView);
-  } else {
-    trackPageView();
-  }
+  document.addEventListener("DOMContentLoaded", trackPageView);
 })();
