@@ -22,13 +22,13 @@
       "destination": "/index.html"
     },
     {
-      "source": "/:page",
-      "destination": "/html/:page.html",
+      "source": "/:path",
+      "destination": "/html/:path.html",
       "has": [
         {
           "type": "header",
           "key": "accept",
-          "value": "(?<accept>.*text/html.*)"
+          "value": ".*text/html.*"
         }
       ]
     }

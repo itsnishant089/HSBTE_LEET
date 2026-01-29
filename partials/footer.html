@@ -33,8 +33,12 @@
 
     <div class="footer-bottom-middle">
       <p>Visitor Counter:</p>
-      <div id="visitor-counter" style="font-size:20px;font-weight:bold;">
-        Loading...
+      <div id="visitor-counter" class="visitor-counter">
+        <span class="counter-digit">0</span>
+        <span class="counter-digit">0</span>
+        <span class="counter-digit">0</span>
+        <span class="counter-digit">0</span>
+        <span class="counter-digit">0</span>
       </div>
     </div>
 
@@ -44,22 +48,4 @@
   </div>
 </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const counter = document.getElementById("visitor-counter");
-
-  fetch("https://hsbteleet.com/api/visitor-track?nocache=" + Date.now())
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.success) {
-        counter.textContent = data.totalVisitors;
-      } else {
-        counter.textContent = "Error";
-      }
-    })
-    .catch(err => {
-      console.error("Visitor counter error:", err);
-      counter.textContent = "Error";
-    });
-});
-</script>
+<script defer src="../js/visitor-tracker.js"></script>

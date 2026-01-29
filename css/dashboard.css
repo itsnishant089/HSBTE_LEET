@@ -179,6 +179,18 @@
   background: #f39c12;
 }
 
+.stat-icon.clicks {
+  background: #27ae60;
+}
+
+.stat-icon.avg {
+  background: #16a085;
+}
+
+.stat-icon.ctr {
+  background: #e67e22;
+}
+
 .stat-content h3 {
   margin: 0 0 8px 0;
   color: #666;
@@ -258,6 +270,25 @@ table tbody tr:hover {
 
 table tbody tr:last-child td {
   border-bottom: none;
+}
+
+/* Top Badge */
+.top-badge {
+  background: #667eea;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+/* Rank Cell */
+.rank-cell {
+  font-weight: bold;
+  color: #667eea;
+  text-align: center;
+  width: 50px;
 }
 
 /* Detailed Table Card */

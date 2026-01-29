@@ -7,6 +7,7 @@ const DB_PATH = process.env.VERCEL
   : path.join(__dirname, "../../data/visitors.json");
 
 const INITIAL_COUNT = 4000;
+const DISPLAY_OFFSET = 125; // Add 125 to show 4125 instead of 4000 on regular pages
 
 // Ensure directory exists
 const dataDir = process.env.VERCEL ? "/tmp" : path.join(__dirname, "../../data");
@@ -83,6 +84,11 @@ module.exports = async (req, res) => {
 
     const page = req.query?.page || req.body?.page || "/";
     const referrer = req.query?.referrer || req.body?.referrer || "";
+    
+    // Check if this is a dashboard request (don't add offset for dashboard)
+    const isDashboard = req.query?.dashboard === "true" || req.body?.dashboard === "true" || 
+                        page.includes("analytics-dashboard") || 
+                        req.headers.referer?.includes("analytics-dashboard");
 
     const isNew = isNewVisitor(visitorId, db.visitors);
 
@@ -111,9 +117,14 @@ module.exports = async (req, res) => {
 
     fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
 
+    // For dashboard: return actual count
+    // For regular pages: return count + offset (4125 instead of 4000)
+    const displayCount = isDashboard ? db.totalVisitors : (db.totalVisitors + DISPLAY_OFFSET);
+
     return res.status(200).json({
       success: true,
-      totalVisitors: db.totalVisitors,
+      totalVisitors: displayCount,
+      actualVisitors: db.totalVisitors, // Always include actual for reference
       isNewVisitor: isNew,
       message: isNew
         ? "New visitor counted"
@@ -122,9 +133,15 @@ module.exports = async (req, res) => {
   } catch (error) {
     console.error("Visitor tracking error:", error);
 
+    // Fallback: return display count (4125) for regular pages, actual for dashboard
+    const isDashboard = req.query?.dashboard === "true" || req.body?.dashboard === "true" || 
+                        (req.query?.page || req.body?.page || "").includes("analytics-dashboard");
+    const fallbackCount = isDashboard ? INITIAL_COUNT : (INITIAL_COUNT + DISPLAY_OFFSET);
+    
     return res.status(200).json({
       success: true,
-      totalVisitors: INITIAL_COUNT,
+      totalVisitors: fallbackCount,
+      actualVisitors: INITIAL_COUNT,
       isNewVisitor: false,
       error: "Fallback count returned"
     });

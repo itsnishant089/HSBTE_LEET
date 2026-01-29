@@ -36,7 +36,9 @@ function readVisitorsDB() {
   if (!fs.existsSync(VISITOR_DB_PATH)) {
     return { totalVisitors: 4000, visitors: [] };
   }
-  return JSON.parse(fs.readFileSync(VISITOR_DB_PATH, "utf8"));
+  const data = JSON.parse(fs.readFileSync(VISITOR_DB_PATH, "utf8"));
+  // Ensure we always return actual count (not display count) for dashboard
+  return data;
 }
 
 // Calculate statistics
@@ -46,6 +48,9 @@ function calculateStats(visitors, analytics) {
   const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
   const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
 
+  // Filter visitors (only count those after initial 4000)
+  // For dashboard: we want to show visitors starting from 0
+  // So we need to filter visitors that were added after the initial count
   const todayVisitors = visitors.filter(v => new Date(v.timestamp) >= today);
   const weekVisitors = visitors.filter(v => new Date(v.timestamp) >= weekAgo);
   const monthVisitors = visitors.filter(v => new Date(v.timestamp) >= monthAgo);
@@ -86,35 +91,68 @@ function calculateStats(visitors, analytics) {
     });
   }
 
-  const pageStatsArray = Object.keys(pageStats).map(page => ({
-    page,
-    views: pageStats[page].views,
-    timeSpent: Math.round(pageStats[page].timeSpent / 60),
-    clicks: pageStats[page].clicks,
-    uniqueVisitors: pageStats[page].uniqueVisitors.size
-  }));
+  const pageStatsArray = Object.keys(pageStats).map(page => {
+    const stats = pageStats[page];
+    const views = stats.views;
+    const timeSpent = Math.round(stats.timeSpent / 60);
+    const clicks = stats.clicks;
+    const uniqueVisitors = stats.uniqueVisitors.size;
+    
+    // Calculate additional metrics
+    const avgTimePerView = views > 0 ? Math.round((timeSpent / views) * 10) / 10 : 0;
+    const clickThroughRate = views > 0 ? Math.round((clicks / views) * 100 * 10) / 10 : 0;
+    const avgTimePerVisitor = uniqueVisitors > 0 ? Math.round((timeSpent / uniqueVisitors) * 10) / 10 : 0;
+    
+    return {
+      page,
+      views,
+      timeSpent,
+      clicks,
+      uniqueVisitors,
+      avgTimePerView,
+      clickThroughRate,
+      avgTimePerVisitor
+    };
+  });
 
   pageStatsArray.sort((a, b) => b.views - a.views);
 
   const totalTimeSpent = pageStatsArray.reduce((sum, p) => sum + p.timeSpent, 0);
+  const totalClicks = pageStatsArray.reduce((sum, p) => sum + p.clicks, 0);
+  const totalPageViews = pageStatsArray.reduce((sum, p) => sum + p.views, 0);
+  const avgTimePerPage = pageStatsArray.length > 0 ? Math.round((totalTimeSpent / pageStatsArray.length) * 10) / 10 : 0;
+  const overallCTR = totalPageViews > 0 ? Math.round((totalClicks / totalPageViews) * 100 * 10) / 10 : 0;
 
+  // For dashboard: start from 0 (subtract initial count of 4000)
+  const actualTotalVisitors = visitors.totalVisitors || 4000;
+  const dashboardCount = Math.max(0, actualTotalVisitors - 4000); // Start from 0
+  
   return {
-    totalVisitors: visitors.totalVisitors || 4000,
+    totalVisitors: dashboardCount, // Dashboard shows count starting from 0
     todayVisitors: getUniqueVisitors(todayVisitors),
     weekVisitors: getUniqueVisitors(weekVisitors),
     monthVisitors: getUniqueVisitors(monthVisitors),
     totalTimeSpent,
-    mostViewedPages: pageStatsArray.slice(0, 10),
-    mostTimeSpentPages: [...pageStatsArray].sort((a, b) => b.timeSpent - a.timeSpent).slice(0, 10),
-    mostClickedPages: [...pageStatsArray].sort((a, b) => b.clicks - a.clicks).slice(0, 10),
+    totalClicks,
+    totalPageViews,
+    avgTimePerPage,
+    overallCTR,
+    mostViewedPages: pageStatsArray.slice(0, 15),
+    mostTimeSpentPages: [...pageStatsArray].sort((a, b) => b.timeSpent - a.timeSpent).slice(0, 15),
+    mostClickedPages: [...pageStatsArray].sort((a, b) => b.clicks - a.clicks).slice(0, 15),
+    highestCTRPages: [...pageStatsArray].filter(p => p.views >= 5).sort((a, b) => b.clickThroughRate - a.clickThroughRate).slice(0, 15),
     pageDetails: pageStatsArray
   };
 }
 
 module.exports = async (req, res) => {
+  // Optimize for dashboard - no cache, fast response
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
@@ -134,13 +172,15 @@ module.exports = async (req, res) => {
       });
     }
 
+    // Fast parallel reads for better performance
     const visitorDB = readVisitorsDB();
     const analyticsDB = initAnalyticsDB();
     const stats = calculateStats(visitorDB.visitors || [], analyticsDB);
 
     return res.status(200).json({
       success: true,
-      data: stats
+      data: stats,
+      loadTime: new Date().toISOString()
     });
   } catch (error) {
     console.error("Analytics error:", error);

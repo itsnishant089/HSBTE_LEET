@@ -70,10 +70,13 @@
     document.getElementById("monthVisitors").textContent = "Loading...";
     document.getElementById("totalTimeSpent").textContent = "Loading...";
 
-    fetch("/api/analytics?nocache=" + Date.now(), {
+    // Use cache-busting and request with dashboard flag for faster loading
+    const startTime = performance.now();
+    fetch("/api/analytics?nocache=" + Date.now() + "&dashboard=true", {
       headers: {
         "Authorization": currentPassword,
-        "Cache-Control": "no-cache"
+        "Cache-Control": "no-cache",
+        "X-Requested-With": "Dashboard"
       }
     })
       .then(res => {
@@ -92,6 +95,8 @@
           showError("Failed to load analytics data");
           return;
         }
+        const loadTime = ((performance.now() - startTime) / 1000).toFixed(2);
+        console.log(`Dashboard loaded in ${loadTime}s`);
         updateDashboard(result.data);
       })
       .catch(err => {
@@ -106,30 +111,46 @@
     document.getElementById("weekVisitors").textContent = formatNumber(data.weekVisitors);
     document.getElementById("monthVisitors").textContent = formatNumber(data.monthVisitors);
     document.getElementById("totalTimeSpent").textContent = formatTime(data.totalTimeSpent);
+    document.getElementById("totalClicks").textContent = formatNumber(data.totalClicks || 0);
+    document.getElementById("avgTimePerPage").textContent = formatNumber(data.avgTimePerPage || 0);
+    document.getElementById("overallCTR").textContent = formatNumber(data.overallCTR || 0);
 
-    renderTable("mostViewedTable", data.mostViewedPages, p => `
+    renderTable("mostViewedTable", data.mostViewedPages, (p, index) => `
       <tr>
+        <td class="rank-cell">${index + 1}</td>
         <td title="${p.page}">${truncatePage(p.page)}</td>
         <td>${formatNumber(p.views)}</td>
         <td>${formatNumber(p.uniqueVisitors)}</td>
       </tr>
-    `, 3);
+    `, 4);
 
-    renderTable("mostTimeSpentTable", data.mostTimeSpentPages, p => `
+    renderTable("mostTimeSpentTable", data.mostTimeSpentPages, (p, index) => `
       <tr>
+        <td class="rank-cell">${index + 1}</td>
         <td title="${p.page}">${truncatePage(p.page)}</td>
         <td>${formatTime(p.timeSpent)}</td>
         <td>${formatNumber(p.views)}</td>
       </tr>
-    `, 3);
+    `, 4);
 
-    renderTable("mostClickedTable", data.mostClickedPages, p => `
+    renderTable("mostClickedTable", data.mostClickedPages, (p, index) => `
       <tr>
+        <td class="rank-cell">${index + 1}</td>
         <td title="${p.page}">${truncatePage(p.page)}</td>
         <td>${formatNumber(p.clicks)}</td>
         <td>${formatNumber(p.views)}</td>
       </tr>
-    `, 3);
+    `, 4);
+
+    renderTable("highestCTRTable", data.highestCTRPages || [], (p, index) => `
+      <tr>
+        <td class="rank-cell">${index + 1}</td>
+        <td title="${p.page}">${truncatePage(p.page)}</td>
+        <td>${formatNumber(p.clickThroughRate || 0)}%</td>
+        <td>${formatNumber(p.clicks)}</td>
+        <td>${formatNumber(p.views)}</td>
+      </tr>
+    `, 5);
 
     renderTable("detailedTable", data.pageDetails, p => `
       <tr>
@@ -138,14 +159,17 @@
         <td>${formatNumber(p.uniqueVisitors)}</td>
         <td>${formatTime(p.timeSpent)}</td>
         <td>${formatNumber(p.clicks)}</td>
+        <td>${formatNumber(p.avgTimePerView || 0)} min</td>
+        <td>${formatNumber(p.clickThroughRate || 0)}%</td>
+        <td>${formatNumber(p.avgTimePerVisitor || 0)} min</td>
       </tr>
-    `, 5);
+    `, 8);
   }
 
   function renderTable(id, list, rowFn, colspan) {
     const el = document.getElementById(id);
     if (list && list.length) {
-      el.innerHTML = list.map(rowFn).join("");
+      el.innerHTML = list.map((item, index) => rowFn(item, index)).join("");
     } else {
       el.innerHTML = `<tr><td colspan="${colspan}">No data available</td></tr>`;
     }
