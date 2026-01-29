@@ -7,7 +7,7 @@ const DB_PATH = process.env.VERCEL
   : path.join(__dirname, "../../data/visitors.json");
 
 const INITIAL_COUNT = 4000;
-//ji
+
 // Ensure directory exists
 const dataDir = process.env.VERCEL ? "/tmp" : path.join(__dirname, "../../data");
 if (!fs.existsSync(dataDir)) {
@@ -59,6 +59,11 @@ function isNewVisitor(visitorId, visitors) {
 }
 
 module.exports = async (req, res) => {
+  // ❗ NO CACHE (VERY IMPORTANT)
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+
   // CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -76,7 +81,6 @@ module.exports = async (req, res) => {
     const db = initDatabase();
     const visitorId = getVisitorId(req);
 
-    // Support GET and POST
     const page = req.query?.page || req.body?.page || "/";
     const referrer = req.query?.referrer || req.body?.referrer || "";
 
@@ -86,7 +90,7 @@ module.exports = async (req, res) => {
       db.totalVisitors += 1;
     }
 
-    const visit = {
+    db.visitors.push({
       visitorId,
       page,
       referrer,
@@ -96,9 +100,8 @@ module.exports = async (req, res) => {
         req.headers["x-real-ip"] ||
         "unknown",
       userAgent: req.headers["user-agent"] || "unknown"
-    };
+    });
 
-    db.visitors.push(visit);
     db.lastUpdated = new Date().toISOString();
 
     // limit size
@@ -127,4 +130,3 @@ module.exports = async (req, res) => {
     });
   }
 };
-
