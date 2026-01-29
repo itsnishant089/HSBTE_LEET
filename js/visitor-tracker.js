@@ -32,20 +32,32 @@
       // Check if response is actually JSON
       const contentType = response.headers.get('content-type');
       if (!contentType || !contentType.includes('application/json')) {
-        // If not JSON, just show default counter
+        // If not JSON, log for debugging
+        console.warn('API returned non-JSON response. Status:', response.status);
+        return response.text().then(text => {
+          console.warn('Response text:', text.substring(0, 200));
+          return null;
+        });
+      }
+      if (!response.ok) {
+        console.warn('API error:', response.status, response.statusText);
         return null;
       }
       return response.json();
     })
     .then(data => {
       if (data && data.success) {
-        // Update counter display
+        // Update counter display with new count
+        console.log('Visitor counter updated:', data.totalVisitors, data.message || '');
         updateVisitorCounter(data.totalVisitors);
+      } else if (data) {
+        console.warn('API response:', data);
       }
     })
     .catch(error => {
-      // Silently fail - just show default counter
+      // Log error but don't break the page
       console.error('Error tracking visitor:', error);
+      console.log('Visitor counter will show default value (4000)');
     });
   }
 
