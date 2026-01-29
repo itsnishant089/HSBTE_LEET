@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics Dashboard - HSBTE LEET</title>
+  <link href="../css/main.css" rel="stylesheet"/>
+  <link href="../css/dashboard.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="login-screen" id="loginScreen">
+      <div class="login-box">
+        <h1><i class="fa-solid fa-chart-line"></i> Analytics Dashboard</h1>
+        <p>Enter password to access analytics</p>
+        <form id="loginForm">
+          <input type="password" id="passwordInput" placeholder="Enter password" required autocomplete="current-password" aria-label="Password"/>
+          <button type="submit"><i class="fa-solid fa-lock-open"></i> Login</button>
+        </form>
+        <div id="loginError" class="error-message" role="alert"></div>
+      </div>
+    </div>
+
+    <div class="dashboard-content" id="dashboardContent" style="display: none;">
+      <header class="dashboard-header">
+        <h1><i class="fa-solid fa-chart-bar"></i> Analytics Dashboard</h1>
+        <button id="refreshBtn" class="refresh-btn" aria-label="Refresh data">
+          <i class="fa-solid fa-rotate"></i> Refresh
+        </button>
+      </header>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-content">
+            <h3>Total Visitors</h3>
+            <p class="stat-value" id="totalVisitors">-</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon today"><i class="fa-solid fa-calendar-day"></i></div>
+          <div class="stat-content">
+            <h3>Today</h3>
+            <p class="stat-value" id="todayVisitors">-</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon week"><i class="fa-solid fa-calendar-week"></i></div>
+          <div class="stat-content">
+            <h3>This Week</h3>
+            <p class="stat-value" id="weekVisitors">-</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon month"><i class="fa-solid fa-calendar"></i></div>
+          <div class="stat-content">
+            <h3>This Month</h3>
+            <p class="stat-value" id="monthVisitors">-</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon time"><i class="fa-solid fa-clock"></i></div>
+          <div class="stat-content">
+            <h3>Total Time Spent</h3>
+            <p class="stat-value" id="totalTimeSpent">-</p>
+            <p class="stat-label">minutes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tables-grid">
+        <div class="table-card">
+          <h2><i class="fa-solid fa-eye"></i> Most Viewed Pages</h2>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Page</th>
+                  <th>Views</th>
+                  <th>Unique Visitors</th>
+                </tr>
+              </thead>
+              <tbody id="mostViewedTable">
+                <tr><td colspan="3">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h2><i class="fa-solid fa-clock"></i> Most Time Spent</h2>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Page</th>
+                  <th>Time (minutes)</th>
+                  <th>Views</th>
+                </tr>
+              </thead>
+              <tbody id="mostTimeSpentTable">
+                <tr><td colspan="3">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h2><i class="fa-solid fa-mouse"></i> Most Clicked Pages</h2>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Page</th>
+                  <th>Clicks</th>
+                  <th>Views</th>
+                </tr>
+              </thead>
+              <tbody id="mostClickedTable">
+                <tr><td colspan="3">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="detailed-table-card">
+        <h2><i class="fa-solid fa-list"></i> All Pages - Detailed Analytics</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Page</th>
+                <th>Views</th>
+                <th>Unique Visitors</th>
+                <th>Time Spent (min)</th>
+                <th>Clicks</th>
+              </tr>
+            </thead>
+            <tbody id="detailedTable">
+              <tr><td colspan="5">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
