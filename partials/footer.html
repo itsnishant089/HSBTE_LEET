@@ -48,24 +48,5 @@
   </div>
 </footer>
 
-<!-- Visitor tracker loader -->
-<script>
-(function () {
-  if (window.__visitorTrackerLoaded) return;
-  window.__visitorTrackerLoaded = true;
-
-  const script = document.createElement("script");
-  script.defer = true;
-
-  // If page is inside /html/ folder, go up one level
-  script.src = window.location.pathname.includes("/html/")
-    ? "../js/visitor-tracker.js"
-    : "/js/visitor-tracker.js";
-
-  script.onerror = function () {
-    console.error("Visitor tracker script failed to load:", script.src);
-  };
-
-  document.body.appendChild(script);
-})();
-</script>
+<!-- Visitor Counter Script -->
+<script src="/js/visitor-tracker.js" defer></script>
