@@ -38,7 +38,9 @@
     const referrer = document.referrer || "";
 
     const url =
-      "/api/visitor-track?page=" +
+      "/api/visitor-track?nocache=" +
+      Date.now() +
+      "&page=" +
       encodeURIComponent(page) +
       "&referrer=" +
       encodeURIComponent(referrer);
@@ -47,6 +49,7 @@
       .then(res => res.json())
       .then(data => {
         if (data && data.success) {
+          console.log("Visitor count:", data.totalVisitors);
           updateVisitorCounter(data.totalVisitors);
         }
       })
