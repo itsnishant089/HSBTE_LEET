@@ -7,7 +7,7 @@ const path = require('path');
 
 const app = express();
 const PORT = 3000;
-
+//hi
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -57,3 +57,4 @@ app.listen(PORT, () => {
   console.log(`\n🚀 Server running at http://localhost:${PORT}`);
   console.log(`📊 Dashboard: http://localhost:${PORT}/html/analytics-dashboard.html\n`);
 });
+
