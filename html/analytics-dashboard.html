@@ -86,58 +86,108 @@
             <p class="stat-label">minutes</p>
           </div>
         </div>
+
+        <div class="stat-card">
+          <div class="stat-icon clicks"><i class="fa-solid fa-mouse-pointer"></i></div>
+          <div class="stat-content">
+            <h3>Total Clicks</h3>
+            <p class="stat-value" id="totalClicks">-</p>
+            <p class="stat-label">clicks</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon avg"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="stat-content">
+            <h3>Avg Time/Page</h3>
+            <p class="stat-value" id="avgTimePerPage">-</p>
+            <p class="stat-label">minutes</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon ctr"><i class="fa-solid fa-percent"></i></div>
+          <div class="stat-content">
+            <h3>Click-Through Rate</h3>
+            <p class="stat-value" id="overallCTR">-</p>
+            <p class="stat-label">%</p>
+          </div>
+        </div>
       </div>
 
       <div class="tables-grid">
         <div class="table-card">
-          <h2><i class="fa-solid fa-eye"></i> Most Viewed Pages</h2>
+          <h2><i class="fa-solid fa-eye"></i> Most Viewed Pages <span class="top-badge">Top 15</span></h2>
           <div class="table-container">
             <table>
               <thead>
                 <tr>
+                  <th>Rank</th>
                   <th>Page</th>
                   <th>Views</th>
                   <th>Unique Visitors</th>
                 </tr>
               </thead>
               <tbody id="mostViewedTable">
-                <tr><td colspan="3">Loading...</td></tr>
+                <tr><td colspan="4">Loading...</td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
         <div class="table-card">
-          <h2><i class="fa-solid fa-clock"></i> Most Time Spent</h2>
+          <h2><i class="fa-solid fa-clock"></i> Most Time Spent <span class="top-badge">Top 15</span></h2>
           <div class="table-container">
             <table>
               <thead>
                 <tr>
+                  <th>Rank</th>
                   <th>Page</th>
                   <th>Time (minutes)</th>
                   <th>Views</th>
                 </tr>
               </thead>
               <tbody id="mostTimeSpentTable">
-                <tr><td colspan="3">Loading...</td></tr>
+                <tr><td colspan="4">Loading...</td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
         <div class="table-card">
-          <h2><i class="fa-solid fa-mouse"></i> Most Clicked Pages</h2>
+          <h2><i class="fa-solid fa-mouse"></i> Most Clicked Pages <span class="top-badge">Top 15</span></h2>
           <div class="table-container">
             <table>
               <thead>
                 <tr>
+                  <th>Rank</th>
                   <th>Page</th>
                   <th>Clicks</th>
                   <th>Views</th>
                 </tr>
               </thead>
               <tbody id="mostClickedTable">
-                <tr><td colspan="3">Loading...</td></tr>
+                <tr><td colspan="4">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h2><i class="fa-solid fa-trophy"></i> Highest CTR Pages <span class="top-badge">Top 15</span></h2>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Page</th>
+                  <th>CTR (%)</th>
+                  <th>Clicks</th>
+                  <th>Views</th>
+                </tr>
+              </thead>
+              <tbody id="highestCTRTable">
+                <tr><td colspan="5">Loading...</td></tr>
               </tbody>
             </table>
           </div>
@@ -155,10 +205,13 @@
                 <th>Unique Visitors</th>
                 <th>Time Spent (min)</th>
                 <th>Clicks</th>
+                <th>Avg Time/View</th>
+                <th>CTR (%)</th>
+                <th>Avg Time/Visitor</th>
               </tr>
             </thead>
             <tbody id="detailedTable">
-              <tr><td colspan="5">Loading...</td></tr>
+              <tr><td colspan="8">Loading...</td></tr>
             </tbody>
           </table>
         </div>
