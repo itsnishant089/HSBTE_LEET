@@ -1,49 +1,32 @@
-// Visitor Tracker - FINAL (FIXED)
 (function () {
   "use strict";
 
   function updateVisitorCounter(count) {
     const el = document.getElementById("visitor-counter");
-    if (!el) {
-      console.warn("❌ visitor-counter element not found");
-      return;
-    }
+    if (!el) return;
 
     const str = String(count).padStart(5, "0");
     el.innerHTML = "";
 
-    for (let i = 0; i < str.length; i++) {
+    for (let ch of str) {
       const span = document.createElement("span");
       span.className = "counter-digit";
-      span.textContent = str[i];
+      span.textContent = ch;
       el.appendChild(span);
     }
   }
 
-  function trackPageView() {
-    const page = window.location.pathname + window.location.search;
-    const referrer = document.referrer || "";
-
-    const url =
-      "/api/visitor-track?page=" +
-      encodeURIComponent(page) +
-      "&referrer=" +
-      encodeURIComponent(referrer) +
-      "&t=" +
-      Date.now(); // cache buster
-
-    console.log("📡 Calling:", url);
-
-    fetch(url, { cache: "no-store" })
+  function loadCounter() {
+    fetch("/api/visitor-track?nocache=" + Date.now())
       .then(r => r.json())
       .then(data => {
-        console.log("✅ Visitor API:", data);
-        if (data && data.success) {
+        console.log("Visitor API:", data);
+        if (data.success) {
           updateVisitorCounter(data.totalVisitors);
         }
       })
-      .catch(err => console.error("❌ Visitor error:", err));
+      .catch(err => console.error("Visitor counter error:", err));
   }
 
-  document.addEventListener("DOMContentLoaded", trackPageView);
+  document.addEventListener("DOMContentLoaded", loadCounter);
 })();
