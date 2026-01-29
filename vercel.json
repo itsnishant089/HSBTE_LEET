@@ -23,7 +23,14 @@
     },
     {
       "source": "/:page",
-      "destination": "/html/:page.html"
+      "destination": "/html/:page.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "(?<accept>.*text/html.*)"
+        }
+      ]
     }
   ]
 }
