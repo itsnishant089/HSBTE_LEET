@@ -1,21 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/html/:page.html",
-      "destination": "/:page",
-      "permanent": true
-    },
-    {
-      "source": "/:page.html",
-      "destination": "/:page",
-      "permanent": true
-    },
-    {
-      "source": "/index",
-      "destination": "/",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/",
@@ -26,15 +9,15 @@
       "destination": "/html/analytics-dashboard.html"
     },
     {
-      "source": "/:path",
-      "destination": "/html/:path.html",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": ".*text/html.*"
-        }
-      ]
+      "source": "/:path((?!api|_next|.*\\..*|image|css|js|pdf|paper|syllabus).*)",
+      "destination": "/html/:path.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
