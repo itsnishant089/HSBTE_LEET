@@ -1,8 +1,8 @@
 (function () {
   "use strict";
 
-  let retryCount = 0;
-  const MAX_RETRIES = 50; // Maximum 5 seconds of retries (50 * 100ms)
+  let attempts = 0;
+  const MAX_ATTEMPTS = 100; // Try for up to 10 seconds
 
   function updateVisitorCounter(count) {
     const el = document.getElementById("visitor-counter");
@@ -11,19 +11,15 @@
       return false;
     }
 
-    // Ensure count is a valid number
     const numCount = Number(count);
     if (isNaN(numCount) || numCount < 0) {
-      console.warn("Invalid count value:", count);
+      console.warn("Invalid count:", count);
       return false;
     }
 
     const str = String(Math.floor(numCount)).padStart(5, "0");
-    
-    // Clear existing content
     el.innerHTML = "";
 
-    // Add each digit as a span
     for (let ch of str) {
       const span = document.createElement("span");
       span.className = "counter-digit";
@@ -31,7 +27,7 @@
       el.appendChild(span);
     }
     
-    console.log("✅ Visitor counter updated successfully to:", str, "(" + numCount + " visitors)");
+    console.log("Visitor counter updated to:", str);
     return true;
   }
 
@@ -41,23 +37,24 @@
       return;
     }
     
-    // Check if counter element exists, if not wait a bit and retry
-    const counterEl = document.getElementById("visitor-counter");
-    if (!counterEl) {
-      retryCount++;
-      if (retryCount < MAX_RETRIES) {
-        // Retry after a short delay (footer might be loading via include.js)
+    attempts++;
+    
+    // Make sure element exists
+    const el = document.getElementById("visitor-counter");
+    if (!el) {
+      if (attempts < MAX_ATTEMPTS) {
         setTimeout(loadCounter, 100);
+        return;
       } else {
-        console.error("❌ Visitor counter element not found after", MAX_RETRIES, "retries");
+        console.error("Visitor counter element not found after", MAX_ATTEMPTS, "attempts");
+        return;
       }
-      return;
     }
     
-    // Reset retry count once element is found
-    retryCount = 0;
+    // Element found, reset attempts
+    attempts = 0;
     
-    console.log("🔄 Loading visitor counter...");
+    console.log("Loading visitor counter from API...");
     fetch("/api/visitor-track?nocache=" + Date.now() + "&page=" + encodeURIComponent(window.location.pathname))
       .then(r => {
         if (!r.ok) {
@@ -66,44 +63,49 @@
         return r.json();
       })
       .then(data => {
-        console.log("📊 Visitor counter API response:", data);
+        console.log("API response:", data);
         if (data && data.success && data.totalVisitors !== undefined) {
-          // Use the totalVisitors from API response (already includes offset for display)
           const count = Number(data.totalVisitors);
           if (updateVisitorCounter(count)) {
-            console.log("✅ Visitor counter updated:", count, "(Actual:", (data.actualVisitors || 4000) + ")");
-          } else {
-            console.error("❌ Failed to update visitor counter display");
+            console.log("Successfully updated counter to:", count);
           }
         } else {
-          // Fallback to 4125 if API returns error
-          console.warn("⚠️ Visitor counter API returned error, using fallback:", data);
+          console.warn("API returned invalid data, using fallback");
           updateVisitorCounter(4125);
         }
       })
       .catch(err => {
-        console.error("❌ Visitor counter error:", err);
-        // Fallback to 4125 on error
+        console.error("Visitor counter error:", err);
         updateVisitorCounter(4125);
       });
   }
 
-  // Try to load counter on DOMContentLoaded
-  document.addEventListener("DOMContentLoaded", function() {
-    console.log("📄 DOMContentLoaded - waiting for includes...");
-    // Wait a bit for includes to load
-    setTimeout(loadCounter, 200);
-  });
+  // Multiple strategies to ensure it runs
+  function initCounter() {
+    // Strategy 1: Wait for partialsLoaded event
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("partialsLoaded", function() {
+          setTimeout(loadCounter, 200);
+        });
+        // Fallback if partialsLoaded doesn't fire
+        setTimeout(loadCounter, 1000);
+      });
+    } else {
+      // DOM already loaded
+      document.addEventListener("partialsLoaded", function() {
+        setTimeout(loadCounter, 200);
+      });
+      // Fallback
+      setTimeout(loadCounter, 500);
+    }
+  }
+
+  // Start initialization
+  initCounter();
   
-  // Also listen for partialsLoaded event (from include.js)
-  document.addEventListener("partialsLoaded", function() {
-    console.log("✅ Partials loaded - loading visitor counter...");
-    setTimeout(loadCounter, 100);
-  });
-  
-  // Fallback: try immediately if DOM is already loaded
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-    console.log("📄 DOM already loaded - loading visitor counter...");
+  // Also try immediately if script is loaded after everything
+  if (document.readyState === "complete") {
     setTimeout(loadCounter, 300);
   }
 })();

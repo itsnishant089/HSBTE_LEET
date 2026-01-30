@@ -18,6 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then(data => {
         el.innerHTML = data;
+        
+        // Execute any scripts in the loaded HTML
+        const scripts = el.querySelectorAll("script");
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          if (oldScript.src) {
+            newScript.src = oldScript.src;
+          } else {
+            newScript.textContent = oldScript.textContent;
+          }
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+        
         loaded++;
 
         // when all includes are loaded (success or failure)
