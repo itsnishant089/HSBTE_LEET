@@ -109,51 +109,41 @@
   async function buildSearchIndex() {
     if (isIndexLoaded) return;
 
-    // Determine base path - handle different page locations
-    const currentPath = window.location.pathname;
-    let basePath = './html/'; // Default: assume we're in root, need to go to html/
-    
-    // If we're already in the html/ directory, use relative path (same directory)
-    // Check if current path contains /html/ (meaning we're viewing a page inside html/)
-    // Examples: 
-    //   /html/hsbte-pyq.html -> contains '/html/' -> use './'
-    //   /index.html -> doesn't contain '/html/' -> use './html/'
-    //   / -> doesn't contain '/html/' -> use './html/'
-    if (currentPath.indexOf('/html/') !== -1) {
-      basePath = './';
-    }
+    // Use clean URLs (no /html/ directory, no .html extension)
+    // All URLs should start with / for absolute paths
+    const basePath = '/';
 
     // Define all branches and their semesters
     const branches = [
-      { name: 'Agriculture Engineering', url: 'Agriculture.html', semesters: [1, 2, 3, 4, 5], key: 'agriculture' },
-      { name: 'Architectural Assistantship', url: 'Architectural-Assistantship.html', semesters: [1, 2, 3, 4, 5, 6], key: 'architectural' },
-      { name: 'Automobile Engineering', url: 'Automobile.html', semesters: [1, 2, 3, 4, 5, 6], key: 'automobile' },
-      { name: 'Automation & Robotics', url: 'Automation.html', semesters: [1, 2, 3, 4, 5, 6], key: 'automation' },
-      { name: 'AI & ML', url: 'ai-ml.html', semesters: [1, 2, 3, 4, 5, 6], key: 'ai-ml' },
-      { name: 'Chemical Engineering', url: 'Chemical.html', semesters: [1, 2, 3, 4, 5, 6], key: 'chemical' },
-      { name: 'Civil Engineering', url: 'civil.html', semesters: [1, 2, 3, 4, 5, 6], key: 'civil' },
-      { name: 'Computer Engineering', url: 'computer-pyq.html', semesters: [1, 2, 3, 4, 5, 6], key: 'computer' },
-      { name: 'DBM', url: 'dbm.html', semesters: [1, 2, 3, 4, 5], key: 'dbm' },
-      { name: 'ECE', url: 'ece.html', semesters: [1, 2, 3, 4, 5, 6], key: 'ece' },
-      { name: 'Electrical Engineering', url: 'Electrical-Engineering.html', semesters: [1, 2, 3, 4, 5, 6], key: 'electrical' },
-      { name: 'Fashion Design', url: 'Fashion-Design.html', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-design' },
-      { name: 'Fashion Technology', url: 'Fashion-Technology.html', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-technology' },
-      { name: 'Food Technology', url: 'Food.html', semesters: [1, 2, 3, 4, 5, 6], key: 'food' },
-      { name: 'Hotel Management', url: 'Hotel-Management.html', semesters: [1, 2, 3, 4, 5], key: 'hotel' },
-      { name: 'Instrumentation & Control', url: 'Instrumentation-&-Control.html', semesters: [1, 2, 3, 4, 5, 6], key: 'instrumentation' },
-      { name: 'Library & Information Science', url: 'Library.html', semesters: [1, 2, 3, 4, 5], key: 'library' },
-      { name: 'Mechanical Engineering', url: 'mech.html', semesters: [1, 2, 3, 4, 5, 6], key: 'mechanical' },
-      { name: 'Medical Electronics', url: 'Medical-Electronics.html', semesters: [1, 2, 3, 4, 5], key: 'medical-electronics' },
-      { name: 'Medical Lab Technology', url: 'Medical-Laboratory-Technology.html', semesters: [1, 2, 3, 4], key: 'medical-lab' },
-      { name: 'Office Management', url: 'Office-Management.html', semesters: [1, 2, 3, 4, 5], key: 'office' },
-      { name: 'Plastic Technology', url: 'Plastic.html', semesters: [1, 2, 3, 4, 5, 6], key: 'plastic' },
-      { name: 'Textile Design', url: 'Textile-Design.html', semesters: [1, 2, 3, 4, 5, 6], key: 'textile-design' },
-      { name: 'Textile Processing', url: 'Textile-Processing.html', semesters: [1, 2, 3, 4, 5, 6], key: 'textile-processing' },
-      { name: 'Textile Technology', url: 'Textile-Technology.html', semesters: [1, 2, 3, 4, 5, 6], key: 'textile-technology' },
-      { name: 'Ceramic Engineering', url: 'Ceramic.html', semesters: [1, 2, 3, 4, 5], key: 'ceramic' },
-      { name: 'Advance Diploma', url: 'Adv-Diploma.html', semesters: [1, 2, 3, 4], key: 'adv-diploma' },
-      { name: 'FAA', url: 'FAA.html', semesters: [1, 2, 3, 4, 5], key: 'faa' },
-      { name: 'D Pharmacy', url: 'd-pharmacy.html', semesters: [1, 2], key: 'd-pharmacy' } 
+      { name: 'Agriculture Engineering', url: 'Agriculture', semesters: [1, 2, 3, 4, 5], key: 'agriculture' },
+      { name: 'Architectural Assistantship', url: 'Architectural-Assistantship', semesters: [1, 2, 3, 4, 5, 6], key: 'architectural' },
+      { name: 'Automobile Engineering', url: 'Automobile', semesters: [1, 2, 3, 4, 5, 6], key: 'automobile' },
+      { name: 'Automation & Robotics', url: 'Automation', semesters: [1, 2, 3, 4, 5, 6], key: 'automation' },
+      { name: 'AI & ML', url: 'ai-ml', semesters: [1, 2, 3, 4, 5, 6], key: 'ai-ml' },
+      { name: 'Chemical Engineering', url: 'Chemical', semesters: [1, 2, 3, 4, 5, 6], key: 'chemical' },
+      { name: 'Civil Engineering', url: 'civil', semesters: [1, 2, 3, 4, 5, 6], key: 'civil' },
+      { name: 'Computer Engineering', url: 'computer-pyq', semesters: [1, 2, 3, 4, 5, 6], key: 'computer' },
+      { name: 'DBM', url: 'dbm', semesters: [1, 2, 3, 4, 5], key: 'dbm' },
+      { name: 'ECE', url: 'ece', semesters: [1, 2, 3, 4, 5, 6], key: 'ece' },
+      { name: 'Electrical Engineering', url: 'Electrical-Engineering', semesters: [1, 2, 3, 4, 5, 6], key: 'electrical' },
+      { name: 'Fashion Design', url: 'Fashion-Design', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-design' },
+      { name: 'Fashion Technology', url: 'Fashion-Technology', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-technology' },
+      { name: 'Food Technology', url: 'Food', semesters: [1, 2, 3, 4, 5, 6], key: 'food' },
+      { name: 'Hotel Management', url: 'Hotel-Management', semesters: [1, 2, 3, 4, 5], key: 'hotel' },
+      { name: 'Instrumentation & Control', url: 'Instrumentation-&-Control', semesters: [1, 2, 3, 4, 5, 6], key: 'instrumentation' },
+      { name: 'Library & Information Science', url: 'Library', semesters: [1, 2, 3, 4, 5], key: 'library' },
+      { name: 'Mechanical Engineering', url: 'mech', semesters: [1, 2, 3, 4, 5, 6], key: 'mechanical' },
+      { name: 'Medical Electronics', url: 'Medical-Electronics', semesters: [1, 2, 3, 4, 5], key: 'medical-electronics' },
+      { name: 'Medical Lab Technology', url: 'Medical-Laboratory-Technology', semesters: [1, 2, 3, 4], key: 'medical-lab' },
+      { name: 'Office Management', url: 'Office-Management', semesters: [1, 2, 3, 4, 5], key: 'office' },
+      { name: 'Plastic Technology', url: 'Plastic', semesters: [1, 2, 3, 4, 5, 6], key: 'plastic' },
+      { name: 'Textile Design', url: 'Textile-Design', semesters: [1, 2, 3, 4, 5, 6], key: 'textile-design' },
+      { name: 'Textile Processing', url: 'Textile-Processing', semesters: [1, 2, 3, 4, 5, 6], key: 'textile-processing' },
+      { name: 'Textile Technology', url: 'Textile-Technology', semesters: [1, 2, 3, 4, 5, 6], key: 'textile-technology' },
+      { name: 'Ceramic Engineering', url: 'Ceramic', semesters: [1, 2, 3, 4, 5], key: 'ceramic' },
+      { name: 'Advance Diploma', url: 'Adv-Diploma', semesters: [1, 2, 3, 4], key: 'adv-diploma' },
+      { name: 'FAA', url: 'FAA', semesters: [1, 2, 3, 4, 5], key: 'faa' },
+      { name: 'D Pharmacy', url: 'd-pharmacy', semesters: [1, 2], key: 'd-pharmacy' } 
 
     ];
 
@@ -174,15 +164,15 @@
         // Generate correct URL based on branch and semester
         let semesterUrl;
         if (branch.key === 'computer') {
-          // Special case: computer-1-semester.html, computer-pyq-2-semester.html, etc.
+          // Special case: computer-1-semester, computer-pyq-2-semester, etc.
           if (sem === 1) {
-            semesterUrl = `${basePath}computer-1-semester.html`;
+            semesterUrl = `${basePath}computer-1-semester`;
           } else {
-            semesterUrl = `${basePath}computer-pyq-${sem}-semester.html`;
+            semesterUrl = `${basePath}computer-pyq-${sem}-semester`;
           }
         } else {
-          // For other branches: BranchName-1.html, BranchName-2.html, etc.
-          semesterUrl = `${basePath}${branch.url.replace('.html', `-${sem}.html`)}`;
+          // For other branches: BranchName-1, BranchName-2, etc.
+          semesterUrl = `${basePath}${branch.url}-${sem}`;
         }
         
         searchIndex.push({
@@ -204,16 +194,18 @@
         let semesterUrl;
         if (branch.key === 'computer') {
           if (sem === 1) {
-            semesterUrl = `${basePath}computer-1-semester.html`;
+            semesterUrl = `${basePath}computer-1-semester`;
           } else {
-            semesterUrl = `${basePath}computer-pyq-${sem}-semester.html`;
+            semesterUrl = `${basePath}computer-pyq-${sem}-semester`;
           }
         } else {
-          semesterUrl = `${basePath}${branch.url.replace('.html', `-${sem}.html`)}`;
+          semesterUrl = `${basePath}${branch.url}-${sem}`;
         }
         
         // Extract subjects asynchronously (add to index when ready)
-        extractSubjectsFromHtml(semesterUrl).then(subjects => {
+        // Use /html/ path for fetching since files are still in html/ directory
+        const fetchUrl = `/html/${semesterUrl.replace(/^\//, '')}.html`;
+        extractSubjectsFromHtml(fetchUrl).then(subjects => {
           subjects.forEach(subject => {
             const subjectWords = subject.name.split(/[\s&–\-()]+/).filter(w => w.length > 0);
             const keywords = [
@@ -245,37 +237,37 @@
 
     // Add special pages
     searchIndex.push(
-      { type: 'page', title: 'HSBTE PYQ', url: `${basePath}hsbte-pyq.html`, keywords: ['hsbte', 'pyq', 'previous year', 'question papers', 'question paper'] },
-      { type: 'page', title: 'Home', url: `${basePath}index.html`, keywords: ['home', 'main', 'index', 'homepage'] },
+      { type: 'page', title: 'HSBTE PYQ', url: `${basePath}hsbte-pyq`, keywords: ['hsbte', 'pyq', 'previous year', 'question papers', 'question paper'] },
+      { type: 'page', title: 'Home', url: `${basePath}`, keywords: ['home', 'main', 'index', 'homepage'] },
       // LEET pages with comprehensive keywords
       { 
         type: 'page', 
         title: 'Haryana LEET', 
-        url: `${basePath}haryanaleet.html`, 
+        url: `${basePath}haryanaleet`, 
         keywords: ['leet', 'haryana leet', 'lateral entry', 'haryana', 'lateral entry engineering test', 'haryana lateral entry'] 
       },
       { 
         type: 'page', 
         title: 'BTech LEET Information', 
-        url: `${basePath}btech-leet.html`, 
+        url: `${basePath}btech-leet`, 
         keywords: ['btech leet', 'btech', 'b.tech leet', 'b tech leet', 'btech lateral entry', 'engineering leet', 'leet btech', 'btech lateral', 'btech information', 'btech syllabus', 'btech exam pattern', 'btech cutoff', 'btech key dates'] 
       },
       { 
         type: 'page', 
         title: 'BTech LEET Sample Papers', 
-        url: `${basePath}btech-leet-sample-paper.html`, 
+        url: `${basePath}btech-leet-sample-paper`, 
         keywords: ['btech leet sample paper', 'btech sample paper', 'btech leet sample', 'btech mock paper', 'btech practice paper', 'btech leet practice', 'sample paper btech', 'btech leet mock', 'btech leet papers', 'btech sample', 'btech practice', 'btech mock'] 
       },
       { 
         type: 'page', 
         title: 'B. Pharmacy LEET Information', 
-        url: `${basePath}B-Pharmacy-leet.html`, 
+        url: `${basePath}B-Pharmacy-leet`, 
         keywords: ['b pharmacy leet', 'bpharmacy leet', 'b.pharmacy leet', 'b pharmacy lateral entry', 'pharmacy leet', 'bpharm leet', 'b pharm leet', 'bpharmacy', 'b pharmacy', 'pharmacy lateral entry', 'b pharmacy information', 'b pharmacy syllabus', 'b pharmacy exam pattern', 'b pharmacy cutoff', 'b pharmacy key dates'] 
       },
       { 
         type: 'page', 
         title: 'B. Pharmacy LEET Sample Papers', 
-        url: `${basePath}b-pharmacy-leet-sample-paper.html`, 
+        url: `${basePath}b-pharmacy-leet-sample-paper`, 
         keywords: ['b pharmacy leet sample paper', 'bpharmacy leet sample paper', 'b pharmacy sample paper', 'bpharmacy sample paper', 'b pharmacy leet sample', 'bpharmacy leet sample', 'b pharmacy mock paper', 'bpharmacy mock paper', 'b pharmacy practice paper', 'bpharmacy practice paper', 'sample paper b pharmacy', 'sample paper bpharmacy', 'b pharmacy leet mock', 'bpharmacy leet mock', 'b pharmacy leet papers', 'bpharmacy leet papers', 'b pharmacy sample', 'bpharmacy sample', 'b pharmacy practice', 'bpharmacy practice', 'b pharmacy mock', 'bpharmacy mock'] 
       }
     );
