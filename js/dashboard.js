@@ -91,12 +91,20 @@
         return res.json();
       })
       .then(result => {
+        console.log("📊 Dashboard API response:", result);
         if (!result || !result.success) {
+          console.error("❌ Dashboard API returned error:", result);
           showError("Failed to load analytics data");
           return;
         }
+        if (!result.data) {
+          console.error("❌ Dashboard API response missing data:", result);
+          showError("Invalid data received from server");
+          return;
+        }
         const loadTime = ((performance.now() - startTime) / 1000).toFixed(2);
-        console.log(`Dashboard loaded in ${loadTime}s`);
+        console.log(`✅ Dashboard loaded in ${loadTime}s`);
+        console.log("📈 Dashboard data:", result.data);
         updateDashboard(result.data);
       })
       .catch(err => {
@@ -106,14 +114,62 @@
   }
 
   function updateDashboard(data) {
-    document.getElementById("totalVisitors").textContent = formatNumber(data.totalVisitors);
-    document.getElementById("todayVisitors").textContent = formatNumber(data.todayVisitors);
-    document.getElementById("weekVisitors").textContent = formatNumber(data.weekVisitors);
-    document.getElementById("monthVisitors").textContent = formatNumber(data.monthVisitors);
-    document.getElementById("totalTimeSpent").textContent = formatTime(data.totalTimeSpent);
-    document.getElementById("totalClicks").textContent = formatNumber(data.totalClicks || 0);
-    document.getElementById("avgTimePerPage").textContent = formatNumber(data.avgTimePerPage || 0);
-    document.getElementById("overallCTR").textContent = formatNumber(data.overallCTR || 0);
+    if (!data) {
+      console.error("❌ updateDashboard called with no data");
+      return;
+    }
+    
+    console.log("🔄 Updating dashboard with data:", data);
+    
+    const totalVisitorsEl = document.getElementById("totalVisitors");
+    const todayVisitorsEl = document.getElementById("todayVisitors");
+    const weekVisitorsEl = document.getElementById("weekVisitors");
+    const monthVisitorsEl = document.getElementById("monthVisitors");
+    
+    if (totalVisitorsEl) {
+      totalVisitorsEl.textContent = formatNumber(data.totalVisitors || 0);
+      console.log("✅ Total visitors updated:", data.totalVisitors);
+    } else {
+      console.error("❌ totalVisitors element not found");
+    }
+    
+    if (todayVisitorsEl) {
+      todayVisitorsEl.textContent = formatNumber(data.todayVisitors || 0);
+    } else {
+      console.error("❌ todayVisitors element not found");
+    }
+    
+    if (weekVisitorsEl) {
+      weekVisitorsEl.textContent = formatNumber(data.weekVisitors || 0);
+    } else {
+      console.error("❌ weekVisitors element not found");
+    }
+    
+    if (monthVisitorsEl) {
+      monthVisitorsEl.textContent = formatNumber(data.monthVisitors || 0);
+    } else {
+      console.error("❌ monthVisitors element not found");
+    }
+    
+    const totalTimeSpentEl = document.getElementById("totalTimeSpent");
+    if (totalTimeSpentEl) {
+      totalTimeSpentEl.textContent = formatTime(data.totalTimeSpent || 0);
+    }
+    
+    const totalClicksEl = document.getElementById("totalClicks");
+    if (totalClicksEl) {
+      totalClicksEl.textContent = formatNumber(data.totalClicks || 0);
+    }
+    
+    const avgTimePerPageEl = document.getElementById("avgTimePerPage");
+    if (avgTimePerPageEl) {
+      avgTimePerPageEl.textContent = formatNumber(data.avgTimePerPage || 0);
+    }
+    
+    const overallCTREl = document.getElementById("overallCTR");
+    if (overallCTREl) {
+      overallCTREl.textContent = formatNumber(data.overallCTR || 0);
+    }
 
     renderTable("mostViewedTable", data.mostViewedPages, (p, index) => `
       <tr>
