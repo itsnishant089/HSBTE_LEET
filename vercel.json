@@ -9,7 +9,7 @@
       "destination": "/html/analytics-dashboard.html"
     },
     {
-      "source": "/:path((?!api|_next|.*\\..*|image|css|js|pdf|paper|syllabus).*)",
+      "source": "/:path((?!api|_next|.*\\..*|image|css|js|pdf|paper|syllabus|html|data|partials|node_modules).*)",
       "destination": "/html/:path.html"
     }
   ],
@@ -17,6 +17,16 @@
     {
       "source": "/index",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/html/:path",
+      "destination": "/:path",
+      "permanent": true
+    },
+    {
+      "source": "/:path.html",
+      "destination": "/:path",
       "permanent": true
     }
   ]

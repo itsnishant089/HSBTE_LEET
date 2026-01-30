@@ -4,6 +4,7 @@
 
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = 3000;
@@ -28,9 +29,9 @@ app.use((req, res, next) => {
 });
 
 // Import API handlers (same as Vercel)
-const visitorTrack = require('./api/visitor-track.js');
-const analytics = require('./api/analytics.js');
-const analyticsUpdate = require('./api/analytics-update.js');
+const visitorTrack = require('./api/visitor-track/index.js');
+const analytics = require('./api/analytics/index.js');
+const analyticsUpdate = require('./api/analytics/update.js');
 
 // API Routes
 app.get('/api/visitor-track', visitorTrack);
@@ -42,9 +43,29 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Serve html pages
+// Serve html pages (with .html extension)
 app.get('/html/:page', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', req.params.page));
+  const page = req.params.page.endsWith('.html') ? req.params.page : req.params.page + '.html';
+  res.sendFile(path.join(__dirname, 'html', page));
+});
+
+// Serve clean URLs (without /html/ and .html extension)
+app.get('/:page', (req, res, next) => {
+  // Skip API routes, static files, and root
+  if (req.params.page.startsWith('api') || 
+      req.params.page.includes('.') ||
+      req.params.page === '' ||
+      req.params.page === 'index') {
+    return next();
+  }
+  
+  // Check if file exists in html directory
+  const htmlFile = path.join(__dirname, 'html', req.params.page + '.html');
+  if (fs.existsSync(htmlFile)) {
+    return res.sendFile(htmlFile);
+  }
+  
+  next();
 });
 
 // 404 fallback
