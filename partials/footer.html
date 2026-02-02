@@ -1,65 +1,41 @@
 <footer>
-  <div class="footer-left">
-    <h1> 🚀 Useful Links</h1>
-    <ul>
-      <li><a href="https://hsbte.org.in/" target="_blank">HSBTE</a></li>
-      <li><a href="https://www.hstes.org.in/" target="_blank">HSTES</a></li>
-      <li><a href="https://techadmissionshry.gov.in/" target="_blank">TECH ADMISSION</a></li>  
-      <li><a href="https://www.aicte.gov.in/" target="_blank">AICTE</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-middle">
-    <h1>⚠️ Disclaimer</h1>
-    <p>
-      This website is not an official website of the Haryana State Board of Technical Education (HSBTE) or any government authority. 
-      It has been created solely for educational and informational purposes to help students by providing previous years’ question papers 
-      and sample papers for LEET.
-    </p>
-  </div>
-
-  <div class="footer-right">
-    <h1> ☎️ Contact Us</h1>
-    <p><i class="fa-solid fa-envelope"></i> <a href="mailto:nishant@hsbteleet.com">nishant@hsbteleet.com</a></p>
-    <p><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/nishant.089" target="_blank">Nishant.089</a></p>
-    <p><i class="fa-solid fa-user"></i> <a href="https://itsnishant.com" target="_blank">My Portfolio</a></p>
-    <p><i class="fa-brands fa-snapchat"></i> <a href="https://www.snapchat.com/add/nishant.089" target="_blank">nishant.089</a></p>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      <p>&copy;2026 HSBTE_LEET. All rights reserved.</p>
+    <div class="footer-left">
+     <h1> 🚀 Useful Links</h1>
+      <ul> <!-- Wrap list items in a <ul> element -->
+    <li><a href="https://hsbte.org.in/" target="_blank">HSBTE</a></li>
+    <li><a href="https://www.hstes.org.in/" target="_blank">HSTES</a></li>
+    <li><a href="https://techadmissionshry.gov.in/" target="_blank">TECH ADMISSION</a></li>  
+    <li><a href="https://www.aicte.gov.in/" target="_blank">AICTE</a></li>
+  </ul>
     </div>
+    <div class="footer-middle">
+     <h1>⚠️ Disclaimer</h1>
+     <p>This website is not an official website of the Haryana State Board of Technical Education (HSBTE) or any government authority. It has been created solely for educational and informational purposes to help students by providing previous years’ question papers and sample papers for LEET.
 
-    <div class="footer-bottom-middle">
-      <p>Visitor Counter:</p>
-      <div id="visitor-counter" style="font-size:20px;font-weight:bold;">
-        Loading...
+    </div>
+    <div class="footer-right">
+     <h1> ☎️ Contact Us</h1>
+     
+        <p><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp; <a href="mailto:nishant@hsbteleet.com">nishant@hsbteleet.com</a></p>
+       <p><i class="fa-brands fa-instagram"></i>&nbsp;&nbsp;&nbsp; <a href="https://www.instagram.com/nishant.089" target="_blank">Nishant.089</a></p>
+      <p>
+  <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
+  <a href="https://itsnishant.com" target="_blank">My Portfolio</a>
+</p>
+
+       <p><i class="fa-brands fa-snapchat"></i>&nbsp;&nbsp;&nbsp; <a href="https://www.snapchat.com/add/nishant.089" target="_blank">nishant.089</a> </p>
+
+    </div>
+     <div class="footer-bottom">
+      <div class="footer-bottom-left">
+          <p>&copy;2026 HSBTE_LEET. All rights reserved.</p>
       </div>
-    </div>
-
-    <div class="footer-bottom-right">
-      <p>Design By:- Nishant</p>
-    </div>
-  </div>
+      <div class="footer-bottom-middle">
+        <p> Visiter-Counter:-</p>
+        <a href="https://www.freecounterstat.com" title="free counters"><img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=szqdjndqwaa8hcjzrcufkuk7tbudugx4" border="0" title="free counters" alt="free counters"></a>
+        </div>
+      <div class="footer-bottom-right">
+          <p> Design By:-Nishant</p>
+          </div>
+        </div>
 </footer>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const counter = document.getElementById("visitor-counter");
-
-  fetch("https://hsbteleet.com/api/visitor-track?nocache=" + Date.now())
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.success) {
-        counter.textContent = data.totalVisitors;
-      } else {
-        counter.textContent = "Error";
-      }
-    })
-    .catch(err => {
-      console.error("Visitor counter error:", err);
-      counter.textContent = "Error";
-    });
-});
-</script>
