@@ -33,12 +33,8 @@
 
     <div class="footer-bottom-middle">
       <p>Visitor Counter:</p>
-      <div id="visitor-counter" class="visitor-counter">
-        <span class="counter-digit">0</span>
-        <span class="counter-digit">0</span>
-        <span class="counter-digit">0</span>
-        <span class="counter-digit">0</span>
-        <span class="counter-digit">0</span>
+      <div id="visitor-counter" style="font-size:20px;font-weight:bold;">
+        Loading...
       </div>
     </div>
 
@@ -49,76 +45,21 @@
 </footer>
 
 <script>
-(function () {
-  "use strict";
+document.addEventListener("DOMContentLoaded", function () {
+  const counter = document.getElementById("visitor-counter");
 
-  let attempts = 0;
-  const MAX_ATTEMPTS = 100;
-
-  function updateVisitorCounter(count) {
-    const el = document.getElementById("visitor-counter");
-    if (!el) return false;
-
-    const numCount = Number(count);
-    if (isNaN(numCount) || numCount < 0) return false;
-
-    const str = String(Math.floor(numCount)).padStart(5, "0");
-    el.innerHTML = "";
-
-    for (let ch of str) {
-      const span = document.createElement("span");
-      span.className = "counter-digit";
-      span.textContent = ch;
-      el.appendChild(span);
-    }
-    return true;
-  }
-
-  function loadCounter() {
-    if (window.location.pathname.includes("analytics-dashboard")) return;
-    
-    attempts++;
-    const el = document.getElementById("visitor-counter");
-    if (!el) {
-      if (attempts < MAX_ATTEMPTS) {
-        setTimeout(loadCounter, 100);
+  fetch("https://hsbteleet.com/api/visitor-track?nocache=" + Date.now())
+    .then(res => res.json())
+    .then(data => {
+      if (data && data.success) {
+        counter.textContent = data.totalVisitors;
+      } else {
+        counter.textContent = "Error";
       }
-      return;
-    }
-    
-    attempts = 0;
-    
-    fetch("/api/visitor-track?nocache=" + Date.now() + "&page=" + encodeURIComponent(window.location.pathname))
-      .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)))
-      .then(data => {
-        if (data && data.success && data.totalVisitors !== undefined) {
-          updateVisitorCounter(Number(data.totalVisitors));
-        } else {
-          updateVisitorCounter(4125);
-        }
-      })
-      .catch(() => updateVisitorCounter(4125));
-  }
-
-  // Try multiple times to ensure element is ready
-  function tryLoad() {
-    if (document.getElementById("visitor-counter")) {
-      loadCounter();
-    } else {
-      setTimeout(tryLoad, 50);
-    }
-  }
-
-  // Start trying immediately (script is in footer, element should exist)
-  tryLoad();
-  
-  // Also listen for events
-  document.addEventListener("partialsLoaded", function() {
-    setTimeout(loadCounter, 100);
-  });
-  
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-    setTimeout(loadCounter, 200);
-  }
-})();
+    })
+    .catch(err => {
+      console.error("Visitor counter error:", err);
+      counter.textContent = "Error";
+    });
+});
 </script>
