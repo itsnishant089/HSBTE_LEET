@@ -1,30 +1,5 @@
-const fs = require("fs");
-const path = require("path");
-//ji
-// DB path (Vercel compatible)
-const ANALYTICS_DB_PATH = process.env.VERCEL
-  ? path.join("/tmp", "analytics.json")
-  : path.join(__dirname, "../../data/analytics.json");
-
-// Ensure data directory exists
-const dataDir = process.env.VERCEL ? "/tmp" : path.join(__dirname, "../../data");
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
-
-// Init DB
-function initAnalyticsDB() {
-  if (!fs.existsSync(ANALYTICS_DB_PATH)) {
-    const initialData = {
-      pageViews: {},   // { page: { views, timeSpent, clicks } }
-      sessions: [],   // { sessionId, startTime, endTime, pages: [] }
-      lastUpdated: new Date().toISOString()
-    };
-    fs.writeFileSync(ANALYTICS_DB_PATH, JSON.stringify(initialData, null, 2));
-    return initialData;
-  }
-  return JSON.parse(fs.readFileSync(ANALYTICS_DB_PATH, "utf8"));
-}
+// Use Vercel KV for persistent storage
+const { getAnalyticsDB, saveAnalyticsDB } = require('../../lib/kv-storage');
 
 module.exports = async (req, res) => {
   // CORS
@@ -50,7 +25,7 @@ module.exports = async (req, res) => {
       });
     }
 
-    const analytics = initAnalyticsDB();
+    const analytics = await getAnalyticsDB();
 
     // Init page
     if (!analytics.pageViews[page]) {
@@ -67,6 +42,10 @@ module.exports = async (req, res) => {
     analytics.pageViews[page].clicks += Number(clicks) || 0;
 
     // Session tracking (optional)
+    if (!analytics.sessions) {
+      analytics.sessions = [];
+    }
+    
     if (sessionId) {
       let session = analytics.sessions.find(s => s.sessionId === sessionId);
 
@@ -97,7 +76,8 @@ module.exports = async (req, res) => {
 
     analytics.lastUpdated = new Date().toISOString();
 
-    fs.writeFileSync(ANALYTICS_DB_PATH, JSON.stringify(analytics, null, 2));
+    // Save to KV (persistent storage)
+    await saveAnalyticsDB(analytics);
 
     return res.status(200).json({
       success: true,

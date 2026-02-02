@@ -1,48 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-
-// Paths (Vercel compatible)
-const VISITOR_DB_PATH = process.env.VERCEL
-  ? path.join("/tmp", "visitors.json")
-  : path.join(__dirname, "../../data/visitors.json");
-
-const ANALYTICS_DB_PATH = process.env.VERCEL
-  ? path.join("/tmp", "analytics.json")
-  : path.join(__dirname, "../../data/analytics.json");
+// Use Vercel KV for persistent storage
+const { getVisitorsDB, getAnalyticsDB, INITIAL_COUNT } = require('../../lib/kv-storage');
 
 const PASSWORD = "Nishant@089";
-//ji
-// Ensure data directory exists
-const dataDir = process.env.VERCEL ? "/tmp" : path.join(__dirname, "../../data");
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
-
-// Init analytics DB
-function initAnalyticsDB() {
-  if (!fs.existsSync(ANALYTICS_DB_PATH)) {
-    const initialData = {
-      pageViews: {}, // { page: { views, timeSpent, clicks } }
-      lastUpdated: new Date().toISOString()
-    };
-    fs.writeFileSync(ANALYTICS_DB_PATH, JSON.stringify(initialData, null, 2));
-    return initialData;
-  }
-  return JSON.parse(fs.readFileSync(ANALYTICS_DB_PATH, "utf8"));
-}
-
-// Read visitors DB
-function readVisitorsDB() {
-  if (!fs.existsSync(VISITOR_DB_PATH)) {
-    return { totalVisitors: 4000, visitors: [] };
-  }
-  const data = JSON.parse(fs.readFileSync(VISITOR_DB_PATH, "utf8"));
-  // Ensure we always return actual count (not display count) for dashboard
-  return data;
-}
 
 // Calculate statistics
-function calculateStats(visitors, analytics) {
+function calculateStats(visitorDB, analytics) {
+  const visitors = visitorDB.visitors || [];
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -124,8 +87,9 @@ function calculateStats(visitors, analytics) {
   const overallCTR = totalPageViews > 0 ? Math.round((totalClicks / totalPageViews) * 100 * 10) / 10 : 0;
 
   // For dashboard: start from 0 (subtract initial count of 4000)
-  const actualTotalVisitors = visitors.totalVisitors || 4000;
-  const dashboardCount = Math.max(0, actualTotalVisitors - 4000); // Start from 0
+  // Get actual totalVisitors from visitorDB object
+  const actualTotalVisitors = visitorDB.totalVisitors || INITIAL_COUNT;
+  const dashboardCount = Math.max(0, actualTotalVisitors - INITIAL_COUNT); // Start from 0
   
   return {
     totalVisitors: dashboardCount, // Dashboard shows count starting from 0
@@ -173,9 +137,9 @@ module.exports = async (req, res) => {
     }
 
     // Fast parallel reads for better performance
-    const visitorDB = readVisitorsDB();
-    const analyticsDB = initAnalyticsDB();
-    const stats = calculateStats(visitorDB.visitors || [], analyticsDB);
+    const visitorDB = await getVisitorsDB();
+    const analyticsDB = await getAnalyticsDB();
+    const stats = calculateStats(visitorDB, analyticsDB);
 
     return res.status(200).json({
       success: true,
