@@ -80,6 +80,16 @@
       }
     })
       .then(res => {
+        // Handle KV misconfiguration explicitly
+        if (res.status === 503) {
+          return res.json().then(payload => {
+            const msg =
+              (payload && payload.error) ||
+              "Storage not configured. Please setup Vercel KV and redeploy.";
+            showError(msg);
+            throw new Error(msg);
+          });
+        }
         if (res.status === 401) {
           sessionStorage.removeItem("dashboardPassword");
           currentPassword = "";
@@ -101,6 +111,8 @@
       })
       .catch(err => {
         console.error("Analytics fetch error:", err);
+        // Don't double-toast if we already showed a specific error
+        if (String(err && err.message || "").includes("Storage not configured")) return;
         showError("Network error. Try again.");
       });
   }

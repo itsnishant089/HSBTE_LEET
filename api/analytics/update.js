@@ -1,5 +1,5 @@
 // Use Vercel KV for persistent storage
-const { getAnalyticsDB, saveAnalyticsDB } = require('../../lib/kv-storage');
+const { getAnalyticsDB, saveAnalyticsDB, getStorageStatus } = require('../../lib/kv-storage');
 
 module.exports = async (req, res) => {
   // CORS
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { page, timeSpent = 0, clicks = 0, sessionId } = req.body || {};
+    const { page, timeSpent = 0, clicks = 0, sessionId, event = "engagement" } = req.body || {};
 
     if (!page) {
       return res.status(400).json({
@@ -37,7 +37,10 @@ module.exports = async (req, res) => {
     }
 
     // Update page stats
-    analytics.pageViews[page].views += 1;
+    // Count views only for explicit pageview events (prevents inflating views on periodic engagement pings)
+    if (event === "pageview") {
+      analytics.pageViews[page].views += 1;
+    }
     analytics.pageViews[page].timeSpent += Number(timeSpent) || 0;
     analytics.pageViews[page].clicks += Number(clicks) || 0;
 
@@ -81,11 +84,19 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Analytics updated"
+      message: "Analytics updated",
+      storage: getStorageStatus()
     });
 
   } catch (error) {
     console.error("Analytics update error:", error);
+    if (error && error.code === "PERSISTENT_STORAGE_NOT_CONFIGURED") {
+      return res.status(503).json({
+        success: false,
+        error: error.message,
+        storage: getStorageStatus(),
+      });
+    }
     return res.status(500).json({
       success: false,
       error: "Internal server error"

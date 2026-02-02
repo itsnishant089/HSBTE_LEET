@@ -1,5 +1,5 @@
 // Use Vercel KV for persistent storage
-const { getVisitorsDB, getAnalyticsDB, INITIAL_COUNT } = require('../../lib/kv-storage');
+const { getVisitorsDB, getAnalyticsDB, getStorageStatus, INITIAL_COUNT } = require('../../lib/kv-storage');
 
 const PASSWORD = "Nishant@089";
 
@@ -86,13 +86,14 @@ function calculateStats(visitorDB, analytics) {
   const avgTimePerPage = pageStatsArray.length > 0 ? Math.round((totalTimeSpent / pageStatsArray.length) * 10) / 10 : 0;
   const overallCTR = totalPageViews > 0 ? Math.round((totalClicks / totalPageViews) * 100 * 10) / 10 : 0;
 
-  // For dashboard: start from 0 (subtract initial count of 4000)
-  // Get actual totalVisitors from visitorDB object
+  // Visitor totals
   const actualTotalVisitors = visitorDB.totalVisitors || INITIAL_COUNT;
-  const dashboardCount = Math.max(0, actualTotalVisitors - INITIAL_COUNT); // Start from 0
+  const visitorsSinceBaseline = Math.max(0, actualTotalVisitors - INITIAL_COUNT);
   
   return {
-    totalVisitors: dashboardCount, // Dashboard shows count starting from 0
+    // Show REAL total visitors on dashboard (so it never looks like 0000)
+    totalVisitors: actualTotalVisitors,
+    visitorsSinceBaseline,
     todayVisitors: getUniqueVisitors(todayVisitors),
     weekVisitors: getUniqueVisitors(weekVisitors),
     monthVisitors: getUniqueVisitors(monthVisitors),
@@ -144,10 +145,18 @@ module.exports = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: stats,
+      storage: getStorageStatus(),
       loadTime: new Date().toISOString()
     });
   } catch (error) {
     console.error("Analytics error:", error);
+    if (error && error.code === "PERSISTENT_STORAGE_NOT_CONFIGURED") {
+      return res.status(503).json({
+        success: false,
+        error: error.message,
+        storage: getStorageStatus(),
+      });
+    }
     return res.status(500).json({
       success: false,
       error: "Internal server error"

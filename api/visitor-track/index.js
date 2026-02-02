@@ -1,52 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-
-// Use /tmp on Vercel (ephemeral storage)
-const DB_PATH = process.env.VERCEL
-  ? path.join("/tmp", "visitors.json")
-  : path.join(__dirname, "../../data/visitors.json");
-
-const INITIAL_COUNT = 4000;
-const DISPLAY_OFFSET = 125; // Add 125 to show 4125 instead of 4000 on regular pages
-
-// Ensure directory exists
-const dataDir = process.env.VERCEL ? "/tmp" : path.join(__dirname, "../../data");
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
-
-// Initialize DB
-function initDatabase() {
-  if (!fs.existsSync(DB_PATH)) {
-    const initialData = {
-      totalVisitors: INITIAL_COUNT,
-      visitors: [],
-      lastUpdated: new Date().toISOString()
-    };
-    fs.writeFileSync(DB_PATH, JSON.stringify(initialData, null, 2));
-    return initialData;
-  }
-  
-  try {
-    const data = JSON.parse(fs.readFileSync(DB_PATH, "utf8"));
-    // Ensure totalVisitors is at least INITIAL_COUNT
-    if (!data.totalVisitors || data.totalVisitors < INITIAL_COUNT) {
-      data.totalVisitors = INITIAL_COUNT;
-      fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
-    }
-    return data;
-  } catch (error) {
-    // If file is corrupted, recreate it
-    console.error("Error reading database, recreating:", error);
-    const initialData = {
-      totalVisitors: INITIAL_COUNT,
-      visitors: [],
-      lastUpdated: new Date().toISOString()
-    };
-    fs.writeFileSync(DB_PATH, JSON.stringify(initialData, null, 2));
-    return initialData;
-  }
-}
+// Use Vercel KV for persistent storage (or file system for local dev)
+const {
+  getVisitorsDB,
+  saveVisitorsDB,
+  getStorageStatus,
+  INITIAL_COUNT,
+  DISPLAY_OFFSET,
+} = require("../../lib/kv-storage");
 
 // Generate visitor ID (IP + User-Agent)
 function getVisitorId(req) {
@@ -98,7 +57,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const db = initDatabase();
+    const db = await getVisitorsDB();
     const visitorId = getVisitorId(req);
 
     const page = req.query?.page || req.body?.page || "/";
@@ -109,10 +68,15 @@ module.exports = async (req, res) => {
                         page.includes("analytics-dashboard") || 
                         req.headers.referer?.includes("analytics-dashboard");
 
-    const isNew = isNewVisitor(visitorId, db.visitors);
+    const isNew = isNewVisitor(visitorId, db.visitors || []);
 
     if (isNew) {
-      db.totalVisitors += 1;
+      db.totalVisitors = (db.totalVisitors || INITIAL_COUNT) + 1;
+    }
+
+    // Ensure visitors array exists
+    if (!db.visitors) {
+      db.visitors = [];
     }
 
     db.visitors.push({
@@ -127,19 +91,18 @@ module.exports = async (req, res) => {
       userAgent: req.headers["user-agent"] || "unknown"
     });
 
-    db.lastUpdated = new Date().toISOString();
-
     // limit size
     if (db.visitors.length > 10000) {
       db.visitors = db.visitors.slice(-10000);
     }
 
-    fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
-
     // Ensure totalVisitors is at least INITIAL_COUNT
-    if (db.totalVisitors < INITIAL_COUNT) {
+    if (!db.totalVisitors || db.totalVisitors < INITIAL_COUNT) {
       db.totalVisitors = INITIAL_COUNT;
     }
+
+    // Save to KV (persistent storage)
+    await saveVisitorsDB(db);
     
     // For dashboard: return actual count
     // For regular pages: return count + offset (4125 instead of 4000)
@@ -150,12 +113,22 @@ module.exports = async (req, res) => {
       totalVisitors: displayCount,
       actualVisitors: db.totalVisitors, // Always include actual for reference
       isNewVisitor: isNew,
+      storage: getStorageStatus(),
       message: isNew
         ? "New visitor counted"
         : "Returning visitor (not counted)"
     });
   } catch (error) {
     console.error("Visitor tracking error:", error);
+
+    // If KV is not configured on Vercel, do NOT pretend it's fine (it causes random resets/jumps).
+    if (error && error.code === "PERSISTENT_STORAGE_NOT_CONFIGURED") {
+      return res.status(503).json({
+        success: false,
+        error: error.message,
+        storage: getStorageStatus(),
+      });
+    }
 
     // Fallback: return display count (4125) for regular pages, actual for dashboard
     const isDashboard = req.query?.dashboard === "true" || req.body?.dashboard === "true" || 
@@ -167,6 +140,7 @@ module.exports = async (req, res) => {
       totalVisitors: fallbackCount,
       actualVisitors: INITIAL_COUNT,
       isNewVisitor: false,
+      storage: getStorageStatus(),
       error: "Fallback count returned"
     });
   }

@@ -172,6 +172,7 @@ document.addEventListener("partialsLoaded", () => {
   let startTime = Date.now();
   let timeSpent = 0;
   let clicks = 0;
+  let pageviewSent = false;
   let sessionId = sessionStorage.getItem("sessionId") || 
                   "session_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9);
   
@@ -183,6 +184,23 @@ document.addEventListener("partialsLoaded", () => {
   function trackTime() {
     const currentTime = Date.now();
     timeSpent = Math.floor((currentTime - startTime) / 1000); // in seconds
+  }
+
+  // Send a single pageview event (so dashboard is never stuck at 0)
+  function sendPageviewOnce() {
+    if (pageviewSent) return;
+    pageviewSent = true;
+    fetch("/api/analytics/update", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event: "pageview",
+        page,
+        timeSpent: 0,
+        clicks: 0,
+        sessionId
+      })
+    }).catch(() => {});
   }
   
   // Track clicks
@@ -205,6 +223,7 @@ document.addEventListener("partialsLoaded", () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          event: "engagement",
           page: page,
           timeSpent: timeSpent, // in seconds
           clicks: clicks,
@@ -226,6 +245,7 @@ document.addEventListener("partialsLoaded", () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          event: "engagement",
           page: page,
           timeSpent: timeSpent,
           clicks: clicks,
@@ -247,4 +267,7 @@ document.addEventListener("partialsLoaded", () => {
       startTime = Date.now();
     }
   });
+
+  // Fire pageview after a tiny delay to ensure scripts/partials are ready
+  setTimeout(sendPageviewOnce, 1200);
 })();
