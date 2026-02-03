@@ -70,9 +70,35 @@
       const subjects = [];
       
       // Find all subject sections - look for sections with IDs (these are individual subjects)
-      doc.querySelectorAll('.computer-1-semester[id]').forEach(section => {
+      // Try multiple selectors to work with all branch pages
+      const selectors = [
+        '.computer-1-semester[id]',
+        '[class*="semester"][id]',
+        'section[id]',
+        'div[id][class*="subject"]',
+        'div[id][class*="semester"]'
+      ];
+      
+      let foundSections = [];
+      for (const selector of selectors) {
+        const sections = doc.querySelectorAll(selector);
+        if (sections.length > 0) {
+          foundSections = Array.from(sections);
+          break;
+        }
+      }
+      
+      foundSections.forEach(section => {
         const sectionId = section.id;
-        const heading = section.querySelector('.semester-heading');
+        if (!sectionId) return;
+        
+        // Try multiple ways to find the heading
+        const heading = section.querySelector('.semester-heading') || 
+                       section.querySelector('h2') || 
+                       section.querySelector('h3') ||
+                       section.querySelector('[class*="heading"]') ||
+                       section.querySelector('[class*="title"]');
+        
         if (heading) {
           const subjectName = heading.textContent.trim();
           
@@ -82,15 +108,28 @@
             return;
           }
           
+          // Skip if it's just a number or very short
+          if (subjectName.length < 3 || /^\d+$/.test(subjectName)) {
+            return;
+          }
+          
           // Check if it's a subject section (has session buttons or "Select exam session" text)
-          const subtext = section.querySelector('.semester-subtext');
-          const hasSessionButtons = section.querySelector('.semester-subject-card');
+          const subtext = section.querySelector('.semester-subtext') || 
+                         section.querySelector('[class*="subtext"]');
+          const hasSessionButtons = section.querySelector('.semester-subject-card') ||
+                                   section.querySelector('[class*="session"]') ||
+                                   section.querySelector('button') ||
+                                   section.querySelector('a[href*="pdf"]');
           
           if (subtext && (subtext.textContent.includes('Select exam session') || 
-              subtext.textContent.includes('exam session'))) {
+              subtext.textContent.includes('exam session') ||
+              subtext.textContent.includes('session'))) {
             subjects.push({ id: sectionId, name: subjectName });
           } else if (hasSessionButtons && sectionId) {
             // Also include if it has session buttons and an ID
+            subjects.push({ id: sectionId, name: subjectName });
+          } else if (sectionId && subjectName.length > 5) {
+            // Include if it has a meaningful ID and name (likely a subject)
             subjects.push({ id: sectionId, name: subjectName });
           }
         }
@@ -239,38 +278,101 @@
     searchIndex.push(
       { type: 'page', title: 'HSBTE PYQ', url: `${basePath}hsbte-pyq`, keywords: ['hsbte', 'pyq', 'previous year', 'question papers', 'question paper'] },
       { type: 'page', title: 'Home', url: `${basePath}`, keywords: ['home', 'main', 'index', 'homepage'] },
+      { type: 'page', title: 'Syllabus', url: `${basePath}syllabus`, keywords: ['syllabus', 'hsbte syllabus', 'diploma syllabus', 'polytechnic syllabus', 'haryana syllabus', 'syllabus pdf', 'curriculum'] },
       // LEET pages with comprehensive keywords
       { 
         type: 'page', 
         title: 'Haryana LEET', 
         url: `${basePath}haryanaleet`, 
-        keywords: ['leet', 'haryana leet', 'lateral entry', 'haryana', 'lateral entry engineering test', 'haryana lateral entry'] 
+        keywords: ['leet', 'haryana leet', 'lateral entry', 'haryana', 'lateral entry engineering test', 'haryana lateral entry', 'haryana leet exam', 'haryana leet syllabus', 'haryana leet sample paper'] 
       },
       { 
         type: 'page', 
         title: 'BTech LEET Information', 
         url: `${basePath}btech-leet`, 
-        keywords: ['btech leet', 'btech', 'b.tech leet', 'b tech leet', 'btech lateral entry', 'engineering leet', 'leet btech', 'btech lateral', 'btech information', 'btech syllabus', 'btech exam pattern', 'btech cutoff', 'btech key dates'] 
+        keywords: ['btech leet', 'btech', 'b.tech leet', 'b tech leet', 'btech lateral entry', 'engineering leet', 'leet btech', 'btech lateral', 'btech information', 'btech syllabus', 'btech exam pattern', 'btech cutoff', 'btech key dates', 'btech leet 2025', 'btech leet 2026', 'btech leet 2027'] 
       },
       { 
         type: 'page', 
         title: 'BTech LEET Sample Papers', 
         url: `${basePath}btech-leet-sample-paper`, 
-        keywords: ['btech leet sample paper', 'btech sample paper', 'btech leet sample', 'btech mock paper', 'btech practice paper', 'btech leet practice', 'sample paper btech', 'btech leet mock', 'btech leet papers', 'btech sample', 'btech practice', 'btech mock'] 
+        keywords: ['btech leet sample paper', 'btech sample paper', 'btech leet sample', 'btech mock paper', 'btech practice paper', 'btech leet practice', 'sample paper btech', 'btech leet mock', 'btech leet papers', 'btech sample', 'btech practice', 'btech mock', 'btech leet pyq', 'btech leet previous year'] 
       },
       { 
         type: 'page', 
         title: 'B. Pharmacy LEET Information', 
         url: `${basePath}B-Pharmacy-leet`, 
-        keywords: ['b pharmacy leet', 'bpharmacy leet', 'b.pharmacy leet', 'b pharmacy lateral entry', 'pharmacy leet', 'bpharm leet', 'b pharm leet', 'bpharmacy', 'b pharmacy', 'pharmacy lateral entry', 'b pharmacy information', 'b pharmacy syllabus', 'b pharmacy exam pattern', 'b pharmacy cutoff', 'b pharmacy key dates'] 
+        keywords: ['b pharmacy leet', 'bpharmacy leet', 'b.pharmacy leet', 'b pharmacy lateral entry', 'pharmacy leet', 'bpharm leet', 'b pharm leet', 'bpharmacy', 'b pharmacy', 'pharmacy lateral entry', 'b pharmacy information', 'b pharmacy syllabus', 'b pharmacy exam pattern', 'b pharmacy cutoff', 'b pharmacy key dates', 'b pharmacy leet 2025', 'b pharmacy leet 2026', 'b pharmacy leet 2027'] 
       },
       { 
         type: 'page', 
         title: 'B. Pharmacy LEET Sample Papers', 
         url: `${basePath}b-pharmacy-leet-sample-paper`, 
-        keywords: ['b pharmacy leet sample paper', 'bpharmacy leet sample paper', 'b pharmacy sample paper', 'bpharmacy sample paper', 'b pharmacy leet sample', 'bpharmacy leet sample', 'b pharmacy mock paper', 'bpharmacy mock paper', 'b pharmacy practice paper', 'bpharmacy practice paper', 'sample paper b pharmacy', 'sample paper bpharmacy', 'b pharmacy leet mock', 'bpharmacy leet mock', 'b pharmacy leet papers', 'bpharmacy leet papers', 'b pharmacy sample', 'bpharmacy sample', 'b pharmacy practice', 'bpharmacy practice', 'b pharmacy mock', 'bpharmacy mock'] 
+        keywords: ['b pharmacy leet sample paper', 'bpharmacy leet sample paper', 'b pharmacy sample paper', 'bpharmacy sample paper', 'b pharmacy leet sample', 'bpharmacy leet sample', 'b pharmacy mock paper', 'bpharmacy mock paper', 'b pharmacy practice paper', 'bpharmacy practice paper', 'sample paper b pharmacy', 'sample paper bpharmacy', 'b pharmacy leet mock', 'bpharmacy leet mock', 'b pharmacy leet papers', 'bpharmacy leet papers', 'b pharmacy sample', 'bpharmacy sample', 'b pharmacy practice', 'bpharmacy practice', 'b pharmacy mock', 'bpharmacy mock', 'b pharmacy leet pyq', 'b pharmacy leet previous year'] 
       }
     );
+
+    // Add BTech sample paper pages (1-11)
+    for (let i = 1; i <= 11; i++) {
+      searchIndex.push({
+        type: 'page',
+        title: `BTech LEET Sample Paper ${i}`,
+        url: `${basePath}btech-sample-paper-${i}`,
+        keywords: [
+          `btech sample paper ${i}`,
+          `btech leet sample paper ${i}`,
+          `btech mock paper ${i}`,
+          `btech practice paper ${i}`,
+          'btech leet',
+          'btech sample',
+          'btech leet sample',
+          'btech leet pyq',
+          'btech previous year'
+        ]
+      });
+    }
+
+    // Add B Pharmacy sample paper pages (1-6, 11)
+    [1, 2, 3, 4, 5, 6, 11].forEach(i => {
+      searchIndex.push({
+        type: 'page',
+        title: `B. Pharmacy LEET Sample Paper ${i}`,
+        url: `${basePath}Bpharma-sample-paper-${i}`,
+        keywords: [
+          `b pharmacy sample paper ${i}`,
+          `bpharmacy sample paper ${i}`,
+          `b pharmacy leet sample paper ${i}`,
+          `bpharmacy leet sample paper ${i}`,
+          `b pharmacy mock paper ${i}`,
+          `bpharmacy mock paper ${i}`,
+          'b pharmacy leet',
+          'bpharmacy leet',
+          'b pharmacy sample',
+          'bpharmacy sample',
+          'b pharmacy leet pyq',
+          'b pharmacy previous year'
+        ]
+      });
+    });
+
+    // Add DBM specialization pages
+    const dbmSpecializations = [
+      { url: 'dbm-5-retail', title: 'DBM 5th Semester - Retail', keywords: ['dbm', 'retail', '5th semester', 'business management', 'retail management'] },
+      { url: 'dbm-5-mr', title: 'DBM 5th Semester - Marketing', keywords: ['dbm', 'marketing', '5th semester', 'business management', 'marketing management'] },
+      { url: 'dbm-5-hr', title: 'DBM 5th Semester - HR', keywords: ['dbm', 'hr', 'human resources', '5th semester', 'business management', 'hr management'] },
+      { url: 'dbm-4-retail', title: 'DBM 4th Semester - Retail', keywords: ['dbm', 'retail', '4th semester', 'business management', 'retail management'] },
+      { url: 'dbm-4-mr', title: 'DBM 4th Semester - Marketing', keywords: ['dbm', 'marketing', '4th semester', 'business management', 'marketing management'] },
+      { url: 'dbm-4-hr', title: 'DBM 4th Semester - HR', keywords: ['dbm', 'hr', 'human resources', '4th semester', 'business management', 'hr management'] }
+    ];
+
+    dbmSpecializations.forEach(spec => {
+      searchIndex.push({
+        type: 'semester',
+        title: spec.title,
+        url: `${basePath}${spec.url}`,
+        keywords: [...spec.keywords, 'dbm pyq', 'dbm previous year', 'dbm question paper']
+      });
+    });
 
     // Mark as loaded immediately (subjects will be added as they load)
     isIndexLoaded = true;
