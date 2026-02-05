@@ -55,4 +55,6 @@ Allow: /partials/
 
 # Sitemap location
 Sitemap: https://hsbteleet.com/sitemap.xml
+Allow: /sitemap.xml
+
 
