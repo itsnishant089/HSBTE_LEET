@@ -2,49 +2,57 @@
 # https://hsbteleet.com/robots.txt
 
 User-agent: *
-Allow: /
 
-# Disallow admin and private areas
-Disallow: /admin/
-Disallow: /private/
-Disallow: /*.json$
-Disallow: /search?
+# Block everything by default
+Disallow: /
 
-
-# Allow important pages and resources
-Allow: /html/
+# Allow homepage
+Allow: /$
 Allow: /index.html
-Allow: /image/
+
+# Allow only main branch / exam pages (pretty URLs)
+Allow: /Adv-Diploma
+Allow: /Agriculture
+Allow: /ai-ml
+Allow: /Architectural-Assistantship
+Allow: /Automation
+Allow: /Automobile
+Allow: /B-Pharmacy-leet
+Allow: /btech-leet-sample-paper
+Allow: /btech-leet
+Allow: /Ceramic
+Allow: /Chemical
+Allow: /civil
+Allow: /computer-pyq
+Allow: /d-pharmacy
+Allow: /dbm
+Allow: /ece
+Allow: /Electrical-Engineering
+Allow: /FAA
+Allow: /Fashion-Design
+Allow: /Fashion-Technology
+Allow: /Food
+Allow: /haryanaleet
+Allow: /Hotel-Management
+Allow: /hsbte-pyq
+Allow: /Instrumentation-&-Control
+Allow: /Library
+Allow: /mech
+Allow: /Medical-Electronics
+Allow: /Medical-Laboratory-Technology
+Allow: /Office-Management
+Allow: /Plastic
+Allow: /Textile-Design
+Allow: /Textile-Processing
+Allow: /Textile-Technology
+Allow: /syllabus
+
+# Also allow asset folders so main pages render correctly
 Allow: /css/
 Allow: /js/
+Allow: /image/
 Allow: /partials/
-
-# Allow specific file types
-Allow: /*.html$
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.webp$
-Allow: /*.svg$
 
 # Sitemap location
 Sitemap: https://hsbteleet.com/sitemap.xml
 
-# Crawl-delay (optional, adjust as needed)
-# Set to 1 second to be respectful to server resources
-Crawl-delay: 1
-
-# Special rules for major search engines
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Slurp
-Allow: /
-Crawl-delay: 1
