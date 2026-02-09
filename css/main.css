@@ -323,10 +323,12 @@ header {
 .main-content img {
   display: block;
   max-width: 75%;
-  height: 350px;
+  height: auto;
+  aspect-ratio: auto;
   margin: 15px auto;
   border-radius: 8px;
   transition: transform 0.4s ease;
+  object-fit: contain;
 }
 
 /* Image hover zoom */
@@ -2131,6 +2133,7 @@ body.dark-mode .special-paper-card:hover {
   letter-spacing: 0.5px;
   text-transform: uppercase;
   font-size: 11px;
+  will-change: transform, background-position;
 }
 
 .tooltip-arrow {
@@ -2268,6 +2271,7 @@ body.dark-mode .special-paper-card:hover {
               inset 0 1px 0 rgba(255, 255, 255, 0.2);
   animation: headerGradient 5s ease infinite;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  will-change: background-position;
 }
 
 .header-content {
@@ -2479,6 +2483,7 @@ body.dark-mode .special-paper-card:hover {
   animation: messageSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55),
              userGradient 3s ease infinite;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  will-change: transform, background-position;
 }
 
 /* Bot bubble */
@@ -2632,6 +2637,7 @@ body.dark-mode .special-paper-card:hover {
   align-items: center;
   justify-content: center;
   animation: sendButtonGradient 3s ease infinite;
+  will-change: transform, background-position;
 }
 
 #chatbot-input button:hover {
@@ -2966,8 +2972,8 @@ margin-bottom:15px;
 .syllabus-box .view-syllabus-btn{
 display:inline-block;
 padding:10px 22px;
-background:#007bff;
-color:white;
+background:#0056b3;
+color:#ffffff;
 border-radius:30px;
 font-weight:600;
 text-decoration:none;
