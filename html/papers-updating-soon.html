@@ -1,67 +1,70 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Character Encoding -->
-  <meta charset="utf-8"/>
-  
+  <meta charset="utf-8">
+
   <!-- Viewport & Mobile Optimization -->
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
-<!-- Favicon for all devices -->
-<link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
-<link rel="icon" type="image/png" sizes="16x16" href="https://hsbteleet.com/image/favicon.webp"/>
-<link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
-<link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
   <!-- Primary Meta Tags -->
   <title>HSBTE PYQ | Previous Year Question Papers | Free Download</title>
-  
-  
-  
-</head>
- <body>
-  <!-- HEADER -->
-  <div data-include="../partials/header.html">
-  </div>
-  <!-- CHATBOT -->
-  <div data-include="../partials/chatbot.html">
-  </div>
-  <main id="main-content" role="main">
-   <div class="computer-1-semester">
-    <h1 class="semester-heading">
-     Papers Updating Soon
-    </h1>
-    <p class="semester-subtext">
-     Question papers for this subject and session are currently being updated.
-    </p>
-    <p class="semester-subtext">
-     Please check back later. As soon as official PDFs are available from HSBTE, they will be uploaded here and linked from every branch, semester, and subject page.
-    </p>
-    <div class="semester-subject-grid">
-     <a class="semester-subject-card main-subject" href="javascript:history.back()" aria-label="Go back to previous page">
-      ← Go back to previous page
-     </a>
-    </div>
-   </div>
-  </main>
-  <button id="goTopBtn" title="Go to top">
-   <i class="fa-solid fa-arrow-up">
-   </i>
-  </button>
-  <script defer src="../js/search.js">
-  </script>
-  <!-- FOOTER -->
-  <div data-include="../partials/footer.html">
-  </div>
-  <script defer src="../js/main.js">
-  </script>
-  <script defer src="../js/include.js">
-  </script>
-  <script defer src="../js/translate.js">
-  </script>
-  <script defer src="../js/chatbot.js">
-  </script>
- 
-  </body>
-</html>
+  <meta name="description" content="HSBTE Previous Year Question Papers (PYQ) – Free PDF downloads for all branches and semesters.">
 
+  <!-- Favicon -->
+  <link rel="icon" href="https://hsbteleet.com/image/favicon.webp">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div data-include="/partials/header.html"></div>
+
+  <!-- CHATBOT -->
+  <div data-include="/partials/chatbot.html"></div>
+
+  <main id="main-content" role="main">
+    <div class="computer-1-semester">
+      <h1 class="semester-heading">Papers Updating Soon</h1>
+
+      <p class="semester-subtext">
+        Question papers for this subject and session are currently being updated.
+      </p>
+
+      <p class="semester-subtext">
+        Please check back later. As soon as official PDFs are available from HSBTE,
+        they will be uploaded here and linked from every branch, semester, and subject page.
+      </p>
+
+      <div class="semester-subject-grid">
+        <a class="semester-subject-card main-subject"
+           href="#"
+           onclick="history.back(); return false;"
+           aria-label="Go back to previous page">
+          ← Go back to previous page
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- GO TO TOP BUTTON -->
+  <button id="goTopBtn" title="Go to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- SCRIPTS -->
+  <script defer src="/js/search.js"></script>
+  <script defer src="/js/main.js"></script>
+  <script defer src="/js/include.js"></script>
+  <script defer src="/js/translate.js"></script>
+  <script defer src="/js/chatbot.js"></script>
+
+  <!-- FOOTER -->
+  <div data-include="/partials/footer.html"></div>
+
+</body>
+</html>
