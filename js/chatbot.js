@@ -9,8 +9,7 @@ function initChatbot() {
   const input = document.getElementById("chatbot-text");
   const messages = document.getElementById("chatbot-messages");
 
-  // Stop if chatbot not loaded
-  if (!chatBox || !messages) return;
+  if (!chatBox || !messages || !input) return;
 
   /* ===== DEVICE CHECK ===== */
   const isMobile = () => window.innerWidth <= 768;
@@ -22,7 +21,7 @@ function initChatbot() {
     chatBox.style.display = "none";   // Mobile closed
   }
 
-  /* ===== OPEN BUTTON ===== */
+  /* ===== OPEN ===== */
   if (toggleBtn) {
     toggleBtn.onclick = () => {
       chatBox.style.display = "flex";
@@ -30,7 +29,7 @@ function initChatbot() {
     };
   }
 
-  /* ===== CLOSE BUTTON ===== */
+  /* ===== CLOSE ===== */
   if (closeBtn) {
     closeBtn.onclick = () => {
       chatBox.style.display = "none";
@@ -38,31 +37,14 @@ function initChatbot() {
   }
 
   /* ===== ADD MESSAGE ===== */
-  function addMessage(text, type, typing = false) {
-
+  function addMessage(text, type) {
     const div = document.createElement("div");
     div.className = "chatbot-msg " + type;
+    div.textContent = text;
     messages.appendChild(div);
-
-    if (!typing) {
-      div.textContent = text;
-      scrollToBottom();
-      return;
-    }
-
-    let i = 0;
-    const speed = 15;
-
-    (function typeEffect() {
-      if (i < text.length) {
-        div.textContent += text.charAt(i++);
-        scrollToBottom();
-        setTimeout(typeEffect, speed);
-      }
-    })();
+    scrollToBottom();
   }
 
-  /* ===== SCROLL HELPER ===== */
   function scrollToBottom() {
     messages.scrollTop = messages.scrollHeight;
   }
@@ -70,13 +52,13 @@ function initChatbot() {
   /* ===== SEND MESSAGE ===== */
   async function sendMessage() {
 
-    if (!input) return;
-
     const text = input.value.trim();
     if (!text) return;
 
     addMessage(text, "user");
     input.value = "";
+
+    addMessage("⏳ Thinking...", "bot");
 
     try {
 
@@ -86,25 +68,32 @@ function initChatbot() {
         body: JSON.stringify({ message: text })
       });
 
-      if (!res.ok) throw new Error("Network error");
+      if (!res.ok) {
+        throw new Error("Server error " + res.status);
+      }
 
       const data = await res.json();
 
-      addMessage(data.reply || "Try again 🙂", "bot", true);
+      // Remove "Thinking..." message
+      messages.removeChild(messages.lastChild);
+
+      addMessage(data.reply || "No reply received.", "bot");
 
     } catch (error) {
-      console.error("Chat error:", error);
-      addMessage("⚠ Server error. Please try again.", "bot", true);
+      console.error(error);
+      messages.removeChild(messages.lastChild);
+      addMessage("⚠ Server error. Please try again.", "bot");
     }
   }
 
   /* ===== EVENTS ===== */
   if (sendBtn) sendBtn.onclick = sendMessage;
 
-  if (input) {
-    input.addEventListener("keydown", e => {
-      if (e.key === "Enter") sendMessage();
-    });
-  }
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
 
 }
