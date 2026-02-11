@@ -1,4 +1,6 @@
-document.addEventListener("partialsLoaded", () => {
+document.addEventListener("partialsLoaded", initChatbot);
+
+function initChatbot() {
 
   const toggleBtn = document.getElementById("robot-chatbot");
   const chatBox = document.getElementById("chatbot-box");
@@ -7,61 +9,68 @@ document.addEventListener("partialsLoaded", () => {
   const input = document.getElementById("chatbot-text");
   const messages = document.getElementById("chatbot-messages");
 
-  if (!chatBox) return;
+  // Stop if chatbot not loaded
+  if (!chatBox || !messages) return;
 
-  /* ================= DEVICE CHECK ================= */
-  function isMobile() {
-    return window.innerWidth <= 768;
-  }
+  /* ===== DEVICE CHECK ===== */
+  const isMobile = () => window.innerWidth <= 768;
 
-  /* ================= AUTO OPEN ONLY DESKTOP ================= */
+  /* ===== INITIAL STATE ===== */
   if (!isMobile()) {
     chatBox.style.display = "flex";   // Desktop auto open
   } else {
-    chatBox.style.display = "none";   // Mobile closed by default
+    chatBox.style.display = "none";   // Mobile closed
   }
 
-  /* ================= TOGGLE BUTTON ================= */
+  /* ===== OPEN BUTTON ===== */
   if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
+    toggleBtn.onclick = () => {
       chatBox.style.display = "flex";
-      messages.scrollTop = messages.scrollHeight;
-    });
+      scrollToBottom();
+    };
   }
 
-  /* ================= CLOSE ================= */
+  /* ===== CLOSE BUTTON ===== */
   if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
+    closeBtn.onclick = () => {
       chatBox.style.display = "none";
-    });
+    };
   }
 
-  /* ================= ADD MESSAGE ================= */
+  /* ===== ADD MESSAGE ===== */
   function addMessage(text, type, typing = false) {
+
     const div = document.createElement("div");
     div.className = "chatbot-msg " + type;
     messages.appendChild(div);
 
     if (!typing) {
       div.textContent = text;
-      messages.scrollTop = messages.scrollHeight;
+      scrollToBottom();
       return;
     }
 
     let i = 0;
     const speed = 15;
 
-    (function type() {
+    (function typeEffect() {
       if (i < text.length) {
         div.textContent += text.charAt(i++);
-        messages.scrollTop = messages.scrollHeight;
-        setTimeout(type, speed);
+        scrollToBottom();
+        setTimeout(typeEffect, speed);
       }
     })();
   }
 
-  /* ================= SEND MESSAGE ================= */
+  /* ===== SCROLL HELPER ===== */
+  function scrollToBottom() {
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  /* ===== SEND MESSAGE ===== */
   async function sendMessage() {
+
+    if (!input) return;
 
     const text = input.value.trim();
     if (!text) return;
@@ -73,22 +82,24 @@ document.addEventListener("partialsLoaded", () => {
 
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text })
       });
+
+      if (!res.ok) throw new Error("Network error");
 
       const data = await res.json();
 
       addMessage(data.reply || "Try again 🙂", "bot", true);
 
-    } catch (err) {
-      addMessage("⚠ Server error. Try again.", "bot", true);
+    } catch (error) {
+      console.error("Chat error:", error);
+      addMessage("⚠ Server error. Please try again.", "bot", true);
     }
   }
 
-  if (sendBtn) sendBtn.addEventListener("click", sendMessage);
+  /* ===== EVENTS ===== */
+  if (sendBtn) sendBtn.onclick = sendMessage;
 
   if (input) {
     input.addEventListener("keydown", e => {
@@ -96,4 +107,4 @@ document.addEventListener("partialsLoaded", () => {
     });
   }
 
-});
+}
