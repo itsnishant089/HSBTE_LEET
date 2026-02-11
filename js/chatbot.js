@@ -21,21 +21,6 @@ function initChatbot() {
     chatBox.style.display = "none";   // Mobile closed
   }
 
-  /* ===== OPEN ===== */
-  if (toggleBtn) {
-    toggleBtn.onclick = () => {
-      chatBox.style.display = "flex";
-      scrollToBottom();
-    };
-  }
-
-  /* ===== CLOSE ===== */
-  if (closeBtn) {
-    closeBtn.onclick = () => {
-      chatBox.style.display = "none";
-    };
-  }
-
   /* ===== ADD MESSAGE ===== */
   function addMessage(text, type) {
     const div = document.createElement("div");
@@ -49,6 +34,44 @@ function initChatbot() {
     messages.scrollTop = messages.scrollHeight;
   }
 
+  /* ===== GREETING (OLD STYLE PRELOAD) ===== */
+  function greetUser() {
+    if (sessionStorage.getItem("hsbteGreeted")) return;
+
+    addMessage(
+`👋 Hey! I’m your HSBTE AI Assistant.
+What can I help you with today?
+
+• PYQ & syllabus
+• LEET guidance
+• Results & exams`,
+      "bot"
+    );
+
+    sessionStorage.setItem("hsbteGreeted", "true");
+  }
+
+  // Show greeting on desktop auto open
+  if (!isMobile()) {
+    greetUser();
+  }
+
+  /* ===== OPEN ===== */
+  if (toggleBtn) {
+    toggleBtn.onclick = () => {
+      chatBox.style.display = "flex";
+      greetUser();
+      scrollToBottom();
+    };
+  }
+
+  /* ===== CLOSE ===== */
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      chatBox.style.display = "none";
+    };
+  }
+
   /* ===== SEND MESSAGE ===== */
   async function sendMessage() {
 
@@ -58,7 +81,11 @@ function initChatbot() {
     addMessage(text, "user");
     input.value = "";
 
-    addMessage("⏳ Thinking...", "bot");
+    const thinkingMessage = document.createElement("div");
+    thinkingMessage.className = "chatbot-msg bot";
+    thinkingMessage.textContent = "⏳ Thinking...";
+    messages.appendChild(thinkingMessage);
+    scrollToBottom();
 
     try {
 
@@ -68,20 +95,20 @@ function initChatbot() {
         body: JSON.stringify({ message: text })
       });
 
-      if (!res.ok) {
-        throw new Error("Server error " + res.status);
-      }
-
       const data = await res.json();
 
-      // Remove "Thinking..." message
-      messages.removeChild(messages.lastChild);
+      messages.removeChild(thinkingMessage);
+
+      if (!res.ok) {
+        addMessage(data.reply || "Server error.", "bot");
+        return;
+      }
 
       addMessage(data.reply || "No reply received.", "bot");
 
     } catch (error) {
       console.error(error);
-      messages.removeChild(messages.lastChild);
+      messages.removeChild(thinkingMessage);
       addMessage("⚠ Server error. Please try again.", "bot");
     }
   }
