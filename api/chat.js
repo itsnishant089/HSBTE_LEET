@@ -8,12 +8,12 @@ export default async function handler(req, res) {
 
   const ip =
     req.headers["x-forwarded-for"] ||
-    req.socket.remoteAddress ||
+    req.socket?.remoteAddress ||
     "unknown";
 
   const now = Date.now();
 
-  // ===== RATE LIMIT =====
+  // ===== RATE LIMIT (10 req per minute) =====
   if (!requestCounts[ip]) {
     requestCounts[ip] = { count: 1, time: now };
   } else {
@@ -52,8 +52,9 @@ Only answer about HSBTE, LEET, Diploma, PYQ, Syllabus.
 If unrelated, say you are not trained for that.
 `;
 
+    // ✅ UPDATED MODEL (WORKING ONE)
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -69,14 +70,13 @@ If unrelated, say you are not trained for that.
 
     const data = await response.json();
 
-    // ===== HANDLE GEMINI ERRORS =====
     if (!response.ok) {
+      console.error("Gemini API Error:", data);
       return res.status(response.status).json({
         reply: data?.error?.message || "Gemini API error."
       });
     }
 
-    // ===== SAFE REPLY EXTRACTION =====
     const reply =
       data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
