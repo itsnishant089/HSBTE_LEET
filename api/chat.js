@@ -13,20 +13,19 @@ export default async function handler(req, res) {
 
   const now = Date.now();
 
+  // ===== RATE LIMIT =====
   if (!requestCounts[ip]) {
     requestCounts[ip] = { count: 1, time: now };
   } else {
-    const timeDiff = now - requestCounts[ip].time;
+    const diff = now - requestCounts[ip].time;
 
-    // Reset after 1 minute
-    if (timeDiff > 60000) {
+    if (diff > 60000) {
       requestCounts[ip] = { count: 1, time: now };
     } else {
       requestCounts[ip].count++;
     }
   }
 
-  // Limit: 10 requests per minute
   if (requestCounts[ip].count > 10) {
     return res.status(429).json({
       reply: "⚠ Too many requests. Please wait 1 minute."
@@ -35,9 +34,17 @@ export default async function handler(req, res) {
 
   const API_KEY = process.env.GEMINI_API_KEY;
 
+  if (!API_KEY) {
+    return res.status(500).json({ reply: "API key missing." });
+  }
+
   try {
 
     const { message } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ reply: "Message required." });
+    }
 
     const CONTEXT = `
 You are an AI assistant for HSBTE LEET & PYQ website.
@@ -62,13 +69,27 @@ If unrelated, say you are not trained for that.
 
     const data = await response.json();
 
-    const reply =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "Please try again.";
+    // ===== HANDLE GEMINI ERRORS =====
+    if (!response.ok) {
+      return res.status(response.status).json({
+        reply: data?.error?.message || "Gemini API error."
+      });
+    }
 
-    res.status(200).json({ reply });
+    // ===== SAFE REPLY EXTRACTION =====
+    const reply =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!reply) {
+      return res.status(500).json({
+        reply: "No response from AI."
+      });
+    }
+
+    return res.status(200).json({ reply });
 
   } catch (error) {
-    res.status(500).json({ reply: "Server error." });
+    console.error("Server error:", error);
+    return res.status(500).json({ reply: "Server error." });
   }
 }
