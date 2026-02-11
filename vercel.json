@@ -4,12 +4,9 @@
       "source": "/",
       "destination": "/index.html"
     },
+   
     {
-      "source": "/analytics-dashboard",
-      "destination": "/html/analytics-dashboard.html"
-    },
-    {
-      "source": "/:path((?!api|_next|.*\\..*|image|css|js|pdf|html|data|partials|node_modules).*)",
+      "source": "/:path((?!api|_next|.*\\..*|image|css|js|pdf|data|partials|node_modules).*)",
       "destination": "/html/:path.html"
     }
   ],
