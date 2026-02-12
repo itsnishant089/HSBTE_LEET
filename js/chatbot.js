@@ -14,49 +14,64 @@ function initChatbot() {
   /* ===== DEVICE CHECK ===== */
   const isMobile = () => window.innerWidth <= 768;
 
-  /* ===== INITIAL STATE ===== */
-  if (!isMobile()) {
-    chatBox.style.display = "flex";   // Desktop auto open
-  } else {
-    chatBox.style.display = "none";   // Mobile closed
-  }
-
-  /* ===== ADD MESSAGE ===== */
-  function addMessage(text, type) {
-    const div = document.createElement("div");
-    div.className = "chatbot-msg " + type;
-    div.textContent = text;
-    messages.appendChild(div);
-    scrollToBottom();
-  }
-
+  /* ===== SCROLL ===== */
   function scrollToBottom() {
     messages.scrollTop = messages.scrollHeight;
   }
 
-  /* ===== GREETING (OLD STYLE PRELOAD) ===== */
-  function greetUser() {
-    if (sessionStorage.getItem("hsbteGreeted")) return;
+  /* ===== ADD MESSAGE WITH TYPING EFFECT ===== */
+  function addMessage(text, type, typing = false) {
+    const div = document.createElement("div");
+    div.className = "chatbot-msg " + type;
+    messages.appendChild(div);
 
-    addMessage(
+    if (!typing) {
+      div.textContent = text;
+      scrollToBottom();
+      return;
+    }
+
+    let i = 0;
+    const speed = 15;
+
+    function typeEffect() {
+      if (i < text.length) {
+        div.textContent += text.charAt(i);
+        i++;
+        scrollToBottom();
+        setTimeout(typeEffect, speed);
+      }
+    }
+
+    typeEffect();
+  }
+
+  /* ===== GREETING WITH TYPING ===== */
+  function greetUser() {
+    if (sessionStorage.getItem("chatGreetingShown")) return;
+
+    const greetingText =
 `👋 Hey! I’m your HSBTE AI Assistant.
 What can I help you with today?
 
 • PYQ & syllabus
 • LEET guidance
-• Results & exams`,
-      "bot"
-    );
+• Results & exams`;
 
-    sessionStorage.setItem("hsbteGreeted", "true");
+    addMessage(greetingText, "bot", true);
+    sessionStorage.setItem("chatGreetingShown", "true");
   }
 
-  // Show greeting on desktop auto open
-  if (!isMobile()) {
+  /* ===== AUTO OPEN ONLY FIRST VISIT (DESKTOP ONLY) ===== */
+  if (!isMobile() && !sessionStorage.getItem("chatAutoOpened")) {
+    chatBox.style.display = "flex";
     greetUser();
+    sessionStorage.setItem("chatAutoOpened", "true");
+  } else {
+    chatBox.style.display = "none";
   }
 
-  /* ===== OPEN ===== */
+  /* ===== OPEN BUTTON ===== */
   if (toggleBtn) {
     toggleBtn.onclick = () => {
       chatBox.style.display = "flex";
@@ -65,7 +80,7 @@ What can I help you with today?
     };
   }
 
-  /* ===== CLOSE ===== */
+  /* ===== CLOSE BUTTON ===== */
   if (closeBtn) {
     closeBtn.onclick = () => {
       chatBox.style.display = "none";
@@ -81,10 +96,10 @@ What can I help you with today?
     addMessage(text, "user");
     input.value = "";
 
-    const thinkingMessage = document.createElement("div");
-    thinkingMessage.className = "chatbot-msg bot";
-    thinkingMessage.textContent = "⏳ Thinking...";
-    messages.appendChild(thinkingMessage);
+    const thinkingDiv = document.createElement("div");
+    thinkingDiv.className = "chatbot-msg bot";
+    thinkingDiv.textContent = "⏳ Thinking...";
+    messages.appendChild(thinkingDiv);
     scrollToBottom();
 
     try {
@@ -97,18 +112,18 @@ What can I help you with today?
 
       const data = await res.json();
 
-      messages.removeChild(thinkingMessage);
+      messages.removeChild(thinkingDiv);
 
       if (!res.ok) {
         addMessage(data.reply || "Server error.", "bot");
         return;
       }
 
-      addMessage(data.reply || "No reply received.", "bot");
+      addMessage(data.reply || "No reply received.", "bot", true);
 
     } catch (error) {
       console.error(error);
-      messages.removeChild(thinkingMessage);
+      messages.removeChild(thinkingDiv);
       addMessage("⚠ Server error. Please try again.", "bot");
     }
   }
