@@ -1,4 +1,13 @@
 // ================================
+// ERROR HANDLING - PREVENT JS ERRORS
+// ================================
+window.addEventListener('error', function(e) {
+  console.warn('JavaScript error caught:', e.message, e.filename, e.lineno);
+  // Prevent error from breaking the page
+  return true;
+});
+
+// ================================
 // PARTIALS LOADED LOGIC
 // ================================
 document.addEventListener("partialsLoaded", () => {

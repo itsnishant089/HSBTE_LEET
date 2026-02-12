@@ -73,6 +73,12 @@ body {
   color: #222;
 }
 
+/* Prevent font loading layout shift */
+@font-face {
+  font-family: 'Arial';
+  font-display: swap;
+}
+
 /* ---------- HEADER ---------- */
 header {
   width: 100%;
@@ -303,12 +309,32 @@ header {
   animation: fadeUp 0.8s ease forwards;
 }
 
-/* FULL DIV hover effect */
+/* FULL DIV hover effect - IMPROVED FOR BETTER CLICKABILITY */
+.main-content-left,
+.main-content-right {
+  cursor: pointer;
+  position: relative;
+}
+
 .main-content-left:hover,
 .main-content-right:hover {
   background-color: #e6f2ff;   /* light blue */
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 14px 30px rgba(2, 27, 64, 0.25);
+}
+
+/* Make links more clickable */
+.main-content-left a,
+.main-content-right a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.main-content-left a:hover,
+.main-content-right a:hover {
+  opacity: 0.9;
 }
 
 /* Headings */
@@ -319,16 +345,19 @@ header {
   letter-spacing: 1px;
 }
 
-/* Images (centered, not full width) */
+/* Images (centered, not full width) - CLS FIXED */
 .main-content img {
   display: block;
   max-width: 75%;
   height: auto;
-  aspect-ratio: auto;
+  aspect-ratio: 524 / 350; /* Fixed aspect ratio to prevent CLS */
   margin: 15px auto;
   border-radius: 8px;
   transition: transform 0.4s ease;
   object-fit: contain;
+  /* Reserve space to prevent layout shift */
+  min-height: 200px;
+  background-color: #f5f5f5;
 }
 
 /* Image hover zoom */
@@ -345,19 +374,25 @@ header {
 
 
 
-/* ---------- ANIMATION ---------- */
+/* ---------- ANIMATION (NO LAYOUT SHIFT) ---------- */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 /* ---------- RESPONSIVE ---------- */
+/* Reserve space for syllabus box to prevent CLS */
+.syllabus-box {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;
@@ -366,6 +401,11 @@ header {
   .main-content img {
     max-width: 85%;
     height: 200px;
+    min-height: 200px; /* Prevent CLS on mobile */
+  }
+  
+  .syllabus-box {
+    min-height: 280px;
   }
   .top-left{
     margin-right: 37px;
