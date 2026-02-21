@@ -41,42 +41,10 @@ footer {
   flex-shrink: 0;
 }
 
-/* Hide unfilled AdSense containers to prevent extra white space */
-ins.adsbygoogle[data-ad-status="unfilled"],
-ins.adsbygoogle[data-ad-status="error"],
-ins.adsbygoogle[data-ad-status="unfilled"] + * {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  visibility: hidden !important;
-  overflow: hidden !important;
-  line-height: 0 !important;
-}
-
-/* Hide empty AdSense containers */
-ins.adsbygoogle:empty,
-ins.adsbygoogle:not([data-ad-status="filled"]) {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-/* Prevent AdSense from creating extra space */
+/* AdSense - Normal display (no hiding) */
 .adsbygoogle {
   display: block;
   text-align: center;
-}
-
-/* Only show filled AdSense ads */
-ins.adsbygoogle[data-ad-status="filled"] {
-  display: block !important;
 }
 
 /* Prevent body overflow from AdSense - merged with existing body styles */
@@ -87,27 +55,9 @@ body > *:last-child:not(footer):not(script):not(style) {
   margin-bottom: 0;
 }
 
-/* Hide AdSense containers that appear after footer */
-footer ~ ins.adsbygoogle,
-footer ~ div[id*="google_ads"],
-footer ~ iframe[src*="googlesyndication"],
-footer ~ iframe[src*="doubleclick"] {
-  display: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  visibility: hidden !important;
-}
+/* AdSense after footer - allow normal display */
 
-/* Additional AdSense container fixes - only hide unfilled */
-iframe[src*="googlesyndication"]:not([data-ad-status="filled"]),
-iframe[src*="doubleclick"]:not([data-ad-status="filled"]),
-div[id*="google_ads"]:not([data-ad-status="filled"]),
-div[class*="adsbygoogle"]:not([data-ad-status="filled"]) {
-  max-height: 0 !important;
-  overflow: hidden !important;
-  display: none !important;
-}
+/* AdSense iframes - normal display */
 
 /* Ensure body doesn't extend beyond viewport */
 body {
