@@ -73,8 +73,18 @@
 <!-- AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3142279668395491" crossorigin="anonymous"></script>
 
-<!-- Analytics - Deferred -->
-<script defer src="https://www.clarity.ms/tag/vesdg7gqcq"></script>
+<!-- Analytics - Clarity (with error handling) -->
+<script>
+(function(c,l,a,r,i,t,y){
+  try {
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  } catch(e) {
+    console.warn('Clarity initialization error:', e);
+  }
+})(window, document, "clarity", "script", "vesdg7gqcq");
+</script>
 <script defer src="https://www.googletagmanager.com/gtag/js?id=G-WR1BG2HCE0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
