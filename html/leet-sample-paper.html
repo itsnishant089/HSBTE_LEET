@@ -1,1 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
 
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
+
+<title>HSBTE LEET Sample Papers | BTech & B.Pharmacy LEET Papers</title>
+
+<meta name="description" content="Download HSBTE LEET Sample Papers for BTech and B.Pharmacy lateral entry. Practice previous and model papers for Haryana LEET preparation."/>
+<meta name="keywords" content="HSBTE LEET sample paper, LEET previous papers, Haryana LEET question papers, BTech LEET sample, BPharmacy LEET sample"/>
+
+<link rel="canonical" href="https://hsbteleet.com/html/leet-sample-paper.html"/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#f4f6f9;
+}
+
+/* HERO */
+.page-hero{
+  background:linear-gradient(135deg,#1565c0,#0d47a1);
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+}
+
+.page-hero h1{
+  margin:0;
+  font-size:28px;
+}
+
+.page-hero p{
+  margin-top:8px;
+  font-size:16px;
+}
+
+/* CONTAINER */
+.sample-container{
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.sample-card{
+  background:white;
+  border-radius:12px;
+  padding:25px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:.3s;
+}
+
+.sample-card:hover{
+  transform:translateY(-4px);
+}
+
+.sample-card h2{
+  margin-bottom:10px;
+  color:#0d47a1;
+}
+
+.sample-card p{
+  color:#555;
+  font-size:15px;
+}
+
+/* BUTTON */
+.view-btn{
+  margin-top:15px;
+  padding:12px 28px;
+  background:#1565c0;
+  color:white;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  transition:.3s;
+}
+
+.view-btn:hover{
+  background:#0d47a1;
+}
+
+/* GO TOP */
+#goTopBtn{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  background:#1565c0;
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:45px;
+  height:45px;
+  cursor:pointer;
+  display:none;
+}
+
+#goTopBtn i{
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER INCLUDE -->
+<div data-include="../partials/header.html"></div>
+
+<main>
+
+<div class="page-hero">
+  <h1><i class="fas fa-file-alt"></i> HSBTE LEET Sample Papers</h1>
+  <p>BTech & B.Pharmacy LEET Previous & Model Papers</p>
+</div>
+
+<div class="sample-container">
+
+  <!-- BTECH -->
+  <div class="sample-card">
+    <h2>BTech LEET Sample Papers</h2>
+    <p>Practice BTech LEET previous year and model question papers</p>
+    <button class="view-btn" onclick="openPage('btech')">
+      View BTech Papers
+    </button>
+  </div>
+
+  <!-- BPHARMACY -->
+  <div class="sample-card">
+    <h2>B.Pharmacy LEET Sample Papers</h2>
+    <p>Practice B.Pharmacy LEET previous year and model question papers</p>
+    <button class="view-btn" onclick="openPage('pharmacy')">
+      View B.Pharmacy Papers
+    </button>
+  </div>
+
+</div>
+
+</main>
+
+<button id="goTopBtn" title="Go to top">
+<i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- FOOTER INCLUDE -->
+<div data-include="../partials/footer.html"></div>
+
+<script>
+/* OPEN PAGE */
+function openPage(type){
+  if(type==="btech"){
+    window.location.href="html/btech-leet-sample-paper.html";
+  }else{
+    window.location.href="html/b-pharmacy-leet-sample-paper.html";
+  }
+}
+
+/* GO TOP BUTTON */
+const goTopBtn=document.getElementById("goTopBtn");
+
+window.onscroll=function(){
+  if(document.body.scrollTop>200 || document.documentElement.scrollTop>200){
+    goTopBtn.style.display="block";
+  }else{
+    goTopBtn.style.display="none";
+  }
+};
+
+goTopBtn.onclick=function(){
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+/* INCLUDE HTML */
+document.querySelectorAll("[data-include]").forEach(el=>{
+  fetch(el.getAttribute("data-include"))
+    .then(r=>r.text())
+    .then(data=>el.innerHTML=data);
+});
+</script>
+
+</body>
+</html>
