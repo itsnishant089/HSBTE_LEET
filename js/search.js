@@ -309,6 +309,24 @@
         title: 'B. Pharmacy LEET Sample Papers', 
         url: `${basePath}b-pharmacy-leet-sample-paper`, 
         keywords: ['b pharmacy leet sample paper', 'bpharmacy leet sample paper', 'b pharmacy sample paper', 'bpharmacy sample paper', 'b pharmacy leet sample', 'bpharmacy leet sample', 'b pharmacy mock paper', 'bpharmacy mock paper', 'b pharmacy practice paper', 'bpharmacy practice paper', 'sample paper b pharmacy', 'sample paper bpharmacy', 'b pharmacy leet mock', 'bpharmacy leet mock', 'b pharmacy leet papers', 'bpharmacy leet papers', 'b pharmacy sample', 'bpharmacy sample', 'b pharmacy practice', 'bpharmacy practice', 'b pharmacy mock', 'bpharmacy mock', 'b pharmacy leet pyq', 'b pharmacy leet previous year'] 
+      },
+      { 
+        type: 'page', 
+        title: 'LEET Preparation Guide', 
+        url: `${basePath}leet-preparation-guide`, 
+        keywords: ['leet preparation guide', 'leet preparation', 'hsbte leet preparation', 'haryana leet preparation', 'leet exam preparation', 'leet study plan', 'leet preparation tips', 'leet preparation strategy', 'leet preparation material', 'leet exam tips', 'leet study guide', 'btech leet preparation', 'b pharmacy leet preparation', 'leet preparation 2025', 'leet preparation 2026', 'leet preparation books', 'leet mock test', 'leet practice papers'] 
+      },
+      { 
+        type: 'page', 
+        title: 'LEET Counselling Information', 
+        url: `${basePath}leet-counselling`, 
+        keywords: ['leet counselling', 'hsbte leet counselling', 'haryana leet counselling', 'leet counselling process', 'leet seat allotment', 'leet counselling dates', 'leet counselling registration', 'leet counselling fee', 'leet document verification', 'leet counselling rounds', 'leet choice filling', 'leet counselling guidelines', 'btech leet counselling', 'b pharmacy leet counselling', 'leet counselling 2025', 'leet counselling 2026'] 
+      },
+      { 
+        type: 'page', 
+        title: 'Haryana Diploma Information', 
+        url: `${basePath}haryana-diploma-info`, 
+        keywords: ['haryana diploma', 'hsbte diploma', 'haryana diploma engineering', 'hsbte diploma courses', 'haryana polytechnic', 'diploma engineering haryana', 'diploma admission haryana', 'diploma syllabus haryana', 'diploma branches haryana', 'diploma engineering information', 'haryana technical education', 'diploma career', 'diploma to degree', 'lateral entry diploma', 'haryana diploma colleges'] 
       }
     );
 

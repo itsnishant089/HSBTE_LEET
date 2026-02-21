@@ -55,6 +55,9 @@ Allow: /leet-syllabus
 Allow: /leet-tentative-dates
 Allow: /leet-overview
 Allow: /last-year-cutoff
+Allow: /leet-preparation-guide
+Allow: /leet-counselling
+Allow: /haryana-diploma-info
 
 
 
