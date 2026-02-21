@@ -3,24 +3,126 @@
    BASE STYLES
    ============================================ */
 
-/* Light mode (default) */
-html, body {
+/* Flexbox Full-Height Layout - Fix Footer Spacing */
+html {
+  height: 100%;
   width: 100%;
   overflow-x: hidden;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
   position: relative;
-}
-
-body {
   background-color: #ffffff;
   color: #000000;
   transition: background 0.3s, color 0.3s;
+}
+
+/* Main content grows to fill space, pushing footer down */
+main,
+#main-content,
+.main-content,
+.page-content,
+.content-section,
+.sample-container,
+.syllabus-page-container {
+  flex: 1 0 auto;
+  min-height: 0; /* Prevent flex items from overflowing */
+}
+
+/* Footer stays at bottom */
+footer {
+  flex-shrink: 0;
+}
+
+/* Hide unfilled AdSense containers to prevent extra white space */
+ins.adsbygoogle[data-ad-status="unfilled"],
+ins.adsbygoogle[data-ad-status="error"],
+ins.adsbygoogle[data-ad-status="unfilled"] + * {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+  line-height: 0 !important;
+}
+
+/* Hide empty AdSense containers */
+ins.adsbygoogle:empty,
+ins.adsbygoogle:not([data-ad-status="filled"]) {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Prevent AdSense from creating extra space */
+.adsbygoogle {
+  display: block;
+  text-align: center;
+}
+
+/* Only show filled AdSense ads */
+ins.adsbygoogle[data-ad-status="filled"] {
+  display: block !important;
+}
+
+/* Prevent body overflow from AdSense - merged with existing body styles */
+/* Body overflow already set above in flexbox layout */
+
+/* Ensure no extra space after footer */
+body > *:last-child:not(footer):not(script):not(style) {
+  margin-bottom: 0;
+}
+
+/* Hide AdSense containers that appear after footer */
+footer ~ ins.adsbygoogle,
+footer ~ div[id*="google_ads"],
+footer ~ iframe[src*="googlesyndication"],
+footer ~ iframe[src*="doubleclick"] {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Additional AdSense container fixes - only hide unfilled */
+iframe[src*="googlesyndication"]:not([data-ad-status="filled"]),
+iframe[src*="doubleclick"]:not([data-ad-status="filled"]),
+div[id*="google_ads"]:not([data-ad-status="filled"]),
+div[class*="adsbygoogle"]:not([data-ad-status="filled"]) {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  display: none !important;
+}
+
+/* Ensure body doesn't extend beyond viewport */
+body {
+  max-width: 100vw;
+}
+
+/* Prevent horizontal scroll - ensure no overflow */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Dark mode */
@@ -66,11 +168,10 @@ body.text-large {
   box-sizing: border-box;
 }
 
+/* Additional body styles - merged with flexbox layout above */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background: white;
-  color: #222;
 }
 
 /* Prevent font loading layout shift */
