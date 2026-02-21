@@ -46,6 +46,17 @@ Allow: /Textile-Design
 Allow: /Textile-Processing
 Allow: /Textile-Technology
 Allow: /syllabus
+Allow: /leet-sample-paper
+Allow: /hsbte-result
+Allow: /contact
+Allow: /faq
+Allow: /notices
+Allow: /leet-syllabus
+Allow: /leet-tentative-dates
+Allow: /leet-overview
+Allow: /last-year-cutoff
+
+
 
 # Also allow asset folders so main pages render correctly
 Allow: /css/
