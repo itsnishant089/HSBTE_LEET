@@ -3,14 +3,14 @@
 
 User-agent: *
 
-# Block everything by default
-Disallow: /
+# Allow all important pages (block nothing critical)
+Disallow:
 
-# Allow homepage
+# Main site entry
 Allow: /$
 Allow: /index.html
 
-# Allow only main branch / exam pages (pretty URLs)
+# Main branch / exam pages (pretty URLs)
 Allow: /Adv-Diploma
 Allow: /Agriculture
 Allow: /ai-ml
@@ -58,6 +58,9 @@ Allow: /last-year-cutoff
 Allow: /leet-preparation-guide
 Allow: /leet-counselling
 Allow: /haryana-diploma-info
+
+# Haryana LEET 2026 hub
+Allow: /haryana-leet-2026
 
 
 

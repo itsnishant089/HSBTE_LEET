@@ -943,7 +943,11 @@ body.dark-mode footer {
   background: #f8f9ff;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   cursor: pointer;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 360px; /* ensure BTech & B.Pharmacy cards same height */
   /* Animation */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   animation: fadeUp 0.8s ease forwards;
@@ -987,6 +991,11 @@ body.dark-mode footer {
 .leet-card p {
   color: black;
   font-size: 15px;
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Entrance Animation */

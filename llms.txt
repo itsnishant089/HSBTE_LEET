@@ -1,0 +1,30 @@
+# LLM instructions for hsbteleet.com
+# This file helps AI search and assistant bots understand and index the site.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://hsbteleet.com/sitemap.xml
+
+# Priority pages for Haryana LEET and HSBTE PYQ
+https://hsbteleet.com/ - HSBTE PYQ – Haryana LEET & Polytechnic Previous Year Question Papers
+https://hsbteleet.com/haryanaleet - Haryana LEET hub with BTech & B.Pharmacy LEET information
+https://hsbteleet.com/haryana-leet-2026 - Haryana LEET 2026 exam guide: dates, syllabus, PYQ, sample papers, counselling
+https://hsbteleet.com/hsbte-pyq - HSBTE PYQ branch-wise diploma previous year question papers
+https://hsbteleet.com/leet-sample-paper - Haryana LEET sample papers for BTech & B.Pharmacy lateral entry
+https://hsbteleet.com/leet-preparation-guide - LEET preparation strategy, study plan, and tips
+https://hsbteleet.com/leet-syllabus - Haryana LEET syllabus and exam pattern
+https://hsbteleet.com/last-year-cutoff - Haryana LEET previous year cutoff and rank information
+https://hsbteleet.com/leet-counselling - Haryana LEET counselling process and seat allotment
+https://hsbteleet.com/syllabus/syllabus.html - HSBTE diploma syllabus for all branches (PDF)
+https://hsbteleet.com/hsbte-result - Latest HSBTE result updates for diploma students
+https://hsbteleet.com/faq - Frequently asked questions about HSBTE, Haryana LEET, PYQ, and syllabus
+https://hsbteleet.com/contact - Contact page for students needing help with HSBTE PYQ or Haryana LEET
+
+https://hsbteleet.com/haryana-leet-syllabus - Haryana LEET 2026 syllabus page
+https://hsbteleet.com/haryana-leet-exam-pattern - Haryana LEET 2026 exam pattern page
+https://hsbteleet.com/haryana-leet-eligibility - Haryana LEET 2026 eligibility page
+https://hsbteleet.com/haryana-leet-counselling - Haryana LEET 2026 counselling page
+https://hsbteleet.com/haryana-leet-cutoff - Haryana LEET cutoff and rank trends page
+https://hsbteleet.com/haryana-leet-colleges - Overview of Haryana LEET colleges and seat options
+
