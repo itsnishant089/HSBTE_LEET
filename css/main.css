@@ -1728,37 +1728,59 @@ body.dark-mode .footer-bottom {
 .computer-1-semester {
   padding: 80px 20px;
   text-align: center;
-  max-width: 1100px;
-  margin: auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-/* Heading */
 .semester-heading {
-  font-size: 34px;
-  color: #1d3557;
+  font-size: 42px;
+  font-weight: 800;
+  text-align: center;
   margin-bottom: 12px;
+  letter-spacing: 0.6px;
+
+  /* Gradient text highlight */
+  background: linear-gradient(135deg, #667eea, #764ba2, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* glow */
+  text-shadow: 0 4px 18px rgba(102,126,234,0.25);
+
+  position: relative;
 }
 
-/* Subtext */
-.semester-subtext {
+/* highlight bar */
+.semester-heading::after {
+  content: "";
+  width: 110px;
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  display: block;
+  margin: 14px auto 0;
+  box-shadow: 0 4px 14px rgba(102,126,234,0.35);
+}.semester-subtext {
   font-size: 18px;
-  color: black;
-  margin-bottom: 45px;
+  color: #5c677d;
+  text-align: center;
+  margin-bottom: 55px;
+  font-weight: 500;
 }
 
-/* Grid - Enhanced */
 .semester-subject-grid {
-  display: grid ;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) ;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 28px;
   margin-top: 40px;
   padding: 0 10px;
+
+  width: 100%;
+  max-width: 1200px;   /* controls how many cards per row */
+  margin-left: auto;
+  margin-right: auto;
 }
-@media (min-width:1200px){
-  .semester-subject-grid{
-    grid-template-columns:repeat(5,1fr);
-  }
-}
+
 
 /* Subject Card - Modern Enhanced Design */
 .semester-subject-card {
@@ -4583,4 +4605,91 @@ body.dark-mode .dropdown-menu a:hover {
 
 .result-link-btn i {
   margin-right: 8px;
+}
+/* ===============================
+   MOBILE DRAWER NAV
+=/* ===============================
+   MOBILE NAVBAR (FIXED)
+================================ */
+
+/* Fix dropdown button in navbar */
+.nav-link.dropdown-toggle {
+  background: transparent !important;
+  border: none;
+  color: #ffffff;
+  font: inherit;
+  padding: 14px 10px;
+  cursor: pointer;
+}
+
+.nav-link.dropdown-toggle:hover {
+  background: rgba(255,255,255,0.12);
+}
+@media (max-width: 1100px) {
+
+  /* Hamburger */
+  .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1002;
+  }
+
+  .mobile-menu-toggle span {
+    width: 26px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 2px;
+  }
+
+  /* Drawer menu */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background: #0b6db7;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 80px 0 20px;
+    box-shadow: 8px 0 25px rgba(0,0,0,0.25);
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: 1001;
+    overflow-y: auto;
+  }
+
+  .nav-menu.active {
+    transform: translateX(0);
+  }
+
+  /* Items */
+  .nav-link {
+    display: block;
+    padding: 14px 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    font-size: 16px;
+    color: #fff;
+  }
+
+  .nav-link:hover {
+    background: rgba(255,255,255,0.12);
+  }
+
+  /* Dropdown inside drawer */
+  .dropdown-menu {
+    position: static;
+    display: none;
+    background: rgba(0,0,0,0.15);
+  }
+
+  .has-dropdown.active > .dropdown-menu {
+    display: block;
+  }
+
 }

@@ -207,6 +207,7 @@ function initGoTopButton() {
       goTopBtn.classList.remove("show");
     }
   }
+  
 
   window.addEventListener("scroll", toggleGoTopButton, { passive: true });
   
