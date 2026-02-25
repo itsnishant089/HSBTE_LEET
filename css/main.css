@@ -771,18 +771,99 @@ footer a:hover {
 
 /* ---------- DARK MODE ---------- */
 body.dark-mode {
-  background: #121212;
-  color: #eaeaea;
+  background: #0b0b10;
+  color: #e5e7eb;
 }
 
-body.dark-mode header,
+/* Header + top bar */
+body.dark-mode header {
+  background: #111827;
+  border-bottom-color: #1f2933;
+}
+
+body.dark-mode .top-header {
+  background: #111827;
+}
+
+body.dark-mode .middle-header {
+  background: #020617;
+}
+
+/* Search + controls */
+body.dark-mode .search-container {
+  background: #020617;
+  border-color: #374151;
+}
+
+body.dark-mode .search-input {
+  color: #e5e7eb;
+}
+
+body.dark-mode .search-input::placeholder {
+  color: #9ca3af;
+}
+
+body.dark-mode .search-results {
+  background: #020617;
+  border-color: #374151;
+}
+
+body.dark-mode .search-result-item {
+  color: #e5e7eb;
+}
+
+body.dark-mode .search-result-item:hover {
+  background-color: #111827;
+}
+
+/* Global cards/sections */
 body.dark-mode .main-content-left,
-body.dark-mode .main-content-right {
-  background: #1e1e1e;
+body.dark-mode .main-content-right,
+body.dark-mode .content-card,
+body.dark-mode .syllabus-card,
+body.dark-mode .notice-card,
+body.dark-mode .result-search-card,
+body.dark-mode .dates-table-container,
+body.dark-mode .course-selector-card,
+body.dark-mode .info-card,
+body.dark-mode .contact-profile-card {
+  background: #111827;
+  color: #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+  border-color: #1f2937;
 }
 
+body.dark-mode .page-hero,
+body.dark-mode .overview-hero,
+body.dark-mode .contact-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #111827 100%);
+}
+
+body.dark-mode .semester-subtext,
+body.dark-mode .hsbte-subtext,
+body.dark-mode .page-hero p,
+body.dark-mode .content-card p,
+body.dark-mode .content-card li {
+  color: #d1d5db;
+}
+
+/* Branch / semester cards */
+body.dark-mode .hsbte-card,
+body.dark-mode .btech-card,
+body.dark-mode .sample-paper-card,
+body.dark-mode .computer-pyq-card,
+body.dark-mode .semester-subject-card.main-subject {
+  background: #020617 !important;
+  color: #e5e7eb !important;
+}
+
+/* Footer */
 body.dark-mode footer {
-  background: #000;
+  background: #020617;
+}
+
+body.dark-mode .footer-bottom {
+  background: #111827;
 }
 
 /* ---------- MEDIA QUERIES ---------- */
@@ -1574,6 +1655,7 @@ body.dark-mode footer {
   
 }
 
+
 /* Card */
 .computer-pyq-card {
   text-decoration: none;
@@ -1666,11 +1748,16 @@ body.dark-mode footer {
 
 /* Grid - Enhanced */
 .semester-subject-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: grid ;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) ;
   gap: 28px;
   margin-top: 40px;
   padding: 0 10px;
+}
+@media (min-width:1200px){
+  .semester-subject-grid{
+    grid-template-columns:repeat(5,1fr);
+  }
 }
 
 /* Subject Card - Modern Enhanced Design */
@@ -1679,11 +1766,12 @@ body.dark-mode footer {
   font-size: 18px;
   font-weight: 600;
   color: #ffffff;
-  padding: 32px 24px;
+  padding: 0 24px;
   border-radius: 18px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
+
   
   /* Beautiful gradient backgrounds */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1704,6 +1792,7 @@ body.dark-mode footer {
   justify-content: center;
   text-align: center;
   min-height: 100px;
+  height: 110px; /* ensure all buttons look the same height on desktop */
 }
 
 /* Staggered animation delays */
@@ -1830,6 +1919,7 @@ body.dark-mode footer {
 .semester-subject-card > * {
   position: relative;
   z-index: 2;
+ 
 }
 
 /* ================= MAIN SUBJECT CARDS (Subject Navigation) ================= */
@@ -1910,8 +2000,9 @@ body.dark-mode footer {
 
   .semester-subject-card {
     font-size: 16px;
-    padding: 26px 18px;
+    padding: 0 18px;
     min-height: 90px;
+    height: 100px; /* slightly smaller but still fixed on tablets/phones */
   }
 }
 
@@ -3110,6 +3201,10 @@ background:#0056b3;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .nav-menu {
@@ -3232,13 +3327,11 @@ background:#0056b3;
   transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
+/* Mobile Responsive (below 992px) */
+@media (max-width: 991px) {
   .nav-container {
     padding: 0 15px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 
   .mobile-menu-toggle {
