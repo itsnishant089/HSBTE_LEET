@@ -65,13 +65,22 @@
       <p style="margin-top:8px;font-size:0.9rem;">Last updated: 23 February 2026 • Source reference: <a href="https://hstes.org.in" rel="nofollow noopener" target="_blank">HSTES official website</a></p>
     </section>
 
+    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
+      <button type="button" data-stream-select="btech" aria-pressed="false">
+        B.Tech LEET
+      </button>
+      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+        B.Pharmacy LEET
+      </button>
+    </div>
+
     <section class="content-section page-content">
       <div class="content-card">
         <h2>Important Note on Official Syllabus</h2>
         <p>The exact and final syllabus for Haryana LEET 2026 is always provided in the official information brochure released by <strong>HSTES</strong>. The topics given below are based on the usual pattern followed in recent years and on diploma-level subjects. Always cross-check with the latest brochure before final preparation.</p>
       </div>
 
-      <div class="content-card">
+      <div class="content-card" data-leet-stream="btech">
         <h2>B.Tech LEET – Expected Syllabus Structure</h2>
         <p>The Haryana LEET 2026 syllabus for B.Tech lateral entry usually covers the following broad areas:</p>
         <ul>
@@ -126,7 +135,7 @@
         </ul>
       </div>
 
-      <div class="content-card">
+      <div class="content-card" data-leet-stream="bpharmacy">
         <h2>B.Pharmacy LEET – Broad Syllabus Areas</h2>
         <p>For B.Pharmacy lateral entry through Haryana LEET, the expected syllabus generally includes diploma-level pharmacy subjects:</p>
         <ul>
@@ -176,6 +185,7 @@
   <script defer src="../js/include.js"></script>
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
+  <script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>
 

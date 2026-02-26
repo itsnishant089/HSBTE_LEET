@@ -3767,6 +3767,34 @@ body.dark-mode .dropdown-menu a:hover {
   background: #f8f9fa;
 }
 
+/* LEET stream toggle (B.Tech / B.Pharmacy) */
+.leet-stream-toggle {
+  display: inline-flex;
+  gap: 8px;
+  margin: 16px 0;
+  border-radius: 999px;
+  padding: 4px;
+  background: #e5edff;
+}
+
+.leet-stream-toggle button[data-stream-select] {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: #1f2937;
+  transition: background 0.15s ease-out, color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.leet-stream-toggle button[data-stream-select].leet-stream-active {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
 .faq-question:hover {
   background: #e9ecef;
 }

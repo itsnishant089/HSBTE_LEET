@@ -65,13 +65,22 @@
       <p style="margin-top:8px;font-size:0.9rem;">Last updated: 23 February 2026 • Based on previous exam patterns – confirm with the latest HSTES brochure.</p>
     </section>
 
+    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
+      <button type="button" data-stream-select="btech" aria-pressed="false">
+        B.Tech LEET
+      </button>
+      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+        B.Pharmacy LEET
+      </button>
+    </div>
+
     <section class="content-section page-content">
       <div class="content-card">
         <h2>Official Pattern vs This Guide</h2>
         <p>The official Haryana LEET 2026 exam pattern is released only by <strong>HSTES</strong>. The structure given below is based on the typical pattern followed in recent years to help you plan your preparation. Always read the latest information brochure for final details.</p>
       </div>
 
-      <div class="content-card">
+      <div class="content-card" data-leet-stream="btech">
         <h2>Question Paper Structure (B.Tech LEET – as per official scheme)</h2>
         <p>According to the <strong>B.Tech (LEET) Syllabus 2025‑26</strong>, the Haryana LEET paper for B.Tech lateral entry has the following pattern:</p>
         <ul>
@@ -123,7 +132,7 @@
         <p>This structure is taken directly from the official scheme of entrance test; if HSTES issues any updated pattern for 2026, follow the latest brochure.</p>
       </div>
 
-      <div class="content-card">
+      <div class="content-card" data-leet-stream="bpharmacy">
         <h2>Question Paper Structure (B.Pharmacy LEET)</h2>
         <ul>
           <li><strong>Question Type:</strong> Objective MCQs</li>
@@ -176,6 +185,7 @@
   <script defer src="../js/include.js"></script>
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
+  <script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>
 

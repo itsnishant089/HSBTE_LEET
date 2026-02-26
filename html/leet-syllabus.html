@@ -68,8 +68,17 @@
     <p>Download BTech & B.Pharmacy LEET Syllabus PDF</p>
   </div>
 
+  <div class="leet-stream-toggle" data-leet-toggle>
+    <button type="button" data-stream-select="btech" aria-pressed="false">
+      B.Tech LEET
+    </button>
+    <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+      B.Pharmacy LEET
+    </button>
+  </div>
+
   <div class="syllabus-page-container page-content">
-    <div class="syllabus-card">
+    <div class="syllabus-card" data-leet-stream="btech">
       <h2>BTech LEET Syllabus</h2>
       <p>Click below to view and download the BTech LEET syllabus PDF</p>
       <button onclick="loadPDF('btech')" class="view-syllabus-btn" style="margin: 15px auto; display: block; padding: 12px 30px; background: #1565c0; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; font-weight: 600;">
@@ -80,7 +89,7 @@
       </div>
     </div>
 
-    <div class="syllabus-card">
+    <div class="syllabus-card" data-leet-stream="bpharmacy">
       <h2>B.Pharmacy LEET Syllabus</h2>
       <p>Click below to view and download the B.Pharmacy LEET syllabus PDF</p>
       <button onclick="loadPDF('pharmacy')" class="view-syllabus-btn" style="margin: 15px auto; display: block; padding: 12px 30px; background: #1565c0; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; font-weight: 600;">
@@ -127,6 +136,7 @@ function loadPDF(type) {
 <script defer src="../js/include.js"></script>
 <script defer src="../js/translate.js"></script>
 <script defer src="../js/chatbot.js"></script>
+<script defer src="../js/leet-stream-toggle.js"></script>
 
 </body>
 </html>

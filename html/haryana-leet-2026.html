@@ -127,6 +127,15 @@
       <p>Eligibility, syllabus, important dates, previous year question papers, sample papers and counselling for Haryana LEET 2026.</p>
     </section>
 
+    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
+      <button type="button" data-stream-select="btech" aria-pressed="false">
+        B.Tech LEET
+      </button>
+      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+        B.Pharmacy LEET
+      </button>
+    </div>
+
     <section class="content-section page-content">
       <div class="content-card">
         <h2>Haryana LEET 2026 Overview</h2>
@@ -152,9 +161,11 @@
           <li><a href="/haryana-leet-counselling">Haryana LEET 2026 Counselling</a> – registration, choice filling and seat allotment.</li>
           <li><a href="/haryana-leet-cutoff">Haryana LEET Cutoff</a> – previous years trend & 2026 insight.</li>
           <li><a href="/haryana-leet-colleges">Haryana LEET Colleges</a> – overview of participating colleges.</li>
-          <li><a href="leet-sample-paper.html">LEET Sample Papers</a> – B.Tech and B.Pharmacy sample papers.</li>
+          <li data-leet-stream="btech"><a href="leet-sample-paper.html">LEET Sample Papers (B.Tech focus)</a> – B.Tech LEET oriented sample sets.</li>
+          <li data-leet-stream="bpharmacy"><a href="leet-sample-paper.html">LEET Sample Papers (B.Pharmacy focus)</a> – B.Pharmacy LEET oriented sample sets.</li>
           <li><a href="hsbte-pyq.html">HSBTE PYQ</a> – diploma previous year question papers (useful for concept revision).</li>
-          <li><a href="leet-preparation-guide.html">LEET Preparation Guide</a> – structured preparation strategy.</li>
+          <li data-leet-stream="btech"><a href="leet-preparation-guide.html">LEET Preparation Guide (B.Tech)</a> – structured preparation strategy for engineering.</li>
+          <li data-leet-stream="bpharmacy"><a href="leet-preparation-guide.html">LEET Preparation Guide (B.Pharmacy)</a> – strategy points for pharmacy lateral entry.</li>
           <li><a href="leet-tentative-dates.html">LEET Important & Tentative Dates</a> – keep track of 2026 schedule.</li>
           <li><a href="last-year-cutoff.html">Older LEET Cutoff Page</a> – if you want historical PDFs and notes.</li>
           <li><a href="leet-counselling.html">Legacy LEET Counselling Page</a> – additional explanation of process.</li>
@@ -244,6 +255,7 @@
   <script defer src="../js/include.js"></script>
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
+  <script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>
 

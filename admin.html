@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HSBTE LEET Leads Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Scoped admin styles (prefixed with leet-admin-) */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #0f172a;
+      color: #e5e7eb;
+    }
+
+    .leet-admin-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    .leet-admin-card {
+      width: 100%;
+      max-width: 960px;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(94, 234, 212, 0.15), transparent 55%),
+        #020617;
+      border-radius: 18px;
+      padding: 20px 18px 18px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      box-sizing: border-box;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .leet-admin-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .leet-admin-title {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    .leet-admin-subtitle {
+      margin: 2px 0 0;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .leet-admin-login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .leet-admin-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .leet-admin-input {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 1px solid #4b5563;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      color: #f9fafb;
+      background-color: #020617;
+      outline: none;
+      transition: border-color 0.12s ease-out, box-shadow 0.12s ease-out;
+    }
+
+    .leet-admin-input:focus-visible {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+    }
+
+    .leet-admin-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #38bdf8, #4f46e5);
+      color: #0b1120;
+      box-shadow: 0 12px 26px rgba(56, 189, 248, 0.45);
+      transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, opacity 0.08s ease-out;
+    }
+
+    .leet-admin-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 35px rgba(56, 189, 248, 0.55);
+    }
+
+    .leet-admin-button:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
+    }
+
+    .leet-admin-button:disabled {
+      opacity: 0.7;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .leet-admin-login-error {
+      font-size: 0.8rem;
+      color: #fca5a5;
+      min-height: 1em;
+    }
+
+    .leet-admin-hidden {
+      display: none;
+    }
+
+    .leet-admin-stats {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .leet-admin-table-wrapper {
+      margin-top: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .leet-admin-table-scroll {
+      max-height: 70vh;
+      overflow: auto;
+    }
+
+    table.leet-admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+
+    .leet-admin-table thead {
+      background: rgba(15, 23, 42, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .leet-admin-table th,
+    .leet-admin-table td {
+      padding: 7px 9px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .leet-admin-table th {
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      backdrop-filter: blur(10px);
+    }
+
+    .leet-admin-table td {
+      font-size: 0.78rem;
+    }
+
+    .leet-admin-table tr:nth-child(even) td {
+      background-color: rgba(15, 23, 42, 0.6);
+    }
+
+    .leet-admin-table tr:hover td {
+      background-color: rgba(30, 64, 175, 0.45);
+    }
+
+    .leet-admin-badge {
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background-color: rgba(56, 189, 248, 0.08);
+      color: #7dd3fc;
+    }
+
+    .leet-admin-badge--btech {
+      background-color: rgba(34, 197, 94, 0.08);
+      color: #bbf7d0;
+    }
+
+    .leet-admin-badge--bpharma {
+      background-color: rgba(249, 115, 22, 0.08);
+      color: #fed7aa;
+    }
+
+    .leet-admin-muted {
+      color: #9ca3af;
+    }
+
+    .leet-admin-small {
+      font-size: 0.72rem;
+    }
+
+    .leet-admin-footer {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: #6b7280;
+      text-align: right;
+    }
+
+    @media (max-width: 640px) {
+      .leet-admin-card {
+        padding: 16px 12px 12px;
+        border-radius: 14px;
+      }
+
+      .leet-admin-title {
+        font-size: 1.05rem;
+      }
+
+      .leet-admin-table th,
+      .leet-admin-table td {
+        padding: 6px 7px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="leet-admin-wrapper">
+    <div class="leet-admin-card">
+      <!-- Login view -->
+      <div id="leet-admin-login">
+        <h1 class="leet-admin-title">HSBTE LEET Leads – Admin</h1>
+        <p class="leet-admin-subtitle">
+          Enter admin password to view all captured leads.
+        </p>
+
+        <form id="leet-admin-login-form" class="leet-admin-login-form">
+          <label for="leet-admin-password" class="leet-admin-label">
+            Admin Password
+          </label>
+          <input
+            id="leet-admin-password"
+            type="password"
+            class="leet-admin-input"
+            autocomplete="current-password"
+            required
+          />
+          <button type="submit" class="leet-admin-button">
+            Login
+          </button>
+          <p
+            id="leet-admin-login-error"
+            class="leet-admin-login-error"
+            aria-live="polite"
+          ></p>
+        </form>
+      </div>
+
+      <!-- Dashboard view -->
+      <div
+        id="leet-admin-dashboard"
+        class="leet-admin-hidden"
+        aria-hidden="true"
+      >
+        <div class="leet-admin-header">
+          <div>
+            <h1 class="leet-admin-title">HSBTE LEET Leads</h1>
+            <p class="leet-admin-subtitle">
+              All leads from your website, newest first.
+            </p>
+          </div>
+          <div>
+            <button id="leet-admin-refresh" class="leet-admin-button">
+              Refresh
+            </button>
+            <p id="leet-admin-stats" class="leet-admin-stats"></p>
+          </div>
+        </div>
+
+        <div class="leet-admin-table-wrapper">
+          <div class="leet-admin-table-scroll">
+            <table class="leet-admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>College</th>
+                  <th>Mobile</th>
+                  <th>Branch</th>
+                  <th>Email</th>
+                  <th>Preparation For</th>
+                  <th>Page</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody id="leet-admin-tbody">
+                <!-- rows injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="leet-admin-footer">
+          <span class="leet-admin-small">
+            Protected client-side (Supabase anon key with open policies).
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin dashboard logic -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Must match lead-capture.js
+      // URL: https://jnsowbnkccddcrkuonan.supabase.co
+      var SUPABASE_URL = 'https://jnsowbnkccddcrkuonan.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impuc293Ym5rY2NkZGNya3VvbmFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjY0MzksImV4cCI6MjA4NzcwMjQzOX0.PbiJI8SOxjgDPAP0njNN8aIW3yArJmstxi_VRhPuM5k';
+
+      // Simple client-side password (cannot be fully secure on static hosting)
+      var ADMIN_PASSWORD = 'Nishant@089';
+
+      var supabaseClient = null;
+
+      function qs(selector, root) {
+        return (root || document).querySelector(selector);
+      }
+
+      function ensureSupabaseLoaded(callback) {
+        if (typeof callback !== 'function') {
+          callback = function () {};
+        }
+
+        if (window.supabase) {
+          callback(null);
+          return;
+        }
+
+        var script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js';
+        script.async = true;
+        script.onload = function () {
+          callback(null);
+        };
+        script.onerror = function () {
+          console.error('Failed to load Supabase JS library for admin.');
+          callback(new Error('supabase_load_failed'));
+        };
+        (document.head || document.documentElement).appendChild(script);
+      }
+
+      function getSupabaseClient() {
+        if (!supabaseClient) {
+          if (!window.supabase || !SUPABASE_URL || !SUPABASE_ANON_KEY) {
+            console.error('Supabase client not available or env vars missing.');
+            return null;
+          }
+          supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+        return supabaseClient;
+      }
+
+      function setLoginError(text) {
+        var el = qs('#leet-admin-login-error');
+        if (el) {
+          el.textContent = text || '';
+        }
+      }
+
+      function setStats(text) {
+        var el = qs('#leet-admin-stats');
+        if (el) {
+          el.textContent = text || '';
+        }
+      }
+
+      function showDashboard() {
+        var login = qs('#leet-admin-login');
+        var dash = qs('#leet-admin-dashboard');
+        if (login) login.classList.add('leet-admin-hidden');
+        if (dash) {
+          dash.classList.remove('leet-admin-hidden');
+          dash.setAttribute('aria-hidden', 'false');
+        }
+      }
+
+      function showLogin() {
+        var login = qs('#leet-admin-login');
+        var dash = qs('#leet-admin-dashboard');
+        if (dash) {
+          dash.classList.add('leet-admin-hidden');
+          dash.setAttribute('aria-hidden', 'true');
+        }
+        if (login) login.classList.remove('leet-admin-hidden');
+      }
+
+      function formatDate(isoString) {
+        if (!isoString) return '';
+        try {
+          var d = new Date(isoString);
+          return d.toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        } catch (e) {
+          return isoString;
+        }
+      }
+
+      function formatPreparation(prep) {
+        if (!prep) return '';
+        var value = String(prep);
+        var badgeClass = 'leet-admin-badge';
+        if (value === 'B.Tech LEET') {
+          badgeClass += ' leet-admin-badge--btech';
+        } else if (value === 'B.Pharmacy LEET') {
+          badgeClass += ' leet-admin-badge--bpharma';
+        }
+        return '<span class="' + badgeClass + '">' + value + '</span>';
+      }
+
+      function escapeHtml(value) {
+        if (value == null) return '';
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function fetchLeads() {
+        ensureSupabaseLoaded(function (loadError) {
+          if (loadError) {
+            setStats('Unable to load leads (Supabase JS failed).');
+            return;
+          }
+
+          var client = getSupabaseClient();
+          var tbody = qs('#leet-admin-tbody');
+          if (!client || !tbody) {
+            setStats('Unable to load leads.');
+            return;
+          }
+
+          setStats('Loading leads...');
+          tbody.innerHTML = '';
+
+          client
+            .from('leet_leads')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .then(function (result) {
+              if (result.error) {
+                console.error('Supabase select error:', result.error);
+                setStats('Failed to load leads.');
+                return;
+              }
+
+              var data = result.data || [];
+
+              if (!data.length) {
+                setStats('No leads yet.');
+                return;
+              }
+
+              var rowsHtml = data
+                .map(function (row) {
+                  return (
+                    '<tr>' +
+                    '<td>' + escapeHtml(row.name) + '</td>' +
+                    '<td>' + escapeHtml(row.college) + '</td>' +
+                    '<td>' + escapeHtml(row.mobile) + '</td>' +
+                    '<td>' + escapeHtml(row.branch) + '</td>' +
+                    '<td>' + escapeHtml(row.email) + '</td>' +
+                    '<td>' + formatPreparation(row.preparation) + '</td>' +
+                    '<td class="leet-admin-small leet-admin-muted">' +
+                    escapeHtml(row.page) +
+                    '</td>' +
+                    '<td class="leet-admin-small">' +
+                    escapeHtml(formatDate(row.created_at)) +
+                    '</td>' +
+                    '</tr>'
+                  );
+                })
+                .join('');
+
+              tbody.innerHTML = rowsHtml;
+              setStats('Total leads: ' + data.length);
+            })
+            .catch(function (err) {
+              console.error('Unexpected fetch error:', err);
+              setStats('Error while loading leads.');
+            });
+        });
+      }
+
+      function handleLoginSubmit(event) {
+        event.preventDefault();
+        var passwordInput = qs('#leet-admin-password');
+        if (!passwordInput) return;
+
+        var entered = passwordInput.value || '';
+        if (entered === ADMIN_PASSWORD) {
+          setLoginError('');
+          showDashboard();
+          try {
+            sessionStorage.setItem('leetAdminAuthed', '1');
+          } catch (e) {
+            // ignore
+          }
+          fetchLeads();
+        } else {
+          setLoginError('Incorrect password. Please try again.');
+        }
+      }
+
+      function init() {
+        var loginForm = qs('#leet-admin-login-form');
+        var refreshBtn = qs('#leet-admin-refresh');
+
+        if (loginForm) {
+          loginForm.addEventListener('submit', handleLoginSubmit);
+        }
+
+        if (refreshBtn) {
+          refreshBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            fetchLeads();
+          });
+        }
+
+        try {
+          if (sessionStorage.getItem('leetAdminAuthed') === '1') {
+            showDashboard();
+            fetchLeads();
+          } else {
+            showLogin();
+          }
+        } catch (e) {
+          showLogin();
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
+

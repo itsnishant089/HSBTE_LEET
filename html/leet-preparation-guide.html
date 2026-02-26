@@ -68,22 +68,32 @@
     <p>Complete Guide to Ace Your HSBTE LEET Exam</p>
   </div>
 
+  <!-- B.Tech / B.Pharmacy stream toggle -->
+  <div class="leet-stream-toggle" data-leet-toggle>
+    <button type="button" data-stream-select="btech" aria-pressed="false">
+      B.Tech LEET
+    </button>
+    <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+      B.Pharmacy LEET
+    </button>
+  </div>
+
   <div class="content-section page-content">
-    <div class="content-card">
+    <div class="content-card" data-leet-stream="btech">
       <h2>Understanding LEET Exam</h2>
       <p>HSBTE LEET (Lateral Entry Engineering Test) is a competitive examination that requires thorough preparation and strategic planning. This comprehensive guide will help you prepare effectively and maximize your chances of success.</p>
       
-      <h3>Exam Overview:</h3>
+      <h3>Exam Overview (as per official B.Tech LEET scheme):</h3>
       <ul>
-        <li><strong>Total Questions:</strong> 100 MCQs</li>
-        <li><strong>Total Marks:</strong> 100 marks</li>
-        <li><strong>Duration:</strong> 2 hours (120 minutes)</li>
-        <li><strong>Marking:</strong> +1 for correct answer, No negative marking</li>
-        <li><strong>Mode:</strong> Offline (Pen and Paper Based)</li>
+        <li><strong>Total Questions:</strong> 90 MCQs</li>
+        <li><strong>Total Marks:</strong> 90 marks</li>
+        <li><strong>Duration:</strong> 90 minutes</li>
+        <li><strong>Marking:</strong> +1 for each correct answer, <strong>No negative marking</strong></li>
+        <li><strong>Mode:</strong> Online Computer Based Test (CBT)</li>
       </ul>
     </div>
 
-    <div class="content-card">
+    <div class="content-card" data-leet-stream="btech">
       <h2>Subject-wise Preparation Strategy</h2>
       
       <h3>For BTech LEET:</h3>
@@ -143,6 +153,11 @@
           </ul>
         </li>
       </ul>
+
+    </div>
+
+    <div class="content-card" data-leet-stream="bpharmacy">
+      <h2>Subject-wise Preparation Strategy</h2>
 
       <h3>For B.Pharmacy LEET:</h3>
       
@@ -290,6 +305,7 @@
 <script defer src="../js/include.js"></script>
 <script defer src="../js/translate.js"></script>
 <script defer src="../js/chatbot.js"></script>
+<script defer src="../js/leet-stream-toggle.js"></script>
 
 </body>
 </html>

@@ -209,13 +209,22 @@ body{
 <div data-include="../partials/header.html"></div>
 
 <main>
+<div class="leet-stream-toggle" data-leet-toggle>
+  <button type="button" data-stream-select="btech" aria-pressed="false">
+    B.Tech LEET
+  </button>
+  <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+    B.Pharmacy LEET
+  </button>
+</div>
+
 <div class="page-hero">
   <h1><i class="fas fa-file-alt"></i> Haryana LEET Sample Papers</h1>
   <p>BTech & B.Pharmacy LEET Previous & Model Papers</p>
 </div>
 
 <div class="sample-container">
-  <div class="sample-card">
+  <div class="sample-card" data-leet-stream="btech">
     <h2>BTech LEET Sample Papers</h2>
     <p>Practice BTech LEET previous year and model question papers. Access comprehensive collection of BTech lateral entry exam papers for effective preparation.</p>
     <a href="btech-leet-sample-paper.html" class="view-btn">
@@ -223,7 +232,7 @@ body{
     </a>
   </div>
 
-  <div class="sample-card">
+  <div class="sample-card" data-leet-stream="bpharmacy">
     <h2>B.Pharmacy LEET Sample Papers</h2>
     <p>Practice B.Pharmacy LEET previous year and model question papers. Get access to B.Pharmacy lateral entry exam papers for better preparation.</p>
     <a href="b-pharmacy-leet-sample-paper.html" class="view-btn">
@@ -264,6 +273,7 @@ body{
 
 <script defer src="../js/main.js"></script>
 <script defer src="../js/include.js"></script>
+<script defer src="../js/leet-stream-toggle.js"></script>
 <script>
 /* GO TOP BUTTON */
 const goTopBtn=document.getElementById("goTopBtn");
