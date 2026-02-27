@@ -65,6 +65,15 @@
       <p style="margin-top:8px;font-size:0.9rem;">Last updated: 23 February 2026 • Always refer to official HSTES seat matrix and college list for the final status.</p>
     </section>
 
+    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
+      <button type="button" data-stream-select="btech" aria-pressed="false">
+        B.Tech LEET
+      </button>
+      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+        B.Pharmacy LEET
+      </button>
+    </div>
+
     <section class="content-section page-content">
       <div class="content-card">
         <h2>Where to Get Official College List</h2>
@@ -76,8 +85,8 @@
         <p>Always check the latest documents for final college names, seat numbers and any changes in affiliation.</p>
       </div>
 
-      <div class="content-card">
-        <h2>Types of Colleges Participating in Haryana LEET</h2>
+      <div class="content-card" data-leet-stream="btech">
+        <h2>Types of Colleges – B.Tech LEET</h2>
         <ul>
           <li><strong>State Government Universities / Institutes</strong> – e.g. technical universities and government engineering colleges.</li>
           <li><strong>Government Aided Institutions</strong> – institutes that receive government support but may have partially self-financed programs.</li>
@@ -86,8 +95,17 @@
         <p>Different colleges may have different fee structures, facilities and placement records – analyse carefully before choosing.</p>
       </div>
 
-      <div class="content-card">
-        <h2>How to Shortlist Colleges for Haryana LEET 2026</h2>
+      <div class="content-card" data-leet-stream="bpharmacy">
+        <h2>Types of Colleges – B.Pharmacy LEET</h2>
+        <ul>
+          <li><strong>Government / Government-aided Pharmacy Institutions</strong> – limited but highly preferred because of low fees and strong labs.</li>
+          <li><strong>Private Pharmacy Colleges</strong> – majority of B.Pharm LEET seats; check PCI approval and university affiliation carefully.</li>
+        </ul>
+        <p>For pharmacy, always verify that the college and course are approved by <strong>PCI</strong> and the concerned university in the latest prospectus.</p>
+      </div>
+
+      <div class="content-card" data-leet-stream="btech">
+        <h2>How to Shortlist B.Tech Colleges for Haryana LEET 2026</h2>
         <ul>
           <li>Check <a href="/haryana-leet-cutoff">previous year cutoff</a> to see which ranks were required for each college/branch.</li>
           <li>Look at location preference – nearby city vs far-away district.</li>
@@ -97,13 +115,14 @@
         </ul>
       </div>
 
-      <div class="content-card">
-        <h2>Engineering vs Pharmacy Colleges</h2>
+      <div class="content-card" data-leet-stream="bpharmacy">
+        <h2>How to Shortlist B.Pharmacy Colleges for Haryana LEET 2026</h2>
         <ul>
-          <li><strong>Engineering Colleges (B.Tech LEET):</strong> Focus on branches like CSE, IT, ECE, EE, ME, CE, etc. Many polytechnic diploma students target these.</li>
-          <li><strong>Pharmacy Colleges (B.Pharmacy LEET):</strong> Focus on B.Pharmacy lateral entry after D.Pharm, with different lab and approval requirements.</li>
+          <li>Check the B.Pharmacy LEET / OCET prospectus for the official list of pharmacy institutes and seats.</li>
+          <li>Prioritise colleges with strong hospital tie‑ups, experienced faculty and well‑equipped pharmaceutics / pharmacology labs.</li>
+          <li>Confirm PCI approval status and university affiliation from the latest documents.</li>
+          <li>Look at hostel, safety and location – important for 4‑year B.Pharm study.</li>
         </ul>
-        <p>Check whether the institute is approved by the relevant bodies (AICTE/PCI/University) in the latest brochure.</p>
       </div>
 
       <div class="content-card">
@@ -140,6 +159,7 @@
   <script defer src="../js/include.js"></script>
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
+  <script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>
 

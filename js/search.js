@@ -8,6 +8,7 @@
 
   let searchIndex = [];
   let isIndexLoaded = false;
+  let searchTimer = null;
 
   /**
    * Initialize search functionality
@@ -327,6 +328,72 @@
         title: 'Haryana Diploma Information', 
         url: `${basePath}haryana-diploma-info`, 
         keywords: ['haryana diploma', 'hsbte diploma', 'haryana diploma engineering', 'hsbte diploma courses', 'haryana polytechnic', 'diploma engineering haryana', 'diploma admission haryana', 'diploma syllabus haryana', 'diploma branches haryana', 'diploma engineering information', 'haryana technical education', 'diploma career', 'diploma to degree', 'lateral entry diploma', 'haryana diploma colleges'] 
+      },
+      { 
+        type: 'page',
+        title: 'LEET Overview',
+        url: `${basePath}leet-overview`,
+        keywords: ['leet overview', 'hsbte leet overview', 'haryana leet overview', 'what is leet', 'leet exam details', 'leet information', 'btech leet overview', 'b pharmacy leet overview']
+      },
+      { 
+        type: 'page',
+        title: 'LEET Sample Papers',
+        url: `${basePath}leet-sample-paper`,
+        keywords: ['leet sample papers', 'haryana leet sample papers', 'leet papers', 'leet practice papers', 'leet mock papers', 'leet model papers', 'btech leet sample papers', 'b pharmacy leet sample papers']
+      },
+      {
+        type: 'page',
+        title: 'LEET Tentative Key Dates',
+        url: `${basePath}leet-tentative-dates`,
+        keywords: ['leet tentative dates', 'leet key dates', 'haryana leet schedule', 'leet exam dates', 'leet counselling dates', 'haryana leet 2026 dates']
+      },
+      {
+        type: 'page',
+        title: 'Last Year LEET Cutoff',
+        url: `${basePath}last-year-cutoff`,
+        keywords: ['last year leet cutoff', 'hsbte leet last year cutoff', 'leet previous cutoff', 'haryana leet cutoff', 'mock rank cutoff', 'institute wise leet cutoff']
+      },
+      {
+        type: 'page',
+        title: 'Haryana LEET 2026 – Complete Guide',
+        url: `${basePath}haryana-leet-2026`,
+        keywords: ['haryana leet 2026', 'leet 2026', 'haryana leet 2026 guide', 'haryana leet 2026 exam', 'haryana leet 2026 syllabus', 'haryana leet 2026 pyq', 'haryana leet 2026 sample papers', 'haryana leet 2026 counselling']
+      },
+      {
+        type: 'page',
+        title: 'Haryana LEET 2026 Syllabus',
+        url: `${basePath}haryana-leet-syllabus`,
+        keywords: ['haryana leet 2026 syllabus', 'leet 2026 syllabus', 'btech leet syllabus 2026', 'b pharmacy leet syllabus 2026', 'haryana leet syllabus pdf']
+      },
+      {
+        type: 'page',
+        title: 'Haryana LEET 2026 Exam Pattern',
+        url: `${basePath}haryana-leet-exam-pattern`,
+        keywords: ['haryana leet 2026 exam pattern', 'leet 2026 exam pattern', 'haryana leet paper pattern', 'btech leet exam pattern', 'b pharmacy leet exam pattern']
+      },
+      {
+        type: 'page',
+        title: 'Haryana LEET 2026 Eligibility',
+        url: `${basePath}haryana-leet-eligibility`,
+        keywords: ['haryana leet 2026 eligibility', 'leet eligibility', 'btech leet eligibility', 'b pharmacy leet eligibility', 'haryana leet qualification']
+      },
+      {
+        type: 'page',
+        title: 'Haryana LEET 2026 Counselling',
+        url: `${basePath}haryana-leet-counselling`,
+        keywords: ['haryana leet 2026 counselling', 'leet counselling haryana', 'hstes leet counselling', 'leet 2026 choice filling', 'leet 2026 seat allotment']
+      },
+      {
+        type: 'page',
+        title: 'Haryana LEET Cutoff – Rank vs College',
+        url: `${basePath}haryana-leet-cutoff`,
+        keywords: ['haryana leet cutoff', 'leet rank vs college', 'leet previous year cutoff', 'haryana leet 2026 cutoff insight']
+      },
+      {
+        type: 'page',
+        title: 'Haryana LEET Colleges Overview',
+        url: `${basePath}haryana-leet-colleges`,
+        keywords: ['haryana leet colleges', 'btech leet colleges haryana', 'b pharmacy leet colleges', 'haryana leet participating institutes']
       }
     );
 
@@ -408,7 +475,13 @@
       return;
     }
 
-    performSearch(query);
+    // Debounce search to make it smoother and avoid running heavy logic on every keystroke
+    if (searchTimer) {
+      clearTimeout(searchTimer);
+    }
+    searchTimer = setTimeout(() => {
+      performSearch(query);
+    }, 160);
   }
 
   /**
@@ -440,7 +513,19 @@
       return;
     }
     
-    const queryLower = query.toLowerCase().trim();
+    // Normalize query and expand common abbreviations (CSE → Computer, ME → Mechanical, etc.)
+    let queryLower = query.toLowerCase().trim();
+    const synonymReplacements = [
+      { pattern: /\bcse\b/g, replacement: 'computer' },
+      { pattern: /\bcs\b/g, replacement: 'computer' },
+      { pattern: /\bme\b/g, replacement: 'mechanical' },
+      { pattern: /\bece\b/g, replacement: 'ece' },
+      { pattern: /\bec\b/g, replacement: 'electrical' },
+      { pattern: /\bmlt\b/g, replacement: 'medical laboratory technology' }
+    ];
+    synonymReplacements.forEach(rule => {
+      queryLower = queryLower.replace(rule.pattern, rule.replacement);
+    });
     const queryWords = queryLower.split(/\s+/).filter(w => w.length > 0);
     const results = [];
 

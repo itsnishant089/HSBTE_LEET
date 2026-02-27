@@ -65,13 +65,22 @@
       <p style="margin-top:8px;font-size:0.9rem;">Last updated: 23 February 2026 • Always verify with the latest HSTES brochure before applying.</p>
     </section>
 
+    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
+      <button type="button" data-stream-select="btech" aria-pressed="false">
+        B.Tech LEET
+      </button>
+      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+        B.Pharmacy LEET
+      </button>
+    </div>
+
     <section class="content-section page-content">
       <div class="content-card">
         <h2>Disclaimer – Follow Official Rules</h2>
         <p>Eligibility conditions below are based on usual requirements followed in previous years. The <strong>only final and valid source</strong> is the official Haryana LEET / HSTES information brochure for 2026. Use this page as a student-friendly explanation and not as a legal document.</p>
       </div>
 
-      <div class="content-card">
+      <div class="content-card" data-leet-stream="btech">
         <h2>Basic Eligibility – B.Tech (Lateral Entry)</h2>
         <ul>
           <li><strong>Qualification:</strong> 3-year diploma in Engineering / Technology in a relevant branch from a recognized board (such as HSBTE or equivalent).</li>
@@ -81,7 +90,7 @@
         </ul>
       </div>
 
-      <div class="content-card">
+      <div class="content-card" data-leet-stream="bpharmacy">
         <h2>Eligibility – B.Pharmacy (Lateral Entry)</h2>
         <ul>
           <li><strong>Qualification:</strong> Diploma in Pharmacy (D.Pharm) from a recognized institute.</li>
@@ -145,6 +154,7 @@
   <script defer src="../js/include.js"></script>
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
+  <script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>
 

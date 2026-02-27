@@ -1,6 +1,29 @@
-/* css/lead-modal.css */
-/* All classes prefixed with leet- to avoid conflicts with existing site styles */
+/* ============================================================
+   lead-modal.css
+   Gen-Z / Modern UI — glassmorphism · mesh gradients · bounce
+   All classes prefixed with leet- to avoid site conflicts
+   ============================================================ */
 
+/* ── Design tokens ─────────────────────────────────────── */
+:root {
+  --leet-violet:      #7c3aed;
+  --leet-violet-light:#a78bfa;
+  --leet-pink:        #ec4899;
+  --leet-cyan:        #06b6d4;
+  --leet-fg:          #0f0a1e;
+  --leet-fg-muted:    #6b7280;
+  --leet-bg-glass:    rgba(255, 255, 255, 0.72);
+  --leet-border:      rgba(124, 58, 237, 0.18);
+  --leet-radius-lg:   22px;
+  --leet-radius-md:   14px;
+  --leet-radius-sm:   10px;
+  --leet-radius-full: 999px;
+  --leet-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --leet-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* ── Overlay ───────────────────────────────────────────── */
 .leet-modal-overlay {
   position: fixed;
   inset: 0;
@@ -8,11 +31,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  background-color: rgba(0, 0, 0, 0.55);
-  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+  padding: 20px;
+
+  /* Multi-stop mesh gradient backdrop */
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 20%, rgba(124, 58, 237, 0.28) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 75%, rgba(236, 72, 153, 0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 60% 10%, rgba(6, 182, 212, 0.18) 0%, transparent 60%),
+    rgba(10, 6, 30, 0.65);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
   opacity: 1;
   visibility: visible;
+  transition: opacity 0.3s var(--leet-ease-out),
+              visibility 0.3s var(--leet-ease-out);
 }
 
 .leet-modal-hidden {
@@ -21,162 +55,593 @@
   pointer-events: none;
 }
 
+.leet-modal-hidden .leet-modal {
+  transform: translateY(24px) scale(0.94);
+  opacity: 0;
+}
+
+
+/* ── Modal card ────────────────────────────────────────── */
 .leet-modal {
-  max-width: 420px;
+  max-width: 440px;
   width: 100%;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
-  padding: 20px 20px 16px;
   position: relative;
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'DM Sans', 'Sora', system-ui, sans-serif;
+
+  /* Frosted glass */
+  background: var(--leet-bg-glass);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+
+  border-radius: var(--leet-radius-lg);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.1),
+    0 8px 32px rgba(124, 58, 237, 0.15),
+    0 32px 64px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  padding: 0;
+  overflow: hidden;
+
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition:
+    transform 0.45s var(--leet-ease-bounce),
+    opacity   0.35s var(--leet-ease-out);
 }
 
-.leet-modal-title {
-  margin: 0 0 6px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #111827;
+/* Animated top accent bar */
+.leet-modal::before {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg,
+    var(--leet-violet) 0%,
+    var(--leet-pink)   50%,
+    var(--leet-cyan)   100%);
+  background-size: 200% 100%;
+  animation: leet-bar-slide 4s linear infinite;
 }
 
-.leet-modal-subtitle {
-  margin: 0 0 14px;
-  font-size: 0.9rem;
-  color: #4b5563;
+/* Subtle noise texture overlay */
+.leet-modal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
 }
 
+
+/* ── Inner body ────────────────────────────────────────── */
+.leet-modal-body {
+  padding: 24px 26px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ── Close button ──────────────────────────────────────── */
 .leet-modal-close {
   position: absolute;
-  top: 10px;
-  right: 12px;
-  background: transparent;
-  border: none;
-  font-size: 1.25rem;
-  line-height: 1;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1.5px solid rgba(124, 58, 237, 0.15);
+  border-radius: 50%;
   cursor: pointer;
-  color: #6b7280;
-  padding: 4px;
+  color: var(--leet-fg-muted);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  transition:
+    background  0.2s ease,
+    border-color 0.2s ease,
+    color       0.2s ease,
+    transform   0.2s var(--leet-ease-bounce);
 }
 
 .leet-modal-close:hover,
 .leet-modal-close:focus-visible {
-  color: #111827;
+  background: rgba(236, 72, 153, 0.12);
+  border-color: rgba(236, 72, 153, 0.35);
+  color: var(--leet-pink);
+  transform: rotate(90deg) scale(1.1);
+  outline: none;
 }
 
+.leet-modal-close:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+
+/* ── Badge chip ────────────────────────────────────────── */
+.leet-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--leet-radius-full);
+  background: linear-gradient(135deg,
+    rgba(124, 58, 237, 0.1) 0%,
+    rgba(236, 72, 153, 0.08) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--leet-violet);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.leet-modal-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--leet-violet), var(--leet-pink));
+  animation: leet-dot-pulse 2s ease-in-out infinite;
+}
+
+
+/* ── Title & subtitle ──────────────────────────────────── */
+.leet-modal-title {
+  margin: 0 0 6px;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+
+  /* Gradient text */
+  background: linear-gradient(135deg,
+    var(--leet-fg)     0%,
+    var(--leet-violet) 60%,
+    var(--leet-pink)   100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.leet-modal-subtitle {
+  margin: 0 0 20px;
+  font-size: 0.88rem;
+  color: var(--leet-fg-muted);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+
+/* ── Form layout ───────────────────────────────────────── */
 .leet-modal-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .leet-field {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+}
+
+
+/* ── Label ─────────────────────────────────────────────── */
+.leet-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #374151;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
   gap: 4px;
 }
 
-.leet-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #374151;
+/* Required star */
+.leet-label[data-required]::after {
+  content: '✦';
+  font-size: 0.55rem;
+  color: var(--leet-pink);
+  vertical-align: super;
 }
 
+
+/* ── Input ─────────────────────────────────────────────── */
 .leet-input {
   width: 100%;
   box-sizing: border-box;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  padding: 7px 9px;
-  font-size: 0.85rem;
-  color: #111827;
-  background-color: #f9fafb;
+  border-radius: var(--leet-radius-sm);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 13px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: var(--leet-fg);
+  background: rgba(255, 255, 255, 0.7);
   outline: none;
   transition:
-    border-color 0.12s ease-out,
-    box-shadow 0.12s ease-out,
-    background-color 0.12s ease-out;
-}
-
-.leet-input:focus-visible {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.4);
-  background-color: #ffffff;
+    border-color    0.2s ease,
+    box-shadow      0.2s ease,
+    background      0.2s ease,
+    transform       0.15s var(--leet-ease-bounce);
 }
 
 .leet-input::placeholder {
-  color: #9ca3af;
+  color: #b0b7c3;
+  font-weight: 400;
 }
 
+.leet-input:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.leet-input:focus-visible {
+  border-color: var(--leet-violet);
+  background: #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(124, 58, 237, 0.15),
+    0 1px 4px rgba(124, 58, 237, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Error state */
+.leet-input--error {
+  border-color: #f43f5e !important;
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.12) !important;
+  animation: leet-shake 0.4s var(--leet-ease-out);
+}
+
+/* Success state */
+.leet-input--success {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12) !important;
+}
+
+
+/* ── Hint text ─────────────────────────────────────────── */
 .leet-hint {
-  font-size: 0.7rem;
-  color: #6b7280;
+  font-size: 0.72rem;
+  color: #9ca3af;
+  line-height: 1.4;
 }
 
+
+/* ── Submit button ─────────────────────────────────────── */
 .leet-modal-submit {
-  margin-top: 4px;
+  margin-top: 6px;
   width: 100%;
   border: none;
-  border-radius: 999px;
-  padding: 9px 14px;
-  font-size: 0.9rem;
-  font-weight: 600;
+  border-radius: var(--leet-radius-full);
+  padding: 12px 18px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  /* Vivid gradient */
+  background: linear-gradient(135deg,
+    var(--leet-violet) 0%,
+    #6d28d9             40%,
+    var(--leet-pink)   100%);
+  background-size: 200% 100%;
   color: #ffffff;
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+
+  box-shadow:
+    0 4px 15px rgba(124, 58, 237, 0.35),
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
   transition:
-    transform 0.08s ease-out,
-    box-shadow 0.08s ease-out,
-    opacity 0.08s ease-out;
+    background-position 0.4s ease,
+    transform           0.15s var(--leet-ease-bounce),
+    box-shadow          0.15s ease,
+    opacity             0.12s ease;
+}
+
+/* Shimmer sweep on hover */
+.leet-modal-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 65%);
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  transition: background-position 0.5s ease;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.leet-modal-submit:hover::before {
+  background-position: 200% 0;
+}
+
+.leet-modal-submit > * {
+  position: relative;
+  z-index: 2;
 }
 
 .leet-modal-submit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 25px rgba(124, 58, 237, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .leet-modal-submit:active {
-  transform: translateY(0);
-  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    0 3px 12px rgba(124, 58, 237, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .leet-modal-submit:disabled {
-  opacity: 0.7;
-  cursor: default;
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
   box-shadow: none;
+  background-position: left center;
 }
 
+/* Loading spinner inside button */
+.leet-modal-submit.leet-loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.leet-modal-submit.leet-loading::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: leet-spin 0.7s linear infinite;
+  z-index: 3;
+}
+
+
+/* ── Divider ───────────────────────────────────────────── */
+.leet-modal-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0;
+  font-size: 0.72rem;
+  color: #c4c9d4;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.leet-modal-divider::before,
+.leet-modal-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(124, 58, 237, 0.2),
+    transparent);
+}
+
+
+/* ── Privacy note ──────────────────────────────────────── */
 .leet-modal-privacy {
-  margin: 6px 0 0;
+  margin: 10px 0 0;
   font-size: 0.7rem;
-  color: #6b7280;
+  color: #9ca3af;
+  line-height: 1.5;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
 }
 
+.leet-modal-privacy::before {
+  content: '🔒';
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+
+/* ── Status messages ───────────────────────────────────── */
 .leet-modal-message {
   margin-top: 10px;
-  font-size: 0.8rem;
-  min-height: 1.1em;
+  font-size: 0.82rem;
+  min-height: 1.2em;
+  border-radius: var(--leet-radius-sm);
+  padding: 0;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.leet-modal-message:not(:empty) {
+  padding: 9px 12px;
 }
 
 .leet-modal-message--error {
-  color: #b91c1c;
+  color: #be123c;
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  animation: leet-fade-in 0.25s ease;
+}
+
+.leet-modal-message--error::before {
+  content: '⚠️';
+  font-size: 0.85rem;
+  flex-shrink: 0;
 }
 
 .leet-modal-message--success {
-  color: #15803d;
+  color: #065f46;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  animation: leet-fade-in 0.25s ease;
 }
 
-/* Small screens */
+.leet-modal-message--success::before {
+  content: '✅';
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+
+/* ── Success state (full modal swap) ───────────────────── */
+.leet-modal-success-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 28px 36px;
+  gap: 12px;
+  animation: leet-fade-in 0.4s var(--leet-ease-out);
+}
+
+.leet-success-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+  animation: leet-pop 0.5s 0.1s var(--leet-ease-bounce) both;
+}
+
+.leet-success-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--leet-fg);
+  letter-spacing: -0.02em;
+}
+
+.leet-success-sub {
+  font-size: 0.88rem;
+  color: var(--leet-fg-muted);
+  line-height: 1.5;
+}
+
+
+/* ── Keyframe animations ───────────────────────────────── */
+@keyframes leet-bar-slide {
+  0%   { background-position:  0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes leet-dot-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+
+@keyframes leet-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+@keyframes leet-spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+@keyframes leet-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes leet-pop {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+
+/* ── Focus-visible ring (accessibility) ─────────────────── */
+.leet-input:focus-visible,
+.leet-modal-submit:focus-visible,
+.leet-modal-close:focus-visible {
+  outline: 2px solid var(--leet-violet);
+  outline-offset: 2px;
+}
+
+
+/* ── Mobile ─────────────────────────────────────────────── */
 @media (max-width: 480px) {
+  .leet-modal-overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
   .leet-modal {
     max-width: 100%;
-    padding: 18px 16px 14px;
-    border-radius: 10px;
+    border-radius: var(--leet-radius-lg) var(--leet-radius-lg) 14px 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    /* Bottom sheet feel */
+    transform-origin: bottom center;
   }
 
-  .leet-modal-title {
-    font-size: 1.1rem;
+  /* Slide-up from bottom on mobile */
+  .leet-modal-hidden .leet-modal {
+    transform: translateY(40px) scale(0.97);
+  }
+
+  .leet-modal-body { padding: 20px 18px 18px; }
+
+  .leet-modal-title    { font-size: 1.2rem; }
+  .leet-modal-subtitle { font-size: 0.85rem; margin-bottom: 16px; }
+
+  .leet-input          { padding: 11px 13px; }
+  .leet-modal-submit   { padding: 13px 18px; font-size: 0.95rem; }
+
+  /* Drag handle hint on mobile */
+  .leet-modal-body::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    border-radius: var(--leet-radius-full);
+    background: rgba(124, 58, 237, 0.18);
+    margin: 0 auto 16px;
   }
 }
 
+
+/* ── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .leet-modal,
+  .leet-modal-overlay,
+  .leet-modal-close,
+  .leet-modal-submit,
+  .leet-input {
+    transition: none;
+    animation: none;
+  }
+
+  .leet-modal::before { animation: none; }
+  .leet-modal-badge::before { animation: none; }
+}

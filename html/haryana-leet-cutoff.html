@@ -65,15 +65,34 @@
       <p style="margin-top:8px;font-size:0.9rem;">Last updated: 23 February 2026 • Exact 2026 cutoff will be known only after counselling.</p>
     </section>
 
+    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
+      <button type="button" data-stream-select="btech" aria-pressed="false">
+        B.Tech LEET
+      </button>
+      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+        B.Pharmacy LEET
+      </button>
+    </div>
+
     <section class="content-section page-content">
-      <div class="content-card">
-        <h2>What is Haryana LEET Cutoff?</h2>
-        <p>Cutoff is the <strong>last rank / score</strong> at which admission is granted to a particular branch in a specific college for a given category and counselling round. It changes every year based on:</p>
+      <div class="content-card" data-leet-stream="btech">
+        <h2>What is Haryana LEET Cutoff? (B.Tech)</h2>
+        <p>For B.Tech LEET, cutoff is the <strong>last rank / score</strong> at which a candidate is admitted to a specific engineering branch in a college for a given category and round. It changes every year based on:</p>
         <ul>
-          <li>Number of applicants</li>
-          <li>Difficulty level of the exam</li>
-          <li>Total available seats in each college/branch</li>
-          <li>Category-wise reservation and seat matrix</li>
+          <li>Number of applicants in engineering streams.</li>
+          <li>Difficulty level of the B.Tech LEET paper and performance of candidates.</li>
+          <li>Total available B.Tech seats in each college / branch.</li>
+          <li>Category-wise reservation and seat matrix notified by HSTES.</li>
+        </ul>
+      </div>
+
+      <div class="content-card" data-leet-stream="bpharmacy">
+        <h2>What is Haryana LEET Cutoff? (B.Pharmacy)</h2>
+        <p>For B.Pharmacy LEET, cutoff refers to the last rank / score at which admission is granted to B.Pharm lateral entry seats. Because total pharmacy seats are fewer, closing ranks can behave differently from B.Tech. Cutoff is affected by:</p>
+        <ul>
+          <li>Number of D.Pharm candidates applying for B.Pharm LEET.</li>
+          <li>Seat availability in pharmacy colleges approved for LEET intake.</li>
+          <li>Category-wise distribution and reservation policies.</li>
         </ul>
       </div>
 
@@ -147,6 +166,7 @@
   <script defer src="../js/include.js"></script>
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
+  <script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>
 

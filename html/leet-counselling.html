@@ -68,10 +68,25 @@
     <p>Complete Guide to HSBTE LEET Counselling Process</p>
   </div>
 
+  <!-- B.Tech / B.Pharmacy stream toggle -->
+  <div class="leet-stream-toggle" data-leet-toggle>
+    <button type="button" data-stream-select="btech" aria-pressed="false">
+      B.Tech LEET
+    </button>
+    <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+      B.Pharmacy LEET
+    </button>
+  </div>
+
   <div class="content-section page-content">
-    <div class="content-card">
-      <h2>Overview</h2>
-      <p>The HSBTE LEET counselling process is conducted online to ensure fair and transparent seat allocation based on merit, candidate preferences, and seat availability. This comprehensive guide will help you understand the complete counselling process.</p>
+    <div class="content-card" data-leet-stream="btech">
+      <h2>Overview – B.Tech LEET Counselling</h2>
+      <p>The B.Tech LEET counselling process is conducted online by HSTES to allocate 2nd year engineering seats fairly based on merit, candidate preferences and seat availability. This section explains the process from a B.Tech lateral entry point of view.</p>
+    </div>
+
+    <div class="content-card" data-leet-stream="bpharmacy">
+      <h2>Overview – B.Pharmacy LEET Counselling</h2>
+      <p>For B.Pharmacy LEET (lateral entry after D.Pharm), the counselling is also online and uses the same portal, but the available institutes, seats and cutoff patterns are specific to pharmacy colleges. Use this section when you are targeting B.Pharm seats only.</p>
     </div>
 
     <div class="content-card">
@@ -109,8 +124,8 @@
       </ul>
     </div>
 
-    <div class="content-card">
-      <h2>Choice Filling Process</h2>
+    <div class="content-card" data-leet-stream="btech">
+      <h2>Choice Filling Process – B.Tech LEET</h2>
       
       <h3>Understanding Choice Filling:</h3>
       <p>Choice filling is the process where you select colleges and branches in order of your preference. The seat allotment is done based on your rank and the choices you fill.</p>
@@ -176,8 +191,8 @@
       </ul>
     </div>
 
-    <div class="content-card">
-      <h2>Seat Allotment Process</h2>
+    <div class="content-card" data-leet-stream="btech">
+      <h2>Seat Allotment Process – B.Tech LEET</h2>
       
       <h3>How Seat Allotment Works:</h3>
       <p>Seat allotment is done through a computerized process based on:</p>
@@ -207,7 +222,7 @@
     </div>
 
     <div class="content-card">
-      <h2>Document Verification</h2>
+      <h2>Document Verification (Common)</h2>
       
       <h3>Required Documents:</h3>
       <ul>
@@ -241,7 +256,7 @@
     </div>
 
     <div class="content-card">
-      <h2>Fee Payment & Admission</h2>
+      <h2>Fee Payment & Admission (Common)</h2>
       
       <h3>Fee Payment:</h3>
       <ul>
@@ -276,7 +291,7 @@
     </div>
 
     <div class="content-card">
-      <h2>Counselling Rounds</h2>
+      <h2>Counselling Rounds (Typical Structure)</h2>
       
       <h3>Round 1:</h3>
       <ul>
@@ -309,7 +324,7 @@
     </div>
 
     <div class="content-card">
-      <h2>Important Guidelines</h2>
+      <h2>Important Guidelines for All Streams</h2>
       <ul>
         <li>Participate in all counselling rounds to maximize your chances</li>
         <li>Fill maximum choices to increase probability of getting preferred college/branch</li>
@@ -362,6 +377,7 @@
 <script defer src="../js/include.js"></script>
 <script defer src="../js/translate.js"></script>
 <script defer src="../js/chatbot.js"></script>
+<script defer src="../js/leet-stream-toggle.js"></script>
 
 </body>
 </html>

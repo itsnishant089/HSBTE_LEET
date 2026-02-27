@@ -65,19 +65,34 @@
       <p style="margin-top:8px;font-size:0.9rem;">Last updated: 23 February 2026 • Follow <a href="https://hstes.org.in" target="_blank" rel="nofollow noopener">HSTES official website</a> for exact schedule and notices.</p>
     </section>
 
+    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
+      <button type="button" data-stream-select="btech" aria-pressed="false">
+        B.Tech LEET
+      </button>
+      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+        B.Pharmacy LEET
+      </button>
+    </div>
+
     <section class="content-section page-content">
-      <div class="content-card">
-        <h2>Counselling Overview</h2>
-        <p>After declaration of the Haryana LEET 2026 result, eligible candidates must participate in <strong>online counselling</strong> conducted by HSTES for admission to B.Tech and B.Pharmacy lateral entry seats in Haryana colleges.</p>
+      <div class="content-card" data-leet-stream="btech">
+        <h2>Counselling Overview – B.Tech LEET</h2>
+        <p>After declaration of the Haryana LEET 2026 result for B.Tech, eligible diploma / B.Sc. candidates must participate in <strong>online counselling</strong> for engineering seats. The process is fully merit‑cum‑preference based.</p>
         <p>The broad steps are:</p>
         <ol>
           <li>Online registration & counselling fee payment</li>
-          <li>Choice filling & locking of colleges/branches</li>
+          <li>Choice filling & locking of B.Tech colleges / branches</li>
           <li>Seat allotment result</li>
           <li>Payment of seat acceptance fee (if applicable)</li>
           <li>Reporting to allotted institute with documents</li>
           <li>Subsequent rounds / upgradation if conducted</li>
         </ol>
+      </div>
+
+      <div class="content-card" data-leet-stream="bpharmacy">
+        <h2>Counselling Overview – B.Pharmacy LEET</h2>
+        <p>For B.Pharmacy LEET (lateral entry after D.Pharm), counselling is also done through the HSTES portal but only for institutes and seats offering B.Pharm LEET. The broad steps are similar, but your choices and cutoff trends will be pharmacy‑specific.</p>
+        <p>Key idea: you will still register, fill choices, get seat allotment and report to the pharmacy college within the notified dates.</p>
       </div>
 
       <div class="content-card">
@@ -162,6 +177,7 @@
   <script defer src="../js/include.js"></script>
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
+  <script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>
 

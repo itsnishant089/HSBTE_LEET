@@ -121,127 +121,783 @@
   <!-- CHATBOT -->
   <div data-include="../partials/chatbot.html"></div>
 
+  <!-- PAGE STYLES -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    /* ── CSS VARIABLES ── */
+    :root {
+      --navy:       #0d1b2a;
+      --navy2:      #1b3355;
+      --blue:       #1a6fc4;
+      --blue2:      #2d8ef5;
+      --accent:     #f5a623;
+      --green:      #22c55e;
+      --bg:         #f2f6fc;
+      --card:       #ffffff;
+      --border:     #dce8f5;
+      --txt:        #1c2d3f;
+      --txt2:       #52697f;
+      --radius:     16px;
+    }
+
+    /* ── RESET FOR MAIN ONLY ── */
+    #leet-page * { box-sizing: border-box; }
+    #leet-page { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--txt); }
+
+    /* ── HERO ── */
+    .lp-hero {
+      background: linear-gradient(135deg, #0d1b2a 0%, #0e3260 55%, #1a6fc4 100%);
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .lp-hero::before {
+      content:''; position:absolute; top:-120px; right:-80px;
+      width:420px; height:420px; border-radius:50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .lp-hero::after {
+      content:''; position:absolute; bottom:-90px; left:-60px;
+      width:300px; height:300px; border-radius:50%;
+      background: radial-gradient(circle, rgba(245,166,35,0.13) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .lp-hero-inner { position:relative; z-index:1; max-width:740px; margin:0 auto; }
+    .lp-badges { display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-bottom:22px; }
+    .lp-badge {
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.18);
+      border-radius:50px; padding:5px 14px; font-size:12px; font-weight:600; color:#fff;
+    }
+    .lp-badge.gold  { background:rgba(245,166,35,0.20); border-color:rgba(245,166,35,0.35); color:#f5c842; }
+    .lp-badge.green { background:rgba(34,197,94,0.18);  border-color:rgba(34,197,94,0.32);  color:#6ee89e; }
+    .lp-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.9rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      letter-spacing: -0.4px;
+    }
+    .lp-hero h1 .gold { color: var(--accent); }
+    .lp-hero h1 i { margin-right:10px; font-size:0.9em; }
+    .lp-hero p {
+      color: rgba(255,255,255,0.72);
+      font-size: 15.5px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    /* ── STREAM TOGGLE ── */
+    .lp-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 0 0 36px;
+    }
+    .leet-stream-toggle[data-leet-toggle] {
+      display: inline-flex !important;
+      gap: 0 !important;
+      background: #e8f0fc;
+      border-radius: 50px;
+      padding: 5px;
+      box-shadow: 0 2px 14px rgba(26,111,196,0.13);
+      margin: 0 !important;
+    }
+    .leet-stream-toggle[data-leet-toggle] button {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 10px 28px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: #4a6285;
+      transition: all 0.22s;
+      white-space: nowrap;
+    }
+    .leet-stream-toggle[data-leet-toggle] button[aria-pressed="true"],
+    .leet-stream-toggle[data-leet-toggle] button.lp-active {
+      background: linear-gradient(135deg, var(--navy2), var(--blue));
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(26,111,196,0.32);
+    }
+    .leet-stream-toggle[data-leet-toggle] button:hover:not([aria-pressed="true"]):not(.lp-active) {
+      background: #d0e2f8;
+      color: var(--blue);
+    }
+
+    /* ── META STRIP ── */
+    .lp-meta {
+      background: var(--navy2);
+      border-bottom: 3px solid var(--accent);
+    }
+    .lp-meta-inner {
+      max-width: 1020px; margin: 0 auto;
+      display: flex; flex-wrap: wrap;
+    }
+    .lp-meta-item {
+      flex: 1; min-width: 150px;
+      padding: 13px 20px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+    }
+    .lp-meta-item:last-child { border-right: none; }
+    .lp-meta-item strong {
+      display: block; color: var(--accent);
+      font-size: 10.5px; letter-spacing: 0.9px;
+      text-transform: uppercase; margin-bottom: 3px;
+    }
+
+    /* ── LAYOUT ── */
+    .lp-layout {
+      max-width: 1020px; margin: 0 auto;
+      padding: 44px 20px 72px;
+      display: grid;
+      grid-template-columns: 1fr 278px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ── SECTION TITLES ── */
+    .lp-section { margin-bottom: 28px; }
+    .lp-sec-head {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 18px;
+    }
+    .lp-sec-icon {
+      width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px;
+    }
+    .lp-sec-head h2 {
+      font-size: 1.3rem; font-weight: 800; color: var(--navy);
+      margin: 0; line-height: 1.25;
+    }
+
+    /* ── CARD BASE ── */
+    .lp-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 28px 28px;
+      box-shadow: 0 3px 18px rgba(13,27,42,0.06);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .lp-card:hover {
+      box-shadow: 0 8px 32px rgba(13,27,42,0.11);
+      transform: translateY(-2px);
+    }
+    .lp-card p {
+      font-size: 14.5px; line-height: 1.8; color: var(--txt2);
+      margin-bottom: 14px;
+    }
+    .lp-card p:last-child { margin-bottom: 0; }
+    .lp-card strong { color: var(--navy); font-weight: 700; }
+
+    /* ── OVERVIEW TABLE ── */
+    .lp-table { width: 100%; border-collapse: collapse; }
+    .lp-table tr { border-bottom: 1px solid var(--border); }
+    .lp-table tr:last-child { border-bottom: none; }
+    .lp-table td { padding: 11px 14px; font-size: 14px; color: var(--txt2); }
+    .lp-table td:first-child {
+      font-weight: 700; color: var(--navy); width: 44%;
+      background: #f6f9fe; border-right: 1px solid var(--border);
+    }
+
+    /* ── NOTICE BOX ── */
+    .lp-notice {
+      background: linear-gradient(135deg, #fff9e5, #fff4cc);
+      border: 1.5px solid #f5c842;
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 13.5px; color: #7a4a00;
+      margin-top: 16px;
+      display: flex; gap: 9px; align-items: flex-start;
+    }
+    .lp-notice .ni { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── LINKS GRID ── */
+    .lp-links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 14px;
+    }
+    .lp-link-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px;
+      background: #f6f9fe;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--txt);
+      font-size: 13.5px; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .lp-link-item:hover {
+      background: var(--blue); color: #fff;
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(26,111,196,0.25);
+    }
+    .lp-link-item .li-ico { font-size: 17px; flex-shrink: 0; }
+    .lp-link-item span { line-height: 1.3; }
+
+    /* ── ELIGIBILITY LIST ── */
+    .lp-eli { list-style: none; padding: 0; margin: 14px 0; }
+    .lp-eli li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 13px 0; border-bottom: 1px solid var(--border);
+      font-size: 14.5px; color: var(--txt2);
+    }
+    .lp-eli li:last-child { border-bottom: none; }
+    .lp-eli .ck {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: #e6f9ee; color: var(--green);
+      font-size: 12px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── EXAM PATTERN TABLE ── */
+    .lp-ptable { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 14px; }
+    .lp-ptable th {
+      background: var(--navy); color: #fff;
+      padding: 11px 14px; text-align: left; font-weight: 700;
+    }
+    .lp-ptable th:first-child { border-radius: 8px 0 0 0; }
+    .lp-ptable th:last-child  { border-radius: 0 8px 0 0; }
+    .lp-ptable td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--txt2); }
+    .lp-ptable tr:last-child td { border-bottom: none; }
+    .lp-ptable tr:nth-child(even) td { background: #f6f9fe; }
+
+    /* ── SYLLABUS PILLS ── */
+    .lp-sylsec { margin-bottom: 18px; }
+    .lp-sylsec h3 {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.94rem; font-weight: 800; color: var(--navy);
+      margin: 0 0 10px;
+    }
+    .lp-snum {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--blue); color: #fff;
+      font-size: 12px; font-weight: 800;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .lp-pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .lp-pill {
+      background: #eef4fd; border: 1px solid #c4d9f5;
+      color: var(--blue); border-radius: 50px;
+      padding: 5px 13px; font-size: 12.5px; font-weight: 700;
+    }
+
+    /* ── TIMELINE ── */
+    .lp-timeline { position: relative; padding-left: 26px; }
+    .lp-timeline::before {
+      content:''; position:absolute; left:8px; top:8px; bottom:8px;
+      width:2px; background: linear-gradient(to bottom, var(--blue), var(--accent));
+      border-radius:2px;
+    }
+    .lp-tl {
+      position:relative; padding:14px 18px;
+      background:#f6f9fe; border:1.5px solid var(--border);
+      border-radius:11px; margin-bottom:14px;
+    }
+    .lp-tl::before {
+      content:''; position:absolute; left:-22px; top:18px;
+      width:12px; height:12px; border-radius:50%;
+      background:var(--blue); border:2.5px solid #fff;
+      box-shadow:0 0 0 2px var(--blue);
+    }
+    .lp-tl.hi::before { background:var(--accent); box-shadow:0 0 0 2px var(--accent); }
+    .lp-tl-label { font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--blue); margin-bottom:4px; }
+    .lp-tl.hi .lp-tl-label { color:var(--accent); }
+    .lp-tl-title { font-size:14.5px; font-weight:800; color:var(--navy); margin-bottom:2px; }
+    .lp-tl-sub   { font-size:13px; color:var(--txt2); }
+
+    /* ── STEPS ── */
+    .lp-steps { counter-reset: lps; }
+    .lp-step { counter-increment: lps; display:flex; gap:14px; margin-bottom:18px; align-items:flex-start; }
+    .lp-step-num {
+      width:38px; height:38px; border-radius:50%; flex-shrink:0;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      color:#fff; font-weight:800; font-size:14px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .lp-step-num::before { content:counter(lps); }
+    .lp-step-body strong { display:block; font-size:14.5px; font-weight:800; color:var(--navy); margin-bottom:4px; }
+    .lp-step-body p { font-size:13.5px; color:var(--txt2); margin:0; line-height:1.7; }
+
+    /* ── COUNSELLING STEPS ── */
+    .lp-csteps { counter-reset: cs; list-style:none; padding:0; margin:14px 0; }
+    .lp-csteps li {
+      counter-increment:cs;
+      display:flex; align-items:flex-start; gap:14px;
+      padding:13px 0; border-bottom:1px solid var(--border);
+      font-size:14.5px; color:var(--txt2);
+    }
+    .lp-csteps li:last-child { border-bottom:none; }
+    .lp-csteps li::before {
+      content:counter(cs);
+      width:28px; height:28px; border-radius:50%; flex-shrink:0;
+      background:var(--blue); color:#fff;
+      font-weight:800; font-size:12px;
+      display:flex; align-items:center; justify-content:center;
+      margin-top:1px;
+    }
+
+    /* ── FAQ ACCORDION ── */
+    .lp-faq { margin-top:4px; }
+    .lp-faq-item {
+      border:1.5px solid var(--border); border-radius:11px;
+      margin-bottom:10px; overflow:hidden;
+    }
+    .lp-faq-q {
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      padding:15px 18px;
+      background:#f6f9fe; cursor:pointer;
+      font-size:14.5px; font-weight:800; color:var(--navy);
+      user-select:none;
+    }
+    .lp-faq-arrow {
+      width:24px; height:24px; border-radius:50%; flex-shrink:0;
+      background:var(--border); color:var(--txt2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:11px; transition:transform 0.25s, background 0.25s;
+    }
+    .lp-faq-item.open .lp-faq-arrow { transform:rotate(180deg); background:var(--blue); color:#fff; }
+    .lp-faq-a {
+      display:none; padding:14px 18px;
+      font-size:14px; line-height:1.8; color:var(--txt2);
+      border-top:1.5px solid var(--border); background:#fff;
+    }
+    .lp-faq-item.open .lp-faq-a { display:block; }
+
+    /* ── SIDEBAR ── */
+    .lp-sidebar { position:sticky; top:20px; display:flex; flex-direction:column; gap:18px; }
+    .lp-sb-card {
+      background:var(--card); border-radius:var(--radius);
+      border:1.5px solid var(--border);
+      box-shadow:0 3px 16px rgba(13,27,42,0.06);
+      overflow:hidden;
+    }
+    .lp-sb-head {
+      padding:13px 18px;
+      background:linear-gradient(135deg, var(--navy), var(--navy2));
+      color:#fff; font-weight:800; font-size:13px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .lp-sb-link {
+      display:flex; align-items:center; gap:10px;
+      padding:11px 18px; text-decoration:none;
+      color:var(--txt); font-size:13px; font-weight:600;
+      border-bottom:1px solid #f0f5fa;
+      transition:background 0.15s, color 0.15s;
+    }
+    .lp-sb-link:last-child { border-bottom:none; }
+    .lp-sb-link:hover { background:#eef4fd; color:var(--blue); }
+    .lp-sb-link .si { font-size:16px; }
+
+    .lp-alert {
+      background:linear-gradient(135deg, #fff8e5, #fff3cc);
+      border:1.5px solid var(--accent);
+      border-radius:var(--radius); padding:16px 18px;
+      font-size:13.5px; color:#7a4a00;
+      display:flex; gap:10px; align-items:flex-start;
+    }
+    .lp-alert .ai { font-size:20px; flex-shrink:0; }
+
+    .lp-cta {
+      background:linear-gradient(135deg, var(--blue), var(--blue2));
+      border-radius:var(--radius); padding:24px 20px; text-align:center; color:#fff;
+    }
+    .lp-cta h4 { font-size:1rem; font-weight:800; margin-bottom:8px; }
+    .lp-cta p  { font-size:13px; opacity:0.82; margin-bottom:16px; line-height:1.6; }
+    .lp-cta-btn {
+      display:inline-block; background:var(--accent); color:var(--navy);
+      font-weight:800; font-size:13px; padding:10px 22px;
+      border-radius:50px; text-decoration:none; transition:background 0.2s;
+    }
+    .lp-cta-btn:hover { background:#ffc04a; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px){
+      .lp-layout { grid-template-columns:1fr; }
+      .lp-sidebar { position:static; }
+      .lp-links-grid { grid-template-columns:1fr; }
+      .lp-meta-item { min-width:140px; }
+    }
+    @media(max-width:520px){
+      .lp-card { padding:20px 16px; }
+      .lp-hero  { padding:44px 16px 40px; }
+    }
+  </style>
+
   <main id="main-content" role="main">
-    <section class="page-hero">
-      <h1><i class="fas fa-university"></i> Haryana LEET 2026 – Complete Guide</h1>
-      <p>Eligibility, syllabus, important dates, previous year question papers, sample papers and counselling for Haryana LEET 2026.</p>
+  <div id="leet-page">
+
+    <!-- HERO -->
+    <section class="lp-hero">
+      <div class="lp-hero-inner">
+        <div class="lp-badges">
+          <span class="lp-badge">🎓 HSTES Official</span>
+          <span class="lp-badge gold">📅 2026 Session</span>
+          <span class="lp-badge green">✅ Updated Guide</span>
+        </div>
+        <h1><i class="fas fa-university"></i> Haryana <span class="gold">LEET 2026</span> – Complete Guide</h1>
+        <p>Eligibility, syllabus, important dates, previous year question papers, sample papers and counselling for Haryana LEET 2026.</p>
+      </div>
     </section>
 
-    <div class="leet-stream-toggle" data-leet-toggle style="margin-left: 20px;">
-      <button type="button" data-stream-select="btech" aria-pressed="false">
-        B.Tech LEET
-      </button>
-      <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
-        B.Pharmacy LEET
-      </button>
+    <!-- STREAM TOGGLE -->
+    <div class="lp-toggle-wrap">
+      <div class="leet-stream-toggle" data-leet-toggle style="margin-left:0;">
+        <button type="button" data-stream-select="btech" aria-pressed="false">
+          🔧 B.Tech LEET
+        </button>
+        <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+          💊 B.Pharmacy LEET
+        </button>
+      </div>
     </div>
 
-    <section class="content-section page-content">
-      <div class="content-card">
-        <h2>Haryana LEET 2026 Overview</h2>
-        <p>Haryana LEET 2026 (Lateral Entry Engineering Test) is conducted by HSTES for diploma holders and B.Sc. graduates who want direct admission into the 2nd year of B.Tech or B.Pharmacy programmes in Haryana engineering and pharmacy colleges.</p>
-        <ul>
-          <li><strong>Exam Name:</strong> Haryana LEET 2026</li>
-          <li><strong>Conducting Body:</strong> Haryana State Technical Education Society (HSTES)</li>
-          <li><strong>Courses:</strong> B.Tech (Lateral Entry), B.Pharmacy (Lateral Entry)</li>
-          <li><strong>Admission Type:</strong> Direct admission into 2nd year (3rd semester)</li>
-          <li><strong>Mode of Exam:</strong> As per latest HSTES notification</li>
-        </ul>
-        <p>Always check the latest official brochure and notifications on the HSTES website for final information.</p>
+    <!-- META STRIP -->
+    <div class="lp-meta">
+      <div class="lp-meta-inner">
+        <div class="lp-meta-item"><strong>Exam</strong>Haryana LEET 2026</div>
+        <div class="lp-meta-item"><strong>Conducted By</strong>HSTES Haryana</div>
+        <div class="lp-meta-item"><strong>Courses</strong>B.Tech · B.Pharmacy</div>
+        <div class="lp-meta-item"><strong>Admission Into</strong>2nd Year (3rd Sem)</div>
+        <div class="lp-meta-item"><strong>Exam Mode</strong>As per HSTES Notice</div>
       </div>
+    </div>
 
-      <div class="content-card">
-        <h2>Important Links for Haryana LEET 2026</h2>
-        <p>Use these pages on HSBTE PYQ as your hub for Haryana LEET 2026 preparation:</p>
-        <ul>
-          <li><a href="haryanaleet.html">Haryana LEET Hub</a> – overview of B.Tech and B.Pharmacy LEET in Haryana.</li>
-          <li><a href="/haryana-leet-syllabus">Haryana LEET 2026 Syllabus</a> – section-wise topics for exam preparation.</li>
-          <li><a href="/haryana-leet-exam-pattern">Haryana LEET 2026 Exam Pattern</a> – marks, sections and paper structure.</li>
-          <li><a href="/haryana-leet-eligibility">Haryana LEET 2026 Eligibility</a> – who can apply for lateral entry.</li>
-          <li><a href="/haryana-leet-counselling">Haryana LEET 2026 Counselling</a> – registration, choice filling and seat allotment.</li>
-          <li><a href="/haryana-leet-cutoff">Haryana LEET Cutoff</a> – previous years trend & 2026 insight.</li>
-          <li><a href="/haryana-leet-colleges">Haryana LEET Colleges</a> – overview of participating colleges.</li>
-          <li data-leet-stream="btech"><a href="leet-sample-paper.html">LEET Sample Papers (B.Tech focus)</a> – B.Tech LEET oriented sample sets.</li>
-          <li data-leet-stream="bpharmacy"><a href="leet-sample-paper.html">LEET Sample Papers (B.Pharmacy focus)</a> – B.Pharmacy LEET oriented sample sets.</li>
-          <li><a href="hsbte-pyq.html">HSBTE PYQ</a> – diploma previous year question papers (useful for concept revision).</li>
-          <li data-leet-stream="btech"><a href="leet-preparation-guide.html">LEET Preparation Guide (B.Tech)</a> – structured preparation strategy for engineering.</li>
-          <li data-leet-stream="bpharmacy"><a href="leet-preparation-guide.html">LEET Preparation Guide (B.Pharmacy)</a> – strategy points for pharmacy lateral entry.</li>
-          <li><a href="leet-tentative-dates.html">LEET Important & Tentative Dates</a> – keep track of 2026 schedule.</li>
-          <li><a href="last-year-cutoff.html">Older LEET Cutoff Page</a> – if you want historical PDFs and notes.</li>
-          <li><a href="leet-counselling.html">Legacy LEET Counselling Page</a> – additional explanation of process.</li>
-          <li><a href="contact.html">Contact Page</a> – reach out if you need help navigating resources.</li>
-        </ul>
-      </div>
+    <!-- MAIN LAYOUT -->
+    <div class="lp-layout">
+      <div class="lp-main-col">
 
-      <div class="content-card">
-        <h2>Eligibility for Haryana LEET 2026</h2>
-        <p>Exact eligibility will be defined in the official brochure. Typical eligibility conditions (based on previous years) include:</p>
-        <ul>
-          <li>Diploma in Engineering / Technology in a relevant branch from a recognized board with required minimum aggregate percentage.</li>
-          <li>Or B.Sc. degree with appropriate combination of subjects as per HSTES rules.</li>
-          <li>Fulfilment of age, domicile and reservation criteria defined by HSTES.</li>
-        </ul>
-        <p>Before applying, always confirm the final eligibility rules in the <strong>Haryana LEET 2026 information brochure</strong> on the official HSTES website.</p>
-      </div>
+        <!-- OVERVIEW -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">📋</div>
+            <h2>Haryana LEET 2026 Overview</h2>
+          </div>
+          <div class="lp-card">
+            <p>
+              <strong>Haryana LEET 2026</strong> (Lateral Entry Engineering Test) is conducted by the
+              <strong>Haryana State Technical Education Society (HSTES)</strong> for diploma holders and
+              B.Sc. graduates who want direct admission into the <strong>2nd year (3rd semester)</strong>
+              of B.Tech or B.Pharmacy programmes in Haryana engineering and pharmacy colleges.
+              It is one of the most student-friendly lateral entry routes in North India, letting
+              diploma holders bypass Year 1 and join degree programmes directly.
+            </p>
+            <table class="lp-table">
+              <tr><td>Exam Name</td><td>Haryana Lateral Entry Engineering Test (LEET) 2026</td></tr>
+              <tr><td>Conducting Body</td><td>Haryana State Technical Education Society (HSTES)</td></tr>
+              <tr><td>Courses Offered</td><td>B.Tech (Lateral Entry), B.Pharmacy (Lateral Entry)</td></tr>
+              <tr><td>Direct Admission To</td><td>2nd Year / 3rd Semester</td></tr>
+              <tr><td>Exam Mode</td><td>As per latest HSTES notification</td></tr>
+              <tr><td>Question Type</td><td>Objective – Multiple Choice Questions (MCQ)</td></tr>
+              <tr><td>Official Website</td><td>hstes.org.in</td></tr>
+            </table>
+            <div class="lp-notice">
+              <span class="ni">⚠️</span>
+              <span>Always verify dates, eligibility and rules from the official HSTES brochure before applying. This page is a student-friendly reference guide only.</span>
+            </div>
+          </div>
+        </div>
 
-      <div class="content-card">
-        <h2>Haryana LEET 2026 Syllabus & Exam Pattern</h2>
-        <p>The detailed syllabus and pattern are provided on the dedicated syllabus page, but the key points are:</p>
-        <ul>
-          <li>Questions are generally based on diploma-level subjects and core engineering fundamentals.</li>
-          <li>Sections typically include Mathematics, Physics, basic Engineering subjects and branch-specific topics.</li>
-          <li>The paper is objective type with multiple-choice questions.</li>
-        </ul>
-        <p>For the latest official syllabus and pattern, visit the <a href="leet-syllabus.html">LEET syllabus page</a>. Use it together with Haryana LEET PYQ and sample papers for smart preparation.</p>
-      </div>
+        <!-- IMPORTANT LINKS -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">🔗</div>
+            <h2>Important Links for Haryana LEET 2026</h2>
+          </div>
+          <div class="lp-card">
+            <p>Use these pages on HSBTE PYQ as your complete hub for Haryana LEET 2026 preparation:</p>
+            <div class="lp-links-grid">
+              <a href="haryanaleet.html" class="lp-link-item"><span class="li-ico">🏠</span><span>Haryana LEET Hub</span></a>
+              <a href="/haryana-leet-syllabus" class="lp-link-item"><span class="li-ico">📚</span><span>LEET 2026 Syllabus</span></a>
+              <a href="/haryana-leet-exam-pattern" class="lp-link-item"><span class="li-ico">📝</span><span>LEET Exam Pattern</span></a>
+              <a href="/haryana-leet-eligibility" class="lp-link-item"><span class="li-ico">✅</span><span>LEET Eligibility</span></a>
+              <a href="/haryana-leet-counselling" class="lp-link-item"><span class="li-ico">🎓</span><span>LEET Counselling 2026</span></a>
+              <a href="/haryana-leet-cutoff" class="lp-link-item"><span class="li-ico">📊</span><span>LEET Cutoff Trends</span></a>
+              <a href="/haryana-leet-colleges" class="lp-link-item"><span class="li-ico">🏛️</span><span>Participating Colleges</span></a>
+              <a href="leet-sample-paper.html" class="lp-link-item" data-leet-stream="btech"><span class="li-ico">📄</span><span>B.Tech Sample Papers</span></a>
+              <a href="leet-sample-paper.html" class="lp-link-item" data-leet-stream="bpharmacy"><span class="li-ico">💊</span><span>B.Pharmacy Sample Papers</span></a>
+              <a href="hsbte-pyq.html" class="lp-link-item"><span class="li-ico">📁</span><span>HSBTE Diploma PYQ</span></a>
+              <a href="leet-preparation-guide.html" class="lp-link-item" data-leet-stream="btech"><span class="li-ico">🎯</span><span>B.Tech Prep Guide</span></a>
+              <a href="leet-preparation-guide.html" class="lp-link-item" data-leet-stream="bpharmacy"><span class="li-ico">🎯</span><span>B.Pharmacy Prep Guide</span></a>
+              <a href="leet-tentative-dates.html" class="lp-link-item"><span class="li-ico">🗓️</span><span>Important Dates 2026</span></a>
+              <a href="last-year-cutoff.html" class="lp-link-item"><span class="li-ico">📂</span><span>Older LEET Cutoff</span></a>
+              <a href="leet-counselling.html" class="lp-link-item"><span class="li-ico">📋</span><span>Legacy Counselling Page</span></a>
+              <a href="contact.html" class="lp-link-item"><span class="li-ico">📞</span><span>Contact &amp; Support</span></a>
+            </div>
+          </div>
+        </div>
 
-      <div class="content-card">
-        <h2>PYQ & Sample Papers for Haryana LEET 2026</h2>
-        <p>Practicing with previous year question papers and model papers is the best way to prepare for Haryana LEET 2026.</p>
-        <ul>
-          <li><a href="leet-sample-paper.html">Haryana LEET Sample Papers</a> – dedicated page for B.Tech and B.Pharmacy sample papers.</li>
-          <li><a href="hsbte-pyq.html">HSBTE Diploma PYQ</a> – helps you revise core diploma subjects that appear in LEET.</li>
-          <li><a href="btech-leet-sample-paper.html">B.Tech LEET Sample Papers</a> – focused practice for engineering lateral entry.</li>
-          <li><a href="b-pharmacy-leet-sample-paper.html">B.Pharmacy LEET Sample Papers</a> – practice papers for pharmacy aspirants.</li>
-        </ul>
-        <p>Try to solve multiple years of PYQ and treat them like mock tests. Analyse your mistakes and revise weak topics regularly.</p>
-      </div>
+        <!-- ELIGIBILITY -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">✅</div>
+            <h2>Eligibility for Haryana LEET 2026</h2>
+          </div>
+          <div class="lp-card">
+            <p>Exact eligibility will be defined in the official HSTES brochure. Based on previous years, the following general conditions apply:</p>
+            <ul class="lp-eli">
+              <li><span class="ck">✓</span><span><strong>Diploma Holders (B.Tech LEET):</strong> Must have passed Diploma in Engineering / Technology in a relevant branch from a recognized board with the required minimum aggregate percentage (typically 45%–60% depending on category).</span></li>
+              <li><span class="ck">✓</span><span><strong>B.Sc. Graduates (B.Tech LEET):</strong> Candidates with a B.Sc. degree with Physics, Chemistry and Mathematics (PCM) or equivalent combination may be eligible for specific B.Tech branches as per HSTES rules.</span></li>
+              <li><span class="ck">✓</span><span><strong>Diploma Holders (B.Pharmacy LEET):</strong> Must hold a Diploma in Pharmacy (D.Pharm) from a recognized institution under Pharmacy Council of India (PCI) norms.</span></li>
+              <li><span class="ck">✓</span><span><strong>Domicile Requirement:</strong> Candidates must fulfil Haryana domicile and residency conditions as specified by HSTES for state quota seats.</span></li>
+              <li><span class="ck">✓</span><span><strong>Age Limit:</strong> No specific upper age limit has been prescribed in previous years — verify this in the official 2026 brochure.</span></li>
+              <li><span class="ck">✓</span><span><strong>Reservation:</strong> SC / BC / EWS and other reserved categories get relaxation in minimum qualifying marks as per Haryana Government norms.</span></li>
+            </ul>
+            <div class="lp-notice">
+              <span class="ni">📌</span>
+              <span>Before applying, always confirm the final eligibility rules in the <strong>Haryana LEET 2026 information brochure</strong> on the official HSTES website.</span>
+            </div>
+          </div>
+        </div>
 
-      <div class="content-card">
-        <h2>Preparation Strategy for Haryana LEET 2026</h2>
-        <p>For a structured preparation plan, follow the detailed <a href="leet-preparation-guide.html">LEET preparation guide</a>. In short:</p>
-        <ul>
-          <li>Revise diploma subjects thoroughly, focusing on frequently asked topics.</li>
-          <li>Create a 2–3 month study plan with daily targets for theory and practice.</li>
-          <li>Combine concept revision from diploma books with PYQ and sample papers.</li>
-          <li>Take regular mock tests to improve speed and accuracy.</li>
-          <li>Use online resources (videos, notes) only to clarify concepts – avoid random browsing.</li>
-        </ul>
-      </div>
+        <!-- SYLLABUS & EXAM PATTERN -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">📚</div>
+            <h2>Haryana LEET 2026 Syllabus &amp; Exam Pattern</h2>
+          </div>
+          <div class="lp-card">
+            <p>The Haryana LEET 2026 paper is objective-type (MCQ). It tests candidates on their diploma-level knowledge across core subjects. The official syllabus is published by HSTES — below is a topic-wise overview based on previous year patterns.</p>
 
-      <div class="content-card">
-        <h2>Counselling, Colleges & Cutoff for 2026</h2>
-        <p>After the Haryana LEET 2026 result, HSTES will conduct online counselling for seat allotment in participating engineering and pharmacy colleges.</p>
-        <ul>
-          <li>Read the <a href="leet-counselling.html">LEET counselling guide</a> for step-by-step process.</li>
-          <li>Check <a href="last-year-cutoff.html">previous year cutoff</a> to estimate your target rank and possible colleges.</li>
-          <li>Use the official HSTES website for latest college lists, seat matrix and category-wise rules.</li>
-        </ul>
-        <p>Cutoff for Haryana LEET 2026 will depend on factors like number of applicants, difficulty of the paper and total available seats.</p>
-      </div>
+            <!-- B.Tech stream -->
+            <div data-leet-stream="btech">
+              <h3 style="font-size:1rem;font-weight:800;color:var(--navy);margin:18px 0 12px;display:flex;align-items:center;gap:8px;">🔧 B.Tech LEET – Subject Areas</h3>
+              <div class="lp-sylsec">
+                <h3><span class="lp-snum">1</span> Mathematics</h3>
+                <div class="lp-pills">
+                  <span class="lp-pill">Algebra</span><span class="lp-pill">Trigonometry</span><span class="lp-pill">Coordinate Geometry</span><span class="lp-pill">Differential Calculus</span><span class="lp-pill">Integral Calculus</span><span class="lp-pill">Differential Equations</span><span class="lp-pill">Matrices &amp; Determinants</span><span class="lp-pill">Statistics &amp; Probability</span>
+                </div>
+              </div>
+              <div class="lp-sylsec">
+                <h3><span class="lp-snum">2</span> Physics</h3>
+                <div class="lp-pills">
+                  <span class="lp-pill">Units &amp; Measurements</span><span class="lp-pill">Laws of Motion</span><span class="lp-pill">Work, Energy &amp; Power</span><span class="lp-pill">Electrostatics</span><span class="lp-pill">Current Electricity</span><span class="lp-pill">Optics</span><span class="lp-pill">Thermodynamics</span><span class="lp-pill">Modern Physics</span>
+                </div>
+              </div>
+              <div class="lp-sylsec">
+                <h3><span class="lp-snum">3</span> Engineering Fundamentals</h3>
+                <div class="lp-pills">
+                  <span class="lp-pill">Basic Electronics</span><span class="lp-pill">Electrical Fundamentals</span><span class="lp-pill">Engineering Drawing Basics</span><span class="lp-pill">Workshop Technology</span><span class="lp-pill">Computer Basics</span><span class="lp-pill">Environmental Science</span>
+                </div>
+              </div>
+              <div class="lp-sylsec">
+                <h3><span class="lp-snum">4</span> Branch-Specific Topics</h3>
+                <div class="lp-pills">
+                  <span class="lp-pill">Civil Engg.</span><span class="lp-pill">Mechanical Engg.</span><span class="lp-pill">Electrical Engg.</span><span class="lp-pill">CS / IT</span><span class="lp-pill">Electronics &amp; Comm.</span>
+                </div>
+              </div>
+            </div>
 
-      <div class="content-card">
-        <h2>Quick FAQ – Haryana LEET 2026</h2>
-        <ul>
-          <li><strong>Q.</strong> Is Haryana LEET 2026 only for diploma holders?<br/>
-              <strong>Ans.</strong> Mainly yes, it is for diploma holders in relevant branches and in some cases B.Sc. graduates, as per official eligibility rules.</li>
-          <li><strong>Q.</strong> Where can I get the official Haryana LEET 2026 notification?<br/>
-              <strong>Ans.</strong> On the official HSTES website. Use this page only as a student-friendly guide.</li>
-          <li><strong>Q.</strong> How many months are enough for Haryana LEET 2026 preparation?<br/>
-              <strong>Ans.</strong> With focused study and proper use of PYQ, 2–3 months of disciplined preparation is usually sufficient.</li>
-        </ul>
-      </div>
-    </section>
+            <!-- B.Pharmacy stream -->
+            <div data-leet-stream="bpharmacy">
+              <h3 style="font-size:1rem;font-weight:800;color:var(--navy);margin:18px 0 12px;display:flex;align-items:center;gap:8px;">💊 B.Pharmacy LEET – Subject Areas</h3>
+              <div class="lp-sylsec">
+                <div class="lp-pills">
+                  <span class="lp-pill">Pharmaceutics</span><span class="lp-pill">Pharmaceutical Chemistry</span><span class="lp-pill">Pharmacology</span><span class="lp-pill">Pharmacognosy</span><span class="lp-pill">Biochemistry</span><span class="lp-pill">Human Anatomy &amp; Physiology</span><span class="lp-pill">Dispensing Pharmacy</span><span class="lp-pill">Hospital &amp; Clinical Pharmacy</span>
+                </div>
+              </div>
+            </div>
+
+            <h3 style="font-size:1rem;font-weight:800;color:var(--navy);margin:22px 0 10px;">📊 Exam Pattern at a Glance</h3>
+            <table class="lp-ptable">
+              <thead><tr><th>Feature</th><th>B.Tech LEET</th><th>B.Pharmacy LEET</th></tr></thead>
+              <tbody>
+                <tr><td>Question Type</td><td>MCQ (Objective)</td><td>MCQ (Objective)</td></tr>
+                <tr><td>Total Questions</td><td>~120–150 (as per HSTES)</td><td>~120–150 (as per HSTES)</td></tr>
+                <tr><td>Duration</td><td>3 Hours</td><td>3 Hours</td></tr>
+                <tr><td>Marking Scheme</td><td>+1 per correct answer</td><td>+1 per correct answer</td></tr>
+                <tr><td>Negative Marking</td><td>As per HSTES notification</td><td>As per HSTES notification</td></tr>
+                <tr><td>Medium</td><td>English / Hindi</td><td>English / Hindi</td></tr>
+              </tbody>
+            </table>
+            <p style="margin-top:14px;">For the latest official syllabus and pattern, visit the <a href="leet-syllabus.html" style="color:var(--blue);font-weight:700;">LEET syllabus page</a>. Use it together with Haryana LEET PYQ and sample papers for smart preparation.</p>
+          </div>
+        </div>
+
+        <!-- IMPORTANT DATES -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">📅</div>
+            <h2>LEET Important &amp; Tentative Dates 2026</h2>
+          </div>
+          <div class="lp-card">
+            <p>The dates below are <strong>tentative and based on previous year trends</strong>. HSTES will release the official 2026 schedule on its website.</p>
+            <div class="lp-timeline" style="margin-top:16px;">
+              <div class="lp-tl"><div class="lp-tl-label">Phase 1</div><div class="lp-tl-title">Official Notification Released</div><div class="lp-tl-sub">HSTES publishes brochure, eligibility details and application schedule</div></div>
+              <div class="lp-tl"><div class="lp-tl-label">Phase 2</div><div class="lp-tl-title">Online Application Form Opens</div><div class="lp-tl-sub">Registration portal goes live on the HSTES website</div></div>
+              <div class="lp-tl"><div class="lp-tl-label">Phase 3</div><div class="lp-tl-title">Last Date to Apply</div><div class="lp-tl-sub">Final deadline to submit application form and pay the exam fee</div></div>
+              <div class="lp-tl"><div class="lp-tl-label">Phase 4</div><div class="lp-tl-title">Admit Card Download</div><div class="lp-tl-sub">Hall tickets available on official portal for all registered candidates</div></div>
+              <div class="lp-tl hi"><div class="lp-tl-label">Phase 5 – Exam Day</div><div class="lp-tl-title">Haryana LEET 2026 Examination</div><div class="lp-tl-sub">Main exam at designated centres across Haryana</div></div>
+              <div class="lp-tl"><div class="lp-tl-label">Phase 6</div><div class="lp-tl-title">Result &amp; Merit List</div><div class="lp-tl-sub">HSTES publishes results and category-wise merit lists</div></div>
+              <div class="lp-tl"><div class="lp-tl-label">Phase 7</div><div class="lp-tl-title">Counselling &amp; Seat Allotment</div><div class="lp-tl-sub">Online counselling rounds, choice filling and seat allotment begin</div></div>
+            </div>
+            <div class="lp-notice" style="margin-top:8px;">
+              <span class="ni">🔔</span>
+              <span>Keep track of the <a href="leet-tentative-dates.html" style="color:#7a4a00;font-weight:700;text-decoration:underline;">LEET Important Dates page</a> and <strong>hstes.org.in</strong> for confirmed 2026 schedule.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PYQ & SAMPLE PAPERS -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">📄</div>
+            <h2>PYQ &amp; Sample Papers for Haryana LEET 2026</h2>
+          </div>
+          <div class="lp-card">
+            <p>Practicing with <strong>previous year question papers (PYQ)</strong> and model papers is the single most effective strategy for cracking Haryana LEET 2026. Past papers reveal the exact difficulty level, question distribution and frequently repeated topics.</p>
+            <div class="lp-links-grid" style="margin-top:14px;">
+              <a href="leet-sample-paper.html" class="lp-link-item"><span class="li-ico">📄</span><span>Haryana LEET Sample Papers</span></a>
+              <a href="hsbte-pyq.html" class="lp-link-item"><span class="li-ico">📁</span><span>HSBTE Diploma PYQ</span></a>
+              <a href="btech-leet-sample-paper.html" class="lp-link-item" data-leet-stream="btech"><span class="li-ico">🔧</span><span>B.Tech LEET Sample Papers</span></a>
+              <a href="b-pharmacy-leet-sample-paper.html" class="lp-link-item" data-leet-stream="bpharmacy"><span class="li-ico">💊</span><span>B.Pharmacy LEET Sample Papers</span></a>
+            </div>
+            <p style="margin-top:16px;">Try to solve multiple years of PYQ and treat them like mock tests. Analyse your mistakes and revise weak topics regularly. Candidates who solve 5+ years of PYQ consistently outperform those who rely only on theory revision.</p>
+          </div>
+        </div>
+
+        <!-- PREPARATION STRATEGY -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">🎯</div>
+            <h2>Preparation Strategy for Haryana LEET 2026</h2>
+          </div>
+          <div class="lp-card">
+            <p>For a structured plan, follow the detailed <a href="leet-preparation-guide.html" style="color:var(--blue);font-weight:700;">LEET preparation guide</a>. Here is a proven step-by-step framework:</p>
+            <div class="lp-steps" style="margin-top:18px;">
+              <div class="lp-step"><div class="lp-step-num"></div><div class="lp-step-body"><strong>Analyse the Syllabus &amp; PYQ First</strong><p>Download the HSTES syllabus. Cross-reference with 3–5 years of PYQ to find the highest-weightage topics. Build your study plan around those — not the entire textbook.</p></div></div>
+              <div class="lp-step"><div class="lp-step-num"></div><div class="lp-step-body"><strong>Create a 2–3 Month Study Schedule</strong><p>Divide into Phase 1 (concept revision), Phase 2 (PYQ practice), Phase 3 (mock tests + revision). Stick to daily targets of at least 3–4 hours of focused study.</p></div></div>
+              <div class="lp-step"><div class="lp-step-num"></div><div class="lp-step-body"><strong>Revise Diploma Subjects Thoroughly</strong><p>Revise diploma subjects thoroughly, focusing on frequently asked topics from your HSBTE-prescribed textbooks and notes. Pay extra attention to Mathematics, Physics and branch-specific subjects.</p></div></div>
+              <div class="lp-step"><div class="lp-step-num"></div><div class="lp-step-body"><strong>Solve PYQ Under Exam Conditions</strong><p>Set a 3-hour timer, attempt the full paper, then self-evaluate. Track accuracy and speed across multiple attempts — this is the best predictor of your actual performance.</p></div></div>
+              <div class="lp-step"><div class="lp-step-num"></div><div class="lp-step-body"><strong>Take Regular Mock Tests</strong><p>Take regular mock tests to improve speed and accuracy. Simulate exam-day conditions — no phone, proper timing and honest self-assessment in the final month.</p></div></div>
+              <div class="lp-step"><div class="lp-step-num"></div><div class="lp-step-body"><strong>Use Online Resources Wisely</strong><p>Use online resources (videos, notes) only to clarify concepts — avoid random browsing. Invest revision time in weak topics, not ones you already know well.</p></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COUNSELLING -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">🎓</div>
+            <h2>Counselling, Colleges &amp; Cutoff for 2026</h2>
+          </div>
+          <div class="lp-card">
+            <p>After the Haryana LEET 2026 result, HSTES will conduct <strong>online centralised counselling</strong> for seat allotment in participating engineering and pharmacy colleges across Haryana.</p>
+            <ol class="lp-csteps">
+              <li>Counselling Registration &amp; Fee Payment on HSTES portal</li>
+              <li>Online Document Verification</li>
+              <li>Choice Filling &amp; Locking of preferred Colleges / Branches</li>
+              <li>Seat Allotment – Round 1, Round 2, Stray Vacancy Round</li>
+              <li>Document Verification at Allotted College</li>
+              <li>Fee Deposit &amp; Admission Confirmation</li>
+            </ol>
+            <p>Read the <a href="leet-counselling.html" style="color:var(--blue);font-weight:700;">LEET counselling guide</a> for step-by-step process. Check <a href="last-year-cutoff.html" style="color:var(--blue);font-weight:700;">previous year cutoff</a> to estimate your target rank and possible colleges. Use the official HSTES website for latest college lists, seat matrix and category-wise rules.</p>
+            <p>Cutoff for Haryana LEET 2026 will depend on factors like number of applicants, difficulty of the paper and total available seats. Fill as many college choices as possible — more choices = higher chance of a good allotment.</p>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="lp-section">
+          <div class="lp-sec-head">
+            <div class="lp-sec-icon">❓</div>
+            <h2>Quick FAQ – Haryana LEET 2026</h2>
+          </div>
+          <div class="lp-card">
+            <div class="lp-faq">
+              <div class="lp-faq-item open">
+                <div class="lp-faq-q" onclick="this.parentElement.classList.toggle('open')">Is Haryana LEET 2026 only for diploma holders?<span class="lp-faq-arrow">▼</span></div>
+                <div class="lp-faq-a">Mainly yes — it is for diploma holders in relevant branches and in some cases B.Sc. graduates, as per official eligibility rules. For B.Pharmacy LEET, D.Pharm holders are eligible. Always confirm from the official HSTES brochure.</div>
+              </div>
+              <div class="lp-faq-item">
+                <div class="lp-faq-q" onclick="this.parentElement.classList.toggle('open')">Where can I get the official Haryana LEET 2026 notification?<span class="lp-faq-arrow">▼</span></div>
+                <div class="lp-faq-a">On the official HSTES website (hstes.org.in). Use this page only as a student-friendly reference guide. The official brochure will have final dates, rules and eligibility criteria.</div>
+              </div>
+              <div class="lp-faq-item">
+                <div class="lp-faq-q" onclick="this.parentElement.classList.toggle('open')">How many months are enough for Haryana LEET 2026 preparation?<span class="lp-faq-arrow">▼</span></div>
+                <div class="lp-faq-a">With focused study and proper use of PYQ, 2–3 months of disciplined preparation is usually sufficient. If you start earlier, use extra time for deeper concept revision and more mock test cycles.</div>
+              </div>
+              <div class="lp-faq-item">
+                <div class="lp-faq-q" onclick="this.parentElement.classList.toggle('open')">When will Haryana LEET 2026 notification and exam date be released?<span class="lp-faq-arrow">▼</span></div>
+                <div class="lp-faq-a">The official Haryana LEET 2026 notification and exam date will be released by HSTES on its website. Based on previous years, the notification usually comes in the first half of the year, followed by the exam a few weeks later. Always verify the latest schedule on the official HSTES portal.</div>
+              </div>
+              <div class="lp-faq-item">
+                <div class="lp-faq-q" onclick="this.parentElement.classList.toggle('open')">How can I download Haryana LEET PYQ and sample papers?<span class="lp-faq-arrow">▼</span></div>
+                <div class="lp-faq-a">You can download Haryana LEET previous year question papers and sample papers from HSBTE PYQ. Use the Haryana LEET hub page, the LEET sample paper page, and the HSBTE PYQ section, which provide organised links to branch-wise and course-wise question papers.</div>
+              </div>
+              <div class="lp-faq-item">
+                <div class="lp-faq-q" onclick="this.parentElement.classList.toggle('open')">How is counselling done for Haryana LEET 2026?<span class="lp-faq-arrow">▼</span></div>
+                <div class="lp-faq-a">After declaration of the Haryana LEET 2026 result, eligible candidates must register for online counselling through the HSTES portal. The process involves registration, document verification, choice filling, seat allotment (multiple rounds) and fee payment at the allotted college. The LEET counselling page on this site explains the step-by-step process.</div>
+              </div>
+              <div class="lp-faq-item">
+                <div class="lp-faq-q" onclick="this.parentElement.classList.toggle('open')">Is there negative marking in Haryana LEET 2026?<span class="lp-faq-arrow">▼</span></div>
+                <div class="lp-faq-a">The negative marking scheme is defined in the official HSTES notification. In previous years there has been no negative marking or minimal deduction. Always confirm the exact marking scheme from the official 2026 brochure before exam day.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /lp-main-col -->
+
+      <!-- SIDEBAR -->
+      <aside class="lp-sidebar">
+        <div class="lp-alert">
+          <span class="ai">⚠️</span>
+          <span>Always verify dates, eligibility &amp; rules from the <strong>official HSTES website</strong> before applying.</span>
+        </div>
+
+        <div class="lp-sb-card">
+          <div class="lp-sb-head">🔗 Quick Navigation</div>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(1)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">📋</span>Overview</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(2)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">🔗</span>Important Links</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(3)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">✅</span>Eligibility</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(4)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">📚</span>Syllabus &amp; Pattern</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(5)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">📅</span>Important Dates</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(6)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">📄</span>PYQ &amp; Papers</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(7)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">🎯</span>Preparation Strategy</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(8)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">🎓</span>Counselling</a>
+          <a href="#" onclick="document.querySelector('.lp-section:nth-child(9)').scrollIntoView({behavior:'smooth'});return false;" class="lp-sb-link"><span class="si">❓</span>FAQ</a>
+        </div>
+
+        <div class="lp-sb-card">
+          <div class="lp-sb-head">📄 Study Material</div>
+          <a href="leet-sample-paper.html" class="lp-sb-link"><span class="si">📝</span>LEET Sample Papers</a>
+          <a href="btech-leet-sample-paper.html" class="lp-sb-link" data-leet-stream="btech"><span class="si">🔧</span>B.Tech PYQ Papers</a>
+          <a href="b-pharmacy-leet-sample-paper.html" class="lp-sb-link" data-leet-stream="bpharmacy"><span class="si">💊</span>B.Pharm PYQ Papers</a>
+          <a href="hsbte-pyq.html" class="lp-sb-link"><span class="si">📁</span>HSBTE Diploma PYQ</a>
+        </div>
+
+        <div class="lp-sb-card">
+          <div class="lp-sb-head">🎓 Admission Resources</div>
+          <a href="/haryana-leet-cutoff" class="lp-sb-link"><span class="si">📊</span>Previous Year Cutoff</a>
+          <a href="/haryana-leet-colleges" class="lp-sb-link"><span class="si">🏛️</span>Participating Colleges</a>
+          <a href="leet-counselling.html" class="lp-sb-link"><span class="si">📋</span>Counselling Guide</a>
+          <a href="contact.html" class="lp-sb-link"><span class="si">📞</span>Contact &amp; Help</a>
+        </div>
+
+        <div class="lp-cta">
+          <h4>🚀 Start Your Preparation</h4>
+          <p>Access free LEET sample papers and PYQ to begin your LEET 2026 journey today.</p>
+          <a href="leet-sample-paper.html" class="lp-cta-btn">Get Free Papers →</a>
+        </div>
+      </aside>
+
+    </div><!-- /lp-layout -->
+  </div><!-- /leet-page -->
   </main>
 
   <button id="goTopBtn" title="Go to top" aria-label="Go to top">
@@ -256,6 +912,55 @@
   <script defer src="../js/translate.js"></script>
   <script defer src="../js/chatbot.js"></script>
   <script defer src="../js/leet-stream-toggle.js"></script>
+
+  <!-- Inline stream toggle + UI logic -->
+  <script>
+  (function(){
+    function initToggle(){
+      var toggles = document.querySelectorAll('[data-leet-toggle]');
+      toggles.forEach(function(toggle){
+        var btns = toggle.querySelectorAll('[data-stream-select]');
+        if(!btns.length) return;
+
+        function applyStream(stream){
+          // Update button states
+          btns.forEach(function(b){
+            var active = b.getAttribute('data-stream-select') === stream;
+            b.setAttribute('aria-pressed', active ? 'true' : 'false');
+            b.classList.toggle('lp-active', active);
+          });
+
+          // Show/hide all [data-leet-stream] elements on the page
+          document.querySelectorAll('[data-leet-stream]').forEach(function(el){
+            var elStream = el.getAttribute('data-leet-stream');
+            el.style.display = (elStream === stream) ? '' : 'none';
+          });
+
+          // Save preference
+          try{ localStorage.setItem('leet-stream', stream); }catch(e){}
+        }
+
+        btns.forEach(function(btn){
+          btn.addEventListener('click', function(){
+            applyStream(btn.getAttribute('data-stream-select'));
+          });
+        });
+
+        // Init: restore saved or default to btech
+        var saved = '';
+        try{ saved = localStorage.getItem('leet-stream') || ''; }catch(e){}
+        var defaultStream = saved || 'btech';
+        applyStream(defaultStream);
+      });
+    }
+
+    // Run after DOM ready
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', initToggle);
+    } else {
+      initToggle();
+    }
+  })();
+  </script>
 </body>
 </html>
-

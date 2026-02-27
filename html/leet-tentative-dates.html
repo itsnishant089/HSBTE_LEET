@@ -37,6 +37,16 @@
     <p>HSBTE LEET 2025 Important Dates & Schedule</p>
   </div>
 
+  <!-- B.Tech / B.Pharmacy stream toggle (for future dates tables) -->
+  <div class="leet-stream-toggle" data-leet-toggle>
+    <button type="button" data-stream-select="btech" aria-pressed="false">
+      B.Tech LEET
+    </button>
+    <button type="button" data-stream-select="bpharmacy" aria-pressed="false">
+      B.Pharmacy LEET
+    </button>
+  </div>
+
   <div class="dates-page-content">
     <!-- Notice Card -->
     <div class="content-card" style="text-align: center; padding: 40px 20px; max-width: 800px; margin: 0 auto;">
@@ -80,7 +90,7 @@
     </div>
 
     <!-- BTech LEET Dates -->
-    <div id="btech-dates" class="dates-section">
+    <div id="btech-dates" class="dates-section" data-leet-stream="btech">
       <h2 class="section-title">B.E./B.Tech. (Lateral Entry) - Tentative Key Dates</h2>
       
       <!-- Admission Process Table -->
@@ -199,7 +209,7 @@
     </div>
 
     <!-- B.Pharmacy LEET Dates -->
-    <div id="pharmacy-dates" class="dates-section" style="display: none;">
+    <div id="pharmacy-dates" class="dates-section" data-leet-stream="bpharmacy" style="display: none;">
       <h2 class="section-title">B.Pharmacy (Lateral Entry) - Tentative Key Dates</h2>
       
       <!-- Admission Process Table -->
@@ -336,5 +346,6 @@ function showCourseDates(course) {
 <script defer src="../js/include.js"></script>
 <script defer src="../js/translate.js"></script>
 <script defer src="../js/chatbot.js"></script>
+<script defer src="../js/leet-stream-toggle.js"></script>
 </body>
 </html>

@@ -53,5 +53,19 @@
         </div>
 </footer>
 
-<!-- Lead capture modal is injected by /js/lead-capture.js on all pages -->
-<script src="../js/lead-capture.js"></script>
+<!-- Lead capture modal is injected conditionally based on localStorage flag -->
+<script>
+try {
+  if (localStorage.getItem("leetLeadCaptured") !== "1") {
+    var s = document.createElement("script");
+    s.src = "/js/lead-capture.js";
+    s.defer = true;
+    document.body.appendChild(s);
+  }
+} catch (e) {
+  var s = document.createElement("script");
+  s.src = "/js/lead-capture.js";
+  s.defer = true;
+  document.body.appendChild(s);
+}
+</script>
