@@ -234,3 +234,151 @@ document.addEventListener("partialsLoaded", () => {
 });
 
 // AdSense - No interference, let it work normally
+
+/* ============================================================
+   GO TO TOP BUTTON
+   Used by index.html, Adv-Diploma.html and all pages
+   ============================================================ */
+(function () {
+  var goTopBtn = document.getElementById('goTopBtn');
+  if (!goTopBtn) return;
+  window.addEventListener('scroll', function () {
+    goTopBtn.classList.toggle('visible', window.scrollY > 300);
+  });
+  goTopBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+/* ============================================================
+   FAQ ACCORDION
+   Used by index.html (class-based open/close toggle)
+   ============================================================ */
+(function () {
+  var faqBtns = document.querySelectorAll('.faq-question');
+  if (!faqBtns.length) return;
+  faqBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function (i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+// ================================
+// LEET 2026 — PERFORMANCE & SEO HELPERS
+// ================================
+
+/* ── Lazy Image Loading (native + fallback) ── */
+(function () {
+  if ('loading' in HTMLImageElement.prototype) return; // native support
+  var imgs = document.querySelectorAll('img[loading="lazy"]');
+  if (!imgs.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var img = entry.target;
+        if (img.dataset.src) img.src = img.dataset.src;
+        io.unobserve(img);
+      }
+    });
+  }, { rootMargin: '200px' });
+  imgs.forEach(function (img) { io.observe(img); });
+})();
+
+/* ── FAQ Accordion (class-based, used by new leet-faq-item) ── */
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var faqs = document.querySelectorAll('.leet-faq-q');
+    faqs.forEach(function (q) {
+      q.addEventListener('click', function () {
+        var item = this.closest('.leet-faq-item');
+        var isOpen = item.classList.contains('open');
+        // Close all siblings first
+        var siblings = item.parentElement.querySelectorAll('.leet-faq-item');
+        siblings.forEach(function (s) { s.classList.remove('open'); });
+        // Toggle current
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  });
+})();
+
+/* ── Stream Toggle — universal init for ALL pages ── */
+(function () {
+  function initLeetToggle() {
+    document.querySelectorAll('[data-leet-toggle]').forEach(function (toggleWrap) {
+      var btns = toggleWrap.querySelectorAll('[data-stream-select]');
+      if (!btns.length) return;
+
+      function applyStream(stream) {
+        btns.forEach(function (b) {
+          var active = b.getAttribute('data-stream-select') === stream;
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+          b.classList.toggle('lp-active', active);
+        });
+        document.querySelectorAll('[data-leet-stream]').forEach(function (el) {
+          el.style.display = (el.getAttribute('data-leet-stream') === stream) ? '' : 'none';
+        });
+        try { localStorage.setItem('leet-stream', stream); } catch (e) {}
+      }
+
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyStream(btn.getAttribute('data-stream-select'));
+        });
+      });
+
+      var saved = '';
+      try { saved = localStorage.getItem('leet-stream') || ''; } catch (e) {}
+      applyStream(saved || 'btech');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLeetToggle);
+  } else {
+    initLeetToggle();
+  }
+  // Also init after partials load
+  document.addEventListener('partialsLoaded', function () {
+    setTimeout(initLeetToggle, 80);
+  });
+})();
+
+/* ── Breadcrumb JSON-LD Auto-inject ── */
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var bc = document.querySelector('.leet-breadcrumb');
+    if (!bc) return;
+    var items = bc.querySelectorAll('a');
+    if (!items.length) return;
+    var list = [];
+    items.forEach(function (a, i) {
+      list.push({ '@type': 'ListItem', 'position': i + 1, 'name': a.textContent.trim(), 'item': a.href });
+    });
+    var current = bc.querySelector('.current');
+    if (current) {
+      list.push({ '@type': 'ListItem', 'position': list.length + 1, 'name': current.textContent.trim(), 'item': window.location.href });
+    }
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': list });
+    document.head.appendChild(script);
+  });
+})();
+
+/* ── Page Performance: mark LCP candidate ── */
+(function () {
+  if (window.performance && window.performance.mark) {
+    window.performance.mark('leet-page-interactive');
+  }
+})();

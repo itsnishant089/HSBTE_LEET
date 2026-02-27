@@ -412,7 +412,7 @@ hstes related"/>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous"/>
 
-<link rel="stylesheet" href="../css/main.css"/>
+<link rel="preload" href="../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="../css/main.css"></noscript>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" media="print" onload="this.media='all'"/>
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/></noscript>
@@ -482,107 +482,207 @@ hstes related"/>
 
   gtag('config', 'G-WR1BG2HCE0');
 </script>
+
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
 </head>
 
 <body>
+
 <!-- HEADER -->
-<div data-include="../partials/header.html">
-</div>
+<div data-include="../partials/header.html"></div>
+
 <!-- CHATBOT -->
-<div data-include="../partials/chatbot.html">
-</div>
-  <main id="main-content" role="main">
-<div class="computer-pyq">
-  <h1 class="computer-pyq-heading">
-    Computer – Previous Year Papers
-  </h1>
+<div data-include="../partials/chatbot.html"></div>
 
-  <div class="computer-pyq-grid">
-    <a aria-label="1st Semester" class="computer-pyq-card" href="./computer-1-semester.html">
-      <img alt="Semester 1" height="300" loading="lazy" src="../image/1-semester.webp" width="400"/>
-      <span>1st Semester</span>
-    </a>
-    <a aria-label="2nd Semester" class="computer-pyq-card" href="./computer-pyq-2-semester.html">
-      <img alt="Semester 2" height="300" loading="lazy" src="../image/2-semester.webp" width="400"/>
-      <span>2nd Semester</span>
-    </a>
-    <a aria-label="3rd Semester" class="computer-pyq-card" href="./computer-pyq-3-semester.html">
-      <img alt="Semester 3" height="300" loading="lazy" src="../image/3-semester.webp" width="400"/>
-      <span>3rd Semester</span>
-    </a>
-    <a aria-label="4th Semester" class="computer-pyq-card" href="./computer-pyq-4-semester.html">
-      <img alt="Semester 4" height="300" loading="lazy" src="../image/4-semester.webp" width="400"/>
-      <span>4th Semester</span>
-    </a>
-    <a aria-label="5th Semester" class="computer-pyq-card" href="./computer-pyq-5-semester.html">
-      <img alt="Semester 5" height="300" loading="lazy" src="../image/5-semester.webp" width="400"/>
-      <span>5th Semester</span>
-    </a>
-    <a aria-label="6th Semester" class="computer-pyq-card" href="./computer-pyq-6-semester.html">
-      <img alt="Semester 6" height="300" loading="lazy" src="../image/6-semester.webp" width="400"/>
-      <span>6th Semester</span>
-    </a>
-  </div>
-</div>
+<main id="main-content" role="main">
 
-<!-- Branch informational content -->
-<section class="content-section page-content">
-  <div class="content-card">
-    <h2>Computer Engineering – Branch Overview</h2>
-    <p>Computer Engineering focuses on how computers and software work – from basic hardware and operating systems to programming, networking and databases. In this diploma branch you learn how to build, maintain and use computer systems to solve real‑life problems.</p>
+  <!-- ===== PAGE HERO ===== -->
+  <div class="page-hero">
+    <div class="page-hero-badge">💻 HSBTE Diploma PYQ</div>
+    <h1 class="computer-pyq-heading">Computer Engineering<br>Previous Year Papers</h1>
+    <p class="page-hero-sub">Download semester-wise Computer Engineering diploma question papers — free PDF for all semesters.</p>
+    <div class="page-hero-pills">
+      <span class="page-hero-pill">📄 Free PDF Download</span>
+      <span class="page-hero-pill">📅 All Semesters Available</span>
+      <span class="page-hero-pill">✅ Updated 2025–2026</span>
+    </div>
   </div>
 
-  <div class="content-card">
-    <h2>What Students Learn</h2>
-    <ul>
-      <li>C programming, Data Structures and basic Object Oriented concepts.</li>
-      <li>Computer Organization, Operating Systems and Computer Networks.</li>
-      <li>Database Management Systems (DBMS) and basic SQL.</li>
-      <li>Web technologies – HTML, CSS and introduction to web development.</li>
-      <li>Fundamentals of Software Engineering and project development.</li>
-      <li>Basic electronics and digital logic needed for computer hardware.</li>
-    </ul>
-  </div>
+  <div class="computer-pyq">
 
-  <div class="content-card">
-    <h2>Career Opportunities</h2>
-    <ul>
-      <li>Computer hardware and network technician.</li>
-      <li>Junior software / web developer in IT companies.</li>
-      <li>Technical support, IT helpdesk and system maintenance roles.</li>
-      <li>Lab assistant or computer operator in colleges and institutes.</li>
-      <li>Freelance work in website creation and basic software projects.</li>
-    </ul>
-  </div>
+    <!-- ===== SEMESTER CARDS ===== -->
+    <div class="cards-wrap">
+      <div class="section-label"><span>Select Semester</span></div>
+      <h2 class="section-title-center">Choose Your Semester</h2>
+      <p class="section-sub-center">Click any semester to access Computer Engineering previous year papers.</p>
 
-  <div class="content-card">
-    <h2>Why Choose This Branch</h2>
-    <p>If you enjoy coding, problem solving and working with computers, this branch gives you a strong base for both jobs and further study (B.Tech / BCA / B.Sc IT). The demand for computer diploma holders is high in almost every sector because all organisations use IT systems.</p>
-  </div>
+      <div class="computer-pyq-grid">
+        <a aria-label="1st Semester" class="computer-pyq-card" href="./computer-1-semester.html">
+          <img alt="Computer Engineering 1st Semester PYQ" src="../image/1-semester.webp" width="400" height="300" loading="lazy">
+          <span>1st Semester</span>
+        </a>
+        <a aria-label="2nd Semester" class="computer-pyq-card" href="./computer-pyq-2-semester.html">
+          <img alt="Computer Engineering 2nd Semester PYQ" src="../image/2-semester.webp" width="400" height="300" loading="lazy">
+          <span>2nd Semester</span>
+        </a>
+        <a aria-label="3rd Semester" class="computer-pyq-card" href="./computer-pyq-3-semester.html">
+          <img alt="Computer Engineering 3rd Semester PYQ" src="../image/3-semester.webp" width="400" height="300" loading="lazy">
+          <span>3rd Semester</span>
+        </a>
+        <a aria-label="4th Semester" class="computer-pyq-card" href="./computer-pyq-4-semester.html">
+          <img alt="Computer Engineering 4th Semester PYQ" src="../image/4-semester.webp" width="400" height="300" loading="lazy">
+          <span>4th Semester</span>
+        </a>
+        <a aria-label="5th Semester" class="computer-pyq-card" href="./computer-pyq-5-semester.html">
+          <img alt="Computer Engineering 5th Semester PYQ" src="../image/5-semester.webp" width="400" height="300" loading="lazy">
+          <span>5th Semester</span>
+        </a>
+        <a aria-label="6th Semester" class="computer-pyq-card" href="./computer-pyq-6-semester.html">
+          <img alt="Computer Engineering 6th Semester PYQ" src="../image/6-semester.webp" width="400" height="300" loading="lazy">
+          <span>6th Semester</span>
+        </a>
+      </div>
+    </div>
 
-  <div class="content-card">
-    <h2>Real-World Applications</h2>
-    <ul>
-      <li>Maintaining computer labs and networks in schools, colleges and offices.</li>
-      <li>Developing small management systems for shops, institutes and clinics.</li>
-      <li>Setting up and troubleshooting Wi‑Fi, printers and basic LAN connections.</li>
-      <li>Building simple websites and web applications for local businesses.</li>
-      <li>Supporting IT teams in larger software and networking projects.</li>
-    </ul>
-  </div>
-</section>
+    <!-- ===== AT A GLANCE ===== -->
+    <div class="section-label"><span>Quick Facts</span></div>
+    <h2 class="section-title-center" style="margin-bottom:28px;">Programme at a Glance</h2>
 
+    <div class="info-cards-grid">
+      <div class="info-card">
+        <span class="info-card-icon">📆</span>
+        <strong>3 Years</strong>
+        <span>Programme Duration</span>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon">📚</span>
+        <strong>6 Semesters</strong>
+        <span>Total Semesters</span>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon">🏛️</span>
+        <strong>HSBTE</strong>
+        <span>Awarding Board</span>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon">💻</span>
+        <strong>IT Core</strong>
+        <span>Computer Field</span>
+      </div>
+    </div>
+
+    <!-- ===== BRANCH INFO ===== -->
+    <section class="branch-info">
+      <h2>About Computer Engineering</h2>
+
+      <p>
+        Computer Engineering is a modern engineering discipline focused on computer
+        hardware, software, programming, networking, and information technology systems.
+        The HSBTE diploma programme prepares students with strong foundations in
+        programming, databases, operating systems, and computer networks.
+      </p>
+
+      <p>
+        Students gain practical skills in software development, computer maintenance,
+        web technologies, and IT systems — enabling careers in software, networking,
+        IT support, and digital services industries.
+      </p>
+
+      <h3>What Students Learn</h3>
+      <ul>
+        <li>Programming in C and basic OOP concepts</li>
+        <li>Data structures and algorithms fundamentals</li>
+        <li>Computer organization and architecture</li>
+        <li>Operating systems and computer networks</li>
+        <li>Database management systems (DBMS)</li>
+        <li>Web development (HTML, CSS, basics)</li>
+        <li>Software engineering fundamentals</li>
+        <li>Digital electronics basics</li>
+        <li>Computer hardware and maintenance</li>
+        <li>IT project development</li>
+      </ul>
+
+      <h3>Career Opportunities</h3>
+      <ul>
+        <li>Junior Software Developer</li>
+        <li>Web Developer</li>
+        <li>Computer Hardware Technician</li>
+        <li>Network Technician</li>
+        <li>IT Support Technician</li>
+        <li>Database Assistant</li>
+        <li>Computer Operator</li>
+        <li>Technical Support Executive</li>
+      </ul>
+
+      <h3>Why Choose Computer Engineering</h3>
+      <p>
+        Information technology is used in every industry, creating strong demand
+        for computer professionals. Diploma holders can work in software companies,
+        IT services, networking, education, and digital businesses. This branch also
+        provides an excellent base for higher studies like B.Tech, BCA, or IT degrees.
+      </p>
+
+      <h3>Real-World Applications</h3>
+      <ul>
+        <li>Software and web application development</li>
+        <li>Computer network setup and maintenance</li>
+        <li>Database and information systems</li>
+        <li>IT support and troubleshooting</li>
+        <li>Office automation systems</li>
+        <li>Website development for businesses</li>
+        <li>Computer lab management</li>
+        <li>Digital service platforms</li>
+      </ul>
+
+      <h3>Higher Education After This Diploma</h3>
+      <p>
+        After completing Computer Engineering diploma, students can appear for
+        <strong>Haryana LEET</strong> to gain direct admission into the 2nd year of
+        B.Tech Computer Science, IT, or related programmes — enabling progression
+        to advanced software and IT engineering careers.
+      </p>
+    </section>
+
+    <!-- ===== STUDY TIPS ===== -->
+    <div class="tips-section">
+      <h2>📌 How to Use Computer Engineering PYQs Effectively</h2>
+
+      <div class="tips-grid">
+        <div class="tip-item">
+          <strong>Practice Programming</strong>
+          <p>C programming and logic questions frequently appear in exams.</p>
+        </div>
+        <div class="tip-item">
+          <strong>Understand Concepts</strong>
+          <p>OS, DBMS, and networking concepts are often theory-based questions.</p>
+        </div>
+        <div class="tip-item">
+          <strong>Revise Definitions</strong>
+          <p>Technical terms and short notes are common exam patterns.</p>
+        </div>
+        <div class="tip-item">
+          <strong>Compare Papers</strong>
+          <p>Programming and DBMS questions often repeat across semesters.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </main>
+
 <button id="goTopBtn" title="Go to top">
-<i class="fa-solid fa-arrow-up">
-</i>
+  <i class="fa-solid fa-arrow-up"></i>
 </button>
-<div data-include="../partials/footer.html">
-</div>
+
+<div data-include="../partials/footer.html"></div>
+
 <script defer src="../js/search.js"></script>
 <script defer src="../js/main.js"></script>
 <script defer src="../js/include.js"></script>
 <script defer src="../js/translate.js"></script>
 <script defer src="../js/chatbot.js"></script>
+
 </body>
 </html>
