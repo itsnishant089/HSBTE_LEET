@@ -1,75 +1,73 @@
-Site: HSBTE LEET
-Base URL: https://hsbteleet.com
-Description: Educational resource focused on Haryana LEET (Lateral Entry Entrance Test), HSBTE diploma engineering, polytechnic previous year question papers (PYQ), syllabus, counselling, exam preparation strategy, and lateral entry admissions for B.Tech and B.Pharmacy in Haryana.
-Language: en-IN
-Audience: Polytechnic diploma students, Haryana LEET aspirants, lateral entry engineering candidates, HSBTE students
-Region: India (Haryana)
+# HSBTE LEET
 
-Sitemap: https://hsbteleet.com/sitemap.xml
+> Educational resource focused on Haryana LEET (Lateral Entry Entrance Test), HSBTE diploma engineering, polytechnic previous year question papers (PYQ), syllabus, counselling, exam preparation strategy, and lateral entry admissions for B.Tech and B.Pharmacy in Haryana.
 
-Primary topics:
-Haryana LEET
-HSBTE diploma
-lateral entry engineering
-polytechnic previous year papers
-LEET syllabus
-HSBTE syllabus
-LEET counselling
-LEET cutoff
-engineering lateral entry Haryana
-diploma to BTech admission Haryana
+## About
 
-Important pages:
-https://hsbteleet.com/ - HSBTE PYQ and Haryana LEET preparation hub
-https://hsbteleet.com/haryanaleet - Haryana LEET overview and navigation hub
-https://hsbteleet.com/haryana-leet-2026 - Haryana LEET 2026 exam guide
-https://hsbteleet.com/hsbte-pyq - Branch-wise HSBTE diploma previous year papers
-https://hsbteleet.com/leet-sample-paper - Haryana LEET sample papers and practice
-https://hsbteleet.com/leet-preparation-guide - LEET preparation strategy and study plan
-https://hsbteleet.com/leet-syllabus - Haryana LEET syllabus overview
-https://hsbteleet.com/last-year-cutoff - Haryana LEET previous year cutoff and rank trends
-https://hsbteleet.com/leet-counselling - Haryana LEET counselling process
-https://hsbteleet.com/syllabus/syllabus.html - HSBTE diploma syllabus PDF collection
-https://hsbteleet.com/hsbte-result - HSBTE diploma result updates
-https://hsbteleet.com/faq - HSBTE and Haryana LEET frequently asked questions
-https://hsbteleet.com/contact - Student support and contact
+- Base URL: https://hsbteleet.com
+- Language: en-IN
+- Region: India (Haryana)
+- Audience: Polytechnic diploma students, Haryana LEET aspirants, lateral entry engineering candidates, HSBTE students
+- Update frequency: weekly
+- Sitemap: https://hsbteleet.com/sitemap.xml
 
-Haryana LEET detailed pages:
-https://hsbteleet.com/haryana-leet-syllabus - Haryana LEET 2026 syllabus details
-https://hsbteleet.com/haryana-leet-exam-pattern - Haryana LEET exam pattern and marking scheme
-https://hsbteleet.com/haryana-leet-eligibility - Haryana LEET eligibility criteria
-https://hsbteleet.com/haryana-leet-counselling - Haryana LEET counselling details
-https://hsbteleet.com/haryana-leet-cutoff - Haryana LEET cutoff trends and ranks
-https://hsbteleet.com/haryana-leet-colleges - Haryana LEET colleges and seats
+## Primary Topics
 
-HSBTE diploma resources:
-https://hsbteleet.com/hsbte-pyq - HSBTE diploma branch PYQ
-https://hsbteleet.com/syllabus/syllabus.html - HSBTE diploma syllabus PDFs
-https://hsbteleet.com/hsbte-result - HSBTE diploma results
-https://hsbteleet.com/faq - HSBTE student FAQ
+- Haryana LEET
+- HSBTE diploma
+- Lateral entry engineering
+- Polytechnic previous year papers
+- LEET syllabus
+- HSBTE syllabus
+- LEET counselling
+- LEET cutoff
+- Engineering lateral entry Haryana
+- Diploma to BTech admission Haryana
 
-Content types:
-previous year question papers
-sample papers
-exam syllabus
-exam pattern
-cutoff data
-counselling guidance
-admission guidance
-study strategy
-educational updates
+## Important Pages
 
-Purpose:
+- [HSBTE PYQ and Haryana LEET Preparation Hub](https://hsbteleet.com/)
+- [Haryana LEET Overview](https://hsbteleet.com/haryanaleet)
+- [Haryana LEET 2026 Exam Guide](https://hsbteleet.com/haryana-leet-2026)
+- [Branch-wise HSBTE PYQ](https://hsbteleet.com/hsbte-pyq)
+- [LEET Sample Papers](https://hsbteleet.com/leet-sample-paper)
+- [LEET Preparation Guide](https://hsbteleet.com/leet-preparation-guide)
+- [LEET Syllabus Overview](https://hsbteleet.com/leet-syllabus)
+- [Haryana LEET Cutoff Trends](https://hsbteleet.com/last-year-cutoff)
+- [LEET Counselling Process](https://hsbteleet.com/leet-counselling)
+- [HSBTE Diploma Syllabus PDF Collection](https://hsbteleet.com/syllabus/syllabus.html)
+- [HSBTE Result Updates](https://hsbteleet.com/hsbte-result)
+- [FAQ](https://hsbteleet.com/faq)
+- [Contact](https://hsbteleet.com/contact)
+
+## Haryana LEET Detailed Pages
+
+- [Haryana LEET 2026 Syllabus](https://hsbteleet.com/haryana-leet-syllabus)
+- [Haryana LEET Exam Pattern](https://hsbteleet.com/haryana-leet-exam-pattern)
+- [Haryana LEET Eligibility](https://hsbteleet.com/haryana-leet-eligibility)
+- [Haryana LEET Counselling](https://hsbteleet.com/haryana-leet-counselling)
+- [Haryana LEET Cutoff](https://hsbteleet.com/haryana-leet-cutoff)
+- [Haryana LEET Colleges](https://hsbteleet.com/haryana-leet-colleges)
+
+## Content Types
+
+- Previous year question papers
+- Sample papers
+- Exam syllabus
+- Exam pattern
+- Cutoff data
+- Counselling guidance
+- Admission guidance
+- Study strategy
+- Educational updates
+
+## Purpose
+
 Help diploma students in Haryana transition to B.Tech or B.Pharmacy through lateral entry by providing reliable exam resources, PYQ, syllabus, and counselling guidance.
 
-Update frequency:
-weekly
+## Authority Signals
 
-Authority signals:
-HSBTE diploma content
-Haryana LEET exam coverage
-lateral entry engineering guidance
-polytechnic education resources
-
-Contact:
-https://hsbteleet.com/contact
+- HSBTE diploma content
+- Haryana LEET exam coverage
+- Lateral entry engineering guidance
+- Polytechnic education resources
