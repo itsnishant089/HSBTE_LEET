@@ -4,173 +4,700 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Home page -->
+  <!-- ══════════════════════════════════════
+       HOME
+  ══════════════════════════════════════ -->
   <url>
     <loc>https://hsbteleet.com/</loc>
-    <lastmod>2026-02-05</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Main branch / exam pages only -->
-  <url><loc>https://hsbteleet.com/Adv-Diploma</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Agriculture</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/ai-ml</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Architectural-Assistantship</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Automation</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Automobile</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/B-Pharmacy-leet</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://hsbteleet.com/btech-leet-sample-paper</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://hsbteleet.com/btech-leet</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://hsbteleet.com/Ceramic</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Chemical</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/civil</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/computer-pyq</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/d-pharmacy</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/dbm</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/ece</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Electrical-Engineering</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/FAA</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Fashion-Design</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Fashion-Technology</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Food</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/haryanaleet</loc><lastmod>2026-02-05</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://hsbteleet.com/Hotel-Management</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/hsbte-pyq</loc><lastmod>2026-02-05</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <!-- ══════════════════════════════════════
+       TOP-LEVEL HUB PAGES
+  ══════════════════════════════════════ -->
+  <url>
+    <loc>https://hsbteleet.com/hsbte-pyq</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/haryanaleet</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/syllabus/syllabus.html</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════
+       HARYANA LEET INFO PAGES
+  ══════════════════════════════════════ -->
   <url>
     <loc>https://hsbteleet.com/haryana-leet-2026</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hsbteleet.com/haryana-leet-syllabus</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hsbteleet.com/haryana-leet-exam-pattern</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hsbteleet.com/haryana-leet-eligibility</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hsbteleet.com/haryana-leet-counselling</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hsbteleet.com/haryana-leet-cutoff</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hsbteleet.com/haryana-leet-colleges</loc>
-    <lastmod>2026-02-23</lastmod>
+    <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-  <loc>https://hsbteleet.com/leet-sample-paper</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.9</priority>
-</url>
+    <loc>https://hsbteleet.com/leet-sample-paper</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/leet-syllabus</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/leet-overview</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/leet-preparation-guide</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/leet-counselling</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/leet-tentative-dates</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/last-year-cutoff</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-<url>
-  <loc>https://hsbteleet.com/hsbte-result</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>daily</changefreq>
-  <priority>0.9</priority>
-</url>
+  <!-- ══════════════════════════════════════
+       BTECH LEET
+  ══════════════════════════════════════ -->
+  <url>
+    <loc>https://hsbteleet.com/btech-leet</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-leet-sample-paper</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-1</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-2</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-3</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-4</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-5</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-6</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-7</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-8</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-9</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-10</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-sample-paper-11</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
-<url>
-  <loc>https://hsbteleet.com/contact</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.7</priority>
-</url>
+  <!-- ══════════════════════════════════════
+       B.PHARMACY LEET
+  ══════════════════════════════════════ -->
+  <url>
+    <loc>https://hsbteleet.com/B-Pharmacy-leet</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/b-pharmacy-leet-sample-paper</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Bpharma-sample-paper-1</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Bpharma-sample-paper-2</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Bpharma-sample-paper-3</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Bpharma-sample-paper-4</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Bpharma-sample-paper-5</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Bpharma-sample-paper-6</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Bpharma-sample-paper-11</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
-<url>
-  <loc>https://hsbteleet.com/faq</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.7</priority>
-</url>
+  <!-- ══════════════════════════════════════
+       HSBTE PYQ — BRANCH HUB PAGES
+  ══════════════════════════════════════ -->
+  <url>
+    <loc>https://hsbteleet.com/Adv-Diploma</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Agriculture</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/ai-ml</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Architectural-Assistantship</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Automation</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Automobile</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Ceramic</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Chemical</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/civil</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/computer-pyq</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/d-pharmacy</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/dbm</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/ece</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Electrical-Engineering</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/FAA</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Fashion-Design</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Fashion-Technology</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Food</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Hotel-Management</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Instrumentation-&amp;-Control</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Library</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/mech</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Medical-Electronics</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Medical-Laboratory-Technology</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Office-Management</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Plastic</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Textile-Design</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Textile-Processing</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/Textile-Technology</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-<url>
-  <loc>https://hsbteleet.com/notices</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>daily</changefreq>
-  <priority>0.9</priority>
-</url>
+  <!-- ══════════════════════════════════════
+       SEMESTER PAGES — Adv-Diploma (4 semesters)
+  ══════════════════════════════════════ -->
+  <url><loc>https://hsbteleet.com/Adv-Diploma-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Adv-Diploma-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Adv-Diploma-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Adv-Diploma-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-<url>
-  <loc>https://hsbteleet.com/leet-syllabus</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+  <!-- SEMESTER PAGES — Agriculture (5 semesters) -->
+  <url><loc>https://hsbteleet.com/Agriculture-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Agriculture-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Agriculture-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Agriculture-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Agriculture-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-<url>
-  <loc>https://hsbteleet.com/leet-tentative-dates</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
+  <!-- SEMESTER PAGES — AI & ML (6 semesters) -->
+  <url><loc>https://hsbteleet.com/ai-ml-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ai-ml-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ai-ml-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ai-ml-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ai-ml-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ai-ml-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-<url>
-  <loc>https://hsbteleet.com/leet-overview</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+  <!-- SEMESTER PAGES — Architectural Assistantship (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Architectural-Assistantship-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Architectural-Assistantship-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Architectural-Assistantship-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Architectural-Assistantship-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Architectural-Assistantship-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Architectural-Assistantship-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-<url>
-  <loc>https://hsbteleet.com/last-year-cutoff</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
+  <!-- SEMESTER PAGES — Automation & Robotics (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Automation-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automation-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automation-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automation-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automation-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automation-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-<url>
-  <loc>https://hsbteleet.com/leet-preparation-guide</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
+  <!-- SEMESTER PAGES — Automobile Engineering (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Automobile-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automobile-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automobile-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automobile-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automobile-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Automobile-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-<url>
-  <loc>https://hsbteleet.com/leet-counselling</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.9</priority>
-</url>
+  <!-- SEMESTER PAGES — Ceramic Engineering (5 semesters) -->
+  <url><loc>https://hsbteleet.com/Ceramic-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Ceramic-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Ceramic-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Ceramic-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Ceramic-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
-<url>
-  <loc>https://hsbteleet.com/haryana-diploma-info</loc>
-  <lastmod>2026-02-21</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-  <url><loc>https://hsbteleet.com/Library</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/mech</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Medical-Electronics</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Medical-Laboratory-Technology</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Office-Management</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Plastic</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Textile-Design</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Textile-Processing</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/Textile-Technology</loc><lastmod>2026-02-05</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://hsbteleet.com/syllabus/syllabus.html</loc><lastmod>2026-02-05</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <!-- SEMESTER PAGES — Chemical Engineering (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Chemical-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Chemical-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Chemical-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Chemical-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Chemical-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Chemical-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Civil Engineering (6 semesters) -->
+  <url><loc>https://hsbteleet.com/civil-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/civil-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/civil-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/civil-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/civil-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/civil-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Computer Engineering (6 semesters) -->
+  <url><loc>https://hsbteleet.com/computer-1-semester</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/computer-pyq-2-semester</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/computer-pyq-3-semester</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/computer-pyq-4-semester</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/computer-pyq-5-semester</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/computer-pyq-6-semester</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — D Pharmacy (2 semesters) -->
+  <url><loc>https://hsbteleet.com/d-pharmacy-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/d-pharmacy-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — DBM (5 semesters + specializations) -->
+  <url><loc>https://hsbteleet.com/dbm-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-4-hr</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-4-mr</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-4-retail</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-5-hr</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-5-mr</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/dbm-5-retail</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — ECE (6 semesters) -->
+  <url><loc>https://hsbteleet.com/ece-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ece-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ece-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ece-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ece-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/ece-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Electrical Engineering (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Electrical-Engineering-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Electrical-Engineering-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Electrical-Engineering-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Electrical-Engineering-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Electrical-Engineering-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Electrical-Engineering-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — FAA (5 semesters) -->
+  <url><loc>https://hsbteleet.com/FAA-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/FAA-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/FAA-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/FAA-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/FAA-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Fashion Design (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Fashion-Design-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Design-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Design-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Design-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Design-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Design-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Fashion Technology (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Fashion-Technology-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Technology-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Technology-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Technology-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Technology-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Fashion-Technology-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Food Technology (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Food-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Food-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Food-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Food-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Food-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Food-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Hotel Management (5 semesters) -->
+  <url><loc>https://hsbteleet.com/Hotel-Management-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Hotel-Management-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Hotel-Management-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Hotel-Management-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Hotel-Management-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Instrumentation & Control (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Instrumentation-%26-Control-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Instrumentation-%26-Control-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Instrumentation-%26-Control-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Instrumentation-%26-Control-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Instrumentation-%26-Control-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Instrumentation-%26-Control-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Library & Information Science (5 semesters) -->
+  <url><loc>https://hsbteleet.com/Library-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Library-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Library-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Library-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Library-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Mechanical Engineering (6 semesters) -->
+  <url><loc>https://hsbteleet.com/mech-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/mech-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/mech-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/mech-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/mech-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/mech-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Medical Electronics (5 semesters) -->
+  <url><loc>https://hsbteleet.com/Medical-Electronics-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Medical-Electronics-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Medical-Electronics-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Medical-Electronics-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Medical-Electronics-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Medical Laboratory Technology (4 semesters) -->
+  <url><loc>https://hsbteleet.com/Medical-Laboratory-Technology-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Medical-Laboratory-Technology-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Medical-Laboratory-Technology-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Medical-Laboratory-Technology-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Office Management (5 semesters) -->
+  <url><loc>https://hsbteleet.com/Office-Management-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Office-Management-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Office-Management-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Office-Management-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Office-Management-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Plastic Technology (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Plastic-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Plastic-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Plastic-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Plastic-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Plastic-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Plastic-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Textile Design (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Textile-Design-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Design-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Design-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Design-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Design-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Design-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Textile Processing (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Textile-Processing-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Processing-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Processing-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Processing-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Processing-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Processing-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- SEMESTER PAGES — Textile Technology (6 semesters) -->
+  <url><loc>https://hsbteleet.com/Textile-Technology-1</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Technology-2</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Technology-3</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Technology-4</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Technology-5</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://hsbteleet.com/Textile-Technology-6</loc><lastmod>2026-02-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- ══════════════════════════════════════
+       UTILITY / INFO PAGES
+  ══════════════════════════════════════ -->
+  <url>
+    <loc>https://hsbteleet.com/hsbte-result</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/notices</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/haryana-diploma-info</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/faq</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/contact</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
 </urlset>
