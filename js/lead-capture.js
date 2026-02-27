@@ -5,18 +5,18 @@ if (localStorage.getItem('leetLeadCaptured') === '1') {
 return;
 }
 } catch (e) {}
-var SUPABASE_URL = 'https://jnsowbnkccddcrkuonan.supabase.co';
+var SUPABASE_URL      = 'https://jnsowbnkccddcrkuonan.supabase.co';
 var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impuc293Ym5rY2NkZGNya3VvbmFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjY0MzksImV4cCI6MjA4NzcwMjQzOX0.PbiJI8SOxjgDPAP0njNN8aIW3yArJmstxi_VRhPuM5k';
-var supabaseClient = null;
-var supabaseLoading = false;
-var supabaseReadyCallbacks = [];
+var supabaseClient           = null;
+var supabaseLoading          = false;
+var supabaseReadyCallbacks   = [];
 function qs(selector, root) {
 return (root || document).querySelector(selector);
 }
 function ensureStylesheet() {
 if (document.querySelector('link[data-leet-modal="1"]')) return;
 var link = document.createElement('link');
-link.rel = 'stylesheet';
+link.rel  = 'stylesheet';
 link.href = '/css/lead-modal.css';
 link.setAttribute('data-leet-modal', '1');
 (document.head || document.documentElement).appendChild(link);
@@ -24,7 +24,7 @@ link.setAttribute('data-leet-modal', '1');
 function ensureFont() {
 if (document.querySelector('link[data-leet-font="1"]')) return;
 var link = document.createElement('link');
-link.rel = 'stylesheet';
+link.rel  = 'stylesheet';
 link.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap';
 link.setAttribute('data-leet-font', '1');
 (document.head || document.documentElement).appendChild(link);
@@ -35,8 +35,8 @@ if (window.supabase) { callback(null); return; }
 supabaseReadyCallbacks.push(callback);
 if (supabaseLoading) return;
 supabaseLoading = true;
-var script = document.createElement('script');
-script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js';
+var script   = document.createElement('script');
+script.src   = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js';
 script.async = true;
 script.onload = function () {
 supabaseLoading = false;
@@ -67,8 +67,8 @@ function setMessage(text, type) {
 var msgEl = qs('#leet-modal-message');
 if (!msgEl) return;
 msgEl.textContent = text || '';
-msgEl.className = 'leet-modal-message';
-if (type === 'error') msgEl.classList.add('leet-modal-message--error');
+msgEl.className   = 'leet-modal-message';
+if (type === 'error')   msgEl.classList.add('leet-modal-message--error');
 if (type === 'success') msgEl.classList.add('leet-modal-message--success');
 }
 function setInputState(inputEl, state) {
@@ -77,11 +77,11 @@ inputEl.classList.remove('leet-input--error', 'leet-input--success');
 if (state) inputEl.classList.add('leet-input--' + state);
 }
 function validateForm(form) {
-var name = (form.elements.name.value || '').trim();
-var mobile = (form.elements.mobile.value || '').trim();
-var college = (form.elements.college.value || '').trim();
-var branch = (form.elements.branch.value || '').trim();
-var email = (form.elements.email.value || '').trim();
+var name        = (form.elements.name.value        || '').trim();
+var mobile      = (form.elements.mobile.value      || '').trim();
+var college     = (form.elements.college.value     || '').trim();
+var branch      = (form.elements.branch.value      || '').trim();
+var email       = (form.elements.email.value       || '').trim();
 var preparation = form.elements.preparation.value;
 ['leet-name','leet-mobile','leet-college','leet-branch','leet-email','leet-preparation'].forEach(function (id) {
 setInputState(qs('#' + id), null);
@@ -113,7 +113,7 @@ return null;
 }
 function showModal() {
 var overlay = qs('#leet-lead-modal-overlay');
-var dialog = overlay && qs('.leet-modal', overlay);
+var dialog  = overlay && qs('.leet-modal', overlay);
 if (!overlay || !dialog) return;
 overlay.classList.remove('leet-modal-hidden');
 overlay.setAttribute('aria-hidden', 'false');
@@ -146,13 +146,13 @@ async function submitLead(form) {
 var client = getSupabaseClient();
 if (!client) throw new Error('supabase_client_unavailable');
 var payload = {
-name: (form.elements.name.value || '').trim(),
-college: (form.elements.college.value || '').trim() || null,
-mobile: (form.elements.mobile.value || '').trim(),
-branch: (form.elements.branch.value || '').trim() || null,
-email: (form.elements.email.value || '').trim() || null,
+name:        (form.elements.name.value        || '').trim(),
+college:     (form.elements.college.value     || '').trim() || null,
+mobile:      (form.elements.mobile.value      || '').trim(),
+branch:      (form.elements.branch.value      || '').trim() || null,
+email:       (form.elements.email.value       || '').trim() || null,
 preparation: form.elements.preparation.value,
-page: window.location.href
+page:        window.location.href
 };
 var result = await client.from('leet_leads').insert([payload]);
 if (result.error) throw result.error;
@@ -160,7 +160,7 @@ return result;
 }
 function handleSubmit(event) {
 event.preventDefault();
-var form = event.target;
+var form      = event.target;
 var submitBtn = qs('.leet-modal-submit', form);
 setMessage('', null);
 var validationError = validateForm(form);
@@ -169,8 +169,8 @@ setMessage(validationError, 'error');
 return;
 }
 if (submitBtn) {
-submitBtn.disabled = true;
-submitBtn.textContent = 'Submitting…';
+submitBtn.disabled     = true;
+submitBtn.textContent  = 'Submitting…';
 submitBtn.classList.add('leet-loading');
 }
 ensureSupabaseLoaded(function (loadError) {
@@ -208,9 +208,9 @@ submitBtn.classList.remove('leet-loading');
 });
 }
 function attachEvents() {
-var overlay = qs('#leet-lead-modal-overlay');
+var overlay  = qs('#leet-lead-modal-overlay');
 if (!overlay) return;
-var form = qs('#leet-lead-form', overlay);
+var form     = qs('#leet-lead-form', overlay);
 var closeBtn = qs('.leet-modal-close', overlay);
 if (form && !form.__leetBound) {
 form.addEventListener('submit', handleSubmit);

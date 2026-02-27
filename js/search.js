@@ -171,7 +171,7 @@ semesterUrl = `${basePath}computer-pyq-${sem}-semester`;
 } else {
 semesterUrl = `${basePath}${branch.url}-${sem}`;
 }
-const fetchUrl = `/html/${semesterUrl.replace(/^\
+const fetchUrl = `/html/${semesterUrl.replace(/^\//, '')}.html`;
 extractSubjectsFromHtml(fetchUrl).then(subjects => {
 subjects.forEach(subject => {
 const subjectWords = subject.name.split(/[\s&–\-()]+/).filter(w => w.length > 0);
