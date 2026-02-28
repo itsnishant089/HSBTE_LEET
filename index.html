@@ -127,7 +127,20 @@
   ]
 }
 </script>
+<style>
+  /* FAQ fix */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s ease;
+  padding: 0 22px;
+}
 
+.faq-item.open .faq-answer {
+  max-height: 600px;   /* tall enough for any answer */
+  padding: 16px 22px 22px;
+}
+</style>
 <!-- Analytics -->
 <script>
 (function(c,l,a,r,i,t,y){
