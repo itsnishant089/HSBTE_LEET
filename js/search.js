@@ -113,7 +113,7 @@ const branches = [
 { name: 'Fashion Technology', url: 'Fashion-Technology', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-technology' },
 { name: 'Food Technology', url: 'Food', semesters: [1, 2, 3, 4, 5, 6], key: 'food' },
 { name: 'Hotel Management', url: 'Hotel-Management', semesters: [1, 2, 3, 4, 5], key: 'hotel' },
-{ name: 'Instrumentation & Control', url: 'Instrumentation-&-Control', semesters: [1, 2, 3, 4, 5, 6], key: 'instrumentation' },
+{ name: 'Instrumentation & Control', url: 'Instrumentation-_-Control', semesters: [1, 2, 3, 4, 5, 6], key: 'instrumentation' },
 { name: 'Library & Information Science', url: 'Library', semesters: [1, 2, 3, 4, 5], key: 'library' },
 { name: 'Mechanical Engineering', url: 'mech', semesters: [1, 2, 3, 4, 5, 6], key: 'mechanical' },
 { name: 'Medical Electronics', url: 'Medical-Electronics', semesters: [1, 2, 3, 4, 5], key: 'medical-electronics' },
