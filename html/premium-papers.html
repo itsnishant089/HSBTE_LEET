@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
+  <title>My Premium Papers | Haryana LEET | HSBTE PYQ</title>
+  <meta name="description" content="Access your premium Haryana LEET sample papers."/>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet"/>
+  <!-- Prevent indexing, printing, and other sensitive actions -->
+  <link rel="preload" href="../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="../css/main.css"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#f0f4ff;--card:#fff;--text:#1e293b;--text-muted:#64748b;
+      --blue:#1a56db;--gold:#f59e0b;--green:#10b981;--red:#ef4444;
+      --border:#e2e8f0;
+    }
+    body.dark-mode{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--text-muted:#94a3b8;--border:#334155;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* ── SECURITY: Block DevTools shortcuts ── */
+
+    /* Access denied screen */
+    #access-denied{
+      display:none;
+      position:fixed;inset:0;
+      background:#0f172a;
+      z-index:99999;
+      align-items:center;justify-content:center;
+      flex-direction:column;
+      color:#fff;
+      text-align:center;
+      padding:24px;
+    }
+    #access-denied.show{display:flex;}
+    #access-denied .icon{font-size:4rem;margin-bottom:18px;}
+    #access-denied h2{font-size:1.6rem;font-weight:800;margin-bottom:12px;}
+    #access-denied p{font-size:1rem;opacity:0.8;max-width:460px;line-height:1.65;margin-bottom:24px;}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:50px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-size:1rem;font-weight:800;text-decoration:none;border:none;cursor:pointer;}
+
+    /* Loader */
+    #page-loader{
+      position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    }
+    .loader-spinner{width:50px;height:50px;border:4px solid #e2e8f0;border-top-color:var(--blue);border-radius:50%;animation:spin 0.7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:15px;color:var(--text-muted);font-weight:500;}
+
+    /* Premium dashboard */
+    .prem-dash{max-width:1100px;margin:0 auto;padding:32px 20px 60px;}
+    .prem-hero{
+      background:linear-gradient(135deg,#0f172a,#1a3a6e,#1a56db);
+      border-radius:20px;
+      padding:32px 28px;
+      color:#fff;
+      margin-bottom:28px;
+      display:flex;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    .prem-hero .icon{font-size:3rem;flex-shrink:0;}
+    .prem-hero h1{font-size:1.6rem;font-weight:800;margin-bottom:6px;}
+    .prem-hero p{opacity:0.85;font-size:14.5px;}
+    .prem-hero .logout-btn{
+      margin-left:auto;
+      background:rgba(255,255,255,0.12);
+      border:1.5px solid rgba(255,255,255,0.3);
+      color:#fff;
+      border-radius:50px;
+      padding:10px 20px;
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+      display:flex;align-items:center;gap:7px;
+      transition:all 0.2s;
+      flex-shrink:0;
+    }
+    .prem-hero .logout-btn:hover{background:rgba(255,255,255,0.22);}
+
+    /* Security notice */
+    .security-notice{
+      background:#fef3c7;
+      border:1.5px solid #f59e0b;
+      border-radius:14px;
+      padding:16px 20px;
+      font-size:13.5px;
+      color:#92400e;
+      margin-bottom:24px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    body.dark-mode .security-notice{background:#451a03;color:#fcd34d;}
+    .security-notice i{flex-shrink:0;margin-top:2px;}
+
+    /* Papers grid */
+    .papers-heading{font-size:1.15rem;font-weight:800;margin-bottom:16px;color:var(--text);}
+    .papers-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:18px;
+      margin-bottom:32px;
+    }
+    .paper-card{
+      background:var(--card);
+      border-radius:16px;
+      padding:26px 20px;
+      border:2px solid var(--border);
+      text-align:center;
+      cursor:pointer;
+      transition:all 0.22s;
+      text-decoration:none;
+      display:block;
+      color:var(--text);
+    }
+    .paper-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 10px 28px rgba(26,86,219,0.14);}
+    .paper-card .num{
+      font-size:2.2rem;font-weight:900;
+      background:linear-gradient(135deg,var(--blue),#7c3aed);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+      display:block;margin-bottom:10px;
+    }
+    .paper-card h3{font-size:1rem;font-weight:700;margin-bottom:6px;}
+    .paper-card p{font-size:13px;color:var(--text-muted);}
+    .paper-card .tag{
+      display:inline-block;
+      margin-top:12px;
+      padding:4px 12px;
+      border-radius:50px;
+      font-size:11.5px;
+      font-weight:700;
+      background:linear-gradient(135deg,#eff6ff,#dbeafe);
+      color:var(--blue);
+      border:1px solid #bfdbfe;
+    }
+    body.dark-mode .paper-card .tag{background:#1e3a5f;border-color:#1a56db;color:#93c5fd;}
+
+    /* Paper viewer modal */
+    #paper-modal{
+      position:fixed;inset:0;z-index:5000;
+      background:rgba(0,0,0,0.75);
+      display:none;
+      align-items:center;justify-content:center;
+      padding:20px;
+      backdrop-filter:blur(4px);
+    }
+    #paper-modal.show{display:flex;}
+    .modal-box{
+      background:var(--card);
+      border-radius:20px;
+      max-width:820px;
+      width:100%;
+      max-height:90vh;
+      overflow-y:auto;
+      box-shadow:0 30px 80px rgba(0,0,0,0.3);
+    }
+    .modal-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:20px 24px 18px;
+      border-bottom:1px solid var(--border);
+      position:sticky;top:0;background:var(--card);z-index:10;
+    }
+    .modal-header h2{font-size:1.1rem;font-weight:800;color:var(--text);}
+    .modal-close{
+      background:none;border:none;cursor:pointer;
+      font-size:1.4rem;color:var(--text-muted);
+      transition:color 0.2s;padding:4px;border-radius:6px;
+    }
+    .modal-close:hover{color:var(--red);}
+    .modal-body{padding:24px;}
+    .modal-notice{
+      background:#fee2e2;border:1.5px solid #ef4444;border-radius:10px;
+      padding:12px 16px;font-size:13px;color:#991b1b;margin-bottom:20px;
+    }
+    body.dark-mode .modal-notice{background:#450a0a;color:#fca5a5;}
+
+    /* WhatsApp float */
+    .wa-float{
+      position:fixed;bottom:30px;right:24px;z-index:4000;
+      width:56px;height:56px;border-radius:50%;
+      background:#25d366;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.7rem;color:#fff;
+      box-shadow:0 6px 24px rgba(37,211,102,0.45);
+      text-decoration:none;
+      transition:all 0.22s;
+    }
+    .wa-float:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(37,211,102,0.6);}
+
+    @media(max-width:600px){
+      .prem-hero{padding:20px 16px;}
+      .modal-body{padding:16px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ACCESS DENIED (shown if not logged in) -->
+<div id="access-denied">
+  <div class="icon">🔒</div>
+  <h2>Access Restricted</h2>
+  <p>You need to login with your premium account to access these sample papers. If you haven't purchased yet, get access for just ₹11.</p>
+  <a href="./premium-login.html" class="btn-back"><i class="fas fa-sign-in-alt"></i> Login / Get Access</a>
+</div>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-spinner"></div>
+  <p>Verifying your access...</p>
+</div>
+
+<!-- MAIN PAGE (hidden until verified) -->
+<div id="main-page" style="display:none;">
+
+  <div data-include="../partials/header.html"></div>
+
+  <main id="main-content" role="main">
+    <div class="prem-dash">
+
+      <!-- Hero welcome bar -->
+      <div class="prem-hero">
+        <div class="icon">👑</div>
+        <div>
+          <h1>Premium Sample Papers</h1>
+          <p id="welcome-msg">Welcome! You have full access to all 5 premium Haryana LEET sample papers.</p>
+        </div>
+        <button class="logout-btn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+
+      <!-- Security notice -->
+      <div class="security-notice">
+        <i class="fas fa-shield-alt" style="color:#f59e0b;"></i>
+        <span><strong>Security Notice:</strong> These premium papers are for your personal use only. Sharing, screenshotting, printing, or distributing these papers is strictly prohibited and will result in permanent account suspension. For help, contact admin at <strong>+91-7988316241</strong>.</span>
+      </div>
+
+      <!-- Papers grid -->
+      <h2 class="papers-heading">📚 Your 5 Premium Sample Papers</h2>
+      <div class="papers-grid">
+        <a href="#" class="paper-card" onclick="openPaper(1); return false;">
+          <span class="num">01</span>
+          <h3>Sample Paper 1</h3>
+          <p>Full Syllabus Coverage</p>
+          <span class="tag">100 Questions · 120 Min</span>
+        </a>
+        <a href="#" class="paper-card" onclick="openPaper(2); return false;">
+          <span class="num">02</span>
+          <h3>Sample Paper 2</h3>
+          <p>Mathematics Focus</p>
+          <span class="tag">100 Questions · 120 Min</span>
+        </a>
+        <a href="#" class="paper-card" onclick="openPaper(3); return false;">
+          <span class="num">03</span>
+          <h3>Sample Paper 3</h3>
+          <p>Physics Focus</p>
+          <span class="tag">100 Questions · 120 Min</span>
+        </a>
+        <a href="#" class="paper-card" onclick="openPaper(4); return false;">
+          <span class="num">04</span>
+          <h3>Sample Paper 4</h3>
+          <p>Chemistry Focus</p>
+          <span class="tag">100 Questions · 120 Min</span>
+        </a>
+        <a href="#" class="paper-card" onclick="openPaper(5); return false;">
+          <span class="num">05</span>
+          <h3>Sample Paper 5</h3>
+          <p>Mixed Advanced Level</p>
+          <span class="tag">100 Questions · 120 Min</span>
+        </a>
+      </div>
+
+      <div style="text-align:center;padding:20px;background:var(--card);border-radius:16px;border:1px solid var(--border);">
+        <p style="font-size:15px;color:var(--text-muted);margin-bottom:10px;">📤 Sample papers will be uploaded soon. You already have lifetime access.</p>
+        <a href="https://wa.me/917988316241?text=Hi!%20I%20purchased%20the%20premium%20LEET%20papers.%20When%20will%20papers%20be%20uploaded?" class="btn-back" style="font-size:14px;padding:12px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">
+          <i class="fab fa-whatsapp"></i> Notify Me on WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <div data-include="../partials/footer.html"></div>
+</div>
+
+<!-- PAPER VIEWER MODAL -->
+<div id="paper-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 id="modal-title">Premium Sample Paper</h2>
+      <button class="modal-close" onclick="closePaper()" title="Close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-notice">
+        <i class="fas fa-ban"></i> <strong>No Printing / Screenshotting Allowed.</strong> This content is watermarked and tracked to your account.
+      </div>
+      <div id="paper-content"><!-- Paper questions will be injected here --></div>
+    </div>
+  </div>
+</div>
+
+<!-- WhatsApp float -->
+<a href="https://wa.me/917988316241?text=Hi!%20I%20have%20a%20question%20about%20my%20Premium%20LEET%20papers." class="wa-float" target="_blank" rel="noopener noreferrer" title="Contact on WhatsApp" aria-label="WhatsApp support">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script defer src="../js/include.js"></script>
+<script defer src="../js/main.js"></script>
+
+<script>
+'use strict';
+
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+// ── SECURITY: Disable right-click, keyboard shortcuts ──
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('keydown', function(e){
+  // Block Ctrl+P (print), Ctrl+S (save), F12, Ctrl+Shift+I, Ctrl+U
+  if(e.ctrlKey && (e.key==='p'||e.key==='s'||e.key==='u')) e.preventDefault();
+  if(e.key==='F12') e.preventDefault();
+  if(e.ctrlKey && e.shiftKey && (e.key==='I'||e.key==='J'||e.key==='C')) e.preventDefault();
+  if(e.ctrlKey && e.shiftKey && e.key==='S') e.preventDefault();
+});
+// Block print via CSS (additional layer)
+var noPrintStyle = document.createElement('style');
+noPrintStyle.textContent = '@media print { body { display: none !important; } }';
+document.head.appendChild(noPrintStyle);
+
+// ── ACCESS VERIFICATION ──
+async function verifyAccess() {
+  var uid = sessionStorage.getItem('prem_uid');
+  var ts  = parseInt(sessionStorage.getItem('prem_ts') || '0');
+  var now = Date.now();
+
+  // Session timeout: 8 hours
+  if(!uid || (now - ts) > 8 * 60 * 60 * 1000) {
+    showDenied();
+    return;
+  }
+
+  try {
+    // Verify in DB that access is still active
+    var { data: access, error } = await sb.from('premium_access').select('is_active').eq('user_id', uid).maybeSingle();
+    if(error || !access || !access.is_active) {
+      showDenied();
+      return;
+    }
+    // Update session timestamp
+    sessionStorage.setItem('prem_ts', Date.now().toString());
+    var name = sessionStorage.getItem('prem_name') || '';
+    if(name) {
+      document.getElementById('welcome-msg').textContent = 'Welcome back, ' + name + '! You have full access to all 5 premium Haryana LEET sample papers.';
+    }
+    // Show page
+    document.getElementById('page-loader').style.display = 'none';
+    document.getElementById('main-page').style.display = 'block';
+  } catch(e) {
+    showDenied();
+  }
+}
+
+function showDenied() {
+  document.getElementById('page-loader').style.display = 'none';
+  document.getElementById('access-denied').classList.add('show');
+}
+
+function doLogout() {
+  sessionStorage.removeItem('prem_uid');
+  sessionStorage.removeItem('prem_mob');
+  sessionStorage.removeItem('prem_name');
+  sessionStorage.removeItem('prem_ts');
+  window.location.href = './premium-login.html';
+}
+
+// ── PAPER MODAL ──
+function openPaper(num) {
+  document.getElementById('modal-title').textContent = 'Premium Sample Paper ' + num;
+  document.getElementById('paper-content').innerHTML =
+    '<div style="text-align:center;padding:40px 20px;color:var(--text-muted);">' +
+    '<div style="font-size:3rem;margin-bottom:16px;">📄</div>' +
+    '<p style="font-size:1rem;font-weight:600;margin-bottom:8px;">Sample Paper ' + num + ' Coming Soon</p>' +
+    '<p style="font-size:14px;line-height:1.65;">This paper will be uploaded shortly. Your account is active and you will have instant access once available.</p>' +
+    '<p style="margin-top:16px;font-size:13px;"><a href="https://wa.me/917988316241?text=Hi!%20When%20will%20Premium%20Sample%20Paper%20' + num + '%20be%20available?" style="color:#1a56db;font-weight:700;" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Ask on WhatsApp</a></p>' +
+    '</div>';
+  document.getElementById('paper-modal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePaper() {
+  document.getElementById('paper-modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Close modal on backdrop click
+document.getElementById('paper-modal').addEventListener('click', function(e){
+  if(e.target === this) closePaper();
+});
+
+// Close on Escape
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closePaper();
+});
+
+// ── RUN VERIFICATION ON LOAD ──
+verifyAccess();
+</script>
+
+</body>
+</html>

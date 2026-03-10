@@ -76,3 +76,16 @@ Allow: /sitemap.xml
 Allow: /ads.txt
 
 
+
+# Premium section - public landing page allowed, protected pages blocked
+Allow: /html/btech-leet-premium.html
+Allow: /btech-leet-premium
+
+# Block protected premium pages from indexing
+Disallow: /html/premium-login.html
+Disallow: /html/premium-papers.html
+Disallow: /html/premium-admin.html
+Disallow: /html/admin.html
+
+# Block all PDFs from being indexed (protect premium content)
+Disallow: /pdf/
