@@ -183,183 +183,404 @@ function ensureEmailJS(cb) {
   document.head.appendChild(s);
 }
 /* ── Send welcome email via EmailJS after successful lead capture ── */
+// ═══════════════════════════════════════════════════════════
+//  SHARED HELPERS
+// ═══════════════════════════════════════════════════════════
+
+function nowStr() {
+  var d = new Date();
+  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })
+       + ', ' + d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true });
+}
+function firstName(fullName) {
+  return (fullName || 'Student').split(' ')[0];
+}
+
+// ═══════════════════════════════════════════════════════════
+//  SHARED EMAIL SHELL
+//  All emails use table-based layout — 100% inline styles
+//  Gmail/Outlook/mobile safe
+// ═══════════════════════════════════════════════════════════
+
+function emailShell(bodyContent) {
+  return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
+  + '<html xmlns="http://www.w3.org/1999/xhtml"><head>'
+  + '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>'
+  + '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>'
+  + '<meta name="x-apple-disable-message-reformatting"/>'
+  + '</head>'
+  + '<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f4f4f5;min-height:100vh;">'
+  + '<tr><td align="center" style="padding:32px 16px;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:560px;">'
+  + bodyContent
+  + '</table>'
+  + '</td></tr></table>'
+  + '</body></html>';
+}
+
+// Logo bar
+function logoRow() {
+  return '<tr><td align="center" style="padding-bottom:18px;">'
+  + '<span style="font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;color:#111111;letter-spacing:-0.3px;">'
+  + 'HSBT<span style="color:#f5a623;">LEET</span>.com'
+  + '</span>'
+  + '</td></tr>';
+}
+
+// Colored top strip
+function topStrip(color) {
+  return '<tr><td style="background:' + color + ';height:4px;border-radius:12px 12px 0 0;font-size:0;line-height:0;">&nbsp;</td></tr>';
+}
+
+// Section label
+function sectionLabel(text, color) {
+  return '<p style="margin:0 0 6px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:' + (color || '#9ca3af') + ';">' + text + '</p>';
+}
+
+// Info table row
+function infoRow(label, value, valueColor) {
+  return '<tr>'
+  + '<td style="padding:9px 0;border-bottom:1px solid #f3f4f6;font-size:13px;color:#9ca3af;width:120px;vertical-align:top;">' + label + '</td>'
+  + '<td style="padding:9px 0;border-bottom:1px solid #f3f4f6;font-size:13px;font-weight:600;color:' + (valueColor || '#111111') + ';text-align:right;word-break:break-all;">' + value + '</td>'
+  + '</tr>';
+}
+
+// CTA Button
+function ctaBtn(href, text, bgColor, textColor) {
+  return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:10px;">'
+  + '<tr><td align="center">'
+  + '<a href="' + href + '" style="display:block;padding:14px 24px;background:' + bgColor + ';color:' + (textColor||'#ffffff') + ';font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;text-align:center;">' + text + '</a>'
+  + '</td></tr></table>';
+}
+
+// Footer
+function emailFooter(links) {
+  var linkHtml = links.map(function(l){
+    return '<a href="' + l.href + '" style="color:#9ca3af;text-decoration:none;font-size:11.5px;">' + l.label + '</a>';
+  }).join('<span style="color:#d1d5db;margin:0 8px;">·</span>');
+  return '<tr><td style="padding:20px 0 4px;text-align:center;border-top:1px solid #e5e7eb;">'
+  + '<p style="margin:0 0 6px 0;">' + linkHtml + '</p>'
+  + '<p style="margin:0;font-size:11px;color:#9ca3af;line-height:1.8;">'
+  + '&copy; 2025 HSBTELEET.com &nbsp;&middot;&nbsp; Made with &#10084;&#65039; by <a href="https://itsnishant.com" style="color:#9ca3af;text-decoration:none;">Nishant</a>'
+  + '</p></td></tr>';
+}
+
+// ═══════════════════════════════════════════════════════════
+//  EMAIL 1 — FREE WELCOME (Lead Capture)
+//  → Student ke email pe jaata hai
+// ═══════════════════════════════════════════════════════════
+
 function buildWelcomeHTML(data) {
   var name    = data.name        || 'Student';
-  var fn      = name.split(' ')[0];
+  var fn      = firstName(name);
   var branch  = data.branch      || '';
   var college = data.college     || '';
   var prep    = data.preparation || '';
 
+  // Chips
   var chips = '';
-  if (prep)    chips += '<div class="chip chip-a">&#127891;&nbsp;' + prep + '</div>';
-  if (branch)  chips += '<div class="chip chip-b">&#128218;&nbsp;' + branch + '</div>';
-  if (college) chips += '<div class="chip chip-c">&#127979;&nbsp;' + college + '</div>';
+  if (prep)   chips += '<span style="display:inline-block;background:#fef3c7;border:1px solid #fcd34d;border-radius:20px;padding:3px 11px;font-size:11.5px;font-weight:600;color:#92400e;margin:2px 4px 2px 0;">&#127891; ' + prep + '</span>';
+  if (branch) chips += '<span style="display:inline-block;background:#d1fae5;border:1px solid #6ee7b7;border-radius:20px;padding:3px 11px;font-size:11.5px;font-weight:600;color:#065f46;margin:2px 4px 2px 0;">&#128218; ' + branch + '</span>';
+  if (college)chips += '<span style="display:inline-block;background:#f3f4f6;border:1px solid #d1d5db;border-radius:20px;padding:3px 11px;font-size:11.5px;font-weight:600;color:#6b7280;margin:2px 4px 2px 0;">&#127979; ' + college + '</span>';
 
-  return '<!DOCTYPE html><html lang="en"><head>'
-  + '<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>'
-  + '<title>Welcome to HSBTELEET.com</title>'
-  + '<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>'
-  + '<style>'
-  + ':root{--bg:#0e0c09;--card:#141209;--surf:#1c1912;--bdr:rgba(255,220,130,0.08);--bdr2:rgba(255,220,130,0.18);--amber:#f5a623;--amber2:#ffcd6b;--green:#3ecf7a;--cream:#fdf6e3;--muted:rgba(253,246,227,0.45);--faint:rgba(253,246,227,0.2);}'
-  + '*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}'
-  + 'body{background:var(--bg);font-family:"Plus Jakarta Sans",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;}'
-  + '.wrapper{max-width:580px;width:100%;}'
-  + '.card{background:var(--card);border-radius:28px;overflow:hidden;border:1px solid var(--bdr);box-shadow:0 0 0 1px rgba(245,166,35,0.04),0 60px 140px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,220,130,0.06);}'
-  + '.header{position:relative;padding:48px 44px 40px;overflow:hidden;}'
-  + '.hdr-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 95% -10%,rgba(245,166,35,0.18) 0%,transparent 55%),radial-gradient(ellipse 60% 50% at -5% 100%,rgba(62,207,122,0.1) 0%,transparent 55%),linear-gradient(170deg,#1e1a0f 0%,#110f08 60%,#0b0906 100%);}'
-  + '.hdr-texture{position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent 0px,transparent 18px,rgba(245,166,35,0.022) 18px,rgba(245,166,35,0.022) 19px);}'
-  + '.hdr-circle{position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,0.14) 0%,transparent 65%);}'
-  + '.hdr-inner{position:relative;z-index:2;}'
-  + '.logo-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;}'
-  + '.logo-left{display:flex;align-items:center;gap:12px;}'
-  + '.logo-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#f5a623,#ffcd6b);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",serif;font-weight:700;font-size:17px;color:#1a1400;box-shadow:0 0 24px rgba(245,166,35,0.5),0 4px 14px rgba(0,0,0,0.4);}'
-  + '.logo-name{font-size:16px;font-weight:800;color:var(--cream);}'
-  + '.logo-name b{color:var(--amber);}'
-  + '.chip-free{display:flex;align-items:center;gap:6px;background:rgba(62,207,122,0.1);border:1px solid rgba(62,207,122,0.25);border-radius:20px;padding:5px 12px 5px 8px;font-size:11px;font-weight:700;color:var(--green);}'
-  + '.chip-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}'
-  + '.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.28);border-radius:20px;padding:5px 14px;font-size:10.5px;font-weight:700;color:var(--amber2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}'
-  + '.headline{font-family:"Playfair Display",serif;font-size:46px;font-weight:900;line-height:1.0;color:var(--cream);letter-spacing:-1px;margin-bottom:12px;}'
-  + '.glow{color:var(--amber);text-shadow:0 0 40px rgba(245,166,35,0.4),0 0 80px rgba(245,166,35,0.2);}'
-  + '.headline em{font-style:italic;}'
-  + '.subline{font-size:14.5px;color:var(--muted);line-height:1.75;max-width:400px;}'
-  + '.ty-wrap{margin:0 44px;position:relative;z-index:2;}'
-  + '.ty-card{border:1px solid rgba(245,166,35,0.2);border-top:none;border-radius:0 0 22px 22px;overflow:hidden;background:linear-gradient(135deg,rgba(245,166,35,0.07) 0%,rgba(62,207,122,0.05) 100%);}'
-  + '.ty-bar{height:2px;background:linear-gradient(90deg,#f5a623,#ffcd6b,#3ecf7a);}'
-  + '.ty-inner{padding:20px 26px 22px;display:flex;gap:16px;align-items:flex-start;}'
-  + '.ty-icon{width:46px;height:46px;flex-shrink:0;border-radius:14px;background:rgba(245,166,35,0.14);border:1px solid rgba(245,166,35,0.28);display:flex;align-items:center;justify-content:center;font-size:21px;}'
-  + '.ty-title{font-size:14.5px;font-weight:800;color:var(--cream);margin-bottom:5px;}'
-  + '.ty-desc{font-size:13px;color:var(--muted);line-height:1.72;}'
-  + '.ty-desc strong{color:rgba(253,246,227,0.78);font-weight:600;}'
-  + '.chips-row{margin:14px 44px 0;display:flex;gap:7px;flex-wrap:wrap;}'
-  + '.chip{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:4px 13px;font-size:11.5px;font-weight:600;}'
-  + '.chip-a{background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.25);color:var(--amber2);}'
-  + '.chip-b{background:rgba(62,207,122,0.1);border:1px solid rgba(62,207,122,0.22);color:var(--green);}'
-  + '.chip-c{background:rgba(253,246,227,0.05);border:1px solid rgba(253,246,227,0.1);color:var(--muted);}'
-  + '.body{padding:36px 44px;}'
-  + '.greeting{background:var(--surf);border:1px solid var(--bdr);border-radius:20px;padding:24px 26px;margin-bottom:30px;position:relative;overflow:hidden;}'
-  + '.greeting::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--amber),var(--green));border-radius:20px 0 0 20px;}'
-  + '.greeting p{font-size:14px;color:var(--muted);line-height:1.9;padding-left:4px;}'
-  + '.greeting p+p{margin-top:10px;}'
-  + '.greeting p strong{color:var(--cream);font-weight:700;}'
-  + '.greeting p a{color:var(--amber);text-decoration:none;}'
-  + '.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:34px;}'
-  + '.stat{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;padding:16px 10px;text-align:center;}'
-  + '.stat-n{font-family:"Playfair Display",serif;font-size:30px;font-weight:900;line-height:1;margin-bottom:3px;}'
-  + '.stat:nth-child(1) .stat-n{color:var(--amber);}'
-  + '.stat:nth-child(2) .stat-n{color:var(--green);}'
-  + '.stat:nth-child(3) .stat-n{color:var(--amber2);}'
-  + '.stat-n sup{font-size:14px;vertical-align:super;}'
-  + '.stat-l{font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:1px;}'
-  + '.stat-s{font-size:10px;color:rgba(253,246,227,0.15);margin-top:2px;}'
-  + '.sec{display:flex;align-items:center;gap:12px;margin-bottom:14px;}'
-  + '.sec-l{height:1px;flex:1;background:var(--bdr);}'
-  + '.sec-t{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);white-space:nowrap;}'
-  + '.resources{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:30px;}'
-  + '.rc{display:block;text-decoration:none;background:var(--surf);border:1px solid var(--bdr);border-radius:18px;padding:20px 18px;position:relative;overflow:hidden;}'
-  + '.rc-arr{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:8px;background:rgba(253,246,227,0.05);border:1px solid rgba(253,246,227,0.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--faint);}'
-  + '.rc-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:13px;}'
-  + '.rc-a .rc-ico{background:rgba(245,166,35,0.14);}'
-  + '.rc-b .rc-ico{background:rgba(62,207,122,0.12);}'
-  + '.rc-c .rc-ico{background:rgba(248,113,113,0.12);}'
-  + '.rc-d .rc-ico{background:rgba(255,205,107,0.12);}'
-  + '.rc-title{font-size:14px;font-weight:800;color:var(--cream);margin-bottom:3px;}'
-  + '.rc-desc{font-size:11.5px;color:var(--muted);line-height:1.5;}'
-  + '.cta{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border-radius:16px;background:linear-gradient(130deg,#f5a623 0%,#e8831a 100%);color:#1a1000;font-size:15.5px;font-weight:800;padding:17px 28px;margin-bottom:10px;box-shadow:0 8px 32px rgba(245,166,35,0.35);text-align:center;}'
-  + '.cta-note{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:28px;flex-wrap:wrap;}'
-  + '.cta-ni{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--faint);font-weight:500;}'
-  + '.cta-dot{color:var(--green);font-size:14px;}'
-  + '.divider{height:1px;background:linear-gradient(90deg,transparent,var(--bdr2),transparent);margin:0 0 24px;}'
-  + '.contact-box{background:var(--surf);border:1px solid var(--bdr);border-radius:20px;padding:22px 24px;}'
-  + '.contact-lbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}'
-  + '.contacts{display:flex;flex-wrap:wrap;gap:8px;}'
-  + '.pill{display:flex;align-items:center;gap:8px;text-decoration:none;background:rgba(253,246,227,0.04);border:1px solid rgba(253,246,227,0.08);border-radius:100px;padding:7px 14px 7px 8px;font-size:12.5px;font-weight:500;color:var(--muted);}'
-  + '.pill-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}'
-  + '.pd-wa{background:rgba(37,211,102,0.18);color:#25d366;}'
-  + '.pd-mail{background:rgba(245,166,35,0.2);color:#f5a623;}'
-  + '.pd-web{background:rgba(62,207,122,0.18);color:#3ecf7a;}'
-  + '.footer{padding:24px 44px;background:rgba(0,0,0,0.35);border-top:1px solid var(--bdr);text-align:center;}'
-  + '.ft-links{display:flex;justify-content:center;gap:20px;margin-bottom:10px;flex-wrap:wrap;}'
-  + '.ft-links a{font-size:12px;font-weight:500;color:var(--faint);text-decoration:none;}'
-  + '.ft-copy{font-size:11.5px;color:rgba(253,246,227,0.14);line-height:1.8;}'
-  + '.ft-copy a{color:rgba(245,166,35,0.5);text-decoration:none;}'
-  + '.stamp{text-align:center;margin-top:22px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(253,246,227,0.08);font-weight:600;}'
-  + '@media(max-width:500px){.header,.body{padding:28px 22px;}.ty-wrap,.chips-row{margin-left:22px;margin-right:22px;}.footer{padding:20px 22px;}.headline{font-size:32px;}.resources{grid-template-columns:1fr;}}'
-  + '</style></head><body>'
-  + '<div class="wrapper"><div class="card">'
+  var body =
+    logoRow()
 
-  /* HEADER */
-  + '<div class="header"><div class="hdr-bg"></div><div class="hdr-texture"></div><div class="hdr-circle"></div>'
-  + '<div class="hdr-inner">'
-  + '<div class="logo-row"><div class="logo-left"><div class="logo-mark">HL</div><div class="logo-name">HSBT<b>LEET</b>.com</div></div>'
-  + '<div class="chip-free"><div class="chip-dot"></div>100% Free</div></div>'
-  + '<div class="eyebrow">&#10022; &nbsp; Welcome Aboard</div>'
-  + '<h1 class="headline">Hey <em>' + fn + ',</em><br/>Your Prep<br/><span class="glow">Starts Now!</span></h1>'
-  + '<p class="subline">Crack Haryana LEET &amp; ace HSBTE exams with organized syllabi, previous year papers &amp; practice sets &mdash; all free, always updated.</p>'
-  + '</div></div>'
+  // ── CARD ──
+  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + topStrip('linear-gradient(90deg,#f5a623,#fb923c)')
 
-  /* THANK YOU BANNER */
-  + '<div class="ty-wrap"><div class="ty-card"><div class="ty-bar"></div>'
-  + '<div class="ty-inner"><div class="ty-icon">&#127942;</div>'
-  + '<div><div class="ty-title">Thank you, ' + name + '! Welcome to hsbteleet.com &#127881;</div>'
-  + '<div class="ty-desc">We\'re genuinely glad you\'re here. <strong>Thousands of students</strong> across Haryana trust us &mdash; and we promise to be the <strong>best free resource</strong> for your journey. Great choice! &#127919;</div>'
-  + '</div></div></div></div>'
+  // Header block
+  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#fffbf0 0%,#fff 60%);">'
+  + sectionLabel('&#10022; Welcome Aboard', '#f5a623')
+  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:26px;font-weight:700;color:#111111;line-height:1.2;">Hey ' + fn + ', glad<br/>you\'re here! &#127881;</h1>'
+  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">You\'ve joined <strong style="color:#374151;">hsbteleet.com</strong> — Haryana\'s most organized free resource for <strong style="color:#374151;">LEET &amp; HSBTE</strong> exam prep.</p>'
+  + '</td></tr>'
 
-  /* PERSONALIZED CHIPS */
-  + (chips ? '<div class="chips-row">' + chips + '</div>' : '')
+  // Chips
+  + (chips ? '<tr><td style="padding:0 28px 16px 28px;">' + chips + '</td></tr>' : '')
 
-  /* BODY */
-  + '<div class="body">'
+  // Greeting message
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + '<tr><td style="background:#f9fafb;border:1px solid #e5e7eb;border-left:3px solid #f5a623;border-radius:8px;padding:16px 18px;">'
+  + '<p style="margin:0;font-size:13.5px;color:#6b7280;line-height:1.8;">Hey <strong style="color:#111111;">' + name + '!</strong> &#128075; Whether you\'re targeting <strong style="color:#111111;">Haryana LEET</strong> or need <strong style="color:#111111;">HSBTE PYQs</strong> for any branch — we\'ve organized everything so you can focus on <strong style="color:#111111;">studying smart.</strong> &#128640;</p>'
+  + '</td></tr></table>'
+  + '</td></tr>'
 
-  /* GREETING */
-  + '<div class="greeting">'
-  + '<p>Hey <strong>' + name + '!</strong> &#128075; Welcome to <a href="https://hsbteleet.com"><strong>hsbteleet.com</strong></a> &mdash; we\'re absolutely thrilled you\'re here. Whether you\'re gearing up for <strong>Haryana LEET</strong> or need <strong>HSBTE PYQs</strong> for any branch, we\'ve built this platform just for students like you.</p>'
-  + '<p>Well-organized, regularly updated, and always free. Let\'s get you fully prepared. <strong>You\'ve got this! &#128640;</strong></p>'
-  + '</div>'
+  // Stats
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + '<tr>'
+  + '<td width="33%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px 8px;text-align:center;"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#f5a623;line-height:1;">500+</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin-top:4px;">PYQs</div></td>'
+  + '<td width="4" style="padding:0;font-size:0;">&nbsp;</td>'
+  + '<td width="33%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px 8px;text-align:center;"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#059669;line-height:1;">10+</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin-top:4px;">Branches</div></td>'
+  + '<td width="4" style="padding:0;font-size:0;">&nbsp;</td>'
+  + '<td width="33%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px 8px;text-align:center;"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#f59e0b;line-height:1;">&#8734;</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin-top:4px;">Free</div></td>'
+  + '</tr></table>'
+  + '</td></tr>'
 
-  /* STATS */
-  + '<div class="stats">'
-  + '<div class="stat"><div class="stat-n">500<sup>+</sup></div><div class="stat-l">PYQs</div><div class="stat-s">All branches</div></div>'
-  + '<div class="stat"><div class="stat-n">10<sup>+</sup></div><div class="stat-l">Branches</div><div class="stat-s">HSBTE covered</div></div>'
-  + '<div class="stat"><div class="stat-n">&#8734;</div><div class="stat-l">Free</div><div class="stat-s">Always</div></div>'
-  + '</div>'
+  // Resources
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<p style="margin:0 0 12px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128218; Quick Access</p>'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + '<tr>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/syllabus/syllabus.html" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128203;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Syllabus</div><div style="font-size:11.5px;color:#9ca3af;">Full LEET syllabus, topic-wise</div></a></td>'
+  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/haryanaleet" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128221;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Haryana LEET</div><div style="font-size:11.5px;color:#9ca3af;">Sample papers &amp; practice sets</div></a></td>'
+  + '</tr>'
+  + '<tr><td colspan="3" style="padding-top:6px;font-size:0;">&nbsp;</td></tr>'
+  + '<tr>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/hsbte-pyq" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128194;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">HSBTE PYQ</div><div style="font-size:11.5px;color:#9ca3af;">Previous year questions</div></a></td>'
+  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#127968;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Homepage</div><div style="font-size:11.5px;color:#9ca3af;">All resources &amp; updates</div></a></td>'
+  + '</tr></table>'
+  + '</td></tr>'
 
-  /* RESOURCES */
-  + '<div class="sec"><div class="sec-l"></div><div class="sec-t">&#128218; Quick Access Resources</div><div class="sec-l"></div></div>'
-  + '<div class="resources">'
-  + '<a href="https://hsbteleet.com/syllabus/syllabus.html" class="rc rc-a" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#128203;</div><div class="rc-title">Syllabus</div><div class="rc-desc">Full updated LEET syllabus with topic-wise breakdown</div></a>'
-  + '<a href="https://hsbteleet.com/haryanaleet" class="rc rc-b" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#128221;</div><div class="rc-title">Haryana LEET</div><div class="rc-desc">Sample papers &amp; full practice sets</div></a>'
-  + '<a href="https://hsbteleet.com/hsbte-pyq" class="rc rc-c" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#128194;</div><div class="rc-title">HSBTE PYQ</div><div class="rc-desc">Previous year questions &mdash; all branches covered</div></a>'
-  + '<a href="https://hsbteleet.com" class="rc rc-d" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#127968;</div><div class="rc-title">Homepage</div><div class="rc-desc">Browse all resources &amp; latest updates</div></a>'
-  + '</div>'
+  // CTA
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + ctaBtn('https://hsbteleet.com', '&#128640; Start Preparing Now &rarr;', '#f5a623', '#ffffff')
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + '<tr>'
+  + '<td align="center" style="font-size:12px;color:#9ca3af;"><span style="color:#059669;margin-right:4px;">&#10003;</span> No login needed &nbsp; <span style="color:#059669;margin-right:4px;">&#10003;</span> Free forever &nbsp; <span style="color:#059669;margin-right:4px;">&#10003;</span> Updated regularly</td>'
+  + '</tr></table>'
+  + '</td></tr>'
 
-  /* CTA */
-  + '<a href="https://hsbteleet.com" class="cta" target="_blank">&#128640; &nbsp; Start Preparing Now &mdash; hsbteleet.com</a>'
-  + '<div class="cta-note">'
-  + '<div class="cta-ni"><span class="cta-dot">&#10003;</span> No login needed</div>'
-  + '<div class="cta-ni"><span class="cta-dot">&#10003;</span> Updated regularly</div>'
-  + '<div class="cta-ni"><span class="cta-dot">&#10003;</span> Free forever</div>'
-  + '</div>'
+  // Divider + Contact
+  + '<tr><td style="padding:0 28px 20px 28px;border-top:1px solid #f3f4f6;">'
+  + '<p style="margin:16px 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#129309; Need Help?</p>'
+  + '<a href="https://wa.me/917988316241" style="display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#15803d;text-decoration:none;margin-right:8px;margin-bottom:6px;">&#128172; +91 79883 16241</a>'
+  + '<a href="mailto:nishant@hsbteleet.com" style="display:inline-block;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#c2410c;text-decoration:none;margin-bottom:6px;">&#9993;&#65039; nishant@hsbteleet.com</a>'
+  + '</td></tr>'
 
-  + '<div class="divider"></div>'
+  // Footer
+  + emailFooter([
+      {href:'https://hsbteleet.com', label:'Website'},
+      {href:'https://hsbteleet.com/syllabus/syllabus.html', label:'Syllabus'},
+      {href:'https://hsbteleet.com/hsbte-pyq', label:'PYQs'}
+    ])
 
-  /* CONTACT */
-  + '<div class="contact-box"><div class="contact-lbl">&#129309; Need Help? Reach Out Anytime</div>'
-  + '<div class="contacts">'
-  + '<a href="https://wa.me/917988316241" class="pill" target="_blank"><div class="pill-dot pd-wa"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>+91 79883 16241</a>'
-  + '<a href="mailto:nishant@hsbteleet.com" class="pill"><div class="pill-dot pd-mail">&#9993;</div>nishant@hsbteleet.com</a>'
-  + '<a href="https://itsnishant.com" class="pill" target="_blank"><div class="pill-dot pd-web">&#127760;</div>itsnishant.com</a>'
-  + '</div></div>'
-  + '</div>'
+  + '</table></td></tr>'; // end card
 
-  /* FOOTER */
-  + '<div class="footer">'
-  + '<div class="ft-links"><a href="https://hsbteleet.com">Website</a><a href="https://hsbteleet.com/syllabus/syllabus.html">Syllabus</a><a href="https://hsbteleet.com/hsbte-pyq">PYQs</a><a href="#">Unsubscribe</a></div>'
-  + '<div class="ft-copy">You received this because you signed up on <a href="https://hsbteleet.com">hsbteleet.com</a>.<br/>&copy; 2025 HSBTELEET.com &middot; Made with &#10084;&#65039; by <a href="https://itsnishant.com">Nishant</a></div>'
-  + '</div>'
-  + '</div>'
-  + '<div class="stamp">hsbteleet.com &middot; Haryana, India</div>'
-  + '</div></body></html>';
+  return emailShell(body);
 }
+
+// ═══════════════════════════════════════════════════════════
+//  EMAIL 2 — PREMIUM CUSTOMER WELCOME
+//  → Student ke email pe jaata hai after ₹11 payment
+// ═══════════════════════════════════════════════════════════
+
+function buildCustomerWelcomeHTML(data) {
+  var name   = data.name   || 'Student';
+  var fn     = firstName(name);
+  var mobile = data.mobile || '—';
+  var email  = data.email  || '—';
+  var payId  = data.payId  || '—';
+  var ts     = nowStr();
+
+  var body =
+    logoRow()
+  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + topStrip('linear-gradient(90deg,#ea580c,#f97316)')
+
+  // Header
+  + '<tr><td style="padding:28px 28px 0 28px;background:linear-gradient(135deg,#fff7ed 0%,#fff 60%);">'
+  + sectionLabel('&#128081; Premium Access Confirmed', '#ea580c')
+  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:26px;font-weight:700;color:#111111;line-height:1.2;">Welcome, ' + fn + '!<br/>You\'re Premium. &#128081;</h1>'
+  + '<p style="margin:0 0 20px 0;font-size:14px;color:#6b7280;line-height:1.7;">Your <strong style="color:#ea580c;">&#8377;11 payment is confirmed.</strong> You now have <strong style="color:#374151;">lifetime access</strong> to 5 exclusive Haryana LEET sample papers. Let\'s get cracking! &#127919;</p>'
+  + '</td></tr>'
+
+  // Activated banner
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
+  + '<td style="background:#fff7ed;border:1px solid #fed7aa;border-left:3px solid #ea580c;border-radius:8px;padding:13px 16px;">'
+  + '<p style="margin:0;font-size:13.5px;font-weight:700;color:#c2410c;">&#9989; Account Activated &mdash; ' + name + '</p>'
+  + '<p style="margin:4px 0 0 0;font-size:12.5px;color:#9a3412;">Payment received &amp; verified. All 5 papers unlocked and ready for you.</p>'
+  + '</td></tr></table>'
+  + '</td></tr>'
+
+  // Order Details
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<p style="margin:0 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128196; Your Order Details</p>'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;overflow:hidden;">'
+  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + infoRow('Name', name)
+  + infoRow('Email', email)
+  + infoRow('Mobile', mobile)
+  + infoRow('Amount Paid', '&#8377;11 &nbsp;&#10003; Confirmed', '#059669')
+  + infoRow('Activated On', ts)
+  + '<tr><td style="padding:9px 0;font-size:13px;color:#9ca3af;width:120px;vertical-align:top;">Payment ID</td><td style="padding:9px 0;font-size:11.5px;font-family:monospace;color:#6b7280;text-align:right;word-break:break-all;">' + payId + '</td></tr>'
+  + '</table></td></tr>'
+  + '</table>'
+  + '</td></tr>'
+
+  // What unlocked
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<p style="margin:0 0 12px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128081; What You\'ve Unlocked</p>'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#128221;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">5 Sample Papers</div><div style="font-size:11.5px;color:#9ca3af;">Exclusive Haryana LEET papers</div></td>'
+  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#9854;&#65039;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">Lifetime Access</div><div style="font-size:11.5px;color:#9ca3af;">No expiry, no renewal</div></td>'
+  + '</tr><tr><td colspan="3" style="height:6px;font-size:0;">&nbsp;</td></tr><tr>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#127919;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">Exam-Pattern Match</div><div style="font-size:11.5px;color:#9ca3af;">Mirrors actual LEET format</div></td>'
+  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#9889;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">Instant Access</div><div style="font-size:11.5px;color:#9ca3af;">Login &amp; start right now</div></td>'
+  + '</tr></table>'
+  + '</td></tr>'
+
+  // CTAs
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + ctaBtn('https://hsbteleet.com/premium-papers.html', '&#128218; Open My Premium Papers &rarr;', '#ea580c', '#ffffff')
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
+  + '<a href="https://wa.me/917988316241" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; Need help? WhatsApp Nishant</a>'
+  + '</td></tr></table>'
+  + '</td></tr>'
+
+  // Contact
+  + '<tr><td style="padding:0 28px 20px 28px;border-top:1px solid #f3f4f6;">'
+  + '<p style="margin:16px 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#129309; Support</p>'
+  + '<a href="https://wa.me/917988316241" style="display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#15803d;text-decoration:none;margin-right:8px;margin-bottom:6px;">&#128172; +91 79883 16241</a>'
+  + '<a href="mailto:nishant@hsbteleet.com" style="display:inline-block;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#c2410c;text-decoration:none;margin-right:8px;margin-bottom:6px;">&#9993;&#65039; Email Nishant</a>'
+  + '<a href="https://hsbteleet.com/premium-papers.html" style="display:inline-block;background:#fef3c7;border:1px solid #fcd34d;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#92400e;text-decoration:none;margin-bottom:6px;">&#128081; My Papers</a>'
+  + '</td></tr>'
+
+  + emailFooter([
+      {href:'https://hsbteleet.com', label:'Website'},
+      {href:'https://hsbteleet.com/premium-papers.html', label:'My Papers'},
+      {href:'https://wa.me/917988316241', label:'Support'}
+    ])
+
+  + '</table></td></tr>';
+
+  return emailShell(body);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  EMAIL 3 — ADMIN REGISTRATION ALERT (Green)
+//  → nishant@hsbteleet.com pe jaata hai
+// ═══════════════════════════════════════════════════════════
+
+function buildAdminRegistrationHTML(data) {
+  var name   = data.name   || 'Unknown';
+  var mobile = data.mobile || '—';
+  var email  = data.email  || '—';
+  var payId  = data.payId  || '—';
+  var ts     = nowStr();
+
+  var body =
+    logoRow()
+  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + topStrip('linear-gradient(90deg,#059669,#34d399)')
+
+  // Header
+  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#f0fdf4 0%,#fff 60%);">'
+  + '<span style="display:inline-block;background:#dcfce7;border:1px solid #86efac;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#166534;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">&#128994; New Registration</span>'
+  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111111;line-height:1.3;">New Premium Member Joined!</h1>'
+  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;"><strong style="color:#374151;">' + name + '</strong> just registered and paid &#8377;11. Account is now active.</p>'
+  + '</td></tr>'
+
+  // Stats
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
+  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#8377;11</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Earned</div></td>'
+  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
+  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">5</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Papers Given</div></td>'
+  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
+  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#10003;</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Active</div></td>'
+  + '</tr></table>'
+  + '</td></tr>'
+
+  // Student details
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<p style="margin:0 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128196; Student Details</p>'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;">'
+  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + infoRow('Name', name)
+  + infoRow('Mobile', mobile)
+  + infoRow('Email', email)
+  + infoRow('Amount', '&#8377;11 &#10003; Paid', '#059669')
+  + infoRow('Time', ts)
+  + '<tr><td style="padding:9px 0;font-size:13px;color:#9ca3af;vertical-align:top;">Payment ID</td><td style="padding:9px 0;font-size:11.5px;font-family:monospace;color:#6b7280;text-align:right;word-break:break-all;">' + payId + '</td></tr>'
+  + '</table></td></tr></table>'
+  + '</td></tr>'
+
+  // Buttons
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + ctaBtn('https://vzfpltvchsxsfqlldafd.supabase.co', '&#128202; View in Supabase &rarr;', '#059669', '#ffffff')
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
+  + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; WhatsApp ' + name + ' directly</a>'
+  + '</td></tr></table>'
+  + '</td></tr>'
+
+  + '<tr><td style="padding:12px 28px;border-top:1px solid #f3f4f6;"><p style="margin:0;font-size:11.5px;color:#9ca3af;text-align:center;">Admin notification &middot; hsbteleet.com &middot; &copy; 2025</p></td></tr>'
+
+  + '</table></td></tr>';
+
+  return emailShell(body);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  EMAIL 4 — ADMIN LOGIN ALERT (Blue)
+//  → nishant@hsbteleet.com pe jaata hai
+// ═══════════════════════════════════════════════════════════
+
+function buildAdminLoginHTML(data) {
+  var name   = data.name   || 'Unknown';
+  var mobile = data.mobile || '—';
+  var email  = data.email  || '—';
+  var ts     = nowStr();
+
+  var body =
+    logoRow()
+  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + topStrip('linear-gradient(90deg,#1d4ed8,#60a5fa)')
+
+  // Header
+  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#eff6ff 0%,#fff 60%);">'
+  + '<span style="display:inline-block;background:#dbeafe;border:1px solid #93c5fd;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#1e40af;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">&#128275; Login Detected</span>'
+  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111111;line-height:1.3;">Premium Login Alert</h1>'
+  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;"><strong style="color:#374151;">' + name + '</strong> just logged in and is accessing their papers on hsbteleet.com.</p>'
+  + '</td></tr>'
+
+  // Details
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<p style="margin:0 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128196; Login Details</p>'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;">'
+  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + infoRow('Name', name)
+  + infoRow('Mobile', mobile)
+  + infoRow('Email', email)
+  + infoRow('Time', ts)
+  + infoRow('Status', '&#10003; Active &middot; Premium', '#059669')
+  + '</table></td></tr></table>'
+  + '</td></tr>'
+
+  // Buttons
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + ctaBtn('https://vzfpltvchsxsfqlldafd.supabase.co', '&#128202; Open Supabase Dashboard &rarr;', '#1d4ed8', '#ffffff')
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
+  + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; WhatsApp ' + name + '</a>'
+  + '</td></tr></table>'
+  + '</td></tr>'
+
+  + '<tr><td style="padding:12px 28px;border-top:1px solid #f3f4f6;"><p style="margin:0;font-size:11.5px;color:#9ca3af;text-align:center;">Login alert &middot; hsbteleet.com &middot; &copy; 2025</p></td></tr>'
+
+  + '</table></td></tr>';
+
+  return emailShell(body);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  ROW/STAT HELPERS (for backward compat — not used above)
+// ═══════════════════════════════════════════════════════════
+function row(clr, label, val) { return infoRow(label, val, clr); }
+function rowG(label, val)     { return infoRow(label, val, '#059669'); }
+function statBox(clr, num, lbl) { return ''; }
 
 function sendWelcomeEmail(data) {
   if (!data || !data.email) return;
