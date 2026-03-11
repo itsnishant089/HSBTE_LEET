@@ -23,7 +23,6 @@
         linear-gradient(135deg, #eef2ff 0%, #f0f4ff 50%, #f8faff 100%);
     }
 
-    /* ── PAGE LAYOUT ── */
     .page-wrap {
       min-height: 100vh;
       display: flex; flex-direction: column;
@@ -31,7 +30,7 @@
       padding: 36px 16px; gap: 18px;
     }
 
-    /* ── TOP STRIP ── */
+    /* TOP STRIP */
     .site-strip {
       width: 100%; max-width: 480px;
       display: flex; align-items: center; justify-content: space-between;
@@ -53,7 +52,7 @@
     }
     .site-back:hover { color: #1a56db; }
 
-    /* ── AUTH CARD ── */
+    /* AUTH CARD */
     .auth-card {
       width: 100%; max-width: 480px;
       background: #fff;
@@ -63,7 +62,7 @@
       overflow: hidden;
     }
 
-    /* ── HEADER ── */
+    /* HEADER */
     .auth-header {
       position: relative;
       background: linear-gradient(150deg, #0a1628 0%, #12265c 50%, #1a56db 100%);
@@ -100,7 +99,7 @@
     }
     .hbadge-dot { width: 5px; height: 5px; border-radius: 50%; background: #34d399; box-shadow: 0 0 6px #34d399; }
 
-    /* ── TABS ── */
+    /* TABS */
     .auth-tabs { display: flex; border-bottom: 2px solid #e2e8f0; }
     .auth-tab {
       flex: 1; padding: 14px; text-align: center;
@@ -111,7 +110,7 @@
     .auth-tab.active { color: #1a56db; border-bottom-color: #1a56db; }
     .auth-tab:hover:not(.active) { color: #1e293b; background: #f8faff; }
 
-    /* ── FORM ── */
+    /* FORM */
     .auth-body { padding: 26px 30px 30px; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
@@ -134,14 +133,14 @@
     .form-error { font-size: 12px; color: #ef4444; margin-top: 5px; display: none; }
     .form-error.show { display: block; }
 
-    /* ── ALERTS ── */
+    /* ALERTS */
     .alert { padding: 12px 15px; border-radius: 11px; font-size: 13px; margin-bottom: 16px; display: none; line-height: 1.6; }
     .alert.show { display: flex; align-items: flex-start; gap: 9px; }
     .alert.warning { background: #fffbeb; border: 1px solid #f59e0b; color: #92400e; }
     .alert.success { background: #f0fdf4; border: 1px solid #10b981; color: #065f46; }
     .alert.danger  { background: #fff1f2; border: 1px solid #ef4444; color: #9f1239; }
 
-    /* ── BUTTONS ── */
+    /* BUTTONS */
     .btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       width: 100%; padding: 14px; border-radius: 50px;
@@ -160,7 +159,7 @@
     .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,158,11,0.5); }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
-    /* ── STEPS ── */
+    /* STEPS */
     .step-indicator { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 20px; }
     .step {
       width: 30px; height: 30px; border-radius: 50%;
@@ -173,7 +172,7 @@
     .step-line   { flex: 1; height: 2px; background: #e2e8f0; max-width: 44px; transition: background 0.3s; }
     .step-line.done { background: #10b981; }
 
-    /* ── MISC ── */
+    /* MISC */
     .separator {
       display: flex; align-items: center; gap: 12px;
       margin: 18px 0; color: #94a3b8; font-size: 12px;
@@ -268,7 +267,7 @@
 
     <div class="auth-body">
 
-      <!-- ══ LOGIN PANEL ══ -->
+      <!-- LOGIN PANEL -->
       <div class="tab-panel active" id="panel-login">
         <div class="alert warning show" id="login-warn">
           <i class="fas fa-exclamation-triangle"></i>
@@ -298,7 +297,7 @@
         </a>
       </div>
 
-      <!-- ══ REGISTER PANEL ══ -->
+      <!-- REGISTER PANEL -->
       <div class="tab-panel" id="panel-register">
 
         <div class="step-indicator">
@@ -353,7 +352,7 @@
               <li><i class="fas fa-check-circle"></i> 5 exclusive sample papers</li>
               <li><i class="fas fa-check-circle"></i> Lifetime access — no expiry</li>
               <li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>
-              <li><i class="fas fa-check-circle"></i> Admin notified instantly</li>
+              <li><i class="fas fa-check-circle"></i> Welcome email sent to you</li>
             </ul>
           </div>
           <button class="btn btn-gold" id="btn-pay" onclick="doPayment()">
@@ -365,8 +364,8 @@
         <div id="reg-step3" style="display:none;">
           <div class="success-state">
             <div class="success-ico">🎉</div>
-            <h3>Access Unlocked!</h3>
-            <p>Payment confirmed. Your account is now active and admin has been notified. Access all 5 premium sample papers now.</p>
+            <h3 id="success-name-msg">Access Unlocked!</h3>
+            <p id="success-body-msg">Payment confirmed. Your account is now active. Check your email for a welcome message. Access all 5 premium sample papers now.</p>
             <a href="./premium-papers.html" class="btn btn-gold" style="text-decoration:none;">
               <i class="fas fa-book-open"></i> Go to My Papers
             </a>
@@ -385,7 +384,7 @@
 </div>
 
 
-<!-- ── SDKs ── -->
+<!-- SDKs -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -395,16 +394,14 @@
 // ══════════════════════════════════════════════════════
 //  CONFIG
 // ══════════════════════════════════════════════════════
-var SUPA_URL     = 'https://vzfpltvchsxsfqlldafd.supabase.co';
-var SUPA_KEY     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
-var RZP_KEY      = 'rzp_live_SPbBEutqahnSN4';
-var EJS_SVC      = 'service_xwq0gnl';
-var EJS_TPL      = 'template_ed04169';
-var EJS_PUB      = 'tSLSXcGfuU3S3XDr4';
-
-// All emails → ADMIN only (not sent to student)
-var ADMIN_EMAIL  = 'nishant@hsbteleet.com';
-var ADMIN_NAME   = 'Nishant (Admin)';
+var SUPA_URL    = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var RZP_KEY     = 'rzp_live_SPbBEutqahnSN4';
+var EJS_SVC     = 'service_xwq0gnl';
+var EJS_TPL     = 'template_ed04169';  // ek hi template — sab kuch isi se
+var EJS_PUB     = 'tSLSXcGfuU3S3XDr4';
+var ADMIN_EMAIL = 'nishant@hsbteleet.com';
+var ADMIN_NAME  = 'Nishant (Admin)';
 
 var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 emailjs.init(EJS_PUB);
@@ -424,6 +421,10 @@ function nowStr() {
   var d = new Date();
   return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })
        + ' · ' + d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true });
+}
+
+function firstName(fullName) {
+  return (fullName || 'Student').split(' ')[0];
 }
 
 function switchTab(tab) {
@@ -500,8 +501,8 @@ async function doLogin() {
 
     showAlert('login-ok', '<i class="fas fa-check-circle"></i> &nbsp;Welcome back, <strong>' + (user.full_name || 'Student') + '</strong>! Redirecting…', 'success');
 
-    // Notify admin about login
-    sendAdminEmail('login', { name: user.full_name, mobile: mobile, email: user.email });
+    // Admin ko login alert bhejo
+    sendEmail('login', { name: user.full_name, mobile: mobile, email: user.email });
 
     setTimeout(function(){ window.location.href = './premium-papers.html'; }, 1200);
 
@@ -633,9 +634,9 @@ async function completeRegistration(rzpResponse) {
     // 3. Grant access
     await sb.from('premium_access').insert([{ user_id: newUser.id, payment_id: payment.id, is_active: true }]);
 
-    // 4. Notify ADMIN (not student) of new registration + payment
-    sendAdminEmail('registration', {
-      name:  pendingUser.full_name,
+    // 4. Email bhejo — customer ko welcome + admin ko registration alert (dono ek saath)
+    sendEmail('registration', {
+      name:   pendingUser.full_name,
       mobile: pendingUser.mobile,
       email:  pendingUser.email,
       payId:  rzpResponse.razorpay_payment_id
@@ -647,13 +648,19 @@ async function completeRegistration(rzpResponse) {
     sessionStorage.setItem('prem_name', pendingUser.full_name);
     sessionStorage.setItem('prem_ts',   Date.now().toString());
 
-    // 6. Show step 3
+    // 6. Show step 3 with personalized message
     document.getElementById('reg-step2').style.display = 'none';
     document.getElementById('reg-step3').style.display = 'block';
     var s2 = document.getElementById('step2-dot');
     s2.classList.remove('active'); s2.classList.add('done'); s2.textContent = '✓';
     document.getElementById('line2').classList.add('done');
     document.getElementById('step3-dot').classList.add('active');
+
+    // Personalized success message
+    var fn = firstName(pendingUser.full_name);
+    document.getElementById('success-name-msg').textContent = 'Welcome, ' + fn + '! 🎉';
+    document.getElementById('success-body-msg').textContent =
+      'Payment confirmed. A welcome email has been sent to ' + pendingUser.email + '. Your account is now active — access all 5 premium sample papers.';
 
   } catch(e) {
     showAlert('reg-err',
@@ -665,34 +672,285 @@ async function completeRegistration(rzpResponse) {
 }
 
 // ══════════════════════════════════════════════════════
-//  ADMIN EMAIL DISPATCHER
-//  ALL notifications go to admin — not to the student
+//  EMAIL DISPATCHER
+//
+//  'registration' call hone pe:
+//    1. Customer ko  → gold welcome email (uske email pe)
+//    2. Admin ko     → green alert email  (nishant@hsbteleet.com pe)
+//
+//  'login' call hone pe:
+//    1. Admin ko     → blue login alert   (nishant@hsbteleet.com pe)
+//
+//  Sab ek hi template (EJS_TPL) se — sirf to_email alag hota hai
 // ══════════════════════════════════════════════════════
 
-function sendAdminEmail(type, data) {
-  try {
-    var html = (type === 'registration')
-      ? buildAdminRegistrationHTML(data)
-      : buildAdminLoginHTML(data);
+// toName, toEmail, replyEmail, title, mobile, html
+function ejsSend(toName, toEmail, replyEmail, title, mobile, html) {
+  return emailjs.send(EJS_SVC, EJS_TPL, {
+    to_name:      toName,
+    to_email:     toEmail,
+    email:        replyEmail || toEmail,   // Reply-To field
+    title:        title      || 'HSBTE LEET Premium',
+    mobile:       mobile     || '',
+    html_message: html
+  });
+}
 
-    emailjs.send(EJS_SVC, EJS_TPL, {
-      to_name:      ADMIN_NAME,
-      to_email:     ADMIN_EMAIL,
-      mobile:       data.mobile || '',
-      html_message: html
-    }).then(function(r){
-      console.log('[LEET] Admin ' + type + ' alert sent:', r.status);
-    }).catch(function(e){
-      console.warn('[LEET] Admin email error:', e);
-    });
+function sendEmail(type, data) {
+  try {
+    if (type === 'registration') {
+
+      // 1. Customer ko — gold welcome email
+      var custHtml = buildCustomerWelcomeHTML(data);
+      ejsSend(
+        data.name  || 'Student',
+        data.email,
+        data.email,
+        'Welcome to HSBTE LEET Premium! 🎉',
+        data.mobile,
+        custHtml
+      ).then(function(r){ console.log('[LEET] Customer welcome sent → ' + data.email + ' :', r.status); })
+       .catch(function(e){ console.warn('[LEET] Customer email error:', e); });
+
+      // 2. Admin ko — green registration alert
+      var adminRegHtml = buildAdminRegistrationHTML(data);
+      ejsSend(
+        ADMIN_NAME,
+        ADMIN_EMAIL,
+        data.email,
+        'New Premium Registration — ' + (data.name || 'Student'),
+        data.mobile,
+        adminRegHtml
+      ).then(function(r){ console.log('[LEET] Admin reg alert sent → ' + ADMIN_EMAIL + ' :', r.status); })
+       .catch(function(e){ console.warn('[LEET] Admin reg email error:', e); });
+
+    } else if (type === 'login') {
+
+      // Admin ko — blue login alert
+      var adminLoginHtml = buildAdminLoginHTML(data);
+      ejsSend(
+        ADMIN_NAME,
+        ADMIN_EMAIL,
+        data.email,
+        'Premium Login — ' + (data.name || 'Student'),
+        data.mobile,
+        adminLoginHtml
+      ).then(function(r){ console.log('[LEET] Admin login alert sent → ' + ADMIN_EMAIL + ' :', r.status); })
+       .catch(function(e){ console.warn('[LEET] Admin login email error:', e); });
+    }
+
   } catch(e) {
-    console.warn('[LEET] sendAdminEmail threw:', e);
+    console.warn('[LEET] sendEmail threw:', e);
   }
 }
 
 // ══════════════════════════════════════════════════════
-//  EMAIL: NEW REGISTRATION ALERT  →  Admin
-//  Green theme · Shows full student details + payment
+//  EMAIL: CUSTOMER WELCOME  →  Premium Student
+//  Same design language as existing welcome template
+//  (Playfair Display + Plus Jakarta Sans, dark gold theme)
+//  but content is 100% premium-specific
+// ══════════════════════════════════════════════════════
+
+function buildCustomerWelcomeHTML(data) {
+  var name   = data.name   || 'Student';
+  var fn     = firstName(name);
+  var mobile = data.mobile || '—';
+  var email  = data.email  || '—';
+  var payId  = data.payId  || '—';
+  var ts     = nowStr();
+
+  var S = '"';  // shorthand for quotes inside strings
+
+  return '<!DOCTYPE html><html lang="en"><head>'
+  + '<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>'
+  + '<title>Your Premium Access is Live! 👑</title>'
+  + '<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>'
+  + '<style>'
+  + ':root{'
+  + '--bg:#0e0c09;--card:#141209;--surf:#1c1912;--surf2:#221f15;'
+  + '--bdr:rgba(255,220,130,0.08);--bdr2:rgba(255,220,130,0.18);'
+  + '--amber:#f5a623;--amber2:#ffcd6b;--green:#3ecf7a;--green2:#86efac;'
+  + '--cream:#fdf6e3;--text:rgba(253,246,227,0.9);--muted:rgba(253,246,227,0.45);'
+  + '--faint:rgba(253,246,227,0.2);--vfaint:rgba(253,246,227,0.1);}'
+  + '*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}'
+  + 'body{background:var(--bg);font-family:"Plus Jakarta Sans",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;}'
+  + '.wrapper{max-width:580px;width:100%;}'
+  + '.card{background:var(--card);border-radius:28px;overflow:hidden;border:1px solid var(--bdr);box-shadow:0 0 0 1px rgba(245,166,35,0.04),0 60px 140px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,220,130,0.06);}'
+  // HEADER
+  + '.header{position:relative;padding:48px 44px 40px;overflow:hidden;}'
+  + '.hdr-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 95% -10%,rgba(245,166,35,0.18) 0%,transparent 55%),radial-gradient(ellipse 60% 50% at -5% 100%,rgba(62,207,122,0.1) 0%,transparent 55%),linear-gradient(170deg,#1e1a0f 0%,#110f08 60%,#0b0906 100%);}'
+  + '.hdr-texture{position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent 0px,transparent 18px,rgba(245,166,35,0.022) 18px,rgba(245,166,35,0.022) 19px);}'
+  + '.hdr-circle{position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,0.14) 0%,transparent 65%);}'
+  + '.hdr-inner{position:relative;z-index:2;}'
+  + '.logo-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;}'
+  + '.logo-left{display:flex;align-items:center;gap:12px;}'
+  + '.logo-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#f5a623,#ffcd6b);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",serif;font-weight:700;font-size:17px;color:#1a1400;box-shadow:0 0 24px rgba(245,166,35,0.5),0 4px 14px rgba(0,0,0,0.4);}'
+  + '.logo-name{font-size:16px;font-weight:800;color:var(--cream);letter-spacing:0.3px;}'
+  + '.logo-name b{color:var(--amber);}'
+  + '.chip-premium{display:flex;align-items:center;gap:6px;background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.3);border-radius:20px;padding:5px 12px 5px 8px;font-size:11px;font-weight:700;color:var(--amber2);}'
+  + '.chip-crown{font-size:13px;}'
+  + '.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.28);border-radius:20px;padding:5px 14px;font-size:10.5px;font-weight:700;color:var(--amber2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;}'
+  + '.headline{font-family:"Playfair Display",serif;font-size:46px;font-weight:900;line-height:1.0;color:var(--cream);letter-spacing:-1px;margin-bottom:12px;}'
+  + '.headline .glow{color:var(--amber);text-shadow:0 0 40px rgba(245,166,35,0.4),0 0 80px rgba(245,166,35,0.2);}'
+  + '.headline em{font-style:italic;}'
+  + '.subline{font-size:14.5px;color:var(--muted);line-height:1.75;max-width:400px;font-weight:400;}'
+  // ACTIVATED CARD
+  + '.act-wrap{margin:0 44px;position:relative;z-index:2;}'
+  + '.act-card{border:1px solid rgba(245,166,35,0.2);border-top:none;border-radius:0 0 22px 22px;overflow:hidden;background:linear-gradient(135deg,rgba(245,166,35,0.07) 0%,rgba(62,207,122,0.05) 100%);}'
+  + '.act-bar{height:2px;background:linear-gradient(90deg,#f5a623,#ffcd6b,#3ecf7a);}'
+  + '.act-inner{padding:20px 26px 22px;display:flex;gap:16px;align-items:flex-start;}'
+  + '.act-icon{width:46px;height:46px;flex-shrink:0;border-radius:14px;background:rgba(245,166,35,0.14);border:1px solid rgba(245,166,35,0.28);display:flex;align-items:center;justify-content:center;font-size:21px;}'
+  + '.act-title{font-size:14.5px;font-weight:800;color:var(--cream);margin-bottom:5px;}'
+  + '.act-desc{font-size:13px;color:var(--muted);line-height:1.72;}'
+  + '.act-desc strong{color:rgba(253,246,227,0.78);font-weight:600;}'
+  // BODY
+  + '.body{padding:36px 44px;}'
+  + '.greeting{background:var(--surf);border:1px solid var(--bdr);border-radius:20px;padding:24px 26px;margin-bottom:30px;position:relative;overflow:hidden;}'
+  + '.greeting::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--amber),var(--green));border-radius:20px 0 0 20px;}'
+  + '.greeting p{font-size:14px;color:var(--muted);line-height:1.9;padding-left:4px;}'
+  + '.greeting p strong{color:var(--cream);font-weight:700;}'
+  // ORDER DETAILS TABLE
+  + '.order-box{background:var(--surf);border:1px solid var(--bdr);border-radius:20px;padding:22px 24px;margin-bottom:28px;}'
+  + '.order-lbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}'
+  + '.order-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bdr);}'
+  + '.order-row:last-child{border-bottom:none;}'
+  + '.order-key{font-size:12px;color:var(--faint);min-width:110px;}'
+  + '.order-val{font-size:13px;color:var(--text);font-weight:600;text-align:right;word-break:break-all;}'
+  + '.order-val.gold{color:var(--amber);font-weight:800;font-size:14px;}'
+  + '.payid{font-size:11px;color:rgba(245,166,35,0.55);font-family:monospace;word-break:break-all;margin-top:3px;}'
+  // WHAT YOU GET
+  + '.unlocked{margin-bottom:30px;}'
+  + '.sec{display:flex;align-items:center;gap:12px;margin-bottom:14px;}'
+  + '.sec-l{height:1px;flex:1;background:var(--bdr);}'
+  + '.sec-t{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);white-space:nowrap;}'
+  + '.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}'
+  + '.feat{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;padding:16px 14px;}'
+  + '.feat-ico{font-size:20px;margin-bottom:8px;}'
+  + '.feat-t{font-size:13px;font-weight:700;color:var(--cream);margin-bottom:3px;}'
+  + '.feat-d{font-size:11.5px;color:var(--muted);line-height:1.5;}'
+  // CTA
+  + '.cta{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border-radius:16px;background:linear-gradient(130deg,#f5a623 0%,#e8831a 100%);color:#1a1000;font-size:15.5px;font-weight:800;letter-spacing:-0.2px;padding:17px 28px;margin-bottom:10px;box-shadow:0 8px 32px rgba(245,166,35,0.35),0 2px 8px rgba(0,0,0,0.5);text-align:center;}'
+  + '.cta-wa{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border-radius:16px;background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.2);color:#3ecf7a;font-size:13.5px;font-weight:700;padding:13px 20px;margin-bottom:28px;text-align:center;}'
+  + '.divider{height:1px;background:linear-gradient(90deg,transparent,var(--bdr2),transparent);margin:0 0 24px;}'
+  // CONTACT
+  + '.contact-box{background:var(--surf);border:1px solid var(--bdr);border-radius:20px;padding:22px 24px;margin-bottom:0;}'
+  + '.contact-lbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}'
+  + '.contacts{display:flex;flex-wrap:wrap;gap:8px;}'
+  + '.pill{display:flex;align-items:center;gap:8px;text-decoration:none;background:rgba(253,246,227,0.04);border:1px solid rgba(253,246,227,0.08);border-radius:100px;padding:7px 14px 7px 8px;font-size:12.5px;font-weight:500;color:var(--muted);}'
+  + '.pill-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}'
+  + '.pd-wa{background:rgba(37,211,102,0.18);color:#25d366;}'
+  + '.pd-mail{background:rgba(245,166,35,0.2);color:#f5a623;}'
+  + '.pd-web{background:rgba(62,207,122,0.18);color:#3ecf7a;}'
+  // FOOTER
+  + '.footer{padding:24px 44px;background:rgba(0,0,0,0.35);border-top:1px solid var(--bdr);text-align:center;}'
+  + '.ft-links{display:flex;justify-content:center;gap:20px;margin-bottom:10px;flex-wrap:wrap;}'
+  + '.ft-links a{font-size:12px;font-weight:500;color:var(--faint);text-decoration:none;}'
+  + '.ft-copy{font-size:11.5px;color:rgba(253,246,227,0.14);line-height:1.8;}'
+  + '.ft-copy a{color:rgba(245,166,35,0.5);text-decoration:none;}'
+  + '.stamp{text-align:center;margin-top:22px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(253,246,227,0.08);font-weight:600;}'
+  + '@media(max-width:500px){'
+  + '.header,.body{padding:28px 22px;}.act-wrap{margin:0 22px;}.footer{padding:20px 22px;}'
+  + '.headline{font-size:32px;}.feat-grid{grid-template-columns:1fr;}'
+  + '}'
+  + '</style></head><body>'
+
+  + '<div class="wrapper"><div class="card">'
+
+  // ── HEADER ──
+  + '<div class="header">'
+  + '<div class="hdr-bg"></div><div class="hdr-texture"></div><div class="hdr-circle"></div>'
+  + '<div class="hdr-inner">'
+
+  + '<div class="logo-row">'
+  + '<div class="logo-left"><div class="logo-mark">HL</div><div class="logo-name">HSBT<b>LEET</b>.com</div></div>'
+  + '<div class="chip-premium"><span class="chip-crown">👑</span> Premium</div>'
+  + '</div>'
+
+  + '<div class="eyebrow">✦ &nbsp; Premium Access Confirmed</div>'
+
+  + '<h1 class="headline">Welcome,<br/><em>' + fn + '.</em> You\'re<br/><span class="glow">Premium!</span></h1>'
+  + '<p class="subline">Your ₹11 payment is confirmed. You now have <strong style="color:var(--amber2);">lifetime access</strong> to 5 exclusive Haryana LEET sample papers — crafted to get you cracking. 🎯</p>'
+
+  + '</div></div>'
+
+  // ── ACTIVATED BANNER ──
+  + '<div class="act-wrap"><div class="act-card">'
+  + '<div class="act-bar"></div>'
+  + '<div class="act-inner">'
+  + '<div class="act-icon">🏆</div>'
+  + '<div><div class="act-title">Account Activated — ' + name + '</div>'
+  + '<div class="act-desc">Payment received &amp; verified. Your premium dashboard is <strong>ready right now</strong>. All 5 sample papers are unlocked and waiting for you.</div>'
+  + '</div></div></div></div>'
+
+  // ── BODY ──
+  + '<div class="body">'
+
+  // Greeting
+  + '<div class="greeting"><p>'
+  + '<strong>Hey ' + fn + '! 👋</strong><br/><br/>'
+  + 'Welcome to <strong>HSBTE LEET Premium</strong> — we\'re so glad you\'re here. You just made one of the smartest decisions for your LEET preparation. '
+  + 'Your ₹11 investment unlocks <strong>5 hand-picked sample papers</strong> built specifically for the Haryana LEET BTech lateral entry exam.<br/><br/>'
+  + 'These aren\'t random papers — every question is curated to reflect the <strong>actual exam pattern</strong>. Practise smart. Score high. <strong>You\'ve got this! 🚀</strong>'
+  + '</p></div>'
+
+  // Order Details
+  + '<div class="order-box">'
+  + '<div class="order-lbl">📄 &nbsp; Your Order Details</div>'
+  + '<div class="order-row"><span class="order-key">Name</span><span class="order-val">' + name + '</span></div>'
+  + '<div class="order-row"><span class="order-key">Email</span><span class="order-val">' + email + '</span></div>'
+  + '<div class="order-row"><span class="order-key">Mobile</span><span class="order-val">' + mobile + '</span></div>'
+  + '<div class="order-row"><span class="order-key">Amount Paid</span><span class="order-val gold">₹11 ✓ Confirmed</span></div>'
+  + '<div class="order-row"><span class="order-key">Activated On</span><span class="order-val">' + ts + '</span></div>'
+  + '<div class="order-row" style="border-bottom:none;padding-bottom:0;">'
+  + '<span class="order-key">Payment ID</span>'
+  + '<span class="order-val"><span class="payid">' + payId + '</span></span>'
+  + '</div></div>'
+
+  // What You've Unlocked
+  + '<div class="unlocked">'
+  + '<div class="sec"><div class="sec-l"></div><div class="sec-t">👑 What You\'ve Unlocked</div><div class="sec-l"></div></div>'
+  + '<div class="feat-grid">'
+  + '<div class="feat"><div class="feat-ico">📝</div><div class="feat-t">5 Sample Papers</div><div class="feat-d">Exclusive Haryana LEET BTech lateral entry papers</div></div>'
+  + '<div class="feat"><div class="feat-ico">♾️</div><div class="feat-t">Lifetime Access</div><div class="feat-d">No expiry, no renewal — yours forever</div></div>'
+  + '<div class="feat"><div class="feat-ico">🎯</div><div class="feat-t">Exam-Pattern Match</div><div class="feat-d">Curated to mirror the actual LEET paper format</div></div>'
+  + '<div class="feat"><div class="feat-ico">⚡</div><div class="feat-t">Instant Access</div><div class="feat-d">Login now and start practising immediately</div></div>'
+  + '</div></div>'
+
+  // CTA
+  + '<a href="https://hsbteleet.com/premium-papers.html" class="cta">📚 &nbsp; Open My Premium Papers &rarr;</a>'
+  + '<a href="https://wa.me/917988316241?text=Hi%20Nishant!%20I%20just%20purchased%20premium.%20My%20name%20is%20' + encodeURIComponent(name) + '." class="cta-wa">💬 &nbsp; Need help? WhatsApp Nishant</a>'
+
+  + '<div class="divider"></div>'
+
+  // Contact
+  + '<div class="contact-box">'
+  + '<div class="contact-lbl">🤝 &nbsp; Need Help? Reach Out Anytime</div>'
+  + '<div class="contacts">'
+  + '<a href="https://wa.me/917988316241" class="pill"><div class="pill-dot pd-wa">💬</div>+91 79883 16241</a>'
+  + '<a href="mailto:nishant@hsbteleet.com" class="pill"><div class="pill-dot pd-mail">✉</div>nishant@hsbteleet.com</a>'
+  + '<a href="https://hsbteleet.com/premium-papers.html" class="pill"><div class="pill-dot pd-web">👑</div>My Papers</a>'
+  + '</div></div>'
+
+  + '</div>'
+
+  // ── FOOTER ──
+  + '<div class="footer">'
+  + '<div class="ft-links">'
+  + '<a href="https://hsbteleet.com">Website</a>'
+  + '<a href="https://hsbteleet.com/premium-papers.html">My Papers</a>'
+  + '<a href="https://hsbteleet.com/hsbte-pyq">Free PYQs</a>'
+  + '<a href="https://wa.me/917988316241">Support</a>'
+  + '</div>'
+  + '<div class="ft-copy">You received this because you purchased Premium access on <a href="https://hsbteleet.com">hsbteleet.com</a>.<br/>© 2025 HSBTELEET.com · Made with ❤️ by <a href="https://itsnishant.com">Nishant</a></div>'
+  + '</div>'
+
+  + '</div>'
+  + '<div class="stamp">hsbteleet.com · Premium · Haryana, India</div>'
+  + '</div></body></html>';
+}
+
+// ══════════════════════════════════════════════════════
+//  EMAIL: NEW REGISTRATION ALERT  →  Admin (Green theme)
 // ══════════════════════════════════════════════════════
 
 function buildAdminRegistrationHTML(data) {
@@ -709,36 +967,30 @@ function buildAdminRegistrationHTML(data) {
   + '<div style="text-align:center;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(16,185,129,0.5);margin-bottom:14px;">hsbteleet.com &middot; Admin Alert</div>'
   + '<div style="background:#060f09;border-radius:28px;overflow:hidden;border:1px solid rgba(16,185,129,0.15);box-shadow:0 60px 140px rgba(0,0,0,0.9);">'
 
-  // HERO — green
   + '<div style="background:radial-gradient(ellipse 100% 70% at 50% -20%,rgba(16,185,129,0.22) 0%,transparent 55%),linear-gradient(175deg,#051209 0%,#030a06 50%,#020705 100%);padding:40px 44px;">'
   + '<div style="display:inline-block;background:rgba(16,185,129,0.14);border:1px solid rgba(16,185,129,0.28);border-radius:20px;padding:5px 16px;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#34d399;margin-bottom:18px;">&#128994; New Registration + Payment</div>'
   + '<h1 style="font-family:\'DM Serif Display\',serif;font-size:42px;line-height:1.05;color:#f0fdf4;margin-bottom:12px;">New Premium<br/><span style="color:#10b981;">Member Joined!</span></h1>'
-  + '<p style="font-size:14px;color:rgba(240,253,244,0.5);line-height:1.75;">A student just registered and paid &#8377;11. Their account is now active.</p>'
+  + '<p style="font-size:14px;color:rgba(240,253,244,0.5);line-height:1.75;"><strong style="color:rgba(240,253,244,0.75);">' + name + '</strong> just registered and paid &#8377;11. Their account is now active.</p>'
   + '</div>'
 
-  // BODY
   + '<div style="padding:38px 44px;">'
-
-  // RECEIPT
   + '<div style="background:#071209;border:1px solid rgba(16,185,129,0.15);border-left:3px solid #10b981;border-radius:20px;padding:24px 26px;margin-bottom:26px;">'
   + '<div style="font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,253,244,0.3);margin-bottom:16px;">&#128196; Student Details</div>'
-  + row('#f0fdf4', 'Name',       name)
-  + row('#f0fdf4', 'Mobile',     mobile)
-  + row('#f0fdf4', 'Email',      email)
-  + rowG(          'Amount',     '&#8377;11 &#10003; Paid')
-  + row('#f0fdf4', 'Time',       ts)
+  + row('#f0fdf4', 'Name',    name)
+  + row('#f0fdf4', 'Mobile',  mobile)
+  + row('#f0fdf4', 'Email',   email)
+  + rowG(          'Amount',  '&#8377;11 &#10003; Paid')
+  + row('#f0fdf4', 'Time',    ts)
   + '<div style="padding:10px 0 0;"><div style="font-size:12px;color:rgba(240,253,244,0.38);">Payment ID</div>'
   + '<div style="font-size:11px;color:rgba(16,185,129,0.7);font-family:monospace;word-break:break-all;margin-top:3px;">' + payId + '</div></div>'
   + '</div>'
 
-  // STATS
   + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px;">'
   + statBox('#10b981','&#8377;11','Earned')
   + statBox('#10b981','5','Papers Given')
   + statBox('#34d399','&#10003;','Account Active')
   + '</div>'
 
-  // ACTIONS
   + '<a href="https://vzfpltvchsxsfqlldafd.supabase.co" style="display:block;text-decoration:none;text-align:center;border-radius:16px;background:linear-gradient(130deg,#059669,#047857);color:#fff;font-family:\'Syne\',sans-serif;font-size:14.5px;font-weight:800;padding:16px 28px;margin-bottom:14px;box-shadow:0 8px 28px rgba(16,185,129,0.35);">&#128202; View in Supabase &rarr;</a>'
   + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;text-decoration:none;text-align:center;border-radius:16px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.25);color:#25d366;font-family:\'Syne\',sans-serif;font-size:13.5px;font-weight:700;padding:13px 20px;margin-bottom:24px;">&#128241; WhatsApp ' + name + ' directly</a>'
   + '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,0.2),transparent);margin:22px 0;"></div>'
@@ -751,8 +1003,7 @@ function buildAdminRegistrationHTML(data) {
 }
 
 // ══════════════════════════════════════════════════════
-//  EMAIL: LOGIN ALERT  →  Admin
-//  Blue theme · Shows who logged in and when
+//  EMAIL: LOGIN ALERT  →  Admin (Blue theme)
 // ══════════════════════════════════════════════════════
 
 function buildAdminLoginHTML(data) {
@@ -768,15 +1019,13 @@ function buildAdminLoginHTML(data) {
   + '<div style="text-align:center;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(96,165,250,0.5);margin-bottom:14px;">hsbteleet.com &middot; Login Alert</div>'
   + '<div style="background:#05080f;border-radius:28px;overflow:hidden;border:1px solid rgba(26,86,219,0.18);box-shadow:0 60px 140px rgba(0,0,0,0.9);">'
 
-  // HERO — blue
   + '<div style="background:radial-gradient(ellipse 100% 70% at 50% -20%,rgba(26,86,219,0.25) 0%,transparent 55%),linear-gradient(175deg,#040817 0%,#030614 50%,#020410 100%);padding:38px 44px 42px;">'
   + '<div style="display:inline-block;background:rgba(26,86,219,0.16);border:1px solid rgba(59,130,246,0.28);border-radius:20px;padding:5px 16px;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#60a5fa;margin-bottom:18px;">&#128275; Login Detected</div>'
   + '<div style="font-size:42px;margin-bottom:14px;">&#128274;</div>'
   + '<h1 style="font-family:\'DM Serif Display\',serif;font-size:38px;line-height:1.05;color:#eff6ff;margin-bottom:12px;">Premium <span style="color:#60a5fa;">Login</span><br/>Alert</h1>'
-  + '<p style="font-size:14px;color:rgba(239,246,255,0.45);line-height:1.75;">A premium student just logged in and is accessing their papers on hsbteleet.com.</p>'
+  + '<p style="font-size:14px;color:rgba(239,246,255,0.45);line-height:1.75;"><strong style="color:rgba(239,246,255,0.7);">' + name + '</strong> just logged in and is accessing their papers on hsbteleet.com.</p>'
   + '</div>'
 
-  // BODY
   + '<div style="padding:36px 44px;">'
   + '<div style="background:#040915;border:1px solid rgba(26,86,219,0.18);border-left:3px solid #3b82f6;border-radius:20px;padding:22px 24px;margin-bottom:24px;">'
   + '<div style="font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(239,246,255,0.28);margin-bottom:16px;">&#128196; Login Details</div>'
@@ -799,7 +1048,10 @@ function buildAdminLoginHTML(data) {
   + '</div></body></html>';
 }
 
-// ── Shared inline helpers for email rows ──
+// ══════════════════════════════════════════════════════
+//  SHARED INLINE EMAIL ROW HELPERS
+// ══════════════════════════════════════════════════════
+
 function row(clr, label, val) {
   return '<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">'
     + '<span style="font-size:12px;color:rgba(255,255,255,0.35);min-width:90px;">' + label + '</span>'
