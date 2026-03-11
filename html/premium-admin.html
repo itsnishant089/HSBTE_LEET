@@ -240,15 +240,21 @@
 
 var SUPA_URL  = 'https://vzfpltvchsxsfqlldafd.supabase.co';
 var SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
-// Admin password is hashed. CHANGE THIS SHA-256 hash to your desired password.
-// Current: SHA-256 of "PremiumAdmin@2026" — CHANGE BEFORE DEPLOYING
-var ADMIN_HASH = 'c4df9e7bfa4f99e3f97b3a3e4f98d2e6b1e0c6d9a3b7f4e2c1d8a5b9e0f3c7d8';
+// Admin password is SHA-256 hashed. Never store plaintext passwords.
+// Current: SHA-256 of "Nishant@2007"
+var ADMIN_HASH = '58b356d7e99216ad0c56c655c61f1848befd98934b94576aec87afe59311e3d7';
 var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 var allData = [];
 var filtered = [];
 var page = 1;
 var perPage = 20;
 var sessionKey = 'prem_admin_auth';
+
+// ── Brute-force lockout: max 5 attempts, 5-minute lockout ──
+var MAX_ATTEMPTS = 5;
+var LOCKOUT_MS   = 5 * 60 * 1000; // 5 minutes
+var loginAttempts = 0;
+var lockoutUntil  = 0;
 
 async function sha256(msg){
   var buf = new TextEncoder().encode(msg);
@@ -257,25 +263,40 @@ async function sha256(msg){
 }
 
 async function doAdminLogin(){
+  // Check lockout
+  if(Date.now() < lockoutUntil){
+    var secsLeft = Math.ceil((lockoutUntil - Date.now()) / 1000);
+    showLoginErr('Too many failed attempts. Try again in ' + secsLeft + 's.');
+    return;
+  }
   var pass = document.getElementById('admin-pass').value;
   if(!pass){ showLoginErr('Please enter the password.'); return; }
   var btn = document.getElementById('btn-login');
   btn.disabled = true; btn.innerHTML = '<span class="spinner dark"></span> Verifying…';
   var h = await sha256(pass);
-  // For demo: accept any password that matches. In production, replace ADMIN_HASH above.
-  // To generate hash: open browser console, run: crypto.subtle.digest('SHA-256', new TextEncoder().encode('YourPassword')).then(b => console.log(Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')))
-  if(h === ADMIN_HASH || pass === 'PremiumAdmin@2026') { // fallback for initial setup
+  if(h === ADMIN_HASH){
+    loginAttempts = 0;
     sessionStorage.setItem(sessionKey, '1');
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('dashboard').classList.remove('hidden');
     loadDashboard();
   } else {
-    showLoginErr('Incorrect password. Contact developer to reset.');
+    loginAttempts++;
+    var remaining = MAX_ATTEMPTS - loginAttempts;
+    if(loginAttempts >= MAX_ATTEMPTS){
+      lockoutUntil = Date.now() + LOCKOUT_MS;
+      loginAttempts = 0;
+      showLoginErr('Too many failed attempts. Locked out for 5 minutes.');
+    } else {
+      showLoginErr('Incorrect password. ' + remaining + ' attempt(s) remaining.');
+    }
     btn.disabled = false; btn.innerHTML = '<span>Unlock Dashboard</span>';
   }
 }
 function showLoginErr(msg){ document.getElementById('login-err').textContent = msg; }
 function doLogout(){ sessionStorage.removeItem(sessionKey); location.reload(); }
+// Auto-clear session when tab/browser closes (extra safety)
+window.addEventListener('beforeunload', function(){ sessionStorage.removeItem(sessionKey); });
 
 function checkSession(){
   if(sessionStorage.getItem(sessionKey)==='1'){

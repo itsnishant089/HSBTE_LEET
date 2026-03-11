@@ -184,8 +184,218 @@ function ensureEmailJS(cb) {
 }
 /* ── Send welcome email via EmailJS after successful lead capture ── */
 function buildWelcomeHTML(data) {
-  var name = data.name || 'Student';
-  return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Welcome to HSBTELEET.com</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/><style>:root{--bg:#0e0c09;--card:#141209;--surf:#1c1912;--surf2:#221f15;--bdr:rgba(255,220,130,0.08);--bdr2:rgba(255,220,130,0.18);--amber:#f5a623;--amber2:#ffcd6b;--green:#3ecf7a;--green2:#86efac;--rose:#f87171;--cream:#fdf6e3;--text:rgba(253,246,227,0.9);--muted:rgba(253,246,227,0.45);--faint:rgba(253,246,227,0.2);--vfaint:rgba(253,246,227,0.1)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:"Plus Jakarta Sans",sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px}.wrapper{max-width:580px;width:100%}.card{background:var(--card);border-radius:28px;overflow:hidden;border:1px solid var(--bdr);box-shadow:0 0 0 1px rgba(245,166,35,0.04),0 60px 140px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,220,130,0.06)}.header{position:relative;padding:48px 44px 40px;overflow:hidden}.hdr-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 95% -10%,rgba(245,166,35,0.18) 0%,transparent 55%),radial-gradient(ellipse 60% 50% at -5% 100%,rgba(62,207,122,0.1) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 50% 110%,rgba(245,166,35,0.06) 0%,transparent 60%),linear-gradient(170deg,#1e1a0f 0%,#110f08 60%,#0b0906 100%)}.hdr-texture{position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent 0px,transparent 18px,rgba(245,166,35,0.022) 18px,rgba(245,166,35,0.022) 19px)}.hdr-circle{position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,0.14) 0%,transparent 65%)}.hdr-inner{position:relative;z-index:2}.logo-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px}.logo-left{display:flex;align-items:center;gap:12px}.logo-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#f5a623,#ffcd6b);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",serif;font-weight:700;font-size:17px;color:#1a1400;box-shadow:0 0 24px rgba(245,166,35,0.5),0 4px 14px rgba(0,0,0,0.4)}.logo-name{font-size:16px;font-weight:800;color:var(--cream);letter-spacing:0.3px}.logo-name b{color:var(--amber)}.chip-live{display:flex;align-items:center;gap:6px;background:rgba(62,207,122,0.1);border:1px solid rgba(62,207,122,0.25);border-radius:20px;padding:5px 12px 5px 8px;font-size:11px;font-weight:700;color:var(--green)}.chip-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)}.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.28);border-radius:20px;padding:5px 14px;font-size:10.5px;font-weight:700;color:var(--amber2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px}.headline{font-family:"Playfair Display",serif;font-size:46px;font-weight:900;line-height:1.0;color:var(--cream);letter-spacing:-1px;margin-bottom:12px}.headline .glow{color:var(--amber);text-shadow:0 0 40px rgba(245,166,35,0.4),0 0 80px rgba(245,166,35,0.2)}.headline em{font-style:italic}.subline{font-size:14.5px;color:var(--muted);line-height:1.75;max-width:400px;font-weight:400}.ty-wrap{margin:0 44px;position:relative;z-index:2}.ty-card{border:1px solid rgba(245,166,35,0.2);border-top:none;border-radius:0 0 22px 22px;overflow:hidden;background:linear-gradient(135deg,rgba(245,166,35,0.07) 0%,rgba(62,207,122,0.05) 100%)}.ty-bar{height:2px;background:linear-gradient(90deg,#f5a623,#ffcd6b,#3ecf7a)}.ty-inner{padding:20px 26px 22px;display:flex;gap:16px;align-items:flex-start}.ty-icon{width:46px;height:46px;flex-shrink:0;border-radius:14px;background:rgba(245,166,35,0.14);border:1px solid rgba(245,166,35,0.28);display:flex;align-items:center;justify-content:center;font-size:21px}.ty-title{font-size:14.5px;font-weight:800;color:var(--cream);margin-bottom:5px}.ty-desc{font-size:13px;color:var(--muted);line-height:1.72}.ty-desc strong{color:rgba(253,246,227,0.78);font-weight:600}.body{padding:36px 44px}.greeting{background:var(--surf);border:1px solid var(--bdr);border-radius:20px;padding:24px 26px;margin-bottom:30px;position:relative;overflow:hidden}.greeting::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--amber),var(--green));border-radius:20px 0 0 20px}.greeting p{font-size:14px;color:var(--muted);line-height:1.9;padding-left:4px}.greeting p strong{color:var(--cream);font-weight:700}.greeting p a{color:var(--amber);text-decoration:none}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:34px}.stat{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;padding:16px 10px;text-align:center}.stat-n{font-family:"Playfair Display",serif;font-size:30px;font-weight:900;line-height:1;margin-bottom:3px}.stat:nth-child(1) .stat-n{color:var(--amber)}.stat:nth-child(2) .stat-n{color:var(--green)}.stat:nth-child(3) .stat-n{color:var(--amber2)}.stat-n sup{font-size:14px;vertical-align:super}.stat-l{font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:1px}.stat-s{font-size:10px;color:rgba(253,246,227,0.15);margin-top:2px}.sec{display:flex;align-items:center;gap:12px;margin-bottom:14px}.sec-l{height:1px;flex:1;background:var(--bdr)}.sec-t{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);white-space:nowrap}.resources{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:30px}.rc{display:block;text-decoration:none;background:var(--surf);border:1px solid var(--bdr);border-radius:18px;padding:20px 18px;position:relative;overflow:hidden}.rc-arr{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:8px;background:rgba(253,246,227,0.05);border:1px solid rgba(253,246,227,0.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--faint);z-index:1}.rc-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:13px;position:relative;z-index:1}.rc-a .rc-ico{background:rgba(245,166,35,0.14)}.rc-b .rc-ico{background:rgba(62,207,122,0.12)}.rc-c .rc-ico{background:rgba(248,113,113,0.12)}.rc-d .rc-ico{background:rgba(255,205,107,0.12)}.rc-title{font-size:14px;font-weight:800;color:var(--cream);margin-bottom:3px;position:relative;z-index:1;letter-spacing:-0.2px}.rc-desc{font-size:11.5px;color:var(--muted);line-height:1.5;position:relative;z-index:1}.cta{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border-radius:16px;background:linear-gradient(130deg,#f5a623 0%,#e8831a 100%);color:#1a1000;font-size:15.5px;font-weight:800;letter-spacing:-0.2px;padding:17px 28px;margin-bottom:10px;box-shadow:0 8px 32px rgba(245,166,35,0.35),0 2px 8px rgba(0,0,0,0.5)}.cta-note{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:30px}.cta-ni{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--faint);font-weight:500}.cta-dot{color:var(--green);font-size:14px}.divider{height:1px;background:linear-gradient(90deg,transparent,var(--bdr2),transparent);margin:28px 0}.contact-box{background:var(--surf);border:1px solid var(--bdr);border-radius:20px;padding:22px 24px}.contact-lbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);margin-bottom:14px}.contacts{display:flex;flex-wrap:wrap;gap:8px}.pill{display:flex;align-items:center;gap:8px;text-decoration:none;background:rgba(253,246,227,0.04);border:1px solid rgba(253,246,227,0.08);border-radius:100px;padding:7px 14px 7px 8px;font-size:12.5px;font-weight:500;color:var(--muted)}.pill-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.pd-wa{background:rgba(37,211,102,0.18);color:#25d366}.pd-mail{background:rgba(245,166,35,0.2);color:#f5a623}.pd-web{background:rgba(62,207,122,0.18);color:#3ecf7a}.footer{padding:24px 44px;background:rgba(0,0,0,0.35);border-top:1px solid var(--bdr);text-align:center}.ft-links{display:flex;justify-content:center;gap:20px;margin-bottom:10px;flex-wrap:wrap}.ft-links a{font-size:12px;font-weight:500;color:var(--faint);text-decoration:none}.ft-copy{font-size:11.5px;color:rgba(253,246,227,0.14);line-height:1.8}.ft-copy a{color:rgba(245,166,35,0.5);text-decoration:none}.stamp{text-align:center;margin-top:22px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(253,246,227,0.08);font-weight:600}@media(max-width:500px){.header,.body{padding:28px 22px}.ty-wrap{margin:0 22px}.footer{padding:20px 22px}.headline{font-size:32px}.resources{grid-template-columns:1fr}.ty-inner{flex-direction:column;gap:12px}.contacts{flex-direction:column}}</style></head><body><div class="wrapper"><div class="card"><div class="header"><div class="hdr-bg"></div><div class="hdr-texture"></div><div class="hdr-circle"></div><div class="hdr-inner"><div class="logo-row"><div class="logo-left"><div class="logo-mark">HL</div><div class="logo-name">HSBT<b>LEET</b>.com</div></div><div class="chip-live"><div class="chip-dot"></div>100% Free</div></div><div class="eyebrow">&#10022; &nbsp; Welcome Aboard</div><h1 class="headline">Your Polytechnic<br/>Journey <em>Starts</em> <span class="glow">Here.</span></h1><p class="subline">Crack Haryana LEET &amp; HSBTE with organized syllabi, previous year papers, and practice sets &mdash; all free, all in one place.</p></div></div><div class="ty-wrap"><div class="ty-card"><div class="ty-bar"></div><div class="ty-inner"><div class="ty-icon">&#127942;</div><div><div class="ty-title">Hey ' + name + ', welcome to hsbteleet.com!</div><div class="ty-desc">We\'re genuinely grateful you\'re here. <strong>Thousands of students</strong> across Haryana trust us for their LEET prep &mdash; and we promise to keep being the <strong>best free resource</strong> for your journey. You made a great choice. Let\'s get cracking! &#127919;</div></div></div></div></div><div class="body"><div class="greeting"><p><strong>Hey ' + name + '! &#128075;</strong><br/><br/>Welcome to <a href="https://hsbteleet.com"><strong>hsbteleet.com</strong></a> &mdash; we\'re absolutely thrilled you\'re here. Whether you\'re gearing up for <strong>Haryana LEET</strong> or need <strong>HSBTE PYQs</strong> for any branch, we\'ve built this platform just for students like you. Well-organized, regularly updated, and always free.<br/><br/>Let\'s get you fully prepared. <strong>You\'ve got this! &#128640;</strong></p></div><div class="stats"><div class="stat"><div class="stat-n">500<sup>+</sup></div><div class="stat-l">PYQs</div><div class="stat-s">All branches</div></div><div class="stat"><div class="stat-n">10<sup>+</sup></div><div class="stat-l">Branches</div><div class="stat-s">HSBTE covered</div></div><div class="stat"><div class="stat-n">&infin;</div><div class="stat-l">Free</div><div class="stat-s">Always</div></div></div><div class="sec"><div class="sec-l"></div><div class="sec-t">&#128218; Quick Access Resources</div><div class="sec-l"></div></div><div class="resources"><a href="https://hsbteleet.com/syllabus/syllabus.html" class="rc rc-a" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#128203;</div><div class="rc-title">Syllabus</div><div class="rc-desc">Full updated LEET syllabus with topic-wise breakdown</div></a><a href="https://hsbteleet.com/haryanaleet" class="rc rc-b" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#128221;</div><div class="rc-title">Haryana LEET</div><div class="rc-desc">Sample papers &amp; full practice sets</div></a><a href="https://hsbteleet.com/hsbte-pyq" class="rc rc-c" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#128194;</div><div class="rc-title">HSBTE PYQ</div><div class="rc-desc">Previous year questions &mdash; all branches covered</div></a><a href="https://hsbteleet.com" class="rc rc-d" target="_blank"><div class="rc-arr">&#8599;</div><div class="rc-ico">&#127968;</div><div class="rc-title">Homepage</div><div class="rc-desc">Browse all resources &amp; latest updates</div></a></div><a href="https://hsbteleet.com" class="cta" target="_blank">&#128640; &nbsp; Start Preparing Now &mdash; hsbteleet.com</a><div class="cta-note"><div class="cta-ni"><span class="cta-dot">&#10003;</span> No login needed</div><div class="cta-ni"><span class="cta-dot">&#10003;</span> Updated regularly</div><div class="cta-ni"><span class="cta-dot">&#10003;</span> Free forever</div></div><div class="divider"></div><div class="contact-box"><div class="contact-lbl">&#129309; Need Help? Reach Out Anytime</div><div class="contacts"><a href="https://wa.me/917988316241" class="pill" target="_blank"><div class="pill-dot pd-wa">&#128241;</div>+91 79883 16241</a><a href="mailto:nishant@hsbteleet.com" class="pill"><div class="pill-dot pd-mail">&#9993;</div>nishant@hsbteleet.com</a><a href="https://itsnishant.com" class="pill" target="_blank"><div class="pill-dot pd-web">&#127760;</div>itsnishant.com</a></div></div></div><div class="footer"><div class="ft-links"><a href="https://hsbteleet.com">Website</a><a href="https://hsbteleet.com/syllabus/syllabus.html">Syllabus</a><a href="https://hsbteleet.com/hsbte-pyq">PYQs</a></div><div class="ft-copy">You received this because you signed up on <a href="https://hsbteleet.com">hsbteleet.com</a>.<br/>&copy; 2025 HSBTELEET.com &middot; Made with &#10084;&#65039; by <a href="https://itsnishant.com">Nishant</a></div></div></div><div class="stamp">hsbteleet.com &middot; Haryana, India</div></div></body></html>';
+  var name       = data.name        || 'Student';
+  var branch     = data.branch      || '';
+  var college    = data.college     || '';
+  var prep       = data.preparation || '';
+  var mobile     = data.mobile      || '';
+
+  var prepLine = '';
+  if (prep)    prepLine += '<span style="display:inline-block;background:#1c1910;border:1px solid rgba(233,160,26,0.25);border-radius:20px;padding:3px 12px;font-size:11px;color:rgba(247,200,74,0.85);font-weight:600;margin-right:6px;margin-bottom:4px;">&#127891; ' + prep + '</span>';
+  if (branch)  prepLine += '<span style="display:inline-block;background:#1c1910;border:1px solid rgba(41,196,122,0.2);border-radius:20px;padding:3px 12px;font-size:11px;color:rgba(110,231,183,0.8);font-weight:600;margin-right:6px;margin-bottom:4px;">&#128218; ' + branch + '</span>';
+  if (college) prepLine += '<span style="display:inline-block;background:#1c1910;border:1px solid rgba(233,160,26,0.15);border-radius:20px;padding:3px 12px;font-size:11px;color:rgba(253,243,216,0.5);font-weight:500;margin-bottom:4px;">&#127979; ' + college + '</span>';
+
+  return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Welcome to HSBTELEET.com</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>'
+  + '<style>'
+  + '*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}'
+  + 'body{background:#050403;font-family:\'DM Sans\',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 16px;}'
+  + '.wrapper{max-width:600px;width:100%;}'
+  + '.pre-header{text-align:center;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(233,160,26,0.4);margin-bottom:14px;}'
+  + '.card{background:#0d0b07;border-radius:32px;overflow:hidden;border:1px solid rgba(233,160,26,0.1);box-shadow:0 80px 160px rgba(0,0,0,0.9),0 24px 60px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,220,100,0.07);}'
+  + '.hero{position:relative;padding:0;overflow:hidden;min-height:320px;}'
+  + '.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% -20%,rgba(233,160,26,0.22) 0%,transparent 55%),radial-gradient(ellipse 60% 50% at 100% 60%,rgba(247,200,74,0.1) 0%,transparent 50%),radial-gradient(ellipse 50% 40% at 0% 100%,rgba(41,196,122,0.08) 0%,transparent 50%),linear-gradient(175deg,#1c1608 0%,#0e0b06 50%,#080604 100%);}'
+  + '.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(233,160,26,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(233,160,26,0.04) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse 80% 70% at 50% 0%,black 0%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 0%,black 0%,transparent 80%);}'
+  + '.hero-arc{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:400px;border-radius:50%;border:1px solid rgba(233,160,26,0.06);pointer-events:none;}'
+  + '.hero-arc.a2{width:600px;height:300px;top:-160px;border-color:rgba(233,160,26,0.08);}'
+  + '.hero-arc.a3{width:400px;height:200px;top:-120px;border-color:rgba(233,160,26,0.12);}'
+  + '.hero-inner{position:relative;z-index:3;padding:36px 44px 40px;}'
+  + '.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:44px;}'
+  + '.brand{display:flex;align-items:center;gap:11px;}'
+  + '.brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#f7c84a 0%,#e9a01a 100%);display:flex;align-items:center;justify-content:center;font-family:\'Syne\',sans-serif;font-weight:800;font-size:14px;color:#1a0f00;box-shadow:0 0 20px rgba(233,160,26,0.5),0 4px 12px rgba(0,0,0,0.5);}'
+  + '.brand-text{font-family:\'Syne\',sans-serif;font-size:15px;font-weight:700;color:#fdf3d8;letter-spacing:0.5px;}'
+  + '.brand-text span{color:#e9a01a;}'
+  + '.badge-free{display:flex;align-items:center;gap:6px;background:rgba(41,196,122,0.1);border:1px solid rgba(41,196,122,0.22);border-radius:24px;padding:5px 13px 5px 7px;font-family:\'Syne\',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:1px;color:#29c47a;}'
+  + '.badge-dot{width:7px;height:7px;border-radius:50%;background:#29c47a;box-shadow:0 0 8px #29c47a;}'
+  + '.welcome-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;}'
+  + '.tag-line{height:1px;width:28px;background:linear-gradient(90deg,transparent,#e9a01a);}'
+  + '.tag-line-r{height:1px;width:28px;background:linear-gradient(90deg,#e9a01a,transparent);}'
+  + '.tag-text{font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:#f7c84a;}'
+  + '.h1{font-family:\'DM Serif Display\',serif;font-size:48px;line-height:1.0;letter-spacing:-1.5px;color:#fdf3d8;margin-bottom:16px;}'
+  + '.h1-gold{color:#e9a01a;text-shadow:0 0 30px rgba(233,160,26,0.4),0 0 60px rgba(233,160,26,0.2);}'
+  + '.h1-italic{font-style:italic;}'
+  + '.subtext{font-size:14.5px;color:rgba(253,243,216,0.48);line-height:1.8;max-width:440px;font-weight:400;}'
+  + '.hero-pills{display:flex;gap:8px;margin-top:32px;flex-wrap:wrap;}'
+  + '.hpill{display:inline-flex;align-items:center;gap:8px;background:rgba(253,243,216,0.04);border:1px solid rgba(253,243,216,0.08);border-radius:100px;padding:7px 16px 7px 10px;font-family:\'Syne\',sans-serif;font-size:11.5px;font-weight:600;color:rgba(253,243,216,0.22);letter-spacing:0.3px;}'
+  + '.hpill-ico{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;}'
+  + '.hpill-a .hpill-ico{background:rgba(233,160,26,0.18);}'
+  + '.hpill-b .hpill-ico{background:rgba(41,196,122,0.16);}'
+  + '.hpill-c .hpill-ico{background:rgba(247,200,74,0.16);}'
+  + '.acclaim{background:linear-gradient(135deg,rgba(233,160,26,0.1) 0%,rgba(41,196,122,0.07) 100%);border-left:3px solid #e9a01a;padding:18px 28px;display:flex;gap:16px;align-items:center;border-bottom:1px solid rgba(233,160,26,0.1);}'
+  + '.acclaim-trophy{font-size:28px;flex-shrink:0;}'
+  + '.acclaim-text strong{display:block;font-family:\'Syne\',sans-serif;font-size:13.5px;font-weight:700;color:#fdf3d8;margin-bottom:3px;}'
+  + '.acclaim-text p{font-size:12.5px;color:rgba(253,243,216,0.48);line-height:1.65;}'
+  + '.acclaim-text p em{color:rgba(233,160,26,0.8);font-style:normal;font-weight:600;}'
+  + '.personalized-tag{padding:14px 44px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,210,100,0.06);display:flex;gap:8px;flex-wrap:wrap;align-items:center;}'
+  + '.ptag-label{font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(253,243,216,0.22);margin-right:4px;}'
+  + '.body{padding:40px 44px;}'
+  + '.greeting{position:relative;background:#131009;border-radius:24px;border:1px solid rgba(255,210,100,0.07);padding:26px 28px;margin-bottom:32px;overflow:hidden;}'
+  + '.greeting::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,#e9a01a,#29c47a);border-radius:24px 0 0 24px;}'
+  + '.greeting-avatar{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,rgba(233,160,26,0.2),rgba(247,200,74,0.1));border:1px solid rgba(233,160,26,0.2);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:14px;}'
+  + '.greeting p{font-size:14px;color:rgba(253,243,216,0.48);line-height:1.9;}'
+  + '.greeting p+p{margin-top:12px;}'
+  + '.greeting strong{color:#fdf3d8;font-weight:600;}'
+  + '.greeting a{color:#e9a01a;text-decoration:none;border-bottom:1px solid rgba(233,160,26,0.3);}'
+  + '.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:36px;}'
+  + '.stat{background:#131009;border:1px solid rgba(255,210,100,0.07);border-radius:20px;padding:20px 12px 18px;text-align:center;position:relative;overflow:hidden;}'
+  + '.stat-top{position:absolute;top:0;left:0;right:0;height:2px;}'
+  + '.stat:nth-child(1) .stat-top{background:linear-gradient(90deg,#e9a01a,transparent);}'
+  + '.stat:nth-child(2) .stat-top{background:linear-gradient(90deg,#29c47a,transparent);}'
+  + '.stat:nth-child(3) .stat-top{background:linear-gradient(90deg,#f7c84a,transparent);}'
+  + '.stat-num{font-family:\'DM Serif Display\',serif;font-size:34px;line-height:1;font-weight:400;margin-bottom:4px;}'
+  + '.stat:nth-child(1) .stat-num{color:#e9a01a;}'
+  + '.stat:nth-child(2) .stat-num{color:#29c47a;}'
+  + '.stat:nth-child(3) .stat-num{color:#f7c84a;}'
+  + '.stat-num sup{font-size:14px;vertical-align:super;}'
+  + '.stat-label{font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(253,243,216,0.22);}'
+  + '.stat-sub{font-size:10px;color:rgba(253,243,216,0.15);margin-top:3px;}'
+  + '.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}'
+  + '.sec-line{height:1px;flex:1;background:rgba(255,210,100,0.07);}'
+  + '.sec-title{font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(253,243,216,0.22);white-space:nowrap;}'
+  + '.resources{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:34px;}'
+  + '.rc{display:block;text-decoration:none;background:#131009;border:1px solid rgba(255,210,100,0.07);border-radius:22px;padding:20px 18px;position:relative;overflow:hidden;}'
+  + '.rc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:13px;}'
+  + '.rc-ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;}'
+  + '.rc-a .rc-ico{background:rgba(233,160,26,0.14);border:1px solid rgba(233,160,26,0.2);}'
+  + '.rc-b .rc-ico{background:rgba(41,196,122,0.12);border:1px solid rgba(41,196,122,0.2);}'
+  + '.rc-c .rc-ico{background:rgba(240,108,78,0.12);border:1px solid rgba(240,108,78,0.2);}'
+  + '.rc-d .rc-ico{background:rgba(247,200,74,0.12);border:1px solid rgba(247,200,74,0.2);}'
+  + '.rc-arr{width:26px;height:26px;border-radius:8px;background:rgba(253,243,216,0.04);border:1px solid rgba(253,243,216,0.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(253,243,216,0.22);}'
+  + '.rc-title{font-family:\'Syne\',sans-serif;font-size:13.5px;font-weight:700;color:#fdf3d8;letter-spacing:-0.2px;margin-bottom:4px;}'
+  + '.rc-desc{font-size:11.5px;color:rgba(253,243,216,0.48);line-height:1.55;}'
+  + '.cta-wrap{margin-bottom:12px;}'
+  + '.cta{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border-radius:18px;background:linear-gradient(130deg,#f7c84a 0%,#e49010 60%,#d4780a 100%);color:#1a0d00;font-family:\'Syne\',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.5px;padding:18px 32px;margin-bottom:12px;box-shadow:0 8px 32px rgba(233,160,26,0.4),0 2px 8px rgba(0,0,0,0.6);}'
+  + '.cta-trust{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:34px;}'
+  + '.trust-item{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(253,243,216,0.22);font-weight:500;}'
+  + '.trust-check{color:#29c47a;font-size:13px;}'
+  + '.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(233,160,26,0.15),rgba(41,196,122,0.1),transparent);margin:30px 0;}'
+  + '.contact-label{font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(253,243,216,0.22);margin-bottom:14px;}'
+  + '.contacts{display:flex;flex-wrap:wrap;gap:8px;}'
+  + '.pill{display:inline-flex;align-items:center;gap:9px;text-decoration:none;background:#131009;border:1px solid rgba(255,210,100,0.07);border-radius:100px;padding:8px 16px 8px 8px;font-size:12.5px;font-weight:500;color:rgba(253,243,216,0.48);}'
+  + '.pill-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}'
+  + '.pd-wa{background:rgba(37,211,102,0.18);color:#25d366;}'
+  + '.pd-mail{background:rgba(233,160,26,0.2);color:#e9a01a;}'
+  + '.pd-web{background:rgba(41,196,122,0.16);color:#29c47a;}'
+  + '.footer{background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,210,100,0.07);padding:26px 44px 24px;}'
+  + '.ft-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:16px;}'
+  + '.ft-brand{font-family:\'Syne\',sans-serif;font-size:13px;font-weight:700;color:rgba(253,243,216,0.22);letter-spacing:0.5px;}'
+  + '.ft-brand b{color:rgba(233,160,26,0.7);}'
+  + '.ft-links{display:flex;gap:16px;flex-wrap:wrap;}'
+  + '.ft-links a{font-size:11.5px;font-weight:500;color:rgba(253,243,216,0.12);text-decoration:none;}'
+  + '.ft-divider{height:1px;background:rgba(255,210,100,0.07);margin-bottom:16px;}'
+  + '.ft-copy{font-size:11px;color:rgba(253,243,216,0.14);text-align:center;line-height:1.85;}'
+  + '.ft-copy a{color:rgba(233,160,26,0.4);text-decoration:none;}'
+  + '.stamp{text-align:center;margin-top:24px;font-family:\'Syne\',sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(253,243,216,0.06);font-weight:700;}'
+  + '@media(max-width:520px){.hero-inner,.body{padding:26px 22px;}.footer{padding:20px 22px;}.h1{font-size:34px;}.resources{grid-template-columns:1fr;}.personalized-tag{padding:12px 22px;}.acclaim{padding:14px 18px;}.stats{grid-template-columns:repeat(3,1fr);}}'
+  + '</style></head><body>'
+  + '<div class="wrapper">'
+  + '<div class="pre-header">hsbteleet.com &middot; Official Welcome</div>'
+  + '<div class="card">'
+
+  /* ── HERO ── */
+  + '<div class="hero">'
+  + '<div class="hero-bg"></div>'
+  + '<div class="hero-grid"></div>'
+  + '<div class="hero-arc"></div>'
+  + '<div class="hero-arc a2"></div>'
+  + '<div class="hero-arc a3"></div>'
+  + '<div class="hero-inner">'
+  + '<div class="topbar">'
+  + '<div class="brand"><div class="brand-mark">HL</div><div class="brand-text">HSBT<span>LEET</span>.com</div></div>'
+  + '<div class="badge-free"><div class="badge-dot"></div>100% Free</div>'
+  + '</div>'
+  + '<div class="welcome-tag"><div class="tag-line"></div><div class="tag-text">Welcome Aboard</div><div class="tag-line-r"></div></div>'
+  + '<h1 class="h1">Your Polytechnic<br/><span class="h1-italic">Journey </span><span class="h1-gold">Starts Here.</span></h1>'
+  + '<p class="subtext">Crack Haryana LEET &amp; ace HSBTE with organized syllabi, previous year papers, and practice sets &mdash; all free, all in one place, always updated.</p>'
+  + '<div class="hero-pills">'
+  + '<div class="hpill hpill-a"><div class="hpill-ico">&#128203;</div>Full Syllabus</div>'
+  + '<div class="hpill hpill-b"><div class="hpill-ico">&#128194;</div>HSBTE PYQs</div>'
+  + '<div class="hpill hpill-c"><div class="hpill-ico">&#128221;</div>Practice Sets</div>'
+  + '</div>'
+  + '</div>'
+  + '</div>'
+
+  /* ── ACCLAIM ── */
+  + '<div class="acclaim">'
+  + '<div class="acclaim-trophy">&#127942;</div>'
+  + '<div class="acclaim-text">'
+  + '<strong>Hey ' + name + ', welcome to hsbteleet.com!</strong>'
+  + '<p>We\'re genuinely grateful you\'re here. <em>Thousands of students</em> across Haryana trust us &mdash; and we promise to keep delivering the <em>best free resource</em> for your journey. You made a great choice! &#127919;</p>'
+  + '</div>'
+  + '</div>'
+
+  /* ── PERSONALIZED TAGS ── */
+  + (prepLine ? '<div class="personalized-tag"><span class="ptag-label">Your details &rarr;</span>' + prepLine + '</div>' : '')
+
+  /* ── BODY ── */
+  + '<div class="body">'
+
+  /* GREETING */
+  + '<div class="greeting">'
+  + '<div class="greeting-avatar">&#128075;</div>'
+  + '<p>Welcome to <a href="https://hsbteleet.com"><strong>hsbteleet.com</strong></a> &mdash; we\'re absolutely thrilled you\'re here, <strong>' + name + '</strong>! Whether you\'re gearing up for <strong>Haryana LEET</strong> or need <strong>HSBTE PYQs</strong> for any branch, we\'ve built this platform just for students like you.</p>'
+  + '<p>Well-organized, regularly updated, and always free. Let\'s get you fully prepared. <strong>You\'ve got this! &#128640;</strong></p>'
+  + '</div>'
+
+  /* STATS */
+  + '<div class="stats">'
+  + '<div class="stat"><div class="stat-top"></div><div class="stat-num">500<sup>+</sup></div><div class="stat-label">PYQs</div><div class="stat-sub">All branches</div></div>'
+  + '<div class="stat"><div class="stat-top"></div><div class="stat-num">10<sup>+</sup></div><div class="stat-label">Branches</div><div class="stat-sub">HSBTE covered</div></div>'
+  + '<div class="stat"><div class="stat-top"></div><div class="stat-num">&infin;</div><div class="stat-label">Free</div><div class="stat-sub">Always &amp; forever</div></div>'
+  + '</div>'
+
+  /* RESOURCES */
+  + '<div class="sec-head"><div class="sec-line"></div><div class="sec-title">&#128218; Quick Access Resources</div><div class="sec-line"></div></div>'
+  + '<div class="resources">'
+  + '<a href="https://hsbteleet.com/syllabus/syllabus.html" class="rc rc-a" target="_blank"><div class="rc-top"><div class="rc-ico">&#128203;</div><div class="rc-arr">&#8599;</div></div><div class="rc-title">Syllabus</div><div class="rc-desc">Full updated LEET syllabus with topic-wise breakdown</div></a>'
+  + '<a href="https://hsbteleet.com/haryanaleet" class="rc rc-b" target="_blank"><div class="rc-top"><div class="rc-ico">&#128221;</div><div class="rc-arr">&#8599;</div></div><div class="rc-title">Haryana LEET</div><div class="rc-desc">Sample papers &amp; full practice sets</div></a>'
+  + '<a href="https://hsbteleet.com/hsbte-pyq" class="rc rc-c" target="_blank"><div class="rc-top"><div class="rc-ico">&#128194;</div><div class="rc-arr">&#8599;</div></div><div class="rc-title">HSBTE PYQ</div><div class="rc-desc">Previous year questions &mdash; all branches covered</div></a>'
+  + '<a href="https://hsbteleet.com" class="rc rc-d" target="_blank"><div class="rc-top"><div class="rc-ico">&#127968;</div><div class="rc-arr">&#8599;</div></div><div class="rc-title">Homepage</div><div class="rc-desc">Browse all resources &amp; latest updates</div></a>'
+  + '</div>'
+
+  /* CTA */
+  + '<div class="cta-wrap"><a href="https://hsbteleet.com" class="cta" target="_blank">Start Preparing Now &rarr;</a></div>'
+  + '<div class="cta-trust">'
+  + '<div class="trust-item"><span class="trust-check">&#10003;</span> No login needed</div>'
+  + '<div class="trust-item"><span class="trust-check">&#10003;</span> Updated regularly</div>'
+  + '<div class="trust-item"><span class="trust-check">&#10003;</span> Free forever</div>'
+  + '</div>'
+
+  + '<div class="divider"></div>'
+
+  /* CONTACT */
+  + '<div class="contact-label">&#129309; Need Help? Reach Out Anytime</div>'
+  + '<div class="contacts">'
+  + '<a href="https://wa.me/917988316241" class="pill" target="_blank"><div class="pill-dot pd-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>+91 79883 16241</a>'
+  + '<a href="mailto:nishant@hsbteleet.com" class="pill"><div class="pill-dot pd-mail">&#9993;</div>nishant@hsbteleet.com</a>'
+  + '<a href="https://itsnishant.com" class="pill" target="_blank"><div class="pill-dot pd-web">&#127760;</div>itsnishant.com</a>'
+  + '</div>'
+
+  + '</div>'
+
+  /* ── FOOTER ── */
+  + '<div class="footer">'
+  + '<div class="ft-row">'
+  + '<div class="ft-brand">HSBT<b>LEET</b>.com</div>'
+  + '<div class="ft-links"><a href="https://hsbteleet.com">Website</a><a href="https://hsbteleet.com/syllabus/syllabus.html">Syllabus</a><a href="https://hsbteleet.com/hsbte-pyq">PYQs</a><a href="#">Unsubscribe</a></div>'
+  + '</div>'
+  + '<div class="ft-divider"></div>'
+  + '<div class="ft-copy">You received this because you signed up on <a href="https://hsbteleet.com">hsbteleet.com</a>.<br/>&copy; 2025 HSBTELEET.com &middot; Made with &#10084;&#65039; by <a href="https://itsnishant.com">Nishant</a> &middot; Haryana, India</div>'
+  + '</div>'
+
+  + '</div>'
+  + '<div class="stamp">hsbteleet.com &middot; Haryana, India &middot; Est. 2024</div>'
+  + '</div>'
+  + '</body></html>';
 }
 
 function sendWelcomeEmail(data) {

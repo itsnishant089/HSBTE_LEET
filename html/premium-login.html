@@ -7,194 +7,254 @@
   <title>Premium Login | Haryana LEET Sample Papers | HSBTE PYQ</title>
   <meta name="description" content="Login or register to access Premium Haryana LEET Sample Papers. Pay ₹11 via Razorpay and unlock 5 exclusive BTech LEET sample papers."/>
   <meta name="robots" content="noindex, nofollow"/>
-
-  <link rel="preload" href="../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="../css/main.css"></noscript>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
   <style>
-    :root{
-      --bg:#f0f4ff;
-      --card:#fff;
-      --text:#1e293b;
-      --text-muted:#64748b;
-      --blue:#1a56db;
-      --blue-dark:#1240a8;
-      --gold:#f59e0b;
-      --green:#10b981;
-      --red:#ef4444;
-      --border:#e2e8f0;
-      --radius:16px;
-    }
-    body.dark-mode{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--text-muted:#94a3b8;--border:#334155;}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .auth-wrap{
-      min-height:calc(100vh - 200px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:40px 16px;
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      color: #1e293b;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(26,86,219,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(245,158,11,0.05) 0%, transparent 60%),
+        linear-gradient(135deg, #eef2ff 0%, #f0f4ff 50%, #f8faff 100%);
     }
-    .auth-card{
-      width:100%;
-      max-width:480px;
-      background:var(--card);
-      border-radius:24px;
-      box-shadow:0 20px 60px rgba(26,86,219,0.12);
-      border:1px solid var(--border);
-      overflow:hidden;
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 36px 16px; gap: 18px;
     }
-    .auth-header{
-      background:linear-gradient(135deg,#0f172a,#1a3a6e,#1a56db);
-      padding:32px 32px 28px;
-      text-align:center;
-      color:#fff;
+
+    /* ── TOP STRIP ── */
+    .site-strip {
+      width: 100%; max-width: 480px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .auth-header .crown{font-size:2.5rem;display:block;margin-bottom:10px;}
-    .auth-header h1{font-size:1.45rem;font-weight:800;margin-bottom:6px;}
-    .auth-header p{font-size:13px;opacity:0.85;}
-    .auth-tabs{
-      display:flex;
-      border-bottom:2px solid var(--border);
+    .site-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .site-mark {
+      width: 33px; height: 33px; border-radius: 10px;
+      background: linear-gradient(135deg, #f7c84a, #e9a01a);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 11px; color: #1a0f00;
+      box-shadow: 0 0 12px rgba(233,160,26,0.4);
     }
-    .auth-tab{
-      flex:1;
-      padding:15px;
-      text-align:center;
-      font-size:15px;
-      font-weight:700;
-      cursor:pointer;
-      background:transparent;
-      border:none;
-      color:var(--text-muted);
-      transition:all 0.2s;
-      border-bottom:3px solid transparent;
-      margin-bottom:-2px;
+    .site-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #1e293b; }
+    .site-name b { color: #1a56db; }
+    .site-back {
+      font-size: 12px; color: #94a3b8; text-decoration: none;
+      font-weight: 500; display: flex; align-items: center; gap: 5px;
+      transition: color 0.2s;
     }
-    .auth-tab.active{color:var(--blue);border-bottom-color:var(--blue);}
-    .auth-body{padding:28px 32px 32px;}
-    .tab-panel{display:none;}
-    .tab-panel.active{display:block;}
-    .form-group{margin-bottom:18px;}
-    .form-label{display:block;font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:7px;}
-    .form-input{
-      width:100%;
-      padding:13px 16px;
-      border:2px solid var(--border);
-      border-radius:12px;
-      font-size:15px;
-      color:var(--text);
-      background:var(--bg);
-      transition:border-color 0.2s,box-shadow 0.2s;
-      outline:none;
+    .site-back:hover { color: #1a56db; }
+
+    /* ── AUTH CARD ── */
+    .auth-card {
+      width: 100%; max-width: 480px;
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 0 0 1px rgba(26,86,219,0.06), 0 24px 60px rgba(26,86,219,0.12), 0 4px 16px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
     }
-    .form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,0.1);}
-    .form-input.error{border-color:var(--red);}
-    .form-hint{font-size:12px;color:var(--text-muted);margin-top:5px;}
-    .form-error{font-size:13px;color:var(--red);margin-top:6px;display:none;}
-    .form-error.show{display:block;}
-    .alert{
-      padding:12px 16px;
-      border-radius:10px;
-      font-size:14px;
-      margin-bottom:18px;
-      display:none;
+
+    /* ── HEADER ── */
+    .auth-header {
+      position: relative;
+      background: linear-gradient(150deg, #0a1628 0%, #12265c 50%, #1a56db 100%);
+      padding: 36px 36px 30px;
+      text-align: center; color: #fff; overflow: hidden;
     }
-    .alert.show{display:flex;align-items:flex-start;gap:9px;}
-    .alert.warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e;}
-    .alert.success{background:#dcfce7;border:1px solid #10b981;color:#065f46;}
-    .alert.danger{background:#fee2e2;border:1px solid #ef4444;color:#991b1b;}
-    body.dark-mode .alert.warning{background:#451a03;color:#fcd34d;border-color:#92400e;}
-    body.dark-mode .alert.success{background:#064e3b;color:#6ee7b7;border-color:#065f46;}
-    body.dark-mode .alert.danger{background:#450a0a;color:#fca5a5;border-color:#991b1b;}
-    .btn-auth{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      width:100%;
-      padding:15px;
-      border-radius:50px;
-      font-size:1rem;
-      font-weight:800;
-      border:none;
-      cursor:pointer;
-      transition:all 0.22s;
+    .auth-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(245,158,11,0.18) 0%, transparent 55%),
+        repeating-linear-gradient(-45deg, transparent 0, transparent 20px, rgba(255,255,255,0.015) 20px, rgba(255,255,255,0.015) 21px);
     }
-    .btn-auth.blue{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 6px 20px rgba(26,86,219,0.3);}
-    .btn-auth.blue:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(26,86,219,0.4);}
-    .btn-auth.gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;box-shadow:0 6px 20px rgba(245,158,11,0.35);}
-    .btn-auth.gold:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(245,158,11,0.5);}
-    .btn-auth:disabled{opacity:0.6;cursor:not-allowed;transform:none!important;}
-    .separator{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text-muted);font-size:13px;}
-    .separator::before,.separator::after{content:'';flex:1;height:1px;background:var(--border);}
-    .wa-link{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:12px;
-      border-radius:50px;
-      background:#dcfce7;
-      color:#065f46;
-      font-size:14px;
-      font-weight:700;
-      text-decoration:none;
-      transition:all 0.2s;
-      border:1px solid #10b981;
+    .auth-hdr-inner { position: relative; z-index: 1; }
+    .crown-ring {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 62px; height: 62px; border-radius: 20px;
+      background: rgba(245,158,11,0.18); border: 1px solid rgba(245,158,11,0.28);
+      font-size: 1.9rem; margin-bottom: 14px;
+      box-shadow: 0 0 28px rgba(245,158,11,0.18);
     }
-    body.dark-mode .wa-link{background:#064e3b;color:#6ee7b7;}
-    .wa-link:hover{background:#bbf7d0;}
-    .wa-link i{font-size:1.2rem;color:#25d366;}
-    .step-indicator{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
-      margin-bottom:20px;
+    .auth-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; font-weight: 400; margin-bottom: 6px; letter-spacing: -0.3px;
     }
-    .step{
-      width:28px;height:28px;
-      border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      font-size:12px;font-weight:800;
-      background:var(--border);
-      color:var(--text-muted);
-      transition:all 0.3s;
+    .auth-header p { font-size: 13px; opacity: 0.68; line-height: 1.6; }
+    .badge-row { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 14px; flex-wrap: wrap; }
+    .hbadge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 100px; padding: 4px 11px;
+      font-family: 'Syne', sans-serif; font-size: 9.5px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.68);
     }
-    .step.active{background:var(--blue);color:#fff;}
-    .step.done{background:var(--green);color:#fff;}
-    .step-line{flex:1;height:2px;background:var(--border);max-width:40px;}
-    .step-line.done{background:var(--green);}
-    .spinner{display:inline-block;width:18px;height:18px;border:2.5px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;}
-    @keyframes spin{to{transform:rotate(360deg);}}
-    .spinner.dark{border-color:rgba(0,0,0,0.2);border-top-color:#0f172a;}
-    .price-pill{
-      display:inline-flex;align-items:center;gap:6px;
-      background:linear-gradient(135deg,#f59e0b22,#f59e0b11);
-      border:1.5px solid #f59e0b55;
-      color:#92400e;
-      border-radius:50px;
-      padding:5px 14px;
-      font-size:13px;font-weight:700;
-      margin-bottom:16px;
+    .hbadge-dot { width: 5px; height: 5px; border-radius: 50%; background: #34d399; box-shadow: 0 0 6px #34d399; }
+
+    /* ── TABS ── */
+    .auth-tabs { display: flex; border-bottom: 2px solid #e2e8f0; }
+    .auth-tab {
+      flex: 1; padding: 14px; text-align: center;
+      font-family: 'Syne', sans-serif; font-size: 13.5px; font-weight: 700;
+      cursor: pointer; background: transparent; border: none; color: #94a3b8;
+      transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -2px;
     }
-    body.dark-mode .price-pill{color:#fcd34d;}
-    @media(max-width:520px){.auth-body{padding:20px 18px 24px;}}
+    .auth-tab.active { color: #1a56db; border-bottom-color: #1a56db; }
+    .auth-tab:hover:not(.active) { color: #1e293b; background: #f8faff; }
+
+    /* ── FORM ── */
+    .auth-body { padding: 26px 30px 30px; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .form-group { margin-bottom: 17px; }
+    .form-label {
+      display: block; font-family: 'Syne', sans-serif;
+      font-size: 10.5px; font-weight: 700; color: #64748b;
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 7px;
+    }
+    .form-input {
+      width: 100%; padding: 12px 15px;
+      border: 2px solid #e2e8f0; border-radius: 12px;
+      font-size: 15px; color: #1e293b; background: #f8faff;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      outline: none; font-family: 'DM Sans', sans-serif;
+    }
+    .form-input:focus { border-color: #1a56db; background: #fff; box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+    .form-input.error { border-color: #ef4444; background: #fff5f5; }
+    .form-hint { font-size: 12px; color: #94a3b8; margin-top: 5px; }
+    .form-error { font-size: 12px; color: #ef4444; margin-top: 5px; display: none; }
+    .form-error.show { display: block; }
+
+    /* ── ALERTS ── */
+    .alert { padding: 12px 15px; border-radius: 11px; font-size: 13px; margin-bottom: 16px; display: none; line-height: 1.6; }
+    .alert.show { display: flex; align-items: flex-start; gap: 9px; }
+    .alert.warning { background: #fffbeb; border: 1px solid #f59e0b; color: #92400e; }
+    .alert.success { background: #f0fdf4; border: 1px solid #10b981; color: #065f46; }
+    .alert.danger  { background: #fff1f2; border: 1px solid #ef4444; color: #9f1239; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px; border-radius: 50px;
+      font-family: 'Syne', sans-serif; font-size: 14.5px; font-weight: 800;
+      border: none; cursor: pointer; transition: all 0.22s; letter-spacing: 0.3px;
+    }
+    .btn-blue {
+      background: linear-gradient(135deg, #1a56db, #1240a8); color: #fff;
+      box-shadow: 0 6px 20px rgba(26,86,219,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(26,86,219,0.4); }
+    .btn-gold {
+      background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a;
+      box-shadow: 0 6px 20px rgba(245,158,11,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,158,11,0.5); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+
+    /* ── STEPS ── */
+    .step-indicator { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 20px; }
+    .step {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800;
+      background: #e2e8f0; color: #64748b; transition: all 0.3s;
+    }
+    .step.active { background: #1a56db; color: #fff; box-shadow: 0 0 0 4px rgba(26,86,219,0.15); }
+    .step.done   { background: #10b981; color: #fff; }
+    .step-line   { flex: 1; height: 2px; background: #e2e8f0; max-width: 44px; transition: background 0.3s; }
+    .step-line.done { background: #10b981; }
+
+    /* ── MISC ── */
+    .separator {
+      display: flex; align-items: center; gap: 12px;
+      margin: 18px 0; color: #94a3b8; font-size: 12px;
+    }
+    .separator::before, .separator::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+    .wa-btn {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 12px 20px; border-radius: 50px; text-decoration: none;
+      background: #f0fdf4; color: #065f46; font-size: 13.5px; font-weight: 700;
+      border: 1px solid #10b981; transition: all 0.2s; font-family: 'Syne', sans-serif;
+    }
+    .wa-btn:hover { background: #dcfce7; transform: translateY(-1px); }
+    .wa-btn i { color: #25d366; }
+    .price-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(245,158,11,0.1); border: 1.5px solid rgba(245,158,11,0.3);
+      color: #92400e; border-radius: 50px; padding: 5px 15px;
+      font-family: 'Syne', sans-serif; font-size: 12.5px; font-weight: 700; margin-bottom: 14px;
+    }
+    .feat-list { list-style: none; margin: 14px 0; display: flex; flex-direction: column; gap: 8px; }
+    .feat-list li { display: flex; align-items: center; gap: 9px; font-size: 13px; color: #475569; }
+    .feat-list li i { color: #10b981; width: 15px; flex-shrink: 0; }
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    .spinner.dark { border-color: rgba(0,0,0,0.15); border-top-color: #1e293b; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* SUCCESS */
+    .success-state { text-align: center; padding: 8px 0; }
+    .success-ico {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 70px; height: 70px; border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #059669);
+      font-size: 2rem; margin-bottom: 16px;
+      box-shadow: 0 0 0 8px rgba(16,185,129,0.1), 0 8px 24px rgba(16,185,129,0.3);
+      animation: pop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes pop { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
+    .success-state h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 10px; }
+    .success-state p  { font-size: 13.5px; color: #64748b; line-height: 1.7; margin-bottom: 20px; }
+
+    /* FOOTER */
+    .page-foot { font-size: 11.5px; color: #94a3b8; text-align: center; line-height: 1.8; }
+    .page-foot a { color: #64748b; text-decoration: none; }
+    .page-foot a:hover { color: #1a56db; }
+
+    @media (max-width:520px) {
+      .auth-header { padding: 26px 20px 22px; }
+      .auth-body   { padding: 18px 16px 22px; }
+      .auth-card   { border-radius: 20px; }
+    }
   </style>
 </head>
 <body>
 
-<div data-include="../partials/header.html"></div>
+<div class="page-wrap">
 
-<main id="main-content" role="main">
-<div class="auth-wrap">
+  <!-- TOP STRIP -->
+  <div class="site-strip">
+    <a href="https://hsbteleet.com" class="site-brand">
+      <div class="site-mark">HL</div>
+      <div class="site-name">HSBT<b>LEET</b>.com</div>
+    </a>
+    <a href="https://hsbteleet.com" class="site-back">
+      <i class="fas fa-arrow-left"></i> Back to site
+    </a>
+  </div>
+
+  <!-- AUTH CARD -->
   <div class="auth-card">
+
     <div class="auth-header">
-      <span class="crown">👑</span>
-      <h1>Premium LEET Sample Papers</h1>
-      <p>Login or Register to access 5 exclusive Haryana LEET sample papers</p>
+      <div class="auth-hdr-inner">
+        <div class="crown-ring">👑</div>
+        <h1>Premium LEET Access</h1>
+        <p>Login or register to unlock 5 exclusive<br/>Haryana LEET sample papers</p>
+        <div class="badge-row">
+          <span class="hbadge"><span class="hbadge-dot"></span>Secure</span>
+          <span class="hbadge">₹11 One-Time</span>
+          <span class="hbadge">Lifetime Access</span>
+        </div>
+      </div>
     </div>
 
     <div class="auth-tabs">
@@ -208,18 +268,18 @@
 
     <div class="auth-body">
 
-      <!-- ─── LOGIN PANEL ─── -->
+      <!-- ══ LOGIN PANEL ══ -->
       <div class="tab-panel active" id="panel-login">
-        <div class="alert warning" id="login-warn">
+        <div class="alert warning show" id="login-warn">
           <i class="fas fa-exclamation-triangle"></i>
-          <span>⚠️ <strong>Forgot your password?</strong> Contact admin on WhatsApp: <strong>+91-7988316241</strong> with your registered mobile number.</span>
+          <span><strong>Forgot password?</strong> WhatsApp admin at <strong>+91-7988316241</strong> with your registered mobile.</span>
         </div>
-        <div class="alert danger" id="login-err"></div>
+        <div class="alert danger"  id="login-err"></div>
         <div class="alert success" id="login-ok"></div>
 
         <div class="form-group">
           <label class="form-label" for="l-mobile">Mobile Number</label>
-          <input type="tel" id="l-mobile" class="form-input" placeholder="10-digit mobile number" maxlength="10" pattern="[0-9]{10}" autocomplete="tel" inputmode="numeric"/>
+          <input type="tel" id="l-mobile" class="form-input" placeholder="10-digit mobile" maxlength="10" autocomplete="tel" inputmode="numeric"/>
           <div class="form-error" id="l-mobile-err">Please enter a valid 10-digit mobile number.</div>
         </div>
         <div class="form-group">
@@ -228,19 +288,19 @@
           <div class="form-error" id="l-pass-err">Please enter your password.</div>
         </div>
 
-        <button class="btn-auth blue" id="btn-login" onclick="doLogin()">
+        <button class="btn btn-blue" id="btn-login" onclick="doLogin()">
           <i class="fas fa-sign-in-alt"></i> Login to My Account
         </button>
 
-        <div class="separator">or need help?</div>
-        <a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20my%20Premium%20LEET%20account.%20My%20mobile%20is%20" class="wa-link" target="_blank" rel="noopener noreferrer">
+        <div class="separator">need help?</div>
+        <a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20my%20Premium%20LEET%20account." class="wa-btn" target="_blank" rel="noopener">
           <i class="fab fa-whatsapp"></i> Contact Admin on WhatsApp
         </a>
       </div>
 
-      <!-- ─── REGISTER PANEL ─── -->
+      <!-- ══ REGISTER PANEL ══ -->
       <div class="tab-panel" id="panel-register">
-        <!-- Step indicator -->
+
         <div class="step-indicator">
           <div class="step active" id="step1-dot">1</div>
           <div class="step-line" id="line1"></div>
@@ -249,10 +309,10 @@
           <div class="step" id="step3-dot">3</div>
         </div>
 
-        <div class="alert danger" id="reg-err"></div>
+        <div class="alert danger"  id="reg-err"></div>
         <div class="alert success" id="reg-ok"></div>
 
-        <!-- STEP 1: Registration form -->
+        <!-- STEP 1 -->
         <div id="reg-step1">
           <div class="form-group">
             <label class="form-label" for="r-name">Full Name</label>
@@ -261,7 +321,7 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="r-mobile">Mobile Number</label>
-            <input type="tel" id="r-mobile" class="form-input" placeholder="10-digit mobile number" maxlength="10" pattern="[0-9]{10}" autocomplete="tel" inputmode="numeric"/>
+            <input type="tel" id="r-mobile" class="form-input" placeholder="10-digit mobile number" maxlength="10" autocomplete="tel" inputmode="numeric"/>
             <div class="form-error" id="r-mobile-err">Please enter a valid 10-digit mobile number.</div>
           </div>
           <div class="form-group">
@@ -271,80 +331,101 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="r-password">Create Password</label>
-            <input type="password" id="r-password" class="form-input" placeholder="Create a strong password" autocomplete="new-password"/>
-            <div class="form-hint">Minimum 6 characters. Remember this — there's no reset option.</div>
+            <input type="password" id="r-password" class="form-input" placeholder="Minimum 6 characters" autocomplete="new-password"/>
+            <div class="form-hint">⚠️ Save this — no self-reset. Contact admin if forgotten.</div>
             <div class="form-error" id="r-pass-err">Password must be at least 6 characters.</div>
           </div>
-          <div class="alert warning show" style="margin-bottom:18px;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span><strong>⚠️ Important:</strong> If you forget your password, you'll need to contact admin at <strong>+91-7988316241</strong> (same number you register with) to reset it. Please save your password.</span>
+          <div class="alert warning show" style="margin-bottom:16px;">
+            <i class="fas fa-shield-alt"></i>
+            <span>If you forget your password, contact admin at <strong>+91-7988316241</strong> with your registered mobile.</span>
           </div>
-          <button class="btn-auth blue" id="btn-step1" onclick="doStep1()">
+          <button class="btn btn-blue" id="btn-step1" onclick="doStep1()">
             Continue to Payment <i class="fas fa-arrow-right"></i>
           </button>
         </div>
 
-        <!-- STEP 2: Payment -->
+        <!-- STEP 2 -->
         <div id="reg-step2" style="display:none;">
           <div style="text-align:center;margin-bottom:20px;">
-            <div class="price-pill"><i class="fas fa-crown"></i> One-time payment — ₹11 only</div>
-            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Pay ₹11 via Razorpay to unlock all 5 premium Haryana LEET sample papers. Your transaction will be saved for account verification.</p>
+            <div class="price-pill"><i class="fas fa-crown"></i> One-time — ₹11 only</div>
+            <p style="font-size:13.5px;color:#64748b;line-height:1.7;margin-bottom:14px;">Pay ₹11 to instantly unlock all 5 premium Haryana LEET sample papers.</p>
+            <ul class="feat-list" style="text-align:left;max-width:260px;margin:0 auto 18px;">
+              <li><i class="fas fa-check-circle"></i> 5 exclusive sample papers</li>
+              <li><i class="fas fa-check-circle"></i> Lifetime access — no expiry</li>
+              <li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>
+              <li><i class="fas fa-check-circle"></i> Admin notified instantly</li>
+            </ul>
           </div>
-          <button class="btn-auth gold" id="btn-pay" onclick="doPayment()">
-            <i class="fas fa-lock"></i> Pay ₹11 & Unlock Access
+          <button class="btn btn-gold" id="btn-pay" onclick="doPayment()">
+            <i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access
           </button>
         </div>
 
-        <!-- STEP 3: Done -->
-        <div id="reg-step3" style="display:none;text-align:center;">
-          <div style="font-size:3rem;margin-bottom:14px;">🎉</div>
-          <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:10px;color:var(--text);">Access Unlocked!</h3>
-          <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;line-height:1.6;">Your payment was successful and your account is active. You can now access all 5 premium sample papers.</p>
-          <a href="./premium-papers.html" class="btn-auth gold" style="text-decoration:none;">
-            <i class="fas fa-book-open"></i> Go to My Papers
-          </a>
+        <!-- STEP 3 -->
+        <div id="reg-step3" style="display:none;">
+          <div class="success-state">
+            <div class="success-ico">🎉</div>
+            <h3>Access Unlocked!</h3>
+            <p>Payment confirmed. Your account is now active and admin has been notified. Access all 5 premium sample papers now.</p>
+            <a href="./premium-papers.html" class="btn btn-gold" style="text-decoration:none;">
+              <i class="fas fa-book-open"></i> Go to My Papers
+            </a>
+          </div>
         </div>
+
       </div>
+    </div>
+  </div>
 
-    </div><!-- /auth-body -->
-  </div><!-- /auth-card -->
+  <div class="page-foot">
+    <a href="https://hsbteleet.com">hsbteleet.com</a> &bull; Premium &bull; Secure &bull;
+    <a href="https://wa.me/917988316241">Support</a>
+  </div>
+
 </div>
-</main>
 
-<div data-include="../partials/footer.html"></div>
-<script defer src="../js/include.js"></script>
-<script defer src="../js/main.js"></script>
 
-<!-- Supabase -->
+<!-- ── SDKs ── -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
-<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<!-- NOTE: Razorpay is loaded dynamically inside doPayment() to guarantee it is ready -->
 
 <script>
 'use strict';
 
-// ── CONFIG (keys stored as variables, not hardcoded in queryable DOM) ──
-var SUPA_URL  = 'https://vzfpltvchsxsfqlldafd.supabase.co';
-var SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
-var RZP_KEY   = 'rzp_live_SPbBEutqahnSN4';
-var EJS_SVC   = 'service_xwq0gnl';
-var EJS_TPL   = 'template_ed04169';
-var EJS_PUB   = 'tSLSXcGfuU3S3XDr4';
+// ══════════════════════════════════════════════════════
+//  CONFIG
+// ══════════════════════════════════════════════════════
+var SUPA_URL     = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var RZP_KEY      = 'rzp_live_SPbBEutqahnSN4';
+var EJS_SVC      = 'service_xwq0gnl';
+var EJS_TPL      = 'template_ed04169';
+var EJS_PUB      = 'tSLSXcGfuU3S3XDr4';
+
+// All emails → ADMIN only (not sent to student)
+var ADMIN_EMAIL  = 'nishant@hsbteleet.com';
+var ADMIN_NAME   = 'Nishant (Admin)';
 
 var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 emailjs.init(EJS_PUB);
 
-var pendingUser = null; // holds {name, mobile, email, password_hash} during registration flow
+var pendingUser = null;
 
-// ── HASH HELPER (SHA-256 via SubtleCrypto) ──
-async function sha256(message) {
-  var msgBuffer = new TextEncoder().encode(message);
-  var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
+// ══════════════════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════════════════
+
+async function sha256(msg) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
 }
 
-// ── TAB SWITCH ──
+function nowStr() {
+  var d = new Date();
+  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })
+       + ' · ' + d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true });
+}
+
 function switchTab(tab) {
   document.querySelectorAll('.auth-tab').forEach(function(t){ t.classList.remove('active'); });
   document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
@@ -352,82 +433,88 @@ function switchTab(tab) {
   document.getElementById('panel-' + tab).classList.add('active');
 }
 
-// ── SHOW/HIDE ALERTS ──
-function showAlert(id, msg, type) {
+function showAlert(id, html, type) {
   var el = document.getElementById(id);
-  if(!el) return;
+  if (!el) return;
   el.className = 'alert ' + type + ' show';
-  el.innerHTML = msg;
+  el.innerHTML = html;
 }
 function hideAlert(id) {
   var el = document.getElementById(id);
-  if(el){ el.classList.remove('show'); el.innerHTML = ''; }
+  if (el) { el.classList.remove('show'); el.innerHTML = ''; }
 }
-
-function showError(id, show) {
+function showErr(id, show) {
   var el = document.getElementById(id);
-  if(el) el.classList[show ? 'add' : 'remove']('show');
+  if (el) el.classList[show ? 'add' : 'remove']('show');
 }
-function setInputError(id, hasError) {
+function setInputErr(id, isErr) {
   var el = document.getElementById(id);
-  if(el) el.classList[hasError ? 'add' : 'remove']('error');
+  if (el) el.classList[isErr ? 'add' : 'remove']('error');
 }
-
 function setLoading(btnId, loading, text) {
   var btn = document.getElementById(btnId);
-  if(!btn) return;
+  if (!btn) return;
   btn.disabled = loading;
-  btn.innerHTML = loading
-    ? '<span class="spinner"></span> Please wait...'
-    : text;
+  btn.innerHTML = loading ? '<span class="spinner"></span> Please wait…' : text;
 }
-
-// ── VALIDATE ──
 function isValidMobile(v){ return /^\d{10}$/.test(v.trim()); }
-function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
 
-// ── LOGIN ──
+// ══════════════════════════════════════════════════════
+//  LOGIN
+// ══════════════════════════════════════════════════════
+
 async function doLogin() {
   hideAlert('login-err'); hideAlert('login-ok');
   var mobile = document.getElementById('l-mobile').value.trim();
   var pass   = document.getElementById('l-password').value;
   var ok = true;
-  if(!isValidMobile(mobile)){ setInputError('l-mobile',true); showError('l-mobile-err',true); ok=false; } else { setInputError('l-mobile',false); showError('l-mobile-err',false); }
-  if(!pass){ setInputError('l-password',true); showError('l-pass-err',true); ok=false; } else { setInputError('l-password',false); showError('l-pass-err',false); }
-  if(!ok) return;
+  if (!isValidMobile(mobile)) { setInputErr('l-mobile',true);  showErr('l-mobile-err',true);  ok=false; } else { setInputErr('l-mobile',false);  showErr('l-mobile-err',false); }
+  if (!pass)                  { setInputErr('l-password',true); showErr('l-pass-err',true);    ok=false; } else { setInputErr('l-password',false); showErr('l-pass-err',false); }
+  if (!ok) return;
 
   setLoading('btn-login', true, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
-
   try {
     var hash = await sha256(pass);
-    // Check user exists
-    var { data: user, error: uErr } = await sb.from('premium_users').select('id,mobile,email,full_name').eq('mobile', mobile).eq('password_hash', hash).maybeSingle();
-    if(uErr || !user) {
-      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;Invalid mobile number or password. If you forgot your password, contact admin at <strong>+91-7988316241</strong>.', 'danger');
+    var { data: user, error: uErr } = await sb.from('premium_users')
+      .select('id,mobile,email,full_name')
+      .eq('mobile', mobile).eq('password_hash', hash).maybeSingle();
+
+    if (uErr || !user) {
+      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;Invalid mobile or password. Contact admin at <strong>+91-7988316241</strong> if you forgot your password.', 'danger');
       setLoading('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
       return;
     }
-    // Check payment
+
     var { data: access } = await sb.from('premium_access').select('is_active').eq('user_id', user.id).maybeSingle();
-    if(!access || !access.is_active) {
-      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;Account found but no active payment. Please complete payment to access premium papers. <a href="./premium-login.html" style="color:var(--blue);font-weight:700;">Pay ₹11</a>', 'danger');
+    if (!access || !access.is_active) {
+      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;No active premium found. <a href="./premium-login.html" style="color:#1a56db;font-weight:700;">Pay ₹11 to activate →</a>', 'danger');
       setLoading('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
       return;
     }
-    // Store session token in sessionStorage
-    sessionStorage.setItem('prem_uid', user.id);
-    sessionStorage.setItem('prem_mob', mobile);
+
+    sessionStorage.setItem('prem_uid',  user.id);
+    sessionStorage.setItem('prem_mob',  mobile);
     sessionStorage.setItem('prem_name', user.full_name || '');
-    sessionStorage.setItem('prem_ts', Date.now().toString());
-    showAlert('login-ok', '<i class="fas fa-check-circle"></i> &nbsp;Welcome back! Redirecting to your papers...', 'success');
+    sessionStorage.setItem('prem_ts',   Date.now().toString());
+
+    showAlert('login-ok', '<i class="fas fa-check-circle"></i> &nbsp;Welcome back, <strong>' + (user.full_name || 'Student') + '</strong>! Redirecting…', 'success');
+
+    // Notify admin about login
+    sendAdminEmail('login', { name: user.full_name, mobile: mobile, email: user.email });
+
     setTimeout(function(){ window.location.href = './premium-papers.html'; }, 1200);
+
   } catch(e) {
     showAlert('login-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;Something went wrong. Please try again.', 'danger');
     setLoading('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
   }
 }
 
-// ── STEP 1: Validate & save registration data ──
+// ══════════════════════════════════════════════════════
+//  REGISTRATION STEP 1
+// ══════════════════════════════════════════════════════
+
 async function doStep1() {
   hideAlert('reg-err');
   var name   = document.getElementById('r-name').value.trim();
@@ -435,28 +522,28 @@ async function doStep1() {
   var email  = document.getElementById('r-email').value.trim();
   var pass   = document.getElementById('r-password').value;
   var ok = true;
-  if(!name){ setInputError('r-name',true); showError('r-name-err',true); ok=false; } else { setInputError('r-name',false); showError('r-name-err',false); }
-  if(!isValidMobile(mobile)){ setInputError('r-mobile',true); showError('r-mobile-err',true); ok=false; } else { setInputError('r-mobile',false); showError('r-mobile-err',false); }
-  if(!isValidEmail(email)){ setInputError('r-email',true); showError('r-email-err',true); ok=false; } else { setInputError('r-email',false); showError('r-email-err',false); }
-  if(!pass || pass.length < 6){ setInputError('r-password',true); showError('r-pass-err',true); ok=false; } else { setInputError('r-password',false); showError('r-pass-err',false); }
-  if(!ok) return;
+
+  if (!name)                    { setInputErr('r-name',true);     showErr('r-name-err',true);    ok=false; } else { setInputErr('r-name',false);     showErr('r-name-err',false); }
+  if (!isValidMobile(mobile))   { setInputErr('r-mobile',true);   showErr('r-mobile-err',true);  ok=false; } else { setInputErr('r-mobile',false);   showErr('r-mobile-err',false); }
+  if (!isValidEmail(email))     { setInputErr('r-email',true);    showErr('r-email-err',true);   ok=false; } else { setInputErr('r-email',false);    showErr('r-email-err',false); }
+  if (!pass || pass.length < 6) { setInputErr('r-password',true); showErr('r-pass-err',true);    ok=false; } else { setInputErr('r-password',false); showErr('r-pass-err',false); }
+  if (!ok) return;
 
   setLoading('btn-step1', true, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
-
   try {
-    // Check if mobile already registered
     var { data: existing } = await sb.from('premium_users').select('id').eq('mobile', mobile).maybeSingle();
-    if(existing) {
-      showAlert('reg-err', '<i class="fas fa-user-check"></i> &nbsp;This mobile number is already registered. Please <button onclick="switchTab(\'login\')" style="background:none;border:none;color:var(--blue);cursor:pointer;font-weight:700;text-decoration:underline;">Login here</button>.', 'danger');
+    if (existing) {
+      showAlert('reg-err', '<i class="fas fa-user-check"></i> &nbsp;Mobile already registered. <button onclick="switchTab(\'login\')" style="background:none;border:none;color:#1a56db;cursor:pointer;font-weight:700;text-decoration:underline;font-size:13px;">Login here →</button>', 'danger');
       setLoading('btn-step1', false, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
       return;
     }
     var hash = await sha256(pass);
     pendingUser = { full_name: name, mobile: mobile, email: email, password_hash: hash };
-    // Show step 2
+
     document.getElementById('reg-step1').style.display = 'none';
     document.getElementById('reg-step2').style.display = 'block';
-    document.getElementById('step1-dot').classList.remove('active'); document.getElementById('step1-dot').classList.add('done'); document.getElementById('step1-dot').textContent = '✓';
+    var s1 = document.getElementById('step1-dot');
+    s1.classList.remove('active'); s1.classList.add('done'); s1.textContent = '✓';
     document.getElementById('line1').classList.add('done');
     document.getElementById('step2-dot').classList.add('active');
   } catch(e) {
@@ -465,60 +552,47 @@ async function doStep1() {
   }
 }
 
-// ── STEP 2: Razorpay Payment ──
-// Load Razorpay SDK dynamically, then open checkout only after it's confirmed ready
+// ══════════════════════════════════════════════════════
+//  RAZORPAY PAYMENT
+// ══════════════════════════════════════════════════════
+
 function loadRazorpay(cb) {
   if (typeof window.Razorpay === 'function') { cb(null); return; }
   var s = document.createElement('script');
   s.src = 'https://checkout.razorpay.com/v1/checkout.js';
-  s.onload = function() {
-    if (typeof window.Razorpay === 'function') {
-      cb(null);
-    } else {
-      cb(new Error('Razorpay SDK loaded but constructor not found.'));
-    }
-  };
-  s.onerror = function() {
-    cb(new Error('Failed to load Razorpay. Check your internet connection.'));
-  };
+  s.onload  = function(){ typeof window.Razorpay === 'function' ? cb(null) : cb(new Error('Razorpay SDK not ready.')); };
+  s.onerror = function(){ cb(new Error('Failed to load Razorpay. Check your internet.')); };
   document.head.appendChild(s);
 }
 
 function doPayment() {
-  if(!pendingUser) { showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> &nbsp;Session expired. Please start again.','danger'); return; }
+  if (!pendingUser) {
+    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> &nbsp;Session expired. Please start again.','danger');
+    return;
+  }
   hideAlert('reg-err');
-
   var btn = document.getElementById('btn-pay');
-  if(btn){ btn.disabled = true; btn.innerHTML = '<span class="spinner dark"></span> Loading payment…'; }
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner dark"></span> Loading payment…'; }
 
   loadRazorpay(function(err) {
-    if(err) {
+    if (err) {
       showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;' + err.message, 'danger');
-      if(btn){ btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay ₹11 & Unlock Access'; }
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access'; }
       return;
     }
-    if(btn){ btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay ₹11 & Unlock Access'; }
+    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access'; }
 
     var opts = {
-      key: RZP_KEY,
-      amount: 1100,
-      currency: 'INR',
+      key: RZP_KEY, amount: 1100, currency: 'INR',
       name: 'HSBTE LEET Premium',
       description: 'Premium Haryana LEET Sample Papers (5 Papers)',
       image: 'https://hsbteleet.com/image/favicon.webp',
       prefill: { contact: pendingUser.mobile, email: pendingUser.email },
       notes: { mobile: pendingUser.mobile },
       theme: { color: '#1a56db' },
-      handler: function(response) {
-        completeRegistration(response);
-      },
-      modal: {
-        ondismiss: function() {
-          showAlert('reg-err','<i class="fas fa-info-circle"></i> &nbsp;Payment was cancelled. Click the button again to retry.','danger');
-        }
-      }
+      handler: function(response){ completeRegistration(response); },
+      modal: { ondismiss: function(){ showAlert('reg-err','<i class="fas fa-info-circle"></i> &nbsp;Payment cancelled. Click again to retry.','danger'); } }
     };
-
     try {
       var rzp = new window.Razorpay(opts);
       rzp.on('payment.failed', function(resp){
@@ -526,79 +600,231 @@ function doPayment() {
       });
       rzp.open();
     } catch(e) {
-      showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;Could not open payment window: ' + e.message, 'danger');
+      showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;Could not open payment: ' + e.message, 'danger');
     }
   });
 }
 
-// ── COMPLETE REGISTRATION after successful payment ──
+// ══════════════════════════════════════════════════════
+//  COMPLETE REGISTRATION
+// ══════════════════════════════════════════════════════
+
 async function completeRegistration(rzpResponse) {
-  setLoading('btn-pay', true, '<i class="fas fa-lock"></i> Pay ₹11 & Unlock Access');
+  setLoading('btn-pay', true, '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access');
   try {
     // 1. Insert user
     var { data: newUser, error: uErr } = await sb.from('premium_users').insert([{
-      mobile:        pendingUser.mobile,
-      email:         pendingUser.email,
-      password_hash: pendingUser.password_hash,
-      full_name:     pendingUser.full_name
+      mobile: pendingUser.mobile, email: pendingUser.email,
+      password_hash: pendingUser.password_hash, full_name: pendingUser.full_name
     }]).select('id').single();
+    if (uErr) throw new Error('user_insert: ' + uErr.message);
 
-    if(uErr) throw new Error('user_insert: ' + uErr.message);
-
-    // 2. Insert payment record
+    // 2. Insert payment
     var { data: payment, error: pErr } = await sb.from('premium_payments').insert([{
-      user_id:             newUser.id,
+      user_id: newUser.id,
       razorpay_payment_id: rzpResponse.razorpay_payment_id,
-      razorpay_order_id:   rzpResponse.razorpay_order_id || null,
+      razorpay_order_id:   rzpResponse.razorpay_order_id  || null,
       razorpay_signature:  rzpResponse.razorpay_signature || null,
-      amount:              1100,
-      status:              'paid',
-      receipt:             rzpResponse.razorpay_payment_id
+      amount: 1100, status: 'paid',
+      receipt: rzpResponse.razorpay_payment_id
     }]).select('id').single();
+    if (pErr) throw new Error('payment_insert: ' + pErr.message);
 
-    if(pErr) throw new Error('payment_insert: ' + pErr.message);
+    // 3. Grant access
+    await sb.from('premium_access').insert([{ user_id: newUser.id, payment_id: payment.id, is_active: true }]);
 
-    // 3. Grant premium access
-    await sb.from('premium_access').insert([{
-      user_id:    newUser.id,
-      payment_id: payment.id,
-      is_active:  true
-    }]);
-
-    // 4. Send welcome email via EmailJS
-    try {
-      await emailjs.send(EJS_SVC, EJS_TPL, {
-        to_name:  pendingUser.full_name,
-        to_email: pendingUser.email,
-        mobile:   pendingUser.mobile,
-        message:  'Welcome to Premium HSBTE LEET! Your payment of ₹11 has been confirmed (Payment ID: ' + rzpResponse.razorpay_payment_id + '). You can now log in with your mobile number and password to access all 5 premium sample papers at https://hsbteleet.com/html/premium-papers.html'
-      });
-    } catch(eErr) { console.warn('EmailJS failed:', eErr); } // non-blocking
+    // 4. Notify ADMIN (not student) of new registration + payment
+    sendAdminEmail('registration', {
+      name:  pendingUser.full_name,
+      mobile: pendingUser.mobile,
+      email:  pendingUser.email,
+      payId:  rzpResponse.razorpay_payment_id
+    });
 
     // 5. Set session
-    sessionStorage.setItem('prem_uid', newUser.id);
-    sessionStorage.setItem('prem_mob', pendingUser.mobile);
+    sessionStorage.setItem('prem_uid',  newUser.id);
+    sessionStorage.setItem('prem_mob',  pendingUser.mobile);
     sessionStorage.setItem('prem_name', pendingUser.full_name);
-    sessionStorage.setItem('prem_ts', Date.now().toString());
+    sessionStorage.setItem('prem_ts',   Date.now().toString());
 
     // 6. Show step 3
     document.getElementById('reg-step2').style.display = 'none';
     document.getElementById('reg-step3').style.display = 'block';
-    document.getElementById('step2-dot').classList.remove('active'); document.getElementById('step2-dot').classList.add('done'); document.getElementById('step2-dot').textContent = '✓';
+    var s2 = document.getElementById('step2-dot');
+    s2.classList.remove('active'); s2.classList.add('done'); s2.textContent = '✓';
     document.getElementById('line2').classList.add('done');
     document.getElementById('step3-dot').classList.add('active');
 
   } catch(e) {
-    showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;Registration error: ' + e.message + '. Your payment was processed. Contact admin at +91-7988316241 with your payment ID: ' + (rzpResponse.razorpay_payment_id || 'N/A'), 'danger');
-    setLoading('btn-pay', false, '<i class="fas fa-lock"></i> Pay ₹11 & Unlock Access');
+    showAlert('reg-err',
+      '<i class="fas fa-exclamation-triangle"></i> &nbsp;Registration error: ' + e.message +
+      '. Payment was processed — contact admin at <strong>+91-7988316241</strong> with Payment ID: <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:2px 5px;border-radius:4px;">' +
+      (rzpResponse.razorpay_payment_id || 'N/A') + '</code>', 'danger');
+    setLoading('btn-pay', false, '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access');
   }
 }
 
-// ── Enter key support ──
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Enter'){
-    var activePanel = document.querySelector('.tab-panel.active');
-    if(activePanel && activePanel.id === 'panel-login') doLogin();
+// ══════════════════════════════════════════════════════
+//  ADMIN EMAIL DISPATCHER
+//  ALL notifications go to admin — not to the student
+// ══════════════════════════════════════════════════════
+
+function sendAdminEmail(type, data) {
+  try {
+    var html = (type === 'registration')
+      ? buildAdminRegistrationHTML(data)
+      : buildAdminLoginHTML(data);
+
+    emailjs.send(EJS_SVC, EJS_TPL, {
+      to_name:      ADMIN_NAME,
+      to_email:     ADMIN_EMAIL,
+      mobile:       data.mobile || '',
+      html_message: html
+    }).then(function(r){
+      console.log('[LEET] Admin ' + type + ' alert sent:', r.status);
+    }).catch(function(e){
+      console.warn('[LEET] Admin email error:', e);
+    });
+  } catch(e) {
+    console.warn('[LEET] sendAdminEmail threw:', e);
+  }
+}
+
+// ══════════════════════════════════════════════════════
+//  EMAIL: NEW REGISTRATION ALERT  →  Admin
+//  Green theme · Shows full student details + payment
+// ══════════════════════════════════════════════════════
+
+function buildAdminRegistrationHTML(data) {
+  var name   = data.name   || 'Unknown';
+  var mobile = data.mobile || '—';
+  var email  = data.email  || '—';
+  var payId  = data.payId  || '—';
+  var ts     = nowStr();
+
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>New Premium Registration</title>'
+  + '<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>'
+  + '</head><body style="margin:0;padding:0;background:#030d06;font-family:\'DM Sans\',sans-serif;">'
+  + '<div style="max-width:600px;margin:0 auto;padding:44px 16px;">'
+  + '<div style="text-align:center;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(16,185,129,0.5);margin-bottom:14px;">hsbteleet.com &middot; Admin Alert</div>'
+  + '<div style="background:#060f09;border-radius:28px;overflow:hidden;border:1px solid rgba(16,185,129,0.15);box-shadow:0 60px 140px rgba(0,0,0,0.9);">'
+
+  // HERO — green
+  + '<div style="background:radial-gradient(ellipse 100% 70% at 50% -20%,rgba(16,185,129,0.22) 0%,transparent 55%),linear-gradient(175deg,#051209 0%,#030a06 50%,#020705 100%);padding:40px 44px;">'
+  + '<div style="display:inline-block;background:rgba(16,185,129,0.14);border:1px solid rgba(16,185,129,0.28);border-radius:20px;padding:5px 16px;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#34d399;margin-bottom:18px;">&#128994; New Registration + Payment</div>'
+  + '<h1 style="font-family:\'DM Serif Display\',serif;font-size:42px;line-height:1.05;color:#f0fdf4;margin-bottom:12px;">New Premium<br/><span style="color:#10b981;">Member Joined!</span></h1>'
+  + '<p style="font-size:14px;color:rgba(240,253,244,0.5);line-height:1.75;">A student just registered and paid &#8377;11. Their account is now active.</p>'
+  + '</div>'
+
+  // BODY
+  + '<div style="padding:38px 44px;">'
+
+  // RECEIPT
+  + '<div style="background:#071209;border:1px solid rgba(16,185,129,0.15);border-left:3px solid #10b981;border-radius:20px;padding:24px 26px;margin-bottom:26px;">'
+  + '<div style="font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,253,244,0.3);margin-bottom:16px;">&#128196; Student Details</div>'
+  + row('#f0fdf4', 'Name',       name)
+  + row('#f0fdf4', 'Mobile',     mobile)
+  + row('#f0fdf4', 'Email',      email)
+  + rowG(          'Amount',     '&#8377;11 &#10003; Paid')
+  + row('#f0fdf4', 'Time',       ts)
+  + '<div style="padding:10px 0 0;"><div style="font-size:12px;color:rgba(240,253,244,0.38);">Payment ID</div>'
+  + '<div style="font-size:11px;color:rgba(16,185,129,0.7);font-family:monospace;word-break:break-all;margin-top:3px;">' + payId + '</div></div>'
+  + '</div>'
+
+  // STATS
+  + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px;">'
+  + statBox('#10b981','&#8377;11','Earned')
+  + statBox('#10b981','5','Papers Given')
+  + statBox('#34d399','&#10003;','Account Active')
+  + '</div>'
+
+  // ACTIONS
+  + '<a href="https://vzfpltvchsxsfqlldafd.supabase.co" style="display:block;text-decoration:none;text-align:center;border-radius:16px;background:linear-gradient(130deg,#059669,#047857);color:#fff;font-family:\'Syne\',sans-serif;font-size:14.5px;font-weight:800;padding:16px 28px;margin-bottom:14px;box-shadow:0 8px 28px rgba(16,185,129,0.35);">&#128202; View in Supabase &rarr;</a>'
+  + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;text-decoration:none;text-align:center;border-radius:16px;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.25);color:#25d366;font-family:\'Syne\',sans-serif;font-size:13.5px;font-weight:700;padding:13px 20px;margin-bottom:24px;">&#128241; WhatsApp ' + name + ' directly</a>'
+  + '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,0.2),transparent);margin:22px 0;"></div>'
+  + '<div style="font-size:12px;color:rgba(240,253,244,0.3);text-align:center;line-height:1.8;">Registered mobile: <strong style="color:rgba(240,253,244,0.55);">' + mobile + '</strong></div>'
+  + '</div>'
+  + '<div style="background:rgba(0,0,0,0.45);border-top:1px solid rgba(16,185,129,0.08);padding:20px 44px;"><div style="font-size:11px;color:rgba(240,253,244,0.1);text-align:center;line-height:1.8;">Admin notification &bull; hsbteleet.com &bull; &copy; 2025 HSBTELEET.com</div></div>'
+  + '</div>'
+  + '<div style="text-align:center;margin-top:18px;font-family:\'Syne\',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,253,244,0.04);">admin alert &middot; hsbteleet.com</div>'
+  + '</div></body></html>';
+}
+
+// ══════════════════════════════════════════════════════
+//  EMAIL: LOGIN ALERT  →  Admin
+//  Blue theme · Shows who logged in and when
+// ══════════════════════════════════════════════════════
+
+function buildAdminLoginHTML(data) {
+  var name   = data.name   || 'Unknown';
+  var mobile = data.mobile || '—';
+  var email  = data.email  || '—';
+  var ts     = nowStr();
+
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Premium Login Alert</title>'
+  + '<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>'
+  + '</head><body style="margin:0;padding:0;background:#020409;font-family:\'DM Sans\',sans-serif;">'
+  + '<div style="max-width:580px;margin:0 auto;padding:44px 16px;">'
+  + '<div style="text-align:center;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(96,165,250,0.5);margin-bottom:14px;">hsbteleet.com &middot; Login Alert</div>'
+  + '<div style="background:#05080f;border-radius:28px;overflow:hidden;border:1px solid rgba(26,86,219,0.18);box-shadow:0 60px 140px rgba(0,0,0,0.9);">'
+
+  // HERO — blue
+  + '<div style="background:radial-gradient(ellipse 100% 70% at 50% -20%,rgba(26,86,219,0.25) 0%,transparent 55%),linear-gradient(175deg,#040817 0%,#030614 50%,#020410 100%);padding:38px 44px 42px;">'
+  + '<div style="display:inline-block;background:rgba(26,86,219,0.16);border:1px solid rgba(59,130,246,0.28);border-radius:20px;padding:5px 16px;font-family:\'Syne\',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#60a5fa;margin-bottom:18px;">&#128275; Login Detected</div>'
+  + '<div style="font-size:42px;margin-bottom:14px;">&#128274;</div>'
+  + '<h1 style="font-family:\'DM Serif Display\',serif;font-size:38px;line-height:1.05;color:#eff6ff;margin-bottom:12px;">Premium <span style="color:#60a5fa;">Login</span><br/>Alert</h1>'
+  + '<p style="font-size:14px;color:rgba(239,246,255,0.45);line-height:1.75;">A premium student just logged in and is accessing their papers on hsbteleet.com.</p>'
+  + '</div>'
+
+  // BODY
+  + '<div style="padding:36px 44px;">'
+  + '<div style="background:#040915;border:1px solid rgba(26,86,219,0.18);border-left:3px solid #3b82f6;border-radius:20px;padding:22px 24px;margin-bottom:24px;">'
+  + '<div style="font-family:\'Syne\',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(239,246,255,0.28);margin-bottom:16px;">&#128196; Login Details</div>'
+  + row('#eff6ff', 'Name',   name)
+  + row('#eff6ff', 'Mobile', mobile)
+  + row('#eff6ff', 'Email',  email)
+  + row('#eff6ff', 'Time',   ts)
+  + '<div style="padding:9px 0 0;"><span style="font-size:12px;color:rgba(239,246,255,0.38);">Status &nbsp;</span><span style="font-size:13px;color:#34d399;font-weight:800;">&#10003; Active &bull; Premium Verified</span></div>'
+  + '</div>'
+
+  + '<a href="https://vzfpltvchsxsfqlldafd.supabase.co" style="display:block;text-decoration:none;text-align:center;border-radius:15px;background:linear-gradient(130deg,#1a56db,#1240a8);color:#fff;font-family:\'Syne\',sans-serif;font-size:14px;font-weight:800;padding:15px 26px;margin-bottom:14px;box-shadow:0 8px 24px rgba(26,86,219,0.4);">&#128202; Open Supabase Dashboard &rarr;</a>'
+  + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;text-decoration:none;text-align:center;border-radius:15px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.22);color:#25d366;font-family:\'Syne\',sans-serif;font-size:13px;font-weight:700;padding:12px 20px;margin-bottom:22px;">&#128241; WhatsApp ' + name + '</a>'
+  + '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(26,86,219,0.18),transparent);margin:20px 0;"></div>'
+  + '<div style="font-size:12px;color:rgba(239,246,255,0.28);text-align:center;line-height:1.8;">User mobile: <strong style="color:rgba(239,246,255,0.5);">' + mobile + '</strong></div>'
+  + '</div>'
+
+  + '<div style="background:rgba(0,0,0,0.45);border-top:1px solid rgba(26,86,219,0.1);padding:20px 44px;"><div style="font-size:11px;color:rgba(239,246,255,0.1);text-align:center;line-height:1.8;">Login alert &bull; hsbteleet.com &bull; &copy; 2025 HSBTELEET.com</div></div>'
+  + '</div>'
+  + '<div style="text-align:center;margin-top:18px;font-family:\'Syne\',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(239,246,255,0.03);">login alert &middot; hsbteleet.com</div>'
+  + '</div></body></html>';
+}
+
+// ── Shared inline helpers for email rows ──
+function row(clr, label, val) {
+  return '<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">'
+    + '<span style="font-size:12px;color:rgba(255,255,255,0.35);min-width:90px;">' + label + '</span>'
+    + '<span style="font-size:13px;color:' + clr + ';font-weight:700;text-align:right;word-break:break-all;">' + val + '</span></div>';
+}
+function rowG(label, val) {
+  return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">'
+    + '<span style="font-size:12px;color:rgba(255,255,255,0.35);">' + label + '</span>'
+    + '<span style="font-size:14px;color:#34d399;font-weight:800;">' + val + '</span></div>';
+}
+function statBox(clr, num, lbl) {
+  return '<div style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05);border-radius:18px;padding:18px 10px;text-align:center;">'
+    + '<div style="font-family:\'DM Serif Display\',serif;font-size:28px;color:' + clr + ';line-height:1;margin-bottom:4px;">' + num + '</div>'
+    + '<div style="font-family:\'Syne\',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.22);">' + lbl + '</div>'
+    + '</div>';
+}
+
+// ══════════════════════════════════════════════════════
+//  KEYBOARD — Enter to login
+// ══════════════════════════════════════════════════════
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    var panel = document.querySelector('.tab-panel.active');
+    if (panel && panel.id === 'panel-login') doLogin();
   }
 });
 </script>
