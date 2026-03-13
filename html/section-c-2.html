@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
+  <title>HSBTE LEET Section C Mechanical Engineering Mock Paper 2</title>
+  <meta name="description" content="Section C Mechanical Engineering HSBTE LEET mock 2. Practice & see detailed review."/>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://hsbteleet.com/"},
+    {"@type":"ListItem","position":2,"name":"Haryana LEET","item":"https://hsbteleet.com/haryanaleet"},
+    {"@type":"ListItem","position":3,"name":"Premium Papers","item":"https://hsbteleet.com/premium-papers"}
+  ]}
+  </script>
+  <style>
+    :root{
+      --pri:#1a56db;--gold:#f59e0b;--success:#16a34a;--danger:#ef4444;
+      --warn:#f59e0b;--bg:#f0f4ff;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* ── ACCESS DENIED ── */
+    #access-denied{display:none;position:fixed;inset:0;background:#0f172a;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied h2{font-size:1.6rem;font-weight:800;margin:18px 0 12px;}
+    #access-denied p{opacity:.8;max-width:400px;line-height:1.7;margin-bottom:22px;}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:50px;
+      background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-size:.95rem;font-weight:800;text-decoration:none;}
+
+    /* ── LOADER ── */
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
+    .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:var(--pri);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:15px;color:var(--muted);}
+
+    /* ── WATERMARK  (strong & visible) ── */
+    #wm-layer{
+      position:fixed;inset:0;pointer-events:none;z-index:8888;
+      overflow:hidden;user-select:none;
+    }
+    .wm-row{
+      position:absolute;
+      white-space:nowrap;
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:3px;
+      color:rgba(26,86,219,0.13);   /* clearly visible */
+      transform:rotate(-30deg);
+      transform-origin:left center;
+    }
+
+    /* ── STICKY HEADER BAR ── */
+    #quiz-header{
+      position:sticky;top:0;z-index:500;
+      background:linear-gradient(135deg,#0f172a 0%,#1a3a6e 60%,#1a56db 100%);
+      color:#fff;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+      border-bottom:3px solid var(--gold);
+      box-shadow:0 4px 20px rgba(26,86,219,.25);
+    }
+    .qh-left h1{font-size:1.1rem;font-weight:800;margin-bottom:2px;}
+    .qh-left p{font-size:11.5px;opacity:.78;}
+    .qh-left a{font-size:11px;color:#fcd34d;text-decoration:none;opacity:.9;}
+    .qh-left a:hover{opacity:1;text-decoration:underline;}
+    #timer{font-size:1.4rem;font-weight:900;color:#fef08a;
+      background:rgba(0,0,0,.3);padding:7px 16px;border-radius:10px;
+      border:1.5px solid rgba(254,240,138,.3);letter-spacing:1px;font-variant-numeric:tabular-nums;}
+    #timer.danger{color:#fca5a5;border-color:rgba(252,165,165,.4);animation:pulse .7s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+    /* ── SECURITY BAR ── */
+    .sec-bar{
+      background:#fef3c7;border-left:4px solid #f59e0b;
+      padding:10px 18px;font-size:12.5px;color:#92400e;
+      display:flex;align-items:center;gap:10px;
+    }
+
+    /* ── MAIN WRAP ── */
+    .quiz-wrap{max-width:900px;margin:0 auto;padding:22px 16px 60px;}
+
+    /* ── SECTION DIVIDER ── */
+    .sec-div{
+      display:flex;align-items:center;gap:12px;
+      background:linear-gradient(135deg,#1a56db,#7c3aed);
+      color:#fff;padding:11px 20px;border-radius:10px;
+      margin:28px 0 16px;font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    }
+    .sec-div .sec-icon{font-size:1.2rem;}
+
+    /* ── QUESTION CARD ── */
+    .q-card{
+      background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+      padding:22px 20px;margin-bottom:18px;
+      transition:border-color .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
+    }
+    .q-card::before{
+      content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+      background:linear-gradient(180deg,var(--pri),#7c3aed);border-radius:4px 0 0 4px;
+    }
+    .q-card:hover{border-color:#bfdbfe;box-shadow:0 4px 18px rgba(26,86,219,.1);}
+    .q-card.answered{border-color:#bbf7d0;background:#f0fdf4;}
+    .q-card.answered::before{background:linear-gradient(180deg,#16a34a,#22c55e);}
+    .q-num{font-size:11px;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+    .q-num .q-badge{background:#eff6ff;border:1px solid #bfdbfe;padding:2px 8px;border-radius:20px;font-size:10px;}
+    .q-text{font-size:1rem;font-weight:600;line-height:1.6;color:var(--text);margin-bottom:16px;}
+    .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+    @media(max-width:520px){.opts{grid-template-columns:1fr;}}
+    .opt{
+      display:flex;align-items:center;gap:10px;
+      padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+      cursor:pointer;transition:all .18s;font-size:.92rem;color:var(--text);
+    }
+    .opt:hover{background:#eff6ff;border-color:#93c5fd;transform:translateX(2px);}
+    .opt input{accent-color:var(--pri);width:15px;height:15px;flex-shrink:0;cursor:pointer;}
+    .opt.sel{background:#eff6ff;border-color:var(--pri);font-weight:600;}
+    .opt-letter{
+      width:24px;height:24px;border-radius:50%;background:var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:800;color:var(--muted);flex-shrink:0;transition:.18s;
+    }
+    .opt.sel .opt-letter{background:var(--pri);color:#fff;}
+
+    /* ── SUBMIT AREA ── */
+    .submit-wrap{text-align:center;padding:28px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-top:10px;}
+    .submit-wrap p{font-size:14px;color:var(--muted);margin-bottom:16px;}
+    #progress-bar-wrap{background:#e2e8f0;border-radius:20px;height:8px;margin-bottom:16px;overflow:hidden;}
+    #progress-bar{height:100%;background:linear-gradient(90deg,var(--pri),#7c3aed);border-radius:20px;transition:width .3s;}
+    #progress-text{font-size:13px;font-weight:700;color:var(--pri);margin-bottom:16px;}
+    .btn-submit{
+      display:inline-flex;align-items:center;gap:9px;
+      padding:15px 40px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+      font-size:1.05rem;font-weight:800;transition:all .2s;
+      box-shadow:0 6px 20px rgba(22,163,74,.3);
+    }
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(22,163,74,.4);}
+    .btn-submit:active{transform:translateY(0);}
+
+    /* ── RESULTS ── */
+    #results{display:none;}
+    .results-hero{
+      background:linear-gradient(135deg,#0f172a,#1a3a6e,#1a56db);
+      color:#fff;border-radius:20px;padding:30px;text-align:center;margin-bottom:24px;
+    }
+    .results-hero h2{font-size:1.6rem;font-weight:900;margin-bottom:6px;}
+    .results-hero p{opacity:.8;font-size:14px;}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;}
+    .score-card{background:var(--card);border-radius:16px;padding:20px 16px;text-align:center;border:2px solid var(--border);transition:.2s;}
+    .score-card:hover{transform:translateY(-3px);}
+    .score-card .s-val{font-size:2.2rem;font-weight:900;display:block;margin-bottom:4px;}
+    .score-card .s-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+    .s-correct{border-color:#86efac;} .s-correct .s-val{color:#16a34a;}
+    .s-wrong{border-color:#fca5a5;}   .s-wrong .s-val{color:#ef4444;}
+    .s-skip{border-color:#fde68a;}    .s-skip .s-val{color:#d97706;}
+    .s-att{border-color:#bfdbfe;}     .s-att .s-val{color:var(--pri);}
+    .s-score{border-color:#ddd6fe;}   .s-score .s-val{color:#7c3aed;}
+    .s-total{border-color:#e2e8f0;}   .s-total .s-val{color:var(--text);}
+
+    /* result action buttons */
+    .result-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:20px 0;}
+    .btn-retake{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 32px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--pri),#1d4ed8);color:#fff;
+      font-size:.95rem;font-weight:800;transition:all .2s;
+    }
+    .btn-retake:hover{transform:translateY(-2px);}
+    .btn-back-papers{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 28px;border-radius:50px;
+      background:#f1f5f9;color:var(--text);font-size:.95rem;font-weight:700;
+      text-decoration:none;border:2px solid var(--border);transition:.2s;
+    }
+    .btn-back-papers:hover{border-color:var(--pri);background:#eff6ff;}
+
+    /* ── REVIEW SECTION ── */
+    .review-header{font-size:1.1rem;font-weight:800;margin:24px 0 14px;color:var(--text);display:flex;align-items:center;gap:8px;}
+    .r-card{border-radius:12px;padding:18px 20px;margin-bottom:14px;border:2px solid;}
+    .r-correct{background:#f0fdf4;border-color:#86efac;}
+    .r-wrong{background:#fff5f5;border-color:#fca5a5;}
+    .r-skip{background:#fffbeb;border-color:#fde68a;}
+    .r-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:8px;}
+    .r-badge.b-c{background:#dcfce7;color:#15803d;}
+    .r-badge.b-w{background:#fee2e2;color:#991b1b;}
+    .r-badge.b-s{background:#fef3c7;color:#92400e;}
+    .r-qnum{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:5px;}
+    .r-q{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:10px;}
+    .r-ans-correct{font-size:.88rem;font-weight:700;color:#15803d;display:flex;align-items:center;gap:6px;}
+    .r-ans-wrong{font-size:.88rem;font-weight:700;color:#991b1b;display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+
+    @media(max-width:600px){
+      .qh-left h1{font-size:.95rem;}
+      #timer{font-size:1.2rem;padding:6px 12px;}
+      .q-card{padding:16px 14px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ACCESS DENIED -->
+<div id="access-denied">
+  <div style="font-size:3.5rem">🔒</div>
+  <h2>Premium Access Only</h2>
+  <p>Login with your premium account to access this paper.</p>
+  <a href="./premium-login.html" class="btn-back">🔑 Login / Get Access</a>
+</div>
+
+<!-- LOADER -->
+<div id="page-loader">
+  <div class="spinner"></div>
+  <p>Verifying premium access…</p>
+</div>
+
+<!-- WATERMARK LAYER (filled by JS) -->
+<div id="wm-layer" aria-hidden="true"></div>
+
+<!-- MAIN PAGE -->
+<div id="main-page" style="display:none;">
+
+  <!-- STICKY HEADER -->
+  <div id="quiz-header">
+    <div class="qh-left">
+      <h1>🏆 HSBTE LEET Section C Mechanical Engineering Mock Paper 2</h1>
+      <p>Section C: Mechanical Engg · 100 Questions · 100 Min</p>
+      <a href="./premium-papers.html">← Back to All Papers</a>
+    </div>
+    <div id="timer">100:00</div>
+  </div>
+
+  <!-- SECURITY BAR -->
+  <div class="sec-bar">
+    🛡️ <strong>Premium Content:</strong> Sharing, screenshotting or printing is strictly prohibited. This paper is watermarked to your account. Contact: <strong>+91-7988316241</strong>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+      <div id="questions-list"></div>
+
+      <!-- SUBMIT AREA -->
+      <div class="submit-wrap">
+        <div id="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+        <div id="progress-text">0 of 100 answered</div>
+        <p>Submit when done — you'll see Correct, Wrong & Skipped instantly.</p>
+        <button class="btn-submit" onclick="submitExam()">✅ Submit Exam & See Score</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+      <div class="results-hero">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🎯</div>
+        <h2>Your Score Report</h2>
+        <p id="score-subtitle">hsbteleet.com · Premium Mock Test</p>
+      </div>
+
+      <div class="score-grid">
+        <div class="score-card s-correct"><span class="s-val" id="res-cor">0</span><span class="s-lbl">✅ Correct</span></div>
+        <div class="score-card s-wrong"><span class="s-val" id="res-wro">0</span><span class="s-lbl">❌ Wrong</span></div>
+        <div class="score-card s-skip"><span class="s-val" id="res-skp">0</span><span class="s-lbl">⏭ Skipped</span></div>
+        <div class="score-card s-att"><span class="s-val" id="res-att">0</span><span class="s-lbl">📝 Attempted</span></div>
+        <div class="score-card s-score"><span class="s-val" id="res-scr">0</span><span class="s-lbl">🏅 Score (4,−1)</span></div>
+        <div class="score-card s-total"><span class="s-val" id="res-tot">100</span><span class="s-lbl">📋 Total Qs</span></div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-retake" onclick="location.reload()">🔄 Retake Test</button>
+        <a href="./premium-papers.html" class="btn-back-papers">📚 All Papers</a>
+      </div>
+
+      <div class="review-header">📋 Detailed Question Review</div>
+      <div id="review-area"></div>
+    </div>
+
+  </div>
+</div><!-- /main-page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var TIMER_SEC = 6000;
+var PAPER_TITLE = 'HSBTE LEET Section C Mechanical Engineering Mock Paper 2';
+
+/* ── SECURITY ── */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){var s=document.createElement('style');s.textContent='@media print{body{display:none!important;}}';document.head.appendChild(s);})();
+
+/* ── WATERMARK — strong & tiled ── */
+function injectWatermark(){
+  var mob  = sessionStorage.getItem('prem_mob')  || '';
+  var name = sessionStorage.getItem('prem_name') || 'Premium';
+  var masked = mob ? mob.slice(0,3)+'****'+mob.slice(-2) : name;
+  var txt = '© hsbteleet.com  ' + masked + '  PREMIUM  ';
+
+  var layer = document.getElementById('wm-layer');
+  layer.innerHTML = '';
+
+  /* Layout: rows every 90px across full viewport, offset alternately */
+  var vw = Math.max(document.documentElement.clientWidth,1400);
+  var vh = Math.max(document.documentElement.clientHeight,900);
+
+  /* We draw rows covering 3x viewport height so scrolling keeps watermark */
+  var totalH = vh * 3;
+  var rowGap  = 90;
+  var rows    = Math.ceil(totalH / rowGap) + 4;
+
+  for(var r = 0; r < rows; r++){
+    var div = document.createElement('div');
+    div.className = 'wm-row';
+    var topVal  = (r * rowGap) - rowGap;
+    var leftVal = (r % 2 === 0) ? -120 : -60;
+    div.style.top  = topVal + 'px';
+    div.style.left = leftVal + 'px';
+    div.style.width = (vw * 2.5) + 'px';
+    /* repeat text across row */
+    var repeats = Math.ceil((vw * 2.5) / (txt.length * 9)) + 3;
+    div.textContent = Array(repeats).fill(txt).join('   ');
+    layer.appendChild(div);
+  }
+}
+
+/* ── ACCESS VERIFICATION ── */
+async function verifyAccess(){
+  var uid = sessionStorage.getItem('prem_uid');
+  var ts  = parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
+  try{
+    var sb = window.supabase.createClient(SUPA_URL,SUPA_KEY);
+    var {data,error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){showDenied();return;}
+    sessionStorage.setItem('prem_ts',Date.now().toString());
+    /* Show page */
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+    buildQuiz();
+    startTimer();
+  }catch(e){showDenied();}
+}
+
+function showDenied(){
+  document.getElementById('page-loader').style.display='none';
+  document.getElementById('access-denied').classList.add('show');
+}
+
+/* ── QUESTIONS DATA ── */
+const questions = [
+
+    // ════════════════════════════════════════════════════════
+    // c-1  ELEMENTS OF MECHANICAL ENGINEERING  (50 Qs)
+    // ════════════════════════════════════════════════════════
+
+    // Applied Mechanics
+    { s:"c-1 Elements of Mechanical Engineering", q:"Two forces 3 N and 4 N act at right angles. Their resultant is:", o:["1 N","5 N","7 N","12 N"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The condition for a body to be in equilibrium is that the resultant of all forces and moments is:", o:["Maximum","Minimum","Zero","Positive"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The mechanical advantage of a second-class lever:", o:["Is always less than 1","Is always greater than 1","Equals 1","Can be less or greater than 1"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The velocity at the highest point of a projectile (initial velocity u, angle θ) is:", o:["Zero","u·sinθ","u·cosθ","u"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Kinetic energy of a body of mass m moving with velocity v is:", o:["mv","mv²","mv²/2","2mv²"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The centroid of a quarter circle of radius R from either straight edge is:", o:["4R/3π","R/2","R/π","2R/π"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Angle of repose equals the angle of friction because at this angle:", o:["Normal force is zero","tan(repose angle) = coefficient of static friction","Component of weight exceeds friction","Friction becomes kinetic"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"A body on an inclined plane of angle α moves up when force P applied along the plane satisfies:", o:["P < W sinα","P = W sinα + μW cosα","P = W cosα","P = W tanα"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"In a compound pulley system with 4 pulleys (movable), the velocity ratio is:", o:["4","8","16","2"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Work done by a force is zero when the force is:", o:["Maximum","In the same direction as displacement","Perpendicular to displacement","Parallel to displacement"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The lead of a screw is:", o:["Same as pitch for single-start screw","Pitch × number of starts","Pitch / number of starts","Always 2 mm"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Centroid of a rectangle lies at:", o:["Corner","1/3 of its height","Intersection of its diagonals","1/4 of its width"], a:2 },
+
+    // Strength of Materials
+    { s:"c-1 Elements of Mechanical Engineering", q:"The volumetric strain for a body under equal stresses in all directions (σ) is:", o:["σ/E","3σ(1−2ν)/E","σ(1−2ν)/E","σ/3E"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Bulk modulus K is related to E and ν by:", o:["K = E/[3(1−2ν)]","K = E/[2(1+ν)]","K = 2G(1+ν)","K = E(1−2ν)"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The proof resilience is the maximum energy stored in a body:", o:["At fracture","At proportionality limit without permanent deformation","At yield point","At ultimate stress"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"For a simply supported beam with UDL w over span L, maximum BM at mid-span is:", o:["wL²/4","wL²/8","wL/4","wL²/2"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Point of contraflexure in a beam is where:", o:["Shear force is maximum","Bending moment changes sign (= zero)","Deflection is maximum","Normal stress is zero"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"A bar of length 2 m, cross-section 500 mm², E = 200 GPa subjected to 100 kN tensile force. Extension =", o:["1 mm","2 mm","0.5 mm","4 mm"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"For a shaft subjected to torque T, the shear stress at radius r is:", o:["T·r/J","T·J/r","J/(T·r)","T/(r·J)"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The maximum principal stress formula when σx, σy, τxy are given is:", o:["(σx+σy)/2 + √[((σx-σy)/2)²+τxy²]","(σx-σy)/2","√(σx²+τxy²)","(σx+σy)/2 - τxy"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Euler's critical load for a column with both ends fixed (length L) is:", o:["π²EI/L²","4π²EI/L²","π²EI/4L²","2π²EI/L²"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The bending equation is M/I = σ/y = E/R. Here R represents:", o:["Radius of section","Radius of curvature of the neutral axis","Radius of gyration","Reaction force"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Strain hardening in metals occurs:", o:["Below elastic limit","In the plastic zone after yielding","Only during fracture","At very high temperatures"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"For a composite bar (parallel) of two materials subjected to temperature rise, the stress is:", o:["Only compressive in both","Compressive in material with higher α, tensile in the other","Tensile in both","Zero in both"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Shear stress distribution across a rectangular cross-section beam is:", o:["Uniform","Linear","Parabolic (max at neutral axis)","Zero at neutral axis"], a:2 },
+
+    // Thermodynamics
+    { s:"c-1 Elements of Mechanical Engineering", q:"The property of a system that determines whether it is in thermal equilibrium with other systems is:", o:["Pressure","Volume","Temperature","Entropy"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"In a steady flow process, the energy equation includes:", o:["Enthalpy (not internal energy)","Internal energy only","Volume work only","Kinetic energy only"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"COP (Coefficient of Performance) of a heat pump is:", o:["T_H/(T_H−T_L)","T_L/(T_H−T_L)","(T_H−T_L)/T_L","T_H/T_L"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Mean effective pressure (MEP) = Work per cycle / Displacement volume. Higher MEP means:", o:["Higher friction","Better engine output per unit displacement","Lower compression ratio","More fuel consumption per cycle"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"In the Diesel cycle, the compression ratio is generally ___ than in the Otto cycle:", o:["Lower","The same","Higher","Not comparable"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Superheated steam has temperature ___ saturation temperature at the same pressure:", o:["Below","Equal to","Above","Unrelated to"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Entropy of a system increases in:", o:["Reversible adiabatic process","Irreversible processes","Isothermal compression","Isobaric cooling"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"For an ideal gas undergoing isothermal expansion, internal energy change ΔU is:", o:["Positive","Negative","Zero","Equal to work done"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The cut-off ratio in a Diesel cycle is the ratio of:", o:["V_max / V_min","Volume at end of heat addition / Volume at start of heat addition","Compression ratio / expansion ratio","V_2 / V_1 (before and after combustion)"], a:3 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"In a throttling process (Joule-Thomson), enthalpy is:", o:["Increased","Decreased","Conserved (constant)","Zero"], a:2 },
+
+    // Heat Transfer
+    { s:"c-1 Elements of Mechanical Engineering", q:"The thermal resistance of a cylindrical pipe wall (per unit length) is:", o:["ln(r₂/r₁)/(2πkL)","(r₂−r₁)/(kA)","2πkL/ln(r₂/r₁)","(r₂/r₁)/k"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Emissivity of a grey body is:", o:["Equal to 1","Greater than 1","Between 0 and 1","Zero"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Forced convection differs from natural convection in that fluid motion is:", o:["Due to buoyancy","Created by external means (fan, pump)","Caused by radiation","Prevented"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Nusselt number represents the ratio of:", o:["Convective heat transfer / Conductive heat transfer","Inertial / Viscous forces","Buoyancy / Viscous forces","Momentum / Thermal diffusivity"], a:0 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Heat transfer by radiation does NOT require:", o:["Temperature difference","A medium (can occur in vacuum)","Surface emissivity","A view factor"], a:1 },
+
+    // Fluid Mechanics
+    { s:"c-1 Elements of Mechanical Engineering", q:"The gauge pressure at the bottom of a tank with 5 m water (ρ=1000 kg/m³, g=9.81 m/s²):", o:["9810 Pa","49050 Pa","4905 Pa","98100 Pa"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"In fully developed turbulent pipe flow, friction factor f depends on:", o:["Reynolds number only","Relative roughness only","Both Re and relative roughness (Moody chart)","Fluid density only"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Hydraulic gradient line (HGL) represents:", o:["Total energy head","Pressure head + datum head (piezometric head)","Velocity head + datum head","Kinetic energy per unit weight"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Mach number > 1 indicates:", o:["Subsonic flow","Transonic flow","Supersonic flow","Incompressible flow"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"The equation of continuity in fluid mechanics is based on:", o:["Newton's 2nd law","Conservation of energy","Conservation of mass","Conservation of momentum"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Kinematic viscosity = Dynamic viscosity / ___:", o:["Pressure","Temperature","Density","Velocity"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Venturimeter coefficient of discharge Cd is typically:", o:["0.2–0.4","0.6–0.65","0.95–0.99","1.0–1.2"], a:2 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"In a boundary layer, the no-slip condition means:", o:["Fluid velocity equals free stream velocity at wall","Fluid velocity is zero at the solid wall","There is no friction","Pressure is constant"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Surface tension is a property of:", o:["All fluids at all times","Liquid-gas interfaces due to intermolecular cohesive forces","Only water","Only gases"], a:1 },
+    { s:"c-1 Elements of Mechanical Engineering", q:"Weber number is the ratio of inertial force to:", o:["Viscous force","Gravity force","Surface tension force","Elastic force"], a:2 },
+
+    // ════════════════════════════════════════════════════════
+    // c-2  ELEMENTS OF PRODUCTION ENGINEERING  (30 Qs)
+    // ════════════════════════════════════════════════════════
+
+    // Workshop Technology
+    { s:"c-2 Elements of Production Engineering", q:"The taper turning operation on a lathe can be done by:", o:["Only compound rest method","Only tailstock offset method","Compound rest, tailstock offset, or taper turning attachment","Only form tool method"], a:2 },
+    { s:"c-2 Elements of Production Engineering", q:"Reaming is done to:", o:["Make a new hole","Enlarge a hole roughly","Finish and size a pre-drilled hole accurately","Thread a hole"], a:2 },
+    { s:"c-2 Elements of Production Engineering", q:"In milling, the milling time = (L + approach) / (feed per tooth × z × N). Here z is:", o:["Depth of cut","Number of teeth on cutter","Feed in mm/min","Cutting speed"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"A shaper cuts metal on the ___ stroke:", o:["Return stroke","Forward (cutting) stroke","Both strokes","Neither"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Planer differs from a shaper in that the ___ moves while the tool is stationary:", o:["Tool","Workpiece (table)","Both","Headstock"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Ring gauge is used to check:", o:["Internal diameter","External diameter of a shaft","Thread angle","Surface flatness"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Soldering uses filler metal with melting point:", o:["Above 450°C","Below 450°C","Same as base metal","Above 1000°C"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"TIG (Tungsten Inert Gas) welding uses ___ as shielding gas:", o:["Carbon dioxide","Argon or Helium","Oxygen","Nitrogen"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Feed in lathe turning is expressed as:", o:["mm/min","mm/rev","m/s","mm/tooth"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"The back rake angle of a single point cutting tool is measured:", o:["In side view","In top view (parallel to axis)","In front view","At the tool nose"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Spot facing operation is done to:", o:["Make a flat seat for bolt head around a drilled hole","Drill a hole","Cut threads","Ream a hole"], a:0 },
+    { s:"c-2 Elements of Production Engineering", q:"The snap gauge is used to check:", o:["Internal dimension","External dimension (shaft diameter)","Angle","Surface roughness"], a:1 },
+
+    // Material Science
+    { s:"c-2 Elements of Production Engineering", q:"Vickers hardness test uses a:", o:["Steel ball","Diamond pyramid (136° included angle) indenter","Diamond cone (Rockwell C)","Tungsten carbide ball"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Case hardening by nitriding adds ___ to the steel surface:", o:["Carbon","Chromium","Nitrogen","Silicon"], a:2 },
+    { s:"c-2 Elements of Production Engineering", q:"The iron-carbon phase diagram shows that at 0.8% carbon steel is:", o:["Hypoeutectoid","Hypereutectoid","Eutectoid (pearlite)","Pure iron"], a:2 },
+    { s:"c-2 Elements of Production Engineering", q:"Malleability is the ability of a material to be:", o:["Drawn into wires","Deformed by compressive forces (rolled/hammered)","Bent without breaking","Machined easily"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Quenching in heat treatment means:", o:["Slow cooling in furnace","Rapid cooling in water, oil, or air","Reheating to reduce brittleness","Heating above critical temperature"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Grey cast iron has good vibration damping due to:", o:["High carbon content","Graphite flake structure","High hardness","Low melting point"], a:1 },
+
+    // Engineering Drawing
+    { s:"c-2 Elements of Production Engineering", q:"The symbol for first angle projection is:", o:["A truncated cone (larger circle on right)","A truncated cone (larger circle on left)","Two circles","An arrow"], a:0 },
+    { s:"c-2 Elements of Production Engineering", q:"In orthographic projection, the minimum number of views needed to fully describe most objects is:", o:["1","2","3","6"], a:2 },
+    { s:"c-2 Elements of Production Engineering", q:"A section view (hatching) is used to show:", o:["Hidden features","Internal details of a component","Surface texture","External profile"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Isometric scale reduces actual dimensions by factor:", o:["1.0 (no change)","cos30°/cos45° ≈ 0.816","0.5","1.22"], a:1 },
+
+    // Foundry & Plastics
+    { s:"c-2 Elements of Production Engineering", q:"Shrinkage allowance on a pattern compensates for:", o:["Taper during withdrawal","Contraction of metal on solidifying and cooling","Surface finish requirements","Machining removal"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"A split pattern is used when the parting surface:", o:["Is flat","Passes through the pattern (complex shape)","Is circular","Is vertical"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Thermoplastic polymers can be recycled because they:", o:["Have cross-linked chains","Soften on heating and harden on cooling repeatedly","Decompose on heating","Are brittle"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Blow moulding is primarily used for making:", o:["Flat sheets","Hollow containers (bottles)","Rods and pipes","Foam products"], a:1 },
+
+    // Industrial Management
+    { s:"c-2 Elements of Production Engineering", q:"In a matrix organizational structure, an employee reports to:", o:["Only functional manager","Only project manager","Both functional and project manager","No one"], a:2 },
+    { s:"c-2 Elements of Production Engineering", q:"Acceptance sampling in quality control involves:", o:["100% inspection","Inspecting a sample and accepting/rejecting the entire batch","Only visual inspection","Destructive testing of all parts"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"Just-In-Time (JIT) manufacturing aims to:", o:["Produce maximum inventory","Minimize inventory and waste by producing only what is needed","Maximize machine utilization","Increase batch size"], a:1 },
+    { s:"c-2 Elements of Production Engineering", q:"A Gantt chart is used for:", o:["Quality control","Project scheduling and monitoring","Cost estimation","Material specification"], a:1 },
+
+    // ════════════════════════════════════════════════════════
+    // c-3  AUTOMOBILE ENGINEERING  (20 Qs)
+    // ════════════════════════════════════════════════════════
+
+    { s:"c-3 Automobile Engineering", q:"A constant mesh gearbox achieves engagement using:", o:["Sliding gears","Synchromesh rings only","Dog clutches while all gears are always in mesh","Epicyclic gears"], a:2 },
+    { s:"c-3 Automobile Engineering", q:"The transfer case in a 4WD vehicle is used to:", o:["Change gear ratios","Distribute power between front and rear axles","Steer the vehicle","Absorb road shocks"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Hydraulic brakes work on which principle?", o:["Pascal's law (pressure equally transmitted in all directions)","Archimedes principle","Bernoulli's principle","Newton's 3rd law"], a:0 },
+    { s:"c-3 Automobile Engineering", q:"The purpose of a pressure plate in a clutch assembly is to:", o:["Carry the flywheel","Press the friction disc against the flywheel to engage the clutch","Disengage the gearbox","Support the driveshaft"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Open differential fails to drive a vehicle when:", o:["Both wheels are on road","One wheel loses traction (spins freely, other gets no torque)","Vehicle is on a hill","Gear ratio is high"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"The thermostat in an engine cooling system:", o:["Always keeps coolant flowing","Stays closed until engine reaches operating temperature, then opens","Pumps coolant","Cools the radiator"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Dry sump lubrication system is used in:", o:["Passenger cars","High-performance and racing engines to prevent oil starvation in corners","Two-wheelers only","Diesel trucks"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Aspect ratio of a tyre 195/65 R15 refers to:", o:["195","65 (sidewall height as % of width)","15","R"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Tata Motors, which manufactures commercial and passenger vehicles, is headquartered in:", o:["Delhi","Pune (Maharashtra)","Chennai","Gurugram"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"In an electric vehicle, motor speed is controlled by:", o:["Gearbox","Throttle cable","Variable Frequency Drive (inverter / motor controller)","Centrifugal clutch"], a:2 },
+    { s:"c-3 Automobile Engineering", q:"Kingpin inclination (KPI) helps in:", o:["Increasing tyre wear","Providing steering self-centering and stability","Reducing ground clearance","Increasing camber"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Negative camber means the top of the wheel tilts:", o:["Outward away from vehicle","Inward toward vehicle","Backward","Forward"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Electronic Stability Control (ESC) uses ___ to prevent skidding:", o:["Manual driver input","Selective braking of individual wheels via ABS and engine torque reduction","Increased steering angle","All-wheel braking simultaneously"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"A series hybrid vehicle uses the combustion engine to:", o:["Directly drive wheels","Only generate electricity for the electric motor","Only charge the battery when parked","Operate the air conditioning"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"The purpose of a catalytic converter in an exhaust system is to:", o:["Muffle engine noise","Reduce harmful exhaust emissions (CO, HC, NOx)","Increase fuel efficiency","Cool exhaust gases"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"In disc brake, the caliper clamps the ___ between its pads:", o:["Drum","Rotor (disc)","Flywheel","Driveshaft"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"The Ackermann steering geometry ensures:", o:["All four wheels turn at the same angle","Inner and outer wheels turn at different angles, with inner wheel turning more sharply","Rear wheels also steer","Steering ratio is constant"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"CVT (Continuously Variable Transmission) provides:", o:["Fixed gear ratios","Infinite gear ratios within a range for optimal engine performance","Only two gear ratios","Only manual control"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Nitrogen gas is filled in tyres (instead of air) because it:", o:["Is cheaper","Has lower moisture content and more stable pressure with temperature changes","Increases traction","Reduces tyre weight"], a:1 },
+    { s:"c-3 Automobile Engineering", q:"Hyundai Motor India's main manufacturing plant is located at:", o:["Pune","Sriperumbudur, Chennai (Tamil Nadu)","Gurugram","Ahmedabad"], a:1 }
+];
+
+/* ── QUIZ BUILD ── */
+var timerInterval, timeLeft = TIMER_SEC;
+
+function buildQuiz(){
+  var list = document.getElementById('questions-list');
+  var html = '';
+  var curSection = '';
+  var LETTERS = ['A','B','C','D','E'];
+  questions.forEach(function(q,i){
+    if(q.s !== curSection){
+      curSection = q.s;
+      html += '<div class="sec-div"><span class="sec-icon">📚</span>' + q.s + '</div>';
+    }
+    html += '<div class="q-card" id="qc-'+i+'">';
+    html +=   '<div class="q-num"><span class="q-badge">Q.'+(i+1)+'</span></div>';
+    html +=   '<div class="q-text">'+q.q+'</div>';
+    html +=   '<div class="opts">';
+    q.o.forEach(function(opt,j){
+      html += '<label class="opt" id="lbl-'+i+'-'+j+'" onclick="selectOpt('+i+','+j+',this)">';
+      html +=   '<input type="radio" name="q'+i+'" value="'+j+'">';
+      html +=   '<span class="opt-letter">'+LETTERS[j]+'</span>';
+      html +=   '<span>'+opt+'</span>';
+      html += '</label>';
+    });
+    html += '</div></div>';
+  });
+  list.innerHTML = html;
+  updateProgress();
+}
+
+function selectOpt(qi,oi,el){
+  document.querySelectorAll('[id^="lbl-'+qi+'-"]').forEach(function(l){l.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('qc-'+qi).classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress(){
+  var answered = 0;
+  questions.forEach(function(_,i){if(document.querySelector('input[name="q'+i+'"]:checked'))answered++;});
+  var pct = Math.round((answered/questions.length)*100);
+  document.getElementById('progress-bar').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = answered+' of '+questions.length+' answered';
+}
+
+function startTimer(){
+  var el = document.getElementById('timer');
+  timerInterval = setInterval(function(){
+    timeLeft--;
+    var m=Math.floor(timeLeft/60), s=timeLeft%60;
+    el.textContent = m+':'+(s<10?'0':'')+s;
+    if(timeLeft<=300) el.classList.add('danger');
+    if(timeLeft<=0){clearInterval(timerInterval);submitExam();}
+  },1000);
+}
+
+function submitExam(){
+  clearInterval(timerInterval);
+  var cor=0,wro=0,skp=0;
+  var reviewHTML = '';
+  var LETTERS=['A','B','C','D','E'];
+
+  questions.forEach(function(q,i){
+    var sel = document.querySelector('input[name="q'+i+'"]:checked');
+    var ans = sel ? parseInt(sel.value) : -1;
+    if(ans===-1) skp++;
+    else if(ans===q.a) cor++;
+    else wro++;
+
+    var cls = ans===-1?'r-skip':ans===q.a?'r-correct':'r-wrong';
+    var badge = ans===-1?'<span class="r-badge b-s">⏭ Skipped</span>':
+                ans===q.a?'<span class="r-badge b-c">✅ Correct</span>':
+                          '<span class="r-badge b-w">❌ Wrong</span>';
+    reviewHTML += '<div class="r-card '+cls+'">';
+    reviewHTML += badge;
+    reviewHTML += '<div class="r-qnum">Q.'+(i+1)+' · '+q.s+'</div>';
+    reviewHTML += '<div class="r-q">'+q.q+'</div>';
+    if(ans!==-1&&ans!==q.a){
+      reviewHTML += '<div class="r-ans-wrong">✗ Your answer: '+LETTERS[ans]+'. '+q.o[ans]+'</div>';
+    }
+    reviewHTML += '<div class="r-ans-correct">✓ Correct: '+LETTERS[q.a]+'. '+q.o[q.a]+'</div>';
+    reviewHTML += '</div>';
+  });
+
+  var att = cor+wro;
+  var scr = cor*4 - wro;
+  document.getElementById('res-cor').textContent = cor;
+  document.getElementById('res-wro').textContent = wro;
+  document.getElementById('res-skp').textContent = skp;
+  document.getElementById('res-att').textContent = att;
+  document.getElementById('res-scr').textContent = scr;
+
+  var pct = questions.length>0?Math.round((cor/questions.length)*100):0;
+  document.getElementById('score-subtitle').textContent =
+    'Score: '+scr+' | Accuracy: '+pct+'% | hsbteleet.com';
+
+  document.getElementById('review-area').innerHTML = reviewHTML;
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('results').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── INIT ── */
+verifyAccess();
+</script>
+</body>
+</html>

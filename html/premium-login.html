@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
   <title>Premium Login | Haryana LEET Sample Papers | HSBTE PYQ</title>
-  <meta name="description" content="Login or register to access Premium Haryana LEET Sample Papers. Pay ₹11 via Razorpay and unlock 5 exclusive BTech LEET sample papers."/>
+  <meta name="description" content="Login or register to access Premium Haryana LEET Sample Papers. Pay ₹11 via Razorpay and unlock 14 exclusive HSBTE LEET sample papers."/>
   <meta name="robots" content="noindex, nofollow"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
@@ -233,7 +233,7 @@
   <div class="site-strip">
     <a href="https://hsbteleet.com" class="site-brand">
       <div class="site-mark">HL</div>
-      <div class="site-name">HSBT<b>LEET</b>.com</div>
+      <div class="site-name">HSBTE<b>LEET</b>.com</div>
     </a>
     <a href="https://hsbteleet.com" class="site-back">
       <i class="fas fa-arrow-left"></i> Back to site
@@ -247,7 +247,7 @@
       <div class="auth-hdr-inner">
         <div class="crown-ring">👑</div>
         <h1>Premium LEET Access</h1>
-        <p>Login or register to unlock 5 exclusive<br/>Haryana LEET sample papers</p>
+        <p>Login or register to unlock 14 exclusive<br/>HSBTE LEET sample papers</p>
         <div class="badge-row">
           <span class="hbadge"><span class="hbadge-dot"></span>Secure</span>
           <span class="hbadge">₹11 One-Time</span>
@@ -345,19 +345,86 @@
 
         <!-- STEP 2 -->
         <div id="reg-step2" style="display:none;">
+
+          <!-- Price & features -->
           <div style="text-align:center;margin-bottom:20px;">
-            <div class="price-pill"><i class="fas fa-crown"></i> One-time — ₹11 only</div>
-            <p style="font-size:13.5px;color:#64748b;line-height:1.7;margin-bottom:14px;">Pay ₹11 to instantly unlock all 5 premium Haryana LEET sample papers.</p>
-            <ul class="feat-list" style="text-align:left;max-width:260px;margin:0 auto 18px;">
-              <li><i class="fas fa-check-circle"></i> 5 exclusive sample papers</li>
+            <div class="price-pill">
+              <i class="fas fa-crown"></i>
+              One-time —
+              <span id="display-price" style="transition:.3s;font-weight:900;">₹11</span>
+            </div>
+            <p style="font-size:13.5px;color:#64748b;line-height:1.7;margin-bottom:14px;">Pay once · unlock all 14 premium HSBTE LEET sample papers · lifetime access.</p>
+            <ul class="feat-list" style="text-align:left;max-width:270px;margin:0 auto 16px;">
+              <li><i class="fas fa-check-circle"></i> 14 exclusive papers (8 Section-wise + 6 Full Syllabus)</li>
               <li><i class="fas fa-check-circle"></i> Lifetime access — no expiry</li>
               <li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>
-              <li><i class="fas fa-check-circle"></i> Welcome email sent to you</li>
+              <li><i class="fas fa-check-circle"></i> Welcome email sent instantly</li>
             </ul>
           </div>
-          <button class="btn btn-gold" id="btn-pay" onclick="doPayment()">
-            <i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access
-          </button>
+
+          <!-- ── COUPON CODE ── -->
+          <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:16px;">
+            <div style="font-size:12.5px;font-weight:700;color:#475569;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+              <span style="background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:800;color:#92400e;">🏷 COUPON</span>
+              Have a coupon code? Apply below (optional)
+            </div>
+            <div style="display:flex;gap:8px;">
+              <input type="text" id="coupon-input"
+                placeholder="e.g STUDY"
+                maxlength="20"
+                oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"
+                onkeydown="if(event.key==='Enter'){event.preventDefault();applyCoupon();}"
+                style="flex:1;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:10px;
+                       font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+                       outline:none;color:#1e293b;background:#fff;transition:.2s;"/>
+              <button onclick="applyCoupon()" id="btn-coupon"
+                style="padding:11px 18px;background:linear-gradient(135deg,#f59e0b,#d97706);
+                       color:#1a0f00;border:none;border-radius:10px;font-size:13px;font-weight:800;
+                       cursor:pointer;white-space:nowrap;transition:.2s;flex-shrink:0;">
+                Apply
+              </button>
+            </div>
+            <div id="coupon-msg" style="display:none;margin-top:10px;padding:10px 14px;border-radius:9px;font-size:13px;font-weight:600;line-height:1.5;"></div>
+          </div>
+
+          <!-- ── PRICE SUMMARY ── -->
+          <div style="background:#fff;border:2px solid #e2e8f0;border-radius:14px;padding:14px 18px;margin-bottom:18px;">
+            <div style="display:flex;justify-content:space-between;font-size:13px;color:#64748b;margin-bottom:8px;">
+              <span>Original Price</span><span style="font-weight:600;">₹11</span>
+            </div>
+            <div id="discount-row" style="display:none;justify-content:space-between;font-size:13px;color:#16a34a;font-weight:700;margin-bottom:8px;">
+              <span id="discount-label">🏷 Discount</span>
+              <span id="discount-value">-₹0</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:17px;font-weight:900;
+                        color:#1e293b;border-top:2px solid #e2e8f0;padding-top:10px;margin-top:2px;">
+              <span>Total Payable</span>
+              <span id="final-price-display" style="color:#1a56db;">₹11</span>
+            </div>
+          </div>
+
+          <!-- ── PAY BUTTON (normal / discounted) ── -->
+          <div id="pay-btn-wrap">
+            <button class="btn btn-gold" id="btn-pay" onclick="doPayment()">
+              <i class="fas fa-lock"></i> <span id="btn-pay-text">Pay ₹11 &amp; Unlock Access</span>
+            </button>
+          </div>
+
+          <!-- ── FREE ACCESS BUTTON (TOPPER coupon) ── -->
+          <div id="free-btn-wrap" style="display:none;">
+            <button class="btn" id="btn-free" onclick="doFreeAccess()"
+              style="width:100%;padding:15px;border:none;border-radius:50px;cursor:pointer;
+                     background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+                     font-size:1.05rem;font-weight:800;
+                     display:flex;align-items:center;justify-content:center;gap:8px;
+                     box-shadow:0 6px 20px rgba(22,163,74,.3);transition:.2s;">
+              <i class="fas fa-gift"></i> Claim FREE Access — ₹0
+            </button>
+            <p style="text-align:center;font-size:12px;color:#64748b;margin-top:8px;">
+              🎉 TOPPER coupon applied — get lifetime access completely free!
+            </p>
+          </div>
+
         </div>
 
         <!-- STEP 3 -->
@@ -365,7 +432,7 @@
           <div class="success-state">
             <div class="success-ico">🎉</div>
             <h3 id="success-name-msg">Access Unlocked!</h3>
-            <p id="success-body-msg">Payment confirmed. Your account is now active. Check your email for a welcome message. Access all 5 premium sample papers now.</p>
+            <p id="success-body-msg">Payment confirmed. Your account is now active. Check your email for a welcome message. Access all 14 premium sample papers now.</p>
             <a href="./premium-papers.html" class="btn btn-gold" style="text-decoration:none;">
               <i class="fas fa-book-open"></i> Go to My Papers
             </a>
@@ -489,7 +556,7 @@ async function doLogin() {
 
     var { data: access } = await sb.from('premium_access').select('is_active').eq('user_id', user.id).maybeSingle();
     if (!access || !access.is_active) {
-      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;No active premium found. <a href="./premium-login.html" style="color:#1a56db;font-weight:700;">Pay ₹11 to activate →</a>', 'danger');
+      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;No active premium access found. <a href="./premium-login.html" style="color:#1a56db;font-weight:700;">Get Access →</a>', 'danger');
       setLoading('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
       return;
     }
@@ -553,6 +620,149 @@ async function doStep1() {
   }
 }
 
+// ═══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
+//  COUPON CODE SYSTEM
+//  NISHANT  →  ₹11 → ₹6   (save ₹5)
+//  TOPPER   →  FREE ₹0     (100% off)
+// ══════════════════════════════════════════════════════════
+
+var COUPONS = {
+  'NISHANT': { label:'NISHANT — ₹5 off!',  discount:5,  finalRs:6,  finalPaise:600, type:'flat' },
+  'TOPPER':  { label:'TOPPER — 100% FREE!', discount:11, finalRs:0,  finalPaise:0,   type:'free' }
+};
+var appliedCoupon = null;
+var payPaise = 1100; // module-level — set in doPayment, read in completeRegistration
+
+function applyCoupon() {
+  var code   = (document.getElementById('coupon-input').value||'').trim().toUpperCase();
+  var msgEl  = document.getElementById('coupon-msg');
+  var input  = document.getElementById('coupon-input');
+
+  function showMsg(txt, type) {
+    var bg  = type==='ok'  ? '#f0fdf4' : type==='err' ? '#fff1f2' : '#fffbeb';
+    var brd = type==='ok'  ? '#86efac' : type==='err' ? '#fca5a5' : '#fde68a';
+    var clr = type==='ok'  ? '#15803d' : type==='err' ? '#991b1b' : '#92400e';
+    msgEl.style.cssText = 'display:block;margin-top:10px;padding:10px 14px;border-radius:9px;'+
+      'font-size:13px;font-weight:600;background:'+bg+';border:1.5px solid '+brd+';color:'+clr+';';
+    msgEl.textContent = txt;
+  }
+
+  if(!code) { showMsg('Please enter a coupon code first.','warn'); return; }
+
+  if(!COUPONS[code]) {
+    showMsg('❌ Invalid code "'+code+'". Try OTHER or ask admin at +91-7988316241.','err');
+    input.style.borderColor = '#fca5a5';
+    appliedCoupon = null;
+    resetCouponUI();
+    return;
+  }
+
+  var c = COUPONS[code];
+  appliedCoupon = c;
+
+  /* Update discount row */
+  document.getElementById('discount-row').style.display  = 'flex';
+  document.getElementById('discount-label').textContent  = '🏷 ' + c.label;
+  document.getElementById('discount-value').textContent  = '-₹' + c.discount;
+
+  if(c.type === 'free') {
+    document.getElementById('final-price-display').textContent = '₹0 (FREE!)';
+    document.getElementById('final-price-display').style.color = '#16a34a';
+    document.getElementById('display-price').textContent = 'FREE 🎉';
+    document.getElementById('pay-btn-wrap').style.display  = 'none';
+    document.getElementById('free-btn-wrap').style.display = 'block';
+    showMsg('🎉 Coupon applied! You get FREE lifetime access to all 14 papers.','ok');
+  } else {
+    document.getElementById('final-price-display').textContent = '₹' + c.finalRs;
+    document.getElementById('final-price-display').style.color = '#1a56db';
+    document.getElementById('display-price').textContent = '₹' + c.finalRs + ' only';
+    document.getElementById('btn-pay-text').innerHTML = 'Pay ₹' + c.finalRs + ' &amp; Unlock Access';
+    document.getElementById('pay-btn-wrap').style.display  = 'block';
+    document.getElementById('free-btn-wrap').style.display = 'none';
+    showMsg('✅ Coupon applied! You save ₹' + c.discount + ' — pay only ₹' + c.finalRs + '.','ok');
+  }
+
+  input.style.borderColor = '#86efac';
+}
+
+function resetCouponUI() {
+  document.getElementById('discount-row').style.display = 'none';
+  document.getElementById('final-price-display').textContent = '₹11';
+  document.getElementById('final-price-display').style.color = '#1a56db';
+  document.getElementById('display-price').textContent = '₹11';
+  document.getElementById('btn-pay-text').innerHTML = 'Pay ₹11 &amp; Unlock Access';
+  document.getElementById('pay-btn-wrap').style.display  = 'block';
+  document.getElementById('free-btn-wrap').style.display = 'none';
+}
+
+// ── FREE REGISTRATION (TOPPER coupon — no Razorpay) ──
+async function doFreeAccess() {
+  if(!pendingUser) {
+    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.','danger');
+    return;
+  }
+  if(!appliedCoupon || appliedCoupon.type !== 'free') {
+    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> No free coupon applied.','danger');
+    return;
+  }
+  var btn = document.getElementById('btn-free');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner dark"></span> Activating free access…';
+  hideAlert('reg-err');
+
+  try {
+    /* 1. Insert user */
+    var { data: newUser, error: uErr } = await sb.from('premium_users').insert([{
+      mobile: pendingUser.mobile, email: pendingUser.email,
+      password_hash: pendingUser.password_hash, full_name: pendingUser.full_name
+    }]).select('id').single();
+    if(uErr) throw new Error('user_insert: ' + uErr.message);
+
+    /* 2. Payment record ₹0 */
+    var { data: payment, error: pErr } = await sb.from('premium_payments').insert([{
+      user_id: newUser.id,
+      razorpay_payment_id: 'COUPON_TOPPER_FREE',
+      amount: 0, status: 'free_coupon',
+      receipt: 'TOPPER-FREE-' + newUser.id
+    }]).select('id').single();
+    if(pErr) throw new Error('payment_insert: ' + pErr.message);
+
+    /* 3. Grant access */
+    await sb.from('premium_access').insert([{ user_id: newUser.id, payment_id: payment.id, is_active: true }]);
+
+    /* 4. Emails */
+    sendEmail('registration', {
+      name: pendingUser.full_name, mobile: pendingUser.mobile,
+      email: pendingUser.email, payId: 'FREE via TOPPER coupon',
+      coupon: 'TOPPER', amount: 0
+    });
+
+    /* 5. Session */
+    sessionStorage.setItem('prem_uid',  newUser.id);
+    sessionStorage.setItem('prem_mob',  pendingUser.mobile);
+    sessionStorage.setItem('prem_name', pendingUser.full_name);
+    sessionStorage.setItem('prem_ts',   Date.now().toString());
+
+    /* 6. Show step 3 */
+    document.getElementById('reg-step2').style.display = 'none';
+    document.getElementById('reg-step3').style.display = 'block';
+    var s2 = document.getElementById('step2-dot');
+    s2.classList.remove('active'); s2.classList.add('done'); s2.textContent = '✓';
+    document.getElementById('line2').classList.add('done');
+    document.getElementById('step3-dot').classList.add('active');
+    var fn = firstName(pendingUser.full_name);
+    document.getElementById('success-name-msg').textContent = 'Welcome, ' + fn + '! 🎉';
+    document.getElementById('success-body-msg').textContent =
+      'FREE access granted via TOPPER coupon! Welcome email sent to ' + pendingUser.email +
+      '. Your account is now active — access all 14 premium papers.';
+  } catch(e) {
+    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> Error: '+e.message+'. Contact admin at +91-7988316241.','danger');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
+  }
+}
+
 // ══════════════════════════════════════════════════════
 //  RAZORPAY PAYMENT
 // ══════════════════════════════════════════════════════
@@ -578,15 +788,20 @@ function doPayment() {
   loadRazorpay(function(err) {
     if (err) {
       showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;' + err.message, 'danger');
-      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access'; }
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> <span id="btn-pay-text">Pay ₹11 &amp; Unlock Access</span>'; }
       return;
     }
-    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access'; }
+    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> <span id="btn-pay-text">Pay ₹11 &amp; Unlock Access</span>'; }
+
+    /* use coupon-adjusted amount — updates module-level payPaise for completeRegistration */
+    payPaise = (appliedCoupon && appliedCoupon.finalPaise !== undefined)
+               ? appliedCoupon.finalPaise : 1100;
+    var payRs = Math.round(payPaise / 100);
 
     var opts = {
-      key: RZP_KEY, amount: 1100, currency: 'INR',
+      key: RZP_KEY, amount: payPaise, currency: 'INR',
       name: 'HSBTE LEET Premium',
-      description: 'Premium Haryana LEET Sample Papers (5 Papers)',
+      description: 'Premium HSBTE LEET Sample Papers (14 Papers)',
       image: 'https://hsbteleet.com/image/favicon.webp',
       prefill: { contact: pendingUser.mobile, email: pendingUser.email },
       notes: { mobile: pendingUser.mobile },
@@ -626,7 +841,7 @@ async function completeRegistration(rzpResponse) {
       razorpay_payment_id: rzpResponse.razorpay_payment_id,
       razorpay_order_id:   rzpResponse.razorpay_order_id  || null,
       razorpay_signature:  rzpResponse.razorpay_signature || null,
-      amount: 1100, status: 'paid',
+      amount: payPaise, status: 'paid', coupon_used: appliedCoupon ? document.getElementById('coupon-input').value.trim().toUpperCase() : null,
       receipt: rzpResponse.razorpay_payment_id
     }]).select('id').single();
     if (pErr) throw new Error('payment_insert: ' + pErr.message);
@@ -659,8 +874,9 @@ async function completeRegistration(rzpResponse) {
     // Personalized success message
     var fn = firstName(pendingUser.full_name);
     document.getElementById('success-name-msg').textContent = 'Welcome, ' + fn + '! 🎉';
+    var couponNote = appliedCoupon ? ' You saved ₹'+appliedCoupon.discount+' with coupon '+document.getElementById('coupon-input').value.trim().toUpperCase()+'!' : '';
     document.getElementById('success-body-msg').textContent =
-      'Payment confirmed. A welcome email has been sent to ' + pendingUser.email + '. Your account is now active — access all 5 premium sample papers.';
+      'Payment confirmed.' + couponNote + ' Welcome email sent to ' + pendingUser.email + '. Your account is now active — access all 14 premium papers.';
 
   } catch(e) {
     showAlert('reg-err',
@@ -726,7 +942,19 @@ function sendEmail(type, data) {
 
     } else if (type === 'login') {
 
-      // Admin ko — blue login alert
+      // 1. Customer ko — login confirmation email
+      var custLoginHtml = buildCustomerLoginHTML(data);
+      ejsSend(
+        data.name || 'Student',
+        data.email,
+        data.email,
+        'You just logged in to HSBTE LEET Premium 🔐',
+        data.mobile,
+        custLoginHtml
+      ).then(function(r){ console.log('[LEET] Customer login alert sent → ' + data.email + ' :', r.status); })
+       .catch(function(e){ console.warn('[LEET] Customer login email error:', e); });
+
+      // 2. Admin ko — blue login alert
       var adminLoginHtml = buildAdminLoginHTML(data);
       ejsSend(
         ADMIN_NAME,
@@ -754,15 +982,6 @@ function sendEmail(type, data) {
 // ═══════════════════════════════════════════════════════════
 //  SHARED HELPERS
 // ═══════════════════════════════════════════════════════════
-
-function nowStr() {
-  var d = new Date();
-  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })
-       + ', ' + d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true });
-}
-function firstName(fullName) {
-  return (fullName || 'Student').split(' ')[0];
-}
 
 // ═══════════════════════════════════════════════════════════
 //  SHARED EMAIL SHELL
@@ -830,7 +1049,7 @@ function emailFooter(links) {
   return '<tr><td style="padding:20px 0 4px;text-align:center;border-top:1px solid #e5e7eb;">'
   + '<p style="margin:0 0 6px 0;">' + linkHtml + '</p>'
   + '<p style="margin:0;font-size:11px;color:#9ca3af;line-height:1.8;">'
-  + '&copy; 2025 HSBTELEET.com &nbsp;&middot;&nbsp; Made with &#10084;&#65039; by <a href="https://itsnishant.com" style="color:#9ca3af;text-decoration:none;">Nishant</a>'
+  + '&copy; 2026 HSBTELEET.com &nbsp;&middot;&nbsp; Made with &#10084;&#65039; by <a href="https://itsnishant.com" style="color:#9ca3af;text-decoration:none;">Nishant</a>'
   + '</p></td></tr>';
 }
 
@@ -958,7 +1177,7 @@ function buildCustomerWelcomeHTML(data) {
   + '<tr><td style="padding:28px 28px 0 28px;background:linear-gradient(135deg,#fff7ed 0%,#fff 60%);">'
   + sectionLabel('&#128081; Premium Access Confirmed', '#ea580c')
   + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:26px;font-weight:700;color:#111111;line-height:1.2;">Welcome, ' + fn + '!<br/>You\'re Premium. &#128081;</h1>'
-  + '<p style="margin:0 0 20px 0;font-size:14px;color:#6b7280;line-height:1.7;">Your <strong style="color:#ea580c;">&#8377;11 payment is confirmed.</strong> You now have <strong style="color:#374151;">lifetime access</strong> to 5 exclusive Haryana LEET sample papers. Let\'s get cracking! &#127919;</p>'
+  + '<p style="margin:0 0 20px 0;font-size:14px;color:#6b7280;line-height:1.7;">Your <strong style="color:#ea580c;">&#8377;11 payment is confirmed.</strong> You now have <strong style="color:#374151;">lifetime access</strong> to 14 exclusive Haryana LEET sample papers. Let\'s get cracking! &#127919;</p>'
   + '</td></tr>'
 
   // Activated banner
@@ -966,7 +1185,7 @@ function buildCustomerWelcomeHTML(data) {
   + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
   + '<td style="background:#fff7ed;border:1px solid #fed7aa;border-left:3px solid #ea580c;border-radius:8px;padding:13px 16px;">'
   + '<p style="margin:0;font-size:13.5px;font-weight:700;color:#c2410c;">&#9989; Account Activated &mdash; ' + name + '</p>'
-  + '<p style="margin:4px 0 0 0;font-size:12.5px;color:#9a3412;">Payment received &amp; verified. All 5 papers unlocked and ready for you.</p>'
+  + '<p style="margin:4px 0 0 0;font-size:12.5px;color:#9a3412;">Payment received &amp; verified. All 14 papers unlocked and ready for you.</p>'
   + '</td></tr></table>'
   + '</td></tr>'
 
@@ -989,7 +1208,7 @@ function buildCustomerWelcomeHTML(data) {
   + '<tr><td style="padding:0 28px 20px 28px;">'
   + '<p style="margin:0 0 12px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128081; What You\'ve Unlocked</p>'
   + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#128221;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">5 Sample Papers</div><div style="font-size:11.5px;color:#9ca3af;">Exclusive Haryana LEET papers</div></td>'
+  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#128221;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">14 Premium Papers</div><div style="font-size:11.5px;color:#9ca3af;">14 exclusive HSBTE LEET papers</div></td>'
   + '<td width="2%" style="font-size:0;">&nbsp;</td>'
   + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#9854;&#65039;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">Lifetime Access</div><div style="font-size:11.5px;color:#9ca3af;">No expiry, no renewal</div></td>'
   + '</tr><tr><td colspan="3" style="height:6px;font-size:0;">&nbsp;</td></tr><tr>'
@@ -1056,7 +1275,7 @@ function buildAdminRegistrationHTML(data) {
   + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
   + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#8377;11</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Earned</div></td>'
   + '<td width="2%" style="font-size:0;">&nbsp;</td>'
-  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">5</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Papers Given</div></td>'
+  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">14</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Papers Given</div></td>'
   + '<td width="2%" style="font-size:0;">&nbsp;</td>'
   + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#10003;</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Active</div></td>'
   + '</tr></table>'
@@ -1078,8 +1297,7 @@ function buildAdminRegistrationHTML(data) {
 
   // Buttons
   + '<tr><td style="padding:0 28px 20px 28px;">'
-  + ctaBtn('https://vzfpltvchsxsfqlldafd.supabase.co', '&#128202; View in Supabase &rarr;', '#059669', '#ffffff')
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
+    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
   + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; WhatsApp ' + name + ' directly</a>'
   + '</td></tr></table>'
   + '</td></tr>'
@@ -1088,6 +1306,50 @@ function buildAdminRegistrationHTML(data) {
 
   + '</table></td></tr>';
 
+  return emailShell(body);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  EMAIL 4a — CUSTOMER LOGIN ALERT (Teal)
+//  → Customer ke email pe jaata hai
+// ═══════════════════════════════════════════════════════════
+
+function buildCustomerLoginHTML(data) {
+  var name   = data.name   || 'Student';
+  var mobile = data.mobile || '—';
+  var ts     = nowStr();
+  var body =
+    logoRow()
+  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + topStrip('linear-gradient(90deg,#0d9488,#14b8a6)')
+  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#f0fdfa 0%,#fff 60%);">'
+  + '<span style="display:inline-block;background:#ccfbf1;border:1px solid #5eead4;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#0f766e;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">&#128275; Login Confirmed</span>'
+  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111;line-height:1.3;">You are In! &#127881;</h1>'
+  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">Hi <strong style="color:#374151;">' + name + '</strong>, you just logged in to your HSBTE LEET Premium account on hsbteleet.com.</p>'
+  + '</td></tr>'
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;">'
+  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+  + infoRow('Name', name)
+  + infoRow('Mobile', mobile)
+  + infoRow('Login Time', ts)
+  + infoRow('Status', '&#10003; Active &middot; Lifetime Access', '#0d9488')
+  + '</table></td></tr></table>'
+  + '</td></tr>'
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + '<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:14px 16px;font-size:13px;color:#9a3412;line-height:1.6;">'
+  + '<strong>&#128274; Security Alert:</strong> If this login was not you, contact us immediately on WhatsApp: <strong>+91-7988316241</strong>. Never share your password with anyone.'
+  + '</div>'
+  + '</td></tr>'
+  + '<tr><td style="padding:0 28px 20px 28px;">'
+  + ctaBtn('https://hsbteleet.com/premium-papers.html', '&#128196; Access Your Premium Papers &rarr;', '#0d9488', '#ffffff')
+  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
+  + '<a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20my%20premium%20papers." style="display:block;padding:12px 20px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:8px;font-size:13.5px;font-weight:600;color:#0f766e;text-decoration:none;text-align:center;">&#128172; WhatsApp Support</a>'
+  + '</td></tr></table>'
+  + '</td></tr>'
+  + '<tr><td style="padding:12px 28px;border-top:1px solid #f3f4f6;"><p style="margin:0;font-size:11.5px;color:#9ca3af;text-align:center;">Login confirmation &middot; hsbteleet.com &middot; &copy; 2025</p></td></tr>'
+  + '</table></td></tr>';
   return emailShell(body);
 }
 
@@ -1130,8 +1392,7 @@ function buildAdminLoginHTML(data) {
 
   // Buttons
   + '<tr><td style="padding:0 28px 20px 28px;">'
-  + ctaBtn('https://vzfpltvchsxsfqlldafd.supabase.co', '&#128202; Open Supabase Dashboard &rarr;', '#1d4ed8', '#ffffff')
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
+    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
   + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; WhatsApp ' + name + '</a>'
   + '</td></tr></table>'
   + '</td></tr>'
