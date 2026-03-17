@@ -135,7 +135,8 @@
 
     /* ALERTS */
     .alert { padding: 12px 15px; border-radius: 11px; font-size: 13px; margin-bottom: 16px; display: none; line-height: 1.6; }
-    .alert.show { display: flex; align-items: flex-start; gap: 9px; }
+    .alert.show { display: block; }
+    .alert.show i.fas { margin-right: 7px; }
     .alert.warning { background: #fffbeb; border: 1px solid #f59e0b; color: #92400e; }
     .alert.success { background: #f0fdf4; border: 1px solid #10b981; color: #065f46; }
     .alert.danger  { background: #fff1f2; border: 1px solid #ef4444; color: #9f1239; }
@@ -410,7 +411,7 @@
             </button>
           </div>
 
-          <!-- ── FREE ACCESS BUTTON (TOPPER coupon) ── -->
+          <!-- ── FREE ACCESS BUTTON (TOPPER01 coupon) ── -->
           <div id="free-btn-wrap" style="display:none;">
             <button class="btn" id="btn-free" onclick="doFreeAccess()"
               style="width:100%;padding:15px;border:none;border-radius:50px;cursor:pointer;
@@ -421,7 +422,7 @@
               <i class="fas fa-gift"></i> Claim FREE Access — ₹0
             </button>
             <p style="text-align:center;font-size:12px;color:#64748b;margin-top:8px;">
-              🎉 TOPPER coupon applied — get lifetime access completely free!
+              🎉 TOPPER01 coupon applied — get lifetime access completely free!
             </p>
           </div>
 
@@ -464,9 +465,9 @@
 var SUPA_URL    = 'https://vzfpltvchsxsfqlldafd.supabase.co';
 var SUPA_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
 var RZP_KEY     = 'rzp_live_SPbBEutqahnSN4';
-var EJS_SVC     = 'service_xwq0gnl';
-var EJS_TPL     = 'template_ed04169';  // ek hi template — sab kuch isi se
-var EJS_PUB     = 'tSLSXcGfuU3S3XDr4';
+var EJS_SVC     = 'service_zlxv3q4';
+var EJS_TPL     = 'template_j4m5ute';  // ek hi template — sab kuch isi se
+var EJS_PUB     = 'byFleJ2hV770O_Mni';
 var ADMIN_EMAIL = 'nishant@hsbteleet.com';
 var ADMIN_NAME  = 'Nishant (Admin)';
 
@@ -479,10 +480,6 @@ var pendingUser = null;
 //  HELPERS
 // ══════════════════════════════════════════════════════
 
-async function sha256(msg) {
-  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
-  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
-}
 
 function nowStr() {
   var d = new Date();
@@ -543,10 +540,9 @@ async function doLogin() {
 
   setLoading('btn-login', true, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
   try {
-    var hash = await sha256(pass);
     var { data: user, error: uErr } = await sb.from('premium_users')
-      .select('id,mobile,email,full_name')
-      .eq('mobile', mobile).eq('password_hash', hash).maybeSingle();
+.select('id,mobile,email,full_name')
+.eq('mobile', mobile).eq('password_hash', pass).maybeSingle();
 
     if (uErr || !user) {
       showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;Invalid mobile or password. Contact admin at <strong>+91-7988316241</strong> if you forgot your password.', 'danger');
@@ -605,8 +601,7 @@ async function doStep1() {
       setLoading('btn-step1', false, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
       return;
     }
-    var hash = await sha256(pass);
-    pendingUser = { full_name: name, mobile: mobile, email: email, password_hash: hash };
+    pendingUser = { full_name: name, mobile: mobile, email: email, password_hash: pass };
 
     document.getElementById('reg-step1').style.display = 'none';
     document.getElementById('reg-step2').style.display = 'block';
@@ -629,7 +624,7 @@ async function doStep1() {
 
 var COUPONS = {
   'NISHANT': { label:'NISHANT — ₹5 off!',  discount:5,  finalRs:6,  finalPaise:600, type:'flat' },
-  'TOPPER':  { label:'TOPPER — 100% FREE!', discount:11, finalRs:0,  finalPaise:0,   type:'free' }
+  'TOPPER01':  { label:'TOPPER01 — 100% FREE!', discount:11, finalRs:0,  finalPaise:0,   type:'free' }
 };
 var appliedCoupon = null;
 var payPaise = 1100; // module-level — set in doPayment, read in completeRegistration
@@ -696,7 +691,7 @@ function resetCouponUI() {
   document.getElementById('free-btn-wrap').style.display = 'none';
 }
 
-// ── FREE REGISTRATION (TOPPER coupon — no Razorpay) ──
+// ── FREE REGISTRATION (TOPPER01 coupon — no Razorpay) ──
 async function doFreeAccess() {
   if(!pendingUser) {
     showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.','danger');
@@ -722,9 +717,9 @@ async function doFreeAccess() {
     /* 2. Payment record ₹0 */
     var { data: payment, error: pErr } = await sb.from('premium_payments').insert([{
       user_id: newUser.id,
-      razorpay_payment_id: 'COUPON_TOPPER_FREE',
+      razorpay_payment_id: 'COUPON_TOPPER01_FREE',
       amount: 0, status: 'free_coupon',
-      receipt: 'TOPPER-FREE-' + newUser.id
+      receipt: 'TOPPER01-FREE-' + newUser.id
     }]).select('id').single();
     if(pErr) throw new Error('payment_insert: ' + pErr.message);
 
@@ -734,8 +729,8 @@ async function doFreeAccess() {
     /* 4. Emails */
     sendEmail('registration', {
       name: pendingUser.full_name, mobile: pendingUser.mobile,
-      email: pendingUser.email, payId: 'FREE via TOPPER coupon',
-      coupon: 'TOPPER', amount: 0
+      email: pendingUser.email, payId: 'FREE via TOPPER01 coupon',
+      coupon: 'TOPPER01', amount: 0
     });
 
     /* 5. Session */
@@ -754,7 +749,7 @@ async function doFreeAccess() {
     var fn = firstName(pendingUser.full_name);
     document.getElementById('success-name-msg').textContent = 'Welcome, ' + fn + '! 🎉';
     document.getElementById('success-body-msg').textContent =
-      'FREE access granted via TOPPER coupon! Welcome email sent to ' + pendingUser.email +
+      'FREE access granted via TOPPER01 coupon! Welcome email sent to ' + pendingUser.email +
       '. Your account is now active — access all 14 premium papers.';
   } catch(e) {
     showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> Error: '+e.message+'. Contact admin at +91-7988316241.','danger');
@@ -828,12 +823,21 @@ function doPayment() {
 async function completeRegistration(rzpResponse) {
   setLoading('btn-pay', true, '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access');
   try {
-    // 1. Insert user
+    // 1. Insert user (handle rare double-submit)
     var { data: newUser, error: uErr } = await sb.from('premium_users').insert([{
       mobile: pendingUser.mobile, email: pendingUser.email,
       password_hash: pendingUser.password_hash, full_name: pendingUser.full_name
     }]).select('id').single();
-    if (uErr) throw new Error('user_insert: ' + uErr.message);
+    if (uErr) {
+      if (uErr.message && uErr.message.includes('duplicate key')) {
+        var { data: existingUser } = await sb.from('premium_users')
+          .select('id').eq('mobile', pendingUser.mobile).maybeSingle();
+        if (existingUser) { newUser = existingUser; }
+        else { throw new Error('user_insert: ' + uErr.message); }
+      } else {
+        throw new Error('user_insert: ' + uErr.message);
+      }
+    }
 
     // 2. Insert payment
     var { data: payment, error: pErr } = await sb.from('premium_payments').insert([{
@@ -844,10 +848,23 @@ async function completeRegistration(rzpResponse) {
       amount: payPaise, status: 'paid', coupon_used: appliedCoupon ? document.getElementById('coupon-input').value.trim().toUpperCase() : null,
       receipt: rzpResponse.razorpay_payment_id
     }]).select('id').single();
-    if (pErr) throw new Error('payment_insert: ' + pErr.message);
+    if (pErr) {
+      if (pErr.message && pErr.message.includes('duplicate key')) {
+        // Payment already recorded — probably a double-submit. Try to fetch existing payment.
+        var { data: existingPay } = await sb.from('premium_payments')
+          .select('id').eq('razorpay_payment_id', rzpResponse.razorpay_payment_id).maybeSingle();
+        if (existingPay) {
+          payment = existingPay;
+        } else {
+          throw new Error('payment_duplicate: Payment already recorded but could not retrieve record. Contact admin at +91-7988316241 with Payment ID: ' + rzpResponse.razorpay_payment_id);
+        }
+      } else {
+        throw new Error('payment_insert: ' + pErr.message);
+      }
+    }
 
     // 3. Grant access
-    await sb.from('premium_access').insert([{ user_id: newUser.id, payment_id: payment.id, is_active: true }]);
+    await sb.from('premium_access').insert([{ user_id: newUser.id, payment_id: payment.id, is_active: true }]).select().maybeSingle();
 
     // 4. Email bhejo — customer ko welcome + admin ko registration alert (dono ek saath)
     sendEmail('registration', {

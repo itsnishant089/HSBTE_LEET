@@ -8,9 +8,9 @@ return;
 var SUPABASE_URL      = 'https://jnsowbnkccddcrkuonan.supabase.co';
 var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impuc293Ym5rY2NkZGNya3VvbmFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjY0MzksImV4cCI6MjA4NzcwMjQzOX0.PbiJI8SOxjgDPAP0njNN8aIW3yArJmstxi_VRhPuM5k';
 /* EmailJS config for welcome message after lead capture */
-var EJS_SERVICE_ID  = 'service_xwq0gnl';
-var EJS_TEMPLATE_ID = 'template_ed04169';
-var EJS_PUBLIC_KEY  = 'tSLSXcGfuU3S3XDr4';
+var EJS_SERVICE_ID  = 'service_zlxv3q4';
+var EJS_TEMPLATE_ID = 'template_j4m5ute';
+var EJS_PUBLIC_KEY  = 'byFleJ2hV770O_Mni';
 var ejsLoaded       = false;
 var ejsLoading      = false;
 var supabaseClient           = null;
