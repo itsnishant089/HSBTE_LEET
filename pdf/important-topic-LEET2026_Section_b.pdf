@@ -1,0 +1,1747 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 3
+/Kids [ 4 0 R 13 0 R 15 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Contents 5 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/ExtGState <<
+/gRLs0 <<
+/ca 0.07
+>>
+>>
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+/F2 8 0 R
+/F2-0 9 0 R
+/F3 10 0 R
+/F4 11 0 R
+/F5 12 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 11621
+>>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 42.51969 756.2047 cm
+q
+0 .513725 .560784 rg
+n 0 40 510.2362 -40 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 12 4 cm
+q
+1 1 1 rg
+BT 1 0 0 1 0 5 Tm /F2 19 Tf 24 TL 123.6251 0 Td (Haryana LEET / OCET 2026) Tj T* -123.6251 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 42.51969 722.2047 cm
+q
+.101961 .184314 .431373 rg
+n 0 34 510.2362 -34 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 10 11 cm
+q
+BT 1 0 0 1 0 3 Tm 54.4485 0 Td 12 TL /F2 9 Tf .960784 .65098 .137255 rg (Section B) Tj /F1 9 Tf ( \227 Electronics Stream Courses) Tj T* -54.4485 0 Td ET
+Q
+Q
+q
+1 0 0 1 305.937 5 cm
+q
+BT 1 0 0 1 0 15 Tm 11.09611 0 Td 12 TL /F2 9 Tf .960784 .65098 .137255 rg (25 Questions  ) Tj (|) Tj (  25 Marks  ) Tj (|) Tj (  No Negative) Tj T* 68.8005 0 Td (Marking) Tj T* -79.89661 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 42.51969 702.2047 cm
+q
+.960784 .65098 .137255 rg
+n 0 20 510.2362 -20 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 4 cm
+q
+.960784 .65098 .137255 rg
+BT 1 0 0 1 0 3 Tm /F1 9 Tf 12 TL 80.22411 0 Td /F3 9 Tf 12 TL (H) Tj /F1 9 Tf 12 TL ( Important Topics Sheet \227 Based on Official HSBTE/AICTE Diploma Curriculum ) Tj /F3 9 Tf 12 TL (H) Tj /F1 9 Tf 12 TL T* -80.22411 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 694.2047 cm
+Q
+q
+1 0 0 1 42.51969 670.2047 cm
+q
+%begin table rect clip
+n 4 0 m 506.2362 0 l 508.4474 0 510.2362 1.7888 510.2362 4 c 510.2362 20 l 510.2362 22.2112 508.4474 24 506.2362 24 c 4 24 l 1.7888 24 0 22.2112 0 20 c 0 4 l 0 1.7888 1.7888 0 4 0 c h W* n
+%end table rect clip
+0 .513725 .560784 rg
+n 0 24 510.2362 -24 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 12 6 cm
+q
+1 1 1 rg
+BT 1 0 0 1 0 1.5 Tm /F2 10.5 Tf 12 TL (b-1 ELEMENTS OF ELECTRICAL ENGINEERING \(9 Q | 9 M\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 666.2047 cm
+Q
+q
+1 0 0 1 48.51969 646.2047 cm
+q
+BT 1 0 0 1 4 1.5 Tm 12 TL /F2 10.5 Tf .05098 .105882 .294118 rg /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( EMF, Kirchhoff's Laws & Network Theorems) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 631.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (KCL: ) Tj /F4 9.2 Tf 12 TL (S) Tj /F1 9.2 Tf 12 TL (I_in = ) Tj /F4 9.2 Tf 12 TL (S) Tj /F1 9.2 Tf 12 TL (I_out at a node) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 617.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (KVL: ) Tj /F4 9.2 Tf 12 TL (S) Tj /F1 9.2 Tf 12 TL (V = 0 around a closed loop) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 603.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Thevenin's theorem: V_th & R_th | Norton's theorem) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 589.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Superposition theorem | Max. power transfer theorem) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 575.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Faraday's laws of electromagnetic induction) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 555.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Magnetic Circuits) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 540.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (MMF, reluctance, flux \227 analogy with electric circuit) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 526.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Self inductance L | Mutual inductance M) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 512.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Lenz's law \227 direction of induced EMF) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 492.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( AC Circuits) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 477.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (RMS value = Peak/) Tj /F4 9.2 Tf 12 TL (\326) Tj /F1 9.2 Tf 12 TL (2 | Average value = 0.637 \327 Peak) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 463.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Form factor = RMS/Average = 1.11) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 449.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Impedance Z = ) Tj /F4 9.2 Tf 12 TL (\326) Tj /F1 9.2 Tf 12 TL (\(R\262+\(XL-Xc\)\262\) | Phase angle ) Tj /F4 9.2 Tf 12 TL (f) Tj /F1 9.2 Tf 12 TL T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 435.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Power factor cos) Tj /F4 9.2 Tf 12 TL (f) Tj /F1 9.2 Tf 12 TL ( = R/Z | Apparent, Active, Reactive power) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 421.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Series RLC: V leads I \(inductive\) / V lags I \(capacitive\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 401.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Resonance) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 386.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Series resonance: fr = 1/\(2) Tj /F4 9.2 Tf 12 TL (p\326) Tj /F1 9.2 Tf 12 TL (LC\) | Z_min = R at resonance) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 372.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Q-factor \(quality factor\) = ) Tj /F4 9.2 Tf 12 TL (w) Tj /F1 9.2 Tf 12 TL (L/R) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 358.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Parallel resonance: high impedance at resonance) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 338.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Transformers) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 323.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (EMF equation: E = 4.44 f N ) Tj /F4 9.2 Tf 12 TL (F) Tj /F1 9.2 Tf 12 TL (_m) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 309.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Turns ratio: N1/N2 = V1/V2 = I2/I1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 295.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Efficiency ) Tj /F4 9.2 Tf 12 TL (h) Tj /F1 9.2 Tf 12 TL ( = P_out/P_in | Losses: copper & core \(iron\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 281.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (3-phase transformer: star-delta, delta-star connections) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 261.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( DC Machines) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 246.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (DC Generator: EMF = P) Tj /F4 9.2 Tf 12 TL (F) Tj /F1 9.2 Tf 12 TL (NZ/60A \(lap: A=P, wave: A=2\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 232.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Types: separately excited, shunt, series, compound) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 218.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (DC Motor: back EMF Eb = V - IaRa | N ) Tj /F4 9.2 Tf 12 TL (\265) Tj /F1 9.2 Tf 12 TL ( Eb/) Tj /F4 9.2 Tf 12 TL (F) Tj /F1 9.2 Tf 12 TL T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 204.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Motor types & characteristics: shunt \(const. speed\), series \(high torque\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 184.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( 3-Phase Induction Motor) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 169.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Rotating magnetic field \227 synchronous speed Ns = 120f/P) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 155.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Slip s = \(Ns-N\)/Ns \327 100% | Rotor frequency = sf) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 141.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Torque ) Tj /F4 9.2 Tf 12 TL (\265) Tj /F1 9.2 Tf 12 TL ( sE) Tj /F3 9.2 Tf 12 TL (n) Tj /F1 9.2 Tf 12 TL (\262R) Tj /F3 9.2 Tf 12 TL (n) Tj /F1 9.2 Tf 12 TL ( / \(R) Tj /F3 9.2 Tf 12 TL (n) Tj /F1 9.2 Tf 12 TL (\262+s\262X) Tj /F3 9.2 Tf 12 TL (n) Tj /F1 9.2 Tf 12 TL (\262\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 121.2047 cm
+q
+BT 1 0 0 1 4 1.5 Tm 12 TL /F2 10.5 Tf .05098 .105882 .294118 rg /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Transmission & Distribution) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 106.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Advantage of HV: lower current ) Tj /F4 9.2 Tf 12 TL (\256) Tj /F1 9.2 Tf 12 TL ( lower I\262R losses) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 92.20472 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (3-phase vs single-phase: 3) Tj /F4 9.2 Tf 12 TL (f) Tj /F1 9.2 Tf 12 TL ( more economical, delivers more power) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 78.20472 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (3-wire DC vs 2-wire DC comparison) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 70.20472 cm
+Q
+q
+1 0 0 1 48.51969 68.80472 cm
+q
+.4 w
+1 J
+.741176 .741176 .741176 RG
+n 0 0 m 498.2362 0 l S
+Q
+Q
+ 
+
+Q
+
+q
+0.0 0.0 595.2756 841.8898 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+q
+0.05098 0.105882 0.294118 rg
+/gRLs0 gs
+BT
+/F2-0 38 Tf
+45.6 TL
+ET
+0.707107 0.707107 -0.707107 0.707107 297.6378 420.9449 cm
+BT
+1 0 0 1 -567.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+Q
+Q
+
+
+endstream
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+9 0 obj
+<<
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+10 0 obj
+<<
+/BaseFont /ZapfDingbats
+/Name /F3
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+11 0 obj
+<<
+/BaseFont /Symbol
+/Name /F4
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+12 0 obj
+<<
+/BaseFont /Helvetica-Oblique
+/Encoding /WinAnsiEncoding
+/Name /F5
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+13 0 obj
+<<
+/Contents 14 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/ExtGState <<
+/gRLs0 <<
+/ca 0.07
+>>
+>>
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+/F2 8 0 R
+/F2-0 9 0 R
+/F3 10 0 R
+/F4 11 0 R
+/F5 12 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+14 0 obj
+<<
+/Length 11498
+>>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 42.51969 772.2047 cm
+q
+%begin table rect clip
+n 4 0 m 506.2362 0 l 508.4474 0 510.2362 1.7888 510.2362 4 c 510.2362 20 l 510.2362 22.2112 508.4474 24 506.2362 24 c 4 24 l 1.7888 24 0 22.2112 0 20 c 0 4 l 0 1.7888 1.7888 0 4 0 c h W* n
+%end table rect clip
+.082353 .396078 .752941 rg
+n 0 24 510.2362 -24 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 12 6 cm
+q
+1 1 1 rg
+BT 1 0 0 1 0 1.5 Tm /F2 10.5 Tf 12 TL (b-2 ELEMENTS OF ELECTRONICS ENGINEERING \(8 Q | 8 M\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 768.2047 cm
+Q
+q
+1 0 0 1 48.51969 748.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Semiconductor Diodes) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 733.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (PN junction: depletion layer, barrier potential) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 719.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Forward bias: current flows | Reverse bias: only leakage) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 705.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Zener diode: breakdown voltage, voltage regulation circuit) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 691.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (LED: emits light when forward biased | Photodiode: reverse biased) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 671.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( BJT \(Bipolar Junction Transistor\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 656.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (NPN & PNP | 3 regions: emitter, base, collector) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 642.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Configurations: CB, CE, CC \227 characteristics & comparison) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 628.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (CE: highest current gain ) Tj /F4 9.2 Tf 12 TL (b) Tj /F1 9.2 Tf 12 TL ( = IC/IB | Most common) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 614.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Biasing: fixed bias, voltage divider bias \227 Q-point stabilization) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 594.2047 cm
+q
+BT 1 0 0 1 4 1.5 Tm 12 TL /F2 10.5 Tf .05098 .105882 .294118 rg /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( FET & MOSFET) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 579.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (JFET: N-channel, P-channel | Gate voltage controls drain current) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 565.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Enhancement & depletion MOSFET | MOSFET in digital circuits) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 545.2047 cm
+q
+BT 1 0 0 1 4 1.5 Tm 12 TL /F2 10.5 Tf .05098 .105882 .294118 rg /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Amplifiers & OPAMP) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 530.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Small signal amplifier: voltage gain Av = Vout/Vin) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 516.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (OPAMP characteristics: very high Av, high Rin, low Rout) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 502.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Inverting amplifier: Av = -Rf/Rin | Non-inverting: Av = 1+Rf/Rin) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 488.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Summing amplifier, integrator, differentiator circuits) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 474.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Oscillators: Barkhausen criterion \(A) Tj /F4 9.2 Tf 12 TL (b) Tj /F1 9.2 Tf 12 TL (=1, phase=0\260\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 454.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Digital Electronics \227 Most Important) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 439.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Number systems: Binary, Octal, Hexadecimal ) Tj /F4 9.2 Tf 12 TL (\253) Tj /F1 9.2 Tf 12 TL ( Decimal conversions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 425.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Binary arithmetic: addition, subtraction \(2's complement\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 411.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (BCD, Gray code, excess-3 code conversions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 397.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Logic gates: AND/OR/NOT/NAND/NOR/XOR/XNOR \227 truth tables) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 383.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Boolean algebra: laws, De Morgan's theorem) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 369.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Simplification using K-map \(2,3,4 variable\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 355.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Flip-Flops: SR, JK, D, T \227 truth table, clocking) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 335.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Communication Systems) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 320.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Modulation need: low freq signal cannot travel long distance) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 306.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (AM: carrier amplitude varies | FM: carrier frequency varies | PM: phase varies) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 292.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Bandwidth of AM = 2fm | Modulation index m = Am/Ac) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 278.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Demodulation: envelope detector \(AM\), discriminator \(FM\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 258.2047 cm
+q
+BT 1 0 0 1 4 1.5 Tm 12 TL /F2 10.5 Tf .05098 .105882 .294118 rg /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Measurements & Instrumentation) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 243.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (CRO: measure voltage, current, frequency, phase \227 operation) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 229.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Ammeter \(series\) vs Voltmeter \(parallel\) connection) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 215.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Wattmeter, energy meter \(kWh\) working principle) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 201.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Multimeter: measure V, I, R | Insulation tester, Earth tester) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 187.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Errors: gross, systematic, random | Accuracy vs precision) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 173.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Transducers: thermistor \(temp\), LVDT \(displacement\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 153.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Power Electronics) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 138.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (SCR \(Silicon Controlled Rectifier\): 4-layer PNPN device) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 124.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (SCR triggering: gate pulse | Applications: speed control, converters) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 110.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (DIAC: bidirectional \227 triggers at breakover voltage) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 96.20472 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (TRIAC: bidirectional SCR \227 used in AC power control) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 88.20472 cm
+Q
+q
+1 0 0 1 48.51969 86.80472 cm
+q
+.4 w
+1 J
+.741176 .741176 .741176 RG
+n 0 0 m 498.2362 0 l S
+Q
+Q
+q
+1 0 0 1 42.51969 58.80472 cm
+q
+%begin table rect clip
+n 4 0 m 506.2362 0 l 508.4474 0 510.2362 1.7888 510.2362 4 c 510.2362 20 l 510.2362 22.2112 508.4474 24 506.2362 24 c 4 24 l 1.7888 24 0 22.2112 0 20 c 0 4 l 0 1.7888 1.7888 0 4 0 c h W* n
+%end table rect clip
+.290196 .078431 .54902 rg
+n 0 24 510.2362 -24 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 12 6 cm
+q
+1 1 1 rg
+BT 1 0 0 1 0 1.5 Tm /F2 10.5 Tf 12 TL (b-3 ELEMENTS OF COMPUTER ENGINEERING \(8 Q | 8 M\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 54.80472 cm
+Q
+ 
+
+Q
+
+q
+0.0 0.0 595.2756 841.8898 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+q
+0.05098 0.105882 0.294118 rg
+/gRLs0 gs
+BT
+/F2-0 38 Tf
+45.6 TL
+ET
+0.707107 0.707107 -0.707107 0.707107 297.6378 420.9449 cm
+BT
+1 0 0 1 -567.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+Q
+Q
+
+
+endstream
+endobj
+15 0 obj
+<<
+/Contents 16 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/ExtGState <<
+/gRLs0 <<
+/ca 0.07
+>>
+>>
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+/F2 8 0 R
+/F2-0 9 0 R
+/F3 10 0 R
+/F4 11 0 R
+/F5 12 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+16 0 obj
+<<
+/Length 9392
+>>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 48.51969 784.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Computer Fundamentals) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 769.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Von Neumann architecture: CPU, Memory, I/O) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 755.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (ALU, CU, Registers \227 functions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 741.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Compiler: translates entire HLL program to machine code) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 727.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Interpreter: translates & executes line by line) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 713.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Assembler: converts assembly language to machine code) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 699.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Algorithm properties: Input, Output, Definiteness, Finiteness, Effectiveness) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 679.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Computer Organization) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 664.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Registers: PC, IR, MAR, MDR, AC, SP) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 650.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Bus: data bus, address bus, control bus) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 636.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Instruction cycle: Fetch ) Tj /F4 9.2 Tf 12 TL (\256) Tj /F1 9.2 Tf 12 TL ( Decode ) Tj /F4 9.2 Tf 12 TL (\256) Tj /F1 9.2 Tf 12 TL ( Execute) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 622.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Hardwired vs Micro-programmed control unit) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 608.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Cache memory: L1, L2, L3 | Virtual memory: paging, segmentation) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 588.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Operating Systems) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 573.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Functions: process management, memory management, I/O) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 559.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Process states: new, ready, running, waiting, terminated) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 545.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (CPU scheduling: FCFS, SJF, Round Robin, Priority) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 531.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Critical section problem | Semaphore, Mutex) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 517.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Deadlock: conditions \(mutual exclusion, hold & wait, no preemption, circular wait\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 497.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( C Programming \227 Most Asked) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 482.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Data types: int, float, double, char, long | sizeof\(\) operator) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 468.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Operators: arithmetic, relational, logical, bitwise, assignment, ternary) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 454.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Control statements: if, if-else, nested if, switch-case) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 440.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Loops: for, while, do-while | break, continue, goto) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 426.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Arrays: 1D, 2D \227 declaration, initialization, traversal) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 412.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Strings: strlen, strcpy, strcat, strcmp functions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 398.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Pointers: declaration, dereferencing \(*p\), pointer arithmetic) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 384.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Functions: call by value vs call by reference | Recursion) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 370.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (Structures & Unions: definition, accessing members \(. and ->\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 356.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (File handling: fopen, fclose, fprintf, fscanf, fread, fwrite) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 336.2047 cm
+q
+.05098 .105882 .294118 rg
+BT 1 0 0 1 4 1.5 Tm /F2 10.5 Tf 12 TL /F3 10.5 Tf 12 TL (n) Tj /F2 10.5 Tf 12 TL ( Networking Basics) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 321.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (LAN: limited area, high speed | WAN: wide area, uses routers) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 307.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (MAN: metropolitan area | Internet: global WAN) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 293.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (TCP/IP model: 4 layers | OSI model: 7 layers \(names\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 279.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (IP address: IPv4 \(32-bit\) | MAC address \(48-bit\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 265.2047 cm
+q
+BT 1 0 0 1 14 2.8 Tm 12 TL /F1 9.2 Tf .109804 .109804 .109804 rg (\177  ) Tj (HTTP, FTP, SMTP, DNS \227 protocol functions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 257.2047 cm
+Q
+q
+1 0 0 1 48.51969 255.8047 cm
+q
+.4 w
+1 J
+.741176 .741176 .741176 RG
+n 0 0 m 498.2362 0 l S
+Q
+Q
+q
+1 0 0 1 83.33858 224.8047 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+.215686 .278431 .309804 rg
+BT 1 0 0 1 0 4 Tm /F5 8 Tf 12 TL 40.53307 0 Td (hsbteleet.com) Tj T* -40.53307 0 Td ET
+Q
+Q
+q
+1 0 0 1 148.8661 3 cm
+q
+.215686 .278431 .309804 rg
+BT 1 0 0 1 0 16 Tm /F5 8 Tf 12 TL 3.777071 0 Td (HSBTE | HSTES | Haryana LEET /) Tj T* 40.536 0 Td (OCET 2026) Tj T* -44.31307 0 Td ET
+Q
+Q
+q
+1 0 0 1 291.7323 3 cm
+q
+.215686 .278431 .309804 rg
+BT 1 0 0 1 0 4 Tm /F5 8 Tf 12 TL 35.41707 0 Td (Session 2026-27) Tj T* -35.41707 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+ 
+
+Q
+
+q
+0.0 0.0 595.2756 841.8898 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+q
+0.05098 0.105882 0.294118 rg
+/gRLs0 gs
+BT
+/F2-0 38 Tf
+45.6 TL
+ET
+0.707107 0.707107 -0.707107 0.707107 297.6378 420.9449 cm
+BT
+1 0 0 1 -567.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 -120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 0 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 120 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 240 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -567.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -347.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 -127.756 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 92.244 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+BT
+1 0 0 1 312.244 360 Tm
+(hsbteleet\056com) Tj
+T*
+ET
+Q
+Q
+
+
+endstream
+endobj
+xref
+0 17
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000127 00000 n 
+0000000176 00000 n 
+0000000503 00000 n 
+0000012177 00000 n 
+0000012284 00000 n 
+0000012391 00000 n 
+0000012503 00000 n 
+0000012615 00000 n 
+0000012699 00000 n 
+0000012777 00000 n 
+0000012893 00000 n 
+0000013222 00000 n 
+0000024774 00000 n 
+0000025103 00000 n 
+trailer
+<<
+/Size 17
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+34548
+%%EOF

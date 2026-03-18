@@ -256,6 +256,45 @@
     .res-card h4{font-size:.9rem;font-weight:800;margin-bottom:3px;}
     .res-card p{font-size:12px;color:var(--muted);line-height:1.4;}
 
+    /* ── PDF STUDY MATERIALS ── */
+    .pdf-section-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+    .pdf-tab{
+      padding:7px 18px;border-radius:50px;font-size:12.5px;font-weight:700;cursor:pointer;
+      border:2px solid var(--border);background:var(--card);color:var(--muted);transition:.18s;
+    }
+    .pdf-tab.active,.pdf-tab:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+    .pdf-tab-panel{display:none;}
+    .pdf-tab-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+    .pdf-card{
+      background:var(--card);border:2px solid var(--border);border-radius:16px;
+      padding:18px 16px;display:flex;align-items:center;gap:14px;
+      text-decoration:none;color:var(--text);transition:.2s;position:relative;overflow:hidden;
+    }
+    .pdf-card::before{
+      content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:16px 0 0 16px;
+    }
+    .pdf-card-a::before{background:#1a56db;}
+    .pdf-card-b::before{background:#059669;}
+    .pdf-card-c::before{background:#dc2626;}
+    .pdf-card-d::before{background:#7c3aed;}
+    .pdf-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:transparent;}
+    .pdf-icon{
+      width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+      justify-content:center;font-size:1.3rem;flex-shrink:0;
+    }
+    .pdf-icon-formula{background:#fef3c7;}
+    .pdf-icon-topics{background:#dbeafe;}
+    .pdf-icon-cheat{background:#fce7f3;}
+    .pdf-card h4{font-size:.88rem;font-weight:800;margin-bottom:3px;line-height:1.3;}
+    .pdf-card p{font-size:11.5px;color:var(--muted);line-height:1.35;}
+    .pdf-dl-btn{
+      margin-left:auto;flex-shrink:0;width:34px;height:34px;border-radius:10px;
+      background:var(--bg);border:1.5px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--blue);font-size:.85rem;transition:.18s;
+    }
+    .pdf-card:hover .pdf-dl-btn{background:var(--blue);color:#fff;border-color:var(--blue);}
+
     /* ── WA FLOAT ── */
     .wa-float{
       position:fixed;bottom:28px;right:22px;z-index:4000;
@@ -309,6 +348,7 @@
         <p id="welcome-msg">Welcome! You have lifetime access to all 14 premium HSBTE LEET papers.</p>
         <div class="hero-meta">
           <span class="hero-badge">📚 14 Papers</span>
+          <span class="hero-badge">📄 13 PDFs</span>
           <span class="hero-badge">⚡ Instant Score</span>
           <span class="hero-badge">🏅 Lifetime Access</span>
         </div>
@@ -496,6 +536,135 @@
     </div>
 
     <!-- ═══════════════════════════════════════════
+         PDF STUDY MATERIALS
+    ═══════════════════════════════════════════ -->
+    <div class="sec-group">
+      <div class="sec-header" style="background:linear-gradient(135deg,#be185d,#ec4899);">
+        <div class="sh-icon">📄</div>
+        <div class="sh-text">
+          <h2>PDF Study Materials</h2>
+          <p>Formula Sheets, Important Topics &amp; Cheat Sheets — Section wise</p>
+        </div>
+        <span class="sh-badge">12 PDFs</span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="pdf-section-tabs">
+        <button class="pdf-tab active" onclick="switchPdfTab('formula',this)">📐 Formula Sheets</button>
+        <button class="pdf-tab" onclick="switchPdfTab('topics',this)">⭐ Important Topics</button>
+        <button class="pdf-tab" onclick="switchPdfTab('cheat',this)">🗒️ Cheat Sheets</button>
+      </div>
+
+      <!-- Formula Sheets -->
+      <div id="pdf-formula" class="pdf-tab-panel active">
+        <a href="../pdf/formula-sheet-LEET2026_Section_A.pdf" class="pdf-card pdf-card-a" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">📐</div>
+          <div>
+            <h4>Formula Sheet — Section A</h4>
+            <p>Basic Sciences · Maths, Physics, Chemistry</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/formula-sheet-LEET2026_Section_B.pdf" class="pdf-card pdf-card-b" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">📐</div>
+          <div>
+            <h4>Formula Sheet — Section B</h4>
+            <p>Electronics Stream · Electrical, Electronics, Computer</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/formula-sheet-LEET2026_Section_C.pdf" class="pdf-card pdf-card-c" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">📐</div>
+          <div>
+            <h4>Formula Sheet — Section C</h4>
+            <p>Mechanical Stream · Mech, Production, Automobile</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/formula-sheet-LEET2026_Section_D.pdf" class="pdf-card pdf-card-d" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">📐</div>
+          <div>
+            <h4>Formula Sheet — Section D</h4>
+            <p>Other Streams · Civil, Textile, Food, Ceramic</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+      </div>
+
+      <!-- Important Topics -->
+      <div id="pdf-topics" class="pdf-tab-panel">
+        <a href="../pdf/important-topic-LEET2026_Section_A.pdf" class="pdf-card pdf-card-a" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">⭐</div>
+          <div>
+            <h4>Important Topics — Section A</h4>
+            <p>Basic Sciences · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/important-topic-LEET2026_Section_b.pdf" class="pdf-card pdf-card-b" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">⭐</div>
+          <div>
+            <h4>Important Topics — Section B</h4>
+            <p>Electronics Stream · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/important-topic-LEET2026_Section_c.pdf" class="pdf-card pdf-card-c" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">⭐</div>
+          <div>
+            <h4>Important Topics — Section C</h4>
+            <p>Mechanical Stream · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/important-topic-LEET2026_Section_d.pdf" class="pdf-card pdf-card-d" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">⭐</div>
+          <div>
+            <h4>Important Topics — Section D</h4>
+            <p>Other Streams · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+      </div>
+
+      <!-- Cheat Sheets -->
+      <div id="pdf-cheat" class="pdf-tab-panel">
+        <a href="../pdf/cheat-sheat-LEET2026_Section_A.pdf" class="pdf-card pdf-card-a" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">🗒️</div>
+          <div>
+            <h4>Cheat Sheet — Section A</h4>
+            <p>Basic Sciences · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/cheat-sheat-LEET2026_Section_b.pdf" class="pdf-card pdf-card-b" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">🗒️</div>
+          <div>
+            <h4>Cheat Sheet — Section B</h4>
+            <p>Electronics Stream · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/cheat-sheat-LEET2026_Section_c.pdf" class="pdf-card pdf-card-c" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">🗒️</div>
+          <div>
+            <h4>Cheat Sheet — Section C</h4>
+            <p>Mechanical Stream · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="../pdf/cheat-sheat-LEET2026_Section_d.pdf" class="pdf-card pdf-card-d" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">🗒️</div>
+          <div>
+            <h4>Cheat Sheet — Section D</h4>
+            <p>Other Streams · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
          EXTRA RESOURCES
     ═══════════════════════════════════════════ -->
     <div class="sec-group">
@@ -522,20 +691,7 @@
             <p>Free study material, PYQs & notes</p>
           </div>
         </a>
-        <a href="https://wa.me/917988316241?text=Hi!%20Please%20send%20me%20LEET%20formula%20sheets." class="res-card" target="_blank" rel="noopener noreferrer">
-          <div class="res-icon res-icon-formula">📋</div>
-          <div>
-            <h4>Formula Sheets</h4>
-            <p>Request topic-wise formula PDFs</p>
-          </div>
-        </a>
-        <a href="https://wa.me/917988316241?text=Hi!%20I%20want%20previous%20year%20LEET%20paper%20solutions." class="res-card" target="_blank" rel="noopener noreferrer">
-          <div class="res-icon res-icon-pyq">📖</div>
-          <div>
-            <h4>PYQ Solutions</h4>
-            <p>Previous year paper solutions PDF</p>
-          </div>
-        </a>
+        
       </div>
     </div>
 
@@ -642,6 +798,14 @@ function showDenied(){
 function doLogout(){
   ['prem_uid','prem_mob','prem_name','prem_ts'].forEach(function(k){sessionStorage.removeItem(k);});
   window.location.href='./premium-login.html';
+}
+
+/* ── PDF TAB SWITCHER ── */
+function switchPdfTab(tab, el) {
+  document.querySelectorAll('.pdf-tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.pdf-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('pdf-' + tab).classList.add('active');
+  el.classList.add('active');
 }
 
 verifyAccess();
