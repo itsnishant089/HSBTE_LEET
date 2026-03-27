@@ -712,7 +712,7 @@ var MODAL_HTML = [
 '</div>',
 '<div class="leet-field">',
 '<label for="leet-college" class="leet-label">College Name</label>',
-'<input id="leet-college" name="college" type="text" class="leet-input" placeholder="e.g. GPCG Patiala" autocomplete="organization" />',
+'<input id="leet-college" name="college" type="text" class="leet-input" placeholder="e.g. GP Mandi Adampur" autocomplete="organization" />',
 '</div>',
 '<div class="leet-field">',
 '<label for="leet-mobile" class="leet-label">Mobile Number <span style="color:#ec4899;font-size:0.6rem;vertical-align:super;">&#10022;</span></label>',

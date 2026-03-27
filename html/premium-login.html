@@ -1,472 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
-  <title>Premium Login | Haryana LEET Sample Papers | HSBTE PYQ</title>
-  <meta name="description" content="Login or register to access Premium Haryana LEET Sample Papers. Pay ₹11 via Razorpay and unlock 14 exclusive HSBTE LEET sample papers."/>
-  <meta name="robots" content="noindex, nofollow"/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="https://hsbteleet.com/image/favicon.webp"/>
+<title>Premium Login | Haryana LEET 2026 | hsbteleet.com</title>
+<meta name="description" content="Login or register for Premium (₹19) or Ultra Premium (₹29) Haryana LEET 2026 access. 14 exclusive LEET sample papers, College Predictor, Rank Predictor and more. 100% ad-free."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+<style>
+:root{
+  --ink:#0f172a;--mu:#64748b;--faint:#94a3b8;--bo:#e2e8f0;--bo2:#cbd5e1;
+  --surf:#ffffff;--surf2:#f8fafc;--surf3:#f1f5f9;
+  --v:#6366f1;--vd:#4338ca;--vl:#eef2ff;
+  --a:#f59e0b;--ad:#d97706;--al:#fef3c7;
+  --g:#10b981;--gl:#d1fae5;
+  --r:#ef4444;--rl:#fee2e2;
+  --b:#2563eb;--bd:#1d4ed8;--bl:#dbeafe;
+  --pu:#a855f7;--pud:#7c3aed;--pul:#faf5ff;
+  --shadow:0 0 0 1px rgba(15,23,42,.06),0 20px 60px rgba(15,23,42,.1),0 4px 16px rgba(15,23,42,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  min-height:100vh;color:var(--ink);
+  background:
+    radial-gradient(ellipse 70% 50% at 15% -5%,rgba(99,102,241,.08) 0,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 105%,rgba(245,158,11,.06) 0,transparent 60%),
+    linear-gradient(160deg,#f0f4ff 0%,#f5f3ff 40%,#fafafa 100%);
+  -webkit-font-smoothing:antialiased;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── PAGE WRAP ── */
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 16px;gap:16px}
 
-    body {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      min-height: 100vh;
-      color: #1e293b;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(26,86,219,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(245,158,11,0.05) 0%, transparent 60%),
-        linear-gradient(135deg, #eef2ff 0%, #f0f4ff 50%, #f8faff 100%);
-    }
+/* ── TOP STRIP ── */
+.strip{width:100%;max-width:480px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.brand-mark{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,#f7c84a,#e9a01a);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:900;font-size:10px;color:#1a0f00;
+  box-shadow:0 2px 12px rgba(233,160,26,.3);
+}
+.brand-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--ink)}
+.brand-name em{color:var(--b);font-style:normal}
+.back-link{font-size:12px;color:var(--faint);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:4px;transition:color .18s}
+.back-link:hover{color:var(--v)}
 
-    .page-wrap {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 36px 16px; gap: 18px;
-    }
+/* ── TIER PICKER ── */
+.tier-picker{width:100%;max-width:480px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tier-card{
+  border:2px solid var(--bo);border-radius:14px;padding:14px 16px;
+  cursor:pointer;transition:all .22s;background:var(--surf);text-align:center;
+  position:relative;
+}
+.tier-card:hover{border-color:var(--bo2);transform:translateY(-1px)}
+.tier-card.tp{border-color:var(--a);background:linear-gradient(135deg,#fffbeb,#fef9ec)}
+.tier-card.tu{border-color:var(--pu);background:linear-gradient(135deg,#faf5ff,#f3e8ff)}
+.tier-icon{font-size:1.5rem;margin-bottom:5px}
+.tier-name{font-family:'Syne',sans-serif;font-size:12.5px;font-weight:800;margin-bottom:3px}
+.tier-price{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:900;line-height:1}
+.tp .tier-price{color:var(--ad)}
+.tu .tier-price{color:var(--pud)}
+.tier-desc{font-size:11px;color:var(--mu);margin-top:4px;line-height:1.4}
+.tier-check{
+  position:absolute;top:10px;right:10px;
+  width:18px;height:18px;border-radius:50%;
+  display:none;align-items:center;justify-content:center;font-size:9px;
+}
+.tp .tier-check{display:flex;background:var(--a);color:#fff}
+.tu .tier-check{display:flex;background:var(--pud);color:#fff}
+.tier-save{
+  display:inline-block;font-size:9px;font-weight:800;font-family:'Syne',sans-serif;
+  text-transform:uppercase;letter-spacing:.04em;padding:1px 7px;border-radius:999px;
+  margin-top:5px;
+}
+.tp .tier-save{background:var(--al);color:#92400e}
+.tu .tier-save{background:#f3e8ff;color:#7c3aed}
 
-    /* TOP STRIP */
-    .site-strip {
-      width: 100%; max-width: 480px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .site-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
-    .site-mark {
-      width: 33px; height: 33px; border-radius: 10px;
-      background: linear-gradient(135deg, #f7c84a, #e9a01a);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 11px; color: #1a0f00;
-      box-shadow: 0 0 12px rgba(233,160,26,0.4);
-    }
-    .site-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #1e293b; }
-    .site-name b { color: #1a56db; }
-    .site-back {
-      font-size: 12px; color: #94a3b8; text-decoration: none;
-      font-weight: 500; display: flex; align-items: center; gap: 5px;
-      transition: color 0.2s;
-    }
-    .site-back:hover { color: #1a56db; }
+/* ── CARD ── */
+.card{
+  width:100%;max-width:480px;background:var(--surf);
+  border-radius:24px;box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,.04);overflow:hidden;
+  animation:fadeUp .4s cubic-bezier(.34,1.1,.64,1);
+}
 
-    /* AUTH CARD */
-    .auth-card {
-      width: 100%; max-width: 480px;
-      background: #fff;
-      border-radius: 28px;
-      box-shadow: 0 0 0 1px rgba(26,86,219,0.06), 0 24px 60px rgba(26,86,219,0.12), 0 4px 16px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-      overflow: hidden;
-    }
+/* ── CARD HEADER ── */
+.card-hdr{
+  padding:30px 32px 24px;text-align:center;color:#fff;
+  position:relative;overflow:hidden;
+}
+.card-hdr.hdr-prem{background:linear-gradient(145deg,#0a1628,#12265c 50%,#1a56db)}
+.card-hdr.hdr-ultra{background:linear-gradient(145deg,#1a0038,#3b0764 50%,#7c3aed)}
+.card-hdr::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%,rgba(245,158,11,.18) 0,transparent 55%),
+    repeating-linear-gradient(-45deg,transparent 0,transparent 20px,rgba(255,255,255,.012) 20px,rgba(255,255,255,.012) 21px);
+}
+.hdr-in{position:relative;z-index:1}
+.hdr-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:54px;height:54px;border-radius:16px;
+  background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.28);
+  font-size:1.7rem;margin-bottom:12px;
+  box-shadow:0 0 24px rgba(245,158,11,.16);
+}
+.hdr-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:5px;letter-spacing:-.02em}
+.hdr-sub{font-size:12.5px;opacity:.65;line-height:1.6}
+.hdr-badges{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
+.hbadge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+  border-radius:999px;padding:3px 10px;
+  font-family:'Syne',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);
+}
+.dot{width:5px;height:5px;border-radius:50%;background:#34d399;box-shadow:0 0 6px #34d399}
 
-    /* HEADER */
-    .auth-header {
-      position: relative;
-      background: linear-gradient(150deg, #0a1628 0%, #12265c 50%, #1a56db 100%);
-      padding: 36px 36px 30px;
-      text-align: center; color: #fff; overflow: hidden;
-    }
-    .auth-header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(245,158,11,0.18) 0%, transparent 55%),
-        repeating-linear-gradient(-45deg, transparent 0, transparent 20px, rgba(255,255,255,0.015) 20px, rgba(255,255,255,0.015) 21px);
-    }
-    .auth-hdr-inner { position: relative; z-index: 1; }
-    .crown-ring {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 62px; height: 62px; border-radius: 20px;
-      background: rgba(245,158,11,0.18); border: 1px solid rgba(245,158,11,0.28);
-      font-size: 1.9rem; margin-bottom: 14px;
-      box-shadow: 0 0 28px rgba(245,158,11,0.18);
-    }
-    .auth-header h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem; font-weight: 400; margin-bottom: 6px; letter-spacing: -0.3px;
-    }
-    .auth-header p { font-size: 13px; opacity: 0.68; line-height: 1.6; }
-    .badge-row { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 14px; flex-wrap: wrap; }
-    .hbadge {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13);
-      border-radius: 100px; padding: 4px 11px;
-      font-family: 'Syne', sans-serif; font-size: 9.5px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.68);
-    }
-    .hbadge-dot { width: 5px; height: 5px; border-radius: 50%; background: #34d399; box-shadow: 0 0 6px #34d399; }
+/* ── TABS ── */
+.tabs{display:flex;border-bottom:1.5px solid var(--bo)}
+.tab{
+  flex:1;padding:13px;text-align:center;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;background:transparent;border:none;color:var(--faint);
+  transition:all .18s;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;
+}
+.tab:hover:not(.on){color:var(--ink);background:var(--surf3)}
+.tab.on{color:var(--v);border-bottom-color:var(--v)}
 
-    /* TABS */
-    .auth-tabs { display: flex; border-bottom: 2px solid #e2e8f0; }
-    .auth-tab {
-      flex: 1; padding: 14px; text-align: center;
-      font-family: 'Syne', sans-serif; font-size: 13.5px; font-weight: 700;
-      cursor: pointer; background: transparent; border: none; color: #94a3b8;
-      transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -2px;
-    }
-    .auth-tab.active { color: #1a56db; border-bottom-color: #1a56db; }
-    .auth-tab:hover:not(.active) { color: #1e293b; background: #f8faff; }
+/* ── BODY ── */
+.card-body{padding:24px 28px 28px}
+.panel{display:none}
+.panel.on{display:block}
+@media(max-width:480px){.card-hdr{padding:24px 20px 20px}.card-body{padding:20px 18px 24px}}
 
-    /* FORM */
-    .auth-body { padding: 26px 30px 30px; }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-    .form-group { margin-bottom: 17px; }
-    .form-label {
-      display: block; font-family: 'Syne', sans-serif;
-      font-size: 10.5px; font-weight: 700; color: #64748b;
-      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 7px;
-    }
-    .form-input {
-      width: 100%; padding: 12px 15px;
-      border: 2px solid #e2e8f0; border-radius: 12px;
-      font-size: 15px; color: #1e293b; background: #f8faff;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-      outline: none; font-family: 'DM Sans', sans-serif;
-    }
-    .form-input:focus { border-color: #1a56db; background: #fff; box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
-    .form-input.error { border-color: #ef4444; background: #fff5f5; }
-    .form-hint { font-size: 12px; color: #94a3b8; margin-top: 5px; }
-    .form-error { font-size: 12px; color: #ef4444; margin-top: 5px; display: none; }
-    .form-error.show { display: block; }
+/* ── FORM ── */
+.fg{margin-bottom:14px}
+.fl{
+  display:block;font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:700;color:var(--mu);
+  text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;
+}
+.fi{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--bo);border-radius:11px;
+  font-size:14.5px;color:var(--ink);background:var(--surf2);
+  transition:border-color .18s,box-shadow .18s,background .18s;
+  outline:none;font-family:'DM Sans',sans-serif;
+}
+.fi:focus{border-color:var(--v);background:var(--surf);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+.fi.err{border-color:var(--r);background:#fff8f8;animation:shake .3s ease}
+.fi-hint{font-size:11.5px;color:var(--faint);margin-top:5px;line-height:1.5}
+.fi-err{font-size:11.5px;color:var(--r);margin-top:4px;display:none}
+.fi-err.on{display:block}
+.pw-wrap{position:relative}
+.pw-wrap .fi{padding-right:44px}
+.pw-eye{
+  position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;color:var(--faint);
+  font-size:14px;padding:4px;transition:color .15s;
+}
+.pw-eye:hover{color:var(--ink)}
 
-    /* ALERTS */
-    .alert { padding: 12px 15px; border-radius: 11px; font-size: 13px; margin-bottom: 16px; display: none; line-height: 1.6; }
-    .alert.show { display: block; }
-    .alert.show i.fas { margin-right: 7px; }
-    .alert.warning { background: #fffbeb; border: 1px solid #f59e0b; color: #92400e; }
-    .alert.success { background: #f0fdf4; border: 1px solid #10b981; color: #065f46; }
-    .alert.danger  { background: #fff1f2; border: 1px solid #ef4444; color: #9f1239; }
+/* ── ALERTS ── */
+.alert{padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:14px;display:none;line-height:1.6}
+.alert.on{display:block;animation:fadeUp .2s ease}
+.alert i{margin-right:6px}
+.alert-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.alert-ok{background:var(--gl);border:1px solid #86efac;color:#065f46}
+.alert-err{background:var(--rl);border:1px solid #fca5a5;color:#991b1b}
 
-    /* BUTTONS */
-    .btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 14px; border-radius: 50px;
-      font-family: 'Syne', sans-serif; font-size: 14.5px; font-weight: 800;
-      border: none; cursor: pointer; transition: all 0.22s; letter-spacing: 0.3px;
-    }
-    .btn-blue {
-      background: linear-gradient(135deg, #1a56db, #1240a8); color: #fff;
-      box-shadow: 0 6px 20px rgba(26,86,219,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
-    }
-    .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(26,86,219,0.4); }
-    .btn-gold {
-      background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a;
-      box-shadow: 0 6px 20px rgba(245,158,11,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-    }
-    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,158,11,0.5); }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+/* ── BUTTONS ── */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;border-radius:50px;
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:800;
+  border:none;cursor:pointer;transition:all .22s;letter-spacing:.01em;
+}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
+.btn-v{background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff;box-shadow:0 5px 18px rgba(99,102,241,.35)}
+.btn-v:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px rgba(99,102,241,.45)}
+.btn-a{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;box-shadow:0 5px 18px rgba(245,158,11,.3)}
+.btn-a:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px rgba(245,158,11,.4)}
+.btn-pu{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;box-shadow:0 5px 18px rgba(168,85,247,.35)}
+.btn-pu:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px rgba(168,85,247,.45)}
+.btn-g{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 5px 18px rgba(16,185,129,.3)}
+.btn-g:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px rgba(16,185,129,.4)}
+.spin{display:inline-block;width:15px;height:15px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.spin-dk{border-color:rgba(0,0,0,.12);border-top-color:var(--ink)}
 
-    /* STEPS */
-    .step-indicator { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 20px; }
-    .step {
-      width: 30px; height: 30px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800;
-      background: #e2e8f0; color: #64748b; transition: all 0.3s;
-    }
-    .step.active { background: #1a56db; color: #fff; box-shadow: 0 0 0 4px rgba(26,86,219,0.15); }
-    .step.done   { background: #10b981; color: #fff; }
-    .step-line   { flex: 1; height: 2px; background: #e2e8f0; max-width: 44px; transition: background 0.3s; }
-    .step-line.done { background: #10b981; }
+/* ── DIVIDER ── */
+.divider{display:flex;align-items:center;gap:11px;margin:18px 0;color:var(--faint);font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--bo)}
 
-    /* MISC */
-    .separator {
-      display: flex; align-items: center; gap: 12px;
-      margin: 18px 0; color: #94a3b8; font-size: 12px;
-    }
-    .separator::before, .separator::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
-    .wa-btn {
-      display: flex; align-items: center; justify-content: center; gap: 9px;
-      padding: 12px 20px; border-radius: 50px; text-decoration: none;
-      background: #f0fdf4; color: #065f46; font-size: 13.5px; font-weight: 700;
-      border: 1px solid #10b981; transition: all 0.2s; font-family: 'Syne', sans-serif;
-    }
-    .wa-btn:hover { background: #dcfce7; transform: translateY(-1px); }
-    .wa-btn i { color: #25d366; }
-    .price-pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(245,158,11,0.1); border: 1.5px solid rgba(245,158,11,0.3);
-      color: #92400e; border-radius: 50px; padding: 5px 15px;
-      font-family: 'Syne', sans-serif; font-size: 12.5px; font-weight: 700; margin-bottom: 14px;
-    }
-    .feat-list { list-style: none; margin: 14px 0; display: flex; flex-direction: column; gap: 8px; }
-    .feat-list li { display: flex; align-items: center; gap: 9px; font-size: 13px; color: #475569; }
-    .feat-list li i { color: #10b981; width: 15px; flex-shrink: 0; }
-    .spinner { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
-    .spinner.dark { border-color: rgba(0,0,0,0.15); border-top-color: #1e293b; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+/* ── WA BUTTON ── */
+.wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  padding:11px 20px;border-radius:50px;text-decoration:none;
+  background:var(--gl);color:#065f46;font-size:13px;font-weight:700;
+  border:1px solid #10b981;transition:all .18s;font-family:'Syne',sans-serif;
+}
+.wa-btn:hover{background:#bbf7d0;transform:translateY(-1px)}
+.wa-btn i{color:#25d366}
 
-    /* SUCCESS */
-    .success-state { text-align: center; padding: 8px 0; }
-    .success-ico {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 70px; height: 70px; border-radius: 50%;
-      background: linear-gradient(135deg, #10b981, #059669);
-      font-size: 2rem; margin-bottom: 16px;
-      box-shadow: 0 0 0 8px rgba(16,185,129,0.1), 0 8px 24px rgba(16,185,129,0.3);
-      animation: pop 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    @keyframes pop { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
-    .success-state h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 10px; }
-    .success-state p  { font-size: 13.5px; color: #64748b; line-height: 1.7; margin-bottom: 20px; }
+/* ── STEPS ── */
+.steps{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:20px}
+.step{
+  width:29px;height:29px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+  background:var(--bo);color:var(--faint);transition:all .3s;
+}
+.step.act{background:var(--v);color:#fff;box-shadow:0 0 0 4px rgba(99,102,241,.15)}
+.step.done{background:var(--g);color:#fff}
+.step-line{flex:1;height:2px;background:var(--bo);max-width:44px;transition:background .3s;border-radius:1px}
+.step-line.done{background:var(--g)}
 
-    /* FOOTER */
-    .page-foot { font-size: 11.5px; color: #94a3b8; text-align: center; line-height: 1.8; }
-    .page-foot a { color: #64748b; text-decoration: none; }
-    .page-foot a:hover { color: #1a56db; }
+/* ── PRICE PILL ── */
+.ppill{
+  display:inline-flex;align-items:center;gap:7px;
+  border-radius:50px;padding:5px 14px;
+  font-family:'Syne',sans-serif;font-size:12.5px;font-weight:700;margin-bottom:13px;
+}
+.ppill-a{background:rgba(245,158,11,.1);border:1.5px solid rgba(245,158,11,.3);color:#92400e}
+.ppill-pu{background:rgba(168,85,247,.1);border:1.5px solid rgba(168,85,247,.3);color:#6b21a8}
 
-    @media (max-width:520px) {
-      .auth-header { padding: 26px 20px 22px; }
-      .auth-body   { padding: 18px 16px 22px; }
-      .auth-card   { border-radius: 20px; }
-    }
-  </style>
+/* ── FEATURES LIST ── */
+.feat-list{list-style:none;margin:12px 0;display:flex;flex-direction:column;gap:7px}
+.feat-list li{display:flex;align-items:center;gap:8px;font-size:13px;color:#475569}
+.feat-list li i{color:var(--g);flex-shrink:0;font-size:12px}
+
+/* ── COUPON BOX ── */
+.coupon-box{
+  background:var(--surf3);border:1.5px solid var(--bo);
+  border-radius:13px;padding:14px;margin-bottom:14px;
+}
+.coupon-label{font-size:12px;font-weight:700;color:#475569;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.coupon-tag{background:var(--al);border:1px solid var(--a);border-radius:5px;padding:1px 7px;font-size:10.5px;font-weight:800;color:#92400e}
+.coupon-row{display:flex;gap:7px}
+.coupon-row .fi{padding:9px 12px;font-size:13.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
+.coupon-apply{
+  padding:9px 16px;background:linear-gradient(135deg,#f59e0b,#d97706);
+  color:#0f172a;border:none;border-radius:10px;font-size:12.5px;font-weight:800;
+  cursor:pointer;white-space:nowrap;transition:.18s;flex-shrink:0;font-family:'Syne',sans-serif;
+}
+.coupon-apply:hover{opacity:.9}
+.coupon-msg{display:none;margin-top:9px;padding:9px 13px;border-radius:9px;font-size:12.5px;font-weight:600;line-height:1.5}
+
+/* ── PRICE SUMMARY ── */
+.price-summary{
+  background:var(--surf);border:1.5px solid var(--bo);
+  border-radius:13px;padding:13px 16px;margin-bottom:16px;
+}
+.price-row{display:flex;justify-content:space-between;font-size:13px;color:var(--mu);margin-bottom:7px}
+.price-disc{display:none;justify-content:space-between;font-size:13px;color:#16a34a;font-weight:700;margin-bottom:7px}
+.price-total{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:900;color:var(--ink);border-top:1.5px solid var(--bo);padding-top:9px;margin-top:2px}
+
+/* ── REFER BOX ── */
+.refer-box{
+  background:linear-gradient(135deg,#fffbeb,#fef9ec);
+  border:1.5px solid rgba(245,158,11,.35);border-radius:12px;
+  padding:12px 14px;margin-bottom:14px;
+  font-size:12.5px;color:#92400e;line-height:1.6;
+}
+.refer-box strong{color:var(--ad)}
+
+/* ── SUCCESS ── */
+.success-wrap{text-align:center;padding:8px 0}
+.success-ico{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:68px;height:68px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g),#059669);
+  font-size:1.9rem;margin-bottom:15px;
+  box-shadow:0 0 0 8px rgba(16,185,129,.1),0 8px 22px rgba(16,185,129,.3);
+  animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+}
+.success-wrap h3{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;margin-bottom:9px}
+.success-wrap p{font-size:13.5px;color:var(--mu);line-height:1.7;margin-bottom:18px}
+.success-actions{display:flex;flex-direction:column;gap:8px}
+
+/* ── FOOT ── */
+.page-foot{font-size:11.5px;color:var(--faint);text-align:center;line-height:1.8}
+.page-foot a{color:#94a3b8;text-decoration:none}
+.page-foot a:hover{color:var(--v)}
+</style>
 </head>
 <body>
+<div class="page">
 
-<div class="page-wrap">
-
-  <!-- TOP STRIP -->
-  <div class="site-strip">
-    <a href="https://hsbteleet.com" class="site-brand">
-      <div class="site-mark">HL</div>
-      <div class="site-name">HSBTE<b>LEET</b>.com</div>
-    </a>
-    <a href="https://hsbteleet.com" class="site-back">
-      <i class="fas fa-arrow-left"></i> Back to site
-    </a>
-  </div>
-
-  <!-- AUTH CARD -->
-  <div class="auth-card">
-
-    <div class="auth-header">
-      <div class="auth-hdr-inner">
-        <div class="crown-ring">👑</div>
-        <h1>Premium LEET Access</h1>
-        <p>Login or register to unlock 14 exclusive<br/>HSBTE LEET sample papers</p>
-        <div class="badge-row">
-          <span class="hbadge"><span class="hbadge-dot"></span>Secure</span>
-          <span class="hbadge">₹11 One-Time</span>
-          <span class="hbadge">Lifetime Access</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">
-        <i class="fas fa-sign-in-alt"></i> Login
-      </button>
-      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">
-        <i class="fas fa-user-plus"></i> New User
-      </button>
-    </div>
-
-    <div class="auth-body">
-
-      <!-- LOGIN PANEL -->
-      <div class="tab-panel active" id="panel-login">
-        <div class="alert warning show" id="login-warn">
-          <i class="fas fa-exclamation-triangle"></i>
-          <span><strong>Forgot password?</strong> WhatsApp admin at <strong>+91-7988316241</strong> with your registered mobile.</span>
-        </div>
-        <div class="alert danger"  id="login-err"></div>
-        <div class="alert success" id="login-ok"></div>
-
-        <div class="form-group">
-          <label class="form-label" for="l-mobile">Mobile Number</label>
-          <input type="tel" id="l-mobile" class="form-input" placeholder="10-digit mobile" maxlength="10" autocomplete="tel" inputmode="numeric"/>
-          <div class="form-error" id="l-mobile-err">Please enter a valid 10-digit mobile number.</div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="l-password">Password</label>
-          <input type="password" id="l-password" class="form-input" placeholder="Enter your password" autocomplete="current-password"/>
-          <div class="form-error" id="l-pass-err">Please enter your password.</div>
-        </div>
-
-        <button class="btn btn-blue" id="btn-login" onclick="doLogin()">
-          <i class="fas fa-sign-in-alt"></i> Login to My Account
-        </button>
-
-        <div class="separator">need help?</div>
-        <a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20my%20Premium%20LEET%20account." class="wa-btn" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp"></i> Contact Admin on WhatsApp
-        </a>
-      </div>
-
-      <!-- REGISTER PANEL -->
-      <div class="tab-panel" id="panel-register">
-
-        <div class="step-indicator">
-          <div class="step active" id="step1-dot">1</div>
-          <div class="step-line" id="line1"></div>
-          <div class="step" id="step2-dot">2</div>
-          <div class="step-line" id="line2"></div>
-          <div class="step" id="step3-dot">3</div>
-        </div>
-
-        <div class="alert danger"  id="reg-err"></div>
-        <div class="alert success" id="reg-ok"></div>
-
-        <!-- STEP 1 -->
-        <div id="reg-step1">
-          <div class="form-group">
-            <label class="form-label" for="r-name">Full Name</label>
-            <input type="text" id="r-name" class="form-input" placeholder="Your full name" autocomplete="name"/>
-            <div class="form-error" id="r-name-err">Full name is required.</div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="r-mobile">Mobile Number</label>
-            <input type="tel" id="r-mobile" class="form-input" placeholder="10-digit mobile number" maxlength="10" autocomplete="tel" inputmode="numeric"/>
-            <div class="form-error" id="r-mobile-err">Please enter a valid 10-digit mobile number.</div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="r-email">Email Address</label>
-            <input type="email" id="r-email" class="form-input" placeholder="your@email.com" autocomplete="email"/>
-            <div class="form-error" id="r-email-err">Please enter a valid email address.</div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="r-password">Create Password</label>
-            <input type="password" id="r-password" class="form-input" placeholder="Minimum 6 characters" autocomplete="new-password"/>
-            <div class="form-hint">⚠️ Save this — no self-reset. Contact admin if forgotten.</div>
-            <div class="form-error" id="r-pass-err">Password must be at least 6 characters.</div>
-          </div>
-          <div class="alert warning show" style="margin-bottom:16px;">
-            <i class="fas fa-shield-alt"></i>
-            <span>If you forget your password, contact admin at <strong>+91-7988316241</strong> with your registered mobile.</span>
-          </div>
-          <button class="btn btn-blue" id="btn-step1" onclick="doStep1()">
-            Continue to Payment <i class="fas fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <!-- STEP 2 -->
-        <div id="reg-step2" style="display:none;">
-
-          <!-- Price & features -->
-          <div style="text-align:center;margin-bottom:20px;">
-            <div class="price-pill">
-              <i class="fas fa-crown"></i>
-              One-time —
-              <span id="display-price" style="transition:.3s;font-weight:900;">₹11</span>
-            </div>
-            <p style="font-size:13.5px;color:#64748b;line-height:1.7;margin-bottom:14px;">Pay once · unlock all 14 premium HSBTE LEET sample papers · lifetime access.</p>
-            <ul class="feat-list" style="text-align:left;max-width:270px;margin:0 auto 16px;">
-              <li><i class="fas fa-check-circle"></i> 14 exclusive papers (8 Section-wise + 6 Full Syllabus)</li>
-              <li><i class="fas fa-check-circle"></i> Lifetime access — no expiry</li>
-              <li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>
-              <li><i class="fas fa-check-circle"></i> Welcome email sent instantly</li>
-            </ul>
-          </div>
-
-          <!-- ── COUPON CODE ── -->
-          <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:16px;">
-            <div style="font-size:12.5px;font-weight:700;color:#475569;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
-              <span style="background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:800;color:#92400e;">🏷 COUPON</span>
-              Have a coupon code? Apply below (optional)
-            </div>
-            <div style="display:flex;gap:8px;">
-              <input type="text" id="coupon-input"
-                placeholder="e.g STUDY"
-                maxlength="20"
-                oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"
-                onkeydown="if(event.key==='Enter'){event.preventDefault();applyCoupon();}"
-                style="flex:1;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:10px;
-                       font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
-                       outline:none;color:#1e293b;background:#fff;transition:.2s;"/>
-              <button onclick="applyCoupon()" id="btn-coupon"
-                style="padding:11px 18px;background:linear-gradient(135deg,#f59e0b,#d97706);
-                       color:#1a0f00;border:none;border-radius:10px;font-size:13px;font-weight:800;
-                       cursor:pointer;white-space:nowrap;transition:.2s;flex-shrink:0;">
-                Apply
-              </button>
-            </div>
-            <div id="coupon-msg" style="display:none;margin-top:10px;padding:10px 14px;border-radius:9px;font-size:13px;font-weight:600;line-height:1.5;"></div>
-          </div>
-
-          <!-- ── PRICE SUMMARY ── -->
-          <div style="background:#fff;border:2px solid #e2e8f0;border-radius:14px;padding:14px 18px;margin-bottom:18px;">
-            <div style="display:flex;justify-content:space-between;font-size:13px;color:#64748b;margin-bottom:8px;">
-              <span>Original Price</span><span style="font-weight:600;">₹11</span>
-            </div>
-            <div id="discount-row" style="display:none;justify-content:space-between;font-size:13px;color:#16a34a;font-weight:700;margin-bottom:8px;">
-              <span id="discount-label">🏷 Discount</span>
-              <span id="discount-value">-₹0</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:17px;font-weight:900;
-                        color:#1e293b;border-top:2px solid #e2e8f0;padding-top:10px;margin-top:2px;">
-              <span>Total Payable</span>
-              <span id="final-price-display" style="color:#1a56db;">₹11</span>
-            </div>
-          </div>
-
-          <!-- ── PAY BUTTON (normal / discounted) ── -->
-          <div id="pay-btn-wrap">
-            <button class="btn btn-gold" id="btn-pay" onclick="doPayment()">
-              <i class="fas fa-lock"></i> <span id="btn-pay-text">Pay ₹11 &amp; Unlock Access</span>
-            </button>
-          </div>
-
-          <!-- ── FREE ACCESS BUTTON (TOPPER01 coupon) ── -->
-          <div id="free-btn-wrap" style="display:none;">
-            <button class="btn" id="btn-free" onclick="doFreeAccess()"
-              style="width:100%;padding:15px;border:none;border-radius:50px;cursor:pointer;
-                     background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
-                     font-size:1.05rem;font-weight:800;
-                     display:flex;align-items:center;justify-content:center;gap:8px;
-                     box-shadow:0 6px 20px rgba(22,163,74,.3);transition:.2s;">
-              <i class="fas fa-gift"></i> Claim FREE Access — ₹0
-            </button>
-            <p style="text-align:center;font-size:12px;color:#64748b;margin-top:8px;">
-              🎉 TOPPER01 coupon applied — get lifetime access completely free!
-            </p>
-          </div>
-
-        </div>
-
-        <!-- STEP 3 -->
-        <div id="reg-step3" style="display:none;">
-          <div class="success-state">
-            <div class="success-ico">🎉</div>
-            <h3 id="success-name-msg">Access Unlocked!</h3>
-            <p id="success-body-msg">Payment confirmed. Your account is now active. Check your email for a welcome message. Access all 14 premium sample papers now.</p>
-            <a href="./premium-papers.html" class="btn btn-gold" style="text-decoration:none;">
-              <i class="fas fa-book-open"></i> Go to My Papers
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="page-foot">
-    <a href="https://hsbteleet.com">hsbteleet.com</a> &bull; Premium &bull; Secure &bull;
-    <a href="https://wa.me/917988316241">Support</a>
-  </div>
-
+<!-- TOP STRIP -->
+<div class="strip">
+  <a href="https://hsbteleet.com" class="brand">
+    <div class="brand-mark">HL</div>
+    <div class="brand-name">HSBTE<em>LEET</em>.com</div>
+  </a>
+  <a href="./btech-leet-premium.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
 </div>
 
+<!-- TIER PICKER -->
+<div class="tier-picker">
+  <div class="tier-card tp" id="opt-prem" onclick="selectTier('premium')">
+    <div class="tier-check"><i class="fas fa-check"></i></div>
+    <div class="tier-icon">👑</div>
+    <div class="tier-name">Premium</div>
+    <div class="tier-price">₹19</div>
+    <div class="tier-desc">14 Papers + Rank Analysis</div>
+    <div class="tier-save">Launch Price</div>
+  </div>
+  <div class="tier-card" id="opt-ultra" onclick="selectTier('ultra')">
+    <div class="tier-check"><i class="fas fa-check"></i></div>
+    <div class="tier-icon">🚀</div>
+    <div class="tier-name">Ultra Premium</div>
+    <div class="tier-price">₹29</div>
+    <div class="tier-desc">Papers + All AI Tools</div>
+    <div class="tier-save">Best Value</div>
+  </div>
+</div>
 
-<!-- SDKs -->
+<!-- CARD -->
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="card-hdr hdr-prem" id="cHdr">
+    <div class="hdr-in">
+      <div class="hdr-icon" id="hdrIcon">👑</div>
+      <h1 class="hdr-title" id="hdrTitle">Premium LEET Access</h1>
+      <p class="hdr-sub" id="hdrSub">Login or register — unlock 14 exclusive papers and Rank Analysis</p>
+      <div class="hdr-badges">
+        <span class="hbadge"><span class="dot"></span>Secure</span>
+        <span class="hbadge" id="hdrPrice">₹19 One-Time</span>
+        <span class="hbadge">Ad-Free</span>
+        <span class="hbadge">Lifetime</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab on" id="tab-login" onclick="switchTab('login')"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <button class="tab" id="tab-reg" onclick="switchTab('register')"><i class="fas fa-user-plus"></i> New User</button>
+  </div>
+
+  <!-- CARD BODY -->
+  <div class="card-body">
+
+    <!-- ── LOGIN PANEL ── -->
+    <div class="panel on" id="panel-login">
+      <div class="alert alert-warn on">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>Forgot password?</strong> WhatsApp admin at <strong>+91-7988316241</strong> with your registered mobile.
+      </div>
+      <div class="alert alert-err" id="lerr"></div>
+      <div class="alert alert-ok"  id="lok"></div>
+
+      <div class="fg">
+        <label class="fl" for="l-mob">Mobile Number</label>
+        <input type="tel" class="fi" id="l-mob" placeholder="10-digit mobile" maxlength="10" autocomplete="tel" inputmode="numeric" aria-label="Mobile number"/>
+        <div class="fi-err" id="l-mob-err">Please enter a valid 10-digit mobile number.</div>
+      </div>
+      <div class="fg">
+        <label class="fl" for="l-pass">Password</label>
+        <div class="pw-wrap">
+          <input type="password" class="fi" id="l-pass" placeholder="Enter your password" autocomplete="current-password" aria-label="Password"/>
+          <button class="pw-eye" onclick="togglePw('l-pass',this)" type="button" aria-label="Show/hide password"><i class="fas fa-eye"></i></button>
+        </div>
+        <div class="fi-err" id="l-pass-err">Please enter your password.</div>
+      </div>
+
+      <button class="btn btn-v" id="btn-login" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Login to My Account</button>
+
+      <div class="divider">need help?</div>
+      <a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20my%20LEET%20Premium%20account." class="wa-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Contact Admin on WhatsApp</a>
+    </div>
+
+    <!-- ── REGISTER PANEL ── -->
+    <div class="panel" id="panel-register">
+
+      <div class="steps">
+        <div class="step act" id="s1-dot">1</div>
+        <div class="step-line" id="line1"></div>
+        <div class="step" id="s2-dot">2</div>
+        <div class="step-line" id="line2"></div>
+        <div class="step" id="s3-dot">3</div>
+      </div>
+
+      <div class="alert alert-err" id="rerr"></div>
+
+      <!-- STEP 1 -->
+      <div id="step1">
+        <div class="fg">
+          <label class="fl" for="r-name">Full Name</label>
+          <input type="text" class="fi" id="r-name" placeholder="Your full name" autocomplete="name" aria-label="Full name"/>
+          <div class="fi-err" id="r-name-err">Full name is required.</div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="r-mob">Mobile Number <span style="font-size:9.5px;color:var(--pud);font-weight:700;text-transform:none;letter-spacing:0">(This is your Refer Code)</span></label>
+          <input type="tel" class="fi" id="r-mob" placeholder="10-digit mobile" maxlength="10" autocomplete="tel" inputmode="numeric" aria-label="Mobile number"/>
+          <div class="fi-hint">📱 Your mobile number is your <strong>Refer Code</strong>. Share it to earn refunds!</div>
+          <div class="fi-err" id="r-mob-err">Please enter a valid 10-digit mobile number.</div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="r-email">Email Address</label>
+          <input type="email" class="fi" id="r-email" placeholder="your@email.com" autocomplete="email" aria-label="Email address"/>
+          <div class="fi-err" id="r-email-err">Please enter a valid email address.</div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="r-pass">Create Password</label>
+          <div class="pw-wrap">
+            <input type="password" class="fi" id="r-pass" placeholder="Minimum 6 characters" autocomplete="new-password" aria-label="Create password"/>
+            <button class="pw-eye" onclick="togglePw('r-pass',this)" type="button" aria-label="Show/hide password"><i class="fas fa-eye"></i></button>
+          </div>
+          <div class="fi-hint">⚠️ Save this — no self-reset. Contact admin if forgotten.</div>
+          <div class="fi-err" id="r-pass-err">Password must be at least 6 characters.</div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="r-refer">Refer Code <span style="font-size:9.5px;color:var(--faint);font-weight:600;text-transform:none;letter-spacing:0">(Optional)</span></label>
+          <input type="tel" class="fi" id="r-refer" placeholder="Friend's 10-digit mobile (optional)" maxlength="10" inputmode="numeric" aria-label="Refer code"/>
+          <div class="fi-hint">🎁 Enter your referrer's mobile to support them!</div>
+        </div>
+
+        <div class="refer-box">
+          <strong>🎁 Refer and Get Refund:</strong> Your mobile number is your refer code. Share it with batchmates.<br>
+          <strong>1 referral = 50% refund</strong> · <strong>2+ referrals = full refund!</strong>
+          Contact admin at +91-7988316241 to claim.
+        </div>
+
+        <div class="alert alert-warn on" style="margin-bottom:14px">
+          <i class="fas fa-shield-alt"></i> Forgot password? Contact admin at <strong>+91-7988316241</strong>.
+        </div>
+
+        <button class="btn btn-v" id="btn-s1" onclick="doStep1()">Continue to Payment <i class="fas fa-arrow-right"></i></button>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="step2" style="display:none">
+        <div style="text-align:center;margin-bottom:18px">
+          <div class="ppill ppill-a" id="s2pill"><i class="fas fa-crown"></i> One-time — <span id="s2price" style="font-weight:900">₹19</span></div>
+          <p style="font-size:13px;color:var(--mu);line-height:1.65;margin-bottom:12px" id="s2desc">Pay once — unlock 14 premium papers plus Rank Analysis, lifetime access, 100% ad-free.</p>
+          <ul class="feat-list" style="text-align:left;max-width:260px;margin:0 auto" id="s2feats">
+            <li><i class="fas fa-check-circle"></i> 14 exclusive papers (section-wise + full)</li>
+            <li><i class="fas fa-check-circle"></i> Rank Analysis Tool</li>
+            <li><i class="fas fa-check-circle"></i> 100% Ad-Free experience</li>
+            <li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>
+          </ul>
+        </div>
+
+        <!-- COUPON -->
+        <div class="coupon-box">
+          <div class="coupon-label"><span class="coupon-tag">🏷 COUPON</span> Have a code? NISHANT = 50% off · TOPPER01 = FREE</div>
+          <div class="coupon-row">
+            <input type="text" class="fi" id="c-input" placeholder="Enter coupon code" maxlength="20" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')" onkeydown="if(event.key==='Enter'){event.preventDefault();applyCoupon()}" aria-label="Coupon code"/>
+            <button class="coupon-apply" onclick="applyCoupon()">Apply</button>
+          </div>
+          <div class="coupon-msg" id="c-msg"></div>
+        </div>
+
+        <!-- PRICE SUMMARY -->
+        <div class="price-summary">
+          <div class="price-row"><span>Original Price</span><span style="font-weight:600" id="orig-p">₹19</span></div>
+          <div class="price-disc" id="disc-row"><span id="disc-lbl">🏷 Discount</span><span id="disc-val">-₹0</span></div>
+          <div class="price-total"><span>Total Payable</span><span id="total-p" style="color:var(--b)">₹19</span></div>
+        </div>
+
+        <div id="pay-wrap">
+          <button class="btn btn-a" id="btn-pay" onclick="doPayment()"><i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹19 and Unlock Access</span></button>
+        </div>
+        <div id="free-wrap" style="display:none">
+          <button class="btn btn-g" id="btn-free" onclick="doFreeAccess()"><i class="fas fa-gift"></i> Claim FREE Access — ₹0</button>
+          <p style="text-align:center;font-size:12px;color:var(--mu);margin-top:8px">🎉 TOPPER01 applied — lifetime access completely free!</p>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="step3" style="display:none">
+        <div class="success-wrap">
+          <div class="success-ico">🎉</div>
+          <h3 id="suc-name">Access Unlocked!</h3>
+          <p id="suc-msg">Payment confirmed. Your account is now active. Check your email. Access all papers and tools now.</p>
+          <div class="success-actions">
+            <a href="./premium-papers.html" class="btn btn-a" style="text-decoration:none"><i class="fas fa-book-open"></i> Go to My Papers</a>
+            <a href="./ultra-premium.html" class="btn btn-pu" style="text-decoration:none;display:none" id="ultra-btn"><i class="fas fa-rocket"></i> Open Ultra Premium Tools</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="page-foot">
+  <a href="https://hsbteleet.com">hsbteleet.com</a> &bull; Premium &bull; Ad-Free &bull; Secure Razorpay &bull; <a href="https://wa.me/917988316241">Support</a>
+</div>
+
+</div><!-- .page -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
 <script>
 'use strict';
 
-// ══════════════════════════════════════════════════════
-//  CONFIG
-// ══════════════════════════════════════════════════════
+// ── CONFIG ──
 var SUPA_URL    = 'https://vzfpltvchsxsfqlldafd.supabase.co';
 var SUPA_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
 var RZP_KEY     = 'rzp_live_SPbBEutqahnSN4';
 var EJS_SVC     = 'service_zlxv3q4';
-var EJS_TPL     = 'template_j4m5ute';  // ek hi template — sab kuch isi se
+var EJS_TPL     = 'template_j4m5ute';
 var EJS_PUB     = 'byFleJ2hV770O_Mni';
 var ADMIN_EMAIL = 'nishant@hsbteleet.com';
 var ADMIN_NAME  = 'Nishant (Admin)';
@@ -474,967 +522,524 @@ var ADMIN_NAME  = 'Nishant (Admin)';
 var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 emailjs.init(EJS_PUB);
 
-var pendingUser = null;
+// ── TIERS — updated to ₹19 / ₹29 ──
+var TIERS = {
+  premium: { label:'Premium', price:19, paise:1900, icon:'👑', color:'#d97706', hdr:'hdr-prem' },
+  ultra:   { label:'Ultra Premium', price:29, paise:2900, icon:'🚀', color:'#7c3aed', hdr:'hdr-ultra' }
+};
+var COUPONS = {
+  'NISHANT':  { label:'NISHANT — 50% off!', type:'percent', percent:50 },
+  'TOPPER01': { label:'TOPPER01 — 100% FREE!', type:'free' }
+};
 
-// ══════════════════════════════════════════════════════
-//  HELPERS
-// ══════════════════════════════════════════════════════
+var curTier = 'premium';
+var pending = null;
+var applied = null;
+var payPaise = 1900;
 
+// ── URL PARAM ──
+(function(){
+  var t = new URLSearchParams(window.location.search).get('tier');
+  if(t === 'ultra') curTier = 'ultra';
+  updateUI();
+})();
 
-function nowStr() {
+function selectTier(t) {
+  curTier = t;
+  updateUI();
+  if(applied){ applied = null; resetCouponUI(); }
+}
+
+function updateUI() {
+  var T = TIERS[curTier];
+  // Tier cards
+  document.getElementById('opt-prem').className  = 'tier-card' + (curTier==='premium'?' tp':'');
+  document.getElementById('opt-ultra').className = 'tier-card' + (curTier==='ultra'?' tu':'');
+  // Header
+  var hdr = document.getElementById('cHdr');
+  hdr.className = 'card-hdr ' + T.hdr;
+  document.getElementById('hdrIcon').textContent  = T.icon;
+  document.getElementById('hdrTitle').textContent = T.label + ' LEET Access';
+  document.getElementById('hdrPrice').textContent = '₹' + T.price + ' One-Time';
+  document.getElementById('hdrSub').textContent = curTier==='ultra'
+    ? 'Register to unlock papers + College Predictor + Counselling tools'
+    : 'Login or register — unlock 14 exclusive papers and Rank Analysis';
+  // Step 2
+  var pill = document.getElementById('s2pill');
+  pill.className = 'ppill ' + (curTier==='ultra' ? 'ppill-pu' : 'ppill-a');
+  pill.querySelector('i').className = curTier==='ultra' ? 'fas fa-rocket' : 'fas fa-crown';
+  document.getElementById('s2price').textContent = '₹' + T.price;
+  document.getElementById('orig-p').textContent  = '₹' + T.price;
+  document.getElementById('total-p').textContent = '₹' + T.price;
+  document.getElementById('total-p').style.color = T.color;
+  document.getElementById('pay-txt').textContent = 'Pay ₹' + T.price + ' and Unlock Access';
+  document.getElementById('s2desc').textContent = curTier==='ultra'
+    ? 'Pay once — unlock 14 papers + College Predictor + all counselling tools, lifetime access, 100% ad-free.'
+    : 'Pay once — unlock 14 premium papers plus Rank Analysis, lifetime access, 100% ad-free.';
+  document.getElementById('s2feats').innerHTML = curTier==='ultra'
+    ? '<li><i class="fas fa-check-circle"></i> 14 exclusive LEET sample papers</li><li><i class="fas fa-star"></i> AI College Predictor (2025 data)</li><li><i class="fas fa-star"></i> Rank Predictor + Counselling Tools</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free · Secure Razorpay</li>'
+    : '<li><i class="fas fa-check-circle"></i> 14 exclusive papers (section-wise + full)</li><li><i class="fas fa-check-circle"></i> Rank Analysis Tool</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free experience</li><li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>';
+  payPaise = T.paise;
+}
+
+// ── TOGGLE PASSWORD VISIBILITY ──
+function togglePw(id, btn) {
+  var fi = document.getElementById(id);
+  var isPass = fi.type === 'password';
+  fi.type = isPass ? 'text' : 'password';
+  btn.querySelector('i').className = isPass ? 'fas fa-eye-slash' : 'fas fa-eye';
+}
+
+// ── HELPERS ──
+function ts() {
   var d = new Date();
-  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })
-       + ' · ' + d.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', hour12:true });
+  return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});
 }
-
-function firstName(fullName) {
-  return (fullName || 'Student').split(' ')[0];
-}
+function fn(n){ return (n||'Student').split(' ')[0]; }
 
 function switchTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach(function(t){ t.classList.remove('active'); });
-  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.getElementById('tab-' + tab).classList.add('active');
-  document.getElementById('panel-' + tab).classList.add('active');
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('on'); });
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('on'); });
+  document.getElementById('tab-'+( tab==='login'?'login':'reg')).classList.add('on');
+  document.getElementById('panel-'+(tab==='login'?'login':'register')).classList.add('on');
 }
 
-function showAlert(id, html, type) {
+function setAlert(id, html, type) {
   var el = document.getElementById(id);
-  if (!el) return;
-  el.className = 'alert ' + type + ' show';
+  if(!el) return;
+  el.className = 'alert alert-'+type+' on';
   el.innerHTML = html;
 }
-function hideAlert(id) {
-  var el = document.getElementById(id);
-  if (el) { el.classList.remove('show'); el.innerHTML = ''; }
-}
-function showErr(id, show) {
-  var el = document.getElementById(id);
-  if (el) el.classList[show ? 'add' : 'remove']('show');
-}
-function setInputErr(id, isErr) {
-  var el = document.getElementById(id);
-  if (el) el.classList[isErr ? 'add' : 'remove']('error');
-}
-function setLoading(btnId, loading, text) {
-  var btn = document.getElementById(btnId);
-  if (!btn) return;
-  btn.disabled = loading;
-  btn.innerHTML = loading ? '<span class="spinner"></span> Please wait…' : text;
-}
-function isValidMobile(v){ return /^\d{10}$/.test(v.trim()); }
-function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+function clearAlert(id) { var el=document.getElementById(id); if(el){ el.classList.remove('on'); el.innerHTML=''; } }
+function showFE(id, show) { var el=document.getElementById(id); if(el) el.classList[show?'add':'remove']('on'); }
+function setFI(id, err) { var el=document.getElementById(id); if(el) el.classList[err?'add':'remove']('err'); }
+function setBtn(id, loading, html) { var btn=document.getElementById(id); if(!btn)return; btn.disabled=loading; btn.innerHTML=loading?'<span class="spin"></span> Please wait…':html; }
+function isMob(v) { return /^\d{10}$/.test(v.trim()); }
+function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
 
-// ══════════════════════════════════════════════════════
-//  LOGIN
-// ══════════════════════════════════════════════════════
-
+// ── LOGIN ──
 async function doLogin() {
-  hideAlert('login-err'); hideAlert('login-ok');
-  var mobile = document.getElementById('l-mobile').value.trim();
-  var pass   = document.getElementById('l-password').value;
+  clearAlert('lerr'); clearAlert('lok');
+  var mob  = document.getElementById('l-mob').value.trim();
+  var pass = document.getElementById('l-pass').value;
   var ok = true;
-  if (!isValidMobile(mobile)) { setInputErr('l-mobile',true);  showErr('l-mobile-err',true);  ok=false; } else { setInputErr('l-mobile',false);  showErr('l-mobile-err',false); }
-  if (!pass)                  { setInputErr('l-password',true); showErr('l-pass-err',true);    ok=false; } else { setInputErr('l-password',false); showErr('l-pass-err',false); }
-  if (!ok) return;
+  if(!isMob(mob)){  setFI('l-mob',true);  showFE('l-mob-err',true);  ok=false; } else { setFI('l-mob',false);  showFE('l-mob-err',false); }
+  if(!pass){        setFI('l-pass',true); showFE('l-pass-err',true); ok=false; } else { setFI('l-pass',false); showFE('l-pass-err',false); }
+  if(!ok) return;
 
-  setLoading('btn-login', true, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
+  setBtn('btn-login', true, '');
   try {
-    var { data: user, error: uErr } = await sb.from('premium_users')
-.select('id,mobile,email,full_name')
-.eq('mobile', mobile).eq('password_hash', pass).maybeSingle();
+    var { data: user, error } = await sb.from('premium_users')
+      .select('id,mobile,email,full_name,tier')
+      .eq('mobile', mob).eq('password_hash', pass).maybeSingle();
 
-    if (uErr || !user) {
-      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;Invalid mobile or password. Contact admin at <strong>+91-7988316241</strong> if you forgot your password.', 'danger');
-      setLoading('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
+    if(error || !user) {
+      setAlert('lerr','<i class="fas fa-times-circle"></i> Invalid mobile or password. Contact admin at <strong>+91-7988316241</strong>.','err');
+      setBtn('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
       return;
     }
 
     var { data: access } = await sb.from('premium_access').select('is_active').eq('user_id', user.id).maybeSingle();
-    if (!access || !access.is_active) {
-      showAlert('login-err', '<i class="fas fa-times-circle"></i> &nbsp;No active premium access found. <a href="./premium-login.html" style="color:#1a56db;font-weight:700;">Get Access →</a>', 'danger');
-      setLoading('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
+    if(!access || !access.is_active) {
+      setAlert('lerr','<i class="fas fa-times-circle"></i> Account not active. <a href="./btech-leet-premium.html" style="color:var(--v);font-weight:700">Get Access →</a>','err');
+      setBtn('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
       return;
     }
 
     sessionStorage.setItem('prem_uid',  user.id);
-    sessionStorage.setItem('prem_mob',  mobile);
+    sessionStorage.setItem('prem_mob',  mob);
     sessionStorage.setItem('prem_name', user.full_name || '');
+    sessionStorage.setItem('prem_tier', user.tier || 'premium');
     sessionStorage.setItem('prem_ts',   Date.now().toString());
 
-    showAlert('login-ok', '<i class="fas fa-check-circle"></i> &nbsp;Welcome back, <strong>' + (user.full_name || 'Student') + '</strong>! Redirecting…', 'success');
+    setAlert('lok','<i class="fas fa-check-circle"></i> Welcome back, <strong>'+(user.full_name||'Student')+'</strong>! Redirecting…','ok');
 
-    // Admin ko login alert bhejo
-    sendEmail('login', { name: user.full_name, mobile: mobile, email: user.email });
+    // ── EMAIL: LOGIN → Only send to USER, NOT admin ──
+    sendLoginEmail(user);
 
     setTimeout(function(){ window.location.href = './premium-papers.html'; }, 1200);
 
   } catch(e) {
-    showAlert('login-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;Something went wrong. Please try again.', 'danger');
-    setLoading('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
+    setAlert('lerr','<i class="fas fa-exclamation-triangle"></i> Login failed. Please check your connection or try again.','err');
+    setBtn('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
   }
 }
 
-// ══════════════════════════════════════════════════════
-//  REGISTRATION STEP 1
-// ══════════════════════════════════════════════════════
-
+// ── STEP 1 ──
 async function doStep1() {
-  hideAlert('reg-err');
-  var name   = document.getElementById('r-name').value.trim();
-  var mobile = document.getElementById('r-mobile').value.trim();
-  var email  = document.getElementById('r-email').value.trim();
-  var pass   = document.getElementById('r-password').value;
+  clearAlert('rerr');
+  var name  = document.getElementById('r-name').value.trim();
+  var mob   = document.getElementById('r-mob').value.trim();
+  var email = document.getElementById('r-email').value.trim();
+  var pass  = document.getElementById('r-pass').value;
+  var refer = document.getElementById('r-refer').value.trim();
   var ok = true;
 
-  if (!name)                    { setInputErr('r-name',true);     showErr('r-name-err',true);    ok=false; } else { setInputErr('r-name',false);     showErr('r-name-err',false); }
-  if (!isValidMobile(mobile))   { setInputErr('r-mobile',true);   showErr('r-mobile-err',true);  ok=false; } else { setInputErr('r-mobile',false);   showErr('r-mobile-err',false); }
-  if (!isValidEmail(email))     { setInputErr('r-email',true);    showErr('r-email-err',true);   ok=false; } else { setInputErr('r-email',false);    showErr('r-email-err',false); }
-  if (!pass || pass.length < 6) { setInputErr('r-password',true); showErr('r-pass-err',true);    ok=false; } else { setInputErr('r-password',false); showErr('r-pass-err',false); }
-  if (!ok) return;
+  if(!name)         { setFI('r-name',true);  showFE('r-name-err',true);  ok=false; } else { setFI('r-name',false);  showFE('r-name-err',false); }
+  if(!isMob(mob))   { setFI('r-mob',true);   showFE('r-mob-err',true);   ok=false; } else { setFI('r-mob',false);   showFE('r-mob-err',false); }
+  if(!isEmail(email)){ setFI('r-email',true); showFE('r-email-err',true); ok=false; } else { setFI('r-email',false); showFE('r-email-err',false); }
+  if(!pass||pass.length<6){ setFI('r-pass',true); showFE('r-pass-err',true); ok=false; } else { setFI('r-pass',false); showFE('r-pass-err',false); }
+  if(!ok) return;
 
-  setLoading('btn-step1', true, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
+  setBtn('btn-s1', true, '');
   try {
-    var { data: existing } = await sb.from('premium_users').select('id').eq('mobile', mobile).maybeSingle();
-    if (existing) {
-      showAlert('reg-err', '<i class="fas fa-user-check"></i> &nbsp;Mobile already registered. <button onclick="switchTab(\'login\')" style="background:none;border:none;color:#1a56db;cursor:pointer;font-weight:700;text-decoration:underline;font-size:13px;">Login here →</button>', 'danger');
-      setLoading('btn-step1', false, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
+    var { data: ex } = await sb.from('premium_users').select('id').eq('mobile', mob).maybeSingle();
+    if(ex) {
+      setAlert('rerr','<i class="fas fa-user-check"></i> Mobile already registered. <button onclick="switchTab(\'login\')" style="background:none;border:none;color:var(--v);cursor:pointer;font-weight:700;text-decoration:underline;font-size:13px">Login here →</button>','err');
+      setBtn('btn-s1', false, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
       return;
     }
-    pendingUser = { full_name: name, mobile: mobile, email: email, password_hash: pass };
+    pending = { full_name:name, mobile:mob, email:email, password_hash:pass, refer_by:refer||null, tier:curTier };
 
-    document.getElementById('reg-step1').style.display = 'none';
-    document.getElementById('reg-step2').style.display = 'block';
-    var s1 = document.getElementById('step1-dot');
-    s1.classList.remove('active'); s1.classList.add('done'); s1.textContent = '✓';
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+    var s1 = document.getElementById('s1-dot');
+    s1.classList.remove('act'); s1.classList.add('done'); s1.textContent = '✓';
     document.getElementById('line1').classList.add('done');
-    document.getElementById('step2-dot').classList.add('active');
+    document.getElementById('s2-dot').classList.add('act');
+    updateUI();
   } catch(e) {
-    showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;Error checking registration. Please try again.', 'danger');
-    setLoading('btn-step1', false, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
+    setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> Unable to verify registration. Please try again.','err');
+    setBtn('btn-s1', false, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
   }
 }
 
-// ═══════════════════════════════════════════════════
-// ══════════════════════════════════════════════════════════
-//  COUPON CODE SYSTEM
-//  NISHANT  →  ₹11 → ₹6   (save ₹5)
-//  TOPPER   →  FREE ₹0     (100% off)
-// ══════════════════════════════════════════════════════════
-
-var COUPONS = {
-  'NISHANT': { label:'NISHANT — ₹5 off!',  discount:5,  finalRs:6,  finalPaise:600, type:'flat' },
-  'TOPPER01':  { label:'TOPPER01 — 100% FREE!', discount:11, finalRs:0,  finalPaise:0,   type:'free' }
-};
-var appliedCoupon = null;
-var payPaise = 1100; // module-level — set in doPayment, read in completeRegistration
-
+// ── COUPON ──
 function applyCoupon() {
-  var code   = (document.getElementById('coupon-input').value||'').trim().toUpperCase();
-  var msgEl  = document.getElementById('coupon-msg');
-  var input  = document.getElementById('coupon-input');
+  var code  = (document.getElementById('c-input').value||'').trim().toUpperCase();
+  var msgEl = document.getElementById('c-msg');
+  var input = document.getElementById('c-input');
+  var T     = TIERS[curTier];
 
-  function showMsg(txt, type) {
-    var bg  = type==='ok'  ? '#f0fdf4' : type==='err' ? '#fff1f2' : '#fffbeb';
-    var brd = type==='ok'  ? '#86efac' : type==='err' ? '#fca5a5' : '#fde68a';
-    var clr = type==='ok'  ? '#15803d' : type==='err' ? '#991b1b' : '#92400e';
-    msgEl.style.cssText = 'display:block;margin-top:10px;padding:10px 14px;border-radius:9px;'+
-      'font-size:13px;font-weight:600;background:'+bg+';border:1.5px solid '+brd+';color:'+clr+';';
+  function showCMsg(txt, bg, brd, clr) {
+    msgEl.style.cssText = 'display:block;padding:9px 13px;border-radius:9px;font-size:12.5px;font-weight:600;background:'+bg+';border:1.5px solid '+brd+';color:'+clr;
     msgEl.textContent = txt;
   }
 
-  if(!code) { showMsg('Please enter a coupon code first.','warn'); return; }
-
-  if(!COUPONS[code]) {
-    showMsg('❌ Invalid code "'+code+'". Try OTHER or ask admin at +91-7988316241.','err');
-    input.style.borderColor = '#fca5a5';
-    appliedCoupon = null;
-    resetCouponUI();
-    return;
+  if(!code){ showCMsg('Please enter a coupon code first.','#fffbeb','#fde68a','#92400e'); return; }
+  if(!COUPONS[code]){
+    showCMsg('❌ Invalid code "'+code+'". Try NISHANT or TOPPER01.','#fff1f2','#fca5a5','#991b1b');
+    input.style.borderColor = '#fca5a5'; applied = null; resetCouponUI(); return;
   }
 
   var c = COUPONS[code];
-  appliedCoupon = c;
+  var orig = T.price, disc, final;
+  if(c.type==='free'){ disc=orig; final=0; }
+  else { disc=Math.round(orig*c.percent/100); final=orig-disc; }
+  applied = Object.assign({}, c, {discount:disc, finalRs:final, finalPaise:final*100});
 
-  /* Update discount row */
-  document.getElementById('discount-row').style.display  = 'flex';
-  document.getElementById('discount-label').textContent  = '🏷 ' + c.label;
-  document.getElementById('discount-value').textContent  = '-₹' + c.discount;
+  document.getElementById('disc-row').style.display = 'flex';
+  document.getElementById('disc-lbl').textContent = '🏷 ' + c.label;
+  document.getElementById('disc-val').textContent = '-₹' + disc;
 
-  if(c.type === 'free') {
-    document.getElementById('final-price-display').textContent = '₹0 (FREE!)';
-    document.getElementById('final-price-display').style.color = '#16a34a';
-    document.getElementById('display-price').textContent = 'FREE 🎉';
-    document.getElementById('pay-btn-wrap').style.display  = 'none';
-    document.getElementById('free-btn-wrap').style.display = 'block';
-    showMsg('🎉 Coupon applied! You get FREE lifetime access to all 14 papers.','ok');
+  if(c.type==='free'){
+    document.getElementById('total-p').textContent = '₹0 (FREE!)';
+    document.getElementById('total-p').style.color = '#16a34a';
+    document.getElementById('s2price').textContent = 'FREE 🎉';
+    document.getElementById('pay-wrap').style.display  = 'none';
+    document.getElementById('free-wrap').style.display = 'block';
+    showCMsg('🎉 Coupon applied! FREE lifetime access!','#f0fdf4','#86efac','#15803d');
   } else {
-    document.getElementById('final-price-display').textContent = '₹' + c.finalRs;
-    document.getElementById('final-price-display').style.color = '#1a56db';
-    document.getElementById('display-price').textContent = '₹' + c.finalRs + ' only';
-    document.getElementById('btn-pay-text').innerHTML = 'Pay ₹' + c.finalRs + ' &amp; Unlock Access';
-    document.getElementById('pay-btn-wrap').style.display  = 'block';
-    document.getElementById('free-btn-wrap').style.display = 'none';
-    showMsg('✅ Coupon applied! You save ₹' + c.discount + ' — pay only ₹' + c.finalRs + '.','ok');
+    document.getElementById('total-p').textContent = '₹' + final;
+    document.getElementById('total-p').style.color = T.color;
+    document.getElementById('s2price').textContent = '₹' + final + ' only';
+    document.getElementById('pay-txt').textContent = 'Pay ₹' + final + ' and Unlock Access';
+    document.getElementById('pay-wrap').style.display  = 'block';
+    document.getElementById('free-wrap').style.display = 'none';
+    showCMsg('✅ Coupon applied! Save ₹'+disc+' — pay only ₹'+final+'.','#f0fdf4','#86efac','#15803d');
   }
-
   input.style.borderColor = '#86efac';
 }
 
 function resetCouponUI() {
-  document.getElementById('discount-row').style.display = 'none';
-  document.getElementById('final-price-display').textContent = '₹11';
-  document.getElementById('final-price-display').style.color = '#1a56db';
-  document.getElementById('display-price').textContent = '₹11';
-  document.getElementById('btn-pay-text').innerHTML = 'Pay ₹11 &amp; Unlock Access';
-  document.getElementById('pay-btn-wrap').style.display  = 'block';
-  document.getElementById('free-btn-wrap').style.display = 'none';
+  var T = TIERS[curTier];
+  document.getElementById('disc-row').style.display = 'none';
+  document.getElementById('total-p').textContent = '₹' + T.price;
+  document.getElementById('total-p').style.color = T.color;
+  document.getElementById('s2price').textContent = '₹' + T.price;
+  document.getElementById('pay-txt').textContent = 'Pay ₹' + T.price + ' and Unlock Access';
+  document.getElementById('pay-wrap').style.display  = 'block';
+  document.getElementById('free-wrap').style.display = 'none';
+  payPaise = T.paise;
 }
 
-// ── FREE REGISTRATION (TOPPER01 coupon — no Razorpay) ──
+// ── FREE ACCESS ──
 async function doFreeAccess() {
-  if(!pendingUser) {
-    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.','danger');
-    return;
-  }
-  if(!appliedCoupon || appliedCoupon.type !== 'free') {
-    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> No free coupon applied.','danger');
-    return;
-  }
+  if(!pending){ setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.','err'); return; }
+  if(!applied || applied.type !== 'free'){ setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> No free coupon applied.','err'); return; }
   var btn = document.getElementById('btn-free');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner dark"></span> Activating free access…';
-  hideAlert('reg-err');
-
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Activating free access…';
+  clearAlert('rerr');
   try {
-    /* 1. Insert user */
-    var { data: newUser, error: uErr } = await sb.from('premium_users').insert([{
-      mobile: pendingUser.mobile, email: pendingUser.email,
-      password_hash: pendingUser.password_hash, full_name: pendingUser.full_name
+    var { data: nu, error: uE } = await sb.from('premium_users').insert([{
+      mobile:pending.mobile, email:pending.email, password_hash:pending.password_hash,
+      full_name:pending.full_name, tier:pending.tier, refer_by:pending.refer_by
     }]).select('id').single();
-    if(uErr) throw new Error('user_insert: ' + uErr.message);
+    if(uE) throw new Error(uE.message);
 
-    /* 2. Payment record ₹0 */
-    var { data: payment, error: pErr } = await sb.from('premium_payments').insert([{
-      user_id: newUser.id,
-      razorpay_payment_id: 'COUPON_TOPPER01_FREE',
-      amount: 0, status: 'free_coupon',
-      receipt: 'TOPPER01-FREE-' + newUser.id
+    var { data: pay, error: pE } = await sb.from('premium_payments').insert([{
+      user_id:nu.id, razorpay_payment_id:'COUPON_TOPPER01_FREE',
+      amount:0, status:'free_coupon', receipt:'TOPPER01-FREE-'+nu.id, tier:pending.tier
     }]).select('id').single();
-    if(pErr) throw new Error('payment_insert: ' + pErr.message);
+    if(pE) throw new Error(pE.message);
 
-    /* 3. Grant access */
-    await sb.from('premium_access').insert([{ user_id: newUser.id, payment_id: payment.id, is_active: true }]);
+    await sb.from('premium_access').insert([{user_id:nu.id, payment_id:pay.id, is_active:true, tier:pending.tier}]);
+    if(pending.refer_by) trackReferral(pending.refer_by, nu.id, pending.mobile, pending.full_name, pending.tier, 0);
 
-    /* 4. Emails */
-    sendEmail('registration', {
-      name: pendingUser.full_name, mobile: pendingUser.mobile,
-      email: pendingUser.email, payId: 'FREE via TOPPER01 coupon',
-      coupon: 'TOPPER01', amount: 0
-    });
+    // Registration emails: welcome to user + alert to admin
+    sendRegistrationEmails({ name:pending.full_name, email:pending.email, mobile:pending.mobile, payId:'FREE via TOPPER01', tier:pending.tier, amount:0 });
 
-    /* 5. Session */
-    sessionStorage.setItem('prem_uid',  newUser.id);
-    sessionStorage.setItem('prem_mob',  pendingUser.mobile);
-    sessionStorage.setItem('prem_name', pendingUser.full_name);
-    sessionStorage.setItem('prem_ts',   Date.now().toString());
-
-    /* 6. Show step 3 */
-    document.getElementById('reg-step2').style.display = 'none';
-    document.getElementById('reg-step3').style.display = 'block';
-    var s2 = document.getElementById('step2-dot');
-    s2.classList.remove('active'); s2.classList.add('done'); s2.textContent = '✓';
-    document.getElementById('line2').classList.add('done');
-    document.getElementById('step3-dot').classList.add('active');
-    var fn = firstName(pendingUser.full_name);
-    document.getElementById('success-name-msg').textContent = 'Welcome, ' + fn + '! 🎉';
-    document.getElementById('success-body-msg').textContent =
-      'FREE access granted via TOPPER01 coupon! Welcome email sent to ' + pendingUser.email +
-      '. Your account is now active — access all 14 premium papers.';
+    setSession(nu.id);
+    showSuccess(pending.full_name, 'FREE access via TOPPER01! Welcome email sent to '+pending.email+'. Account is now active.', pending.tier);
   } catch(e) {
-    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> Error: '+e.message+'. Contact admin at +91-7988316241.','danger');
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
+    setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Contact +91-7988316241 if issue persists.','err');
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
   }
 }
 
-// ══════════════════════════════════════════════════════
-//  RAZORPAY PAYMENT
-// ══════════════════════════════════════════════════════
-
-function loadRazorpay(cb) {
-  if (typeof window.Razorpay === 'function') { cb(null); return; }
+// ── RAZORPAY ──
+function loadRZP(cb) {
+  if(typeof window.Razorpay === 'function'){ cb(null); return; }
   var s = document.createElement('script');
   s.src = 'https://checkout.razorpay.com/v1/checkout.js';
-  s.onload  = function(){ typeof window.Razorpay === 'function' ? cb(null) : cb(new Error('Razorpay SDK not ready.')); };
-  s.onerror = function(){ cb(new Error('Failed to load Razorpay. Check your internet.')); };
+  s.onload  = function(){ typeof window.Razorpay==='function'?cb(null):cb(new Error('Razorpay not ready')); };
+  s.onerror = function(){ cb(new Error('Failed to load Razorpay. Check internet connection.')); };
   document.head.appendChild(s);
 }
 
 function doPayment() {
-  if (!pendingUser) {
-    showAlert('reg-err','<i class="fas fa-exclamation-triangle"></i> &nbsp;Session expired. Please start again.','danger');
-    return;
-  }
-  hideAlert('reg-err');
+  if(!pending){ setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.','err'); return; }
+  clearAlert('rerr');
+  var T = TIERS[curTier];
   var btn = document.getElementById('btn-pay');
-  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner dark"></span> Loading payment…'; }
+  btn.disabled = true; btn.innerHTML = '<span class="spin spin-dk"></span> Loading payment…';
 
-  loadRazorpay(function(err) {
-    if (err) {
-      showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;' + err.message, 'danger');
-      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> <span id="btn-pay-text">Pay ₹11 &amp; Unlock Access</span>'; }
-      return;
-    }
-    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> <span id="btn-pay-text">Pay ₹11 &amp; Unlock Access</span>'; }
+  loadRZP(function(err){
+    var resetTxt = '<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹'+T.price+' and Unlock Access</span>';
+    if(err){ setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> '+err.message,'err'); btn.disabled=false; btn.innerHTML=resetTxt; return; }
+    btn.disabled=false; btn.innerHTML=resetTxt;
 
-    /* use coupon-adjusted amount — updates module-level payPaise for completeRegistration */
-    payPaise = (appliedCoupon && appliedCoupon.finalPaise !== undefined)
-               ? appliedCoupon.finalPaise : 1100;
-    var payRs = Math.round(payPaise / 100);
+    payPaise = (applied && applied.finalPaise !== undefined) ? applied.finalPaise : T.paise;
 
     var opts = {
       key: RZP_KEY, amount: payPaise, currency: 'INR',
-      name: 'HSBTE LEET Premium',
-      description: 'Premium HSBTE LEET Sample Papers (14 Papers)',
+      name: 'HSBTE LEET ' + T.label,
+      description: T.label + ' Access — hsbteleet.com',
       image: 'https://hsbteleet.com/image/favicon.webp',
-      prefill: { contact: pendingUser.mobile, email: pendingUser.email },
-      notes: { mobile: pendingUser.mobile },
-      theme: { color: '#1a56db' },
-      handler: function(response){ completeRegistration(response); },
-      modal: { ondismiss: function(){ showAlert('reg-err','<i class="fas fa-info-circle"></i> &nbsp;Payment cancelled. Click again to retry.','danger'); } }
+      prefill: { contact: pending.mobile, email: pending.email },
+      notes: { mobile: pending.mobile, tier: curTier },
+      theme: { color: curTier==='ultra' ? '#7c3aed' : '#1a56db' },
+      handler: function(r){ completeReg(r); },
+      modal: { ondismiss: function(){ setAlert('rerr','<i class="fas fa-info-circle"></i> Payment cancelled. Click again to retry.','err'); } }
     };
     try {
       var rzp = new window.Razorpay(opts);
-      rzp.on('payment.failed', function(resp){
-        showAlert('reg-err','<i class="fas fa-times-circle"></i> &nbsp;Payment failed: ' + ((resp.error && resp.error.description) || 'Unknown error') + '. Please try again.','danger');
-      });
+      rzp.on('payment.failed', function(r){ setAlert('rerr','<i class="fas fa-times-circle"></i> Payment failed: '+((r.error&&r.error.description)||'Unknown error')+'.','err'); });
       rzp.open();
-    } catch(e) {
-      showAlert('reg-err', '<i class="fas fa-exclamation-triangle"></i> &nbsp;Could not open payment: ' + e.message, 'danger');
-    }
+    } catch(e) { setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> Could not open payment: '+e.message,'err'); }
   });
 }
 
-// ══════════════════════════════════════════════════════
-//  COMPLETE REGISTRATION
-// ══════════════════════════════════════════════════════
-
-async function completeRegistration(rzpResponse) {
-  setLoading('btn-pay', true, '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access');
+// ── COMPLETE REGISTRATION ──
+async function completeReg(rzp) {
+  var T = TIERS[curTier];
+  var btn = document.getElementById('btn-pay');
+  btn.disabled = true; btn.innerHTML = '<span class="spin spin-dk"></span> Confirming payment…';
   try {
-    // 1. Insert user (handle rare double-submit)
-    var { data: newUser, error: uErr } = await sb.from('premium_users').insert([{
-      mobile: pendingUser.mobile, email: pendingUser.email,
-      password_hash: pendingUser.password_hash, full_name: pendingUser.full_name
+    var { data: nu, error: uE } = await sb.from('premium_users').insert([{
+      mobile:pending.mobile, email:pending.email, password_hash:pending.password_hash,
+      full_name:pending.full_name, tier:pending.tier, refer_by:pending.refer_by
     }]).select('id').single();
-    if (uErr) {
-      if (uErr.message && uErr.message.includes('duplicate key')) {
-        var { data: existingUser } = await sb.from('premium_users')
-          .select('id').eq('mobile', pendingUser.mobile).maybeSingle();
-        if (existingUser) { newUser = existingUser; }
-        else { throw new Error('user_insert: ' + uErr.message); }
-      } else {
-        throw new Error('user_insert: ' + uErr.message);
-      }
+    if(uE){
+      if(uE.message && uE.message.includes('duplicate key')){
+        var { data: eu } = await sb.from('premium_users').select('id').eq('mobile',pending.mobile).maybeSingle();
+        if(eu){ nu=eu; } else { throw new Error(uE.message); }
+      } else { throw new Error(uE.message); }
     }
 
-    // 2. Insert payment
-    var { data: payment, error: pErr } = await sb.from('premium_payments').insert([{
-      user_id: newUser.id,
-      razorpay_payment_id: rzpResponse.razorpay_payment_id,
-      razorpay_order_id:   rzpResponse.razorpay_order_id  || null,
-      razorpay_signature:  rzpResponse.razorpay_signature || null,
-      amount: payPaise, status: 'paid', coupon_used: appliedCoupon ? document.getElementById('coupon-input').value.trim().toUpperCase() : null,
-      receipt: rzpResponse.razorpay_payment_id
+    var { data: pay, error: pE } = await sb.from('premium_payments').insert([{
+      user_id:nu.id,
+      razorpay_payment_id:rzp.razorpay_payment_id,
+      razorpay_order_id:rzp.razorpay_order_id||null,
+      razorpay_signature:rzp.razorpay_signature||null,
+      amount:payPaise, status:'paid',
+      coupon_used:applied ? document.getElementById('c-input').value.trim().toUpperCase() : null,
+      receipt:rzp.razorpay_payment_id, tier:pending.tier
     }]).select('id').single();
-    if (pErr) {
-      if (pErr.message && pErr.message.includes('duplicate key')) {
-        // Payment already recorded — probably a double-submit. Try to fetch existing payment.
-        var { data: existingPay } = await sb.from('premium_payments')
-          .select('id').eq('razorpay_payment_id', rzpResponse.razorpay_payment_id).maybeSingle();
-        if (existingPay) {
-          payment = existingPay;
-        } else {
-          throw new Error('payment_duplicate: Payment already recorded but could not retrieve record. Contact admin at +91-7988316241 with Payment ID: ' + rzpResponse.razorpay_payment_id);
-        }
-      } else {
-        throw new Error('payment_insert: ' + pErr.message);
-      }
+    if(pE){
+      if(pE.message && pE.message.includes('duplicate key')){
+        var { data: ep } = await sb.from('premium_payments').select('id').eq('razorpay_payment_id',rzp.razorpay_payment_id).maybeSingle();
+        if(ep){ pay=ep; } else { throw new Error('Payment duplicate: '+rzp.razorpay_payment_id); }
+      } else { throw new Error(pE.message); }
     }
 
-    // 3. Grant access
-    await sb.from('premium_access').insert([{ user_id: newUser.id, payment_id: payment.id, is_active: true }]).select().maybeSingle();
+    await sb.from('premium_access').insert([{user_id:nu.id, payment_id:pay.id, is_active:true, tier:pending.tier}]).select().maybeSingle();
+    if(pending.refer_by) trackReferral(pending.refer_by, nu.id, pending.mobile, pending.full_name, pending.tier, Math.round(payPaise/100));
 
-    // 4. Email bhejo — customer ko welcome + admin ko registration alert (dono ek saath)
-    sendEmail('registration', {
-      name:   pendingUser.full_name,
-      mobile: pendingUser.mobile,
-      email:  pendingUser.email,
-      payId:  rzpResponse.razorpay_payment_id
-    });
+    // Registration emails: welcome to user + alert to admin
+    sendRegistrationEmails({ name:pending.full_name, email:pending.email, mobile:pending.mobile, payId:rzp.razorpay_payment_id, tier:pending.tier, amount:Math.round(payPaise/100), coupon:applied?document.getElementById('c-input').value.trim().toUpperCase():null });
 
-    // 5. Set session
-    sessionStorage.setItem('prem_uid',  newUser.id);
-    sessionStorage.setItem('prem_mob',  pendingUser.mobile);
-    sessionStorage.setItem('prem_name', pendingUser.full_name);
-    sessionStorage.setItem('prem_ts',   Date.now().toString());
-
-    // 6. Show step 3 with personalized message
-    document.getElementById('reg-step2').style.display = 'none';
-    document.getElementById('reg-step3').style.display = 'block';
-    var s2 = document.getElementById('step2-dot');
-    s2.classList.remove('active'); s2.classList.add('done'); s2.textContent = '✓';
-    document.getElementById('line2').classList.add('done');
-    document.getElementById('step3-dot').classList.add('active');
-
-    // Personalized success message
-    var fn = firstName(pendingUser.full_name);
-    document.getElementById('success-name-msg').textContent = 'Welcome, ' + fn + '! 🎉';
-    var couponNote = appliedCoupon ? ' You saved ₹'+appliedCoupon.discount+' with coupon '+document.getElementById('coupon-input').value.trim().toUpperCase()+'!' : '';
-    document.getElementById('success-body-msg').textContent =
-      'Payment confirmed.' + couponNote + ' Welcome email sent to ' + pendingUser.email + '. Your account is now active — access all 14 premium papers.';
+    setSession(nu.id);
+    var couponNote = applied ? ' You saved ₹'+applied.discount+'!' : '';
+    showSuccess(pending.full_name, 'Payment confirmed!'+couponNote+' Welcome email sent to '+pending.email+'. Account active — '+T.label+'.', pending.tier);
 
   } catch(e) {
-    showAlert('reg-err',
-      '<i class="fas fa-exclamation-triangle"></i> &nbsp;Registration error: ' + e.message +
-      '. Payment was processed — contact admin at <strong>+91-7988316241</strong> with Payment ID: <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:2px 5px;border-radius:4px;">' +
-      (rzpResponse.razorpay_payment_id || 'N/A') + '</code>', 'danger');
-    setLoading('btn-pay', false, '<i class="fas fa-lock"></i> Pay ₹11 &amp; Unlock Access');
+    setAlert('rerr','<i class="fas fa-exclamation-triangle"></i> Error: '+e.message+'. Your payment was processed — contact admin at <strong>+91-7988316241</strong> with Payment ID: <code style="font-size:11px;background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px">'+(rzp.razorpay_payment_id||'N/A')+'</code>','err');
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹'+T.price+' and Unlock Access</span>';
   }
 }
 
-// ══════════════════════════════════════════════════════
-//  EMAIL DISPATCHER
-//
-//  'registration' call hone pe:
-//    1. Customer ko  → gold welcome email (uske email pe)
-//    2. Admin ko     → green alert email  (nishant@hsbteleet.com pe)
-//
-//  'login' call hone pe:
-//    1. Admin ko     → blue login alert   (nishant@hsbteleet.com pe)
-//
-//  Sab ek hi template (EJS_TPL) se — sirf to_email alag hota hai
-// ══════════════════════════════════════════════════════
+// ── REFERRAL TRACKING ──
+async function trackReferral(refMob, newUid, newMob, newName, newTier, amtRs) {
+  try {
+    // Call Supabase function (or upsert referrals table)
+    var { data: ref } = await sb.from('referrals').select('id,count').eq('referrer_mobile',refMob).maybeSingle();
+    if(ref){
+      await sb.from('referrals').update({count:(ref.count||0)+1,last_updated:new Date().toISOString()}).eq('id',ref.id);
+    } else {
+      await sb.from('referrals').insert([{referrer_mobile:refMob,count:1}]);
+    }
+    // Log referral use
+    await sb.from('referral_uses').insert([{referrer_mobile:refMob,referee_user_id:newUid,referee_mobile:newMob,referee_name:newName,referee_tier:newTier,amount_paid_rs:amtRs}]);
+  } catch(e){ console.warn('Referral tracking error:', e); }
+}
 
-// toName, toEmail, replyEmail, title, mobile, html
+// ── SESSION ──
+function setSession(uid) {
+  sessionStorage.setItem('prem_uid',  uid);
+  sessionStorage.setItem('prem_mob',  pending.mobile);
+  sessionStorage.setItem('prem_name', pending.full_name);
+  sessionStorage.setItem('prem_tier', pending.tier);
+  sessionStorage.setItem('prem_ts',   Date.now().toString());
+}
+
+// ── SUCCESS SCREEN ──
+function showSuccess(name, msg, tier) {
+  document.getElementById('step2').style.display = 'none';
+  document.getElementById('step3').style.display = 'block';
+  var s2 = document.getElementById('s2-dot');
+  s2.classList.remove('act'); s2.classList.add('done'); s2.textContent = '✓';
+  document.getElementById('line2').classList.add('done');
+  document.getElementById('s3-dot').classList.add('act');
+  document.getElementById('suc-name').textContent = 'Welcome, ' + fn(name) + '! 🎉';
+  document.getElementById('suc-msg').textContent  = msg;
+  if(tier === 'ultra') {
+    document.getElementById('ultra-btn').style.display = 'flex';
+  }
+}
+
+// ── EMAILJS SEND ──
 function ejsSend(toName, toEmail, replyEmail, title, mobile, html) {
   return emailjs.send(EJS_SVC, EJS_TPL, {
-    to_name:      toName,
-    to_email:     toEmail,
-    email:        replyEmail || toEmail,   // Reply-To field
-    title:        title      || 'HSBTE LEET Premium',
-    mobile:       mobile     || '',
-    html_message: html
+    to_name:toName, to_email:toEmail, email:replyEmail||toEmail,
+    title:title||'HSBTE LEET Premium', mobile:mobile||'', html_message:html
   });
 }
 
-function sendEmail(type, data) {
+// ── LOGIN EMAIL: User only, NOT admin ──
+function sendLoginEmail(user) {
   try {
-    if (type === 'registration') {
+    var tier = (user.tier==='ultra') ? 'Ultra Premium' : 'Premium';
+    var html =
+      '<div style="font-family:sans-serif;max-width:560px;padding:0">' +
+      '<div style="background:linear-gradient(135deg,#0a1628,#1a56db);padding:28px 32px;text-align:center;border-radius:12px 12px 0 0">' +
+      '<div style="font-size:2.2rem;margin-bottom:8px">👋</div>' +
+      '<h2 style="color:#fff;font-size:1.3rem;margin:0">Login Alert — HSBTE LEET '+tier+'</h2>' +
+      '</div>' +
+      '<div style="padding:24px 32px;background:#fff;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px">' +
+      '<p style="color:#475569;font-size:14px;line-height:1.7">Hi <strong>'+user.full_name+'</strong>,</p>' +
+      '<p style="color:#475569;font-size:14px;line-height:1.7">You just logged into your <strong>'+tier+'</strong> account on hsbteleet.com.</p>' +
+      '<div style="background:#f8fafc;border-radius:10px;padding:14px 16px;margin:14px 0;font-size:13px;color:#475569">' +
+      '<strong>Login Time:</strong> '+ts()+'<br>' +
+      '<strong>Mobile:</strong> '+user.mobile+'<br>' +
+      '<strong>Plan:</strong> '+tier +
+      '</div>' +
+      '<p style="color:#94a3b8;font-size:12px;margin-top:14px">If this was not you, contact admin immediately at +91-7988316241 via WhatsApp.</p>' +
+      '</div></div>';
 
-      // 1. Customer ko — gold welcome email
-      var custHtml = buildCustomerWelcomeHTML(data);
-      ejsSend(
-        data.name  || 'Student',
-        data.email,
-        data.email,
-        'Welcome to HSBTE LEET Premium! 🎉',
-        data.mobile,
-        custHtml
-      ).then(function(r){ console.log('[LEET] Customer welcome sent → ' + data.email + ' :', r.status); })
-       .catch(function(e){ console.warn('[LEET] Customer email error:', e); });
+    ejsSend(user.full_name||'Student', user.email, user.email, 'Login Alert — HSBTE LEET '+tier, user.mobile, html)
+      .then(function(r){ console.log('[LEET] Login email → user:', r.status); })
+      .catch(function(e){ console.warn('[LEET] Login email err:', e); });
 
-      // 2. Admin ko — green registration alert
-      var adminRegHtml = buildAdminRegistrationHTML(data);
-      ejsSend(
-        ADMIN_NAME,
-        ADMIN_EMAIL,
-        data.email,
-        'New Premium Registration — ' + (data.name || 'Student'),
-        data.mobile,
-        adminRegHtml
-      ).then(function(r){ console.log('[LEET] Admin reg alert sent → ' + ADMIN_EMAIL + ' :', r.status); })
-       .catch(function(e){ console.warn('[LEET] Admin reg email error:', e); });
+    // ── NO admin email on login ──
 
-    } else if (type === 'login') {
-
-      // 1. Customer ko — login confirmation email
-      var custLoginHtml = buildCustomerLoginHTML(data);
-      ejsSend(
-        data.name || 'Student',
-        data.email,
-        data.email,
-        'You just logged in to HSBTE LEET Premium 🔐',
-        data.mobile,
-        custLoginHtml
-      ).then(function(r){ console.log('[LEET] Customer login alert sent → ' + data.email + ' :', r.status); })
-       .catch(function(e){ console.warn('[LEET] Customer login email error:', e); });
-
-      // 2. Admin ko — blue login alert
-      var adminLoginHtml = buildAdminLoginHTML(data);
-      ejsSend(
-        ADMIN_NAME,
-        ADMIN_EMAIL,
-        data.email,
-        'Premium Login — ' + (data.name || 'Student'),
-        data.mobile,
-        adminLoginHtml
-      ).then(function(r){ console.log('[LEET] Admin login alert sent → ' + ADMIN_EMAIL + ' :', r.status); })
-       .catch(function(e){ console.warn('[LEET] Admin login email error:', e); });
-    }
-
-  } catch(e) {
-    console.warn('[LEET] sendEmail threw:', e);
-  }
+  } catch(e){ console.warn('[LEET] sendLoginEmail err:', e); }
 }
 
-// ══════════════════════════════════════════════════════
-//  EMAIL: CUSTOMER WELCOME  →  Premium Student
-//  Same design language as existing welcome template
-//  (Playfair Display + Plus Jakarta Sans, dark gold theme)
-//  but content is 100% premium-specific
-// ══════════════════════════════════════════════════════
+// ── REGISTRATION EMAILS: Welcome to user + Alert to admin ──
+function sendRegistrationEmails(d) {
+  try {
+    var tier = (d.tier==='ultra') ? 'Ultra Premium' : 'Premium';
+    var amtRs = d.amount !== undefined ? d.amount : (d.tier==='ultra' ? 29 : 19);
 
-// ═══════════════════════════════════════════════════════════
-//  SHARED HELPERS
-// ═══════════════════════════════════════════════════════════
+    // 1. WELCOME EMAIL → USER
+    var custHtml =
+      '<div style="font-family:sans-serif;max-width:560px;padding:0">' +
+      '<div style="background:linear-gradient(135deg,#0a1628,#1a56db);padding:28px 32px;text-align:center;border-radius:12px 12px 0 0">' +
+      '<div style="font-size:2.5rem;margin-bottom:10px">🎉</div>' +
+      '<h1 style="color:#fff;font-size:1.4rem;font-weight:800;margin:0">Welcome to HSBTE LEET '+tier+'!</h1>' +
+      '</div>' +
+      '<div style="padding:24px 32px;background:#fff;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px">' +
+      '<p style="color:#475569;font-size:14px;line-height:1.7">Hi <strong>'+d.name+'</strong>,</p>' +
+      '<p style="color:#475569;font-size:14px;line-height:1.7">Your <strong>'+tier+'</strong> access is now active on hsbteleet.com. Thank you for your purchase!</p>' +
+      '<div style="background:#f8fafc;border-radius:10px;padding:14px 16px;margin:14px 0;font-size:13px;color:#475569">' +
+      '<strong>Mobile:</strong> '+d.mobile+'<br>' +
+      '<strong>Payment ID:</strong> '+(d.payId||'N/A')+'<br>' +
+      '<strong>Amount Paid:</strong> ₹'+amtRs+(d.coupon?' (Coupon: '+d.coupon+')':'')+'<br>' +
+      '<strong>Plan:</strong> '+tier +
+      '</div>' +
+      '<div style="background:#fef3c7;border-radius:10px;padding:12px 15px;margin:14px 0;font-size:13px;color:#92400e">' +
+      '📱 <strong>Refer Code:</strong> Your refer code is your registered mobile number <strong>'+d.mobile+'</strong>.<br>' +
+      'Share it with friends — 1 referral = 50% refund · 2+ referrals = full refund!' +
+      '</div>' +
+      '<p style="text-align:center;margin-top:18px"><a href="https://hsbteleet.com/html/premium-login.html" style="background:linear-gradient(135deg,#1a56db,#1240a8);color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:14px">Login to My Account →</a></p>' +
+      '<p style="color:#94a3b8;font-size:12px;margin-top:14px;text-align:center">Questions? WhatsApp admin at +91-7988316241</p>' +
+      '</div></div>';
 
-// ═══════════════════════════════════════════════════════════
-//  SHARED EMAIL SHELL
-//  All emails use table-based layout — 100% inline styles
-//  Gmail/Outlook/mobile safe
-// ═══════════════════════════════════════════════════════════
+    ejsSend(d.name||'Student', d.email, d.email, 'Welcome to HSBTE LEET '+tier+'! 🎉', d.mobile, custHtml)
+      .then(function(r){ console.log('[LEET] Welcome email → user:', r.status); })
+      .catch(function(e){ console.warn('[LEET] Welcome email err:', e); });
 
-function emailShell(bodyContent) {
-  return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
-  + '<html xmlns="http://www.w3.org/1999/xhtml"><head>'
-  + '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>'
-  + '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>'
-  + '<meta name="x-apple-disable-message-reformatting"/>'
-  + '</head>'
-  + '<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:Arial,Helvetica,sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f4f4f5;min-height:100vh;">'
-  + '<tr><td align="center" style="padding:32px 16px;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:560px;">'
-  + bodyContent
-  + '</table>'
-  + '</td></tr></table>'
-  + '</body></html>';
+    // 2. REGISTRATION ALERT → ADMIN ONLY (no login alerts to admin)
+    var adminHtml =
+      '<div style="font-family:sans-serif;max-width:560px;padding:0">' +
+      '<div style="background:linear-gradient(135deg,#064e3b,#10b981);padding:20px 24px;border-radius:12px 12px 0 0">' +
+      '<h2 style="color:#fff;font-size:1.1rem;margin:0">🆕 New '+tier+' Registration</h2>' +
+      '</div>' +
+      '<div style="padding:18px 24px;background:#fff;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px;font-size:13px;color:#475569">' +
+      '<strong>Name:</strong> '+d.name+'<br><br>' +
+      '<strong>Mobile:</strong> '+d.mobile+'<br><br>' +
+      '<strong>Email:</strong> '+d.email+'<br><br>' +
+      '<strong>Plan:</strong> '+tier+'<br><br>' +
+      '<strong>Amount:</strong> ₹'+amtRs+(d.coupon?' (Coupon: '+d.coupon+')':'')+'<br><br>' +
+      '<strong>Payment ID:</strong> '+(d.payId||'N/A')+'<br><br>' +
+      '<strong>Time:</strong> '+ts() +
+      '</div></div>';
+
+    ejsSend(ADMIN_NAME, ADMIN_EMAIL, d.email, 'New '+tier+' Registration — '+(d.name||'Student'), d.mobile, adminHtml)
+      .then(function(r){ console.log('[LEET] Registration alert → admin:', r.status); })
+      .catch(function(e){ console.warn('[LEET] Admin alert err:', e); });
+
+  } catch(e){ console.warn('[LEET] sendRegistrationEmails err:', e); }
 }
-
-// Logo bar
-function logoRow() {
-  return '<tr><td align="center" style="padding-bottom:18px;">'
-  + '<span style="font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;color:#111111;letter-spacing:-0.3px;">'
-  + 'HSBT<span style="color:#f5a623;">LEET</span>.com'
-  + '</span>'
-  + '</td></tr>';
-}
-
-// Colored top strip
-function topStrip(color) {
-  return '<tr><td style="background:' + color + ';height:4px;border-radius:12px 12px 0 0;font-size:0;line-height:0;">&nbsp;</td></tr>';
-}
-
-// Section label
-function sectionLabel(text, color) {
-  return '<p style="margin:0 0 6px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:' + (color || '#9ca3af') + ';">' + text + '</p>';
-}
-
-// Info table row
-function infoRow(label, value, valueColor) {
-  return '<tr>'
-  + '<td style="padding:9px 0;border-bottom:1px solid #f3f4f6;font-size:13px;color:#9ca3af;width:120px;vertical-align:top;">' + label + '</td>'
-  + '<td style="padding:9px 0;border-bottom:1px solid #f3f4f6;font-size:13px;font-weight:600;color:' + (valueColor || '#111111') + ';text-align:right;word-break:break-all;">' + value + '</td>'
-  + '</tr>';
-}
-
-// CTA Button
-function ctaBtn(href, text, bgColor, textColor) {
-  return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:10px;">'
-  + '<tr><td align="center">'
-  + '<a href="' + href + '" style="display:block;padding:14px 24px;background:' + bgColor + ';color:' + (textColor||'#ffffff') + ';font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;text-align:center;">' + text + '</a>'
-  + '</td></tr></table>';
-}
-
-// Footer
-function emailFooter(links) {
-  var linkHtml = links.map(function(l){
-    return '<a href="' + l.href + '" style="color:#9ca3af;text-decoration:none;font-size:11.5px;">' + l.label + '</a>';
-  }).join('<span style="color:#d1d5db;margin:0 8px;">·</span>');
-  return '<tr><td style="padding:20px 0 4px;text-align:center;border-top:1px solid #e5e7eb;">'
-  + '<p style="margin:0 0 6px 0;">' + linkHtml + '</p>'
-  + '<p style="margin:0;font-size:11px;color:#9ca3af;line-height:1.8;">'
-  + '&copy; 2026 HSBTELEET.com &nbsp;&middot;&nbsp; Made with &#10084;&#65039; by <a href="https://itsnishant.com" style="color:#9ca3af;text-decoration:none;">Nishant</a>'
-  + '</p></td></tr>';
-}
-
-// ═══════════════════════════════════════════════════════════
-//  EMAIL 1 — FREE WELCOME (Lead Capture)
-//  → Student ke email pe jaata hai
-// ═══════════════════════════════════════════════════════════
-
-function buildWelcomeHTML(data) {
-  var name    = data.name        || 'Student';
-  var fn      = firstName(name);
-  var branch  = data.branch      || '';
-  var college = data.college     || '';
-  var prep    = data.preparation || '';
-
-  // Chips
-  var chips = '';
-  if (prep)   chips += '<span style="display:inline-block;background:#fef3c7;border:1px solid #fcd34d;border-radius:20px;padding:3px 11px;font-size:11.5px;font-weight:600;color:#92400e;margin:2px 4px 2px 0;">&#127891; ' + prep + '</span>';
-  if (branch) chips += '<span style="display:inline-block;background:#d1fae5;border:1px solid #6ee7b7;border-radius:20px;padding:3px 11px;font-size:11.5px;font-weight:600;color:#065f46;margin:2px 4px 2px 0;">&#128218; ' + branch + '</span>';
-  if (college)chips += '<span style="display:inline-block;background:#f3f4f6;border:1px solid #d1d5db;border-radius:20px;padding:3px 11px;font-size:11.5px;font-weight:600;color:#6b7280;margin:2px 4px 2px 0;">&#127979; ' + college + '</span>';
-
-  var body =
-    logoRow()
-
-  // ── CARD ──
-  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + topStrip('linear-gradient(90deg,#f5a623,#fb923c)')
-
-  // Header block
-  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#fffbf0 0%,#fff 60%);">'
-  + sectionLabel('&#10022; Welcome Aboard', '#f5a623')
-  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:26px;font-weight:700;color:#111111;line-height:1.2;">Hey ' + fn + ', glad<br/>you\'re here! &#127881;</h1>'
-  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">You\'ve joined <strong style="color:#374151;">hsbteleet.com</strong> — Haryana\'s most organized free resource for <strong style="color:#374151;">LEET &amp; HSBTE</strong> exam prep.</p>'
-  + '</td></tr>'
-
-  // Chips
-  + (chips ? '<tr><td style="padding:0 28px 16px 28px;">' + chips + '</td></tr>' : '')
-
-  // Greeting message
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + '<tr><td style="background:#f9fafb;border:1px solid #e5e7eb;border-left:3px solid #f5a623;border-radius:8px;padding:16px 18px;">'
-  + '<p style="margin:0;font-size:13.5px;color:#6b7280;line-height:1.8;">Hey <strong style="color:#111111;">' + name + '!</strong> &#128075; Whether you\'re targeting <strong style="color:#111111;">Haryana LEET</strong> or need <strong style="color:#111111;">HSBTE PYQs</strong> for any branch — we\'ve organized everything so you can focus on <strong style="color:#111111;">studying smart.</strong> &#128640;</p>'
-  + '</td></tr></table>'
-  + '</td></tr>'
-
-  // Stats
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + '<tr>'
-  + '<td width="33%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px 8px;text-align:center;"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#f5a623;line-height:1;">500+</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin-top:4px;">PYQs</div></td>'
-  + '<td width="4" style="padding:0;font-size:0;">&nbsp;</td>'
-  + '<td width="33%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px 8px;text-align:center;"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#059669;line-height:1;">10+</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin-top:4px;">Branches</div></td>'
-  + '<td width="4" style="padding:0;font-size:0;">&nbsp;</td>'
-  + '<td width="33%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px 8px;text-align:center;"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#f59e0b;line-height:1;">&#8734;</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;margin-top:4px;">Free</div></td>'
-  + '</tr></table>'
-  + '</td></tr>'
-
-  // Resources
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<p style="margin:0 0 12px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128218; Quick Access</p>'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + '<tr>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/syllabus/syllabus.html" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128203;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Syllabus</div><div style="font-size:11.5px;color:#9ca3af;">Full LEET syllabus, topic-wise</div></a></td>'
-  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/haryanaleet" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128221;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Haryana LEET</div><div style="font-size:11.5px;color:#9ca3af;">Sample papers &amp; practice sets</div></a></td>'
-  + '</tr>'
-  + '<tr><td colspan="3" style="padding-top:6px;font-size:0;">&nbsp;</td></tr>'
-  + '<tr>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/hsbte-pyq" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128194;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">HSBTE PYQ</div><div style="font-size:11.5px;color:#9ca3af;">Previous year questions</div></a></td>'
-  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#127968;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Homepage</div><div style="font-size:11.5px;color:#9ca3af;">All resources &amp; updates</div></a></td>'
-  + '</tr></table>'
-  + '</td></tr>'
-
-  // CTA
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + ctaBtn('https://hsbteleet.com', '&#128640; Start Preparing Now &rarr;', '#f5a623', '#ffffff')
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + '<tr>'
-  + '<td align="center" style="font-size:12px;color:#9ca3af;"><span style="color:#059669;margin-right:4px;">&#10003;</span> No login needed &nbsp; <span style="color:#059669;margin-right:4px;">&#10003;</span> Free forever &nbsp; <span style="color:#059669;margin-right:4px;">&#10003;</span> Updated regularly</td>'
-  + '</tr></table>'
-  + '</td></tr>'
-
-  // Divider + Contact
-  + '<tr><td style="padding:0 28px 20px 28px;border-top:1px solid #f3f4f6;">'
-  + '<p style="margin:16px 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#129309; Need Help?</p>'
-  + '<a href="https://wa.me/917988316241" style="display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#15803d;text-decoration:none;margin-right:8px;margin-bottom:6px;">&#128172; +91 79883 16241</a>'
-  + '<a href="mailto:nishant@hsbteleet.com" style="display:inline-block;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#c2410c;text-decoration:none;margin-bottom:6px;">&#9993;&#65039; nishant@hsbteleet.com</a>'
-  + '</td></tr>'
-
-  // Footer
-  + emailFooter([
-      {href:'https://hsbteleet.com', label:'Website'},
-      {href:'https://hsbteleet.com/syllabus/syllabus.html', label:'Syllabus'},
-      {href:'https://hsbteleet.com/hsbte-pyq', label:'PYQs'}
-    ])
-
-  + '</table></td></tr>'; // end card
-
-  return emailShell(body);
-}
-
-// ═══════════════════════════════════════════════════════════
-//  EMAIL 2 — PREMIUM CUSTOMER WELCOME
-//  → Student ke email pe jaata hai after ₹11 payment
-// ═══════════════════════════════════════════════════════════
-
-function buildCustomerWelcomeHTML(data) {
-  var name   = data.name   || 'Student';
-  var fn     = firstName(name);
-  var mobile = data.mobile || '—';
-  var email  = data.email  || '—';
-  var payId  = data.payId  || '—';
-  var ts     = nowStr();
-
-  var body =
-    logoRow()
-  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + topStrip('linear-gradient(90deg,#ea580c,#f97316)')
-
-  // Header
-  + '<tr><td style="padding:28px 28px 0 28px;background:linear-gradient(135deg,#fff7ed 0%,#fff 60%);">'
-  + sectionLabel('&#128081; Premium Access Confirmed', '#ea580c')
-  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:26px;font-weight:700;color:#111111;line-height:1.2;">Welcome, ' + fn + '!<br/>You\'re Premium. &#128081;</h1>'
-  + '<p style="margin:0 0 20px 0;font-size:14px;color:#6b7280;line-height:1.7;">Your <strong style="color:#ea580c;">&#8377;11 payment is confirmed.</strong> You now have <strong style="color:#374151;">lifetime access</strong> to 14 exclusive Haryana LEET sample papers. Let\'s get cracking! &#127919;</p>'
-  + '</td></tr>'
-
-  // Activated banner
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
-  + '<td style="background:#fff7ed;border:1px solid #fed7aa;border-left:3px solid #ea580c;border-radius:8px;padding:13px 16px;">'
-  + '<p style="margin:0;font-size:13.5px;font-weight:700;color:#c2410c;">&#9989; Account Activated &mdash; ' + name + '</p>'
-  + '<p style="margin:4px 0 0 0;font-size:12.5px;color:#9a3412;">Payment received &amp; verified. All 14 papers unlocked and ready for you.</p>'
-  + '</td></tr></table>'
-  + '</td></tr>'
-
-  // Order Details
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<p style="margin:0 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128196; Your Order Details</p>'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;overflow:hidden;">'
-  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + infoRow('Name', name)
-  + infoRow('Email', email)
-  + infoRow('Mobile', mobile)
-  + infoRow('Amount Paid', '&#8377;11 &nbsp;&#10003; Confirmed', '#059669')
-  + infoRow('Activated On', ts)
-  + '<tr><td style="padding:9px 0;font-size:13px;color:#9ca3af;width:120px;vertical-align:top;">Payment ID</td><td style="padding:9px 0;font-size:11.5px;font-family:monospace;color:#6b7280;text-align:right;word-break:break-all;">' + payId + '</td></tr>'
-  + '</table></td></tr>'
-  + '</table>'
-  + '</td></tr>'
-
-  // What unlocked
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<p style="margin:0 0 12px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128081; What You\'ve Unlocked</p>'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#128221;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">14 Premium Papers</div><div style="font-size:11.5px;color:#9ca3af;">14 exclusive HSBTE LEET papers</div></td>'
-  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#9854;&#65039;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">Lifetime Access</div><div style="font-size:11.5px;color:#9ca3af;">No expiry, no renewal</div></td>'
-  + '</tr><tr><td colspan="3" style="height:6px;font-size:0;">&nbsp;</td></tr><tr>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#127919;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">Exam-Pattern Match</div><div style="font-size:11.5px;color:#9ca3af;">Mirrors actual LEET format</div></td>'
-  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
-  + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><div style="font-size:20px;margin-bottom:6px;">&#9889;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:3px;">Instant Access</div><div style="font-size:11.5px;color:#9ca3af;">Login &amp; start right now</div></td>'
-  + '</tr></table>'
-  + '</td></tr>'
-
-  // CTAs
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + ctaBtn('https://hsbteleet.com/premium-papers.html', '&#128218; Open My Premium Papers &rarr;', '#ea580c', '#ffffff')
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
-  + '<a href="https://wa.me/917988316241" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; Need help? WhatsApp Nishant</a>'
-  + '</td></tr></table>'
-  + '</td></tr>'
-
-  // Contact
-  + '<tr><td style="padding:0 28px 20px 28px;border-top:1px solid #f3f4f6;">'
-  + '<p style="margin:16px 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#129309; Support</p>'
-  + '<a href="https://wa.me/917988316241" style="display:inline-block;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#15803d;text-decoration:none;margin-right:8px;margin-bottom:6px;">&#128172; +91 79883 16241</a>'
-  + '<a href="mailto:nishant@hsbteleet.com" style="display:inline-block;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#c2410c;text-decoration:none;margin-right:8px;margin-bottom:6px;">&#9993;&#65039; Email Nishant</a>'
-  + '<a href="https://hsbteleet.com/premium-papers.html" style="display:inline-block;background:#fef3c7;border:1px solid #fcd34d;border-radius:20px;padding:7px 14px;font-size:12.5px;font-weight:600;color:#92400e;text-decoration:none;margin-bottom:6px;">&#128081; My Papers</a>'
-  + '</td></tr>'
-
-  + emailFooter([
-      {href:'https://hsbteleet.com', label:'Website'},
-      {href:'https://hsbteleet.com/premium-papers.html', label:'My Papers'},
-      {href:'https://wa.me/917988316241', label:'Support'}
-    ])
-
-  + '</table></td></tr>';
-
-  return emailShell(body);
-}
-
-// ═══════════════════════════════════════════════════════════
-//  EMAIL 3 — ADMIN REGISTRATION ALERT (Green)
-//  → nishant@hsbteleet.com pe jaata hai
-// ═══════════════════════════════════════════════════════════
-
-function buildAdminRegistrationHTML(data) {
-  var name   = data.name   || 'Unknown';
-  var mobile = data.mobile || '—';
-  var email  = data.email  || '—';
-  var payId  = data.payId  || '—';
-  var ts     = nowStr();
-
-  var body =
-    logoRow()
-  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + topStrip('linear-gradient(90deg,#059669,#34d399)')
-
-  // Header
-  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#f0fdf4 0%,#fff 60%);">'
-  + '<span style="display:inline-block;background:#dcfce7;border:1px solid #86efac;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#166534;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">&#128994; New Registration</span>'
-  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111111;line-height:1.3;">New Premium Member Joined!</h1>'
-  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;"><strong style="color:#374151;">' + name + '</strong> just registered and paid &#8377;11. Account is now active.</p>'
-  + '</td></tr>'
-
-  // Stats
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
-  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#8377;11</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Earned</div></td>'
-  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
-  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">14</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Papers Given</div></td>'
-  + '<td width="2%" style="font-size:0;">&nbsp;</td>'
-  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#10003;</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Active</div></td>'
-  + '</tr></table>'
-  + '</td></tr>'
-
-  // Student details
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<p style="margin:0 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128196; Student Details</p>'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;">'
-  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + infoRow('Name', name)
-  + infoRow('Mobile', mobile)
-  + infoRow('Email', email)
-  + infoRow('Amount', '&#8377;11 &#10003; Paid', '#059669')
-  + infoRow('Time', ts)
-  + '<tr><td style="padding:9px 0;font-size:13px;color:#9ca3af;vertical-align:top;">Payment ID</td><td style="padding:9px 0;font-size:11.5px;font-family:monospace;color:#6b7280;text-align:right;word-break:break-all;">' + payId + '</td></tr>'
-  + '</table></td></tr></table>'
-  + '</td></tr>'
-
-  // Buttons
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
-  + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; WhatsApp ' + name + ' directly</a>'
-  + '</td></tr></table>'
-  + '</td></tr>'
-
-  + '<tr><td style="padding:12px 28px;border-top:1px solid #f3f4f6;"><p style="margin:0;font-size:11.5px;color:#9ca3af;text-align:center;">Admin notification &middot; hsbteleet.com &middot; &copy; 2025</p></td></tr>'
-
-  + '</table></td></tr>';
-
-  return emailShell(body);
-}
-
-// ═══════════════════════════════════════════════════════════
-//  EMAIL 4a — CUSTOMER LOGIN ALERT (Teal)
-//  → Customer ke email pe jaata hai
-// ═══════════════════════════════════════════════════════════
-
-function buildCustomerLoginHTML(data) {
-  var name   = data.name   || 'Student';
-  var mobile = data.mobile || '—';
-  var ts     = nowStr();
-  var body =
-    logoRow()
-  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + topStrip('linear-gradient(90deg,#0d9488,#14b8a6)')
-  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#f0fdfa 0%,#fff 60%);">'
-  + '<span style="display:inline-block;background:#ccfbf1;border:1px solid #5eead4;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#0f766e;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">&#128275; Login Confirmed</span>'
-  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111;line-height:1.3;">You are In! &#127881;</h1>'
-  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;">Hi <strong style="color:#374151;">' + name + '</strong>, you just logged in to your HSBTE LEET Premium account on hsbteleet.com.</p>'
-  + '</td></tr>'
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;">'
-  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + infoRow('Name', name)
-  + infoRow('Mobile', mobile)
-  + infoRow('Login Time', ts)
-  + infoRow('Status', '&#10003; Active &middot; Lifetime Access', '#0d9488')
-  + '</table></td></tr></table>'
-  + '</td></tr>'
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:14px 16px;font-size:13px;color:#9a3412;line-height:1.6;">'
-  + '<strong>&#128274; Security Alert:</strong> If this login was not you, contact us immediately on WhatsApp: <strong>+91-7988316241</strong>. Never share your password with anyone.'
-  + '</div>'
-  + '</td></tr>'
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + ctaBtn('https://hsbteleet.com/premium-papers.html', '&#128196; Access Your Premium Papers &rarr;', '#0d9488', '#ffffff')
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
-  + '<a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20my%20premium%20papers." style="display:block;padding:12px 20px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:8px;font-size:13.5px;font-weight:600;color:#0f766e;text-decoration:none;text-align:center;">&#128172; WhatsApp Support</a>'
-  + '</td></tr></table>'
-  + '</td></tr>'
-  + '<tr><td style="padding:12px 28px;border-top:1px solid #f3f4f6;"><p style="margin:0;font-size:11.5px;color:#9ca3af;text-align:center;">Login confirmation &middot; hsbteleet.com &middot; &copy; 2025</p></td></tr>'
-  + '</table></td></tr>';
-  return emailShell(body);
-}
-
-// ═══════════════════════════════════════════════════════════
-//  EMAIL 4 — ADMIN LOGIN ALERT (Blue)
-//  → nishant@hsbteleet.com pe jaata hai
-// ═══════════════════════════════════════════════════════════
-
-function buildAdminLoginHTML(data) {
-  var name   = data.name   || 'Unknown';
-  var mobile = data.mobile || '—';
-  var email  = data.email  || '—';
-  var ts     = nowStr();
-
-  var body =
-    logoRow()
-  + '<tr><td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;">'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + topStrip('linear-gradient(90deg,#1d4ed8,#60a5fa)')
-
-  // Header
-  + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#eff6ff 0%,#fff 60%);">'
-  + '<span style="display:inline-block;background:#dbeafe;border:1px solid #93c5fd;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#1e40af;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">&#128275; Login Detected</span>'
-  + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111111;line-height:1.3;">Premium Login Alert</h1>'
-  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;"><strong style="color:#374151;">' + name + '</strong> just logged in and is accessing their papers on hsbteleet.com.</p>'
-  + '</td></tr>'
-
-  // Details
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-  + '<p style="margin:0 0 10px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128196; Login Details</p>'
-  + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #f3f4f6;border-radius:8px;">'
-  + '<tr><td style="padding:0 16px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
-  + infoRow('Name', name)
-  + infoRow('Mobile', mobile)
-  + infoRow('Email', email)
-  + infoRow('Time', ts)
-  + infoRow('Status', '&#10003; Active &middot; Premium', '#059669')
-  + '</table></td></tr></table>'
-  + '</td></tr>'
-
-  // Buttons
-  + '<tr><td style="padding:0 28px 20px 28px;">'
-    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>'
-  + '<a href="https://wa.me/91' + mobile.replace(/\D/g,'') + '" style="display:block;padding:12px 20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13.5px;font-weight:600;color:#15803d;text-decoration:none;text-align:center;">&#128172; WhatsApp ' + name + '</a>'
-  + '</td></tr></table>'
-  + '</td></tr>'
-
-  + '<tr><td style="padding:12px 28px;border-top:1px solid #f3f4f6;"><p style="margin:0;font-size:11.5px;color:#9ca3af;text-align:center;">Login alert &middot; hsbteleet.com &middot; &copy; 2025</p></td></tr>'
-
-  + '</table></td></tr>';
-
-  return emailShell(body);
-}
-
-// ═══════════════════════════════════════════════════════════
-//  ROW/STAT HELPERS (for backward compat — not used above)
-// ═══════════════════════════════════════════════════════════
-function row(clr, label, val) { return infoRow(label, val, clr); }
-function rowG(label, val)     { return infoRow(label, val, '#059669'); }
-function statBox(clr, num, lbl) { return ''; }
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    var panel = document.querySelector('.tab-panel.active');
-    if (panel && panel.id === 'panel-login') doLogin();
-  }
+/* ── SECURITY ── */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12'||e.keyCode===123)e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
 });
+(function(){
+  var s=document.createElement('style');
+  s.textContent='@media print{body{display:none!important;}}';
+  document.head.appendChild(s);
+})();
+/* ── DEVTOOLS PROTECTION ── */
+setInterval(function(){
+  if(window.outerWidth-window.innerWidth > 160 || window.outerHeight-window.innerHeight > 160){
+    document.body.innerHTML='<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;background:#050a14;color:#fff;text-align:center;padding:20px;"><div><h1 style="font-size:3rem;">🔒</h1><h2>Security Policy Violation</h2><p>Developer tools are not allowed on this page. Please close them and refresh.</p></div></div>';
+  }
+}, 2000);
 </script>
-
 </body>
 </html>
