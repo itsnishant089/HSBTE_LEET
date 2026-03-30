@@ -721,10 +721,20 @@ var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 document.addEventListener('contextmenu',function(e){e.preventDefault();});
 document.addEventListener('keydown',function(e){
   if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
-  if(e.key==='F12')e.preventDefault();
+  if(e.key==='F12'||e.keyCode===123)e.preventDefault();
   if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
 });
-(function(){var s=document.createElement('style');s.textContent='@media print{body{display:none!important;}}';document.head.appendChild(s);})();
+(function(){
+  var s=document.createElement('style');
+  s.textContent='@media print{body{display:none!important;}}';
+  document.head.appendChild(s);
+})();
+/* ── DEVTOOLS PROTECTION ── */
+setInterval(function(){
+  if(window.outerWidth-window.innerWidth > 160 || window.outerHeight-window.innerHeight > 160){
+    document.body.innerHTML='<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;background:#0a0f1e;color:#fff;text-align:center;padding:20px;"><div><h1 style="font-size:3rem;">🔒</h1><h2>Security Policy Violation</h2><p>Developer tools are not allowed on this page. Please close them and refresh.</p></div></div>';
+  }
+}, 2000);
 
 /* ── WATERMARK ── */
 function injectWatermark() {
