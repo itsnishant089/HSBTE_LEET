@@ -421,6 +421,7 @@ function gotoPage(name,btn){
 }
 function reloadPage(){loadPage(curPage);}
 function loadPage(n){if(n==='dashboard')loadDash();else if(n==='users')loadUsers();else if(n==='payments')loadPay();else if(n==='referrals')loadRefs();else if(n==='reviews')loadRevs();}
+function safe(q){return q.then(function(r){return r.error?{data:[],error:r.error}:r;}).catch(function(){return{data:[]};});}
 function initAdmin(){loadDash();document.getElementById('wm-type').addEventListener('change',toggleCustom);}
 
 async function loadDash(){
@@ -428,9 +429,9 @@ async function loadDash(){
     var[uRes,pyRes,prRes,rfRes,ulRes]=await Promise.all([
       sb.from('premium_users').select('id,full_name,mobile,created_at').order('created_at',{ascending:false}),
       sb.from('premium_payments').select('user_id,amount,status'),
-      sb.from('reviews').select('id').eq('approved',false),
-      sb.from('referrals').select('id').eq('refund_claimed',false).gte('count',1),
-      sb.from('ultra_premium_users').select('user_id')
+      safe(sb.from('reviews').select('id').eq('approved',false)),
+      safe(sb.from('referrals').select('id').eq('refund_claimed',false).gte('count',1)),
+      safe(sb.from('ultra_premium_users').select('user_id'))
     ]);
     var u=uRes.data||[],py=pyRes.data||[];
     var total=u.length,today=u.filter(function(x){return new Date(x.created_at)>=new Date(new Date().setHours(0,0,0,0));}).length;
@@ -457,9 +458,9 @@ async function loadUsers(){
   try{
     var[uRes,pyRes,acRes,ulRes]=await Promise.all([
       sb.from('premium_users').select('id,full_name,mobile,email,created_at').order('created_at',{ascending:false}),
-      sb.from('premium_payments').select('user_id,amount,coupon_used,status'),
+      sb.from('premium_payments').select('user_id,amount,status'),
       sb.from('premium_access').select('user_id,is_active'),
-      sb.from('ultra_premium_users').select('user_id')
+      safe(sb.from('ultra_premium_users').select('user_id'))
     ]);
     if(uRes.error)throw uRes.error;
     var users=uRes.data||[],pmts=pyRes.data||[],acs=acRes.data||[],uls=ulRes.data||[];
@@ -470,7 +471,7 @@ async function loadUsers(){
       var p=pyMap[u.id]||{};var a=acMap[u.id]||{};
       return Object.assign({},u,{
         paid_rs:p.amount?Math.round(p.amount/100):0,
-        coupon_used:p.coupon_used||null,
+        coupon_used:null,
         refer_by:null,
         tier:ulSet.has(u.id)?'ultra':'premium',
         is_active:a.is_active!==undefined?a.is_active:false
@@ -521,7 +522,8 @@ async function upgradeToUltra(uid,mobile,name,email){
   confCb=async function(){
     try{
       // Check if already in ultra table
-      var{data:exists}=await sb.from('ultra_premium_users').select('id').eq('user_id',uid).maybeSingle();
+      var exRes=await sb.from('ultra_premium_users').select('id').eq('user_id',uid).maybeSingle();
+      var exists=exRes.data||null;
       if(exists){ toast('Already Ultra Premium: '+name,'err'); return; }
       var{error}=await sb.from('ultra_premium_users').insert([{user_id:uid,mobile:mobile,full_name:name,email:email||''}]);
       if(error) throw error;
@@ -538,7 +540,7 @@ async function removeUser(uid,name){
       // Delete in order: access → payments → ultra table → user
       await sb.from('premium_access').delete().eq('user_id',uid);
       await sb.from('premium_payments').delete().eq('user_id',uid);
-      await sb.from('ultra_premium_users').delete().eq('user_id',uid);
+      try{ await sb.from('ultra_premium_users').delete().eq('user_id',uid); }catch(e){}
       var{error}=await sb.from('premium_users').delete().eq('id',uid);
       if(error) throw error;
       toast('User removed: '+name);
@@ -558,7 +560,7 @@ function exportCSV(){
 async function loadPay(){
   try{
     var[pyRes,uRes2]=await Promise.all([
-      sb.from('premium_payments').select('id,user_id,amount,razorpay_payment_id,coupon_used,status,created_at').order('created_at',{ascending:false}),
+      sb.from('premium_payments').select('id,user_id,amount,status,created_at').order('created_at',{ascending:false}),
       sb.from('premium_users').select('id,full_name,mobile')
     ]);
     var data=pyRes.data||[],uList=uRes2.data||[];
@@ -573,7 +575,7 @@ async function loadPay(){
       var u=uMap2[p.user_id]||{};
       var amtRs=Math.round((p.amount||0)/100);
       var sb2=p.status==='paid'?'<span class="badge b-green">Paid</span>':p.status==='free_coupon'?'<span class="badge b-blue">Free</span>':'<span class="badge b-red">'+p.status+'</span>';
-      return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td><td style="font-weight:700">₹'+amtRs+'</td><td><span class="badge b-gold">Premium</span></td><td><code style="font-size:10px">'+e((p.razorpay_payment_id||'—').substring(0,22))+'</code></td><td>'+(p.coupon_used?'<span class="badge b-blue">'+e(p.coupon_used)+'</span>':'—')+'</td><td>'+sb2+'</td><td style="color:var(--mu);font-size:12px">'+fd(p.created_at)+'</td></tr>';
+      return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td><td style="font-weight:700">₹'+amtRs+'</td><td><span class="badge b-gold">Premium</span></td><td><code style="font-size:10px">'+e(p.id||'—')+'</code></td><td>—</td><td>'+sb2+'</td><td style="color:var(--mu);font-size:12px">'+fd(p.created_at)+'</td></tr>';
     }).join('');
   }catch(err){document.getElementById('tb-pay').innerHTML='<tr class="lr"><td colspan="8">Error</td></tr>';}
 }
@@ -581,12 +583,14 @@ async function loadPay(){
 async function loadRefs(){
   try{
     var f=document.getElementById('ref-f').value;
-    var q=sb.from('referrals').select('*');
-    if(f==='pending')q=q.eq('refund_claimed',false).gte('count',1);
-    else if(f==='full')q=q.gte('count',2);
-    else if(f==='half')q=q.eq('count',1);
-    else if(f==='claimed')q=q.eq('refund_claimed',true);
-    var{data}=await q.order('count',{ascending:false});
+    var qb=sb.from('referrals').select('*');
+    if(f==='pending')qb=qb.eq('refund_claimed',false).gte('count',1);
+    else if(f==='full')qb=qb.gte('count',2);
+    else if(f==='half')qb=qb.eq('count',1);
+    else if(f==='claimed')qb=qb.eq('refund_claimed',true);
+    var res=await qb.order('count',{ascending:false});
+    if(res.error&&res.error.code==='42P01'){document.getElementById('tb-ref').innerHTML='<tr class="lr"><td colspan="8">Referrals table not set up yet. See setup guide.</td></tr>';document.getElementById('ref-cnt').textContent='—';return;}
+    var data=res.data||[];
     document.getElementById('ref-cnt').textContent=(data||[]).length+' referrers';
     var tb=document.getElementById('tb-ref');
     if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="8">No referrals found.</td></tr>';return;}
@@ -606,7 +610,8 @@ async function loadRefs(){
   }catch(err){document.getElementById('tb-ref').innerHTML='<tr class="lr"><td colspan="8">Error</td></tr>';}
 }
 async function viewRUses(mob){
-  var{data}=await sb.from('referral_uses').select('*').eq('referrer_mobile',mob).order('used_at',{ascending:false});
+  var res2=await sb.from('referral_uses').select('*').eq('referrer_mobile',mob).order('used_at',{ascending:false});
+  var data=res2.data||[];
   document.getElementById('ref-uses-ttl').textContent=mob;document.getElementById('ref-uses-card').style.display='block';
   var tb=document.getElementById('tb-ruses');
   if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="5">No uses.</td></tr>';return;}
@@ -625,8 +630,9 @@ async function loadRevs(){
     var f=document.getElementById('rev-f').value;
     var q=sb.from('reviews').select('*').order('created_at',{ascending:false});
     if(f==='pending')q=q.eq('approved',false);else if(f==='approved')q=q.eq('approved',true);
-    var{data}=await q;
-    document.getElementById('rev-cnt').textContent=(data||[]).length+' reviews';
+    var res=await q; if(res.error&&res.error.code==='42P01'){document.getElementById('tb-rev').innerHTML='<tr class="lr"><td colspan="6">Reviews table not set up yet.</td></tr>';return;}
+    var data=res.data||[];
+    document.getElementById('rev-cnt').textContent=data.length+' reviews';
     var tb=document.getElementById('tb-rev');
     if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="6">No reviews.</td></tr>';return;}
     tb.innerHTML=data.map(function(r){
@@ -664,10 +670,13 @@ async function doAction(){
     if(act==='deactivate'){await sb.from('premium_access').update({is_active:false}).eq('user_id',usr.id);alrt.className='alert alert-success show';alrt.textContent='Account blocked for '+usr.full_name+'.';}
     else if(act==='activate'){await sb.from('premium_access').update({is_active:true}).eq('user_id',usr.id);alrt.className='alert alert-success show';alrt.textContent='Account activated for '+usr.full_name+'.';}
     else if(act==='upgrade'){
-      await sb.from('premium_users').update({tier:'ultra'}).eq('id',usr.id);
-      await sb.from('premium_access').update({tier:'ultra'}).eq('user_id',usr.id);
-      var{data:upu}=await sb.from('ultra_premium_users').insert([{user_id:usr.id,mobile:mob,full_name:usr.full_name,email:''}]).select().maybeSingle();
-      alrt.className='alert alert-success show';alrt.textContent=usr.full_name+' upgraded to Ultra Premium.';
+      var{data:already}=await sb.from('ultra_premium_users').select('id').eq('user_id',usr.id).maybeSingle();
+      if(already){alrt.className='alert alert-warn show';alrt.textContent=usr.full_name+' is already Ultra Premium.';}
+      else{
+        var{error:upErr}=await sb.from('ultra_premium_users').insert([{user_id:usr.id,mobile:mob,full_name:usr.full_name,email:''}]);
+        if(upErr)throw upErr;
+        alrt.className='alert alert-success show';alrt.textContent=usr.full_name+' upgraded to Ultra Premium.';
+      }
     }
     else if(act==='mark-refund'){
       await sb.from('referrals').update({refund_claimed:true,last_updated:new Date().toISOString()}).eq('referrer_mobile',mob);
@@ -715,11 +724,10 @@ async function doAddUser(){
       user_id:nu.id, payment_id:py.id, is_active:true
     }]);
     
-    // 4. If Ultra, add to ultra table
+    // 4. If Ultra, add to ultra table (graceful — table may not exist yet)
     if(tier==='ultra'){
-      await sb.from('ultra_premium_users').insert([{
-        user_id:nu.id, mobile:mob, full_name:name, email:email
-      }]);
+      try{ await sb.from('ultra_premium_users').insert([{user_id:nu.id,mobile:mob,full_name:name,email:email}]); }
+      catch(ulE){ console.warn('ultra_premium_users insert failed:',ulE.message); }
     }
     
     alrt.className='alert alert-success show';
@@ -758,9 +766,12 @@ async function doLookup(){
       tier:'premium',
       is_active:acLRes.data?acLRes.data.is_active:false
     });
-    var{data:rfd}=await sb.from('referrals').select('*').eq('referrer_mobile',mob).maybeSingle();
-    var{data:rus}=await sb.from('referral_uses').select('*').eq('referrer_mobile',mob).order('used_at',{ascending:false});
-    var{data:isu}=await sb.from('ultra_premium_users').select('id').eq('mobile',mob).maybeSingle();
+    var rfdRes=await sb.from('referrals').select('*').eq('referrer_mobile',mob).maybeSingle();
+    var rfd=rfdRes.data||null;
+    var rusRes=await sb.from('referral_uses').select('*').eq('referrer_mobile',mob).order('used_at',{ascending:false});
+    var rus=rusRes.data||[];
+    var isuRes=await sb.from('ultra_premium_users').select('id').eq('mobile',mob).maybeSingle();
+    var isu=isuRes.data||null;
     var refStatus=rfd?(rfd.count>=2?'Full Refund Due (₹'+(usr.paid_rs||0)+')':rfd.count===1?'50% Refund Due (₹'+Math.floor((usr.paid_rs||0)/2)+')':'No Refund'):'No referrals made';
     var ib=function(l,v){return'<div class="info-block"><div class="info-block-lbl">'+l+'</div><div class="info-block-val">'+e(String(v||'—'))+'</div></div>';};
     cont.innerHTML='<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-user" style="color:var(--bl)"></i> '+e(usr.full_name||'—')+'</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(usr.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+(usr.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+(isu?'<span class="badge b-purple"><i class="fas fa-check"></i> Ultra Table</span>':'<span class="badge b-red">Not in Ultra Table</span>')+'</div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px">'+ib('Mobile',usr.mobile)+ib('Email',usr.email)+ib('Paid',usr.paid_rs?'₹'+usr.paid_rs:'—')+ib('Payment ID',usr.razorpay_payment_id||'—')+ib('Coupon',usr.coupon_used||'None')+ib('Referred By',usr.refer_by||'None')+ib('Referrals Made',(rfd?rfd.count:0)+' person(s)')+ib('Refund Status',refStatus)+ib('Joined',fd(usr.created_at))+ib('Payment Status',usr.payment_status||'—')+'</div>'+(rus&&rus.length?'<div style="margin-top:12px"><strong style="font-size:11px;font-family:Syne,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)">People They Referred:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">'+rus.map(function(u){return'<div style="font-size:13px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid var(--bo)"><strong>'+e(u.referee_name||'—')+'</strong> · '+e(u.referee_mobile)+' · '+u.referee_tier+' · ₹'+u.amount_paid_rs+' · '+fd(u.used_at)+'</div>';}).join('')+'</div></div>':'')+'<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><a class="btn btn-green" href="https://wa.me/91'+e(usr.mobile)+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+(usr.tier!=='ultra'?'<button class="btn btn-ultra" onclick="upgradeToUltra(\''+usr.id+'\',\''+e(usr.mobile)+'\',\''+e(usr.full_name||'')+'\',\''+e(usr.email||'')+'\')"><i class="fas fa-rocket"></i> Upgrade to Ultra</button>':'<span class="badge b-purple" style="padding:8px 14px;font-size:11px"><i class="fas fa-rocket"></i> Already Ultra Premium</span>')+'<button class="btn btn-danger" onclick="removeUser(\''+usr.id+'\',\''+e(usr.full_name||'')+'\')"><i class="fas fa-trash"></i> Remove User</button>'+(usr.is_active!==false?'<button class="btn btn-red" onclick="toggleActive(\''+usr.id+'\',false,\''+e(usr.full_name)+'\')"><i class="fas fa-ban"></i> Block</button>':'<button class="btn btn-green" onclick="toggleActive(\''+usr.id+'\',true,\''+e(usr.full_name)+'\')"><i class="fas fa-check"></i> Activate</button>')+'</div></div></div>';
