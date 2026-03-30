@@ -369,7 +369,7 @@ function buildWelcomeHTML(data) {
 
 // ═══════════════════════════════════════════════════════════
 //  EMAIL 2 — PREMIUM CUSTOMER WELCOME
-//  → Student ke email pe jaata hai after ₹11 payment
+//  → Student ke email pe jaata hai after 19 payment
 // ═══════════════════════════════════════════════════════════
 
 function buildCustomerWelcomeHTML(data) {
