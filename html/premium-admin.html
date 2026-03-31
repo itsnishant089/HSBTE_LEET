@@ -429,7 +429,7 @@ async function loadDash(){
     var[uRes,pyRes,prRes,rfRes,ulRes]=await Promise.all([
       sb.from('premium_users').select('id,full_name,mobile,created_at').order('created_at',{ascending:false}),
       sb.from('premium_payments').select('user_id,amount,status'),
-      safe(sb.from('reviews').select('id').eq('approved',false)),
+      safe(sb.from('req_approval').select('id')),
       safe(sb.from('referrals').select('id').eq('refund_claimed',false).gte('count',1)),
       safe(sb.from('ultra_premium_users').select('user_id'))
     ]);
@@ -490,6 +490,8 @@ function filterU(){
   });
   renderU(f);document.getElementById('u-count').textContent=f.length+' users';
 }
+function escInline(s){if(!s)return'';return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
 function renderU(users){
   var tb=document.getElementById('tb-users');
   if(!users.length){tb.innerHTML='<tr class="lr"><td colspan="10">No users found.</td></tr>';return;}
@@ -502,17 +504,19 @@ function renderU(users){
     '<td>'+(u.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+'</td>' +
     '<td style="color:var(--mu);font-size:12px">'+fd(u.created_at)+'</td>' +
     '<td><div style="display:flex;gap:4px;flex-wrap:wrap">' +
-      '<button class="btn btn-sm btn-ghost" onclick="quickLk(\''+e(u.mobile)+'\')" title="Lookup"><i class="fas fa-eye"></i></button>' +
+      '<button class="btn btn-sm btn-ghost" onclick="quickLk(\''+escInline(u.mobile)+'\')" title="Lookup"><i class="fas fa-eye"></i></button>' +
       '<a class="btn btn-sm btn-ghost" href="https://wa.me/91'+e(u.mobile)+'" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366"></i></a>' +
-      (u.tier!=='ultra'?'<button class="btn btn-sm btn-ultra" onclick="upgradeToUltra(\''+u.id+'\',\''+e(u.mobile)+'\',\''+e(u.full_name)+'\',\''+e(u.email||'')+'\')\" title="Upgrade to Ultra"><i class="fas fa-rocket"></i> Ultra</button>':'') +
-      (u.is_active!==false?'<button class="btn btn-sm btn-red" onclick="toggleActive(\''+u.id+'\',false,\''+e(u.full_name)+'\')"><i class="fas fa-ban"></i></button>':'<button class="btn btn-sm btn-green" onclick="toggleActive(\''+u.id+'\',true,\''+e(u.full_name)+'\')"><i class="fas fa-check"></i></button>') +
-      '<button class="btn btn-sm btn-danger" onclick="removeUser(\''+u.id+'\',\''+e(u.full_name)+'\')" title="Delete User"><i class="fas fa-trash"></i></button>' +
+      (u.tier!=='ultra'?'<button class="btn btn-sm btn-ultra" onclick="upgradeToUltra(\''+escInline(u.id)+'\',\''+escInline(u.mobile)+'\',\''+escInline(u.full_name)+'\',\''+escInline(u.email||'')+'\')" title="Upgrade to Ultra"><i class="fas fa-rocket"></i> Ultra</button>':'') +
+      (u.is_active!==false?'<button class="btn btn-sm btn-red" onclick="toggleActive(\''+escInline(u.id)+'\',false,\''+escInline(u.full_name)+'\')"><i class="fas fa-ban"></i></button>':'<button class="btn btn-sm btn-green" onclick="toggleActive(\''+escInline(u.id)+'\',true,\''+escInline(u.full_name)+'\')"><i class="fas fa-check"></i></button>') +
+      '<button class="btn btn-sm btn-danger" onclick="removeUser(\''+escInline(u.id)+'\',\''+escInline(u.full_name)+'\')" title="Delete User"><i class="fas fa-trash"></i></button>' +
     '</div></td></tr>';
   }).join('');
 }
 async function toggleActive(uid,val,name){
   confCb=async function(){
-    await sb.from('premium_access').update({is_active:val}).eq('user_id',uid);
+    var {data, error} = await sb.from('premium_access').update({is_active:val}).eq('user_id',uid).select();
+    if(error) { toast('Error: ' + error.message, 'err'); return; }
+    if(!data || data.length===0) { toast('Action blocked by Database Security Policies (RLS). Please contact developer.', 'err'); return; }
     toast((val?'Activated':'Blocked')+': '+name);loadUsers();
   };
   openConf((val?'Activate':'Block')+' User','Are you sure you want to '+(val?'restore access for':'block')+' '+name+'?');
@@ -525,8 +529,9 @@ async function upgradeToUltra(uid,mobile,name,email){
       var exRes=await sb.from('ultra_premium_users').select('id').eq('user_id',uid).maybeSingle();
       var exists=exRes.data||null;
       if(exists){ toast('Already Ultra Premium: '+name,'err'); return; }
-      var{error}=await sb.from('ultra_premium_users').insert([{user_id:uid,mobile:mobile,full_name:name,email:email||''}]);
+      var{data, error}=await sb.from('ultra_premium_users').insert([{user_id:uid,mobile:mobile,full_name:name,email:email||''}]).select();
       if(error) throw error;
+      if(!data || data.length===0) throw new Error("Insert silently blocked by RLS policies");
       toast('Upgraded to Ultra Premium: '+name);
       loadUsers();
     }catch(err){ toast('Upgrade failed: '+err.message,'err'); }
@@ -541,8 +546,9 @@ async function removeUser(uid,name){
       await sb.from('premium_access').delete().eq('user_id',uid);
       await sb.from('premium_payments').delete().eq('user_id',uid);
       try{ await sb.from('ultra_premium_users').delete().eq('user_id',uid); }catch(e){}
-      var{error}=await sb.from('premium_users').delete().eq('id',uid);
+      var{data, error}=await sb.from('premium_users').delete().eq('id',uid).select();
       if(error) throw error;
+      if(!data || data.length===0) throw new Error("Delete blocked by Database Security Policies (RLS) on premium_users.");
       toast('User removed: '+name);
       loadUsers();
     }catch(err){ toast('Remove failed: '+err.message,'err'); }
@@ -628,22 +634,53 @@ async function markClaimed(mob,amt){
 async function loadRevs(){
   try{
     var f=document.getElementById('rev-f').value;
-    var q=sb.from('reviews').select('*').order('created_at',{ascending:false});
-    if(f==='pending')q=q.eq('approved',false);else if(f==='approved')q=q.eq('approved',true);
-    var res=await q; if(res.error&&res.error.code==='42P01'){document.getElementById('tb-rev').innerHTML='<tr class="lr"><td colspan="6">Reviews table not set up yet.</td></tr>';return;}
-    var data=res.data||[];
+    var data=[];
+    if(f==='pending'){
+      var res=await sb.from('req_approval').select('*').order('created_at',{ascending:false});
+      data=res.data||[];
+    }else if(f==='approved'){
+      var res=await sb.from('reviews').select('*').order('created_at',{ascending:false});
+      data=res.data||[];
+    }else{
+      var[pRes,aRes]=await Promise.all([sb.from('req_approval').select('*'),sb.from('reviews').select('*')]);
+      data=(pRes.data||[]).map(function(x){x._isPending=true;return x;}).concat((aRes.data||[]).map(function(x){x._isPending=false;x.approved=true;return x;})).sort(function(a,b){return new Date(b.created_at)-new Date(a.created_at);});
+    }
     document.getElementById('rev-cnt').textContent=data.length+' reviews';
     var tb=document.getElementById('tb-rev');
     if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="6">No reviews.</td></tr>';return;}
     tb.innerHTML=data.map(function(r){
       var stars='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
+      var isPending = r._isPending !== undefined ? r._isPending : (f==='pending');
       return'<tr><td><strong>'+e(r.name||'—')+'</strong></td><td style="font-size:12px;color:var(--mu)">'+e(r.college||'—')+'</td><td style="color:#f59e0b;letter-spacing:1px">'+stars+'</td><td style="max-width:220px;font-size:12.5px">'+e((r.message||'').substring(0,90))+(r.message&&r.message.length>90?'…':'')+'</td><td style="color:var(--mu);font-size:12px">'+fd(r.created_at)+'</td>' +
-      '<td><div style="display:flex;gap:4px">'+(!r.approved?'<button class="btn btn-sm btn-green" onclick="approveRev(\''+r.id+'\')"><i class="fas fa-check"></i> Approve</button>':'<span class="badge b-green">Approved</span>')+'<button class="btn btn-sm btn-red" onclick="delRev(\''+r.id+'\')"><i class="fas fa-trash"></i></button></div></td></tr>';
+      '<td><div style="display:flex;gap:4px">'+(isPending?'<button class="btn btn-sm btn-green" onclick="approveRev(\''+r.id+'\')"><i class="fas fa-check"></i> Approve</button>':'<span class="badge b-green">Approved</span>')+'<button class="btn btn-sm btn-red" onclick="delRev(\''+r.id+'\','+isPending+')"><i class="fas fa-trash"></i></button></div></td></tr>';
     }).join('');
   }catch(err){}
 }
-async function approveRev(id){await sb.from('reviews').update({approved:true}).eq('id',id);toast('Review approved');loadRevs();}
-async function delRev(id){confCb=async function(){await sb.from('reviews').delete().eq('id',id);toast('Deleted');loadRevs();};openConf('Delete Review','Permanently delete this review?');}
+async function approveRev(id){
+  try{
+    var {data:rev, error:e1} = await sb.from('req_approval').select('*').eq('id',id).single();
+    if(e1 || !rev) { alert('Error finding review: ' + (e1?e1.message:'Unknown')); return; }
+    
+    // Try to insert into reviews
+    var { error: e2 } = await sb.from('reviews').insert([{
+      name: rev.name, 
+      college: rev.college, 
+      rating: rev.rating, 
+      message: rev.message,
+      user_id: rev.user_id ? rev.user_id : null,
+      approved: true
+    }]);
+    
+    if(e2) { alert('ERROR INSERTING TO REVIEWS: ' + e2.message); return; } // STOP HERE if error
+    
+    // Only delete if insert succeeded
+    var { error: e3 } = await sb.from('req_approval').delete().eq('id',id);
+    if(e3) { alert('Error deleting pending: ' + e3.message); return; }
+    
+    toast('Review approved!'); loadRevs(); loadDash();
+  }catch(err){alert('Critical Error: ' + err.message);}
+}
+async function delRev(id,isPending){confCb=async function(){await sb.from(isPending?'req_approval':'reviews').delete().eq('id',id);toast('Deleted');loadRevs();loadDash();};openConf('Delete Review','Permanently delete this review?');}
 
 function toggleCustom(){
   var show=document.getElementById('wm-type').value==='custom';
@@ -667,19 +704,30 @@ async function doAction(){
   try{
     var{data:usr}=await sb.from('premium_users').select('id,full_name,tier').eq('mobile',mob).maybeSingle();
     if(!usr){alrt.className='alert alert-danger show';alrt.textContent='No user found with mobile '+mob+'.';btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Execute Action';return;}
-    if(act==='deactivate'){await sb.from('premium_access').update({is_active:false}).eq('user_id',usr.id);alrt.className='alert alert-success show';alrt.textContent='Account blocked for '+usr.full_name+'.';}
-    else if(act==='activate'){await sb.from('premium_access').update({is_active:true}).eq('user_id',usr.id);alrt.className='alert alert-success show';alrt.textContent='Account activated for '+usr.full_name+'.';}
+    if(act==='deactivate'){
+      var{data, error} = await sb.from('premium_access').update({is_active:false}).eq('user_id',usr.id).select();
+      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error blocking account (RLS or DB issue).';return;}
+      alrt.className='alert alert-success show';alrt.textContent='Account blocked for '+usr.full_name+'.';
+    }
+    else if(act==='activate'){
+      var{data, error} = await sb.from('premium_access').update({is_active:true}).eq('user_id',usr.id).select();
+      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error activating account (RLS or DB issue).';return;}
+      alrt.className='alert alert-success show';alrt.textContent='Account activated for '+usr.full_name+'.';
+    }
     else if(act==='upgrade'){
       var{data:already}=await sb.from('ultra_premium_users').select('id').eq('user_id',usr.id).maybeSingle();
       if(already){alrt.className='alert alert-warn show';alrt.textContent=usr.full_name+' is already Ultra Premium.';}
       else{
-        var{error:upErr}=await sb.from('ultra_premium_users').insert([{user_id:usr.id,mobile:mob,full_name:usr.full_name,email:''}]);
-        if(upErr)throw upErr;
+        var{data:upD, error:upErr}=await sb.from('ultra_premium_users').insert([{user_id:usr.id,mobile:mob,full_name:usr.full_name,email:''}]).select();
+        if(upErr || !upD || upD.length===0){
+           alrt.className='alert alert-danger show';alrt.textContent='Error upgrading to Ultra Premium (RLS or DB failure).';return;
+        }
         alrt.className='alert alert-success show';alrt.textContent=usr.full_name+' upgraded to Ultra Premium.';
       }
     }
     else if(act==='mark-refund'){
-      await sb.from('referrals').update({refund_claimed:true,last_updated:new Date().toISOString()}).eq('referrer_mobile',mob);
+      var{data, error} = await sb.from('referrals').update({refund_claimed:true,last_updated:new Date().toISOString()}).eq('referrer_mobile',mob).select();
+      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error marking refund claimed (RLS or DB issue).';return;}
       alrt.className='alert alert-success show';alrt.textContent='Refund marked claimed for '+mob+'.';
     }
   }catch(err){alrt.className='alert alert-danger show';alrt.textContent='An error occurred while processing the action. Please check the logs or contact support.';}
@@ -774,13 +822,13 @@ async function doLookup(){
     var isu=isuRes.data||null;
     var refStatus=rfd?(rfd.count>=2?'Full Refund Due (₹'+(usr.paid_rs||0)+')':rfd.count===1?'50% Refund Due (₹'+Math.floor((usr.paid_rs||0)/2)+')':'No Refund'):'No referrals made';
     var ib=function(l,v){return'<div class="info-block"><div class="info-block-lbl">'+l+'</div><div class="info-block-val">'+e(String(v||'—'))+'</div></div>';};
-    cont.innerHTML='<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-user" style="color:var(--bl)"></i> '+e(usr.full_name||'—')+'</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(usr.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+(usr.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+(isu?'<span class="badge b-purple"><i class="fas fa-check"></i> Ultra Table</span>':'<span class="badge b-red">Not in Ultra Table</span>')+'</div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px">'+ib('Mobile',usr.mobile)+ib('Email',usr.email)+ib('Paid',usr.paid_rs?'₹'+usr.paid_rs:'—')+ib('Payment ID',usr.razorpay_payment_id||'—')+ib('Coupon',usr.coupon_used||'None')+ib('Referred By',usr.refer_by||'None')+ib('Referrals Made',(rfd?rfd.count:0)+' person(s)')+ib('Refund Status',refStatus)+ib('Joined',fd(usr.created_at))+ib('Payment Status',usr.payment_status||'—')+'</div>'+(rus&&rus.length?'<div style="margin-top:12px"><strong style="font-size:11px;font-family:Syne,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)">People They Referred:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">'+rus.map(function(u){return'<div style="font-size:13px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid var(--bo)"><strong>'+e(u.referee_name||'—')+'</strong> · '+e(u.referee_mobile)+' · '+u.referee_tier+' · ₹'+u.amount_paid_rs+' · '+fd(u.used_at)+'</div>';}).join('')+'</div></div>':'')+'<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><a class="btn btn-green" href="https://wa.me/91'+e(usr.mobile)+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+(usr.tier!=='ultra'?'<button class="btn btn-ultra" onclick="upgradeToUltra(\''+usr.id+'\',\''+e(usr.mobile)+'\',\''+e(usr.full_name||'')+'\',\''+e(usr.email||'')+'\')"><i class="fas fa-rocket"></i> Upgrade to Ultra</button>':'<span class="badge b-purple" style="padding:8px 14px;font-size:11px"><i class="fas fa-rocket"></i> Already Ultra Premium</span>')+'<button class="btn btn-danger" onclick="removeUser(\''+usr.id+'\',\''+e(usr.full_name||'')+'\')"><i class="fas fa-trash"></i> Remove User</button>'+(usr.is_active!==false?'<button class="btn btn-red" onclick="toggleActive(\''+usr.id+'\',false,\''+e(usr.full_name)+'\')"><i class="fas fa-ban"></i> Block</button>':'<button class="btn btn-green" onclick="toggleActive(\''+usr.id+'\',true,\''+e(usr.full_name)+'\')"><i class="fas fa-check"></i> Activate</button>')+'</div></div></div>';
+    cont.innerHTML='<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-user" style="color:var(--bl)"></i> '+e(usr.full_name||'—')+'</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(usr.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+(usr.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+(isu?'<span class="badge b-purple"><i class="fas fa-check"></i> Ultra Table</span>':'<span class="badge b-red">Not in Ultra Table</span>')+'</div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px">'+ib('Mobile',usr.mobile)+ib('Email',usr.email)+ib('Paid',usr.paid_rs?'₹'+usr.paid_rs:'—')+ib('Payment ID',usr.razorpay_payment_id||'—')+ib('Coupon',usr.coupon_used||'None')+ib('Referred By',usr.refer_by||'None')+ib('Referrals Made',(rfd?rfd.count:0)+' person(s)')+ib('Refund Status',refStatus)+ib('Joined',fd(usr.created_at))+ib('Payment Status',usr.payment_status||'—')+'</div>'+(rus&&rus.length?'<div style="margin-top:12px"><strong style="font-size:11px;font-family:Syne,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)">People They Referred:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">'+rus.map(function(u){return'<div style="font-size:13px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid var(--bo)"><strong>'+e(u.referee_name||'—')+'</strong> · '+e(u.referee_mobile)+' · '+u.referee_tier+' · ₹'+u.amount_paid_rs+' · '+fd(u.used_at)+'</div>';}).join('')+'</div></div>':'')+'<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><a class="btn btn-green" href="https://wa.me/91'+e(usr.mobile)+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+(usr.tier!=='ultra'?'<button class="btn btn-ultra" onclick="upgradeToUltra(\''+escInline(usr.id)+'\',\''+escInline(usr.mobile)+'\',\''+escInline(usr.full_name||'')+'\',\''+escInline(usr.email||'')+'\')"><i class="fas fa-rocket"></i> Upgrade to Ultra</button>':'<span class="badge b-purple" style="padding:8px 14px;font-size:11px"><i class="fas fa-rocket"></i> Already Ultra Premium</span>')+'<button class="btn btn-danger" onclick="removeUser(\''+escInline(usr.id)+'\',\''+escInline(usr.full_name||'')+'\')"><i class="fas fa-trash"></i> Remove User</button>'+(usr.is_active!==false?'<button class="btn btn-red" onclick="toggleActive(\''+escInline(usr.id)+'\',false,\''+escInline(usr.full_name)+'\')"><i class="fas fa-ban"></i> Block</button>':'<button class="btn btn-green" onclick="toggleActive(\''+escInline(usr.id)+'\',true,\''+escInline(usr.full_name)+'\')"><i class="fas fa-check"></i> Activate</button>')+'</div></div></div>';
   }catch(err){cont.innerHTML='<div class="alert alert-danger show">Search failed. Please try again.</div>';}
 }
 
 function openConf(t,m){document.getElementById('conf-title').textContent=t;document.getElementById('conf-msg').textContent=m;document.getElementById('conf-modal').classList.add('show');}
 function confClose(){document.getElementById('conf-modal').classList.remove('show');confCb=null;}
-async function confYes(){confClose();if(confCb){await confCb();confCb=null;}}
+async function confYes(){var cb=confCb;confClose();if(cb){await cb();}}
 function toast(msg,err){
   var t=document.createElement('div');
   t.style.cssText='position:fixed;bottom:20px;right:20px;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,.15);max-width:300px;line-height:1.5;animation:fadeIn .2s ease;font-family:Plus Jakarta Sans,sans-serif';
