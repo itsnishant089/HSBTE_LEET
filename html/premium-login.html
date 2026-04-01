@@ -911,21 +911,6 @@
       margin-top: 2px
     }
 
-    /* ── REFER BOX ── */
-    .refer-box {
-      background: linear-gradient(135deg, #fffbeb, #fef9ec);
-      border: 1.5px solid rgba(245, 158, 11, .35);
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 14px;
-      font-size: 12.5px;
-      color: #92400e;
-      line-height: 1.6;
-    }
-
-    .refer-box strong {
-      color: var(--ad)
-    }
 
     /* ── SUCCESS ── */
     .success-wrap {
@@ -1392,7 +1377,7 @@
       var mob = document.getElementById('r-mob').value.trim();
       var email = document.getElementById('r-email').value.trim();
       var pass = document.getElementById('r-pass').value;
-      var refer = document.getElementById('r-refer').value.trim();
+
       var ok = true;
 
       if (!name) { setFI('r-name', true); showFE('r-name-err', true); ok = false; } else { setFI('r-name', false); showFE('r-name-err', false); }
@@ -1409,7 +1394,7 @@
           setBtn('btn-s1', false, 'Continue to Payment <i class="fas fa-arrow-right"></i>');
           return;
         }
-        pending = { full_name: name, mobile: mob, email: email, password_hash: pass, refer_by: refer || null, tier: curTier };
+        pending = { full_name: name, mobile: mob, email: email, password_hash: pass, tier: curTier };
 
         document.getElementById('step1').style.display = 'none';
         document.getElementById('step2').style.display = 'block';
@@ -1617,20 +1602,6 @@
       }
     }
 
-    // ── REFERRAL TRACKING ──
-    async function trackReferral(refMob, newUid, newMob, newName, newTier, amtRs) {
-      try {
-        // Call Supabase function (or upsert referrals table)
-        var { data: ref } = await sb.from('referrals').select('id,count').eq('referrer_mobile', refMob).maybeSingle();
-        if (ref) {
-          await sb.from('referrals').update({ count: (ref.count || 0) + 1, last_updated: new Date().toISOString() }).eq('id', ref.id);
-        } else {
-          await sb.from('referrals').insert([{ referrer_mobile: refMob, count: 1 }]);
-        }
-        // Log referral use
-        await sb.from('referral_uses').insert([{ referrer_mobile: refMob, referee_user_id: newUid, referee_mobile: newMob, referee_name: newName, referee_tier: newTier, amount_paid_rs: amtRs }]);
-      } catch (e) { console.warn('Referral tracking error:', e); }
-    }
 
     // ── SESSION ──
     function setSession(uid) {
