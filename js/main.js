@@ -1,322 +1,235 @@
-// ================================
-// ERROR HANDLING - PREVENT JS ERRORS
-// ================================
+/**
+ * main.js — core site logic with robust error handling and performance optimizations.
+ */
+
+// ─── Global Error Handler ───────────────────────────────────────────────
 window.addEventListener('error', function(e) {
-  console.warn('JavaScript error caught:', e.message, e.filename, e.lineno);
-  // Prevent error from breaking the page
-  return true;
+  console.warn('Caught JS error:', e.message, 'at', e.filename, ':', e.lineno);
+  return true; // Prevents the error from bubble-crashing some browsers
 });
-// ================================
-// PARTIALS LOADED LOGIC
-// ================================
-document.addEventListener("partialsLoaded", () => {
-  // ---------- DARK MODE ----------
-  const toggle = document.getElementById("darkModeToggle");
-  if (toggle) {
-    const savedMode = localStorage.getItem("darkMode");
-    if (savedMode === "enabled") {
-      document.body.classList.add("dark-mode");
-      toggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-    }
-    toggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkMode", "enabled");
-        toggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-      } else {
-        localStorage.setItem("darkMode", "disabled");
-        toggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-      }
+
+// ─── Core Functionality ────────────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", () => {
+  // Service Worker Registration
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed:', err));
     });
   }
-  // ---------- MOBILE NAVIGATION MENU ----------
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+
+  // Partials Loading Trigger
+  if (document.body.classList.contains("partials-ready")) {
+    document.dispatchEvent(new Event("partialsLoaded"));
+  }
+});
+
+document.addEventListener("partialsLoaded", () => {
+  try {
+    initDarkMode();
+    initMobileNav();
+    initLanguageSelect();
+    initGoTopButton();
+  } catch (err) {
+    console.error("Error initializing core features:", err);
+  }
+});
+
+/** Dark Mode Toggle with persistence */
+function initDarkMode() {
+  const toggle = document.getElementById("darkModeToggle");
+  if (!toggle) return;
+
+  const savedMode = localStorage.getItem("darkMode");
+  if (savedMode === "enabled") {
+    document.body.classList.add("dark-mode");
+    toggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+  }
+
+  toggle.onclick = () => {
+    const isDark = document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+    toggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Light Mode' : '<i class="fas fa-moon"></i> Dark Mode';
+  };
+}
+
+/** Mobile Menu & Stream Toggles */
+function initMobileNav() {
+  const toggle = document.querySelector('.mobile-menu-toggle');
   const navMenu = document.querySelector('.nav-menu');
-  const navItems = document.querySelectorAll('.has-dropdown');
-  let overlay = null;
-  if (mobileMenuToggle && navMenu) {
-    // Create overlay
+  if (!toggle || !navMenu) return;
+
+  // The partial header.html handles its own internal menu script, 
+  // but we ensure the mobile-menu-overlay exists.
+  let overlay = document.querySelector('.mobile-menu-overlay');
+  if (!overlay) {
     overlay = document.createElement('div');
     overlay.className = 'mobile-menu-overlay';
-    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; display: none;';
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:999;display:none;';
     document.body.appendChild(overlay);
-    mobileMenuToggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const isActive = this.classList.contains('active');
-      this.classList.toggle('active');
-      navMenu.classList.toggle('active');
-      if (navMenu.classList.contains('active')) {
-        document.body.classList.add("menu-open");
-        overlay.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.classList.remove("menu-open");
-        overlay.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    });
-    // Close menu when clicking overlay
-    overlay.addEventListener('click', function() {
-      mobileMenuToggle.classList.remove('active');
-      navMenu.classList.remove('active');
-      document.body.classList.remove("menu-open");
-      overlay.style.display = 'none';
-      document.body.style.overflow = '';
-    });
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth <= 768 && navMenu.classList.contains('active')) {
-        if (!mobileMenuToggle.contains(e.target) && !navMenu.contains(e.target) && !overlay.contains(e.target)) {
-          mobileMenuToggle.classList.remove('active');
-          navMenu.classList.remove('active');
-          document.body.classList.remove("menu-open");
-          overlay.style.display = 'none';
-          document.body.style.overflow = '';
-        }
-      }
-    });
-    // Handle dropdown toggle on mobile
-    navItems.forEach(item => {
-      const link = item.querySelector('.nav-link');
-      if (link) {
-        link.addEventListener('click', function(e) {
-          if (window.innerWidth <= 768) {
-            e.preventDefault();
-            item.classList.toggle('active');
-          }
-        });
-      }
-    });
   }
-  // ---------- LANGUAGE TRANSLATOR ----------
-  const languageSelect = document.getElementById("languageSelect");
-  if (languageSelect) {
-    languageSelect.addEventListener("change", function () {
-      const lang = this.value;
-      if (!lang) return;
-      const interval = setInterval(() => {
-        const googleSelect = document.querySelector(".goog-te-combo");
-        if (googleSelect) {
-          googleSelect.value = lang;
-          googleSelect.dispatchEvent(new Event("change"));
-          clearInterval(interval);
-        }
-      }, 300);
-    });
-  }
-});
-// ---------- FALLBACK IF NO PARTIALS ----------
-document.addEventListener("DOMContentLoaded", () => {
-  if (!document.querySelector("[data-include]")) {
-    setTimeout(() => {
-      document.dispatchEvent(new Event("partialsLoaded"));
-    }, 100);
-  }
-});
-// ================================
-// TEXT SIZE (ZOOM IN / OUT)
-// ================================
-function setTextSize(size) {
-  document.body.classList.remove("text-small", "text-medium", "text-large");
-  document.body.classList.add("text-" + size);
-  localStorage.setItem("textSize", size);
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const savedSize = localStorage.getItem("textSize") || "medium";
-  setTextSize(savedSize);
-});
-// ================================
-// GO TO TOP BUTTON (SMART & RESPONSIVE)
-// ================================
+
+/** Google Translate Integration Helper */
+function initLanguageSelect() {
+  const languageSelect = document.getElementById("languageSelect");
+  if (!languageSelect) return;
+
+  languageSelect.onchange = function() {
+    const lang = this.value;
+    if (!lang) return;
+    const checkCount = 0;
+    const interval = setInterval(() => {
+      const googleSelect = document.querySelector(".goog-te-combo");
+      if (googleSelect) {
+        googleSelect.value = lang;
+        googleSelect.dispatchEvent(new Event("change"));
+        clearInterval(interval);
+      } else if (checkCount > 20) {
+        clearInterval(interval);
+      }
+    }, 300);
+  };
+}
+
+/** Smooth Scroll to Top */
 function initGoTopButton() {
   const goTopBtn = document.getElementById("goTopBtn");
   if (!goTopBtn) return;
-  // Calculate smart threshold based on page characteristics
-  function calculateSmartThreshold() {
-    const viewportHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollableHeight = documentHeight - viewportHeight;
-    // For very short pages (less than 2 viewports), use viewport-based threshold
-    if (scrollableHeight < viewportHeight * 2) {
-      // Short pages: appear after scrolling 15% of viewport
-      return Math.max(150, viewportHeight * 0.15);
-    }
-    // For medium pages (2-5 viewports), use 8% of viewport
-    if (scrollableHeight < viewportHeight * 5) {
-      return Math.max(200, viewportHeight * 0.08);
-    }
-    // For long pages (5+ viewports), use 5% of document height
-    // This ensures button appears earlier on long pages
-    return Math.max(300, scrollableHeight * 0.05);
-  }
-  let scrollThreshold = calculateSmartThreshold();
-  // Recalculate on resize and when content loads
-  let resizeTimeout;
-  function recalculateThreshold() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      scrollThreshold = calculateSmartThreshold();
-      // Re-check current scroll position after recalculation
-      toggleGoTopButton();
-    }, 150);
-  }
-  window.addEventListener("resize", recalculateThreshold, { passive: true });
-  // Recalculate when content changes (for pages with includes)
-  const observer = new MutationObserver(() => {
-    recalculateThreshold();
-  });
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-  function toggleGoTopButton() {
-    const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop > scrollThreshold) {
+
+  const handleScroll = () => {
+    if (window.scrollY > 400) {
       goTopBtn.classList.add("show");
     } else {
       goTopBtn.classList.remove("show");
     }
-  }
-  window.addEventListener("scroll", toggleGoTopButton, { passive: true });
-  // Initial check after a small delay to ensure content is loaded
-  setTimeout(() => {
-    scrollThreshold = calculateSmartThreshold();
-    toggleGoTopButton();
-  }, 300);
-  goTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  goTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
 }
-// Initialize on DOM ready
-document.addEventListener("DOMContentLoaded", initGoTopButton);
-// Also initialize after partials load (for pages with includes)
-document.addEventListener("partialsLoaded", () => {
-  setTimeout(initGoTopButton, 100);
-});
-// AdSense - No interference, let it work normally
-(function () {
-  var goTopBtn = document.getElementById('goTopBtn');
-  if (!goTopBtn) return;
-  window.addEventListener('scroll', function () {
-    goTopBtn.classList.toggle('visible', window.scrollY > 300);
-  });
-  goTopBtn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-})();
-(function () {
-  var faqBtns = document.querySelectorAll('.faq-question');
-  if (!faqBtns.length) return;
-  faqBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var item = this.closest('.faq-item');
-      var isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(function (i) {
-        i.classList.remove('open');
-        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        this.setAttribute('aria-expanded', 'true');
-      }
-    });
+
+// ─── UI Enhancements & Accessibility ───────────────────────────────────
+
+/** Text Zooming */
+function setTextSize(size) {
+  try {
+    document.body.classList.remove("text-small", "text-medium", "text-large");
+    document.body.classList.add("text-" + size);
+    localStorage.setItem("textSize", size);
+  } catch (e) {}
+}
+
+/** FAQ Accordions */
+(function initFAQs() {
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.faq-question');
+    if (!btn) return;
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    
+    // Close others
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    } else {
+      btn.setAttribute('aria-expanded', 'false');
+    }
   });
 })();
-// ================================
-// LEET 2026 — PERFORMANCE & SEO HELPERS
-// ================================
-(function () {
-  if ('loading' in HTMLImageElement.prototype) return; // native support
-  var imgs = document.querySelectorAll('img[loading="lazy"]');
-  if (!imgs.length) return;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
+
+/** Lazy Loading Images Fallback */
+(function initLazyLoad() {
+  if (!('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        var img = entry.target;
+        const img = entry.target;
         if (img.dataset.src) img.src = img.dataset.src;
-        io.unobserve(img);
+        observer.unobserve(img);
       }
     });
   }, { rootMargin: '200px' });
-  imgs.forEach(function (img) { io.observe(img); });
+
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => observer.observe(img));
 })();
-(function () {
-  document.addEventListener('DOMContentLoaded', function () {
-    var faqs = document.querySelectorAll('.leet-faq-q');
-    faqs.forEach(function (q) {
-      q.addEventListener('click', function () {
-        var item = this.closest('.leet-faq-item');
-        var isOpen = item.classList.contains('open');
-        // Close all siblings first
-        var siblings = item.parentElement.querySelectorAll('.leet-faq-item');
-        siblings.forEach(function (s) { s.classList.remove('open'); });
-        // Toggle current
-        if (!isOpen) item.classList.add('open');
-      });
+
+/** Persistent Stream Toggles (BTech / BPharmacy) */
+function initStreamToggles() {
+  const streamWraps = document.querySelectorAll('[data-leet-toggle]');
+  if (!streamWraps.length) return;
+
+  function applyStream(stream) {
+    document.querySelectorAll('[data-stream-select]').forEach(btn => {
+      const active = btn.getAttribute('data-stream-select') === stream;
+      btn.classList.toggle('lp-active', active);
     });
-  });
-})();
-(function () {
-  function initLeetToggle() {
-    document.querySelectorAll('[data-leet-toggle]').forEach(function (toggleWrap) {
-      var btns = toggleWrap.querySelectorAll('[data-stream-select]');
-      if (!btns.length) return;
-      function applyStream(stream) {
-        btns.forEach(function (b) {
-          var active = b.getAttribute('data-stream-select') === stream;
-          b.setAttribute('aria-pressed', active ? 'true' : 'false');
-          b.classList.toggle('lp-active', active);
-        });
-        document.querySelectorAll('[data-leet-stream]').forEach(function (el) {
-          el.style.display = (el.getAttribute('data-leet-stream') === stream) ? '' : 'none';
-        });
-        try { localStorage.setItem('leet-stream', stream); } catch (e) {}
-      }
-      btns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          applyStream(btn.getAttribute('data-stream-select'));
-        });
-      });
-      var saved = '';
-      try { saved = localStorage.getItem('leet-stream') || ''; } catch (e) {}
-      applyStream(saved || 'btech');
+    document.querySelectorAll('[data-leet-stream]').forEach(el => {
+      el.style.display = (el.getAttribute('data-leet-stream') === stream) ? '' : 'none';
     });
+    localStorage.setItem('leet-stream', stream);
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLeetToggle);
-  } else {
-    initLeetToggle();
-  }
-  // Also init after partials load
-  document.addEventListener('partialsLoaded', function () {
-    setTimeout(initLeetToggle, 80);
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-stream-select]');
+    if (btn) applyStream(btn.getAttribute('data-stream-select'));
   });
-})();
-(function () {
-  document.addEventListener('DOMContentLoaded', function () {
-    var bc = document.querySelector('.leet-breadcrumb');
-    if (!bc) return;
-    var items = bc.querySelectorAll('a');
-    if (!items.length) return;
-    var list = [];
-    items.forEach(function (a, i) {
-      list.push({ '@type': 'ListItem', 'position': i + 1, 'name': a.textContent.trim(), 'item': a.href });
-    });
-    var current = bc.querySelector('.current');
-    if (current) {
-      list.push({ '@type': 'ListItem', 'position': list.length + 1, 'name': current.textContent.trim(), 'item': window.location.href });
+
+  const saved = localStorage.getItem('leet-stream') || 'btech';
+  applyStream(saved);
+}
+
+/** Dynamic Breadcrumb Generator for 260+ pages */
+function initDynamicBreadcrumbs() {
+  const container = document.querySelector('.leet-breadcrumb');
+  if (!container) return; // Only if the page has a breadcrumb container
+
+  const path = window.location.pathname;
+  const parts = path.split('/').filter(p => p && !p.endsWith('.html'));
+  let html = '<a href="/">Home</a>';
+  let currentPath = '';
+
+  parts.forEach((part, index) => {
+    currentPath += `/${part}`;
+    const cleanName = part.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    html += ` <span class="sep">/</span> `;
+    if (index === parts.length - 1) {
+      html += `<span class="current">${cleanName}</span>`;
+    } else {
+      html += `<a href="${currentPath}">${cleanName}</a>`;
     }
-    var script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': list });
-    document.head.appendChild(script);
   });
-})();
-(function () {
-  if (window.performance && window.performance.mark) {
-    window.performance.mark('leet-page-interactive');
-  }
-})();
+  container.innerHTML = html;
+}
+
+/** Sleek Page Progress Bar */
+function initProgressBar() {
+  const bar = document.createElement('div');
+  bar.id = 'page-progress-bar';
+  bar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg, #1565c0, #f59e0b);z-index:99999;width:0%;transition:width 0.2s ease;box-shadow: 0 0 10px rgba(21, 101, 192, 0.5);';
+  document.body.appendChild(bar);
+
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    bar.style.width = scrolled + "%";
+  }, { passive: true });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initProgressBar();
+  initDynamicBreadcrumbs();
+  initStreamToggles();
+  // Recovery helper...
+  setTimeout(() => {
+    if (!document.body.classList.contains("partials-ready")) {
+       document.dispatchEvent(new Event("partialsLoaded"));
+    }
+  }, 2000);
+});
+
+document.addEventListener("partialsLoaded", () => {
+  document.body.classList.add("partials-ready");
+});

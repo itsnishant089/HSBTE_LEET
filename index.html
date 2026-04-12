@@ -137,27 +137,50 @@
 }
 
 .faq-item.open .faq-answer {
-  max-height: 600px;   /* tall enough for any answer */
+  max-height: 600px;
   padding: 16px 22px 22px;
 }
+
+/* Translate Fixes */
+.goog-te-banner-frame { display: none !important; }
+body { top: 0 !important; }
+.goog-te-gadget { display: none !important; }
+#google_translate_element { display: none; }
 </style>
-<!-- Analytics -->
+<!-- Analytics & External Scripts (Deferred to Idle) -->
 <script>
-(function(c,l,a,r,i,t,y){
-  try {
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-  } catch(e) { console.warn('Clarity initialization error:', e); }
-})(window, document, "clarity", "script", "vesdg7gqcq");
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3142279668395491" crossorigin="anonymous"></script>
-<script defer src="https://www.googletagmanager.com/gtag/js?id=G-WR1BG2HCE0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-WR1BG2HCE0');
+(function initAnalytics() {
+  const loadAnalytics = () => {
+    // Clarity
+    try {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "vesdg7gqcq");
+    } catch(e) {}
+
+    // Google Tag Manager
+    try {
+      const gtm = document.createElement("script");
+      gtm.src = "https://www.googletagmanager.com/gtag/js?id=G-WR1BG2HCE0";
+      gtm.async = true;
+      document.head.appendChild(gtm);
+      gtm.onload = () => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WR1BG2HCE0');
+      };
+    } catch(e) {}
+  };
+
+  if (window.requestIdleCallback) {
+    window.requestIdleCallback(loadAnalytics);
+  } else {
+    setTimeout(loadAnalytics, 3000);
+  }
+})();
 </script>
 
 </head>

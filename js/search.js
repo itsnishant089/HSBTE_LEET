@@ -32,7 +32,7 @@ console.log('Search initialized successfully');
 }
 async function extractSubjectsFromHtml(htmlFilePath) {
 try {
-const response = await fetch(htmlFilePath);
+const response = await fetch(htmlFilePath, { cache: 'force-cache' });
 if (!response.ok) {
 return [];
 }
@@ -96,6 +96,24 @@ return [];
 }
 async function buildSearchIndex() {
 if (isIndexLoaded) return;
+
+// Try to load from localStorage first
+const CACHE_KEY = 'hsbte_search_index_v2';
+const cached = localStorage.getItem(CACHE_KEY);
+if (cached) {
+    try {
+        const parsed = JSON.parse(cached);
+        if (parsed && Array.isArray(parsed) && parsed.length > 500) {
+            searchIndex = parsed;
+            isIndexLoaded = true;
+            console.log(`Search index loaded from cache (${searchIndex.length} items).`);
+            return;
+        }
+    } catch (e) {
+        console.warn('Error parsing cached search index');
+    }
+}
+
 const basePath = '/';
 const branches = [
 { name: 'Agriculture Engineering', url: 'Agriculture', semesters: [1, 2, 3, 4, 5], key: 'agriculture' },
@@ -159,19 +177,17 @@ branch.name.toLowerCase(),
 ]
 });
 });
-branch.semesters.forEach(sem => {
+branch.semesters.forEach((sem, idx) => {
 const semNum = sem === 1 ? '1st' : sem === 2 ? '2nd' : sem === 3 ? '3rd' : `${sem}th`;
 let semesterUrl;
 if (branch.key === 'computer') {
-if (sem === 1) {
-semesterUrl = `${basePath}computer-1-semester`;
-} else {
-semesterUrl = `${basePath}computer-pyq-${sem}-semester`;
-}
+semesterUrl = sem === 1 ? `${basePath}computer-1-semester` : `${basePath}computer-pyq-${sem}-semester`;
 } else {
 semesterUrl = `${basePath}${branch.url}-${sem}`;
 }
 const fetchUrl = `/html/${semesterUrl.replace(/^\//, '')}.html`;
+// Throttle background fetches to avoid flooding
+setTimeout(() => {
 extractSubjectsFromHtml(fetchUrl).then(subjects => {
 subjects.forEach(subject => {
 const subjectWords = subject.name.split(/[\s&–\-()]+/).filter(w => w.length > 0);
@@ -194,8 +210,10 @@ branchName: branch.name,
 semester: sem
 });
 });
+if (subjects.length > 0) saveIndexWithDelay();
 }).catch(() => {
 });
+}, 500 + (idx * 200)); 
 });
 });
 searchIndex.push(
@@ -373,7 +391,17 @@ keywords: [...spec.keywords, 'dbm pyq', 'dbm previous year', 'dbm question paper
 });
 });
 isIndexLoaded = true;
+localStorage.setItem(CACHE_KEY, JSON.stringify(searchIndex));
 console.log(`Search index loaded with ${searchIndex.length} items (branches and semesters). Subjects loading in background...`);
+
+// Re-save index periodically as background subjects load
+let backgroundSaveTimer = null;
+const saveIndexWithDelay = () => {
+    if (backgroundSaveTimer) clearTimeout(backgroundSaveTimer);
+    backgroundSaveTimer = setTimeout(() => {
+        localStorage.setItem(CACHE_KEY, JSON.stringify(searchIndex));
+    }, 2000);
+};
 }
 function handleSearchInput(e) {
 const query = e.target.value.trim();

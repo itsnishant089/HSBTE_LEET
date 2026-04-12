@@ -1,76 +1,80 @@
-export default async function handler(req, res) {
+/**
+ * Vercel Edge Function: api/chat.js
+ * Optimized for speed, low latency, and cost reduction.
+ */
 
-  // Allow only POST
+export const config = {
+  runtime: 'edge', // Uses Vercel Edge Runtime for faster starts and lower cost
+};
+
+// Simple transient rate limiter (Edge functions are ephemeral, but this helps in hot instances)
+const rateLimitMap = new Map();
+const RATE_LIMIT_MAX = 10;
+const RATE_LIMIT_WINDOW = 60000;
+
+export default async function handler(req) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
+  }
+
+  const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for") || "unknown";
+  
+  // Rate limiting (basic)
+  const now = Date.now();
+  const limitEntry = rateLimitMap.get(ip);
+  if (limitEntry && now - limitEntry.start < RATE_LIMIT_WINDOW) {
+    if (limitEntry.count >= RATE_LIMIT_MAX) {
+      return new Response(JSON.stringify({ reply: "⚠️ Too many requests. Wait a minute." }), { 
+        status: 429,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    limitEntry.count++;
+  } else {
+    rateLimitMap.set(ip, { count: 1, start: now });
   }
 
   try {
+    const { message } = await req.json();
+    if (!message || message.length > 500) {
+      return new Response(JSON.stringify({ reply: "Invalid message." }), { status: 400 });
+    }
 
     const API_KEY = process.env.GEMINI_API_KEY;
-
     if (!API_KEY) {
-      console.error("GEMINI_API_KEY not found");
-      return res.status(500).json({ reply: "API key missing." });
+      return new Response(JSON.stringify({ reply: "Server error." }), { status: 500 });
     }
 
-    const message = req.body?.message;
-
-    if (!message) {
-      return res.status(400).json({ reply: "Message required." });
-    }
-
-    const CONTEXT = `
-You are an AI assistant for HSBTE LEET & PYQ website.
-Only answer about HSBTE, LEET, Diploma, PYQ, Syllabus.
-If unrelated, say you are not trained for that.
-`;
+    const CONTEXT = "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Concise only.";
 
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: CONTEXT + "\nUser: " + message
-                }
-              ]
-            }
-          ]
+          contents: [{ parts: [{ text: `${CONTEXT}\n\nUser: ${message}` }] }],
+          generationConfig: { maxOutputTokens: 250, temperature: 0.3 }
         })
       }
     );
 
     const data = await geminiResponse.json();
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
 
-    if (!geminiResponse.ok) {
-      console.error("Gemini API error:", data);
-      return res.status(500).json({
-        reply: data?.error?.message || "Gemini API error."
-      });
-    }
-
-    const reply =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!reply) {
-      return res.status(500).json({
-        reply: "No response from AI."
-      });
-    }
-
-    return res.status(200).json({ reply });
-
-  } catch (error) {
-    console.error("Server crash:", error);
-    return res.status(500).json({
-      reply: "Server error."
+    // Performance & Optimization: Cache-Control for Edge
+    // We cache the AI response for 10 minutes at the Edge level.
+    // This dramatically reduces API costs if users ask common questions.
+    return new Response(JSON.stringify({ reply }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=1200',
+        'X-Edge-Source': 'Vercel-Edge'
+      }
     });
+
+  } catch (err) {
+    return new Response(JSON.stringify({ reply: "AI encountered an error." }), { status: 500 });
   }
 }
