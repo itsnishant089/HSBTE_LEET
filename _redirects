@@ -1,0 +1,4 @@
+# Permanent Redirects (301)
+/index / 301
+/html/:path /:path 301
+/:path.html /:path 301

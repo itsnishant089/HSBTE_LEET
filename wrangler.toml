@@ -1,0 +1,23 @@
+# Cloudflare Pages Configuration
+# Docs: https://developers.cloudflare.com/pages/
+
+name = "hsbte-leet"
+compatibility_date = "2026-04-14"
+
+# Pages-specific settings
+# The project root is deployed as-is (static assets).
+# Functions in the /functions directory are auto-deployed as Pages Functions.
+
+# Uncomment below if you need a custom build step:
+# [build]
+# command = ""
+# cwd = "."
+
+# Environment variables for Pages Functions
+# Set SECRET env vars in the Cloudflare Dashboard:
+#   Pages → your project → Settings → Environment Variables
+#   Add: GEMINI_API_KEY = <your_key>
+
+# Smart placement (optional, enables automatic region placement for lower latency)
+# [placement]
+# mode = "smart"
