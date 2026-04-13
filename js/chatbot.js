@@ -168,7 +168,7 @@ function initChatbot() {
       }
 
       if (!res.ok) {
-        addMessage(data.reply || "⚠️ Server error. Please try again.", "bot");
+        addMessage(data.reply || "🤖 Assistant is in beta version. Please try again later!", "bot");
         return;
       }
 
@@ -179,7 +179,7 @@ function initChatbot() {
     } catch (error) {
       console.error("Chatbot fetch error:", error);
       if (messages.contains(thinkingDiv)) messages.removeChild(thinkingDiv);
-      addMessage("⚠️ Network error. Please check your connection and try again.", "bot");
+      addMessage("🤖 Assistant is in beta version. Please try again later!", "bot");
     }
   }
 
