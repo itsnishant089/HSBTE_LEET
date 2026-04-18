@@ -7,7 +7,7 @@
 
 <!-- Status badges -->
 <a href="https://hsbteleet.com">
-  <img src="https://img.shields.io/website?url=https%3A%2F%2Fhsbteleet.com&up_message=LIVE&up_color=00D4B4&down_color=EF4444&style=for-the-badge&logo=vercel&logoColor=white&label=hsbteleet.com"/>
+  <img src="https://img.shields.io/website?url=https%3A%2F%2Fhsbteleet.com&up_message=LIVE&up_color=00D4B4&down_color=EF4444&style=for-the-badge&logo=cloudflare&logoColor=white&label=hsbteleet.com"/>
 </a>
 &nbsp;
 <img src="https://img.shields.io/badge/Pages-250%2B-F0B429?style=for-the-badge&logo=files&logoColor=white"/>
@@ -25,7 +25,7 @@
 &nbsp;
 <a href="https://itsnishant.com"><img src="https://img.shields.io/badge/Author-itsnishant.com-A855F7?style=flat-square&logo=person&logoColor=white"/></a>
 &nbsp;
-<img src="https://img.shields.io/badge/Hosted%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white"/>
+<img src="https://img.shields.io/badge/Hosted%20on-Cloudflare%20Pages-F38020?style=flat-square&logo=cloudflare&logoColor=white"/>
 &nbsp;
 <img src="https://img.shields.io/badge/Payments-Razorpay-0055FA?style=flat-square&logo=razorpay&logoColor=white"/>
 
@@ -33,7 +33,7 @@
 
 ---
 
-> 📖 **A free static educational platform for Haryana LEET & HSBTE diploma students — PYQs, syllabus, premium papers, AI chatbot, and more.**
+> 📖 **A high-performance educational platform for Haryana LEET & HSBTE diploma students. Features include 250+ content pages, PYQs, detailed syllabus, premium sample papers, and an AI-powered study assistant (Gemini).**
 
 ---
 
@@ -43,7 +43,7 @@
 
 | 📄 Pages | 🎓 Coverage | 🤖 AI | 💳 Payments | ⚡ Hosting |
 |:---:|:---:|:---:|:---:|:---:|
-| 250+ HTML | LEET + HSBTE | Gemini Chatbot | Razorpay | Vercel |
+| 250+ HTML | LEET + HSBTE | Gemini Chatbot | Razorpay | Cloudflare Pages |
 
 </div>
 
@@ -51,30 +51,20 @@
 
 ## ✨ Features
 
-### 🆓 Free Features
+### 🆓 Free Resources
+- **HSBTE Previous Year Papers**: Comprehensive collection of PYQs across 40+ diploma branches.
+- **Haryana LEET Guide**: Complete preparation material for B.Tech & B.Pharmacy lateral entry.
+- **Syllabus & Notes**: Structured syllabus PDFs, exam patterns, and formula cheat sheets.
+- **AI Study Buddy**: Integrated chatbot powered by Google Gemini API for instant academic help.
 
-| Feature | Description |
-|---|---|
-| 📁 **HSBTE PYQ Papers** | Previous year question papers grouped by session across 40+ diploma branches |
-| 🎓 **Haryana LEET Resources** | Full prep material for B.Tech & B.Pharmacy lateral entry — syllabus, cutoffs, guidance |
-| 📑 **Syllabus PDFs** | Structured syllabus with exam patterns and section-wise formula/cheat sheets |
-| 🤖 **AI Chatbot** | On-site chatbot connected to `/api/chat`, powered by Google Gemini API |
+### 💎 Premium Offerings
+- **Handcrafted Sample Papers**: High-quality practice sets designed for exam success.
+- **Instant Access**: Seamless Razorpay integration for quick content unlocking (₹19 - ₹29).
 
-### 💎 Premium Features
-
-| Tier | Price | Details |
-|---|---|---|
-| 🔒 **Premium** | ₹19 | Gated sample papers via Razorpay |
-| 👑 **Ultra Premium** | ₹29 | Full access — all sample papers |
-
-### 📊 Platform & Analytics
-
-| Feature | Stack |
-|---|---|
-| 🔐 Authentication | Supabase Auth |
-| 📧 Lead Capture | EmailJS modal flow |
-| 📊 Analytics | Google Analytics GA4 |
-| 👁️ Session Recording | Microsoft Clarity |
+### 🛠️ Infrastructure & Tech
+- **Edge Architecture**: Hosted on Cloudflare Pages for ultra-low latency globally.
+- **PWA Ready**: Offline capabilities and home-screen installation via Service Workers.
+- **Smart Analytics**: Deep insights via GA4 and Microsoft Clarity (session recording).
 
 ---
 
@@ -82,7 +72,7 @@
 
 <div align="center">
 
-**Frontend**
+**Frontend & Logic**
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -90,19 +80,14 @@
 
 **Backend & Serverless**
 
-![Vercel](https://img.shields.io/badge/Vercel%20Functions-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare%20Functions-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
-**Payments & Communication**
+**Tools & Integrations**
 
 ![Razorpay](https://img.shields.io/badge/Razorpay-0055FA?style=for-the-badge&logo=razorpay&logoColor=white)
-![EmailJS](https://img.shields.io/badge/EmailJS-F59E0B?style=for-the-badge)
-
-**AI & Analytics**
-
 ![Gemini](https://img.shields.io/badge/Google%20Gemini%20API-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![GA4](https://img.shields.io/badge/Google%20Analytics%204-E37400?style=for-the-badge&logo=googleanalytics&logoColor=white)
-![Clarity](https://img.shields.io/badge/Microsoft%20Clarity-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)
 
 </div>
 
@@ -110,25 +95,29 @@
 
 ## 📁 Project Structure
 
-```
-📂 hsbteleet.com/
-├── index.html              ← Main landing page
+```bash
+📂 HSBTE_LEET/
+├── index.html              # Main landing page
+├── _headers                # Security & Cache headers (Cloudflare)
+├── _redirects              # URL rewrites & redirects
+├── wrangler.toml           # Cloudflare Pages configuration
 │
-├── 📂 html/                ← 250+ content pages
-├── 📂 css/                 ← main.css + modal styles
-├── 📂 js/                  ← search, chatbot, lead capture
-├── 📂 partials/            ← header / footer / chatbot HTML
+├── 📂 functions/           # Cloudflare Pages Functions (Edge Backend)
+│   └── 📂 api/
+│       └── chat.js         # Gemini-powered AI Chatbot Logic
 │
-├── 📂 api/
-│   └── chat.js             ← Vercel serverless chatbot (Gemini)
+├── 📂 html/                # 250+ Educational content pages
+├── 📂 css/                 # Global styles & layout modules
+├── 📂 js/                  # Client-side logic (UI, Chatbot, PWA)
+├── 📂 partials/            # Injectable components (Header, Chatbot UI)
 │
-├── 📂 paper/               ← PYQ PDFs by session
-├── 📂 pdf/                 ← Syllabus + formula sheets
-├── 📂 image/               ← Site assets (.webp)
+├── 📂 paper/               # PYQ PDF database
+├── 📂 pdf/                 # Syllabus & Formula sheets
+├── 📂 image/               # Optimized assets (.webp)
 │
-├── vercel.json             ← Rewrites + cache headers
-├── sitemap.xml             ← SEO sitemap
-└── robots.txt              ← SEO metadata
+├── sw.js                   # Service Worker (Offline Support)
+├── sitemap.xml             # SEO Sitemap
+└── robots.txt              # Search Engine Metadata
 ```
 
 ---
@@ -137,88 +126,57 @@
 
 | Variable | Required | Description |
 |---|:---:|---|
-| `GEMINI_API_KEY` | ✅ Yes | Powers `api/chat.js` chatbot. Without it, the chatbot returns `"API key missing."` |
+| `GEMINI_API_KEY` | ✅ Yes | Required for the AI Chatbot backend functionality. |
 
-Set locally in a `.env` file, or in **Vercel → Project → Settings → Environment Variables**.
+**Setup:**
+- **Local**: Add to `.dev.vars` for Wrangler dev mode.
+- **Production**: Set in **Cloudflare Dashboard → Pages → Settings → Environment Variables**.
 
 ---
 
 ## 💻 Local Development
 
-> ⚠️ This is a **static-first** site — always serve through a local server, never open `index.html` directly via `file://`.
+> 💡 The project uses **Cloudflare Pages Functions**. For full functionality (including AI Chatbot), use Wrangler.
 
-**Option 1 — Python (quick start)**
+**Step 1: Install Wrangler**
 ```bash
-# Serve locally on port 5500
-python -m http.server 5500
-# Open: http://localhost:5500
+npm install -g wrangler
 ```
 
-**Option 2 — Vercel Dev (recommended — needed for `/api/chat`)**
+**Step 2: Run Development Server**
 ```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Run with environment variables loaded automatically
-vercel dev
+# Serves static assets + Edge functions
+wrangler pages dev .
 ```
 
 ---
 
-## 🚀 Deployment (Vercel)
+## 🚀 Deployment (Cloudflare Pages)
 
-**Step 1 — Import Repository**
-
-Push to GitHub and import the repo in your [Vercel Dashboard](https://vercel.com/dashboard).
-
-**Step 2 — Set Environment Variables**
-
-In **Vercel → Project → Settings → Environment Variables**, add:
-```
-GEMINI_API_KEY = your_key_here
-```
-
-**Step 3 — Deploy**
-
-Vercel auto-handles:
-- URL rewrites from `vercel.json`
-- Cache headers
-- Serverless `/api/chat` function
-
-
+1. **Connect Repository**: Link your GitHub repo to Cloudflare Pages.
+2. **Configure Build Settings**:
+   - **Framework Preset**: None (Static site)
+   - **Build Command**: (Leave empty)
+   - **Build Output Directory**: `.`
+3. **Set Secrets**: Add your `GEMINI_API_KEY` in the Environment Variables tab.
+4. **Deploy**: Cloudflare will automatically deploy your site and functions on every push.
 
 ---
 
-## 🤝 Contributing Guidelines
+## 🤝 Contributing & Standards
 
-| Rule | Details |
-|---|---|
-| 📂 **Page placement** | Keep new pages inside `html/` so clean URL rewrites keep working |
-| 🔁 **Reuse partials** | Use `partials/` and shared scripts in `js/` to avoid duplication |
-| 🖼️ **Image format** | Prefer `.webp` assets for performance consistency |
-| 🔐 **Secret hygiene** | Review credentials and keys before public commits |
-| 📦 **Asset size** | Large `paper/` and PDF assets can bloat the repo — handle with care |
+- **Clean URLs**: New pages in `html/` are automatically mapped (e.g., `/html/syllabus.html` → `/syllabus`).
+- **Modularity**: Use `partials/` for any repeating HTML elements.
+- **Performance**: Compress all images to `.webp` before adding to `image/`.
+- **Atomic Commits**: Keep changes focused and descriptive.
 
 ---
 
-## 👥 Who Is This For?
+## 👥 Audience
 
-<div align="center">
-
-| 🎓 Diploma / Polytechnic Students | 🚀 LEET Aspirants |
+| 🎓 Diploma Students | 🚀 LEET Aspirants |
 |---|---|
-| Students from HSBTE-affiliated polytechnic colleges in Haryana preparing for semester exams. | Students targeting B.Tech or B.Pharmacy lateral entry through the Haryana LEET / OCET exam. |
-
-</div>
-
----
-
-## 📊 Analytics IDs
-
-| Platform | Tracking ID |
-|---|---|
-| Google Analytics 4 | `G-WR1BG2HCE0` |
-| Microsoft Clarity | `vesfse6uac` |
+| Haryana polytechnic students looking for semester resources and exam guidance. | Aspirants preparing for Lateral Entry into B.Tech/B.Pharmacy courses. |
 
 ---
 
@@ -228,11 +186,10 @@ Vercel auto-handles:
 
 | Channel | Link |
 |---|---|
-| 🌐 Project Site | [hsbteleet.com](https://hsbteleet.com) |
-| 👤 Author Portfolio | [itsnishant.com](https://itsnishant.com) |
+| 🌐 Live Site | [hsbteleet.com](https://hsbteleet.com) |
+| 👤 Developer | [itsnishant.com](https://itsnishant.com) |
 | 💼 LinkedIn | [nishant-4aa891346](https://www.linkedin.com/in/nishant-4aa891346/) |
-| ⬡ GitHub | [itsnishant089](https://github.com/itsnishant089) |
-| 📞 Phone | +91 7988316241 |
+| 📞 Support | +91 7988316241 |
 
 </div>
 
@@ -243,9 +200,9 @@ Vercel auto-handles:
 <!-- Animated footer -->
 <img src="https://capsule-render.vercel.app/api?type=waving&color=F0B429,00D4B4&height=80&section=footer&animation=twinkling" width="100%"/>
 
-**Built with ❤️ for Haryana students**
+**Empowering Students across Haryana 🚀**
 
-*Free · Open · For everyone · [hsbteleet.com](https://hsbteleet.com)*
+*Free · Open · AI-Enhanced · [hsbteleet.com](https://hsbteleet.com)*
 
 ![Visitor Count](https://komarev.com/ghpvc/?username=itsnishant089&color=F0B429&style=flat-square&label=Repo+Views)
 

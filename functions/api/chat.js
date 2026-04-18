@@ -52,8 +52,11 @@ export async function onRequestPost(context) {
       return new Response(JSON.stringify({ 
         reply: "🤖 Assistant is in beta version. Please try again later!" 
       }), {
-        status: 200, // Return 200 so its not a console error, but shows the message
-        headers: { "Content-Type": "application/json" },
+        status: 200, 
+        headers: { 
+          "Content-Type": "application/json",
+          "X-Debug-Status": "Missing-API-Key"
+        },
       });
     }
 
