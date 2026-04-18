@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
 'use strict';
 try {
 if (localStorage.getItem('leetLeadCaptured') === '1') {
@@ -369,7 +369,7 @@ function buildWelcomeHTML(data) {
 
 // ═══════════════════════════════════════════════════════════
 //  EMAIL 2 — PREMIUM CUSTOMER WELCOME
-//  → Student ke email pe jaata hai after 19 payment
+//  → Student ke email pe jaata hai after 49 payment
 // ═══════════════════════════════════════════════════════════
 
 function buildCustomerWelcomeHTML(data) {
@@ -390,7 +390,7 @@ function buildCustomerWelcomeHTML(data) {
   + '<tr><td style="padding:28px 28px 0 28px;background:linear-gradient(135deg,#fff7ed 0%,#fff 60%);">'
   + sectionLabel('&#128081; Premium Access Confirmed', '#ea580c')
   + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:26px;font-weight:700;color:#111111;line-height:1.2;">Welcome, ' + fn + '!<br/>You\'re Premium. &#128081;</h1>'
-  + '<p style="margin:0 0 20px 0;font-size:14px;color:#6b7280;line-height:1.7;">Your <strong style="color:#ea580c;">&#8377;11 payment is confirmed.</strong> You now have <strong style="color:#374151;">lifetime access</strong> to 5 exclusive Haryana LEET sample papers. Let\'s get cracking! &#127919;</p>'
+  + '<p style="margin:0 0 20px 0;font-size:14px;color:#6b7280;line-height:1.7;">Your <strong style="color:#ea580c;">&#8377;49 payment is confirmed.</strong> You now have <strong style="color:#374151;">lifetime access</strong> to 14 exclusive Haryana LEET sample papers. Let\'s get cracking! &#127919;</p>'
   + '</td></tr>'
 
   // Activated banner
@@ -410,7 +410,7 @@ function buildCustomerWelcomeHTML(data) {
   + infoRow('Name', name)
   + infoRow('Email', email)
   + infoRow('Mobile', mobile)
-  + infoRow('Amount Paid', '&#8377;11 &nbsp;&#10003; Confirmed', '#059669')
+  + infoRow('Amount Paid', '&#8377;49 &nbsp;&#10003; Confirmed', '#059669')
   + infoRow('Activated On', ts)
   + '<tr><td style="padding:9px 0;font-size:13px;color:#9ca3af;width:120px;vertical-align:top;">Payment ID</td><td style="padding:9px 0;font-size:11.5px;font-family:monospace;color:#6b7280;text-align:right;word-break:break-all;">' + payId + '</td></tr>'
   + '</table></td></tr>'
@@ -480,13 +480,13 @@ function buildAdminRegistrationHTML(data) {
   + '<tr><td style="padding:28px 28px 20px 28px;background:linear-gradient(135deg,#f0fdf4 0%,#fff 60%);">'
   + '<span style="display:inline-block;background:#dcfce7;border:1px solid #86efac;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;color:#166534;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">&#128994; New Registration</span>'
   + '<h1 style="margin:0 0 8px 0;font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111111;line-height:1.3;">New Premium Member Joined!</h1>'
-  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;"><strong style="color:#374151;">' + name + '</strong> just registered and paid &#8377;11. Account is now active.</p>'
+  + '<p style="margin:0;font-size:14px;color:#6b7280;line-height:1.7;"><strong style="color:#374151;">' + name + '</strong> just registered and paid &#8377;49. Account is now active.</p>'
   + '</td></tr>'
 
   // Stats
   + '<tr><td style="padding:0 28px 20px 28px;">'
   + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>'
-  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#8377;11</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Earned</div></td>'
+  + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">&#8377;49</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Earned</div></td>'
   + '<td width="2%" style="font-size:0;">&nbsp;</td>'
   + '<td width="32%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 8px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#059669;line-height:1;">5</div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#6b7280;margin-top:4px;">Papers Given</div></td>'
   + '<td width="2%" style="font-size:0;">&nbsp;</td>'
@@ -502,7 +502,7 @@ function buildAdminRegistrationHTML(data) {
   + infoRow('Name', name)
   + infoRow('Mobile', mobile)
   + infoRow('Email', email)
-  + infoRow('Amount', '&#8377;11 &#10003; Paid', '#059669')
+  + infoRow('Amount', '&#8377;49 &#10003; Paid', '#059669')
   + infoRow('Time', ts)
   + '<tr><td style="padding:9px 0;font-size:13px;color:#9ca3af;vertical-align:top;">Payment ID</td><td style="padding:9px 0;font-size:11.5px;font-family:monospace;color:#6b7280;text-align:right;word-break:break-all;">' + payId + '</td></tr>'
   + '</table></td></tr></table>'

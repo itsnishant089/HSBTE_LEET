@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -215,8 +215,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="page" id="page-referrals">
       <div class="ref-box">
         <strong>Refund Rules:</strong>&nbsp;
-        <span style="background:var(--gl);color:#92400e;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">1 Referral = 50% Refund</span>
-        <span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">2+ Referrals = Full Refund</span>
+        <span style="background:var(--gl);color:#92400e;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">1 Referral = ₹25 Refund</span>
+        <span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">2+ Referrals = ₹49 Refund</span>
         &nbsp;— Transfer via UPI then mark as claimed.
       </div>
       <div class="filter-bar">
@@ -331,7 +331,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div class="form-row" style="margin-top:10px">
             <div>
               <label class="fl">Amount Paid (₹)</label>
-              <input type="number" class="form-input" id="au-paid" placeholder="e.g. 19"/>
+              <input type="number" class="form-input" id="au-paid" placeholder="e.g. 49"/>
             </div>
             <div>
               <label class="fl">Payment ID / Transaction ID</label>
@@ -602,7 +602,7 @@ async function loadRefs(){
     if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="8">No referrals found.</td></tr>';return;}
     tb.innerHTML=data.map(function(r){
       var cnt=r.count||0;
-      var refundDue=cnt>=2?19:cnt===1?10:0;
+      var refundDue=cnt>=2?49:cnt===1?25:0;
       var st=cnt>=2?'<span class="badge b-green">Full Refund</span>':cnt===1?'<span class="badge b-gold">50% Refund</span>':'<span class="badge b-gray">None Yet</span>';
       var cl=r.refund_claimed?'<span class="badge b-green"><i class="fas fa-check"></i> Claimed</span>':'<span class="badge b-red">Pending</span>';
       var waMsg=encodeURIComponent('Hi! Your LEET referral refund of ₹'+refundDue+' is ready. Sending via UPI shortly. — hsbteleet.com Admin');

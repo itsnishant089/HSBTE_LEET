@@ -10,20 +10,14 @@
 
   // ─── EXCLUDED PAGES: no ads on these ────────────────────────────────
   const EXCLUDED_PATTERNS = [
-    'btech-leet-premium',
-    'btech-sample-paper-',
-    'Bpharma-sample-paper-',
-    'premium-admin',
-    'premium-login',
-    'premium-papers',
-    'premium-sample-paper-',
+    'premium',
+    'sample-paper',
+    'section-',
     'rank-analysis',
-    'section-a-',
-    'section-b-',
-    'section-c-',
-    'section-d-',
     'study-plan',
     'ultra-premium',
+    'college-predictor',
+    'admin',
   ];
 
   const currentPage = window.location.pathname;
