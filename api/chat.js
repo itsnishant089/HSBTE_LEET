@@ -12,9 +12,10 @@ export default async function handler(req) {
     return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
   }
 
-  const API_KEY = process.env.GEMINI_API_KEY;
-  if (!API_KEY) {
-    return new Response(JSON.stringify({ reply: "🤖 Assistant is in beta version." }), { status: 200 });
+  const API_KEY = process.env.GEMINI_API_KEY || "YOUR_HARDCODED_API_KEY_HERE";
+
+  if (!API_KEY || API_KEY === "YOUR_HARDCODED_API_KEY_HERE") {
+    return new Response(JSON.stringify({ reply: "🤖 API Key is missing. Please set GEMINI_API_KEY." }), { status: 200 });
   }
 
   try {
@@ -34,12 +35,19 @@ export default async function handler(req) {
     );
 
     const data = await response.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from AI.";
+    let reply = "";
+
+    if (data.candidates && data.candidates.length > 0) {
+        reply = data.candidates[0].content?.parts?.[0]?.text || "No response text found.";
+    } else {
+        reply = "🤖 No response received. Safety block or API limit reached.";
+    }
 
     return new Response(JSON.stringify({ reply }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
+
 
   } catch (err) {
     return new Response(JSON.stringify({ reply: "🤖 AI Assistant is currently in Beta." }), { status: 500 });

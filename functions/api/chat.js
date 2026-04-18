@@ -6,12 +6,15 @@
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  // 1. Check API Key
-  const API_KEY = env.GEMINI_API_KEY;
-  if (!API_KEY) {
+  // 1. API Key Selection
+  // You can set this in Cloudflare Dashboard -> Settings -> Environment Variables
+  // OR hardcode it here (NOT recommended for public repos)
+  const API_KEY = env.GEMINI_API_KEY || "YOUR_HARDCODED_API_KEY_HERE"; 
+
+  if (!API_KEY || API_KEY === "YOUR_HARDCODED_API_KEY_HERE") {
     return new Response(
       JSON.stringify({ 
-        reply: "🤖 Assistant is currently in maintenance. Please try again later!" 
+        reply: "🤖 API Key is missing. Please set GEMINI_API_KEY in Cloudflare settings or the code." 
       }), 
       {
         status: 200, 
@@ -31,7 +34,7 @@ export async function onRequestPost(context) {
     }
 
     // 3. Call Gemini API
-    const CONTEXT = "Assistant for HSBTE LEET. Answer about HSBTE (Haryana State Board of Technical Education), LEET (Lateral Entry Entrance Test), Diploma, Syllabus, and Haryana Polytechnic. Be helpful, concise, and professional.";
+    const CONTEXT = "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Be concise.";
     
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
@@ -39,53 +42,50 @@ export async function onRequestPost(context) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [
-            { parts: [{ text: `${CONTEXT}\n\nUser: ${message}` }] }
-          ],
-          generationConfig: {
-            maxOutputTokens: 500,
-            temperature: 0.7,
-          }
+          contents: [{ parts: [{ text: `${CONTEXT}\n\nUser: ${message}` }] }],
+          generationConfig: { maxOutputTokens: 500, temperature: 0.7 }
         })
       }
     );
 
+    const data = await response.json();
+    console.log("Gemini Raw Response:", JSON.stringify(data));
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Gemini API Error:", errorData);
-      return new Response(
-        JSON.stringify({ reply: "🤖 AI is taking a short break. Try again in a minute!" }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      );
+        return new Response(
+            JSON.stringify({ reply: "🤖 API Error: " + (data.error?.message || "Unknown error") }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+        );
     }
 
-    // 4. Parse Gemini Response
-    const data = await response.json();
+    // 4. Parse Response (Robust)
+    let text = "";
     
-    // Extract text from Gemini's nested structure
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!text) {
-      return new Response(
-        JSON.stringify({ reply: "🤖 I couldn't generate a response. Could you rephrase your question?" }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
-      );
+    if (data.candidates && data.candidates.length > 0) {
+        const candidate = data.candidates[0];
+        if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+            text = candidate.content.parts[0].text;
+        } else if (candidate.finishReason === "SAFETY") {
+            text = "🛡️ Response blocked by AI safety filters. Try rephrasing.";
+        } else {
+            text = "⚠️ AI stopped responding (Reason: " + (candidate.finishReason || "unknown") + ")";
+        }
+    } else {
+        text = "🤖 Gemini returned no answer. Check your message or try again.";
     }
 
     // 5. Return Clean Response
     return new Response(JSON.stringify({ reply: text }), {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Assistant-Version": "1.0.0"
-      }
+      headers: { "Content-Type": "application/json" }
     });
 
   } catch (err) {
     console.error("Chat Function Error:", err);
     return new Response(
-      JSON.stringify({ reply: "🤖 Something went wrong. Please try again later!" }),
+      JSON.stringify({ reply: "🤖 Critical Error: " + err.message }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
 }
+
 
