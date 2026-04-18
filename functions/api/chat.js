@@ -1,112 +1,91 @@
 /**
  * Cloudflare Pages Function: functions/api/chat.js
- * Replaces the Vercel Edge Function.
- * Runs on Cloudflare Workers runtime at the edge globally.
- *
- * Environment variable GEMINI_API_KEY must be set in:
- *   Cloudflare Dashboard → Pages → Settings → Environment Variables
+ * Handles AI chatbot requests using Google Gemini Pro.
  */
-
-// Simple transient rate limiter (Workers are ephemeral, but this helps in hot instances)
-const rateLimitMap = new Map();
-const RATE_LIMIT_MAX = 10;
-const RATE_LIMIT_WINDOW = 60000;
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  const ip =
-    request.headers.get("cf-connecting-ip") ||
-    request.headers.get("x-forwarded-for") ||
-    "unknown";
-
-  // Rate limiting (basic)
-  const now = Date.now();
-  const limitEntry = rateLimitMap.get(ip);
-  if (limitEntry && now - limitEntry.start < RATE_LIMIT_WINDOW) {
-    if (limitEntry.count >= RATE_LIMIT_MAX) {
-      return new Response(
-        JSON.stringify({ reply: "⚠️ Too many requests. Wait a minute." }),
-        {
-          status: 429,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-    }
-    limitEntry.count++;
-  } else {
-    rateLimitMap.set(ip, { count: 1, start: now });
+  // 1. Check API Key
+  const API_KEY = env.GEMINI_API_KEY;
+  if (!API_KEY) {
+    return new Response(
+      JSON.stringify({ 
+        reply: "🤖 Assistant is currently in maintenance. Please try again later!" 
+      }), 
+      {
+        status: 200, 
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 
   try {
+    // 2. Parse Request
     const { message } = await request.json();
-    if (!message || message.length > 500) {
-      return new Response(JSON.stringify({ reply: "⚠️ Invalid message." }), {
+    if (!message || message.trim().length === 0) {
+      return new Response(JSON.stringify({ reply: "⚠️ Please enter a message." }), {
         status: 400,
         headers: { "Content-Type": "application/json" },
       });
     }
 
-    const API_KEY = env.GEMINI_API_KEY;
-    if (!API_KEY) {
-      return new Response(JSON.stringify({ 
-        reply: "🤖 Assistant is in beta version. Please try again later!" 
-      }), {
-        status: 200, 
-        headers: { 
-          "Content-Type": "application/json",
-          "X-Debug-Status": "Missing-API-Key"
-        },
-      });
-    }
-
-    const CONTEXT =
-      "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Concise only.";
-
-    const geminiResponse = await fetch(
+    // 3. Call Gemini API
+    const CONTEXT = "Assistant for HSBTE LEET. Answer about HSBTE (Haryana State Board of Technical Education), LEET (Lateral Entry Entrance Test), Diploma, Syllabus, and Haryana Polytechnic. Be helpful, concise, and professional.";
+    
+    const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contents: [
-            { parts: [{ text: `${CONTEXT}\n\nUser: ${message}` }] },
+            { parts: [{ text: `${CONTEXT}\n\nUser: ${message}` }] }
           ],
-          generationConfig: { maxOutputTokens: 250, temperature: 0.3 },
-        }),
+          generationConfig: {
+            maxOutputTokens: 500,
+            temperature: 0.7,
+          }
+        })
       }
     );
 
-    if (!geminiResponse.ok) {
-        return new Response(JSON.stringify({ 
-            reply: "🤖 Assistant is currently in beta. Please try again later!" 
-        }), {
-            status: 200,
-            headers: { "Content-Type": "application/json" },
-        });
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Gemini API Error:", errorData);
+      return new Response(
+        JSON.stringify({ reply: "🤖 AI is taking a short break. Try again in a minute!" }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
     }
 
-    const data = await geminiResponse.json();
-    const reply =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ AI received no clear answer. Try rephrasing.";
+    // 4. Parse Gemini Response
+    const data = await response.json();
+    
+    // Extract text from Gemini's nested structure
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-    return new Response(JSON.stringify({ reply }), {
-      status: 200,
+    if (!text) {
+      return new Response(
+        JSON.stringify({ reply: "🤖 I couldn't generate a response. Could you rephrase your question?" }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    // 5. Return Clean Response
+    return new Response(JSON.stringify({ reply: text }), {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-store", // Disable cache while debugging
-        "X-Edge-Source": "Cloudflare-Pages-v2",
-      },
-    });
-  } catch (err) {
-    return new Response(
-      JSON.stringify({ 
-        reply: "🤖 AI Assistant is currently in Beta. Please try again later or use the predictor tools above!" 
-      }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
+        "X-Assistant-Version": "1.0.0"
       }
+    });
+
+  } catch (err) {
+    console.error("Chat Function Error:", err);
+    return new Response(
+      JSON.stringify({ reply: "🤖 Something went wrong. Please try again later!" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
 }
+

@@ -159,20 +159,24 @@ function initChatbot() {
         body: JSON.stringify({ message: text })
       });
 
-      const data = await res.json();
-      messages.removeChild(thinkingDiv);
+      if (messages.contains(thinkingDiv)) messages.removeChild(thinkingDiv);
 
       if (res.status === 429) {
         addMessage("⏳ Too many requests. Please wait a moment before asking again.", "bot");
         return;
       }
 
+      const data = await res.json();
+      console.log("Chatbot Response:", data); // Helpful for debugging
+
       if (!res.ok) {
         addMessage(data.reply || "🤖 Assistant is in beta version. Please try again later!", "bot");
         return;
       }
 
-      const reply = data.reply || "No reply received.";
+      // Final check for the reply property
+      const reply = data.reply || (data.candidates && data.candidates[0]?.content?.parts[0]?.text) || "No reply received.";
+      
       setCachedReply(text, reply);      // store in client cache
       addMessage(reply, "bot", true);
 
@@ -182,6 +186,7 @@ function initChatbot() {
       addMessage("🤖 Assistant is in beta version. Please try again later!", "bot");
     }
   }
+
 
   if (sendBtn) sendBtn.onclick = sendMessage;
 
