@@ -131,7 +131,7 @@ const branches = [
 { name: 'Fashion Technology', url: 'Fashion-Technology', semesters: [1, 2, 3, 4, 5, 6], key: 'fashion-technology' },
 { name: 'Food Technology', url: 'Food', semesters: [1, 2, 3, 4, 5, 6], key: 'food' },
 { name: 'Hotel Management', url: 'Hotel-Management', semesters: [1, 2, 3, 4, 5], key: 'hotel' },
-{ name: 'Instrumentation & Control', url: 'Instrumentation-_-Control', semesters: [1, 2, 3, 4, 5, 6], key: 'instrumentation' },
+{ name: 'Instrumentation & Control', url: 'Instrumentation-&-Control', semesters: [1, 2, 3, 4, 5, 6], key: 'instrumentation' },
 { name: 'Library & Information Science', url: 'Library', semesters: [1, 2, 3, 4, 5], key: 'library' },
 { name: 'Mechanical Engineering', url: 'mech', semesters: [1, 2, 3, 4, 5, 6], key: 'mechanical' },
 { name: 'Medical Electronics', url: 'Medical-Electronics', semesters: [1, 2, 3, 4, 5], key: 'medical-electronics' },
@@ -350,6 +350,36 @@ type: 'page',
 title: 'Haryana LEET Colleges Overview',
 url: `${basePath}haryana-leet-colleges`,
 keywords: ['haryana leet colleges', 'btech leet colleges haryana', 'b pharmacy leet colleges', 'haryana leet participating institutes']
+},
+{
+type: 'page',
+title: 'HSBTE Result Check',
+url: `${basePath}hsbte-result`,
+keywords: ['result', 'hsbte result', 'diploma result', 'check result', 'haryana diploma result']
+},
+{
+type: 'page',
+title: 'College Predictor',
+url: `${basePath}college-predictor`,
+keywords: ['predictor', 'college predictor', 'leet predictor', 'rank vs college', 'admission predictor']
+},
+{
+type: 'page',
+title: 'Rank Analysis',
+url: `${basePath}rank-analysis`,
+keywords: ['rank', 'rank analysis', 'leet rank', 'cutoff analysis', 'rank vs marks']
+},
+{
+type: 'page',
+title: 'LEET Study Plan',
+url: `${basePath}study-plan`,
+keywords: ['study plan', 'preparation strategy', 'leet study plan', 'exam schedule']
+},
+{
+type: 'page',
+title: 'Contact Us',
+url: `${basePath}contact`,
+keywords: ['contact', 'support', 'help', 'email', 'about us']
 }
 );
 for (let i = 1; i <= 11; i++) {
