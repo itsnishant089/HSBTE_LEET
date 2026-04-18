@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -445,5 +445,6 @@
 (function(){function init(){var toggles=document.querySelectorAll('[data-leet-toggle]');toggles.forEach(function(t){var btns=t.querySelectorAll('[data-stream-select]');if(!btns.length)return;function apply(s){btns.forEach(function(b){var on=b.getAttribute('data-stream-select')===s;b.setAttribute('aria-pressed',on?'true':'false');b.classList.toggle('active',on);});document.querySelectorAll('[data-leet-stream]').forEach(function(el){el.style.display=el.getAttribute('data-leet-stream')===s?'':'none';});try{localStorage.setItem('leet-stream',s);}catch(e){}}btns.forEach(function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-stream-select'));});});var saved='';try{saved=localStorage.getItem('leet-stream')||'';}catch(e){}apply(saved||'btech');});}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();})();
 var gb=document.getElementById('goTopBtn');window.addEventListener('scroll',function(){gb.style.display=window.scrollY>300?'flex':'none';});gb.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 </script>
+<script defer src="../js/ads.js"></script>
 </body>
 </html>
