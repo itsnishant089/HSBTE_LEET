@@ -1,4 +1,4 @@
-# HSBTE LEET
+﻿# HSBTE LEET
 
 > Educational resource focused on Haryana LEET (Lateral Entry Entrance Test), HSBTE diploma engineering, polytechnic previous year question papers (PYQ), syllabus, counselling, exam preparation strategy, and lateral entry admissions for B.Tech and B.Pharmacy in Haryana.
 
@@ -78,7 +78,7 @@ Help diploma students in Haryana transition to B.Tech or B.Pharmacy through late
 
 ## Premium Sample Papers Details
 
-- Platform offers 5 exclusive premium BTech LEET sample papers for 19
+- Platform offers 5 exclusive premium BTech LEET sample papers for 49
 - Questions are completely different from free papers
 - Designed to help students score 50+ in Haryana LEET entrance exam
 - Access limited to 11 students only for exclusivity

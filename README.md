@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 <!-- Animated Typing Header -->
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=30&pause=1000&color=F0B429&center=true&vCenter=true&width=700&lines=HSBTE+LEET+Website+%F0%9F%93%9A;Free+Education+for+Haryana+Students;250%2B+Pages+of+Exam+Content;AI+Chatbot+%2B+Premium+Papers;Built+with+%E2%9D%A4%EF%B8%8F+for+Haryana" alt="Typing SVG" />
@@ -59,7 +59,7 @@
 
 ### 💎 Premium Offerings
 - **Handcrafted Sample Papers**: High-quality practice sets designed for exam success.
-- **Instant Access**: Seamless Razorpay integration for quick content unlocking (₹19 - ₹29).
+- **Instant Access**: Seamless Razorpay integration for quick content unlocking (₹49 - ₹79).
 
 ### 🛠️ Infrastructure & Tech
 - **Edge Architecture**: Hosted on Cloudflare Pages for ultra-low latency globally.
