@@ -39,11 +39,8 @@
 
 <!-- Resource Hints -->
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin/>
-<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"/>
-<link rel="preconnect" href="https://www.googletagmanager.com"/>
-<link rel="preconnect" href="https://pagead2.googlesyndication.com"/>
-<link rel="dns-prefetch" href="https://www.googletagmanager.com"/>
-<link rel="dns-prefetch" href="https://www.clarity.ms"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 
 <!-- Main CSS (non-blocking) -->
 <link rel="preload" href="../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
@@ -58,10 +55,9 @@
 <!-- LCP image preload -->
 <link rel="preload" as="image" href="../image/robo.webp" fetchpriority="high" type="image/webp"/>
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- Google Fonts (Performance Optimized) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"></noscript>
 
 <!-- Font Awesome (non-blocking) -->
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>

@@ -146,6 +146,8 @@ const branches = [
 { name: 'FAA', url: 'FAA', semesters: [1, 2, 3, 4, 5], key: 'faa' },
 { name: 'D Pharmacy', url: 'd-pharmacy', semesters: [1, 2], key: 'd-pharmacy' }
 ];
+
+// Initial sync build for branches and static pages
 branches.forEach(branch => {
 searchIndex.push({
 type: 'branch',
@@ -157,11 +159,7 @@ branch.semesters.forEach(sem => {
 const semNum = sem === 1 ? '1st' : sem === 2 ? '2nd' : sem === 3 ? '3rd' : `${sem}th`;
 let semesterUrl;
 if (branch.key === 'computer') {
-if (sem === 1) {
-semesterUrl = `${basePath}computer-1-semester`;
-} else {
-semesterUrl = `${basePath}computer-pyq-${sem}-semester`;
-}
+semesterUrl = sem === 1 ? `${basePath}computer-1-semester` : `${basePath}computer-pyq-${sem}-semester`;
 } else {
 semesterUrl = `${basePath}${branch.url}-${sem}`;
 }
@@ -177,45 +175,64 @@ branch.name.toLowerCase(),
 ]
 });
 });
-branch.semesters.forEach((sem, idx) => {
-const semNum = sem === 1 ? '1st' : sem === 2 ? '2nd' : sem === 3 ? '3rd' : `${sem}th`;
-let semesterUrl;
-if (branch.key === 'computer') {
-semesterUrl = sem === 1 ? `${basePath}computer-1-semester` : `${basePath}computer-pyq-${sem}-semester`;
+});
+
+// Use requestIdleCallback to index subjects without blocking main thread
+const startBackgroundIndexing = () => {
+    let globalIdx = 0;
+    branches.forEach(branch => {
+        branch.semesters.forEach(sem => {
+            const semNum = sem === 1 ? '1st' : sem === 2 ? '2nd' : sem === 3 ? '3rd' : `${sem}th`;
+            let semesterUrl;
+            if (branch.key === 'computer') {
+                semesterUrl = sem === 1 ? `${basePath}computer-1-semester` : `${basePath}computer-pyq-${sem}-semester`;
+            } else {
+                semesterUrl = `${basePath}${branch.url}-${sem}`;
+            }
+            const fetchUrl = `/html/${semesterUrl.replace(/^\//, '')}.html`;
+            
+            // Staggered background fetch
+            setTimeout(() => {
+                const runner = () => {
+                   extractSubjectsFromHtml(fetchUrl).then(subjects => {
+                        subjects.forEach(subject => {
+                            const subjectWords = subject.name.split(/[\s&–\-()]+/).filter(w => w.length > 0);
+                            const keywords = [
+                                subject.name.toLowerCase(),
+                                ...subjectWords.map(w => w.toLowerCase()),
+                                branch.name.toLowerCase(),
+                                `${semNum} semester`.toLowerCase()
+                            ];
+                            searchIndex.push({
+                                type: 'subject',
+                                title: `${subject.name} (${branch.name} - ${semNum} Sem)`,
+                                url: `${semesterUrl}#${subject.id}`,
+                                keywords: [...new Set(keywords)],
+                                subjectName: subject.name,
+                                branchName: branch.name,
+                                semester: sem
+                            });
+                        });
+                        if (subjects.length > 0) saveIndexWithDelay();
+                    }).catch(() => {});
+                };
+                
+                if (window.requestIdleCallback) {
+                    window.requestIdleCallback(runner);
+                } else {
+                    runner();
+                }
+            }, 3000 + (globalIdx * 250)); // Start much later and staggered
+            globalIdx++;
+        });
+    });
+};
+
+if (window.requestIdleCallback) {
+    window.requestIdleCallback(startBackgroundIndexing, { timeout: 5000 });
 } else {
-semesterUrl = `${basePath}${branch.url}-${sem}`;
+    setTimeout(startBackgroundIndexing, 4000);
 }
-const fetchUrl = `/html/${semesterUrl.replace(/^\//, '')}.html`;
-// Throttle background fetches to avoid flooding
-setTimeout(() => {
-extractSubjectsFromHtml(fetchUrl).then(subjects => {
-subjects.forEach(subject => {
-const subjectWords = subject.name.split(/[\s&–\-()]+/).filter(w => w.length > 0);
-const keywords = [
-subject.name.toLowerCase(),
-...subjectWords.map(w => w.toLowerCase()),
-...subjectWords.map(w => w.toLowerCase().replace(/[^a-z0-9]/g, '')),
-branch.name.toLowerCase(),
-`${semNum} semester`.toLowerCase(),
-`semester ${sem}`.toLowerCase(),
-...branch.name.split(' ').map(w => w.toLowerCase())
-];
-searchIndex.push({
-type: 'subject',
-title: `${subject.name} (${branch.name} - ${semNum} Sem)`,
-url: `${semesterUrl}#${subject.id}`,
-keywords: [...new Set(keywords)],
-subjectName: subject.name,
-branchName: branch.name,
-semester: sem
-});
-});
-if (subjects.length > 0) saveIndexWithDelay();
-}).catch(() => {
-});
-}, 500 + (idx * 200)); 
-});
-});
 searchIndex.push(
 { type: 'page', title: 'HSBTE PYQ', url: `${basePath}hsbte-pyq`, keywords: ['hsbte', 'pyq', 'previous year', 'question papers', 'question paper'] },
 { type: 'page', title: 'Home', url: `${basePath}`, keywords: ['home', 'main', 'index', 'homepage'] },

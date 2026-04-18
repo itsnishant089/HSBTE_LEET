@@ -54,10 +54,13 @@ function initChatbot() {
   }
 
   // ── UI helpers ───────────────────────────────────────────────────────────
-  const isMobile = () => window.innerWidth <= 768;
+  const mobileQuery = window.matchMedia("(max-width: 768px)");
+  const isMobile = () => mobileQuery.matches;
 
   function scrollToBottom() {
-    messages.scrollTop = messages.scrollHeight;
+    requestAnimationFrame(() => {
+      messages.scrollTop = messages.scrollHeight;
+    });
   }
 
   function addMessage(text, type, typing = false) {

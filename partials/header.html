@@ -49,14 +49,13 @@
   </div>
 
   <!-- ===== BRAND / MIDDLE HEADER ===== -->
-  <div class="middle-header">
     <div class="middle-left">
       <a href="/" aria-label="HSBTE LEET Home">
-        <img src="../image/banner bgremove.webp" alt="HSBTE LEET Banner" width="350" height="127" loading="lazy" decoding="async">
+        <img src="../image/banner bgremove.webp" alt="HSBTE LEET Banner" width="350" height="127" fetchpriority="high" loading="eager" decoding="async">
       </a>
     </div>
     <div class="middle-right">
-      <img src="../image/line bgremove.webp" alt="Important Notice" width="350" height="78" loading="lazy" decoding="async">
+      <img src="../image/line bgremove.webp" alt="Important Notice" width="350" height="78" loading="eager" decoding="async">
     </div>
   </div>
 
@@ -637,14 +636,13 @@ body.dark-mode .dropdown-menu a { color: #e2e8f0; }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
   // Mobile accordion dropdowns
+  const mobileQuery = window.matchMedia("(max-width: 992px)");
   dropItems.forEach(item => {
     const btn = item.querySelector('.dropdown-toggle');
     if (!btn) return;
     btn.addEventListener('click', () => {
-      const isMobile = window.innerWidth <= 992;
-      if (!isMobile) return;
+      if (!mobileQuery.matches) return;
       const wasOpen = item.classList.contains('open');
-      // close all first
       dropItems.forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
     });
@@ -658,8 +656,8 @@ body.dark-mode .dropdown-menu a { color: #e2e8f0; }
   });
 
   // Resize: reset if going back to desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 992) closeMenu();
+  mobileQuery.addEventListener('change', (e) => {
+    if (!e.matches) closeMenu();
   });
 })();
 </script>
