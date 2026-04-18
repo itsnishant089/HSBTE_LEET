@@ -610,68 +610,97 @@ body.dark-mode .dropdown-menu a { color: #e2e8f0; }
   background: #f1f5f9; padding: 2px 7px;
   border-radius: 10px; margin-left: auto; flex-shrink: 0;
 }
+
+/* ===== GLOBAL FIXES FOR BLANK SPACE & MENU ===== */
+.section-gap { margin-top: 32px !important; }
+.page-wrapper { margin-bottom: 20px !important; }
+.why-section, .popular-section, .faq-section, .syllabus-wrapper { margin-bottom: 32px !important; }
+.hero-section { padding: 40px 20px 60px !important; }
+.main-content { padding: 10px 15px !important; }
+
+@media (max-width: 992px) {
+  .nav-menu.active, .nav-menu.is-open { 
+    display: flex !important; 
+    right: 0 !important; 
+    max-height: none !important; 
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .mobile-menu-toggle.active .ham-bar:nth-child(1),
+  .mobile-menu-toggle.is-active .ham-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-menu-toggle.active .ham-bar:nth-child(2),
+  .mobile-menu-toggle.is-active .ham-bar:nth-child(2) { opacity: 0; width: 0; }
+  .mobile-menu-toggle.active .ham-bar:nth-child(3),
+  .mobile-menu-toggle.is-active .ham-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
 </style>
 
 
 <!-- ============================================================
      NAV JAVASCRIPT
      ============================================================ -->
-<script>
-(function () {
-  const toggle  = document.querySelector('.mobile-menu-toggle');
-  const menu    = document.querySelector('.nav-menu');
-  const backdrop = document.querySelector('.nav-backdrop');
-  const dropItems = document.querySelectorAll('.has-dropdown');
+  // Mobile menu functionality
+  (function () {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const menu = document.querySelector('.nav-menu');
+    const backdrop = document.querySelector('.nav-backdrop');
+    const dropItems = document.querySelectorAll('.has-dropdown');
 
-  if (!toggle || !menu) return;
+    if (!toggle || !menu) return;
 
-  // Open / close drawer
-  function openMenu () {
-    menu.classList.add('is-open');
-    toggle.classList.add('is-active');
-    backdrop.classList.add('visible');
-    toggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu () {
-    menu.classList.remove('is-open');
-    toggle.classList.remove('is-active');
-    backdrop.classList.remove('visible');
-    toggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  toggle.addEventListener('click', () => {
-    menu.classList.contains('is-open') ? closeMenu() : openMenu();
-  });
-  backdrop.addEventListener('click', closeMenu);
-
-  // Escape key
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-
-  // Mobile accordion dropdowns
-  const mobileQuery = window.matchMedia("(max-width: 992px)");
-  dropItems.forEach(item => {
-    const btn = item.querySelector('.dropdown-toggle');
-    if (!btn) return;
-    btn.addEventListener('click', () => {
-      if (!mobileQuery.matches) return;
-      const wasOpen = item.classList.contains('open');
-      dropItems.forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
-    });
-  });
-
-  // Desktop: close dropdown on outside click
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.has-dropdown')) {
-      dropItems.forEach(i => i.classList.remove('open'));
+    function openMenu() {
+      menu.classList.add('is-open', 'active'); // Added both for compatibility with older CSS
+      toggle.classList.add('is-active', 'active');
+      if (backdrop) backdrop.classList.add('visible');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
     }
-  });
 
-  // Resize: reset if going back to desktop
-  mobileQuery.addEventListener('change', (e) => {
-    if (!e.matches) closeMenu();
-  });
-})();
+    function closeMenu() {
+      menu.classList.remove('is-open', 'active');
+      toggle.classList.remove('is-active', 'active');
+      if (backdrop) backdrop.classList.remove('visible');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    toggle.onclick = (e) => {
+      e.stopPropagation();
+      menu.classList.contains('is-open') || menu.classList.contains('active') ? closeMenu() : openMenu();
+    };
+
+    if (backdrop) backdrop.onclick = closeMenu;
+
+    // Close on link click
+    menu.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
+      link.onclick = closeMenu;
+    });
+
+    // Mobile accordion dropdowns
+    const mobileQuery = window.matchMedia("(max-width: 992px)");
+    dropItems.forEach(item => {
+      const btn = item.querySelector('.dropdown-toggle');
+      if (!btn) return;
+      btn.onclick = (e) => {
+        if (!mobileQuery.matches) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const wasOpen = item.classList.contains('open') || item.classList.contains('active');
+        dropItems.forEach(i => i.classList.remove('open', 'active'));
+        if (!wasOpen) item.classList.add('open', 'active');
+      };
+    });
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.has-dropdown')) {
+        dropItems.forEach(i => i.classList.remove('open', 'active'));
+      }
+    });
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 992) closeMenu();
+    });
+  })();
 </script>

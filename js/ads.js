@@ -47,7 +47,7 @@
   function createAdUnit(format, slot, layout, layoutKey) {
     const wrapper = document.createElement('div');
     wrapper.className = 'ad-container';
-    wrapper.style.cssText = 'text-align:center;margin:24px auto;max-width:100%;overflow:hidden;clear:both;';
+    wrapper.style.cssText = 'text-align:center;margin:12px auto;max-width:100%;overflow:hidden;clear:both;';
 
     // Small label
     const label = document.createElement('div');

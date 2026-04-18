@@ -52,21 +52,9 @@ function initDarkMode() {
   };
 }
 
-/** Mobile Menu & Stream Toggles */
+/** Mobile Menu handled in header.html partial */
 function initMobileNav() {
-  const toggle = document.querySelector('.mobile-menu-toggle');
-  const navMenu = document.querySelector('.nav-menu');
-  if (!toggle || !navMenu) return;
-
-  // The partial header.html handles its own internal menu script, 
-  // but we ensure the mobile-menu-overlay exists.
-  let overlay = document.querySelector('.mobile-menu-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'mobile-menu-overlay';
-    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:999;display:none;';
-    document.body.appendChild(overlay);
-  }
+  // Logic moved to partials/header.html for better scoping and reliability.
 }
 
 /** Google Translate Integration Helper */
