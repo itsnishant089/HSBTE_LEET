@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
+  <title>Study Plan Generator — LEET 2025 | hsbteleet.com</title>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#08111a;--card:#0e1e2e;--card2:#13263a;--text:#dde6f0;--muted:#6b8099;
+      --border:#1a2f42;--blue:#38bdf8;--indigo:#818cf8;--gold:#fbbf24;
+      --green:#34d399;--red:#f87171;--purple:#c084fc;--orange:#fb923c;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+    #access-denied{display:none;position:fixed;inset:0;background:#000;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied .lock{font-size:4rem;margin-bottom:16px;animation:pulse 1.5s ease infinite;}
+    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+    #access-denied h2{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:10px;}
+    #access-denied p{color:#94a3b8;max-width:380px;line-height:1.7;margin-bottom:24px;}
+    .btn-login{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:50px;
+      background:linear-gradient(135deg,#818cf8,#6366f1);color:#fff;font-weight:800;font-size:.95rem;text-decoration:none;}
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
+    .spin{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--blue);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:14px;color:var(--muted);}
+
+    #wm-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;user-select:none;-webkit-user-select:none;}
+    .wm-row{position:absolute;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
+      letter-spacing:4px;text-transform:uppercase;color:transparent;
+      background-image:linear-gradient(135deg,rgba(56,189,248,.1) 0%,rgba(56,189,248,.18) 50%,rgba(56,189,248,.1) 100%);
+      -webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0.5px rgba(56,189,248,.15);
+      mix-blend-mode:screen;filter:blur(0.2px);transform:rotate(-28deg);transform-origin:left center;}
+
+    #main-page{display:none;}
+
+    .navbar{position:sticky;top:0;z-index:500;background:rgba(8,17,26,.94);
+      backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;
+      display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;}
+    .navbar::-webkit-scrollbar{display:none;}
+    .nav-brand{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:var(--blue);
+      margin-right:20px;white-space:nowrap;text-decoration:none;flex-shrink:0;padding:16px 0;}
+    .nav-item{display:flex;align-items:center;gap:6px;padding:16px 13px;font-size:12.5px;font-weight:600;
+      color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;
+      transition:.18s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
+      border-radius:0;flex-shrink:0;}
+    .nav-item:hover{color:var(--text);}
+    .nav-item.active{border-bottom-color:var(--blue);color:#fff;}
+    .nav-right{margin-left:auto;flex-shrink:0;}
+    .nav-logout{padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);background:transparent;
+      color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;transition:.2s;}
+    .nav-logout:hover{border-color:var(--red);color:var(--red);}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:32px 20px 80px;position:relative;z-index:2;}
+
+    .hero{background:linear-gradient(135deg,#040d14,#091827,#0c2340);
+      border-radius:24px;padding:34px 30px;margin-bottom:28px;
+      display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+      border:1px solid rgba(56,189,248,.15);box-shadow:0 0 60px rgba(56,189,248,.06);position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-40%;right:-5%;width:450px;height:450px;border-radius:50%;
+      background:radial-gradient(circle,rgba(56,189,248,.1) 0%,transparent 65%);pointer-events:none;}
+    .hero-icon{font-size:3.5rem;flex-shrink:0;}
+    .hero h1{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:800;margin-bottom:6px;color:#fff;}
+    .hero p{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.6;max-width:540px;}
+    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+    .hero-badge{background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);
+      border-radius:50px;padding:4px 12px;font-size:11.5px;font-weight:700;color:#7dd3fc;}
+
+    .card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:22px;}
+    .card-title{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:#fff;
+      margin-bottom:5px;display:flex;align-items:center;gap:8px;}
+    .card-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5;}
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:620px){.form-grid{grid-template-columns:1fr;}}
+    .form-group{display:flex;flex-direction:column;gap:7px;}
+    .form-group.full{grid-column:1/-1;}
+    .form-group label{font-size:11.5px;font-weight:700;color:#7dd3fc;text-transform:uppercase;letter-spacing:.5px;}
+    .form-inp,.form-select{
+      padding:12px 14px;border-radius:11px;border:1.5px solid var(--border);
+      background:rgba(255,255,255,.03);color:var(--text);font-size:.95rem;font-weight:600;
+      outline:none;width:100%;transition:.2s;font-family:'DM Sans',sans-serif;
+    }
+    .form-inp:focus,.form-select:focus{border-color:var(--blue);background:rgba(56,189,248,.05);}
+    .form-select option{background:#0e1e2e;}
+
+    /* TOPIC RATING */
+    .topics-section{margin-bottom:22px;}
+    .section-block{background:var(--card);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;overflow:hidden;}
+    .section-head{padding:16px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
+    .section-head:hover{background:rgba(255,255,255,.02);}
+    .section-head-icon{font-size:1.5rem;flex-shrink:0;}
+    .section-head-info{flex:1;}
+    .section-head-name{font-family:'Space Grotesk',sans-serif;font-size:.92rem;font-weight:800;color:#fff;}
+    .section-head-sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+    .section-head-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;}
+    .sb-a{background:rgba(56,189,248,.15);color:#7dd3fc;border:1px solid rgba(56,189,248,.25);}
+    .sb-b{background:rgba(129,140,248,.15);color:#a5b4fc;border:1px solid rgba(129,140,248,.25);}
+    .sb-c{background:rgba(52,211,153,.15);color:#6ee7b7;border:1px solid rgba(52,211,153,.25);}
+    .sb-d{background:rgba(251,191,36,.15);color:#fde68a;border:1px solid rgba(251,191,36,.25);}
+    .chevron{color:var(--muted);font-size:.8rem;transition:.2s;flex-shrink:0;}
+    .section-block.open .chevron{transform:rotate(90deg);}
+    .section-body{display:none;padding:0 20px 18px;}
+    .section-block.open .section-body{display:block;}
+
+    .topic-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(26,47,66,.5);}
+    .topic-row:last-child{border-bottom:none;}
+    .topic-name{flex:1;font-size:13px;font-weight:600;color:var(--text);}
+    .topic-marks{font-size:11px;color:var(--muted);flex-shrink:0;min-width:50px;text-align:right;}
+    .strength-btns{display:flex;gap:4px;flex-shrink:0;}
+    .str-btn{padding:4px 10px;border-radius:6px;border:1.5px solid var(--border);background:transparent;
+      font-size:11.5px;font-weight:700;cursor:pointer;transition:.2s;color:var(--muted);}
+    .str-btn:hover{border-color:currentColor;}
+    .str-btn.sel-strong{background:rgba(52,211,153,.15);border-color:var(--green);color:var(--green);}
+    .str-btn.sel-medium{background:rgba(251,191,36,.15);border-color:var(--gold);color:var(--gold);}
+    .str-btn.sel-weak{background:rgba(248,113,113,.15);border-color:var(--red);color:var(--red);}
+
+    /* GENERATE BTN */
+    .gen-btn{
+      width:100%;padding:16px;background:linear-gradient(135deg,#0ea5e9,#0284c7);
+      color:#fff;border:none;border-radius:14px;font-size:1rem;font-weight:800;cursor:pointer;
+      font-family:'Space Grotesk',sans-serif;letter-spacing:.3px;transition:.2s;
+      box-shadow:0 4px 20px rgba(14,165,233,.25);
+    }
+    .gen-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(14,165,233,.35);}
+
+    /* PLAN OUTPUT */
+    #plan-output{display:none;}
+    #plan-output.show{display:block;animation:fadeUp .4s ease;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+    .plan-header-card{
+      background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(14,165,233,.04));
+      border:1.5px solid rgba(14,165,233,.2);border-radius:18px;padding:22px 24px;margin-bottom:20px;
+    }
+    .plan-header-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:8px;}
+    .plan-summary-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;}
+    .plan-stat{background:rgba(14,165,233,.1);border-radius:10px;padding:9px 14px;display:flex;flex-direction:column;align-items:center;}
+    .plan-stat-v{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:900;color:var(--blue);}
+    .plan-stat-l{font-size:10.5px;color:var(--muted);font-weight:600;margin-top:2px;text-align:center;}
+
+    .target-badge{display:inline-block;padding:6px 16px;border-radius:50px;font-weight:800;font-size:13px;margin-bottom:12px;}
+    .tb-high{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3);}
+    .tb-med{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+    .tb-low{background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);}
+
+    /* PHASE CARDS */
+    .phases{display:flex;flex-direction:column;gap:16px;margin-bottom:24px;}
+    .phase-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;position:relative;overflow:hidden;}
+    .phase-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;}
+    .ph-1::before{background:linear-gradient(180deg,#f87171,#fb923c);}
+    .ph-2::before{background:linear-gradient(180deg,#fbbf24,#a3e635);}
+    .ph-3::before{background:linear-gradient(180deg,#34d399,#38bdf8);}
+    .ph-4::before{background:linear-gradient(180deg,#818cf8,#c084fc);}
+    .phase-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .phase-num{font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:800;
+      text-transform:uppercase;letter-spacing:.6px;padding:3px 10px;border-radius:50px;}
+    .pn-1{background:rgba(248,113,113,.15);color:#f87171;}
+    .pn-2{background:rgba(251,191,36,.15);color:#fbbf24;}
+    .pn-3{background:rgba(52,211,153,.15);color:#34d399;}
+    .pn-4{background:rgba(129,140,248,.15);color:#a5b4fc;}
+    .phase-title{font-family:'Space Grotesk',sans-serif;font-size:.98rem;font-weight:800;color:#fff;}
+    .phase-days{font-size:12px;color:var(--muted);margin-left:auto;}
+    .phase-topics{display:flex;flex-direction:column;gap:8px;}
+    .ptopic-row{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:10px;}
+    .ptopic-row.priority-high{background:rgba(248,113,113,.07);}
+    .ptopic-row.priority-medium{background:rgba(251,191,36,.06);}
+    .ptopic-row.priority-normal{background:rgba(56,189,248,.05);}
+    .ptopic-icon{font-size:.9rem;flex-shrink:0;margin-top:2px;}
+    .ptopic-name{flex:1;font-size:13px;font-weight:700;color:var(--text);}
+    .ptopic-detail{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5;}
+    .ptopic-time{font-size:11.5px;font-weight:700;flex-shrink:0;color:var(--blue);}
+    .ptopic-priority{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:4px;flex-shrink:0;}
+    .pp-high{background:rgba(248,113,113,.15);color:#f87171;}
+    .pp-med{background:rgba(251,191,36,.15);color:#fbbf24;}
+    .pp-low{background:rgba(52,211,153,.15);color:#34d399;}
+
+    /* DAILY SCHEDULE */
+    .daily-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:20px;}
+    .daily-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(26,47,66,.5);}
+    .daily-row:last-child{border-bottom:none;}
+    .daily-time{width:80px;font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:700;color:var(--blue);flex-shrink:0;}
+    .daily-task{flex:1;font-size:13px;font-weight:600;color:var(--text);}
+    .daily-dur{font-size:12px;color:var(--muted);flex-shrink:0;}
+
+    /* TIPS */
+    .tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;}
+    @media(max-width:580px){.tips-grid{grid-template-columns:1fr;}}
+    .tip-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;}
+    .tip-icon{font-size:1.5rem;margin-bottom:8px;}
+    .tip-title{font-size:.85rem;font-weight:800;color:#fff;margin-bottom:5px;}
+    .tip-text{font-size:12.5px;color:var(--muted);line-height:1.6;}
+
+    @media(max-width:500px){.wrap{padding:20px 14px 60px;}.hero{padding:22px 16px;}.hero h1{font-size:1.3rem;}.form-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<div id="access-denied">
+  <div class="lock">🔒</div>
+  <h2>Premium Access Required</h2>
+  <p>This page is only accessible to premium members. Please login to continue.</p>
+  <a href="/premium-login" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login to Premium</a>
+</div>
+<div id="page-loader"><div class="spin"></div><p>Verifying access…</p></div>
+<div id="wm-layer"></div>
+
+<div id="main-page">
+
+  <nav class="navbar">
+    <a href="/premium-papers" class="nav-brand">👑 hsbteleet Premium</a>
+    <a href="/premium-papers" class="nav-item">📄 Papers</a>
+    <a href="/rank-analysis" class="nav-item">📊 Rank Analysis</a>
+    <a href="/college-predictor" class="nav-item">🏫 College Predictor</a>
+    <button class="nav-item active">📅 Study Plan</button>
+    <div class="nav-right">
+      <button class="nav-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <div class="hero">
+      <div class="hero-icon">📅</div>
+      <div style="flex:1;min-width:200px;">
+        <h1>Personalized Study Plan — LEET 2025</h1>
+        <p>Tell us how many days you have, your target branch, and rate your topic strength. We'll generate a smart, prioritized day-by-day study plan from the official LEET 2025 syllabus.</p>
+        <div class="hero-badges">
+          <span class="hero-badge">📚 Official Syllabus</span>
+          <span class="hero-badge">🎯 Prioritized Topics</span>
+          <span class="hero-badge">⏱️ Time-Based</span>
+          <span class="hero-badge">🧠 Smart Scheduling</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: BASICS -->
+    <div class="card">
+      <div class="card-title">📋 Step 1 — Your Basics</div>
+      <div class="card-sub">Fill in your target, time available, and daily study capacity.</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Days Left Until Exam</label>
+          <input type="number" id="days-left" class="form-inp" min="1" max="365" placeholder="e.g. 30">
+        </div>
+        <div class="form-group">
+          <label>Daily Study Hours Available</label>
+          <select id="daily-hours" class="form-select">
+            <option value="2">2 hours/day</option>
+            <option value="3">3 hours/day</option>
+            <option value="4" selected>4 hours/day</option>
+            <option value="5">5 hours/day</option>
+            <option value="6">6 hours/day</option>
+            <option value="8">8 hours/day (Intense)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Diploma Stream (Section B/C/D focus)</label>
+          <select id="my-stream" class="form-select">
+            <option value="electronics">Electronics / ECE / Computer (Section B)</option>
+            <option value="mechanical">Mechanical / Auto / Production (Section C)</option>
+            <option value="civil">Civil / Textile / Others (Section D)</option>
+            <option value="cs">Computer Science / IT (Section B)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Target Score</label>
+          <select id="target-score" class="form-select">
+            <option value="30">30+ (CDLU / Mid-tier)</option>
+            <option value="35">35–40 (DCRUST / GJUST)</option>
+            <option value="40" selected>40+ (YMCA / Top Govt.)</option>
+            <option value="50">50+ (Rank &lt; 50 — Max prep)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: TOPIC STRENGTH -->
+    <div class="card">
+      <div class="card-title">🎯 Step 2 — Rate Your Topic Strength</div>
+      <div class="card-sub">Mark each topic as Strong 💪, Medium 👍, or Weak 😓. We'll allocate more time to weak/high-mark topics. Collapse sections you don't need to rate.</div>
+
+      <!-- SECTION A: BASIC SCIENCES (25 marks) -->
+      <div class="section-block open" id="sb-a">
+        <div class="section-head" onclick="toggleSection('sb-a')">
+          <div class="section-head-icon">📐</div>
+          <div class="section-head-info">
+            <div class="section-head-name">Section A — Basic Sciences</div>
+            <div class="section-head-sub">Mathematics, Physics, Chemistry, Communication, General Awareness</div>
+          </div>
+          <span class="section-head-badge sb-a">25 Marks</span>
+          <i class="fas fa-chevron-right chevron"></i>
+        </div>
+        <div class="section-body" id="topics-a"></div>
+      </div>
+
+      <!-- SECTION B: ELECTRONICS STREAM (25 marks) -->
+      <div class="section-block open" id="sb-b">
+        <div class="section-head" onclick="toggleSection('sb-b')">
+          <div class="section-head-icon">⚡</div>
+          <div class="section-head-info">
+            <div class="section-head-name">Section B — Electronics / Computer Stream</div>
+            <div class="section-head-sub">Electrical Engg., Electronics, Computer Engg.</div>
+          </div>
+          <span class="section-head-badge sb-b">25 Marks</span>
+          <i class="fas fa-chevron-right chevron"></i>
+        </div>
+        <div class="section-body" id="topics-b"></div>
+      </div>
+
+      <!-- SECTION C: MECHANICAL (20 marks) -->
+      <div class="section-block" id="sb-c">
+        <div class="section-head" onclick="toggleSection('sb-c')">
+          <div class="section-head-icon">⚙️</div>
+          <div class="section-head-info">
+            <div class="section-head-name">Section C — Mechanical Stream</div>
+            <div class="section-head-sub">Mechanical Engg., Production, Automobile</div>
+          </div>
+          <span class="section-head-badge sb-c">20 Marks</span>
+          <i class="fas fa-chevron-right chevron"></i>
+        </div>
+        <div class="section-body" id="topics-c"></div>
+      </div>
+
+      <!-- SECTION D: OTHER (20 marks) -->
+      <div class="section-block" id="sb-d">
+        <div class="section-head" onclick="toggleSection('sb-d')">
+          <div class="section-head-icon">🏗️</div>
+          <div class="section-head-info">
+            <div class="section-head-name">Section D — Other Engineering Streams</div>
+            <div class="section-head-sub">Civil, Textile, Chemical, Ceramic, Food, Others</div>
+          </div>
+          <span class="section-head-badge sb-d">20 Marks</span>
+          <i class="fas fa-chevron-right chevron"></i>
+        </div>
+        <div class="section-body" id="topics-d"></div>
+      </div>
+    </div>
+
+    <button class="gen-btn" onclick="generatePlan()">📅 Generate My Study Plan →</button>
+
+    <!-- PLAN OUTPUT -->
+    <div id="plan-output">
+      <div class="plan-header-card">
+        <h2 id="plan-title">Your Personalized LEET Study Plan</h2>
+        <div id="plan-target-badge"></div>
+        <div style="font-size:13px;color:rgba(255,255,255,.65);margin-bottom:10px;" id="plan-desc"></div>
+        <div class="plan-summary-row" id="plan-stats"></div>
+      </div>
+
+      <!-- DAILY SCHEDULE -->
+      <div class="daily-card">
+        <div class="card-title" style="margin-bottom:14px;">⏰ Suggested Daily Routine</div>
+        <div id="daily-schedule"></div>
+      </div>
+
+      <!-- PHASES -->
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:800;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+        📚 Phase-wise Topic Plan
+      </div>
+      <div class="phases" id="phases-container"></div>
+
+      <!-- SECTION-WISE STRATEGY -->
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">🎯 Section-Wise Strategy for Your Stream</div>
+        <div id="section-strategy"></div>
+      </div>
+
+      <!-- TIPS -->
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:800;color:#fff;margin-bottom:14px;">💡 Important Tips</div>
+      <div class="tips-grid">
+        <div class="tip-card"><div class="tip-icon">🎯</div><div class="tip-title">No Negative Marking</div><div class="tip-text">Attempt all 90 questions. Never leave any question blank. Even a random guess gives a 25% chance of getting it right.</div></div>
+        <div class="tip-card"><div class="tip-icon">⏱️</div><div class="tip-title">Time Management</div><div class="tip-text">90 questions in 90 minutes = 1 min per question. If stuck on a question for more than 45 sec, mark and move on. Return later.</div></div>
+        <div class="tip-card"><div class="tip-icon">📐</div><div class="tip-title">Section A is KEY</div><div class="tip-text">Section A (Math, Physics, Chemistry) has 25 marks and is common for ALL streams. Master this section regardless of your diploma branch.</div></div>
+        <div class="tip-card"><div class="tip-icon">📝</div><div class="tip-title">Attempt Premium Papers</div><div class="tip-text">Practice all 14 premium papers before exam. Each paper closely mirrors real LEET difficulty. Track your score improvement weekly.</div></div>
+        <div class="tip-card"><div class="tip-icon">🔁</div><div class="tip-title">Revise, Don't Just Read</div><div class="tip-text">Reading a topic once is not enough. Use the 3-pass method: first read → solve MCQs → quick revision on Day -1 before exam.</div></div>
+        <div class="tip-card"><div class="tip-icon">💬</div><div class="tip-title">Communication Skills (3 Marks)</div><div class="tip-text">Easy 3 marks from grammar/vocab. Cover: prepositions, tenses, voice, narration, antonyms/synonyms. 1 day is enough for this.</div></div>
+        <div class="tip-card"><div class="tip-icon">🌾</div><div class="tip-title">General Awareness (3 Marks)</div><div class="tip-text">Focus on Haryana-specific facts: districts, area, population, polytechnics, LEET eligibility rules. Quick revision material available on site.</div></div>
+        <div class="tip-card"><div class="tip-icon">🏋️</div><div class="tip-title">Mock Test Strategy</div><div class="tip-text">In last 2 weeks, give 1 full mock test daily. Analyze wrong questions. Focus your revision on those specific topics the next day.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){var s=document.createElement('style');s.textContent='@media print{body{display:none!important;}}';document.head.appendChild(s);})();
+
+function injectWatermark(){
+  var mob=sessionStorage.getItem('prem_mob')||'';
+  var name=sessionStorage.getItem('prem_name')||'Premium';
+  var masked=mob?mob.slice(0,3)+'****'+mob.slice(-2):name.toUpperCase();
+  var txt='© hsbteleet.com   '+masked+'   PREMIUM';
+  var layer=document.getElementById('wm-layer');if(!layer)return;layer.innerHTML='';
+  var vw=window.innerWidth||1200;
+  var totalH=Math.max(document.documentElement.scrollHeight,window.innerHeight,4000);
+  var rowGap=90,rowWidth=Math.ceil(Math.sqrt(vw*vw+totalH*totalH))+400;
+  var rows=Math.ceil((totalH+vw)/rowGap)+4;
+  for(var r=0;r<rows;r++){
+    var div=document.createElement('div');div.className='wm-row';
+    div.style.top=(r*rowGap-200)+'px';div.style.left=(r%2===0?-60:-180)+'px';
+    div.style.width=rowWidth+'px';
+    var charPx=11,repeats=Math.ceil(rowWidth/(txt.length*charPx))+2;
+    div.textContent=Array(repeats).fill(txt).join('      ');
+    layer.appendChild(div);
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){initTopics();injectWatermark();window.addEventListener('resize',injectWatermark);});
+
+async function verifyAccess(){
+  var uid=sessionStorage.getItem('prem_uid');
+  var ts=parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
+  try{
+    var {data,error}=await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){showDenied();return;}
+    sessionStorage.setItem('prem_ts',Date.now().toString());
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+  }catch(e){showDenied();}
+}
+function showDenied(){document.getElementById('page-loader').style.display='none';document.getElementById('access-denied').classList.add('show');}
+function doLogout(){['prem_uid','prem_mob','prem_name','prem_ts'].forEach(function(k){sessionStorage.removeItem(k);});window.location.href='./premium-login.html';}
+
+// ── SYLLABUS DATA ──
+var SYLLABUS={
+  a:[
+    {id:'math',name:'Mathematics (a-1 to a-3)',marks:8,subtopics:'AP, Complex Numbers, Logs, Permutations, Binomial, Probability, Matrices, Trigonometry, Lines, Circles, Differentiation, Integration, DE, Statistics',section:'A'},
+    {id:'physics',name:'Physics (a-2)',marks:8,subtopics:'Units/Dimensions, Newton\'s Laws, Work/Energy, Properties of Matter, Waves, Rotational Motion, Geometric Optics',section:'A'},
+    {id:'chemistry',name:'Chemistry (a-3)',marks:3,subtopics:'Heat Transfer, Electrostatics, Laser/Superconductivity, Water Hardness, Acidity/Basicity, pH, Valency, Electronic Configuration',section:'A'},
+    {id:'comm',name:'Communication Skills (a-4)',marks:3,subtopics:'Antonyms/Synonyms, Prepositions, Voice, Narration, Tenses, Error Correction, Punctuation',section:'A'},
+    {id:'ga',name:'General Awareness (a-5)',marks:3,subtopics:'Haryana Polytechnics, LEET Eligibility, Districts/Tehsils, Population, Area, History of Haryana',section:'A'},
+  ],
+  b:[
+    {id:'electrical',name:'Elements of Electrical Engg. (b-1)',marks:9,subtopics:'EMF, KVL/KCL, Faraday\'s Law, Network Theorems, AC Circuits, RLC, Resonance, Transformers, DC Machines, Induction Motor, T&D',section:'B'},
+    {id:'electronics',name:'Elements of Electronics Engg. (b-2)',marks:8,subtopics:'Measurements, Analog Electronics (Diode/BJT/FET/OPAMP), Digital Electronics (Logic Gates, FlipFlop), Communication Systems, Industrial Electronics (SCR/TRIAC)',section:'B'},
+    {id:'computer',name:'Elements of Computer Engg. (b-3)',marks:8,subtopics:'Computer Organization, Memory, OS Concepts, C Programming (Data Types, Arrays, Pointers, Functions, File Handling), Computer Networking (LAN/WAN/Internet)',section:'B'},
+  ],
+  c:[
+    {id:'mech',name:'Elements of Mechanical Engg. (c-1)',marks:8,subtopics:'Applied Mechanics (Friction, Centroid, Machines), Strength of Materials (Stress/Strain, Beams, Columns), Thermodynamics (Laws, Steam, Cycles), Fluid Mechanics',section:'C'},
+    {id:'production',name:'Elements of Production Engg. (c-2)',marks:6,subtopics:'Lathe/Drilling/Milling/Shaper, Measuring Instruments, Material Science, Engineering Drawing, Foundry, Plastics, Industrial Management',section:'C'},
+    {id:'auto',name:'Automobile Engineering (c-3)',marks:6,subtopics:'Gear Box, Brakes, Clutches, Differential, Engine Cooling/Lubrication, Wheels/Tyres, EV/Hybrid, Steering System',section:'C'},
+  ],
+  d:[
+    {id:'civil',name:'Civil Engg. Courses (d-1)',marks:5,subtopics:'Bricks, Soil Properties, Water Demand, Foundation Types, Surveying, RCC Basics, Roads/Bridges, Irrigation, Dams, Cement Types, Ecology',section:'D'},
+    {id:'textile',name:'Textile Engg. Courses (d-2)',marks:5,subtopics:'Fiber Types, Fabric/Yarn Manufacturing, Weaving Technology, Textile Testing, Bleaching/Dyeing/Printing',section:'D'},
+    {id:'chemical',name:'Chemical/Printing Engg. (d-3)',marks:2,subtopics:'Fluid Flow, Chemical Process Industry, Agro-Based Industries, Printing Machines, Types of Printing',section:'D'},
+    {id:'ceramic',name:'Ceramic Engg. (d-4)',marks:2,subtopics:'Pottery Types, Ceramic Materials & Properties',section:'D'},
+    {id:'food',name:'Food Technology (d-5)',marks:2,subtopics:'Vitamins, Cereals & Pulses, Milk & Milk Powder, Food Preservation',section:'D'},
+    {id:'others',name:'Other Streams (d-6)',marks:4,subtopics:'Agriculture (Farm Equipment), Architecture (Indian History, Building Types), Fashion Design (Garment Machines/Tools)',section:'D'},
+  ]
+};
+
+var topicStrength={};
+
+function initTopics(){
+  ['a','b','c','d'].forEach(function(sec){
+    var container=document.getElementById('topics-'+sec);
+    if(!container)return;
+    var html='';
+    SYLLABUS[sec].forEach(function(t){
+      topicStrength[t.id]='medium';
+      html+='<div class="topic-row">'
+        +'<div class="topic-name">'+t.name+'<div style="font-size:11px;color:var(--muted);font-weight:400;margin-top:2px;">'+t.subtopics+'</div></div>'
+        +'<div class="topic-marks">'+t.marks+' marks</div>'
+        +'<div class="strength-btns">'
+        +'<button class="str-btn" data-t="'+t.id+'" data-v="strong" onclick="setStrength(this)">💪</button>'
+        +'<button class="str-btn sel-medium" data-t="'+t.id+'" data-v="medium" onclick="setStrength(this)">👍</button>'
+        +'<button class="str-btn" data-t="'+t.id+'" data-v="weak" onclick="setStrength(this)">😓</button>'
+        +'</div>'
+        +'</div>';
+    });
+    container.innerHTML=html;
+  });
+}
+
+function setStrength(btn){
+  var topicId=btn.getAttribute('data-t');
+  var val=btn.getAttribute('data-v');
+  topicStrength[topicId]=val;
+  btn.closest('.topic-row').querySelectorAll('.str-btn').forEach(function(b){
+    b.classList.remove('sel-strong','sel-medium','sel-weak');
+  });
+  btn.classList.add('sel-'+val);
+}
+
+function toggleSection(id){
+  var el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// ── PLAN GENERATOR ──
+function generatePlan(){
+  var days=parseInt(document.getElementById('days-left').value);
+  var hours=parseInt(document.getElementById('daily-hours').value);
+  var stream=document.getElementById('my-stream').value;
+  var targetScore=parseInt(document.getElementById('target-score').value);
+
+  if(!days||days<1){document.getElementById('days-left').style.borderColor='#ef4444';document.getElementById('days-left').focus();return;}
+  document.getElementById('days-left').style.borderColor='';
+
+  var totalHours=days*hours;
+
+  // Compute topic priorities based on strength + marks + stream relevance
+  var allTopics=[];
+  ['a','b','c','d'].forEach(function(sec){
+    SYLLABUS[sec].forEach(function(t){
+      var str=topicStrength[t.id]||'medium';
+      var streamRelevant=false;
+      if(sec==='a') streamRelevant=true;
+      if(sec==='b'&&(stream==='electronics'||stream==='cs')) streamRelevant=true;
+      if(sec==='c'&&stream==='mechanical') streamRelevant=true;
+      if(sec==='d'&&stream==='civil') streamRelevant=true;
+
+      var priority=0;
+      if(str==='weak') priority+=3;
+      if(str==='medium') priority+=1;
+      if(streamRelevant) priority+=2;
+      priority+=t.marks;
+
+      var hoursNeeded=str==='weak'?t.marks*0.6:str==='medium'?t.marks*0.35:t.marks*0.15;
+      hoursNeeded=Math.max(1,Math.round(hoursNeeded*10)/10);
+
+      allTopics.push({...t,strength:str,priority:priority,hoursNeeded:hoursNeeded,streamRelevant:streamRelevant});
+    });
+  });
+
+  allTopics.sort(function(a,b){return b.priority-a.priority;});
+
+  // Create phases
+  var p1Days=Math.max(1,Math.round(days*0.35)); // Foundation (weak topics / high marks)
+  var p2Days=Math.max(1,Math.round(days*0.30)); // Core (medium topics)
+  var p3Days=Math.max(1,Math.round(days*0.20)); // Practice
+  var p4Days=Math.max(1,days-p1Days-p2Days-p3Days); // Revision
+
+  var phase1=allTopics.filter(function(t){return t.strength==='weak'||t.marks>=8;});
+  var phase2=allTopics.filter(function(t){return t.strength==='medium'&&t.marks<8&&t.marks>=5;});
+  var phase3=allTopics.filter(function(t){return t.strength==='strong';});
+
+  function buildPhaseHTML(topics, phaseNum){
+    var cls=['','ph-1','ph-2','ph-3','ph-4'];
+    var numCls=['','pn-1','pn-2','pn-3','pn-4'];
+    var labels=['','🔥 Phase 1: Foundation','📘 Phase 2: Core Subjects','⚡ Phase 3: Practice & Mock Tests','🔁 Phase 4: Revision & Exam Prep'];
+    var daysArr=[0,p1Days,p2Days,p3Days,p4Days];
+    var topicRows=topics.map(function(t){
+      var priCls=t.strength==='weak'?'priority-high':t.marks>=8?'priority-medium':'priority-normal';
+      var priTag=t.strength==='weak'?'<span class="ptopic-priority pp-high">Weak</span>':t.marks>=8?'<span class="ptopic-priority pp-med">High Marks</span>':'<span class="ptopic-priority pp-low">Review</span>';
+      return '<div class="ptopic-row '+priCls+'">'
+        +'<div class="ptopic-icon">'+(t.strength==='weak'?'😓':t.strength==='medium'?'👍':'💪')+'</div>'
+        +'<div style="flex:1;">'
+        +'<div class="ptopic-name">'+t.name+' '+priTag+'</div>'
+        +'<div class="ptopic-detail">'+t.subtopics.split(',').slice(0,4).join(', ')+(t.subtopics.split(',').length>4?'…':'')+'</div>'
+        +'</div>'
+        +'<div class="ptopic-time">~'+t.hoursNeeded+'h</div>'
+        +'</div>';
+    }).join('');
+    return '<div class="phase-card '+cls[phaseNum]+'">'
+      +'<div class="phase-head">'
+      +'<span class="phase-num '+numCls[phaseNum]+'">Phase '+phaseNum+'</span>'
+      +'<span class="phase-title">'+labels[phaseNum]+'</span>'
+      +'<span class="phase-days">~'+daysArr[phaseNum]+' days</span>'
+      +'</div>'
+      +'<div class="phase-topics">'+topicRows+'</div>'
+      +'</div>';
+  }
+
+  var phase4HTML='<div class="phase-card ph-4">'
+    +'<div class="phase-head"><span class="phase-num pn-4">Phase 4</span><span class="phase-title">🔁 Phase 4: Revision & Exam Prep</span><span class="phase-days">~'+p4Days+' days</span></div>'
+    +'<div class="phase-topics">'
+    +'<div class="ptopic-row priority-high"><div class="ptopic-icon">📝</div><div style="flex:1;"><div class="ptopic-name">Full Mock Tests (All 6 Full Papers) <span class="ptopic-priority pp-high">Must Do</span></div><div class="ptopic-detail">Attempt 1 full mock daily under exam conditions. Analyze errors.</div></div><div class="ptopic-time">~3h/day</div></div>'
+    +'<div class="ptopic-row priority-medium"><div class="ptopic-icon">📐</div><div style="flex:1;"><div class="ptopic-name">Formula Sheets Revision <span class="ptopic-priority pp-med">Daily</span></div><div class="ptopic-detail">Review Formula Sheets for all 4 sections each morning.</div></div><div class="ptopic-time">30 min</div></div>'
+    +'<div class="ptopic-row priority-normal"><div class="ptopic-icon">💬</div><div style="flex:1;"><div class="ptopic-name">General Awareness + Communication Skills</div><div class="ptopic-detail">Quick 1-day revision. Haryana facts, grammar rules, vocab.</div></div><div class="ptopic-time">~2h</div></div>'
+    +'<div class="ptopic-row priority-normal"><div class="ptopic-icon">😴</div><div style="flex:1;"><div class="ptopic-name">Day Before Exam — Light Revision Only</div><div class="ptopic-detail">Only formula sheets + cheat sheets. Sleep by 10 PM. No new topics.</div></div><div class="ptopic-time">2h max</div></div>'
+    +'</div></div>';
+
+  document.getElementById('phases-container').innerHTML=
+    buildPhaseHTML(phase1,1)+buildPhaseHTML(phase2,2)+buildPhaseHTML(phase3,3)+phase4HTML;
+
+  // Daily schedule based on hours
+  var scheduleItems=[];
+  if(hours>=4){
+    scheduleItems=[
+      {time:'Morning',task:'New Topic Study (Weak/High-Mark Topics)',dur:(Math.round(hours*0.45*10)/10)+'h'},
+      {time:'Afternoon',task:'MCQ Practice / Previous Questions on same topic',dur:(Math.round(hours*0.3*10)/10)+'h'},
+      {time:'Evening',task:'Formula Revision + Previous Day Topic Quick Recap',dur:(Math.round(hours*0.15*10)/10)+'h'},
+      {time:'Night',task:'Section A (Math/Physics) — 20 MCQs daily',dur:'30 min'},
+    ];
+  } else {
+    scheduleItems=[
+      {time:'1st Session',task:'New Topic Study',dur:(Math.round(hours*0.55*10)/10)+'h'},
+      {time:'2nd Session',task:'MCQ Practice on today\'s topic',dur:(Math.round(hours*0.3*10)/10)+'h'},
+      {time:'Quick Recap',task:'Section A Math — 10 MCQs',dur:'20 min'},
+    ];
+  }
+  document.getElementById('daily-schedule').innerHTML=scheduleItems.map(function(s){
+    return '<div class="daily-row"><div class="daily-time">'+s.time+'</div><div class="daily-task">'+s.task+'</div><div class="daily-dur">'+s.dur+'</div></div>';
+  }).join('');
+
+  // Section strategy
+  var sectionStrategyText={
+    electronics:'<div style="display:flex;flex-direction:column;gap:10px;">'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#a5b4fc;">Section B (25 marks) — Your Core:</strong><br><span style="font-size:13px;color:var(--muted);">Focus heavily on Electrical (b-1, 9 marks). Master KVL/KCL, Transformers, DC Machines. Electronics (b-2) — cover BJT, OPAMP, Digital Logic. Computer (b-3) — C programming basics, OS concepts, networking.</span></div>'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#7dd3fc;">Section A (25 marks) — Don\'t Ignore:</strong><br><span style="font-size:13px;color:var(--muted);">Math 8 marks is easiest to score. Focus on AP, Probability, Matrices, Integration. Physics 8 marks — Newton\'s Laws, Work/Energy, Optics are common. Chemistry 3 marks — pH, water hardness, laser.</span></div>'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#6ee7b7;">Sections C & D (20 marks each):</strong><br><span style="font-size:13px;color:var(--muted);">You can still score in Section C (Mechanical) and D (Civil/Others). Focus on high-yield easy topics like thermodynamics basics, fluid mechanics, civil materials. Even 8–10 marks from these sections is valuable.</span></div>'
+      +'</div>',
+    cs:'<div style="display:flex;flex-direction:column;gap:10px;">'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#a5b4fc;">Section B (25 marks) — Your Core:</strong><br><span style="font-size:13px;color:var(--muted);">Computer Engg. (b-3, 8 marks) — Master C programming, OS, networking. Electrical (b-1, 9 marks) — KVL/KCL, Transformer basics. Electronics (b-2, 8 marks) — Logic gates, BJT basics, OPAMP.</span></div>'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#7dd3fc;">Section A (25 marks) — Key Priority:</strong><br><span style="font-size:13px;color:var(--muted);">Math 8 marks — AP, Matrices, Probability. Physics 8 marks — Wave theory, Newton\'s Laws. Chemistry + Comm + GA are easy 9 marks, prepare in 2 days.</span></div>'
+      +'</div>',
+    mechanical:'<div style="display:flex;flex-direction:column;gap:10px;">'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#6ee7b7;">Section C (20 marks) — Your Core:</strong><br><span style="font-size:13px;color:var(--muted);">Mech Engg. (c-1, 8 marks) — Thermodynamics laws, Fluid Mechanics, Strength of Materials. Production (c-2, 6 marks) — Lathe, Milling, Material Testing. Auto (c-3, 6 marks) — Gear box, Brakes, Engine systems.</span></div>'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#7dd3fc;">Section A (25 marks) — High Priority:</strong><br><span style="font-size:13px;color:var(--muted);">Math 8 marks — Focus on calculus, AP. Physics 8 marks — Rotational motion, energy, properties of matter align well with your stream. Chemistry, Comm, GA — easy 9 marks.</span></div>'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#a5b4fc;">Section B (25 marks) — Target at least 10:</strong><br><span style="font-size:13px;color:var(--muted);">Basic Electrical (KVL, Ohm\'s Law), Basic Electronics (Logic gates), Basic Computer (C basics, OS). With your background, 10–12 marks from Section B is achievable.</span></div>'
+      +'</div>',
+    civil:'<div style="display:flex;flex-direction:column;gap:10px;">'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#fde68a;">Section D (20 marks) — Your Core:</strong><br><span style="font-size:13px;color:var(--muted);">Civil (d-1, 5 marks) — Bricks, Soil, Water, Foundation, Surveying, RCC, Roads. Textile (d-2, 5 marks) — Fiber types, fabric manufacturing, testing. Chemical (2m), Ceramic (2m), Food (2m) — easy 6 marks with basic reading.</span></div>'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#7dd3fc;">Section A (25 marks) — Key:</strong><br><span style="font-size:13px;color:var(--muted);">Math 8 marks — AP, Probability, Trigonometry. Physics — Properties of matter, surface tension directly relevant. Comm + GA easy marks.</span></div>'
+      +'</div>'
+  };
+
+  document.getElementById('section-strategy').innerHTML=sectionStrategyText[stream]||sectionStrategyText.electronics;
+
+  // Header
+  var streamLabels={electronics:'Electronics/ECE',cs:'Computer Science/IT',mechanical:'Mechanical',civil:'Civil/Others'};
+  document.getElementById('plan-title').textContent='Your LEET Study Plan — '+streamLabels[stream]+' Stream';
+  var tbClass=targetScore>=40?'tb-high':targetScore>=35?'tb-med':'tb-low';
+  var tbText=targetScore>=40?'🏆 Target: '+targetScore+'+ Score (Top College Zone)':targetScore>=35?'⚡ Target: '+targetScore+'+ Score (Mid-tier Zone)':'📘 Target: '+targetScore+'+ Score (Good Start Zone)';
+  document.getElementById('plan-target-badge').innerHTML='<span class="target-badge '+tbClass+'">'+tbText+'</span>';
+  document.getElementById('plan-desc').textContent='Based on '+days+' days × '+hours+' hours/day = '+totalHours+' total study hours. Plan is optimized for your stream and topic strengths.';
+  document.getElementById('plan-stats').innerHTML=
+    '<div class="plan-stat"><span class="plan-stat-v">'+days+'</span><span class="plan-stat-l">Days Left</span></div>'
+    +'<div class="plan-stat"><span class="plan-stat-v">'+hours+'h</span><span class="plan-stat-l">Per Day</span></div>'
+    +'<div class="plan-stat"><span class="plan-stat-v">'+totalHours+'h</span><span class="plan-stat-l">Total Hours</span></div>'
+    +'<div class="plan-stat"><span class="plan-stat-v">'+allTopics.filter(function(t){return t.strength==='weak';}).length+'</span><span class="plan-stat-l">Weak Topics</span></div>'
+    +'<div class="plan-stat"><span class="plan-stat-v">'+targetScore+'+</span><span class="plan-stat-l">Target Score</span></div>';
+
+  var out=document.getElementById('plan-output');
+  out.classList.add('show');
+  out.scrollIntoView({behavior:'smooth',block:'start'});
+  injectWatermark();
+}
+
+verifyAccess();
+</script>
+</body>
+</html>

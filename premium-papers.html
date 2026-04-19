@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
+
+  <title>Premium Sample Papers | 14 HSBTE LEET Mock Tests | hsbteleet.com</title>
+  <meta name="description" content="Access 14 premium HSBTE LEET sample papers — section-wise (Maths, Electrical, Mechanical, Civil) and full syllabus mock tests. Attempt online and check your score instantly."/>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <meta property="og:title" content="Premium HSBTE LEET Sample Papers | hsbteleet.com"/>
+  <meta property="og:description" content="14 premium HSBTE LEET mock tests — section-wise + full syllabus. Attempt online, check score instantly."/>
+  <meta property="og:url" content="https://hsbteleet.com/premium-papers"/>
+  <meta property="og:site_name" content="HSBTE LEET | hsbteleet.com"/>
+  <meta name="theme-color" content="#1a56db"/>
+  <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://hsbteleet.com/"},
+    {"@type":"ListItem","position":2,"name":"Haryana LEET","item":"https://hsbteleet.com/haryanaleet"},
+    {"@type":"ListItem","position":3,"name":"BTech LEET","item":"https://hsbteleet.com/btech-leet"},
+    {"@type":"ListItem","position":4,"name":"Premium Papers","item":"https://hsbteleet.com/premium-papers"}
+  ]}
+  </script>
+  <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/main.css"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f0f4ff;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+      --blue:#1a56db;--gold:#f59e0b;--green:#16a34a;--red:#ef4444;--purple:#7c3aed;
+    }
+    body.dark-mode{--bg:#0a0f1e;--card:#111827;--text:#e2e8f0;--muted:#94a3b8;--border:#1f2937;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* -- ACCESS DENIED -- */
+    #access-denied{display:none;position:fixed;inset:0;background:#0a0f1e;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied .ad-icon{font-size:4rem;margin-bottom:16px;animation:bounce .8s ease infinite alternate;}
+    @keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-8px);}}
+    #access-denied h2{font-size:1.7rem;font-weight:900;margin-bottom:10px;}
+    #access-denied p{opacity:.78;max-width:400px;line-height:1.7;margin-bottom:22px;font-size:.95rem;}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:50px;
+      background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-size:1rem;font-weight:800;text-decoration:none;}
+
+    /* -- LOADER -- */
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
+    .spinner{width:50px;height:50px;border:4px solid var(--border);border-top-color:var(--blue);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:15px;color:var(--muted);}
+
+    /* -- WATERMARK (strong, clearly visible) -- */
+    #wm-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;              /* behind all content */
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.wm-row {
+  position: absolute;
+  white-space: nowrap;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+
+  /* transparent fill — gradient shows through text shape */
+  color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    rgba(26, 86, 219, 0.12) 0%,
+    rgba(26, 86, 219, 0.22) 50%,
+    rgba(26, 86, 219, 0.12) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* soft outline for print-stamp feel */
+  -webkit-text-stroke: 0.6px rgba(26, 86, 219, 0.25);
+
+  /* blends into background naturally */
+  mix-blend-mode: multiply;
+  filter: blur(0.2px);
+
+  transform: rotate(-30deg);
+  transform-origin: left center;
+}
+
+    /* -- MAIN LAYOUT -- */
+    .prem-wrap{max-width:1140px;margin:0 auto;padding:30px 20px 80px;}
+
+    /* -- HERO -- */
+    .prem-hero{
+      background:linear-gradient(135deg,#0a0f1e 0%,#1a3a6e 55%,#1a56db 100%);
+      border-radius:24px;padding:34px 30px;color:#fff;
+      margin-bottom:22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+      box-shadow:0 12px 40px rgba(26,86,219,.22);
+      position:relative;overflow:hidden;
+    }
+    .prem-hero::after{
+      content:'';position:absolute;top:-40%;right:-10%;
+      width:400px;height:400px;border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .prem-hero .hero-icon{font-size:3.2rem;flex-shrink:0;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));}
+    .prem-hero h1{font-size:1.65rem;font-weight:900;margin-bottom:6px;line-height:1.25;}
+    .prem-hero p{opacity:.82;font-size:14px;line-height:1.55;}
+    .hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:5px;
+      background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+      border-radius:50px;padding:5px 13px;font-size:12px;font-weight:700;
+    }
+    .logout-btn{
+      margin-left:auto;background:rgba(255,255,255,.1);
+      border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:50px;
+      padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;
+      display:flex;align-items:center;gap:7px;transition:.2s;flex-shrink:0;
+    }
+    .logout-btn:hover{background:rgba(255,255,255,.22);}
+
+    /* -- SCORE INFO BANNER -- */
+    .info-banner{
+      background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+      border:2px solid #86efac;border-radius:16px;
+      padding:16px 22px;margin-bottom:22px;
+      display:flex;align-items:flex-start;gap:14px;
+    }
+    .info-banner .ib-icon{font-size:1.8rem;flex-shrink:0;margin-top:2px;}
+    .info-banner h3{font-size:.95rem;font-weight:800;color:#15803d;margin-bottom:4px;}
+    .info-banner p{font-size:13px;color:#166534;line-height:1.55;}
+
+    /* -- SECURITY NOTICE -- */
+    .sec-notice{
+      background:#fef3c7;border:1.5px solid #f59e0b;border-radius:14px;
+      padding:12px 18px;font-size:13px;color:#92400e;
+      margin-bottom:26px;display:flex;gap:12px;align-items:flex-start;
+    }
+    body.dark-mode .sec-notice{background:#451a03;color:#fcd34d;}
+
+    /* -- SECTION GROUP WRAPPER -- */
+    .sec-group{margin-bottom:36px;}
+
+    /* -- SECTION HEADER -- */
+    .sec-header{
+      display:flex;align-items:center;gap:14px;
+      padding:16px 22px;border-radius:16px;margin-bottom:16px;
+      position:relative;overflow:hidden;
+    }
+    .sec-header::before{
+      content:'';position:absolute;inset:0;border-radius:16px;opacity:.08;
+    }
+    .sec-header-a{background:linear-gradient(135deg,#1a56db,#3b82f6);}
+    .sec-header-b{background:linear-gradient(135deg,#059669,#10b981);}
+    .sec-header-c{background:linear-gradient(135deg,#dc2626,#ef4444);}
+    .sec-header-d{background:linear-gradient(135deg,#7c3aed,#a78bfa);}
+    .sec-header-full{background:linear-gradient(135deg,#0f172a,#1a3a6e);}
+    .sec-header-res{background:linear-gradient(135deg,#c2410c,#ea580c);}
+    .sh-icon{font-size:2rem;flex-shrink:0;}
+    .sh-text h2{font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:2px;}
+    .sh-text p{font-size:12.5px;color:rgba(255,255,255,.75);}
+    .sh-badge{
+      margin-left:auto;flex-shrink:0;
+      background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+      color:#fff;border-radius:50px;padding:4px 14px;font-size:11.5px;font-weight:800;
+    }
+
+    /* -- PAPERS GRID -- */
+    .papers-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+      gap:16px;
+    }
+
+    /* -- PAPER CARD -- */
+    .paper-card{
+      background:var(--card);border-radius:18px;
+      border:2px solid var(--border);
+      text-decoration:none;color:var(--text);
+      display:flex;flex-direction:column;
+      padding:22px 18px;
+      transition:all .22s;
+      position:relative;overflow:hidden;
+    }
+    .paper-card::after{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+      border-radius:0 0 18px 18px;opacity:0;transition:.22s;
+    }
+    .paper-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.1);border-color:transparent;}
+    .paper-card:hover::after{opacity:1;}
+
+    /* colour variants */
+    .pc-a{border-top:3px solid #1a56db;} .pc-a:hover{box-shadow:0 12px 32px rgba(26,86,219,.18);} .pc-a::after{background:#1a56db;}
+    .pc-b{border-top:3px solid #059669;} .pc-b:hover{box-shadow:0 12px 32px rgba(5,150,105,.18);} .pc-b::after{background:#059669;}
+    .pc-c{border-top:3px solid #dc2626;} .pc-c:hover{box-shadow:0 12px 32px rgba(220,38,38,.18);} .pc-c::after{background:#dc2626;}
+    .pc-d{border-top:3px solid #7c3aed;} .pc-d:hover{box-shadow:0 12px 32px rgba(124,58,237,.18);} .pc-d::after{background:#7c3aed;}
+    .pc-full{border-top:3px solid #0f172a;} .pc-full:hover{box-shadow:0 12px 32px rgba(15,23,42,.18);} .pc-full::after{background:#0f172a;}
+
+    .pc-icon{font-size:1.8rem;margin-bottom:12px;}
+    .pc-num{
+      font-size:2.4rem;font-weight:900;line-height:1;margin-bottom:10px;
+      display:inline-block;
+    }
+    .pc-a .pc-num{color:#1a56db;}
+    .pc-b .pc-num{color:#059669;}
+    .pc-c .pc-num{color:#dc2626;}
+    .pc-d .pc-num{color:#7c3aed;}
+    .pc-full .pc-num{color:#0f172a;}
+    body.dark-mode .pc-full .pc-num{color:#e2e8f0;}
+
+    .pc-title{font-size:.95rem;font-weight:800;margin-bottom:4px;line-height:1.3;}
+    .pc-sub{font-size:12.5px;color:var(--muted);line-height:1.4;margin-bottom:12px;}
+    .pc-tag{
+      display:inline-flex;align-items:center;gap:5px;margin-top:auto;
+      padding:5px 12px;border-radius:50px;font-size:11.5px;font-weight:700;
+      background:var(--bg);border:1px solid var(--border);color:var(--muted);
+    }
+    .paper-card:hover .pc-tag{color:var(--blue);}
+
+    /* -- RESOURCE GRID -- */
+    .resource-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+      gap:14px;
+    }
+    .res-card{
+      background:var(--card);border:2px solid var(--border);border-radius:16px;
+      padding:18px;display:flex;align-items:center;gap:14px;
+      cursor:pointer;transition:.2s;text-decoration:none;color:var(--text);
+    }
+    .res-card:hover{border-color:var(--blue);box-shadow:0 6px 22px rgba(26,86,219,.1);transform:translateY(-2px);}
+    .res-icon{
+      width:48px;height:48px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.4rem;flex-shrink:0;
+    }
+    .res-icon-wa{background:#dcfce7;}
+    .res-icon-web{background:#dbeafe;}
+    .res-icon-formula{background:#fef3c7;}
+    .res-icon-pyq{background:#fce7f3;}
+    .res-card h4{font-size:.9rem;font-weight:800;margin-bottom:3px;}
+    .res-card p{font-size:12px;color:var(--muted);line-height:1.4;}
+
+    /* -- PDF STUDY MATERIALS -- */
+    .pdf-section-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+    .pdf-tab{
+      padding:7px 18px;border-radius:50px;font-size:12.5px;font-weight:700;cursor:pointer;
+      border:2px solid var(--border);background:var(--card);color:var(--muted);transition:.18s;
+    }
+    .pdf-tab.active,.pdf-tab:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+    .pdf-tab-panel{display:none;}
+    .pdf-tab-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+    .pdf-card{
+      background:var(--card);border:2px solid var(--border);border-radius:16px;
+      padding:18px 16px;display:flex;align-items:center;gap:14px;
+      text-decoration:none;color:var(--text);transition:.2s;position:relative;overflow:hidden;
+    }
+    .pdf-card::before{
+      content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:16px 0 0 16px;
+    }
+    .pdf-card-a::before{background:#1a56db;}
+    .pdf-card-b::before{background:#059669;}
+    .pdf-card-c::before{background:#dc2626;}
+    .pdf-card-d::before{background:#7c3aed;}
+    .pdf-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:transparent;}
+    .pdf-icon{
+      width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+      justify-content:center;font-size:1.3rem;flex-shrink:0;
+    }
+    .pdf-icon-formula{background:#fef3c7;}
+    .pdf-icon-topics{background:#dbeafe;}
+    .pdf-icon-cheat{background:#fce7f3;}
+    .pdf-card h4{font-size:.88rem;font-weight:800;margin-bottom:3px;line-height:1.3;}
+    .pdf-card p{font-size:11.5px;color:var(--muted);line-height:1.35;}
+    .pdf-dl-btn{
+      margin-left:auto;flex-shrink:0;width:34px;height:34px;border-radius:10px;
+      background:var(--bg);border:1.5px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--blue);font-size:.85rem;transition:.18s;
+    }
+    .pdf-card:hover .pdf-dl-btn{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+    /* -- WA FLOAT -- */
+    .wa-float{
+      position:fixed;bottom:28px;right:22px;z-index:4000;
+      width:56px;height:56px;border-radius:50%;background:#25d366;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.7rem;color:#fff;
+      box-shadow:0 6px 24px rgba(37,211,102,.45);text-decoration:none;transition:.22s;
+    }
+    .wa-float:hover{transform:scale(1.1);}
+
+    @media(max-width:640px){
+      .prem-hero{padding:22px 18px;}
+      .prem-hero h1{font-size:1.3rem;}
+      .papers-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+      .sec-header{padding:14px 16px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ACCESS DENIED -->
+<div id="access-denied">
+  <div class="ad-icon">??</div>
+  <h2>Access Restricted</h2>
+  <p>Login with your premium account to access these sample papers. Get lifetime access for Just 49.</p>
+  <a href="/premium-login" class="btn-back"><i class="fas fa-sign-in-alt"></i> Login / Get Access</a>
+</div>
+
+<!-- LOADER -->
+<div id="page-loader">
+  <div class="spinner"></div>
+  <p>Verifying your premium access…</p>
+</div>
+
+<!-- WATERMARK LAYER -->
+<div id="wm-layer" aria-hidden="true"></div>
+
+<!-- MAIN PAGE -->
+<div id="main-page" style="display:none;">
+
+  <div data-include="/partials/header.html"></div>
+
+  <main id="main-content" role="main">
+  <div class="prem-wrap">
+
+    <!-- HERO -->
+    <div class="prem-hero">
+      <div class="hero-icon">??</div>
+      <div style="flex:1;min-width:200px;">
+        <h1>Premium Sample Papers</h1>
+        <p id="welcome-msg">Welcome! You have lifetime access to all 14 premium HSBTE LEET papers.</p>
+        <div class="hero-meta">
+          <span class="hero-badge">?? 14 Papers</span>
+          <span class="hero-badge">?? 13 PDFs</span>
+          <span class="hero-badge">? Instant Score</span>
+          <span class="hero-badge">?? Lifetime Access</span>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <!-- HOW TO USE -->
+    <div class="info-banner">
+      <div class="ib-icon">??</div>
+      <div>
+        <h3>How to use your papers</h3>
+        <p>Click any paper ? attempt the test with live timer ? click <strong>Submit Exam</strong> to instantly see <strong>Correct / Wrong / Skipped</strong> stats and a full question-wise review.</p>
+      </div>
+    </div>
+
+    <!-- SECURITY NOTICE -->
+    <div class="sec-notice">
+      <i class="fas fa-shield-alt" style="color:#f59e0b;font-size:1.1rem;margin-top:1px;flex-shrink:0;"></i>
+      <span><strong>Security Notice:</strong> These papers are watermarked to your account. Sharing, screenshotting, or printing is strictly prohibited and will result in permanent account suspension. For help: <strong>+91-7988316241</strong></span>
+    </div>
+
+    <!-- -------------------------------------------
+         SECTION A — MATHEMATICS
+    ------------------------------------------- -->
+    <div class="sec-group">
+      <div class="sec-header sec-header-a">
+        <div class="sh-icon">??</div>
+        <div class="sh-text">
+          <h2>Section A — Mathematics</h2>
+          <p>Algebra, Trigonometry, Calculus, Probability & more</p>
+        </div>
+        <span class="sh-badge">2 Papers</span>
+      </div>
+      <div class="papers-grid">
+        <a href="/section-a-1" class="paper-card pc-a">
+          <span class="pc-num">A1</span>
+          <div class="pc-title">Section A · Paper 1</div>
+          <div class="pc-sub">Mathematics — Hard Level · Quadratics, GP, Matrices, Probability</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+        <a href="/section-a-2" class="paper-card pc-a">
+          <span class="pc-num">A2</span>
+          <div class="pc-title">Section A · Paper 2</div>
+          <div class="pc-sub">Mathematics — Practice Set · Logs, Permutations, Trigonometry</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- -------------------------------------------
+         SECTION B — ELECTRICAL ENGINEERING
+    ------------------------------------------- -->
+    <div class="sec-group">
+      <div class="sec-header sec-header-b">
+        <div class="sh-icon">?</div>
+        <div class="sh-text">
+          <h2>Section B — Electrical Engineering</h2>
+          <p>KVL/KCL, Transformers, Electrical Machines, AC Circuits</p>
+        </div>
+        <span class="sh-badge">2 Papers</span>
+      </div>
+      <div class="papers-grid">
+        <a href="/section-b-1" class="paper-card pc-b">
+          <span class="pc-num">B1</span>
+          <div class="pc-title">Section B · Paper 1</div>
+          <div class="pc-sub">Electrical Engg. — KVL, Electromagnetism, Transformers</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+        <a href="/section-b-2" class="paper-card pc-b">
+          <span class="pc-num">B2</span>
+          <div class="pc-title">Section B · Paper 2</div>
+          <div class="pc-sub">Electrical Engg. — AC Circuits, Motors, Semiconductors</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- -------------------------------------------
+         SECTION C — MECHANICAL ENGINEERING
+    ------------------------------------------- -->
+    <div class="sec-group">
+      <div class="sec-header sec-header-c">
+        <div class="sh-icon">??</div>
+        <div class="sh-text">
+          <h2>Section C — Mechanical Engineering</h2>
+          <p>Friction, Thermodynamics, Fluid Mechanics, Stress-Strain</p>
+        </div>
+        <span class="sh-badge">2 Papers</span>
+      </div>
+      <div class="papers-grid">
+        <a href="/section-c-1" class="paper-card pc-c">
+          <span class="pc-num">C1</span>
+          <div class="pc-title">Section C · Paper 1</div>
+          <div class="pc-sub">Mechanical Engg. — Friction, Machines, Thermodynamics</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+        <a href="/section-c-2" class="paper-card pc-c">
+          <span class="pc-num">C2</span>
+          <div class="pc-title">Section C · Paper 2</div>
+          <div class="pc-sub">Mechanical Engg. — Fluids, Stress, Heat Transfer</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- -------------------------------------------
+         SECTION D — CIVIL ENGINEERING
+    ------------------------------------------- -->
+    <div class="sec-group">
+      <div class="sec-header sec-header-d">
+        <div class="sh-icon">???</div>
+        <div class="sh-text">
+          <h2>Section D — Civil Engineering</h2>
+          <p>Building Materials, Surveying, RCC, Soil Mechanics</p>
+        </div>
+        <span class="sh-badge">2 Papers</span>
+      </div>
+      <div class="papers-grid">
+        <a href="/section-d-1" class="paper-card pc-d">
+          <span class="pc-num">D1</span>
+          <div class="pc-title">Section D · Paper 1</div>
+          <div class="pc-sub">Civil Engg. — Bricks, Cement, Surveying, Beams</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+        <a href="/section-d-2" class="paper-card pc-d">
+          <span class="pc-num">D2</span>
+          <div class="pc-title">Section D · Paper 2</div>
+          <div class="pc-sub">Civil Engg. — RCC, Soil, Water Supply, Roads</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 100 Qs · 100 Min</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- -------------------------------------------
+         FULL SYLLABUS COMPLETE PAPERS
+    ------------------------------------------- -->
+    <div class="sec-group">
+      <div class="sec-header sec-header-full">
+        <div class="sh-icon">??</div>
+        <div class="sh-text">
+          <h2>Full Syllabus Complete Papers</h2>
+          <p>All subjects combined — Maths, Physics, Chemistry, Engineering</p>
+        </div>
+        <span class="sh-badge">6 Papers</span>
+      </div>
+      <div class="papers-grid">
+        <a href="/premium-sample-paper-1" class="paper-card pc-full">
+          <span class="pc-num">01</span>
+          <div class="pc-title">Sample Paper 1</div>
+          <div class="pc-sub">Full Syllabus · All Topics Covered</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs · 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-2" class="paper-card pc-full">
+          <span class="pc-num">02</span>
+          <div class="pc-title">Sample Paper 2</div>
+          <div class="pc-sub">Full Syllabus · Mathematics Focus</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs · 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-3" class="paper-card pc-full">
+          <span class="pc-num">03</span>
+          <div class="pc-title">Sample Paper 3</div>
+          <div class="pc-sub">Full Syllabus · Physics Focus</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs · 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-4" class="paper-card pc-full">
+          <span class="pc-num">04</span>
+          <div class="pc-title">Sample Paper 4</div>
+          <div class="pc-sub">Full Syllabus · Chemistry Focus</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs · 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-5" class="paper-card pc-full">
+          <span class="pc-num">05</span>
+          <div class="pc-title">Sample Paper 5</div>
+          <div class="pc-sub">Full Syllabus · Mixed Advanced</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs · 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-6" class="paper-card pc-full">
+          <span class="pc-num">06</span>
+          <div class="pc-title">Sample Paper 6</div>
+          <div class="pc-sub">Full Syllabus · Mixed Advanced</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs · 90 Min</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- -------------------------------------------
+         PDF STUDY MATERIALS
+    ------------------------------------------- -->
+    <div class="sec-group">
+      <div class="sec-header" style="background:linear-gradient(135deg,#be185d,#ec4899);">
+        <div class="sh-icon">??</div>
+        <div class="sh-text">
+          <h2>PDF Study Materials</h2>
+          <p>Formula Sheets, Important Topics &amp; Cheat Sheets — Section wise</p>
+        </div>
+        <span class="sh-badge">12 PDFs</span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="pdf-section-tabs">
+        <button class="pdf-tab active" onclick="switchPdfTab('formula',this)">?? Formula Sheets</button>
+        <button class="pdf-tab" onclick="switchPdfTab('topics',this)">? Important Topics</button>
+        <button class="pdf-tab" onclick="switchPdfTab('cheat',this)">??? Cheat Sheets</button>
+      </div>
+
+      <!-- Formula Sheets -->
+      <div id="pdf-formula" class="pdf-tab-panel active">
+        <a href="/pdf/formula-sheet-LEET2026_Section_A.pdf" class="pdf-card pdf-card-a" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">??</div>
+          <div>
+            <h4>Formula Sheet — Section A</h4>
+            <p>Basic Sciences · Maths, Physics, Chemistry</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/formula-sheet-LEET2026_Section_B.pdf" class="pdf-card pdf-card-b" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">??</div>
+          <div>
+            <h4>Formula Sheet — Section B</h4>
+            <p>Electronics Stream · Electrical, Electronics, Computer</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/formula-sheet-LEET2026_Section_C.pdf" class="pdf-card pdf-card-c" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">??</div>
+          <div>
+            <h4>Formula Sheet — Section C</h4>
+            <p>Mechanical Stream · Mech, Production, Automobile</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/formula-sheet-LEET2026_Section_D.pdf" class="pdf-card pdf-card-d" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-formula">??</div>
+          <div>
+            <h4>Formula Sheet — Section D</h4>
+            <p>Other Streams · Civil, Textile, Food, Ceramic</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+      </div>
+
+      <!-- Important Topics -->
+      <div id="pdf-topics" class="pdf-tab-panel">
+        <a href="/pdf/important-topic-LEET2026_Section_A.pdf" class="pdf-card pdf-card-a" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">?</div>
+          <div>
+            <h4>Important Topics — Section A</h4>
+            <p>Basic Sciences · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/important-topic-LEET2026_Section_b.pdf" class="pdf-card pdf-card-b" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">?</div>
+          <div>
+            <h4>Important Topics — Section B</h4>
+            <p>Electronics Stream · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/important-topic-LEET2026_Section_c.pdf" class="pdf-card pdf-card-c" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">?</div>
+          <div>
+            <h4>Important Topics — Section C</h4>
+            <p>Mechanical Stream · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/important-topic-LEET2026_Section_d.pdf" class="pdf-card pdf-card-d" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-topics">?</div>
+          <div>
+            <h4>Important Topics — Section D</h4>
+            <p>Other Streams · High-weightage topics</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+      </div>
+
+      <!-- Cheat Sheets -->
+      <div id="pdf-cheat" class="pdf-tab-panel">
+        <a href="/pdf/cheat-sheat-LEET2026_Section_A.pdf" class="pdf-card pdf-card-a" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">???</div>
+          <div>
+            <h4>Cheat Sheet — Section A</h4>
+            <p>Basic Sciences · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/cheat-sheat-LEET2026_Section_b.pdf" class="pdf-card pdf-card-b" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">???</div>
+          <div>
+            <h4>Cheat Sheet — Section B</h4>
+            <p>Electronics Stream · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/cheat-sheat-LEET2026_Section_c.pdf" class="pdf-card pdf-card-c" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">???</div>
+          <div>
+            <h4>Cheat Sheet — Section C</h4>
+            <p>Mechanical Stream · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+        <a href="/pdf/cheat-sheat-LEET2026_Section_d.pdf" class="pdf-card pdf-card-d" target="_blank" rel="noopener">
+          <div class="pdf-icon pdf-icon-cheat">???</div>
+          <div>
+            <h4>Cheat Sheet — Section D</h4>
+            <p>Other Streams · Last-minute quick revision</p>
+          </div>
+          <div class="pdf-dl-btn"><i class="fas fa-download"></i></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- -------------------------------------------
+         EXTRA RESOURCES
+    ------------------------------------------- -->
+    <div class="sec-group">
+      <div class="sec-header sec-header-res">
+        <div class="sh-icon">??</div>
+        <div class="sh-text">
+          <h2>Extra Resources</h2>
+          <p>WhatsApp support, formula sheets & more</p>
+        </div>
+        <span class="sh-badge">Bonus</span>
+      </div>
+      <div class="resource-grid">
+        <a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20LEET%20preparation." class="res-card" target="_blank" rel="noopener noreferrer">
+          <div class="res-icon res-icon-wa">??</div>
+          <div>
+            <h4>WhatsApp Support</h4>
+            <p>Get instant doubt help from admin</p>
+          </div>
+        </a>
+        <a href="https://hsbteleet.com" class="res-card" target="_blank" rel="noopener noreferrer">
+          <div class="res-icon res-icon-web">??</div>
+          <div>
+            <h4>Visit hsbteleet.com</h4>
+            <p>Free study material, PYQs & notes</p>
+          </div>
+        </a>
+        
+      </div>
+    </div>
+
+  </div>
+  </main>
+
+  <div data-include="/partials/footer.html"></div>
+</div><!-- /main-page -->
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/917988316241?text=Hi!%20I%20have%20a%20question%20about%20my%20Premium%20LEET%20papers." class="wa-float" target="_blank" rel="noopener noreferrer" title="WhatsApp Support" aria-label="WhatsApp support">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script defer src="/js/include.js"></script>
+<script defer src="/js/main.js"></script>
+
+<script>
+'use strict';
+
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+/* -- SECURITY -- */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12'||e.keyCode===123)e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){
+  var s=document.createElement('style');
+  s.textContent='@media print{body{display:none!important;}}';
+  document.head.appendChild(s);
+})();
+/* -- DEVTOOLS PROTECTION -- */
+setInterval(function(){
+  if(window.outerWidth-window.innerWidth > 160 || window.outerHeight-window.innerHeight > 160){
+    document.body.innerHTML='<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;background:#0a0f1e;color:#fff;text-align:center;padding:20px;"><div><h1 style="font-size:3rem;">??</h1><h2>Security Policy Violation</h2><p>Developer tools are not allowed on this page. Please close them and refresh.</p></div></div>';
+  }
+}, 2000);
+
+/* -- WATERMARK -- */
+function injectWatermark() {
+  var mob    = sessionStorage.getItem('prem_mob')  || '';
+  var name   = sessionStorage.getItem('prem_name') || 'Premium';
+  var masked = mob
+    ? mob.slice(0, 3) + '****' + mob.slice(-2)
+    : name.toUpperCase();
+
+  var txt = '© hsbteleet.com   ' + masked + '   PREMIUM';
+
+  var layer = document.getElementById('wm-layer');
+  if (!layer) return;
+  layer.innerHTML = '';
+
+  var vw     = window.innerWidth  || 1200;
+  var totalH = Math.max(
+    document.documentElement.scrollHeight,
+    window.innerHeight,
+    2000
+  );
+
+  var rowGap   = 90;
+  var rowWidth = Math.ceil(Math.sqrt(vw * vw + totalH * totalH)) + 400;
+  var rows     = Math.ceil((totalH + vw) / rowGap) + 4;
+
+  for (var r = 0; r < rows; r++) {
+    var div = document.createElement('div');
+    div.className = 'wm-row';
+    div.style.top  = (r * rowGap - 200) + 'px';
+    div.style.left = (r % 2 === 0 ? -60 : -180) + 'px';
+    div.style.width = rowWidth + 'px';
+
+    var charPx  = 11;
+    var repeats = Math.ceil(rowWidth / (txt.length * charPx)) + 2;
+    div.textContent = Array(repeats).fill(txt).join('      ');
+    layer.appendChild(div);
+  }
+}
+
+// Run on load + resize
+document.addEventListener('DOMContentLoaded', function () {
+  injectWatermark();
+  window.addEventListener('resize', injectWatermark);
+});
+/* -- ACCESS VERIFY -- */
+async function verifyAccess(){
+  var uid = sessionStorage.getItem('prem_uid');
+  var ts  = parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){ showDenied(); return; }
+  try{
+    var {data, error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){ showDenied(); return; }
+    sessionStorage.setItem('prem_ts', Date.now().toString());
+    var name = sessionStorage.getItem('prem_name') || '';
+    if(name){
+      document.getElementById('welcome-msg').textContent =
+        'Welcome back, '+name+'! You have lifetime access to all 14 premium HSBTE LEET papers.';
+    }
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+  }catch(e){ showDenied(); }
+}
+
+function showDenied(){
+  document.getElementById('page-loader').style.display='none';
+  document.getElementById('access-denied').classList.add('show');
+}
+
+function doLogout(){
+  ['prem_uid','prem_mob','prem_name','prem_ts'].forEach(function(k){sessionStorage.removeItem(k);});
+  window.location.href='./premium-login.html';
+}
+
+/* -- PDF TAB SWITCHER -- */
+function switchPdfTab(tab, el) {
+  document.querySelectorAll('.pdf-tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.pdf-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('pdf-' + tab).classList.add('active');
+  el.classList.add('active');
+}
+
+verifyAccess();
+</script>
+
+</body>
+</html>

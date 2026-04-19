@@ -189,7 +189,7 @@ const startBackgroundIndexing = () => {
             } else {
                 semesterUrl = `${basePath}${branch.url}-${sem}`;
             }
-            const fetchUrl = `/html/${semesterUrl.replace(/^\//, '')}.html`;
+            const fetchUrl = `${semesterUrl}.html`;
             
             // Staggered background fetch
             setTimeout(() => {

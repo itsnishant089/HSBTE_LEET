@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | hsbteleet.com</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+  <style>
+:root{--p:#7c3aed;--pd:#5b21b6;--pl:#ede9fe;--go:#f59e0b;--gd:#d97706;--gl:#fef3c7;--bl:#1a56db;--gr:#10b981;--re:#ef4444;--nv:#0a0f1e;--tx:#0f172a;--mu:#64748b;--bo:#e2e8f0;--ca:#fff;--bg:#f1f5f9}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+#login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0a0f1e,#1a0038);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.login-card{background:#fff;border-radius:22px;padding:40px 36px;max-width:400px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(124,58,237,.3)}
+.login-logo{font-size:2.5rem;margin-bottom:12px}
+.login-card h1{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:6px;color:var(--tx)}
+.login-card p{font-size:13px;color:var(--mu);margin-bottom:24px}
+.login-input{width:100%;padding:12px 15px;border:2px solid var(--bo);border-radius:10px;font-size:15px;color:var(--tx);background:#f8faff;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px}
+.login-input:focus{border-color:var(--p);background:#fff}
+.login-btn{width:100%;padding:13px;border:none;border-radius:50px;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;box-shadow:0 6px 20px rgba(124,58,237,.35);transition:all .22s}
+.login-btn:hover{transform:translateY(-2px)}
+.login-err{color:#ef4444;font-size:12.5px;margin-top:8px;display:none}
+.layout{display:flex;min-height:100vh}
+#sidebar{width:240px;background:var(--nv);flex-shrink:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-brand{padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-logo{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff}
+.sb-logo span{color:#c4b5fd}
+.sb-tagline{font-size:10.5px;color:rgba(255,255,255,.4);margin-top:3px}
+.sb-nav{padding:12px 0;flex:1}
+.sb-section{font-family:'Syne',sans-serif;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.3);padding:12px 18px 5px}
+.sb-link{display:flex;align-items:center;gap:10px;padding:10px 18px;color:rgba(255,255,255,.55);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;border:none;background:transparent;width:100%;text-align:left;border-left:3px solid transparent}
+.sb-link:hover{color:#fff;background:rgba(255,255,255,.06)}
+.sb-link.active{color:#fff;background:rgba(124,58,237,.25);border-left-color:#7c3aed}
+.sb-link i{width:16px;font-size:13.5px;flex-shrink:0}
+.sb-badge{margin-left:auto;background:#ef4444;color:#fff;border-radius:999px;padding:1px 7px;font-size:9.5px;font-weight:800;font-family:'Syne',sans-serif}
+.sb-footer{padding:16px 18px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-logout{width:100%;padding:10px;border:1px solid rgba(255,255,255,.15);border-radius:9px;background:transparent;color:rgba(255,255,255,.5);font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px}
+.sb-logout:hover{background:rgba(255,255,255,.08);color:#fff}
+.main{flex:1;overflow-x:hidden;min-width:0}
+.topbar{background:#fff;border-bottom:1px solid var(--bo);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--tx)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.admin-badge{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;padding:5px 13px;border-radius:999px;font-family:'Syne',sans-serif;font-size:10.5px;font-weight:800}
+.refresh-btn{padding:7px 13px;border:1.5px solid var(--bo);border-radius:8px;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:var(--mu);display:flex;align-items:center;gap:5px;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.refresh-btn:hover{border-color:var(--p);color:var(--p)}
+.page{display:none;padding:24px}
+.page.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--ca);border-radius:14px;padding:20px 18px;border:1px solid var(--bo);position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;border-radius:50%;transform:translate(30%,-30%);opacity:.08}
+.sc-blue::before{background:var(--bl)}.sc-purple::before{background:var(--p)}.sc-green::before{background:var(--gr)}.sc-gold::before{background:var(--go)}.sc-red::before{background:var(--re)}
+.stat-icon{font-size:1.6rem;margin-bottom:10px}
+.stat-val{font-family:'Syne',sans-serif;font-size:2rem;font-weight:900;color:var(--tx);line-height:1}
+.stat-lbl{font-size:12px;color:var(--mu);margin-top:5px;font-weight:600}
+.stat-sub{font-size:11px;color:var(--gr);margin-top:3px;font-weight:600}
+.card{background:var(--ca);border-radius:14px;border:1px solid var(--bo);overflow:hidden;margin-bottom:20px}
+.card-hdr{padding:14px 20px;border-bottom:1px solid var(--bo);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.card-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:8px}
+.card-body{padding:20px}
+.card-body.np{padding:0}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{padding:10px 14px;background:#f8fafc;font-family:'Syne',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mu);text-align:left;border-bottom:1px solid var(--bo);white-space:nowrap}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--bo);color:var(--tx);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#f8fafc}
+.tbl-wrap{overflow-x:auto}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:'Syne',sans-serif;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.b-green{background:#d1fae5;color:#065f46}.b-purple{background:var(--pl);color:var(--pd)}.b-gold{background:var(--gl);color:#92400e}.b-red{background:#fee2e2;color:#991b1b}.b-blue{background:#dbeafe;color:#1e40af}.b-gray{background:#f1f5f9;color:#475569}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;border:none;cursor:pointer;transition:all .18s;text-decoration:none}
+.btn-sm{padding:5px 10px;font-size:11px}
+.btn-purple{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff}.btn-purple:hover{opacity:.9}
+.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.btn-red{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
+.btn-blue{background:linear-gradient(135deg,#1a56db,#1240a8);color:#fff}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a}
+.btn-ghost{background:#f1f5f9;color:var(--tx);border:1px solid var(--bo)}
+.btn-ghost:hover{border-color:var(--p);color:var(--p)}
+.btn-ultra{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff}
+.btn-ultra:hover{opacity:.9}
+.btn-danger{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff}
+.btn-danger:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.fi{padding:8px 13px;border:1.5px solid var(--bo);border-radius:9px;font-size:13px;color:var(--tx);background:#fff;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.fi:focus{border-color:var(--p)}
+.fs{padding:8px 28px 8px 13px;border:1.5px solid var(--bo);border-radius:9px;font-size:13px;color:var(--tx);background:#fff;outline:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.fl{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--mu);display:block;margin-bottom:5px;margin-top:14px}
+.fl:first-child{margin-top:0}
+.form-input,.form-select{width:100%;padding:10px 13px;border:1.5px solid var(--bo);border-radius:9px;font-size:14px;color:var(--tx);background:#f8faff;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.form-input:focus,.form-select:focus{border-color:var(--p);background:#fff}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.alert{padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:14px;display:none;line-height:1.6}
+.alert.show{display:block}
+.alert-success{background:#f0fdf4;border:1px solid #86efac;color:#15803d}
+.alert-danger{background:#fff1f2;border:1px solid #fca5a5;color:#991b1b}
+.alert-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.ref-box{background:linear-gradient(135deg,#fffbeb,#fef9ec);border:1.5px solid rgba(245,158,11,.4);border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13.5px;color:#92400e}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-box{background:#fff;border-radius:18px;padding:28px 26px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.2)}
+.modal-box h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:16px}
+.modal-btns{display:flex;gap:10px;margin-top:18px}
+.spin{display:inline-block;width:14px;height:14px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.lr td{text-align:center;padding:28px;color:var(--mu);font-style:italic}
+.info-block{background:#f8fafc;border:1px solid var(--bo);border-radius:9px;padding:10px 13px}
+.info-block-lbl{font-size:10px;font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase;color:var(--mu);margin-bottom:3px}
+.info-block-val{font-size:13.5px;font-weight:600;color:var(--tx)}
+@media(max-width:700px){#sidebar{display:none}.layout{flex-direction:column}.page{padding:16px}.form-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">🛡️</div>
+    <h1>Admin Portal</h1>
+    <p>hsbteleet.com — Restricted Access Only</p>
+    <input type="password" class="login-input" id="admin-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()" aria-label="Admin password"/>
+    <button class="login-btn" onclick="doLogin()"><i class="fas fa-shield-alt"></i> Login to Admin</button>
+    <div class="login-err" id="lerr">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<div class="layout" id="main-layout" style="display:none">
+  <div id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo">HSBTE<span>LEET</span>.com</div>
+      <div class="sb-tagline">Admin Control Panel v3</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Overview</div>
+      <button class="sb-link active" onclick="gotoPage('dashboard',this)"><i class="fas fa-chart-pie"></i> Dashboard</button>
+      <button class="sb-link" onclick="gotoPage('users',this)"><i class="fas fa-users"></i> All Users <span class="sb-badge" id="bdg-u">0</span></button>
+      <div class="sb-section">Finance</div>
+      <button class="sb-link" onclick="gotoPage('payments',this)"><i class="fas fa-rupee-sign"></i> Payments</button>
+      <button class="sb-link" onclick="gotoPage('referrals',this)"><i class="fas fa-share-alt"></i> Referrals <span class="sb-badge" id="bdg-r" style="background:#f59e0b;color:#0f172a">0</span></button>
+      <div class="sb-section">Content</div>
+      <button class="sb-link" onclick="gotoPage('reviews',this)"><i class="fas fa-star"></i> Reviews <span class="sb-badge" id="bdg-rev">0</span></button>
+      <div class="sb-section">Tools</div>
+      <button class="sb-link" onclick="gotoPage('send',this)"><i class="fas fa-comment-alt"></i> Send Message</button>
+      <button class="sb-link" onclick="gotoPage('adduser',this)"><i class="fas fa-user-plus"></i> Add User Manually</button>
+      <button class="sb-link" onclick="gotoPage('lookup',this)"><i class="fas fa-search"></i> User Lookup</button>
+    </nav>
+    <div class="sb-footer">
+      <button class="sb-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="page-ttl">Dashboard</div>
+      <div class="topbar-right">
+        <button class="refresh-btn" onclick="reloadPage()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        <span class="admin-badge"><i class="fas fa-user-shield"></i> Nishant Admin</span>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card sc-blue"><div class="stat-icon">👥</div><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Total Users</div><div class="stat-sub" id="s-today">+0 today</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">👑</div><div class="stat-val" id="s-prem">—</div><div class="stat-lbl">Premium (₹49)</div></div>
+        <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="s-ultra">—</div><div class="stat-lbl">Ultra Premium (₹79)</div></div>
+        <div class="stat-card sc-green"><div class="stat-icon">💰</div><div class="stat-val" id="s-rev">—</div><div class="stat-lbl">Total Revenue</div></div>
+        <div class="stat-card sc-red"><div class="stat-icon">⭐</div><div class="stat-val" id="s-pend-rev">—</div><div class="stat-lbl">Pending Reviews</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">🔄</div><div class="stat-val" id="s-pend-ref">—</div><div class="stat-lbl">Pending Refunds</div></div>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-user-plus" style="color:var(--gr)"></i> Recent Signups</div></div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl"><thead><tr><th>Name</th><th>Mobile</th><th>Tier</th><th>Paid</th><th>Joined</th></tr></thead>
+          <tbody id="tb-recent"><tr class="lr"><td colspan="5">Loading…</td></tr></tbody></table>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="page" id="page-users">
+      <div class="filter-bar">
+        <input class="fi" id="u-q" placeholder="Search name, mobile, email…" oninput="filterU()" style="flex:1;min-width:180px"/>
+        <select class="fs" id="u-tier" onchange="filterU()"><option value="">All Tiers</option><option value="premium">Premium</option><option value="ultra">Ultra</option></select>
+        <select class="fs" id="u-status" onchange="filterU()"><option value="">All Status</option><option value="true">Active</option><option value="false">Blocked</option></select>
+        <button class="btn btn-ghost" onclick="exportCSV()"><i class="fas fa-download"></i> Export</button>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-users" style="color:var(--bl)"></i> All Users</div><span id="u-count" style="font-size:12px;color:var(--mu)">—</span></div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl"><thead><tr><th>Name</th><th>Mobile</th><th>Email</th><th>Tier</th><th>Paid ₹</th><th>Coupon</th><th>Refer By</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
+          <tbody id="tb-users"><tr class="lr"><td colspan="10">Loading…</td></tr></tbody></table>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="page" id="page-payments">
+      <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+        <div class="stat-card sc-green"><div class="stat-icon">💳</div><div class="stat-val" id="py-tot">—</div><div class="stat-lbl">Total Revenue</div></div>
+        <div class="stat-card sc-blue"><div class="stat-icon">📊</div><div class="stat-val" id="py-cnt">—</div><div class="stat-lbl">Transactions</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">👑</div><div class="stat-val" id="py-pr">—</div><div class="stat-lbl">Premium Revenue</div></div>
+        <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="py-ul">—</div><div class="stat-lbl">Ultra Revenue</div></div>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-credit-card" style="color:var(--gr)"></i> Payment History</div></div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl"><thead><tr><th>User</th><th>Mobile</th><th>Amount</th><th>Tier</th><th>Razorpay ID</th><th>Coupon</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="tb-pay"><tr class="lr"><td colspan="8">Loading…</td></tr></tbody></table>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- REFERRALS -->
+    <div class="page" id="page-referrals">
+      <div class="ref-box">
+        <strong>Refund Rules:</strong>&nbsp;
+        <span style="background:var(--gl);color:#92400e;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">1 Referral = ₹25 Refund</span>
+        <span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">2+ Referrals = ₹49 Refund</span>
+        &nbsp;— Transfer via UPI then mark as claimed.
+      </div>
+      <div class="filter-bar">
+        <select class="fs" id="ref-f" onchange="loadRefs()"><option value="all">All Referrers</option><option value="pending">Pending Refunds</option><option value="full">Full Refund Due</option><option value="half">50% Refund Due</option><option value="claimed">Claimed</option></select>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-share-alt" style="color:var(--go)"></i> Referral Tracker</div><span id="ref-cnt" style="font-size:12px;color:var(--mu)">—</span></div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl"><thead><tr><th>Name</th><th>Mobile</th><th>Tier</th><th>Referrals</th><th>Status</th><th>Refund Due ₹</th><th>Claimed</th><th>Actions</th></tr></thead>
+          <tbody id="tb-ref"><tr class="lr"><td colspan="8">Loading…</td></tr></tbody></table>
+        </div></div>
+      </div>
+      <div class="card" id="ref-uses-card" style="display:none">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-list" style="color:var(--bl)"></i> Uses for: <span id="ref-uses-ttl">—</span></div><button class="btn btn-ghost btn-sm" onclick="document.getElementById('ref-uses-card').style.display='none'">Close</button></div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl"><thead><tr><th>Referee Name</th><th>Mobile</th><th>Tier</th><th>Amount Paid</th><th>Date</th></tr></thead>
+          <tbody id="tb-ruses"></tbody></table>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="page" id="page-reviews">
+      <div class="filter-bar">
+        <select class="fs" id="rev-f" onchange="loadRevs()"><option value="pending">Pending Approval</option><option value="approved">Approved</option><option value="all">All Reviews</option></select>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-star" style="color:var(--go)"></i> Student Reviews</div><span id="rev-cnt" style="font-size:12px;color:var(--mu)">—</span></div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl"><thead><tr><th>Name</th><th>College</th><th>Rating</th><th>Review</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="tb-rev"><tr class="lr"><td colspan="6">Loading…</td></tr></tbody></table>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- SEND MESSAGE -->
+    <div class="page" id="page-send">
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-comment-alt" style="color:var(--bl)"></i> WhatsApp Message Generator</div></div>
+        <div class="card-body">
+          <label class="fl">User Mobile Number</label>
+          <input type="tel" class="form-input" id="wm-mob" placeholder="10-digit mobile" maxlength="10"/>
+          <label class="fl">Message Type</label>
+          <select class="form-select" id="wm-type" onchange="toggleCustom()">
+            <option value="refund-full">Full Refund Notification</option>
+            <option value="refund-half">50% Refund Notification</option>
+            <option value="welcome">Welcome Message</option>
+            <option value="support">Support Reply</option>
+            <option value="custom">Custom Message</option>
+          </select>
+          <label class="fl" id="wm-clbl" style="display:none">Custom Message</label>
+          <textarea class="form-input" id="wm-ctxt" rows="3" style="display:none;resize:none" placeholder="Type message…"></textarea>
+          <button class="btn btn-green" style="margin-top:16px" onclick="openWA()"><i class="fab fa-whatsapp"></i> Open in WhatsApp</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-user-edit" style="color:var(--p)"></i> Manual User Actions</div></div>
+        <div class="card-body">
+          <div class="form-row">
+            <div>
+              <label class="fl">User Mobile</label>
+              <input type="tel" class="form-input" id="ma-mob" placeholder="10-digit mobile"/>
+            </div>
+            <div>
+              <label class="fl">Action</label>
+              <select class="form-select" id="ma-act">
+                <option value="deactivate">Block Account (Prevent Login)</option>
+                <option value="activate">Restore Account Access</option>
+                <option value="upgrade">Upgrade to Ultra Premium</option>
+                <option value="mark-refund">Mark Refund as Claimed</option>
+              </select>
+            </div>
+          </div>
+          <div id="ma-alrt" class="alert"></div>
+          <button class="btn btn-purple" style="margin-top:14px" onclick="doAction()" id="ma-btn"><i class="fas fa-bolt"></i> Execute Action</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD USER MANUALLY -->
+    <div class="page" id="page-adduser">
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-user-plus" style="color:var(--gr)"></i> Create New User Manually</div></div>
+        <div class="card-body">
+          <div class="alert alert-warn show">
+            <i class="fas fa-info-circle"></i> Use this to manually give access to students who paid via direct UPI or cash.
+          </div>
+          <div id="au-alrt" class="alert"></div>
+          <div class="form-row">
+            <div>
+              <label class="fl">Full Name</label>
+              <input type="text" class="form-input" id="au-name" placeholder="Student's name"/>
+            </div>
+            <div>
+              <label class="fl">Mobile Number (Password)</label>
+              <input type="tel" class="form-input" id="au-mob" placeholder="10-digit mobile" maxlength="10"/>
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:10px">
+            <div>
+              <label class="fl">Email Address</label>
+              <input type="email" class="form-input" id="au-email" placeholder="student@example.com"/>
+            </div>
+            <div>
+              <label class="fl">Tier Access</label>
+              <select class="form-select" id="au-tier">
+                <option value="premium">Normal Premium (₹49)</option>
+                <option value="ultra">Ultra Premium (₹79)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:10px">
+            <div>
+              <label class="fl">Amount Paid (₹)</label>
+              <input type="number" class="form-input" id="au-paid" placeholder="e.g. 49"/>
+            </div>
+            <div>
+              <label class="fl">Payment ID / Transaction ID</label>
+              <input type="text" class="form-input" id="au-payid" placeholder="e.g. UPI_DIRECT_8932"/>
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:10px">
+            <div>
+              <label class="fl">Password (Optional - default is Mobile)</label>
+              <input type="text" class="form-input" id="au-pass" placeholder="Leave blank to use Mobile as password"/>
+            </div>
+            <div>
+              <label class="fl">Refer By (Mobile)</label>
+              <input type="tel" class="form-input" id="au-refer" placeholder="Optional" maxlength="10"/>
+            </div>
+          </div>
+          <button class="btn btn-green" style="margin-top:20px; width: auto; padding: 12px 24px;" onclick="doAddUser()" id="au-btn">
+            <i class="fas fa-check-circle"></i> Create Account & Give Access
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- USER LOOKUP -->
+    <div class="page" id="page-lookup">
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-search" style="color:var(--bl)"></i> User Lookup</div></div>
+        <div class="card-body">
+          <div style="display:flex;gap:10px;margin-bottom:18px">
+            <input type="tel" class="fi" id="lk-mob" placeholder="10-digit mobile" maxlength="10" style="flex:1" onkeydown="if(event.key==='Enter')doLookup()"/>
+            <button class="btn btn-blue" onclick="doLookup()"><i class="fas fa-search"></i> Lookup</button>
+          </div>
+          <div id="lk-result"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="conf-modal">
+  <div class="modal-box">
+    <h3 id="conf-title">Confirm Action</h3>
+    <p id="conf-msg" style="font-size:13.5px;color:var(--mu);line-height:1.65"></p>
+    <div class="modal-btns">
+      <button class="btn btn-red" onclick="confYes()">Yes, Proceed</button>
+      <button class="btn btn-ghost" onclick="confClose()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var ADMIN_PASS='Nishant@089';
+var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+var curPage='dashboard';
+var usersCache=[];
+var confCb=null;
+
+function doLogin(){
+  var p=document.getElementById('admin-pass').value;
+  if(p===ADMIN_PASS){
+    sessionStorage.setItem('adm','1');
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('main-layout').style.display='flex';
+    initAdmin();
+  }else{
+    var e=document.getElementById('lerr');e.style.display='block';
+    document.getElementById('admin-pass').value='';
+    setTimeout(function(){e.style.display='none';},3000);
+  }
+}
+function doLogout(){sessionStorage.removeItem('adm');location.reload();}
+(function(){if(sessionStorage.getItem('adm')==='1'){document.getElementById('login-screen').style.display='none';document.getElementById('main-layout').style.display='flex';initAdmin();}})();
+
+function gotoPage(name,btn){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.sb-link').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('page-'+name).classList.add('active');
+  if(btn)btn.classList.add('active');
+  var ttls={dashboard:'Dashboard',users:'All Users',payments:'Payments',referrals:'Referrals and Refunds',reviews:'Student Reviews',send:'Send Message',adduser:'Add User Manually',lookup:'User Lookup'};
+  document.getElementById('page-ttl').textContent=ttls[name]||name;
+  curPage=name;loadPage(name);
+}
+function reloadPage(){loadPage(curPage);}
+function loadPage(n){if(n==='dashboard')loadDash();else if(n==='users')loadUsers();else if(n==='payments')loadPay();else if(n==='referrals')loadRefs();else if(n==='reviews')loadRevs();}
+function safe(q){return q.then(function(r){return r.error?{data:[],error:r.error}:r;}).catch(function(){return{data:[]};});}
+function initAdmin(){loadDash();document.getElementById('wm-type').addEventListener('change',toggleCustom);}
+
+async function loadDash(){
+  try{
+    var[uRes,pyRes,prRes,rfRes,ulRes]=await Promise.all([
+      sb.from('premium_users').select('id,full_name,mobile,created_at').order('created_at',{ascending:false}),
+      sb.from('premium_payments').select('user_id,amount,status'),
+      safe(sb.from('req_approval').select('id')),
+      safe(sb.from('referrals').select('id').eq('refund_claimed',false).gte('count',1)),
+      safe(sb.from('ultra_premium_users').select('user_id'))
+    ]);
+    var u=uRes.data||[],py=pyRes.data||[];
+    var total=u.length,today=u.filter(function(x){return new Date(x.created_at)>=new Date(new Date().setHours(0,0,0,0));}).length;
+    var ultraCount=(ulRes.data||[]).length, premCount=total-ultraCount;
+    document.getElementById('s-total').textContent=total;document.getElementById('s-prem').textContent=premCount;
+    document.getElementById('s-ultra').textContent=ultraCount;document.getElementById('s-today').textContent='+'+today+' today';
+    document.getElementById('bdg-u').textContent=total;
+    var rev=py.filter(function(p){return p.status==='paid';}).reduce(function(s,p){return s+Math.round((p.amount||0)/100);},0);
+    document.getElementById('s-rev').textContent='₹'+rev;
+    var pc=(prRes.data||[]).length;document.getElementById('s-pend-rev').textContent=pc;if(pc)document.getElementById('bdg-rev').textContent=pc;
+    var rc=(rfRes.data||[]).length;document.getElementById('s-pend-ref').textContent=rc;if(rc)document.getElementById('bdg-r').textContent=rc;
+    var payMap={};py.forEach(function(p){if(!payMap[p.user_id])payMap[p.user_id]=p;});
+    var recent=u.slice(0,10);
+    var tb=document.getElementById('tb-recent');
+    if(!recent.length){tb.innerHTML='<tr class="lr"><td colspan="5">No users yet.</td></tr>';return;}
+    tb.innerHTML=recent.map(function(r){
+      var pmt=payMap[r.id];var amtRs=pmt?Math.round((pmt.amount||0)/100):0;
+      return'<tr><td><strong>'+e(r.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(r.mobile||'—')+'</code></td><td><span class="badge b-gold">Premium</span></td><td>₹'+(amtRs||'—')+'</td><td style="color:var(--mu);font-size:12px">'+fd(r.created_at)+'</td></tr>';
+    }).join('');
+  }catch(err){console.error(err);}
+}
+
+async function loadUsers(){
+  try{
+    var[uRes,pyRes,acRes,ulRes]=await Promise.all([
+      sb.from('premium_users').select('id,full_name,mobile,email,created_at').order('created_at',{ascending:false}),
+      sb.from('premium_payments').select('user_id,amount,status'),
+      sb.from('premium_access').select('user_id,is_active'),
+      safe(sb.from('ultra_premium_users').select('user_id'))
+    ]);
+    if(uRes.error)throw uRes.error;
+    var users=uRes.data||[],pmts=pyRes.data||[],acs=acRes.data||[],uls=ulRes.data||[];
+    var pyMap={};pmts.forEach(function(p){if(!pyMap[p.user_id])pyMap[p.user_id]=p;});
+    var acMap={};acs.forEach(function(a){acMap[a.user_id]=a;});
+    var ulSet=new Set(uls.map(function(u){return u.user_id;}));
+    usersCache=users.map(function(u){
+      var p=pyMap[u.id]||{};var a=acMap[u.id]||{};
+      return Object.assign({},u,{
+        paid_rs:p.amount?Math.round(p.amount/100):0,
+        coupon_used:null,
+        refer_by:null,
+        tier:ulSet.has(u.id)?'ultra':'premium',
+        is_active:a.is_active!==undefined?a.is_active:false
+      });
+    });
+    document.getElementById('u-count').textContent=usersCache.length+' users';
+    renderU(usersCache);
+  }catch(err){document.getElementById('tb-users').innerHTML='<tr class="lr"><td colspan="10">Unable to load users. Please try again.</td></tr>';}
+}
+function filterU(){
+  var q=(document.getElementById('u-q').value||'').toLowerCase();
+  var tier=document.getElementById('u-tier').value,status=document.getElementById('u-status').value;
+  var f=usersCache.filter(function(u){
+    var ms=!q||[u.full_name,u.mobile,u.email].some(function(v){return v&&v.toLowerCase().includes(q);});
+    return ms&&(!tier||u.tier===tier)&&(!status||String(u.is_active)===status);
+  });
+  renderU(f);document.getElementById('u-count').textContent=f.length+' users';
+}
+function escInline(s){if(!s)return'';return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function renderU(users){
+  var tb=document.getElementById('tb-users');
+  if(!users.length){tb.innerHTML='<tr class="lr"><td colspan="10">No users found.</td></tr>';return;}
+  tb.innerHTML=users.map(function(u){
+    return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td><td style="font-size:12px">'+e(u.email||'—')+'</td>' +
+    '<td>'+(u.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+'</td>' +
+    '<td>₹'+(u.paid_rs||'—')+'</td>' +
+    '<td>'+(u.coupon_used?'<span class="badge b-blue">'+e(u.coupon_used)+'</span>':'—')+'</td>' +
+    '<td>'+(u.refer_by?'<code style="font-size:11px">'+e(u.refer_by)+'</code>':'—')+'</td>' +
+    '<td>'+(u.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+'</td>' +
+    '<td style="color:var(--mu);font-size:12px">'+fd(u.created_at)+'</td>' +
+    '<td><div style="display:flex;gap:4px;flex-wrap:wrap">' +
+      '<button class="btn btn-sm btn-ghost" onclick="quickLk(\''+escInline(u.mobile)+'\')" title="Lookup"><i class="fas fa-eye"></i></button>' +
+      '<a class="btn btn-sm btn-ghost" href="https://wa.me/91'+e(u.mobile)+'" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366"></i></a>' +
+      (u.tier!=='ultra'?'<button class="btn btn-sm btn-ultra" onclick="upgradeToUltra(\''+escInline(u.id)+'\',\''+escInline(u.mobile)+'\',\''+escInline(u.full_name)+'\',\''+escInline(u.email||'')+'\')" title="Upgrade to Ultra"><i class="fas fa-rocket"></i> Ultra</button>':'') +
+      (u.is_active!==false?'<button class="btn btn-sm btn-red" onclick="toggleActive(\''+escInline(u.id)+'\',false,\''+escInline(u.full_name)+'\')"><i class="fas fa-ban"></i></button>':'<button class="btn btn-sm btn-green" onclick="toggleActive(\''+escInline(u.id)+'\',true,\''+escInline(u.full_name)+'\')"><i class="fas fa-check"></i></button>') +
+      '<button class="btn btn-sm btn-danger" onclick="removeUser(\''+escInline(u.id)+'\',\''+escInline(u.full_name)+'\')" title="Delete User"><i class="fas fa-trash"></i></button>' +
+    '</div></td></tr>';
+  }).join('');
+}
+async function toggleActive(uid,val,name){
+  confCb=async function(){
+    var {data, error} = await sb.from('premium_access').update({is_active:val}).eq('user_id',uid).select();
+    if(error) { toast('Error: ' + error.message, 'err'); return; }
+    if(!data || data.length===0) { toast('Action blocked by Database Security Policies (RLS). Please contact developer.', 'err'); return; }
+    toast((val?'Activated':'Blocked')+': '+name);loadUsers();
+  };
+  openConf((val?'Activate':'Block')+' User','Are you sure you want to '+(val?'restore access for':'block')+' '+name+'?');
+}
+
+async function upgradeToUltra(uid,mobile,name,email){
+  confCb=async function(){
+    try{
+      // Check if already in ultra table
+      var exRes=await sb.from('ultra_premium_users').select('id').eq('user_id',uid).maybeSingle();
+      var exists=exRes.data||null;
+      if(exists){ toast('Already Ultra Premium: '+name,'err'); return; }
+      var{data, error}=await sb.from('ultra_premium_users').insert([{user_id:uid,mobile:mobile,full_name:name,email:email||''}]).select();
+      if(error) throw error;
+      if(!data || data.length===0) throw new Error("Insert silently blocked by RLS policies");
+      toast('Upgraded to Ultra Premium: '+name);
+      loadUsers();
+    }catch(err){ toast('Upgrade failed: '+err.message,'err'); }
+  };
+  openConf('Upgrade to Ultra Premium','Grant Ultra Premium access to '+name+'? They will be able to access all Ultra tools on next login.');
+}
+
+async function removeUser(uid,name){
+  confCb=async function(){
+    try{
+      // Delete in order: access → payments → ultra table → user
+      await sb.from('premium_access').delete().eq('user_id',uid);
+      await sb.from('premium_payments').delete().eq('user_id',uid);
+      try{ await sb.from('ultra_premium_users').delete().eq('user_id',uid); }catch(e){}
+      var{data, error}=await sb.from('premium_users').delete().eq('id',uid).select();
+      if(error) throw error;
+      if(!data || data.length===0) throw new Error("Delete blocked by Database Security Policies (RLS) on premium_users.");
+      toast('User removed: '+name);
+      loadUsers();
+    }catch(err){ toast('Remove failed: '+err.message,'err'); }
+  };
+  openConf('⚠️ Remove User','Permanently delete '+name+' and all their data? This cannot be undone.');
+}
+function exportCSV(){
+  var rows=[['Name','Mobile','Email','Tier','Paid Rs','Coupon','Refer By','Status','Joined']];
+  usersCache.forEach(function(u){rows.push([u.full_name||'',u.mobile||'',u.email||'',u.tier||'',u.paid_rs||0,u.coupon_used||'',u.refer_by||'',u.is_active!==false?'Active':'Blocked',fd(u.created_at)]);});
+  var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='users_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+
+async function loadPay(){
+  try{
+    var[pyRes,uRes2]=await Promise.all([
+      sb.from('premium_payments').select('id,user_id,amount,status,created_at').order('created_at',{ascending:false}),
+      sb.from('premium_users').select('id,full_name,mobile')
+    ]);
+    var data=pyRes.data||[],uList=uRes2.data||[];
+    var uMap2={};uList.forEach(function(u){uMap2[u.id]=u;});
+    var paid=data.filter(function(p){return p.status==='paid';});
+    var tot=paid.reduce(function(s,p){return s+Math.round((p.amount||0)/100);},0);
+    document.getElementById('py-tot').textContent='₹'+tot;document.getElementById('py-cnt').textContent=data.length;
+    document.getElementById('py-pr').textContent='₹'+tot;document.getElementById('py-ul').textContent='₹0';
+    var tb=document.getElementById('tb-pay');
+    if(!data.length){tb.innerHTML='<tr class="lr"><td colspan="8">No payments yet.</td></tr>';return;}
+    tb.innerHTML=data.map(function(p){
+      var u=uMap2[p.user_id]||{};
+      var amtRs=Math.round((p.amount||0)/100);
+      var sb2=p.status==='paid'?'<span class="badge b-green">Paid</span>':p.status==='free_coupon'?'<span class="badge b-blue">Free</span>':'<span class="badge b-red">'+p.status+'</span>';
+      return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td><td style="font-weight:700">₹'+amtRs+'</td><td><span class="badge b-gold">Premium</span></td><td><code style="font-size:10px">'+e(p.id||'—')+'</code></td><td>—</td><td>'+sb2+'</td><td style="color:var(--mu);font-size:12px">'+fd(p.created_at)+'</td></tr>';
+    }).join('');
+  }catch(err){document.getElementById('tb-pay').innerHTML='<tr class="lr"><td colspan="8">Error</td></tr>';}
+}
+
+async function loadRefs(){
+  try{
+    var f=document.getElementById('ref-f').value;
+    var qb=sb.from('referrals').select('*');
+    if(f==='pending')qb=qb.eq('refund_claimed',false).gte('count',1);
+    else if(f==='full')qb=qb.gte('count',2);
+    else if(f==='half')qb=qb.eq('count',1);
+    else if(f==='claimed')qb=qb.eq('refund_claimed',true);
+    var res=await qb.order('count',{ascending:false});
+    if(res.error&&res.error.code==='42P01'){document.getElementById('tb-ref').innerHTML='<tr class="lr"><td colspan="8">Referrals table not set up yet. See setup guide.</td></tr>';document.getElementById('ref-cnt').textContent='—';return;}
+    var data=res.data||[];
+    document.getElementById('ref-cnt').textContent=(data||[]).length+' referrers';
+    var tb=document.getElementById('tb-ref');
+    if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="8">No referrals found.</td></tr>';return;}
+    tb.innerHTML=data.map(function(r){
+      var cnt=r.count||0;
+      var refundDue=cnt>=2?49:cnt===1?25:0;
+      var st=cnt>=2?'<span class="badge b-green">Full Refund</span>':cnt===1?'<span class="badge b-gold">50% Refund</span>':'<span class="badge b-gray">None Yet</span>';
+      var cl=r.refund_claimed?'<span class="badge b-green"><i class="fas fa-check"></i> Claimed</span>':'<span class="badge b-red">Pending</span>';
+      var waMsg=encodeURIComponent('Hi! Your LEET referral refund of ₹'+refundDue+' is ready. Sending via UPI shortly. — hsbteleet.com Admin');
+      return'<tr><td><strong>'+e(r.referrer_mobile||'—')+'</strong></td><td><code style="font-size:12px">'+e(r.referrer_mobile||'—')+'</code></td><td><span class="badge b-gold">Premium</span></td><td style="text-align:center"><strong style="font-family:Syne,sans-serif;font-size:1.1rem">'+cnt+'</strong></td><td>'+st+'</td><td style="font-weight:700;color:var(--gr)">₹'+refundDue+'</td><td>'+cl+'</td>' +
+      '<td><div style="display:flex;gap:4px">' +
+        '<button class="btn btn-sm btn-ghost" onclick="viewRUses(\''+e(r.referrer_mobile)+'\')"><i class="fas fa-list"></i></button>' +
+        '<a class="btn btn-sm btn-ghost" href="https://wa.me/91'+e(r.referrer_mobile)+'?text='+waMsg+'" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i></a>' +
+        (!r.refund_claimed&&cnt>=1?'<button class="btn btn-sm btn-green" onclick="markClaimed(\''+e(r.referrer_mobile)+'\','+refundDue+')"><i class="fas fa-check"></i></button>':'') +
+      '</div></td></tr>';
+    }).join('');
+  }catch(err){document.getElementById('tb-ref').innerHTML='<tr class="lr"><td colspan="8">Error</td></tr>';}
+}
+async function viewRUses(mob){
+  var res2=await sb.from('referral_uses').select('*').eq('referrer_mobile',mob).order('used_at',{ascending:false});
+  var data=res2.data||[];
+  document.getElementById('ref-uses-ttl').textContent=mob;document.getElementById('ref-uses-card').style.display='block';
+  var tb=document.getElementById('tb-ruses');
+  if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="5">No uses.</td></tr>';return;}
+  tb.innerHTML=data.map(function(u){return'<tr><td><strong>'+e(u.referee_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.referee_mobile)+'</code></td><td><span class="badge '+(u.referee_tier==='ultra'?'b-purple':'b-gold')+'">'+u.referee_tier+'</span></td><td>₹'+(u.amount_paid_rs||0)+'</td><td style="color:var(--mu);font-size:12px">'+fd(u.used_at)+'</td></tr>';}).join('');
+}
+async function markClaimed(mob,amt){
+  confCb=async function(){
+    await sb.from('referrals').update({refund_claimed:true,refund_amount_rs:amt,last_updated:new Date().toISOString()}).eq('referrer_mobile',mob);
+    toast('Refund marked claimed for '+mob);loadRefs();
+  };
+  openConf('Mark Refund Claimed','Confirm you have transferred ₹'+amt+' to '+mob+'?');
+}
+
+async function loadRevs(){
+  try{
+    var f=document.getElementById('rev-f').value;
+    var data=[];
+    if(f==='pending'){
+      var res=await sb.from('req_approval').select('*').order('created_at',{ascending:false});
+      data=res.data||[];
+    }else if(f==='approved'){
+      var res=await sb.from('reviews').select('*').order('created_at',{ascending:false});
+      data=res.data||[];
+    }else{
+      var[pRes,aRes]=await Promise.all([sb.from('req_approval').select('*'),sb.from('reviews').select('*')]);
+      data=(pRes.data||[]).map(function(x){x._isPending=true;return x;}).concat((aRes.data||[]).map(function(x){x._isPending=false;x.approved=true;return x;})).sort(function(a,b){return new Date(b.created_at)-new Date(a.created_at);});
+    }
+    document.getElementById('rev-cnt').textContent=data.length+' reviews';
+    var tb=document.getElementById('tb-rev');
+    if(!data||!data.length){tb.innerHTML='<tr class="lr"><td colspan="6">No reviews.</td></tr>';return;}
+    tb.innerHTML=data.map(function(r){
+      var stars='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
+      var isPending = r._isPending !== undefined ? r._isPending : (f==='pending');
+      return'<tr><td><strong>'+e(r.name||'—')+'</strong></td><td style="font-size:12px;color:var(--mu)">'+e(r.college||'—')+'</td><td style="color:#f59e0b;letter-spacing:1px">'+stars+'</td><td style="max-width:220px;font-size:12.5px">'+e((r.message||'').substring(0,90))+(r.message&&r.message.length>90?'…':'')+'</td><td style="color:var(--mu);font-size:12px">'+fd(r.created_at)+'</td>' +
+      '<td><div style="display:flex;gap:4px">'+(isPending?'<button class="btn btn-sm btn-green" onclick="approveRev(\''+r.id+'\')"><i class="fas fa-check"></i> Approve</button>':'<span class="badge b-green">Approved</span>')+'<button class="btn btn-sm btn-red" onclick="delRev(\''+r.id+'\','+isPending+')"><i class="fas fa-trash"></i></button></div></td></tr>';
+    }).join('');
+  }catch(err){}
+}
+async function approveRev(id){
+  try{
+    var {data:rev, error:e1} = await sb.from('req_approval').select('*').eq('id',id).single();
+    if(e1 || !rev) { alert('Error finding review: ' + (e1?e1.message:'Unknown')); return; }
+    
+    // Try to insert into reviews
+    var { error: e2 } = await sb.from('reviews').insert([{
+      name: rev.name, 
+      college: rev.college, 
+      rating: rev.rating, 
+      message: rev.message,
+      user_id: rev.user_id ? rev.user_id : null,
+      approved: true
+    }]);
+    
+    if(e2) { alert('ERROR INSERTING TO REVIEWS: ' + e2.message); return; } // STOP HERE if error
+    
+    // Only delete if insert succeeded
+    var { error: e3 } = await sb.from('req_approval').delete().eq('id',id);
+    if(e3) { alert('Error deleting pending: ' + e3.message); return; }
+    
+    toast('Review approved!'); loadRevs(); loadDash();
+  }catch(err){alert('Critical Error: ' + err.message);}
+}
+async function delRev(id,isPending){confCb=async function(){await sb.from(isPending?'req_approval':'reviews').delete().eq('id',id);toast('Deleted');loadRevs();loadDash();};openConf('Delete Review','Permanently delete this review?');}
+
+function toggleCustom(){
+  var show=document.getElementById('wm-type').value==='custom';
+  document.getElementById('wm-ctxt').style.display=show?'block':'none';
+  document.getElementById('wm-clbl').style.display=show?'block':'none';
+}
+function openWA(){
+  var mob=(document.getElementById('wm-mob').value||'').trim();
+  var type=document.getElementById('wm-type').value;
+  if(!/^\d{10}$/.test(mob)){alert('Enter valid 10-digit mobile');return;}
+  var msgs={'refund-full':'Hi! Your LEET referral refund is being processed. Since 2+ friends purchased using your code, you get a FULL REFUND. Sending via UPI shortly. Thank you! — hsbteleet.com','refund-half':'Hi! Your LEET referral reward is ready. 1 friend purchased using your code, so you get a 50% REFUND. Sending via UPI shortly. Refer 1 more for full refund! — hsbteleet.com','welcome':'Hi! Welcome to hsbteleet.com Premium. Your account is active. Login at https://hsbteleet.com/premium-login.html — Best of luck for LEET 2026! — Admin','support':'Hi! Thank you for contacting hsbteleet.com. We will help you shortly. — Admin','custom':document.getElementById('wm-ctxt').value};
+  window.open('https://wa.me/91'+mob+'?text='+encodeURIComponent(msgs[type]||''),'_blank');
+}
+
+async function doAction(){
+  var mob=(document.getElementById('ma-mob').value||'').trim();
+  var act=document.getElementById('ma-act').value;
+  var alrt=document.getElementById('ma-alrt'),btn=document.getElementById('ma-btn');
+  if(!/^\d{10}$/.test(mob)){alrt.className='alert alert-danger show';alrt.textContent='Enter valid 10-digit mobile.';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Processing…';alrt.className='alert';
+  try{
+    var{data:usr}=await sb.from('premium_users').select('id,full_name,tier').eq('mobile',mob).maybeSingle();
+    if(!usr){alrt.className='alert alert-danger show';alrt.textContent='No user found with mobile '+mob+'.';btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Execute Action';return;}
+    if(act==='deactivate'){
+      var{data, error} = await sb.from('premium_access').update({is_active:false}).eq('user_id',usr.id).select();
+      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error blocking account (RLS or DB issue).';return;}
+      alrt.className='alert alert-success show';alrt.textContent='Account blocked for '+usr.full_name+'.';
+    }
+    else if(act==='activate'){
+      var{data, error} = await sb.from('premium_access').update({is_active:true}).eq('user_id',usr.id).select();
+      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error activating account (RLS or DB issue).';return;}
+      alrt.className='alert alert-success show';alrt.textContent='Account activated for '+usr.full_name+'.';
+    }
+    else if(act==='upgrade'){
+      var{data:already}=await sb.from('ultra_premium_users').select('id').eq('user_id',usr.id).maybeSingle();
+      if(already){alrt.className='alert alert-warn show';alrt.textContent=usr.full_name+' is already Ultra Premium.';}
+      else{
+        var{data:upD, error:upErr}=await sb.from('ultra_premium_users').insert([{user_id:usr.id,mobile:mob,full_name:usr.full_name,email:''}]).select();
+        if(upErr || !upD || upD.length===0){
+           alrt.className='alert alert-danger show';alrt.textContent='Error upgrading to Ultra Premium (RLS or DB failure).';return;
+        }
+        alrt.className='alert alert-success show';alrt.textContent=usr.full_name+' upgraded to Ultra Premium.';
+      }
+    }
+    else if(act==='mark-refund'){
+      var{data, error} = await sb.from('referrals').update({refund_claimed:true,last_updated:new Date().toISOString()}).eq('referrer_mobile',mob).select();
+      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error marking refund claimed (RLS or DB issue).';return;}
+      alrt.className='alert alert-success show';alrt.textContent='Refund marked claimed for '+mob+'.';
+    }
+  }catch(err){alrt.className='alert alert-danger show';alrt.textContent='An error occurred while processing the action. Please check the logs or contact support.';}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Execute Action';
+}
+
+async function doAddUser(){
+  var name=document.getElementById('au-name').value.trim();
+  var mob=document.getElementById('au-mob').value.trim();
+  var email=document.getElementById('au-email').value.trim();
+  var tier=document.getElementById('au-tier').value;
+  var paid=parseInt(document.getElementById('au-paid').value)||0;
+  var payid=document.getElementById('au-payid').value.trim()||'MANUAL_ADMIN_ADD';
+  var pass=document.getElementById('au-pass').value.trim()||mob;
+  var refer=document.getElementById('au-refer').value.trim();
+  var alrt=document.getElementById('au-alrt'),btn=document.getElementById('au-btn');
+  
+  if(!name||!/^\d{10}$/.test(mob)||!email){
+    alrt.className='alert alert-danger show';alrt.textContent='Please fill Name, valid 10-digit Mobile, and Email.';
+    return;
+  }
+  
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Creating…';alrt.className='alert';
+  
+  try{
+    // 1. Create User
+    var{data:nu,error:uE}=await sb.from('premium_users').insert([{
+      full_name:name, mobile:mob, email:email, password_hash:pass,
+      created_at:new Date().toISOString()
+    }]).select('id').single();
+    if(uE) throw uE;
+    
+    // 2. Create Payment Record
+    var{data:py,error:pE}=await sb.from('premium_payments').insert([{
+      user_id:nu.id, razorpay_payment_id:payid,
+      amount:paid*100, status:'paid', created_at:new Date().toISOString()
+    }]).select('id').single();
+    if(pE) throw pE;
+    
+    // 3. Give Access
+    await sb.from('premium_access').insert([{
+      user_id:nu.id, payment_id:py.id, is_active:true
+    }]);
+    
+    // 4. If Ultra, add to ultra table (graceful — table may not exist yet)
+    if(tier==='ultra'){
+      try{ await sb.from('ultra_premium_users').insert([{user_id:nu.id,mobile:mob,full_name:name,email:email}]); }
+      catch(ulE){ console.warn('ultra_premium_users insert failed:',ulE.message); }
+    }
+    
+    alrt.className='alert alert-success show';
+    alrt.textContent='Success! '+name+' has been added and given '+tier+' access.';
+    document.getElementById('au-name').value='';document.getElementById('au-mob').value='';
+    document.getElementById('au-email').value='';document.getElementById('au-paid').value='';
+    document.getElementById('au-payid').value='';document.getElementById('au-pass').value='';
+    document.getElementById('au-refer').value='';
+    loadDash();
+  }catch(err){
+    alrt.className='alert alert-danger show';
+    alrt.textContent='Failure: Could not add user. The mobile might already exist or there was a connection issue.';
+  }
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-check-circle"></i> Create Account & Give Access';
+}
+
+function quickLk(mob){gotoPage('lookup',null);document.getElementById('lk-mob').value=mob;doLookup();}
+async function doLookup(){
+  var mob=(document.getElementById('lk-mob').value||'').trim();
+  var cont=document.getElementById('lk-result');
+  if(!/^\d{10}$/.test(mob)){cont.innerHTML='<div class="alert alert-warn show">Enter valid 10-digit mobile.</div>';return;}
+  cont.innerHTML='<div style="color:var(--mu);padding:16px;font-style:italic">Searching…</div>';
+  try{
+    var{data:uBase}=await sb.from('premium_users').select('id,full_name,mobile,email,created_at').eq('mobile',mob).maybeSingle();
+    if(!uBase){cont.innerHTML='<div class="alert alert-warn show">No user found with mobile '+mob+'.</div>';return;}
+    var[pyLRes,acLRes]=await Promise.all([
+      sb.from('premium_payments').select('amount,razorpay_payment_id,coupon_used,status').eq('user_id',uBase.id).maybeSingle(),
+      sb.from('premium_access').select('is_active').eq('user_id',uBase.id).maybeSingle()
+    ]);
+    var usr=Object.assign({},uBase,{
+      paid_rs:pyLRes.data?Math.round((pyLRes.data.amount||0)/100):0,
+      razorpay_payment_id:pyLRes.data?pyLRes.data.razorpay_payment_id:null,
+      coupon_used:pyLRes.data?pyLRes.data.coupon_used:null,
+      payment_status:pyLRes.data?pyLRes.data.status:'none',
+      refer_by:null,
+      tier:'premium',
+      is_active:acLRes.data?acLRes.data.is_active:false
+    });
+    var rfdRes=await sb.from('referrals').select('*').eq('referrer_mobile',mob).maybeSingle();
+    var rfd=rfdRes.data||null;
+    var rusRes=await sb.from('referral_uses').select('*').eq('referrer_mobile',mob).order('used_at',{ascending:false});
+    var rus=rusRes.data||[];
+    var isuRes=await sb.from('ultra_premium_users').select('id').eq('mobile',mob).maybeSingle();
+    var isu=isuRes.data||null;
+    var refStatus=rfd?(rfd.count>=2?'Full Refund Due (₹'+(usr.paid_rs||0)+')':rfd.count===1?'50% Refund Due (₹'+Math.floor((usr.paid_rs||0)/2)+')':'No Refund'):'No referrals made';
+    var ib=function(l,v){return'<div class="info-block"><div class="info-block-lbl">'+l+'</div><div class="info-block-val">'+e(String(v||'—'))+'</div></div>';};
+    cont.innerHTML='<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-user" style="color:var(--bl)"></i> '+e(usr.full_name||'—')+'</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(usr.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+(usr.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+(isu?'<span class="badge b-purple"><i class="fas fa-check"></i> Ultra Table</span>':'<span class="badge b-red">Not in Ultra Table</span>')+'</div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px">'+ib('Mobile',usr.mobile)+ib('Email',usr.email)+ib('Paid',usr.paid_rs?'₹'+usr.paid_rs:'—')+ib('Payment ID',usr.razorpay_payment_id||'—')+ib('Coupon',usr.coupon_used||'None')+ib('Referred By',usr.refer_by||'None')+ib('Referrals Made',(rfd?rfd.count:0)+' person(s)')+ib('Refund Status',refStatus)+ib('Joined',fd(usr.created_at))+ib('Payment Status',usr.payment_status||'—')+'</div>'+(rus&&rus.length?'<div style="margin-top:12px"><strong style="font-size:11px;font-family:Syne,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)">People They Referred:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">'+rus.map(function(u){return'<div style="font-size:13px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid var(--bo)"><strong>'+e(u.referee_name||'—')+'</strong> · '+e(u.referee_mobile)+' · '+u.referee_tier+' · ₹'+u.amount_paid_rs+' · '+fd(u.used_at)+'</div>';}).join('')+'</div></div>':'')+'<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><a class="btn btn-green" href="https://wa.me/91'+e(usr.mobile)+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+(usr.tier!=='ultra'?'<button class="btn btn-ultra" onclick="upgradeToUltra(\''+escInline(usr.id)+'\',\''+escInline(usr.mobile)+'\',\''+escInline(usr.full_name||'')+'\',\''+escInline(usr.email||'')+'\')"><i class="fas fa-rocket"></i> Upgrade to Ultra</button>':'<span class="badge b-purple" style="padding:8px 14px;font-size:11px"><i class="fas fa-rocket"></i> Already Ultra Premium</span>')+'<button class="btn btn-danger" onclick="removeUser(\''+escInline(usr.id)+'\',\''+escInline(usr.full_name||'')+'\')"><i class="fas fa-trash"></i> Remove User</button>'+(usr.is_active!==false?'<button class="btn btn-red" onclick="toggleActive(\''+escInline(usr.id)+'\',false,\''+escInline(usr.full_name)+'\')"><i class="fas fa-ban"></i> Block</button>':'<button class="btn btn-green" onclick="toggleActive(\''+escInline(usr.id)+'\',true,\''+escInline(usr.full_name)+'\')"><i class="fas fa-check"></i> Activate</button>')+'</div></div></div>';
+  }catch(err){cont.innerHTML='<div class="alert alert-danger show">Search failed. Please try again.</div>';}
+}
+
+function openConf(t,m){document.getElementById('conf-title').textContent=t;document.getElementById('conf-msg').textContent=m;document.getElementById('conf-modal').classList.add('show');}
+function confClose(){document.getElementById('conf-modal').classList.remove('show');confCb=null;}
+async function confYes(){var cb=confCb;confClose();if(cb){await cb();}}
+function toast(msg,err){
+  var t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:20px;right:20px;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,.15);max-width:300px;line-height:1.5;animation:fadeIn .2s ease;font-family:Plus Jakarta Sans,sans-serif';
+  t.style.background=err?'#fee2e2':'#d1fae5';t.style.color=err?'#991b1b':'#065f46';
+  t.style.border='1px solid '+(err?'#fca5a5':'#86efac');
+  t.textContent=(err?'❌ ':'✅ ')+msg;
+  document.body.appendChild(t);setTimeout(function(){t.remove();},4000);
+}
+function e(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
+function fd(iso){if(!iso)return'—';try{var d=new Date(iso);return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});}catch(x){return iso;}}
+/* ── SECURITY ── */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12'||e.keyCode===123)e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){
+  var s=document.createElement('style');
+  s.textContent='@media print{body{display:none!important;}}';
+  document.head.appendChild(s);
+})();
+/* ── DEVTOOLS PROTECTION ── */
+setInterval(function(){
+  if(window.outerWidth-window.innerWidth > 160 || window.outerHeight-window.innerHeight > 160){
+    document.body.innerHTML='<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;background:#030712;color:#fff;text-align:center;padding:20px;"><div><h1 style="font-size:3rem;">🔒</h1><h2>Security Policy Violation</h2><p>Developer tools are not allowed on this page. Please close them and refresh.</p></div></div>';
+  }
+}, 2000);
+</script>
+</body>
+</html>

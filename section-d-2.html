@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
+  <title>HSBTE LEET Section D Civil Engineering Mock Paper 2</title>
+  <meta name="description" content="Section D Civil Engineering HSBTE LEET mock 2. Practice online & get instant score."/>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://hsbteleet.com/"},
+    {"@type":"ListItem","position":2,"name":"Haryana LEET","item":"https://hsbteleet.com/haryanaleet"},
+    {"@type":"ListItem","position":3,"name":"Premium Papers","item":"https://hsbteleet.com/premium-papers"}
+  ]}
+  </script>
+  <style>
+    :root{
+      --pri:#1a56db;--gold:#f59e0b;--success:#16a34a;--danger:#ef4444;
+      --warn:#f59e0b;--bg:#f0f4ff;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* ── ACCESS DENIED ── */
+    #access-denied{display:none;position:fixed;inset:0;background:#0f172a;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied h2{font-size:1.6rem;font-weight:800;margin:18px 0 12px;}
+    #access-denied p{opacity:.8;max-width:400px;line-height:1.7;margin-bottom:22px;}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:50px;
+      background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-size:.95rem;font-weight:800;text-decoration:none;}
+
+    /* ── LOADER ── */
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
+    .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:var(--pri);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:15px;color:var(--muted);}
+
+    /* ── WATERMARK  (strong & visible) ── */
+    #wm-layer{
+      position:fixed;inset:0;pointer-events:none;z-index:8888;
+      overflow:hidden;user-select:none;
+    }
+    .wm-row{
+      position:absolute;
+      white-space:nowrap;
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:3px;
+      color:rgba(26,86,219,0.13);   /* clearly visible */
+      transform:rotate(-30deg);
+      transform-origin:left center;
+    }
+
+    /* ── STICKY HEADER BAR ── */
+    #quiz-header{
+      position:sticky;top:0;z-index:500;
+      background:linear-gradient(135deg,#0f172a 0%,#1a3a6e 60%,#1a56db 100%);
+      color:#fff;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+      border-bottom:3px solid var(--gold);
+      box-shadow:0 4px 20px rgba(26,86,219,.25);
+    }
+    .qh-left h1{font-size:1.1rem;font-weight:800;margin-bottom:2px;}
+    .qh-left p{font-size:11.5px;opacity:.78;}
+    .qh-left a{font-size:11px;color:#fcd34d;text-decoration:none;opacity:.9;}
+    .qh-left a:hover{opacity:1;text-decoration:underline;}
+    #timer{font-size:1.4rem;font-weight:900;color:#fef08a;
+      background:rgba(0,0,0,.3);padding:7px 16px;border-radius:10px;
+      border:1.5px solid rgba(254,240,138,.3);letter-spacing:1px;font-variant-numeric:tabular-nums;}
+    #timer.danger{color:#fca5a5;border-color:rgba(252,165,165,.4);animation:pulse .7s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+    /* ── SECURITY BAR ── */
+    .sec-bar{
+      background:#fef3c7;border-left:4px solid #f59e0b;
+      padding:10px 18px;font-size:12.5px;color:#92400e;
+      display:flex;align-items:center;gap:10px;
+    }
+
+    /* ── MAIN WRAP ── */
+    .quiz-wrap{max-width:900px;margin:0 auto;padding:22px 16px 60px;}
+
+    /* ── SECTION DIVIDER ── */
+    .sec-div{
+      display:flex;align-items:center;gap:12px;
+      background:linear-gradient(135deg,#1a56db,#7c3aed);
+      color:#fff;padding:11px 20px;border-radius:10px;
+      margin:28px 0 16px;font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    }
+    .sec-div .sec-icon{font-size:1.2rem;}
+
+    /* ── QUESTION CARD ── */
+    .q-card{
+      background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+      padding:22px 20px;margin-bottom:18px;
+      transition:border-color .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
+    }
+    .q-card::before{
+      content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+      background:linear-gradient(180deg,var(--pri),#7c3aed);border-radius:4px 0 0 4px;
+    }
+    .q-card:hover{border-color:#bfdbfe;box-shadow:0 4px 18px rgba(26,86,219,.1);}
+    .q-card.answered{border-color:#bbf7d0;background:#f0fdf4;}
+    .q-card.answered::before{background:linear-gradient(180deg,#16a34a,#22c55e);}
+    .q-num{font-size:11px;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+    .q-num .q-badge{background:#eff6ff;border:1px solid #bfdbfe;padding:2px 8px;border-radius:20px;font-size:10px;}
+    .q-text{font-size:1rem;font-weight:600;line-height:1.6;color:var(--text);margin-bottom:16px;}
+    .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+    @media(max-width:520px){.opts{grid-template-columns:1fr;}}
+    .opt{
+      display:flex;align-items:center;gap:10px;
+      padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+      cursor:pointer;transition:all .18s;font-size:.92rem;color:var(--text);
+    }
+    .opt:hover{background:#eff6ff;border-color:#93c5fd;transform:translateX(2px);}
+    .opt input{accent-color:var(--pri);width:15px;height:15px;flex-shrink:0;cursor:pointer;}
+    .opt.sel{background:#eff6ff;border-color:var(--pri);font-weight:600;}
+    .opt-letter{
+      width:24px;height:24px;border-radius:50%;background:var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:800;color:var(--muted);flex-shrink:0;transition:.18s;
+    }
+    .opt.sel .opt-letter{background:var(--pri);color:#fff;}
+
+    /* ── SUBMIT AREA ── */
+    .submit-wrap{text-align:center;padding:28px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-top:10px;}
+    .submit-wrap p{font-size:14px;color:var(--muted);margin-bottom:16px;}
+    #progress-bar-wrap{background:#e2e8f0;border-radius:20px;height:8px;margin-bottom:16px;overflow:hidden;}
+    #progress-bar{height:100%;background:linear-gradient(90deg,var(--pri),#7c3aed);border-radius:20px;transition:width .3s;}
+    #progress-text{font-size:13px;font-weight:700;color:var(--pri);margin-bottom:16px;}
+    .btn-submit{
+      display:inline-flex;align-items:center;gap:9px;
+      padding:15px 40px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+      font-size:1.05rem;font-weight:800;transition:all .2s;
+      box-shadow:0 6px 20px rgba(22,163,74,.3);
+    }
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(22,163,74,.4);}
+    .btn-submit:active{transform:translateY(0);}
+
+    /* ── RESULTS ── */
+    #results{display:none;}
+    .results-hero{
+      background:linear-gradient(135deg,#0f172a,#1a3a6e,#1a56db);
+      color:#fff;border-radius:20px;padding:30px;text-align:center;margin-bottom:24px;
+    }
+    .results-hero h2{font-size:1.6rem;font-weight:900;margin-bottom:6px;}
+    .results-hero p{opacity:.8;font-size:14px;}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;}
+    .score-card{background:var(--card);border-radius:16px;padding:20px 16px;text-align:center;border:2px solid var(--border);transition:.2s;}
+    .score-card:hover{transform:translateY(-3px);}
+    .score-card .s-val{font-size:2.2rem;font-weight:900;display:block;margin-bottom:4px;}
+    .score-card .s-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+    .s-correct{border-color:#86efac;} .s-correct .s-val{color:#16a34a;}
+    .s-wrong{border-color:#fca5a5;}   .s-wrong .s-val{color:#ef4444;}
+    .s-skip{border-color:#fde68a;}    .s-skip .s-val{color:#d97706;}
+    .s-att{border-color:#bfdbfe;}     .s-att .s-val{color:var(--pri);}
+    .s-score{border-color:#ddd6fe;}   .s-score .s-val{color:#7c3aed;}
+    .s-total{border-color:#e2e8f0;}   .s-total .s-val{color:var(--text);}
+
+    /* result action buttons */
+    .result-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:20px 0;}
+    .btn-retake{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 32px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--pri),#1d4ed8);color:#fff;
+      font-size:.95rem;font-weight:800;transition:all .2s;
+    }
+    .btn-retake:hover{transform:translateY(-2px);}
+    .btn-back-papers{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 28px;border-radius:50px;
+      background:#f1f5f9;color:var(--text);font-size:.95rem;font-weight:700;
+      text-decoration:none;border:2px solid var(--border);transition:.2s;
+    }
+    .btn-back-papers:hover{border-color:var(--pri);background:#eff6ff;}
+
+    /* ── REVIEW SECTION ── */
+    .review-header{font-size:1.1rem;font-weight:800;margin:24px 0 14px;color:var(--text);display:flex;align-items:center;gap:8px;}
+    .r-card{border-radius:12px;padding:18px 20px;margin-bottom:14px;border:2px solid;}
+    .r-correct{background:#f0fdf4;border-color:#86efac;}
+    .r-wrong{background:#fff5f5;border-color:#fca5a5;}
+    .r-skip{background:#fffbeb;border-color:#fde68a;}
+    .r-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:8px;}
+    .r-badge.b-c{background:#dcfce7;color:#15803d;}
+    .r-badge.b-w{background:#fee2e2;color:#991b1b;}
+    .r-badge.b-s{background:#fef3c7;color:#92400e;}
+    .r-qnum{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:5px;}
+    .r-q{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:10px;}
+    .r-ans-correct{font-size:.88rem;font-weight:700;color:#15803d;display:flex;align-items:center;gap:6px;}
+    .r-ans-wrong{font-size:.88rem;font-weight:700;color:#991b1b;display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+
+    @media(max-width:600px){
+      .qh-left h1{font-size:.95rem;}
+      #timer{font-size:1.2rem;padding:6px 12px;}
+      .q-card{padding:16px 14px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ACCESS DENIED -->
+<div id="access-denied">
+  <div style="font-size:3.5rem">🔒</div>
+  <h2>Premium Access Only</h2>
+  <p>Login with your premium account to access this paper.</p>
+  <a href="/premium-login" class="btn-back">🔑 Login / Get Access</a>
+</div>
+
+<!-- LOADER -->
+<div id="page-loader">
+  <div class="spinner"></div>
+  <p>Verifying premium access…</p>
+</div>
+
+<!-- WATERMARK LAYER (filled by JS) -->
+<div id="wm-layer" aria-hidden="true"></div>
+
+<!-- MAIN PAGE -->
+<div id="main-page" style="display:none;">
+
+  <!-- STICKY HEADER -->
+  <div id="quiz-header">
+    <div class="qh-left">
+      <h1>🏆 HSBTE LEET Section D Civil Engineering Mock Paper 2</h1>
+      <p>Section D: Civil Engineering · 100 Questions · 100 Min</p>
+      <a href="/premium-papers">← Back to All Papers</a>
+    </div>
+    <div id="timer">100:00</div>
+  </div>
+
+  <!-- SECURITY BAR -->
+  <div class="sec-bar">
+    🛡️ <strong>Premium Content:</strong> Sharing, screenshotting or printing is strictly prohibited. This paper is watermarked to your account. Contact: <strong>+91-7988316241</strong>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+      <div id="questions-list"></div>
+
+      <!-- SUBMIT AREA -->
+      <div class="submit-wrap">
+        <div id="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+        <div id="progress-text">0 of 102 answered</div>
+        <p>Submit when done — you'll see Correct, Wrong & Skipped instantly.</p>
+        <button class="btn-submit" onclick="submitExam()">✅ Submit Exam & See Score</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+      <div class="results-hero">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🎯</div>
+        <h2>Your Score Report</h2>
+        <p id="score-subtitle">hsbteleet.com · Premium Mock Test</p>
+      </div>
+
+      <div class="score-grid">
+        <div class="score-card s-correct"><span class="s-val" id="res-cor">0</span><span class="s-lbl">✅ Correct</span></div>
+        <div class="score-card s-wrong"><span class="s-val" id="res-wro">0</span><span class="s-lbl">❌ Wrong</span></div>
+        <div class="score-card s-skip"><span class="s-val" id="res-skp">0</span><span class="s-lbl">⏭ Skipped</span></div>
+        <div class="score-card s-att"><span class="s-val" id="res-att">0</span><span class="s-lbl">📝 Attempted</span></div>
+        <div class="score-card s-score"><span class="s-val" id="res-scr">0</span><span class="s-lbl">🏅 Score (4,−1)</span></div>
+        <div class="score-card s-total"><span class="s-val" id="res-tot">102</span><span class="s-lbl">📋 Total Qs</span></div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-retake" onclick="location.reload()">🔄 Retake Test</button>
+        <a href="/premium-papers" class="btn-back-papers">📚 All Papers</a>
+      </div>
+
+      <div class="review-header">📋 Detailed Question Review</div>
+      <div id="review-area"></div>
+    </div>
+
+  </div>
+</div><!-- /main-page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var TIMER_SEC = 6000;
+var PAPER_TITLE = 'HSBTE LEET Section D Civil Engineering Mock Paper 2';
+
+/* ── SECURITY ── */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){var s=document.createElement('style');s.textContent='@media print{body{display:none!important;}}';document.head.appendChild(s);})();
+
+/* ── WATERMARK — strong & tiled ── */
+function injectWatermark(){
+  var mob  = sessionStorage.getItem('prem_mob')  || '';
+  var name = sessionStorage.getItem('prem_name') || 'Premium';
+  var masked = mob ? mob.slice(0,3)+'****'+mob.slice(-2) : name;
+  var txt = '© hsbteleet.com  ' + masked + '  PREMIUM  ';
+
+  var layer = document.getElementById('wm-layer');
+  layer.innerHTML = '';
+
+  /* Layout: rows every 90px across full viewport, offset alternately */
+  var vw = Math.max(document.documentElement.clientWidth,1400);
+  var vh = Math.max(document.documentElement.clientHeight,900);
+
+  /* We draw rows covering 3x viewport height so scrolling keeps watermark */
+  var totalH = vh * 3;
+  var rowGap  = 90;
+  var rows    = Math.ceil(totalH / rowGap) + 4;
+
+  for(var r = 0; r < rows; r++){
+    var div = document.createElement('div');
+    div.className = 'wm-row';
+    var topVal  = (r * rowGap) - rowGap;
+    var leftVal = (r % 2 === 0) ? -120 : -60;
+    div.style.top  = topVal + 'px';
+    div.style.left = leftVal + 'px';
+    div.style.width = (vw * 2.5) + 'px';
+    /* repeat text across row */
+    var repeats = Math.ceil((vw * 2.5) / (txt.length * 9)) + 3;
+    div.textContent = Array(repeats).fill(txt).join('   ');
+    layer.appendChild(div);
+  }
+}
+
+/* ── ACCESS VERIFICATION ── */
+async function verifyAccess(){
+  var uid = sessionStorage.getItem('prem_uid');
+  var ts  = parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
+  try{
+    var sb = window.supabase.createClient(SUPA_URL,SUPA_KEY);
+    var {data,error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){showDenied();return;}
+    sessionStorage.setItem('prem_ts',Date.now().toString());
+    /* Show page */
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+    buildQuiz();
+    startTimer();
+  }catch(e){showDenied();}
+}
+
+function showDenied(){
+  document.getElementById('page-loader').style.display='none';
+  document.getElementById('access-denied').classList.add('show');
+}
+
+/* ── QUESTIONS DATA ── */
+const questions = [
+
+    // ══════════════════════════════════════════════════════
+    // d-1  CIVIL ENGINEERING  (45 Qs)
+    // ══════════════════════════════════════════════════════
+
+    // Bricks & Materials
+    { s:"d-1 Civil Engineering", q:"The standard size of a modular brick as per IS code is:", o:["190×90×90 mm","230×115×75 mm","200×100×100 mm","220×100×75 mm"], a:0 },
+    { s:"d-1 Civil Engineering", q:"The raw material primarily used for manufacturing bricks is:", o:["Lime","Clay (alumina and silica)","Cement","Gypsum"], a:1 },
+    { s:"d-1 Civil Engineering", q:"The process of burning bricks in a kiln to required temperature is called:", o:["Tempering","Moulding","Clamp burning / kiln firing","Drying"], a:2 },
+    { s:"d-1 Civil Engineering", q:"Efflorescence in bricks is caused by:", o:["Excess water during curing","Presence of soluble salts that appear as white deposits on drying","High clay content","Over-burning"], a:1 },
+    { s:"d-1 Civil Engineering", q:"English bond in brickwork has alternating courses of:", o:["All stretchers","All headers","Alternate headers and stretchers in same course","Alternate courses of stretchers and headers"], a:3 },
+
+    // Soil Mechanics
+    { s:"d-1 Civil Engineering", q:"The liquid limit of soil is determined by:", o:["Proctor test","Casagrande apparatus","Hydrometer test","Sieve analysis"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Plasticity index = Liquid limit − ___:", o:["Shrinkage limit","Plastic limit","Flow index","Toughness index"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Darcy's law for seepage: q = k·i·A. Here 'i' is the:", o:["Porosity","Void ratio","Hydraulic gradient","Permeability coefficient"], a:2 },
+    { s:"d-1 Civil Engineering", q:"The specific gravity of soil solids typically ranges from:", o:["1.0–1.5","1.5–2.0","2.6–2.8","3.0–3.5"], a:2 },
+    { s:"d-1 Civil Engineering", q:"Quick sand condition occurs when upward seepage pressure equals:", o:["Half the submerged weight of soil","The submerged weight of soil (effective stress = 0)","Twice the submerged weight","The total stress"], a:1 },
+
+    // Water Supply
+    { s:"d-1 Civil Engineering", q:"Per capita water demand for domestic purposes in India is typically taken as:", o:["50–70 LPCD","135–200 LPCD","300–400 LPCD","500+ LPCD"], a:1 },
+    { s:"d-1 Civil Engineering", q:"The process of removing suspended impurities from water by passing through a porous medium is:", o:["Sedimentation","Coagulation","Filtration","Chlorination"], a:2 },
+    { s:"d-1 Civil Engineering", q:"Activated sludge process is used for:", o:["Water supply treatment","Sewage/wastewater treatment","Desalination","Softening hard water"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Alum (Al₂(SO₄)₃) is used in water treatment as a:", o:["Disinfectant","Coagulant","Filter medium","pH adjuster"], a:1 },
+    { s:"d-1 Civil Engineering", q:"BOD (Biochemical Oxygen Demand) is a measure of:", o:["Chemical pollution","Organic pollution in water","Turbidity","Hardness"], a:1 },
+
+    // Foundations & Buildings
+    { s:"d-1 Civil Engineering", q:"Raft foundation is used when:", o:["Soil bearing capacity is high","Individual footings would cover more than 50% of the area, or soil is weak","Only for bridges","Only for tall buildings"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Underpinning is done for:", o:["New construction only","Strengthening and supporting existing foundations","Waterproofing walls","Roof repair"], a:1 },
+    { s:"d-1 Civil Engineering", q:"DPC (Damp Proof Course) is provided in a building to:", o:["Increase load-bearing capacity","Prevent moisture rising from ground into walls","Improve aesthetics","Reduce foundation depth"], a:1 },
+    { s:"d-1 Civil Engineering", q:"The ratio of cement:sand:aggregate for M20 concrete is:", o:["1:1:2","1:1.5:3","1:2:4","1:3:6"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Slump test of concrete measures:", o:["Compressive strength","Tensile strength","Workability","Water-cement ratio"], a:2 },
+
+    // Surveying
+    { s:"d-1 Civil Engineering", q:"Bench Mark (BM) is a fixed point with known:", o:["Horizontal distance","Reduced level (RL) above mean sea level","Bearing","Latitude"], a:1 },
+    { s:"d-1 Civil Engineering", q:"In chain surveying, the check line is used to:", o:["Measure bearings","Verify the accuracy of the survey framework","Set up the theodolite","Calculate areas"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Prismatic compass measures bearings from:", o:["True North clockwise (0°–360°)","Magnetic North, reading directly through prism","South both ways (0°–90° each)","East-West only"], a:0 },
+    { s:"d-1 Civil Engineering", q:"The local attraction in compass surveying is due to:", o:["Variation in terrain","Magnetic objects near the compass disturbing readings","Humidity","Instrument error"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Contour lines in surveying are lines joining points of:", o:["Equal slope","Equal horizontal distance","Equal elevation (RL)","Equal rainfall"], a:2 },
+
+    // RCC & Concrete
+    { s:"d-1 Civil Engineering", q:"Characteristic strength of M25 concrete means compressive strength at 28 days ≥:", o:["20 N/mm²","25 N/mm²","30 N/mm²","15 N/mm²"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Water-cement ratio affects ___ of concrete most directly:", o:["Unit weight","Colour","Strength and durability","Aggregate size"], a:2 },
+    { s:"d-1 Civil Engineering", q:"Clear cover for reinforcement in footings (as per IS 456) is typically:", o:["15 mm","25 mm","40–50 mm","75 mm"], a:2 },
+    { s:"d-1 Civil Engineering", q:"The purpose of vibrating freshly placed concrete is to:", o:["Increase water content","Compact and remove air voids","Accelerate setting","Add aggregates"], a:1 },
+
+    // Doors, Roofs & Structures
+    { s:"d-1 Civil Engineering", q:"Flush door is preferred for:", o:["Exterior use requiring heavy duty","Interior use in modern buildings for smooth appearance","Industrial warehouses","Fireproof applications"], a:1 },
+    { s:"d-1 Civil Engineering", q:"A flat RCC roof has slope less than:", o:["10°","5°","1°","15°"], a:1 },
+    { s:"d-1 Civil Engineering", q:"A pitched roof is preferred in areas with:", o:["Low rainfall","Very high rainfall and snowfall","Desert climate","Flat terrain"], a:1 },
+
+    // Roads & Bridges
+    { s:"d-1 Civil Engineering", q:"Flexible pavement distributes load through:", o:["Slab action","Grain-to-grain contact (layer by layer)","Arch action","Tension"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Rigid pavement uses ___ as the top layer:", o:["Bitumen","Cement concrete slab","Gravel","Water-bound macadam"], a:1 },
+    { s:"d-1 Civil Engineering", q:"A bulldozer is primarily used for:", o:["Excavating trenches","Pushing/clearing earth and debris","Compacting soil","Lifting materials"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Arch bridges are most suitable for:", o:["Very long spans","Short to medium spans with good foundation at both ends","Weak soils","Movable/swing spans"], a:1 },
+    { s:"d-1 Civil Engineering", q:"CBR (California Bearing Ratio) test is used to design:", o:["Dams","Flexible pavements","Water treatment plants","Retaining walls"], a:1 },
+
+    // Irrigation & Dams
+    { s:"d-1 Civil Engineering", q:"Delta of a crop (Δ) is defined as:", o:["Time period of irrigation","Total depth of water required by a crop during its entire growing season","Water duty","Discharge per unit area"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Duty in irrigation is defined as:", o:["Area of land irrigated per unit discharge (hectares per cumec)","Volume of water supplied","Depth of water per application","Velocity of water in canal"], a:0 },
+    { s:"d-1 Civil Engineering", q:"Drip irrigation is most suitable for:", o:["Paddy fields","Orchards and vegetables (high water-use efficiency)","Flood irrigation areas","Large wheat fields"], a:1 },
+    { s:"d-1 Civil Engineering", q:"An earthen dam (embankment dam) fails most commonly due to:", o:["Compression","Overtopping and seepage/piping","Tension","Shrinkage"], a:1 },
+    { s:"d-1 Civil Engineering", q:"The ideal site for a reservoir dam requires:", o:["Wide valley with impermeable rock","Narrow gorge with impermeable, stable rock","Sandy soil","Near populated area only"], a:1 },
+
+    // Ecology, Pollution & Cement
+    { s:"d-1 Civil Engineering", q:"Eutrophication of water bodies is caused by:", o:["Oil spills","Excess nutrients (N and P) causing algal blooms","Heavy metal discharge","Thermal pollution"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Rapid Hardening Cement (RHC) gains strength faster due to:", o:["Higher C₃S and finer grinding","Less water content","More gypsum","Higher C₂S content"], a:0 },
+    { s:"d-1 Civil Engineering", q:"Igneous rocks are formed by:", o:["Deposition of sediments","Solidification of molten magma","Metamorphism of existing rocks","Chemical precipitation"], a:1 },
+    { s:"d-1 Civil Engineering", q:"The entrepreneur's primary characteristic is:", o:["Risk aversion","Willingness to take calculated risks and innovate","Dependency on government","Avoidance of competition"], a:1 },
+    { s:"d-1 Civil Engineering", q:"Solar energy is an example of ___ source of energy:", o:["Conventional","Non-conventional (renewable)","Fossil fuel","Nuclear"], a:1 },
+
+    // ══════════════════════════════════════════════════════
+    // d-2  TEXTILE ENGINEERING  (15 Qs)
+    // ══════════════════════════════════════════════════════
+
+    { s:"d-2 Textile Engineering", q:"Polyester fibre is produced from:", o:["Cellulose","Protein","Ethylene glycol and terephthalic acid (PET)","Acrylonitrile"], a:2 },
+    { s:"d-2 Textile Engineering", q:"The English count (Ne) of yarn is defined as:", o:["Weight in grams per 9000 m","Number of 840-yard lengths per pound","Number of 1000-m lengths per kg","Weight per unit length in tex"], a:1 },
+    { s:"d-2 Textile Engineering", q:"The weaving process interlaces two sets of threads called:", o:["Warp and fill (weft)","Warp only","Weft only","Chain and filling"], a:0 },
+    { s:"d-2 Textile Engineering", q:"Tenacity of a fibre is defined as:", o:["Breaking elongation","Tensile strength per unit linear density (g/tex or cN/tex)","Weight per unit area","Moisture regain"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Scouring of wool removes:", o:["Dyes","Natural grease (lanolin), dirt and suint","Fibre crimp","Colour"], a:1 },
+    { s:"d-2 Textile Engineering", q:"The process of drawing sliver through rollers to reduce its thickness and improve fibre parallelism is:", o:["Carding","Drawing/drafting","Spinning","Winding"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Vat dyes are used primarily for:", o:["Nylon fibres","Cotton (cellulosic) fibres for high wash fastness","Polyester","Wool only"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Reactive dyes form a ___ bond with cellulosic fibres:", o:["Hydrogen bond","Ionic bond","Covalent bond","Van der Waals bond"], a:2 },
+    { s:"d-2 Textile Engineering", q:"Screen printing in textiles uses:", o:["Engraved rollers","Flat or rotary screens with blocked areas","Inkjet heads only","Transfer paper only"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Twist per inch (TPI) in yarn affects:", o:["Only colour fastness","Strength, handle and appearance of the yarn","Weight of fabric","Fibre type"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Moisture regain of cotton under standard conditions (65% RH, 20°C) is approximately:", o:["2%","8.5%","15%","0%"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Knitted fabrics are produced by:", o:["Interlacing warp and weft","Interloping loops of yarn using needles","Bonding fibres chemically","Weaving on a shuttle loom"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Mercerization of cotton is done using:", o:["Sulphuric acid","Concentrated NaOH (caustic soda)","Hydrogen peroxide","Acetic acid"], a:1 },
+    { s:"d-2 Textile Engineering", q:"The Uster tester is used to measure:", o:["Fabric tensile strength","Yarn evenness/irregularity","Thread count","Shrinkage"], a:1 },
+    { s:"d-2 Textile Engineering", q:"Spandex (Lycra) fibre is known for:", o:["High strength and low elongation","Very high elongation and recovery (elastomeric)","High heat resistance","Low moisture absorption only"], a:1 },
+
+    // ══════════════════════════════════════════════════════
+    // d-3  CHEMICAL / PRINTING ENGINEERING  (15 Qs)
+    // ══════════════════════════════════════════════════════
+
+    { s:"d-3 Chemical / Printing Engineering", q:"Reynolds number in fluid flow is the ratio of inertial to ___ forces:", o:["Gravitational","Surface tension","Viscous","Elastic"], a:2 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Distillation separates liquid mixtures based on difference in:", o:["Density","Solubility","Boiling points (relative volatility)","Particle size"], a:2 },
+    { s:"d-3 Chemical / Printing Engineering", q:"The Haber process is used for manufacture of:", o:["Sulphuric acid","Nitric acid","Ammonia","Ethylene"], a:2 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Sugar industry is an example of ___ based industry:", o:["Mineral","Petro-chemical","Agro-based","Metal"], a:2 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Cracking of petroleum produces:", o:["Only lubricating oils","Smaller molecules like petrol, LPG from larger molecules","Only bitumen","Paraffin wax only"], a:1 },
+    { s:"d-3 Chemical / Printing Engineering", q:"The contact process manufactures:", o:["Hydrochloric acid","Nitric acid","Sulphuric acid","Phosphoric acid"], a:2 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Offset printing works on the principle that:", o:["Ink is pressed directly onto paper from metal plate","Oil and water do not mix (ink on image area, water on non-image area)","Photosensitive drum transfers ink","Screen blocks non-printing areas"], a:1 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Flexography printing uses ___ type of printing plate:", o:["Hard metal","Relief (raised image) flexible rubber or photopolymer plate","Intaglio (recessed)","Flat stone"], a:1 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Gravure printing is an ___ process:", o:["Relief","Planographic","Intaglio (recessed image)","Screen"], a:2 },
+    { s:"d-3 Chemical / Printing Engineering", q:"CMYK in printing stands for:", o:["Chrome, Magenta, Yellow, Key (Black)","Cyan, Magenta, Yellow, Key (Black)","Cyan, Maroon, Yellow, Khaki","Carbon, Metal, Yellow, Key"], a:1 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Bernoulli's equation in chemical engineering applies to:", o:["Heat transfer in reactors","Steady, incompressible fluid flow in pipes","Batch reactor kinetics","Mass transfer"], a:1 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Polyvinyl chloride (PVC) is produced by polymerization of:", o:["Ethylene","Vinyl chloride monomer (CH₂=CHCl)","Styrene","Propylene"], a:1 },
+    { s:"d-3 Chemical / Printing Engineering", q:"Letterpress printing is a ___ type process:", o:["Intaglio","Planographic","Relief (raised surface carries ink)","Screen"], a:2 },
+    { s:"d-3 Chemical / Printing Engineering", q:"GSM in paper/printing refers to:", o:["Grams per Square Metre (basis weight)","Grams per Standard Metre","General Surface Measurement","Grade of Substrate Material"], a:0 },
+    { s:"d-3 Chemical / Printing Engineering", q:"An agro-based industry that uses sugarcane bagasse as raw material for paper is:", o:["Petrochemical plant","Pulp and paper industry","Cement industry","Steel plant"], a:1 },
+
+    // ══════════════════════════════════════════════════════
+    // d-4  CERAMIC ENGINEERING  (13 Qs)
+    // ══════════════════════════════════════════════════════
+
+    { s:"d-4 Ceramic Engineering", q:"Kaolin (China clay) is mainly composed of:", o:["SiO₂ only","Al₂Si₂O₅(OH)₄ — aluminium silicate hydroxide","CaCO₃","Fe₂O₃"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"Vitrification in ceramics refers to:", o:["Applying glaze","Formation of glassy phase at high temperature that fills pores and increases density","Drying of clay","Mixing of raw materials"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"Porcelain differs from earthenware in that porcelain is:", o:["More porous","Fired at lower temperature","Translucent and non-porous (fired at very high temperature)","Cheaper to produce"], a:2 },
+    { s:"d-4 Ceramic Engineering", q:"The firing temperature for hard porcelain is approximately:", o:["600–800°C","900–1000°C","1200–1400°C","1600–1800°C"], a:2 },
+    { s:"d-4 Ceramic Engineering", q:"Glost firing in ceramics is the firing done:", o:["Before biscuit firing","After applying glaze over biscuit-fired ware","At room temperature","Without any kiln"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"Flux in ceramics is used to:", o:["Increase melting point","Lower the vitrification/fusion temperature","Strengthen the ware","Add colour"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"Terracotta products are:", o:["High-fired, non-porous","Low-fired, unglazed, porous earthenware","Made from pure silica","Translucent like porcelain"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"The principal ingredient that gives plasticity to clay bodies is:", o:["Quartz","Feldspar","Kaolinite clay minerals","Calcium carbonate"], a:2 },
+    { s:"d-4 Ceramic Engineering", q:"Stoneware is fired at temperature range:", o:["700–900°C","1100–1300°C","600–800°C","1500°C+"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"Alumina (Al₂O₃) ceramics are used in cutting tools because of their:", o:["Low melting point","High hardness, wear resistance and chemical stability","High electrical conductivity","High thermal expansion"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"The process of shaping ceramic products by forcing plastic clay through a die is:", o:["Slip casting","Jiggering","Extrusion","Pressing"], a:2 },
+    { s:"d-4 Ceramic Engineering", q:"Bone china contains ___ as its main constituent:", o:["Iron oxide","Bone ash (calcium phosphate)","Alumina","Silica sand only"], a:1 },
+    { s:"d-4 Ceramic Engineering", q:"Piezoelectric ceramics (like BaTiO₃) are used in:", o:["Cooking vessels","Sensors, actuators and ultrasonic transducers","Roofing tiles","Drainage pipes"], a:1 },
+
+    // ══════════════════════════════════════════════════════
+    // d-5  FOOD TECHNOLOGY  (12 Qs)
+    // ══════════════════════════════════════════════════════
+
+    { s:"d-5 Food Technology", q:"Vitamin C (Ascorbic acid) deficiency causes:", o:["Rickets","Scurvy","Night blindness","Beriberi"], a:1 },
+    { s:"d-5 Food Technology", q:"Which vitamin is synthesized by the body on exposure to sunlight?", o:["Vitamin A","Vitamin B12","Vitamin C","Vitamin D"], a:3 },
+    { s:"d-5 Food Technology", q:"Pulses are a rich source of:", o:["Carbohydrates only","Fats","Proteins (especially lysine-poor, but good plant protein)","Vitamin D"], a:2 },
+    { s:"d-5 Food Technology", q:"The main carbohydrate component of wheat is:", o:["Lactose","Starch (amylose and amylopectin)","Sucrose","Cellulose"], a:1 },
+    { s:"d-5 Food Technology", q:"Pasteurization of milk at 72°C for 15 seconds is called:", o:["Batch pasteurization (LTH)","HTST (High Temperature Short Time) pasteurization","UHT treatment","Sterilization"], a:1 },
+    { s:"d-5 Food Technology", q:"Spray drying of milk produces:", o:["Condensed milk","Butter","Milk powder","Cheese"], a:2 },
+    { s:"d-5 Food Technology", q:"Water activity (a_w) of 1.0 corresponds to:", o:["Completely dry food","Pure water (maximum microbial growth)","Frozen food","Salted food"], a:1 },
+    { s:"d-5 Food Technology", q:"Blanching of vegetables before freezing is done to:", o:["Add nutrients","Inactivate enzymes that cause deterioration","Improve colour only","Add salt"], a:1 },
+    { s:"d-5 Food Technology", q:"Retort processing (canning) preserves food by:", o:["Adding preservatives","Sterilizing at high temperature and pressure in sealed containers","Freezing","Drying"], a:1 },
+    { s:"d-5 Food Technology", q:"The germ of wheat grain contains high amounts of:", o:["Starch","Vitamin E and essential fatty acids","Water only","Cellulose"], a:1 },
+    { s:"d-5 Food Technology", q:"Lactic acid fermentation in curd formation is done by:", o:["Yeast (Saccharomyces)","Lactic acid bacteria (Lactobacillus)","Penicillium","Aspergillus"], a:1 },
+    { s:"d-5 Food Technology", q:"Iodized salt is used to prevent:", o:["Anaemia","Iodine deficiency disorders (goitre)","Vitamin C deficiency","Calcium deficiency"], a:1 }
+];
+
+/* ── QUIZ BUILD ── */
+var timerInterval, timeLeft = TIMER_SEC;
+
+function buildQuiz(){
+  var list = document.getElementById('questions-list');
+  var html = '';
+  var curSection = '';
+  var LETTERS = ['A','B','C','D','E'];
+  questions.forEach(function(q,i){
+    if(q.s !== curSection){
+      curSection = q.s;
+      html += '<div class="sec-div"><span class="sec-icon">📚</span>' + q.s + '</div>';
+    }
+    html += '<div class="q-card" id="qc-'+i+'">';
+    html +=   '<div class="q-num"><span class="q-badge">Q.'+(i+1)+'</span></div>';
+    html +=   '<div class="q-text">'+q.q+'</div>';
+    html +=   '<div class="opts">';
+    q.o.forEach(function(opt,j){
+      html += '<label class="opt" id="lbl-'+i+'-'+j+'" onclick="selectOpt('+i+','+j+',this)">';
+      html +=   '<input type="radio" name="q'+i+'" value="'+j+'">';
+      html +=   '<span class="opt-letter">'+LETTERS[j]+'</span>';
+      html +=   '<span>'+opt+'</span>';
+      html += '</label>';
+    });
+    html += '</div></div>';
+  });
+  list.innerHTML = html;
+  updateProgress();
+}
+
+function selectOpt(qi,oi,el){
+  document.querySelectorAll('[id^="lbl-'+qi+'-"]').forEach(function(l){l.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('qc-'+qi).classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress(){
+  var answered = 0;
+  questions.forEach(function(_,i){if(document.querySelector('input[name="q'+i+'"]:checked'))answered++;});
+  var pct = Math.round((answered/questions.length)*100);
+  document.getElementById('progress-bar').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = answered+' of '+questions.length+' answered';
+}
+
+function startTimer(){
+  var el = document.getElementById('timer');
+  timerInterval = setInterval(function(){
+    timeLeft--;
+    var m=Math.floor(timeLeft/60), s=timeLeft%60;
+    el.textContent = m+':'+(s<10?'0':'')+s;
+    if(timeLeft<=300) el.classList.add('danger');
+    if(timeLeft<=0){clearInterval(timerInterval);submitExam();}
+  },1000);
+}
+
+function submitExam(){
+  clearInterval(timerInterval);
+  var cor=0,wro=0,skp=0;
+  var reviewHTML = '';
+  var LETTERS=['A','B','C','D','E'];
+
+  questions.forEach(function(q,i){
+    var sel = document.querySelector('input[name="q'+i+'"]:checked');
+    var ans = sel ? parseInt(sel.value) : -1;
+    if(ans===-1) skp++;
+    else if(ans===q.a) cor++;
+    else wro++;
+
+    var cls = ans===-1?'r-skip':ans===q.a?'r-correct':'r-wrong';
+    var badge = ans===-1?'<span class="r-badge b-s">⏭ Skipped</span>':
+                ans===q.a?'<span class="r-badge b-c">✅ Correct</span>':
+                          '<span class="r-badge b-w">❌ Wrong</span>';
+    reviewHTML += '<div class="r-card '+cls+'">';
+    reviewHTML += badge;
+    reviewHTML += '<div class="r-qnum">Q.'+(i+1)+' · '+q.s+'</div>';
+    reviewHTML += '<div class="r-q">'+q.q+'</div>';
+    if(ans!==-1&&ans!==q.a){
+      reviewHTML += '<div class="r-ans-wrong">✗ Your answer: '+LETTERS[ans]+'. '+q.o[ans]+'</div>';
+    }
+    reviewHTML += '<div class="r-ans-correct">✓ Correct: '+LETTERS[q.a]+'. '+q.o[q.a]+'</div>';
+    reviewHTML += '</div>';
+  });
+
+  var att = cor+wro;
+  var scr = cor*4 - wro;
+  document.getElementById('res-cor').textContent = cor;
+  document.getElementById('res-wro').textContent = wro;
+  document.getElementById('res-skp').textContent = skp;
+  document.getElementById('res-att').textContent = att;
+  document.getElementById('res-scr').textContent = scr;
+
+  var pct = questions.length>0?Math.round((cor/questions.length)*100):0;
+  document.getElementById('score-subtitle').textContent =
+    'Score: '+scr+' | Accuracy: '+pct+'% | hsbteleet.com';
+
+  document.getElementById('review-area').innerHTML = reviewHTML;
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('results').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── INIT ── */
+verifyAccess();
+</script>
+</body>
+</html>

@@ -1,5 +1,1 @@
-# Permanent Redirects (301)
 /index / 301
-/html/:path /:path 301
-# Only redirect .html to clean URL for main pages (excluding partials/assets)
-/:path((?!partials|css|js|image|pdf|data).+).html /:path 301

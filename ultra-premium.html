@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="https://hsbteleet.com/image/favicon.webp"/>
+<title>Ultra Premium Tools | Haryana LEET 2026 Smart Counselling | hsbteleet.com</title>
+<meta name="description" content="India's first smart LEET counselling platform. AI College Predictor, Rank Predictor, Choice Filling, Study Planner — built by a Haryana Polytechnic student. Real 2025 data."/>
+<meta name="keywords" content="haryana leet college predictor 2026, haryana leet rank predictor, smart leet counselling, haryana leet choice filling, ymca leet cutoff, dcrust leet cutoff, gju leet cutoff, kuk leet cutoff, cdlu sirsa leet, haryana leet study plan 2026, hsbteleet ultra premium"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://hsbteleet.com/ultra-premium.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<style>
+:root{
+  --ink:#0a0d14;--ink2:#111827;--ink3:#1e293b;
+  --surface:#ffffff;--surface2:#f8fafc;--surface3:#f1f5f9;
+  --border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#64748b;--faint:#94a3b8;
+  --v:#6366f1;--vd:#4338ca;--vl:#eef2ff;--vm:#c7d2fe;
+  --a:#f59e0b;--ad:#d97706;--al:#fef3c7;
+  --g:#10b981;--gl:#d1fae5;
+  --r:#ef4444;--rl:#fee2e2;
+  --b:#2563eb;--bl:#dbeafe;
+  --p:#a855f7;--pl:#faf5ff;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow:0 4px 16px rgba(0,0,0,.07),0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.1),0 4px 16px rgba(0,0,0,.06);
+  --shadow-xl:0 24px 64px rgba(0,0,0,.14),0 8px 24px rgba(0,0,0,.08);
+  --radius:14px;--radius-sm:10px;--radius-lg:20px;--radius-xl:28px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--surface2);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* -- GLOBAL ANIMATIONS -- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@keyframes slideRight{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+
+/* -- AUTH OVERLAY -- */
+#auth-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,#0a0d14 0%,#12103a 100%);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+#auth-overlay.gone{display:none}
+.gate-wrap{
+  background:#fff;border-radius:var(--radius-xl);padding:44px 40px;
+  max-width:420px;width:100%;text-align:center;
+  box-shadow:0 32px 80px rgba(99,102,241,.3),0 0 0 1px rgba(99,102,241,.1);
+  animation:scaleIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+.gate-icon{font-size:3rem;margin-bottom:16px;display:block}
+.gate-wrap h2{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:8px;color:var(--text)}
+.gate-wrap p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:28px}
+.gate-btns{display:flex;flex-direction:column;gap:10px}
+.gate-btn{
+  padding:14px;border-radius:50px;font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:800;border:none;cursor:pointer;
+  text-decoration:none;display:flex;align-items:center;justify-content:center;
+  gap:8px;transition:all .22s;
+}
+.gate-primary{background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff;box-shadow:0 6px 20px rgba(99,102,241,.4)}
+.gate-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(99,102,241,.5)}
+.gate-ghost{background:var(--surface3);color:var(--text);border:1.5px solid var(--border)}
+.gate-ghost:hover{border-color:var(--v);color:var(--v)}
+
+/* -- TOP NAV -- */
+.topnav{
+  background:linear-gradient(135deg,#0a0d14 0%,#12103a 60%,#1a0844 100%);
+  position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);
+}
+.topnav-inner{
+  max-width:1400px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:58px;padding:0 20px;gap:12px;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-mark{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,#f7c84a,#e9a01a);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:900;font-size:10px;color:#1a0f00;
+  box-shadow:0 0 16px rgba(245,158,11,.3);
+}
+.nav-name{color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:800}
+.nav-name em{color:#a5b4fc;font-style:normal}
+.nav-tabs{display:flex;gap:2px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.ntab{
+  padding:6px 13px;border-radius:8px;color:rgba(255,255,255,.55);
+  font-size:12.5px;font-weight:600;text-decoration:none;
+  transition:all .2s;border:none;background:transparent;cursor:pointer;
+  font-family:'DM Sans',sans-serif;white-space:nowrap;
+  display:flex;align-items:center;gap:5px;
+}
+.ntab:hover,.ntab.on{background:rgba(255,255,255,.1);color:#fff}
+.ntab.on{color:#a5b4fc}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-user-chip{
+  background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.35);
+  color:#a5b4fc;padding:5px 12px;border-radius:999px;
+  font-size:12px;font-weight:600;white-space:nowrap;
+}
+.nav-papers-btn{
+  background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;
+  padding:7px 14px;border-radius:8px;font-weight:800;font-size:12px;
+  text-decoration:none;white-space:nowrap;transition:opacity .2s;
+}
+.nav-papers-btn:hover{opacity:.9}
+@media(max-width:768px){.nav-tabs{display:none}}
+
+/* -- SIDEBAR LAYOUT -- */
+.page-layout{display:flex;max-width:1400px;margin:0 auto;gap:0}
+
+/* -- SIDEBAR -- */
+.sidebar{
+  width:220px;flex-shrink:0;position:sticky;top:58px;
+  height:calc(100vh - 58px);overflow-y:auto;
+  background:#fff;border-right:1px solid var(--border);
+  padding:20px 0;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.sb-section{
+  font-family:'Syne',sans-serif;font-size:9.5px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--faint);
+  padding:12px 18px 5px;
+}
+.sb-item{
+  display:flex;align-items:center;gap:9px;padding:9px 18px;
+  font-size:13px;font-weight:600;color:var(--muted);
+  cursor:pointer;transition:all .15s;border:none;background:transparent;
+  width:100%;text-align:left;position:relative;
+  border-left:3px solid transparent;
+  font-family:'DM Sans',sans-serif;
+}
+.sb-item:hover{color:var(--text);background:var(--surface3);border-left-color:var(--border2)}
+.sb-item.active{color:var(--v);background:var(--vl);border-left-color:var(--v);font-weight:700}
+.sb-item i{width:16px;font-size:13px;flex-shrink:0;text-align:center}
+@media(max-width:900px){.sidebar{display:none}}
+
+/* -- MAIN CONTENT -- */
+.main-content{flex:1;min-width:0;padding:28px 24px}
+@media(max-width:600px){.main-content{padding:16px 14px}}
+
+/* -- HERO BLOCK -- */
+.hero-block{
+  background:linear-gradient(135deg,#0a0d14 0%,#12103a 50%,#1a0844 100%);
+  border-radius:var(--radius-xl);padding:44px 40px;margin-bottom:28px;
+  position:relative;overflow:hidden;color:#fff;
+}
+.hero-block::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 10% -10%,rgba(99,102,241,.25) 0,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 90% 110%,rgba(245,158,11,.15) 0,transparent 60%);
+  pointer-events:none;
+}
+.hero-block::after{
+  content:'';position:absolute;top:0;right:-60px;bottom:0;width:400px;
+  background:url("data:image/svg+xml,%3Csvg width='400' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='150' r='140' fill='none' stroke='rgba(99,102,241,0.08)' stroke-width='60'/%3E%3Ccircle cx='200' cy='150' r='80' fill='none' stroke='rgba(245,158,11,0.06)' stroke-width='40'/%3E%3C/svg%3E") no-repeat center;
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(165,180,252,.12);border:1px solid rgba(165,180,252,.25);
+  color:#a5b4fc;border-radius:999px;padding:5px 14px;
+  font-family:'Syne',sans-serif;font-size:10.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;
+}
+.hero-block h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.75rem,3.5vw,2.8rem);
+  font-weight:900;line-height:1.14;margin-bottom:12px;
+  letter-spacing:-.03em;
+}
+.hero-block h1 .hl{color:#fbbf24}
+.hero-block p{font-size:.97rem;opacity:.78;line-height:1.7;max-width:560px;margin-bottom:20px}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap}
+.hpill{
+  display:inline-flex;align-items:center;gap:5px;border-radius:999px;
+  padding:4px 12px;font-size:11.5px;font-weight:600;
+}
+.hpill-g{background:rgba(16,185,129,.18);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+.hpill-a{background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.3);color:#fbbf24}
+.hpill-v{background:rgba(165,180,252,.18);border:1px solid rgba(165,180,252,.3);color:#a5b4fc}
+.built-chip{
+  margin-top:18px;display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:8px 14px;font-size:12.5px;color:rgba(255,255,255,.65);
+}
+.built-chip strong{color:#fbbf24}
+
+/* -- DISCLAIMER STRIP -- */
+.disc-strip{
+  background:linear-gradient(135deg,#fffbeb,#fef9ec);
+  border:1.5px solid rgba(245,158,11,.3);border-radius:var(--radius);
+  padding:12px 18px;margin-bottom:24px;
+  font-size:12.5px;color:#92400e;line-height:1.6;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.disc-strip i{flex-shrink:0;margin-top:2px;color:#f59e0b}
+
+/* -- DASHBOARD BAR -- */
+.dash-bar{
+  background:linear-gradient(135deg,#1e293b,#0f172a);
+  border-radius:var(--radius);padding:16px 22px;margin-bottom:28px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;color:#fff;
+}
+.dash-greet{font-family:'Syne',sans-serif;font-size:14.5px;font-weight:700}
+.dash-greet span{color:#fbbf24}
+.dash-chips{display:flex;gap:10px;flex-wrap:wrap}
+.dash-chip{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:9px;padding:7px 14px;text-align:center;
+}
+.dash-chip-v{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:#a5b4fc}
+.dash-chip-l{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.07em}
+
+/* -- SECTION HEADER -- */
+.sec-hd{margin-bottom:20px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.sec-hd-left h2{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:3px}
+.sec-hd-left p{font-size:13px;color:var(--muted)}
+.sec-pill{
+  font-family:'Syne',sans-serif;font-size:9.5px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.08em;
+  padding:4px 11px;border-radius:999px;
+}
+.sp-v{background:var(--vl);color:var(--vd)}
+.sp-a{background:var(--al);color:#92400e}
+.sp-p{background:var(--pl);color:#7e22ce}
+.sp-g{background:var(--gl);color:#065f46}
+
+/* -- TOOL GRID -- */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-bottom:32px}
+.full{grid-column:1/-1}
+@media(max-width:600px){.tool-grid{grid-template-columns:1fr}.full{grid-column:1}}
+
+/* -- TOOL CARD -- */
+.tc{
+  background:var(--surface);border-radius:var(--radius-lg);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  overflow:hidden;transition:transform .22s,box-shadow .22s;
+}
+.tc:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.tc-hd{
+  padding:16px 20px 13px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.tc-hd.hv{background:linear-gradient(135deg,#eef2ff,#f5f3ff)}
+.tc-hd.ha{background:linear-gradient(135deg,#fef9ec,#fffbeb)}
+.tc-hd.hb{background:linear-gradient(135deg,#eff6ff,#e0f2fe)}
+.tc-hd.hg{background:linear-gradient(135deg,#ecfdf5,#d1fae5)}
+.tc-hd.hp{background:linear-gradient(135deg,#fdf4ff,#fae8ff)}
+.tc-ico{font-size:1.8rem;flex-shrink:0}
+.tc-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--text)}
+.tc-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.ai-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;
+  font-size:9px;font-weight:800;padding:2px 7px;border-radius:999px;
+  text-transform:uppercase;letter-spacing:.05em;margin-left:6px;vertical-align:middle;
+}
+.tc-body{padding:18px 20px}
+
+/* -- FORM -- */
+.fl{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);display:block;margin-bottom:5px;margin-top:13px}
+.fl:first-child{margin-top:0}
+.fi,.fs{
+  width:100%;padding:10px 13px;border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);font-size:14px;color:var(--text);
+  background:#fafafa;outline:none;transition:all .18s;
+  font-family:'DM Sans',sans-serif;
+}
+.fi:focus,.fs:focus{border-color:var(--v);background:#fff;box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+.fi.err{border-color:var(--r);background:#fff5f5}
+.fs{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-color:#fafafa;cursor:pointer;padding-right:30px}
+.fs:focus{background-color:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:420px){.frow{grid-template-columns:1fr}}
+.ferr{font-size:11.5px;color:var(--r);margin-top:4px;display:none}
+.ferr.on{display:block;animation:fadeIn .2s}
+
+/* -- BUTTONS -- */
+.btn{
+  width:100%;padding:12px;border:none;border-radius:50px;
+  cursor:pointer;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  transition:all .22s;display:flex;align-items:center;justify-content:center;
+  gap:7px;margin-top:14px;letter-spacing:.01em;
+}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.btn-v{background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.35)}
+.btn-v:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(99,102,241,.45)}
+.btn-a{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;box-shadow:0 4px 14px rgba(245,158,11,.3)}
+.btn-a:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(245,158,11,.4)}
+.btn-b{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.3)}
+.btn-b:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,99,235,.4)}
+.btn-g{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 4px 14px rgba(16,185,129,.3)}
+.btn-g:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(16,185,129,.4)}
+.btn-p{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;box-shadow:0 4px 14px rgba(168,85,247,.3)}
+.btn-p:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(168,85,247,.4)}
+.spin-sm{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.spin-dk{border-color:rgba(0,0,0,.12);border-top-color:#0f172a}
+
+/* -- RESULT BOX -- */
+.rbox{margin-top:14px;border-radius:var(--radius);border:1.5px solid var(--border);display:none;overflow:hidden}
+.rbox.on{display:block;animation:fadeUp .3s cubic-bezier(.34,1.1,.64,1)}
+.rbox-hd{padding:10px 16px;font-family:'Syne',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--border)}
+.rh-v{background:var(--vl);color:var(--vd);border-color:#c7d2fe}
+.rh-a{background:var(--al);color:#92400e;border-color:#fde68a}
+.rh-b{background:var(--bl);color:#1e40af;border-color:#bfdbfe}
+.rh-g{background:var(--gl);color:#065f46;border-color:#a7f3d0}
+.rh-p{background:#fae8ff;color:#7e22ce;border-color:#e9d5ff}
+.rbox-body{padding:14px 16px}
+
+/* -- RESULT ROWS -- */
+.rrow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px}
+.rrow:last-child{border-bottom:none}
+.rrow-l{display:flex;flex-direction:column;gap:2px}
+.rcol{font-weight:700;color:var(--text)}
+.rbr{font-size:12px;color:var(--muted)}
+.cbadge{font-family:'Syne',sans-serif;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.c-h{background:var(--gl);color:#065f46}
+.c-m{background:var(--al);color:#92400e}
+.c-l{background:var(--rl);color:#991b1b}
+
+/* -- RANK BIG -- */
+.rank-center{text-align:center;padding:18px 0}
+.rank-big{font-family:'Syne',sans-serif;font-size:3rem;font-weight:900;line-height:1;color:var(--v)}
+.rank-sub{font-size:13px;color:var(--muted);margin-top:6px}
+
+/* -- ZONE BAR -- */
+.zone-bar{
+  border-radius:var(--radius-sm);padding:10px 14px;margin-top:12px;
+  font-weight:700;font-size:14px;
+}
+
+/* -- STRATEGY ITEMS -- */
+.strat-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.strat-item:last-child{border-bottom:none}
+.snum{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:800;flex-shrink:0}
+.sn-dr{background:#dbeafe;color:#1e40af}
+.sn-sf{background:var(--gl);color:#065f46}
+.sn-bk{background:var(--al);color:#92400e}
+.sinfo{flex:1}
+.scol{font-weight:700;color:var(--text);font-size:13.5px}
+.sbr{font-size:12px;color:var(--muted);margin-top:1px}
+.stag{font-size:9.5px;font-weight:800;font-family:'Syne',sans-serif;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.st-dr{background:#dbeafe;color:#1e40af}
+.st-sf{background:var(--gl);color:#065f46}
+.st-bk{background:var(--al);color:#92400e}
+
+/* -- CHOICE LIST -- */
+.choice-list{display:flex;flex-direction:column;gap:7px}
+.choice-item{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface3);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px 13px;
+  transition:border-color .15s;
+}
+.choice-item:hover{border-color:var(--border2)}
+.cnum{
+  width:27px;height:27px;border-radius:50%;
+  background:var(--v);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:800;
+  flex-shrink:0;margin-top:1px;
+}
+.cnum.warn{background:var(--r)}
+.cinfo{flex:1}
+.ctxt{font-weight:700;color:var(--text);font-size:13.5px}
+.creason{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+/* -- MISTAKE ITEM -- */
+.mistake-item{background:var(--rl);border:1.5px solid #fca5a5;border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px}
+.mistake-item h4{font-size:13px;font-weight:700;color:#991b1b;margin-bottom:4px}
+.mistake-item p{font-size:12.5px;color:#7f1d1d;line-height:1.55}
+
+/* -- DATA TABLE -- */
+.dtable{width:100%;border-collapse:collapse;font-size:13px}
+.dtable th{padding:9px 11px;background:var(--surface3);font-family:'Syne',sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;border-bottom:1px solid var(--border)}
+.dtable td{padding:10px 11px;border-bottom:1px solid var(--border);color:var(--text)}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:hover td{background:var(--surface3)}
+.dem{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.df{background:#fee2e2;color:#991b1b}
+.dh{background:#fef3c7;color:#92400e}
+.dm{background:#e0f2fe;color:#0369a1}
+.dl{background:var(--gl);color:#065f46}
+
+/* -- COMPARE GRID -- */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.cmp-grid{grid-template-columns:1fr}}
+.cmp-col{border:1.5px solid var(--border);border-radius:var(--radius)}
+.cmp-col.win{border-color:var(--g)}
+.cmp-hdr{padding:12px 14px;font-family:'Syne',sans-serif;font-weight:800;font-size:13.5px;text-align:center}
+.ch1{background:var(--bl);color:#1e40af}
+.ch2{background:var(--vl);color:var(--vd)}
+.cmp-row{display:flex;flex-direction:column;padding:9px 13px;border-bottom:1px solid var(--border);gap:2px}
+.cmp-row:last-child{border-bottom:none}
+.cmp-lbl{font-size:11px;color:var(--muted)}
+.cmp-val{font-weight:700;color:var(--text);font-size:13px}
+.cmp-win{color:var(--g)!important}
+
+/* -- PROGRESS BARS -- */
+.prog-item{margin-bottom:13px}
+.prog-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px;display:flex;justify-content:space-between}
+.prog-track{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+.prog-fill{height:100%;border-radius:999px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* -- AI CHAT -- */
+.chat-wrap{border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.chat-msgs{height:240px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--surface3);scrollbar-width:thin}
+.chat-msgs::-webkit-scrollbar{width:4px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+.cmsg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.6}
+.cmsg.bot{background:#fff;border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px}
+.cmsg.user{background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-quick{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--border);background:#fff}
+.cq{padding:5px 12px;border-radius:999px;background:var(--surface3);border:1.5px solid var(--border);font-size:11.5px;font-weight:600;cursor:pointer;color:var(--text);transition:all .18s;font-family:'DM Sans',sans-serif}
+.cq:hover{border-color:var(--v);color:var(--v);background:var(--vl)}
+.chat-input-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border);background:#fff}
+.chat-input-row input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:50px;font-size:13.5px;outline:none;font-family:'DM Sans',sans-serif;transition:border-color .18s}
+.chat-input-row input:focus{border-color:var(--v)}
+.send-btn{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#4338ca);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.send-btn:hover{transform:scale(1.08)}
+
+/* -- TOPIC GRID -- */
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-bottom:14px}
+.titem{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;transition:border-color .15s}
+.titem.strong{border-color:var(--g);background:var(--gl)}
+.titem.medium{border-color:var(--a);background:var(--al)}
+.titem.weak{border-color:var(--r);background:var(--rl)}
+.tname{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:7px}
+.tbtns{display:flex;gap:4px}
+.tbtn{flex:1;padding:4px;border-radius:6px;border:1px solid var(--border);font-size:10.5px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;transition:all .15s;text-align:center;background:#fff}
+.tbtn:hover{transform:scale(1.04)}
+.tb-s.on,.tb-s:hover{background:var(--g);border-color:var(--g);color:#fff}
+.tb-m.on,.tb-m:hover{background:var(--a);border-color:var(--a);color:#fff}
+.tb-w.on,.tb-w:hover{background:var(--r);border-color:var(--r);color:#fff}
+
+/* -- PLAN PHASES -- */
+.plan-phase{background:var(--surface3);border-left:4px solid var(--v);border-radius:0 var(--radius) var(--radius) 0;padding:14px 16px;margin-bottom:10px}
+.plan-phase h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--v);margin-bottom:8px}
+.plan-day{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:13px}
+.pday-num{font-family:'Syne',sans-serif;font-size:10.5px;font-weight:800;color:var(--muted);background:var(--border);padding:2px 7px;border-radius:5px;flex-shrink:0;margin-top:1px}
+
+/* -- NOTES -- */
+.note{border-radius:var(--radius-sm);padding:11px 14px;font-size:12.5px;line-height:1.6;margin-top:12px}
+.note-a{background:var(--al);border:1px solid #fde68a;color:#92400e}
+.note-b{background:var(--bl);border:1px solid #bfdbfe;color:#1e40af}
+.note-g{background:var(--gl);border:1px solid #a7f3d0;color:#065f46}
+.note-r{background:var(--rl);border:1px solid #fca5a5;color:#991b1b}
+
+/* -- REVIEW CARDS -- */
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.rev-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.rev-stars{color:#f59e0b;font-size:13px;margin-bottom:6px}
+.rev-msg{font-size:13.5px;color:var(--text);line-height:1.6;margin-bottom:7px}
+.rev-name{font-size:12px;color:var(--muted);font-weight:600}
+.star-btn{background:none;border:none;font-size:1.9rem;cursor:pointer;color:#d1d5db;transition:color .15s;padding:2px}
+.star-btn.lit,.star-btn:hover{color:#f59e0b}
+
+/* -- SECTION TABS (mobile) -- */
+.section-tabs{
+  display:none;overflow-x:auto;gap:6px;padding:0 0 12px;
+  scrollbar-width:none;margin-bottom:16px;
+}
+.section-tabs::-webkit-scrollbar{display:none}
+.stab{
+  padding:7px 14px;border-radius:999px;border:1.5px solid var(--border);
+  background:#fff;font-size:12.5px;font-weight:600;cursor:pointer;
+  white-space:nowrap;transition:all .18s;font-family:'DM Sans',sans-serif;color:var(--muted);
+  flex-shrink:0;
+}
+.stab.on{background:var(--v);border-color:var(--v);color:#fff}
+@media(max-width:900px){.section-tabs{display:flex}}
+
+/* -- UPGRADE TABLE -- */
+.upgrade-row{background:var(--surface3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px;border:1px solid var(--border)}
+.up-target{font-weight:700;font-size:13.5px;color:var(--text);margin-bottom:8px}
+.up-chances{display:flex;gap:8px}
+.up-chance{flex:1;text-align:center;background:#fff;border-radius:8px;padding:8px;border:1px solid var(--border)}
+.up-pct{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:900}
+.up-lbl{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* -- WHATSAPP FLOAT -- */
+.wa-float{
+  position:fixed;bottom:22px;right:22px;
+  width:52px;height:52px;background:#25d366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;color:#fff;
+  box-shadow:0 4px 20px rgba(37,211,102,.5);
+  text-decoration:none;z-index:500;transition:transform .2s;
+}
+.wa-float:hover{transform:scale(1.1)}
+
+/* -- UTIL -- */
+.mt8{margin-top:8px}
+.mt12{margin-top:12px}
+</style>
+</head>
+<body>
+
+<!-- AUTH OVERLAY -->
+<div id="auth-overlay">
+  <div class="gate-wrap">
+    <span class="gate-icon">??</span>
+    <h2>Ultra Premium Required</h2>
+    <p>These tools are for <strong>Ultra Premium (?79)</strong> members only. Login or register to unlock India's first smart LEET counselling platform.</p>
+    <div class="gate-btns">
+      <a href="./premium-login.html?tier=ultra" class="gate-btn gate-primary"><i class="fas fa-rocket"></i> Get Ultra Premium — ?79</a>
+      <a href="/premium-login" class="gate-btn gate-ghost"><i class="fas fa-sign-in-alt"></i> Already a member? Login</a>
+    </div>
+  </div>
+</div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="https://hsbteleet.com" class="nav-logo">
+      <div class="nav-mark">HL</div>
+      <div class="nav-name">HSBTE<em>LEET</em></div>
+    </a>
+    <div class="nav-tabs">
+      <button class="ntab on" onclick="scrollTo(0,0)"><i class="fas fa-tools"></i> Tools</button>
+      <a class="ntab" href="/premium-papers"><i class="fas fa-book-open"></i> Papers</a>
+      <a class="ntab" href="/btech-leet-premium"><i class="fas fa-crown"></i> Plans</a>
+      <a class="ntab" href="https://wa.me/917988316241" target="_blank"><i class="fab fa-whatsapp"></i> Help</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-user-chip"><i class="fas fa-user-check"></i> <span id="nav-name">Student</span></div>
+      <a href="/premium-papers" class="nav-papers-btn">?? Papers</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE LAYOUT -->
+<div class="page-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-section">Analysis</div>
+  <button class="sb-item active" onclick="scrollToSec('sec-rank')"><i class="fas fa-chart-bar"></i> Rank Analysis</button>
+  <button class="sb-item" onclick="scrollToSec('sec-college')"><i class="fas fa-university"></i> College Predictor</button>
+  <div class="sb-section">Counselling</div>
+  <button class="sb-item" onclick="scrollToSec('sec-strategy')"><i class="fas fa-map-marked-alt"></i> Strategy Advisor</button>
+  <button class="sb-item" onclick="scrollToSec('sec-choices')"><i class="fas fa-list-ol"></i> Choice Filling</button>
+  <button class="sb-item" onclick="scrollToSec('sec-upgrade')"><i class="fas fa-level-up-alt"></i> Upgrade Calculator</button>
+  <div class="sb-section">Data</div>
+  <button class="sb-item" onclick="scrollToSec('sec-demand')"><i class="fas fa-fire"></i> Branch Demand</button>
+  <button class="sb-item" onclick="scrollToSec('sec-cutoff')"><i class="fas fa-table"></i> Cutoff Analyzer</button>
+  <div class="sb-section">Tools</div>
+  <button class="sb-item" onclick="scrollToSec('sec-compare')"><i class="fas fa-balance-scale"></i> College Compare</button>
+  <button class="sb-item" onclick="scrollToSec('sec-ai')"><i class="fas fa-robot"></i> AI Assistant</button>
+  <button class="sb-item" onclick="scrollToSec('sec-planner')"><i class="fas fa-calendar-alt"></i> Study Planner</button>
+  <div class="sb-section">Community</div>
+  <button class="sb-item" onclick="scrollToSec('sec-reviews')"><i class="fas fa-star"></i> Reviews</button>
+</aside>
+
+<!-- MAIN -->
+<div class="main-content">
+
+  <!-- HERO -->
+  <div class="hero-block">
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><i class="fas fa-rocket"></i> Ultra Premium — Haryana LEET 2026</div>
+      <h1>India's First Smart<br><span class="hl">LEET Counselling Platform</span></h1>
+      <p>AI-powered college predictor, rank analysis, choice filling optimizer and study planner — all built on real 2025 Haryana LEET allotment data.</p>
+      <div class="hero-pills">
+        <span class="hpill hpill-g"><i class="fas fa-ban"></i> 100% Ad-Free</span>
+        <span class="hpill hpill-a"><i class="fas fa-database"></i> Real 2025 Data</span>
+        <span class="hpill hpill-v"><i class="fas fa-robot"></i> AI-Powered</span>
+        <span class="hpill hpill-g"><i class="fas fa-lock"></i> Secure Access</span>
+      </div>
+      <div class="built-chip">?? <strong>Built by a Govt. Polytechnic Student</strong> for Haryana LEET Aspirants — We know the struggle.</div>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disc-strip">
+    <i class="fas fa-exclamation-triangle"></i>
+    <div><strong>Important Disclaimer:</strong> All predictions, rank estimates, college suggestions and cutoff data are <strong>approximate analytical estimates based on 2025 Haryana LEET trends</strong>. Actual results may vary ±15%. This is a predictive tool — not an official HSTES service. Always verify with <a href="https://hstes.org.in" target="_blank" style="color:#92400e;font-weight:700">hstes.org.in</a></div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dash-bar">
+    <div class="dash-greet">Welcome, <span id="dash-name">Student</span> ?? &mdash; Ultra Premium Active</div>
+    <div class="dash-chips">
+      <div class="dash-chip"><div class="dash-chip-v">90</div><div class="dash-chip-l">Max Marks</div></div>
+      <div class="dash-chip"><div class="dash-chip-v">2025</div><div class="dash-chip-l">Data Year</div></div>
+      <div class="dash-chip"><div class="dash-chip-v">10+</div><div class="dash-chip-l">Smart Tools</div></div>
+    </div>
+  </div>
+
+  <!-- MOBILE TABS -->
+  <div class="section-tabs">
+    <button class="stab on" onclick="scrollToSec('sec-rank')">?? Rank</button>
+    <button class="stab" onclick="scrollToSec('sec-college')">?? Colleges</button>
+    <button class="stab" onclick="scrollToSec('sec-strategy')">??? Strategy</button>
+    <button class="stab" onclick="scrollToSec('sec-choices')">?? AI Choices</button>
+    <button class="stab" onclick="scrollToSec('sec-upgrade')">?? Upgrade</button>
+    <button class="stab" onclick="scrollToSec('sec-cutoff')">?? Cutoffs</button>
+    <button class="stab" onclick="scrollToSec('sec-ai')">?? AI Chat</button>
+    <button class="stab" onclick="scrollToSec('sec-planner')">?? Planner</button>
+  </div>
+
+  <!-- -- RANK ANALYSIS -- -->
+  <section id="sec-rank">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>?? Rank and Score Analysis</h2>
+        <p>Enter marks to predict your rank, or enter rank for zone analysis</p>
+      </div>
+      <span class="sec-pill sp-v">Rank Analysis</span>
+    </div>
+    <div class="tool-grid">
+
+      <!-- RANK PREDICTOR -->
+      <div class="tc">
+        <div class="tc-hd ha">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">Rank Predictor</div><div class="tc-sub">Enter expected marks to get predicted rank range</div></div>
+        </div>
+        <div class="tc-body">
+          <label class="fl" for="rp-marks">Expected Marks (out of 90)</label>
+          <input type="number" class="fi" id="rp-marks" placeholder="e.g. 65" min="0" max="90" aria-label="Enter expected marks"/>
+          <div class="ferr" id="rp-err">Please enter marks between 0 and 90.</div>
+          <div class="frow">
+            <div>
+              <label class="fl" for="rp-cat">Category</label>
+              <select class="fs" id="rp-cat">
+                <option value="GEN">General (HOGC)</option>
+                <option value="AIC">AIC (All India)</option>
+                <option value="SC">SC</option>
+                <option value="BC_A">BC-A</option>
+                <option value="BC_B">BC-B</option>
+                <option value="EWS">EWS</option>
+              </select>
+            </div>
+            <div>
+              <label class="fl" for="rp-stream">Diploma Stream</label>
+              <select class="fs" id="rp-stream">
+                <option value="CS">Computer/IT</option>
+                <option value="EE">Electronics/Electrical</option>
+                <option value="ME">Mechanical</option>
+                <option value="CE">Civil</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-a" onclick="predictRank()" id="btn-rp"><i class="fas fa-calculator"></i> Predict My Rank</button>
+          <div class="rbox" id="rp-result">
+            <div class="rbox-hd rh-a">?? Predicted Rank — Based on 2025 LEET Data</div>
+            <div class="rbox-body">
+              <div class="rank-center">
+                <div class="rank-big" id="rp-val" style="color:var(--ad)">—</div>
+                <div class="rank-sub">Predicted rank range (±15% variation possible)</div>
+              </div>
+              <div id="rp-zone"></div>
+              <div id="rp-tip" style="font-size:13px;color:var(--muted);line-height:1.65;margin-top:10px;padding:10px;background:var(--surface3);border-radius:var(--radius-sm)"></div>
+            </div>
+          </div>
+          <div class="note note-a mt12">?? Reference: 39 marks ˜ Rank 112, 37 marks ˜ Rank 153, 36 marks ˜ Rank 346, 28 marks ˜ Rank 750 (GEN). Actual rank depends on exam difficulty, total students, and seat matrix.</div>
+        </div>
+      </div>
+
+      <!-- RANK ZONE ANALYSIS -->
+      <div class="tc">
+        <div class="tc-hd hb">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">Rank Zone Analysis</div><div class="tc-sub">Understand your competition and rank zone</div></div>
+        </div>
+        <div class="tc-body">
+          <label class="fl" for="ra-rank">Your LEET Rank</label>
+          <input type="number" class="fi" id="ra-rank" placeholder="e.g. 153" min="1" aria-label="Enter your LEET rank"/>
+          <div class="ferr" id="ra-err">Please enter a valid rank (minimum 1).</div>
+          <label class="fl" for="ra-cat">Category</label>
+          <select class="fs" id="ra-cat">
+            <option value="GEN">General (HOGC)</option>
+            <option value="AIC">AIC (All India)</option>
+            <option value="SC">SC</option>
+            <option value="BC_A">BC-A</option>
+            <option value="BC_B">BC-B</option>
+            <option value="EWS">EWS</option>
+          </select>
+          <button class="btn btn-b" onclick="analyzeRank()"><i class="fas fa-chart-bar"></i> Analyze My Rank</button>
+          <div class="rbox" id="ra-result">
+            <div class="rbox-hd rh-b">?? Rank Zone Analysis</div>
+            <div class="rbox-body" id="ra-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- COLLEGE PREDICTOR -- -->
+  <section id="sec-college">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>?? College Predictor</h2>
+        <p>Predict possible colleges based on your rank, category and preferred branch</p>
+      </div>
+      <span class="sec-pill sp-v">Predictive Analytics</span>
+    </div>
+    <div class="tool-grid">
+      <div class="tc full">
+        <div class="tc-hd hv">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">College Predictor</div><div class="tc-sub">Based on real 2025 Haryana LEET allotment data. Predictions include ±15% variation range.</div></div>
+        </div>
+        <div class="tc-body">
+          <div class="frow" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+            <div>
+              <label class="fl" for="cp-rank">Your Rank</label>
+              <input type="number" class="fi" id="cp-rank" placeholder="e.g. 153" min="1"/>
+              <div class="ferr" id="cp-err">Please enter a valid rank.</div>
+            </div>
+            <div>
+              <label class="fl" for="cp-cat">Category</label>
+              <select class="fs" id="cp-cat">
+                <option value="GEN">GEN (HOGC)</option>
+                <option value="AIC">AIC</option>
+                <option value="SC">SC</option>
+                <option value="BC_A">BC-A</option>
+                <option value="BC_B">BC-B</option>
+                <option value="EWS">EWS</option>
+              </select>
+            </div>
+            <div>
+              <label class="fl" for="cp-branch">Preferred Branch</label>
+              <select class="fs" id="cp-branch">
+                <option value="ALL">All Branches</option>
+                <option value="CSE">CSE</option>
+                <option value="CSE (AI/ML)">CSE (AI/ML)</option>
+                <option value="AI & Data Science">AI &amp; Data Science</option>
+                <option value="IT">IT (YMCA / GJU only)</option>
+                <option value="ECE">ECE</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Civil">Civil</option>
+                <option value="Chemical">Chemical (DCRUST only)</option>
+                <option value="Robotics & AI">Robotics &amp; AI (YMCA only)</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-v" onclick="predictColleges()" style="max-width:280px"><i class="fas fa-university"></i> Predict My Colleges</button>
+          <div class="rbox" id="cp-result">
+            <div class="rbox-hd rh-v">?? Possible College Allotments (2025 Trend)</div>
+            <div class="rbox-body" id="cp-body"></div>
+          </div>
+          <div class="note note-b mt12">?? Data reference: Rank 57 ? YMCA IT, Rank 112-131 ? YMCA (GEN/Outsider), Rank 153 ? GJU/YMCA range, Rank 346 ? CDLU Sirsa CSE, marks 28 (~Rank 750). All predictions have ±15% variation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- STRATEGY ADVISOR -- -->
+  <section id="sec-strategy">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>??? Smart Counselling Advisor</h2>
+        <p>Tell us your dream — we build your complete Dream ? Safe ? Backup strategy</p>
+      </div>
+      <span class="sec-pill sp-g">Strategy Tool</span>
+    </div>
+    <div class="tool-grid">
+      <div class="tc full">
+        <div class="tc-hd hg">
+          <div class="tc-ico">???</div>
+          <div><div class="tc-title">Smart Counselling Advisor</div><div class="tc-sub">Complete choice-based strategy with seat competition indicator and warnings</div></div>
+        </div>
+        <div class="tc-body">
+          <div class="frow" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+            <div>
+              <label class="fl" for="sca-rank">Your Rank</label>
+              <input type="number" class="fi" id="sca-rank" placeholder="e.g. 153" min="1"/>
+            </div>
+            <div>
+              <label class="fl" for="sca-cat">Category</label>
+              <select class="fs" id="sca-cat">
+                <option value="GEN">GEN (HOGC)</option>
+                <option value="AIC">AIC</option>
+                <option value="SC">SC</option>
+                <option value="BC_A">BC-A</option>
+                <option value="BC_B">BC-B</option>
+                <option value="EWS">EWS</option>
+              </select>
+            </div>
+            <div>
+              <label class="fl" for="sca-dream-college">Dream College</label>
+              <select class="fs" id="sca-dream-college">
+                <option value="YMCA">YMCA Faridabad</option>
+                <option value="DCRUST">DCRUST Murthal</option>
+                <option value="GJU">GJU Hisar</option>
+                <option value="KUK">KUK Kurukshetra</option>
+                <option value="CDLU">CDLU Sirsa</option>
+                <option value="MDU">MDU Rohtak</option>
+                <option value="CRSU">CRSU Jind</option>
+                <option value="ANY">Best Available</option>
+              </select>
+            </div>
+            <div>
+              <label class="fl" for="sca-dream-branch">Dream Branch</label>
+              <select class="fs" id="sca-dream-branch">
+                <option value="CSE">CSE</option>
+                <option value="CSE (AI/ML)">CSE (AI/ML)</option>
+                <option value="AI & Data Science">AI &amp; Data Science</option>
+                <option value="IT">IT (YMCA / GJU only)</option>
+                <option value="ECE">ECE</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Civil">Civil</option>
+                <option value="Chemical">Chemical (DCRUST only)</option>
+                <option value="Robotics & AI">Robotics &amp; AI (YMCA only)</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-g" onclick="buildSmartStrategy()" style="max-width:280px"><i class="fas fa-map-marked-alt"></i> Build My Complete Strategy</button>
+          <div class="rbox" id="sca-result">
+            <div class="rbox-hd rh-g">??? Your Complete Counselling Strategy</div>
+            <div class="rbox-body" id="sca-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- AI CHOICE FILLING + MISTAKE DETECTOR -- -->
+  <section id="sec-choices">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>?? AI Choice Filling <span class="ai-tag">AI</span></h2>
+        <p>AI generates your optimal choice order and checks for ordering mistakes</p>
+      </div>
+      <span class="sec-pill sp-p">AI Powered</span>
+    </div>
+    <div class="tool-grid">
+
+      <!-- AI CHOICE FILLING -->
+      <div class="tc">
+        <div class="tc-hd hp">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">AI Choice Filling Generator<span class="ai-tag">AI</span></div><div class="tc-sub">AI generates optimal choice order with reasoning</div></div>
+        </div>
+        <div class="tc-body">
+          <div class="frow">
+            <div>
+              <label class="fl" for="cf-rank">Your Rank</label>
+              <input type="number" class="fi" id="cf-rank" placeholder="e.g. 200" min="1"/>
+            </div>
+            <div>
+              <label class="fl" for="cf-cat">Category</label>
+              <select class="fs" id="cf-cat">
+                <option value="GEN">GEN (HOGC)</option>
+                <option value="AIC">AIC</option>
+                <option value="SC">SC</option>
+                <option value="BC_A">BC-A</option>
+                <option value="BC_B">BC-B</option>
+                <option value="EWS">EWS</option>
+              </select>
+            </div>
+          </div>
+          <label class="fl" for="cf-pref">Preferred Branch</label>
+          <select class="fs" id="cf-pref">
+            <option value="CSE">CSE</option>
+            <option value="CSE (AI/ML)">CSE (AI/ML)</option>
+            <option value="AI & Data Science">AI &amp; Data Science</option>
+            <option value="IT">IT (YMCA / GJU only)</option>
+            <option value="ECE">ECE</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Civil">Civil</option>
+            <option value="Chemical">Chemical (DCRUST only)</option>
+            <option value="Robotics & AI">Robotics &amp; AI (YMCA only)</option>
+          </select>
+          <button class="btn btn-p" onclick="generateAIChoices()" id="btn-cf"><i class="fas fa-robot"></i> Generate AI Choice Order</button>
+          <div class="rbox" id="cf-result">
+            <div class="rbox-hd rh-p">?? AI Generated Choice Filling Order</div>
+            <div class="rbox-body" id="cf-body"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MISTAKE DETECTOR -->
+      <div class="tc">
+        <div class="tc-hd ha">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">Choice Mistake Detector</div><div class="tc-sub">Check your choice order for mistakes before submission</div></div>
+        </div>
+        <div class="tc-body">
+          <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Enter your planned choices (one per line). Format: College — Branch</p>
+          <label class="fl" for="cmd-choices">Your Choices (one per line)</label>
+          <textarea id="cmd-choices" class="fi" rows="7" placeholder="Example:&#10;1. YMCA Faridabad — CSE&#10;2. DCRUST Murthal — ECE&#10;3. GJU Hisar — CSE (AI/ML)&#10;4. KUK — CSE&#10;5. MDU Rohtak — CSE" style="resize:vertical;font-size:13px;line-height:1.6"></textarea>
+          <button class="btn btn-a" onclick="detectMistakes()"><i class="fas fa-search"></i> Check My Choices</button>
+          <div class="rbox" id="cmd-result">
+            <div class="rbox-hd rh-a">?? Choice Analysis Report</div>
+            <div class="rbox-body" id="cmd-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- UPGRADE + COMPARE -- -->
+  <section id="sec-upgrade">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>?? Upgrade Chance Calculator</h2>
+        <p>Check your Round 2 and Round 3 upgrade probabilities</p>
+      </div>
+      <span class="sec-pill sp-v">Round Analysis</span>
+    </div>
+    <div class="tool-grid">
+      <div class="tc">
+        <div class="tc-hd hb">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">Upgrade Chance Calculator</div><div class="tc-sub">Check your chances of upgrading in Round 2 or Round 3</div></div>
+        </div>
+        <div class="tc-body">
+          <label class="fl" for="uc-rank">Your Rank</label>
+          <input type="number" class="fi" id="uc-rank" placeholder="e.g. 200" min="1"/>
+          <label class="fl" for="uc-round1">Round 1 Allotted</label>
+          <select class="fs" id="uc-round1">
+            <option value="GJU-CSE">GJU Hisar — CSE</option>
+            <option value="GJU-AI & Data Science">GJU Hisar — AI &amp; Data Science</option>
+            <option value="GJU-IT">GJU Hisar — IT</option>
+            <option value="KUK-CSE">KUK Kurukshetra — CSE</option>
+            <option value="KUK-ECE">KUK Kurukshetra — ECE</option>
+            <option value="MDU-CSE">MDU Rohtak — CSE</option>
+            <option value="CDLU-CSE">CDLU Sirsa — CSE</option>
+            <option value="CRSU-CSE">CRSU Jind — CSE (AI/ML)</option>
+            <option value="DCRUST-ECE">DCRUST Murthal — ECE</option>
+            <option value="NONE">No allotment / Waiting</option>
+          </select>
+          <button class="btn btn-b" onclick="calculateUpgrade()"><i class="fas fa-level-up-alt"></i> Calculate Upgrade Chances</button>
+          <div class="rbox" id="uc-result">
+            <div class="rbox-hd rh-b">?? Upgrade Probability Analysis</div>
+            <div class="rbox-body" id="uc-body"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARE -->
+      <div class="tc" id="sec-compare">
+        <div class="tc-hd hv">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">College Comparison Tool</div><div class="tc-sub">Compare two Haryana LEET colleges side by side</div></div>
+        </div>
+        <div class="tc-body">
+          <div class="frow">
+            <div>
+              <label class="fl" for="cc-col1">College 1</label>
+              <select class="fs" id="cc-col1">
+                <option value="YMCA">YMCA Faridabad</option>
+                <option value="DCRUST">DCRUST Murthal</option>
+                <option value="GJU">GJU Hisar</option>
+                <option value="KUK">KUK Kurukshetra</option>
+                <option value="CDLU">CDLU Sirsa</option>
+                <option value="MDU">MDU Rohtak</option>
+                <option value="CRSU">CRSU Jind</option>
+              </select>
+            </div>
+            <div>
+              <label class="fl" for="cc-col2">College 2</label>
+              <select class="fs" id="cc-col2">
+                <option value="DCRUST">DCRUST Murthal</option>
+                <option value="YMCA">YMCA Faridabad</option>
+                <option value="GJU">GJU Hisar</option>
+                <option value="KUK">KUK Kurukshetra</option>
+                <option value="CDLU">CDLU Sirsa</option>
+                <option value="MDU">MDU Rohtak</option>
+                <option value="CRSU">CRSU Jind</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-v" onclick="compareColleges()"><i class="fas fa-balance-scale"></i> Compare Now</button>
+          <div class="rbox" id="cc-result">
+            <div class="rbox-hd rh-v">?? College Comparison</div>
+            <div class="rbox-body" id="cc-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- BRANCH DEMAND + CUTOFF -- -->
+  <section id="sec-demand">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>?? Branch Demand and Cutoff Analyzer</h2>
+        <p>2025 branch demand index and estimated closing ranks</p>
+      </div>
+    </div>
+    <div class="tool-grid">
+
+      <!-- BRANCH DEMAND -->
+      <div class="tc">
+        <div class="tc-hd hg">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">Branch Demand Index</div><div class="tc-sub">Branch demand and competition analysis for 2025</div></div>
+        </div>
+        <div class="tc-body">
+          <table class="dtable">
+            <thead><tr><th>Branch</th><th>Demand</th><th>Approx GEN Cutoff</th><th>Total Seats</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CSE</strong></td><td><span class="dem df">?? Very High</span></td><td>Top 200</td><td>~480</td></tr>
+              <tr><td><strong>AI / ML / DS</strong></td><td><span class="dem df">?? Very High</span></td><td>Top 250</td><td>~180</td></tr>
+              <tr><td><strong>IT</strong></td><td><span class="dem dh">? High</span></td><td>Top 300</td><td>~240</td></tr>
+              <tr><td><strong>ECE</strong></td><td><span class="dem dm">? Medium</span></td><td>Top 450</td><td>~240</td></tr>
+              <tr><td><strong>Electrical</strong></td><td><span class="dem dm">? Medium</span></td><td>Top 600</td><td>~180</td></tr>
+              <tr><td><strong>Mechanical</strong></td><td><span class="dem dl">?? Low</span></td><td>Top 800</td><td>~300</td></tr>
+              <tr><td><strong>Civil</strong></td><td><span class="dem dl">?? Low</span></td><td>Top 900</td><td>~180</td></tr>
+            </tbody>
+          </table>
+          <div class="note note-a mt12">?? CSE and AI/ML seats fill fastest in Round 1. If your rank is above 300, IT or AI/ML in a good college may be better than CSE in a lower college.</div>
+        </div>
+      </div>
+
+      <!-- CUTOFF ANALYZER -->
+      <div class="tc" id="sec-cutoff">
+        <div class="tc-hd ha">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">Cutoff Analyzer</div><div class="tc-sub">Estimated 2025 closing ranks for all Haryana govt colleges</div></div>
+        </div>
+        <div class="tc-body">
+          <label class="fl" for="ca-cat">Category</label>
+          <select class="fs" id="ca-cat" onchange="showCutoffs()">
+            <option value="GEN">GEN (HOGC)</option>
+            <option value="AIC">AIC (All India)</option>
+            <option value="SC">SC</option>
+            <option value="BC_A">BC-A</option>
+            <option value="BC_B">BC-B</option>
+            <option value="EWS">EWS</option>
+          </select>
+          <button class="btn btn-a" onclick="showCutoffs()"><i class="fas fa-table"></i> Show Estimated Cutoff Data</button>
+          <div class="rbox" id="ca-result" style="margin-top:14px">
+            <div class="rbox-hd rh-a" id="ca-title">?? Estimated 2025 Closing Ranks</div>
+            <div class="rbox-body" id="ca-body"></div>
+          </div>
+          <div class="note note-a mt12">?? Estimated figures based on 2025 LEET trends. Not official HSTES data.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- AI CHATBOT -- -->
+  <section id="sec-ai">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>?? LEET AI Assistant <span class="ai-tag">Gemini AI</span></h2>
+        <p>Ask anything about LEET syllabus, counselling, exam strategy, or college info</p>
+      </div>
+      <span class="sec-pill sp-p">AI Chat</span>
+    </div>
+    <div class="tool-grid">
+      <div class="tc full">
+        <div class="tc-hd hp">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">HSBTE LEET AI Assistant<span class="ai-tag">Gemini AI</span></div><div class="tc-sub">Ask about syllabus, colleges, counselling process, exam tips — powered by Gemini AI</div></div>
+        </div>
+        <div class="tc-body">
+          <div class="chat-wrap">
+            <div class="chat-msgs" id="ai-messages">
+              <div class="cmsg bot">?? Hi! I'm your LEET AI Assistant. Ask me anything about Haryana LEET 2026 — syllabus topics, exam strategy, college info, counselling process! <br><br><em style="font-size:12px;opacity:.7">Note: AI tools above work independently without AI connection.</em></div>
+            </div>
+            <div class="chat-quick">
+              <button class="cq" onclick="sendAI('What are the important topics in Mathematics section?')">Math topics</button>
+              <button class="cq" onclick="sendAI('How is LEET 2026 counselling done in Haryana?')">Counselling process</button>
+              <button class="cq" onclick="sendAI('What is the syllabus for Electronics section in LEET?')">Electronics syllabus</button>
+              <button class="cq" onclick="sendAI('Give me exam tips for Haryana LEET 2026')">Exam tips</button>
+              <button class="cq" onclick="sendAI('Which section should I focus most for LEET?')">Focus areas</button>
+            </div>
+            <div class="chat-input-row">
+              <input type="text" id="ai-input" placeholder="Ask about LEET syllabus, colleges, counselling..." aria-label="Ask AI"/>
+              <button class="send-btn" onclick="sendAI()" aria-label="Send"><i class="fas fa-paper-plane" style="font-size:13px"></i></button>
+            </div>
+          </div>
+          <div class="note note-b mt12">?? AI responses are for guidance only. For official LEET info, visit hstes.org.in. The prediction tools above work without AI connection.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- STUDY PLANNER -- -->
+  <section id="sec-planner">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>?? Smart Study Planner</h2>
+        <p>Rate your prep level per topic ? get a personalized LEET 2026 study roadmap</p>
+      </div>
+      <span class="sec-pill sp-v">Smart Study</span>
+    </div>
+    <div class="tool-grid">
+      <div class="tc full">
+        <div class="tc-hd hv">
+          <div class="tc-ico">??</div>
+          <div><div class="tc-title">Personalized Study Plan Generator</div><div class="tc-sub">Rate your topics, get your custom LEET 2026 preparation roadmap based on official syllabus</div></div>
+        </div>
+        <div class="tc-body">
+          <div id="planner-inputs">
+            <div class="frow" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:18px">
+              <div>
+                <label class="fl" for="pl-days">Days Until Exam</label>
+                <input type="number" class="fi" id="pl-days" placeholder="e.g. 45" min="1" max="365"/>
+              </div>
+              <div>
+                <label class="fl" for="pl-hours">Daily Study Hours</label>
+                <input type="number" class="fi" id="pl-hours" placeholder="e.g. 5" min="1" max="16"/>
+              </div>
+              <div>
+                <label class="fl" for="pl-stream">Diploma Stream</label>
+                <select class="fs" id="pl-stream">
+                  <option value="CS">Computer Engineering</option>
+                  <option value="EE">Electronics Engineering</option>
+                  <option value="ME">Mechanical Engineering</option>
+                  <option value="CE">Civil Engineering</option>
+                </select>
+              </div>
+              <div>
+                <label class="fl" for="pl-level">Prep Level</label>
+                <select class="fs" id="pl-level">
+                  <option value="beginner">Beginner — Just starting</option>
+                  <option value="average">Average — Moderate prep</option>
+                  <option value="advanced">Advanced — Well prepared</option>
+                </select>
+              </div>
+            </div>
+
+            <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--text);margin-bottom:8px">Rate Your Preparation for Each Topic:</h4>
+            <div style="margin-bottom:12px;font-size:12.5px;color:var(--muted)">
+              <span style="color:var(--g);font-weight:700">?? Strong</span> — Confident &nbsp;|&nbsp;
+              <span style="color:var(--a);font-weight:700">?? Medium</span> — Needs revision &nbsp;|&nbsp;
+              <span style="color:var(--r);font-weight:700">?? Weak</span> — Need to study
+            </div>
+            <div style="margin-bottom:16px">
+              <div style="font-family:'Syne',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--v);margin-bottom:10px;padding:5px 12px;background:var(--vl);border-radius:6px;display:inline-block">Section A — Basic Sciences (25 marks)</div>
+              <div class="topic-grid" id="topics-sec-a"></div>
+            </div>
+            <div style="margin-bottom:16px" id="stream-sec-wrap">
+              <div id="stream-sec-title" style="font-family:'Syne',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--b);margin-bottom:10px;padding:5px 12px;background:var(--bl);border-radius:6px;display:inline-block">Section B — Stream Subject (25 marks)</div>
+              <div class="topic-grid" id="topics-stream"></div>
+            </div>
+            <button class="btn btn-v" onclick="generateStudyPlan()" style="max-width:300px"><i class="fas fa-magic"></i> Generate My Study Plan</button>
+          </div>
+          <div id="planner-output" style="display:none;margin-top:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+              <h4 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--text)">?? Your Personalized Study Plan</h4>
+              <button onclick="resetPlanner()" style="padding:7px 16px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;transition:all .18s" onmouseover="this.style.borderColor='var(--v)'" onmouseout="this.style.borderColor='var(--border)'">? Reset</button>
+            </div>
+            <div id="plan-content"></div>
+            <div style="margin-top:20px">
+              <h4 style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px">?? LEET 2026 Exam Strategy Tips</h4>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:9px">
+                <div class="note note-b">1?? Attempt Section A (Basic Sciences) first — predictable topics, high accuracy</div>
+                <div class="note note-b">2?? Do Mathematics when mind is fresh — skip lengthy ones and return</div>
+                <div class="note note-b">3?? No negative marking — attempt all 90 questions without hesitation</div>
+                <div class="note note-b">4?? Keep 10 minutes at end for unattempted and review</div>
+                <div class="note note-b">5?? Elimination technique — remove 2 wrong options first</div>
+                <div class="note note-b">6?? Don't panic if paper is difficult — others face the same</div>
+                <div class="note note-b">7?? Section D (Other streams) is often easier — check early</div>
+                <div class="note note-b">8?? 90 questions in 90 minutes = 1 minute per question strategy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- -- REVIEWS -- -->
+  <section id="sec-reviews">
+    <div class="sec-hd">
+      <div class="sec-hd-left">
+        <h2>? Student Reviews</h2>
+        <p>Real feedback from students who used hsbteleet.com for LEET preparation</p>
+      </div>
+    </div>
+    <div class="rev-grid" id="reviews-list" style="margin-bottom:24px">
+      <div class="rev-card"><div class="rev-stars">?????</div><div class="rev-msg">The College Predictor was spot on! Got GJU Hisar CSE exactly as predicted. Highly recommended for LEET students.</div><div class="rev-name">— Rahul K., LEET 2025</div></div>
+      <div class="rev-card"><div class="rev-stars">?????</div><div class="rev-msg">Best investment for LEET prep. The sample papers are very close to exam level. Worth every rupee.</div><div class="rev-name">— Priya S., LEET 2025</div></div>
+      <div class="rev-card"><div class="rev-stars">????</div><div class="rev-msg">Choice filling optimizer helped me avoid big mistakes in counselling. Should be mandatory for all LEET students!</div><div class="rev-name">— Ankit M., LEET 2025</div></div>
+    </div>
+    <div class="tc" style="max-width:560px">
+      <div class="tc-hd ha">
+        <div class="tc-ico">??</div>
+        <div><div class="tc-title">Leave a Review</div><div class="tc-sub">Help other LEET aspirants trust this platform</div></div>
+      </div>
+      <div class="tc-body">
+        <label class="fl">Your Rating</label>
+        <div style="display:flex;gap:3px;margin-bottom:4px">
+          <button class="star-btn" data-val="1" onclick="setRating(1)" aria-label="1 star">?</button>
+          <button class="star-btn" data-val="2" onclick="setRating(2)" aria-label="2 stars">?</button>
+          <button class="star-btn" data-val="3" onclick="setRating(3)" aria-label="3 stars">?</button>
+          <button class="star-btn" data-val="4" onclick="setRating(4)" aria-label="4 stars">?</button>
+          <button class="star-btn" data-val="5" onclick="setRating(5)" aria-label="5 stars">?</button>
+        </div>
+        <label class="fl" for="rev-msg">Your Review</label>
+        <textarea class="fi" id="rev-msg" rows="3" placeholder="Share your experience..." style="resize:none"></textarea>
+        <div id="rev-status" style="font-size:13px;margin-top:8px;display:none"></div>
+        <button class="btn btn-a" onclick="submitReview()" id="btn-rev"><i class="fas fa-paper-plane"></i> Submit Review</button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end main-content -->
+</div><!-- end page-layout -->
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/917988316241?text=Hi!%20I%20have%20a%20question%20about%20Haryana%20LEET%20counselling." class="wa-float" target="_blank" title="WhatsApp Support"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+'use strict';
+
+// -- CONFIG --
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var GEMINI_KEY = 'AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Replace with actual key
+var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+// -- AUTH GUARD --
+(function(){
+  var uid = sessionStorage.getItem('prem_uid');
+  var tier = sessionStorage.getItem('prem_tier');
+  var ts = parseInt(sessionStorage.getItem('prem_ts') || '0');
+  if(!uid || tier !== 'ultra' || (Date.now() - ts) > 28800000){
+    document.getElementById('auth-overlay').classList.remove('gone');
+  } else {
+    document.getElementById('auth-overlay').classList.add('gone');
+    var n = sessionStorage.getItem('prem_name') || 'Student';
+    document.getElementById('nav-name').textContent = n.split(' ')[0];
+    document.getElementById('dash-name').textContent = n.split(' ')[0];
+  }
+})();
+
+// -- HELPERS --
+function showErr(id){ document.getElementById(id).classList.add('on'); }
+function hideErr(id){ document.getElementById(id).classList.remove('on'); }
+function showRes(id){ document.getElementById(id).classList.add('on'); }
+function scrollToSec(id){ var el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+// -- DATA -- (same as before, full dataset)
+var COLLEGE_DATA = {
+  /* -- Branches verified from HSTES B.Tech LE Prospectus 2025-26 -- */
+  GEN:[
+    /* YMCA — J.C. Bose University, Faridabad (PDF confirmed branches) */
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'CSE',open:30,close:110,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'IT',open:50,close:160,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'ECE',open:100,close:230,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'Electrical',open:120,close:270,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'Mechanical',open:130,close:290,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'Civil',open:140,close:310,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'Robotics & AI',open:60,close:180,govt:true},
+    /* DCRUST — Deen Bandhu Chhotu Ram University, Murthal (NO IT — PDF confirmed) */
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'CSE',open:80,close:200,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'ECE',open:160,close:340,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'Electrical',open:180,close:360,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'Mechanical',open:190,close:380,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'Civil',open:200,close:390,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'Chemical',open:220,close:420,govt:true},
+    /* GJU — Guru Jambheshwar University, Hisar */
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'CSE',open:120,close:260,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'CSE (AI/ML)',open:100,close:220,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'AI & Data Science',open:90,close:230,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'IT',open:150,close:310,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'ECE',open:170,close:340,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'Mechanical',open:190,close:380,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'Civil',open:200,close:400,govt:true},
+    /* KUK — UIET Kurukshetra University (NO IT — PDF confirmed) */
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'CSE',open:200,close:420,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'CSE (AI/ML)',open:180,close:390,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'ECE',open:230,close:460,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'Electrical & Computer',open:250,close:490,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'Mechanical',open:270,close:520,govt:true},
+    /* MDU — UIET Maharshi Dayanand University, Rohtak (NO IT — PDF confirmed) */
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'CSE',open:300,close:550,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'CSE (AI/ML)',open:280,close:520,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'ECE',open:340,close:600,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'Electrical',open:360,close:630,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'Mechanical',open:370,close:650,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'Civil',open:380,close:670,govt:true},
+    /* CRSU — Chaudhary Ranbir Singh University, Jind */
+    {college:'Chaudhary Ranbir Singh University, Jind',abbr:'CRSU',branch:'CSE (AI/ML)',open:350,close:620,govt:true},
+    /* CDLU — Ch. Devi Lal State Institute, Sirsa (NO IT — PDF confirmed) */
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'CSE',open:300,close:620,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'ECE',open:450,close:780,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'Electrical',open:470,close:800,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'Mechanical',open:490,close:830,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'Civil',open:500,close:850,govt:true}
+  ],
+  AIC:[
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'CSE',open:20,close:80,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'IT',open:40,close:120,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'ECE',open:80,close:180,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'CSE',open:60,close:160,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'ECE',open:130,close:270,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'CSE',open:100,close:210,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'AI & Data Science',open:80,close:180,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'CSE',open:160,close:340,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'CSE',open:240,close:460,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'CSE',open:250,close:520,govt:true}
+  ],
+  SC:[
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'CSE',open:200,close:460,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'IT',open:280,close:560,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'CSE',open:300,close:620,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'ECE',open:380,close:720,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'CSE',open:350,close:680,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'AI & Data Science',open:300,close:620,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'CSE',open:450,close:900,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'CSE',open:520,close:1000,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'CSE',open:600,close:1200,govt:true}
+  ],
+  BC_A:[
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'CSE',open:150,close:330,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'IT',open:200,close:410,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'CSE',open:200,close:430,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'ECE',open:270,close:530,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'CSE',open:250,close:510,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'AI & Data Science',open:220,close:470,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'CSE',open:320,close:660,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'CSE',open:380,close:750,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'CSE',open:450,close:920,govt:true}
+  ],
+  BC_B:[
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'CSE',open:180,close:380,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'CSE',open:240,close:490,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'CSE',open:280,close:570,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'CSE',open:360,close:730,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'CSE',open:420,close:820,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'CSE',open:500,close:1000,govt:true}
+  ],
+  EWS:[
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'CSE',open:120,close:265,govt:true},
+    {college:'J.C. Bose University of Science & Technology, YMCA, Faridabad',abbr:'YMCA',branch:'IT',open:160,close:325,govt:true},
+    {college:'DCRUST, Murthal, Sonipat',abbr:'DCRUST',branch:'CSE',open:180,close:365,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'CSE',open:200,close:405,govt:true},
+    {college:'Guru Jambheshwar University (GJU), Hisar',abbr:'GJU',branch:'AI & Data Science',open:170,close:360,govt:true},
+    {college:'University Institute of Engg. & Tech., Kurukshetra University',abbr:'KUK',branch:'CSE',open:285,close:570,govt:true},
+    {college:'University Institute of Engg. & Tech., MDU, Rohtak',abbr:'MDU',branch:'CSE',open:330,close:640,govt:true},
+    {college:'Ch. Devi Lal State Inst. of Engg. & Tech., Sirsa',abbr:'CDLU',branch:'CSE',open:400,close:810,govt:true}
+  ]
+};
+
+var COL_RANK = {YMCA:1,DCRUST:2,GJU:3,KUK:4,MDU:5,CRSU:6,CDLU:7};
+
+var COL_INFO = {
+  YMCA:{full:'J.C. Bose University of Science & Technology, YMCA, Faridabad',placement:'?8-12 LPA avg',hostel:'Limited (girls priority)',campus:'Urban — well connected',fees:'~?80,000/year',rank:1},
+  DCRUST:{full:'DCRUST, Murthal (Sonipat)',placement:'?7-10 LPA avg',hostel:'Good facilities',campus:'Large — 112 acres, Murthal',fees:'~?65,000/year',rank:2},
+  GJU:{full:'Guru Jambheshwar University, Hisar',placement:'?5-8 LPA avg',hostel:'Available',campus:'Large — Hisar, Haryana',fees:'~?55,000/year',rank:3},
+  KUK:{full:'Kurukshetra University',placement:'?4-7 LPA avg',hostel:'Available',campus:'Large — KUK Campus',fees:'~?50,000/year',rank:4},
+  MDU:{full:'Maharshi Dayanand University, Rohtak',placement:'?4-6 LPA avg',hostel:'Available',campus:'Large — Rohtak',fees:'~?50,000/year',rank:5},
+  CRSU:{full:'Chaudhary Ranbir Singh University, Jind',placement:'?3-5 LPA avg',hostel:'Available',campus:'Jind, Haryana',fees:'~?45,000/year',rank:6},
+  CDLU:{full:'Chaudhary Devi Lal University, Sirsa',placement:'?3-5 LPA avg',hostel:'Available',campus:'Sirsa, Haryana',fees:'~?45,000/year',rank:7}
+};
+
+// -- CALIBRATED RANK PREDICTOR --
+function marksToBaseRank(m){
+  if(m>=39&&m<=40) return Math.round(112-(m-39)*22);
+  if(m===38) return 130;
+  if(m===37) return 153;
+  if(m===36) return 346;
+  if(m===28) return 750;
+  if(m>=80) return Math.round(10+(90-m)*3);
+  if(m>=70) return Math.round(40+(80-m)*7);
+  if(m>=60) return Math.round(110+(70-m)*12);
+  if(m>=50) return Math.round(230+(60-m)*18);
+  if(m>=45) return Math.round(410+(50-m)*30);
+  if(m>=40) return Math.round(560+(45-m)*30);
+  if(m>=34) return Math.round(500+(36-m)*75);
+  if(m>=30) return Math.round(650+(34-m)*75);
+  if(m>=28) return Math.round(750+(30-m)*50);
+  return Math.round(850+(28-m)*60);
+}
+
+function predictRank(){
+  var marks=parseInt(document.getElementById('rp-marks').value);
+  var cat=document.getElementById('rp-cat').value;
+  hideErr('rp-err');
+  if(isNaN(marks)||marks<0||marks>90){showErr('rp-err');return;}
+
+  var base=marksToBaseRank(marks);
+  var mult={GEN:1,AIC:0.8,EWS:0.93,BC_A:1.25,BC_B:1.35,SC:1.8}[cat]||1;
+  var adj=cat!=='GEN'?Math.round(base*mult):base;
+  var lo=Math.max(1,Math.round(adj*0.85)),hi=Math.round(adj*1.15);
+
+  document.getElementById('rp-val').textContent=lo+' – '+hi;
+
+  var zone,zc,bg;
+  if(adj<=120){zone='?? Elite Zone — Top colleges, CSE/IT possible';zc='#6366f1';bg='#eef2ff';}
+  else if(adj<=250){zone='? Excellent Zone — YMCA CSE/IT or DCRUST CSE';zc='#2563eb';bg='#eff6ff';}
+  else if(adj<=450){zone='? Good Zone — GJU CSE or DCRUST ECE';zc='#10b981';bg='#ecfdf5';}
+  else if(adj<=700){zone='?? Average Zone — KUK/CDLU CSE range';zc='#f59e0b';bg:'#fef9ec';}
+  else{zone='?? Below Average — Focus on CDLU or lower colleges';zc='#ef4444';bg='#fff1f2';}
+  bg=bg||'#fef9ec';
+
+  document.getElementById('rp-zone').innerHTML='<div style="background:'+bg+';border-radius:10px;padding:10px 13px;margin-top:10px;font-size:14px;font-weight:800;color:'+zc+'">'+zone+'</div>';
+
+  var tips=marks<50?'Focus heavily on Mathematics (8 marks) and your stream subjects. No negative marking — attempt all 90. Even 5-10 more marks drastically improves rank.':marks<65?'Good score potential. Focus on weak areas in stream section. Solve PYQ papers for time management.':'Strong score! Focus on exam-day strategy — time management, attempting all questions, revision.';
+  document.getElementById('rp-tip').textContent='?? Strategy: '+tips;
+  showRes('rp-result');
+}
+
+function analyzeRank(){
+  var rank=parseInt(document.getElementById('ra-rank').value);
+  var cat=document.getElementById('ra-cat').value;
+  hideErr('ra-err');
+  if(isNaN(rank)||rank<1){showErr('ra-err');return;}
+
+  var tot=2800,pct=Math.min(100,Math.max(1,Math.round(((tot-rank+1)/tot)*100)));
+  var mult={GEN:1,AIC:0.8,EWS:0.93,BC_A:1.25,BC_B:1.35,SC:1.8}[cat]||1;
+  var nr=rank/mult;
+
+  var zone,zc,desc,advice;
+  if(nr<=60){zone='?? Elite';zc='#6366f1';desc='Top 2%';advice='YMCA CSE/IT or DCRUST CSE almost guaranteed. Fill these as top choices.';}
+  else if(nr<=150){zone='? Excellent';zc='#2563eb';desc='Top 5%';advice='YMCA IT/ECE or DCRUST CSE likely. KUK/GJU CSE also a strong option.';}
+  else if(nr<=280){zone='? Good';zc='#10b981';desc='Top 10%';advice='DCRUST ECE or GJU CSE/AI realistic. GJU has good placement trend.';}
+  else if(nr<=450){zone='?? Average';zc='#f59e0b';desc='Top 16%';advice='GJU IT or KUK CSE range. Fill GJU CSE / GJU CSE(AI/ML) as first choice. DCRUST & KUK have NO IT.';}
+  else if(nr<=700){zone='?? Below Average';zc='#ef4444';desc='Top 25%';advice='KUK ECE or CDLU/MDU CSE range. Consider ECE/Electrical at better colleges.';}
+  else{zone='?? Challenging';zc='#dc2626';desc='Below top 25%';advice='CDLU/CRSU/MDU range. Consider ECE or Mechanical at a better college vs CSE at lower.';}
+
+  var h='<div style="text-align:center;padding:14px 0">';
+  h+='<div style="font-size:1.5rem;font-weight:800;color:'+zc+';font-family:Syne,sans-serif;margin-bottom:5px">'+zone+'</div>';
+  h+='<div style="font-size:12px;color:var(--muted)">'+desc+' of LEET students</div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:260px;margin:12px auto 14px">';
+  h+='<div style="background:var(--surface3);border-radius:10px;padding:12px;text-align:center"><div style="font-family:Syne,sans-serif;font-size:1.4rem;font-weight:900;color:var(--b)">'+rank+'</div><div style="font-size:10px;color:var(--muted)">Your Rank</div></div>';
+  h+='<div style="background:var(--surface3);border-radius:10px;padding:12px;text-align:center"><div style="font-family:Syne,sans-serif;font-size:1.4rem;font-weight:900;color:var(--g)">'+pct+'%ile</div><div style="font-size:10px;color:var(--muted)">Approx Percentile</div></div>';
+  h+='</div>';
+  h+='<div style="padding:11px 13px;background:#f0f9ff;border-radius:10px;font-size:13px;line-height:1.65;text-align:left"><strong>?? Advice:</strong> '+advice+'</div>';
+  h+='</div>';
+  document.getElementById('ra-body').innerHTML=h;
+  showRes('ra-result');
+}
+
+function predictColleges(){
+  var rank=parseInt(document.getElementById('cp-rank').value);
+  var cat=document.getElementById('cp-cat').value;
+  var pref=document.getElementById('cp-branch').value;
+  hideErr('cp-err');
+  if(isNaN(rank)||rank<1){showErr('cp-err');return;}
+
+  var data=COLLEGE_DATA[cat]||COLLEGE_DATA.GEN;
+  var results=[];
+  data.forEach(function(r){
+    if(rank<=r.close+20){
+      var bm=pref==='ALL'
+        ||(pref==='CSE'&&r.branch==='CSE')
+        ||(pref==='IT'&&r.branch==='IT')
+        ||(pref==='ECE'&&r.branch==='ECE')
+        ||(pref==='Electrical'&&r.branch.toLowerCase().includes('electrical'))
+        ||(pref==='Mechanical'&&r.branch.toLowerCase().includes('mechanical'))
+        ||(pref==='Civil'&&r.branch.toLowerCase().includes('civil'))
+        ||(pref==='Chemical'&&r.branch.toLowerCase().includes('chemical'))
+        ||(pref==='CSE (AI/ML)'&&r.branch==='CSE (AI/ML)')
+        ||(pref==='AI & Data Science'&&(r.branch==='AI & Data Science'||r.branch.includes('AI')||r.branch.includes('Data Science')))
+        ||(pref==='Robotics & AI'&&r.branch.toLowerCase().includes('robot'));
+      var ch,cc;
+      if(rank<=r.open){ch='? High';cc='c-h';}
+      else if(rank<=r.close){ch='?? Possible';cc='c-m';}
+      else{ch='?? Low';cc='c-l';}
+      results.push(Object.assign({},r,{ch,cc,bm,cr:COL_RANK[r.abbr]||99}));
+    }
+  });
+  var ord={'? High':0,'?? Possible':1,'?? Low':2};
+  results.sort(function(a,b){
+    if(ord[a.ch]!==ord[b.ch])return ord[a.ch]-ord[b.ch];
+    if(a.cr!==b.cr)return a.cr-b.cr;
+    return(a.bm?0:1)-(b.bm?0:1);
+  });
+
+  if(!results.length){
+    document.getElementById('cp-body').innerHTML='<div style="padding:14px;color:var(--muted);font-size:13px;text-align:center">?? No strong predictions for rank '+rank+' in '+cat+'. Contact admin at +91-7988316241 for personal guidance.</div>';
+    showRes('cp-result');return;
+  }
+
+  var h='';
+  results.slice(0,10).forEach(function(r,i){
+    h+='<div class="rrow"><div class="rrow-l"><div class="rcol">'+(i+1)+'. '+r.college+'</div><div class="rbr">'+r.branch+' · Est. closing rank: '+r.close+'</div></div><span class="cbadge '+r.cc+'">'+r.ch+'</span></div>';
+  });
+  h+='<div style="margin-top:10px;font-size:12px;color:var(--muted)">All predictions ±15% variation. Based on 2025 LEET trends. Not official HSTES data.</div>';
+  document.getElementById('cp-body').innerHTML=h;
+  showRes('cp-result');
+}
+
+function buildSmartStrategy(){
+  var rank=parseInt(document.getElementById('sca-rank').value);
+  var cat=document.getElementById('sca-cat').value;
+  var dc=document.getElementById('sca-dream-college').value;
+  var db=document.getElementById('sca-dream-branch').value;
+  if(isNaN(rank)||rank<1){alert('Please enter a valid rank');return;}
+
+  var data=COLLEGE_DATA[cat]||COLLEGE_DATA.GEN;
+  var brMap={CSE:'CSE','CSE (AI/ML)':'CSE (AI/ML)','AI & Data Science':'AI & Data Science',IT:'IT',ECE:'ECE',EE:'Electrical',MECH:'Mechanical',CIVIL:'Civil',Chemical:'Chemical','Robotics & AI':'Robotics & AI'};
+  var tb=brMap[db]||db;
+
+  function findBest(prefBr,excAbbr){
+    var el=data.filter(function(r){return rank<=r.close&&(!excAbbr||r.abbr!==excAbbr);});
+    el.sort(function(a,b){
+      var am=a.branch.includes(prefBr)?0:1,bm=b.branch.includes(prefBr)?0:1;
+      if(am!==bm)return am-bm;
+      return(COL_RANK[a.abbr]||99)-(COL_RANK[b.abbr]||99);
+    });
+    return el[0]||null;
+  }
+
+  var dream=findBest(tb,null);
+  var safe=findBest(tb,dream?dream.abbr:null)||findBest('CSE',null);
+  var bkup=findBest('CSE',null);
+  var di=COL_INFO[dc];
+  var diff=dc==='YMCA'&&rank>160?'?? Very Hard — YMCA CSE/IT seats are extremely limited. Low chance at your rank.':dc==='DCRUST'&&rank>280?'?? Hard — DCRUST is competitive at this rank.':'? Achievable — Your rank is in a reasonable range for this college.';
+
+  var h='<div style="background:linear-gradient(135deg,#dbeafe,#eff6ff);border-radius:12px;padding:13px 15px;margin-bottom:13px">';
+  h+='<div style="font-family:Syne,sans-serif;font-size:10px;font-weight:800;color:#1e40af;text-transform:uppercase;margin-bottom:4px">?? Your Target</div>';
+  if(di)h+='<div style="font-weight:700;font-size:14.5px;color:var(--text)">'+(dc==='ANY'?'Best Available College':di.full)+'</div>';
+  h+='<div style="font-size:13px;color:var(--muted);margin-top:3px">Branch: '+db+'</div>';
+  h+='<div style="font-size:13px;margin-top:7px;font-weight:600;color:#1e40af">'+diff+'</div>';
+  h+='</div>';
+  if(dream)h+='<div class="strat-item"><div class="snum sn-dr">??</div><div class="sinfo"><div class="scol">'+dream.college+'</div><div class="sbr">'+dream.branch+' · Closing ~'+dream.close+'</div></div><span class="stag st-dr">DREAM</span></div>';
+  if(safe)h+='<div class="strat-item"><div class="snum sn-sf">???</div><div class="sinfo"><div class="scol">'+safe.college+'</div><div class="sbr">'+safe.branch+' · Closing ~'+safe.close+'</div></div><span class="stag st-sf">SAFE</span></div>';
+  if(bkup)h+='<div class="strat-item"><div class="snum sn-bk">??</div><div class="sinfo"><div class="scol">'+bkup.college+'</div><div class="sbr">'+bkup.branch+' · Closing ~'+bkup.close+'</div></div><span class="stag st-bk">BACKUP</span></div>';
+  h+='<div style="margin-top:12px;padding:11px 13px;background:var(--surface3);border-radius:10px">';
+  h+='<div style="font-family:Syne,sans-serif;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:7px">Seat Competition</div>';
+  h+='<div style="display:flex;gap:5px;flex-wrap:wrap">';
+  [['CSE','?? Very High','#fee2e2','#991b1b'],['CSE (AI/ML)','?? Very High','#fee2e2','#991b1b'],['AI & Data Science','?? High','#fef3c7','#92400e'],['IT','? High','#fef3c7','#92400e'],['ECE','? Medium','#e0f2fe','#0369a1'],['Electrical','? Medium','#e0f2fe','#0369a1'],['Mechanical','?? Low','#d1fae5','#065f46'],['Civil','?? Low','#d1fae5','#065f46'],['Chemical','?? Low','#d1fae5','#065f46']].forEach(function(b){
+    h+='<span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;background:'+b[2]+';color:'+b[3]+'">'+b[0]+': '+b[1]+'</span>';
+  });
+  h+='</div></div>';
+  h+='<div class="note note-a mt12">?? <strong>Warning:</strong> Fill at least 5-7 choices. Never put CDLU above DCRUST or GJU. Note: DCRUST has no IT — choose CSE, ECE, or Chemical. Round 2 upgrade is always possible if you hold a seat.</div>';
+  document.getElementById('sca-body').innerHTML=h;
+  showRes('sca-result');
+}
+
+function generateAIChoices(){
+  var rank=parseInt(document.getElementById('cf-rank').value);
+  var cat=document.getElementById('cf-cat').value;
+  var pref=document.getElementById('cf-pref').value;
+  if(isNaN(rank)||rank<1){alert('Please enter a valid rank');return;}
+
+  var data=COLLEGE_DATA[cat]||COLLEGE_DATA.GEN;
+  var brMap={CSE:'CSE','CSE (AI/ML)':'CSE (AI/ML)','AI & Data Science':'AI & Data Science',IT:'IT',ECE:'ECE',EE:'Electrical',MECH:'Mechanical',CIVIL:'Civil',Chemical:'Chemical','Robotics & AI':'Robotics & AI'};
+  var pb=brMap[pref]||pref;
+
+  var scored=[];
+  data.forEach(function(r){
+    if(rank<=r.close+15){
+      var wc=rank<=r.close?1:0;
+      var bs=r.branch.includes(pb)?0:1;
+      scored.push(Object.assign({},r,{score:wc*-1000+bs*100+(COL_RANK[r.abbr]||99)*10}));
+    }
+  });
+  scored.sort(function(a,b){return a.score-b.score;});
+
+  var seen=new Set();
+  var uniq=scored.filter(function(r){var k=r.abbr+'|'+r.branch;if(seen.has(k))return false;seen.add(k);return true;});
+
+  var reasons={YMCA:'Best placement in Haryana (J.C. Bose Univ.) — Branches: CSE, IT, ECE, Electrical, Mech, Civil, Robotics & AI',DCRUST:'Strong engg. college — 112-acre campus, Murthal. Branches: CSE, ECE, Electrical, Mech, Civil, Chemical, Bio-Tech',GJU:'Good placements — Branches: CSE, CSE(AI/ML), AI & DS, IT, ECE, Electrical, Mech, Civil, Food, Printing, Packaging',KUK:'Established university — UIET KUK Branches: CSE, CSE(AI/ML), ECE, Electrical & Computer, Mechanical',MDU:'UIET Rohtak — Branches: CSE, CSE(AI/ML), ECE, Electrical, Mechanical, Civil, Bio-Tech',CRSU:'Jind — safe backup option',CDLU:'Sirsa — Branches: CSE, ECE, Electrical, Mechanical, Civil, Food Technology'};
+
+  if(!uniq.length){document.getElementById('cf-body').innerHTML='<div style="padding:14px;color:var(--muted);font-size:13px">No choices for rank '+rank+'. Contact admin for help.</div>';showRes('cf-result');return;}
+
+  var h='<div class="choice-list">';
+  uniq.slice(0,8).forEach(function(r,i){
+    var wc=rank<=r.close;
+    h+='<div class="choice-item"><div class="cnum'+(wc?'':' warn')+'">'+(i+1)+'</div><div class="cinfo"><div class="ctxt">'+r.abbr+' — '+r.branch+'</div><div class="creason">'+(reasons[r.abbr]||'Good option')+' · Est. cutoff: '+r.close+'</div></div></div>';
+  });
+  h+='</div><div style="margin-top:10px;font-size:12.5px;color:var(--muted)"><strong>?? AI Tip:</strong> Red-numbered choices are at/above your rank — add as aspirational choices. Fill at least 6-8 for safety.</div>';
+  document.getElementById('cf-body').innerHTML=h;
+  showRes('cf-result');
+}
+
+function detectMistakes(){
+  var input=document.getElementById('cmd-choices').value.trim();
+  if(!input){alert('Please enter your planned choices first');return;}
+  var lines=input.split('\n').map(function(l){return l.trim();}).filter(Boolean);
+  var colleges=lines.map(function(l){
+    var u=l.toUpperCase();
+    if(u.includes('YMCA')||u.includes('J.C. Bose')||u.includes('JC Bose'))return{name:'YMCA (J.C. Bose) Faridabad',rank:1,line:l};
+    if(u.includes('DCRUST')||u.includes('Deen Bandhu'))return{name:'DCRUST Murthal',rank:2,line:l};
+    if(u.includes('GJU')||u.includes('GURU JAMBHESHWAR'))return{name:'GJU Hisar',rank:3,line:l};
+    if(u.includes('KUK')||u.includes('KURUKSHETRA'))return{name:'KUK',rank:4,line:l};
+    if(u.includes('MDU')||u.includes('ROHTAK'))return{name:'MDU Rohtak',rank:5,line:l};
+    if(u.includes('CRSU')||u.includes('JIND'))return{name:'CRSU Jind',rank:6,line:l};
+    if(u.includes('CDLU')||u.includes('SIRSA'))return{name:'CDLU Sirsa',rank:7,line:l};
+    return{name:l,rank:99,line:l};
+  });
+
+  var mistakes=[];
+  for(var i=0;i<colleges.length-1;i++){
+    for(var j=i+1;j<colleges.length;j++){
+      if(colleges[i].rank>colleges[j].rank&&colleges[i].rank!==99&&colleges[j].rank!==99){
+        mistakes.push({title:'?? Wrong Order Detected',msg:'Choice '+(i+1)+' ('+colleges[i].name+') is ranked lower than Choice '+(j+1)+' ('+colleges[j].name+'). Swap them — '+colleges[j].name+' should come higher to maximize your chances.'});
+        break;
+      }
+    }
+    if(mistakes.length)break;
+  }
+  if(lines.length<5)mistakes.push({title:'?? Too Few Choices',msg:'You have only '+lines.length+' choice(s). Always fill at least 6-8 choices. With few choices you risk getting nothing if top choices do not allot.'});
+  var cdI=colleges.findIndex(function(c){return c.rank>=7;}),dcI=colleges.findIndex(function(c){return c.rank<=2;});
+  if(cdI!==-1&&dcI!==-1&&cdI<dcI)mistakes.push({title:'?? CDLU placed above better college',msg:'CDLU Sirsa (Choice '+(cdI+1)+') is above '+colleges[dcI].name+' (Choice '+(dcI+1)+'). Move '+colleges[dcI].name+' higher.'});
+
+  var h='';
+  if(!mistakes.length){
+    h='<div style="padding:14px;text-align:center"><div style="font-size:1.5rem;margin-bottom:8px">?</div><div style="font-weight:700;color:var(--g)">No obvious mistakes detected!</div><div style="font-size:13px;color:var(--muted);margin-top:5px">Your choice order looks reasonable. Verify with official HSTES data.</div></div>';
+  }else{
+    mistakes.forEach(function(m){h+='<div class="mistake-item"><h4>'+m.title+'</h4><p>'+m.msg+'</p></div>';});
+    var byR=colleges.slice().sort(function(a,b){return a.rank-b.rank;});
+    h+='<div style="margin-top:11px;padding:11px 13px;background:var(--gl);border-radius:10px"><div style="font-family:Syne,sans-serif;font-size:10.5px;font-weight:800;color:#065f46;margin-bottom:7px">RECOMMENDED ORDER:</div>';
+    byR.forEach(function(c,i){h+='<div style="font-size:13px;padding:3px 0;color:var(--text)">'+(i+1)+'. '+c.name+'</div>';});
+    h+='</div>';
+  }
+  document.getElementById('cmd-body').innerHTML=h;
+  showRes('cmd-result');
+}
+
+function calculateUpgrade(){
+  var rank=parseInt(document.getElementById('uc-rank').value);
+  var r1=document.getElementById('uc-round1').value;
+  if(isNaN(rank)||rank<1){alert('Please enter a valid rank');return;}
+
+  var targets={
+    'GJU-CSE':[{tgt:'YMCA IT',close:160,r2:41,r3:28},{tgt:'DCRUST CSE',close:200,r2:26,r3:18},{tgt:'GJU CSE (AI/ML)',close:220,r2:60,r3:42}],
+    'GJU-AI & Data Science':[{tgt:'YMCA IT',close:160,r2:38,r3:25},{tgt:'DCRUST CSE',close:200,r2:22,r3:15},{tgt:'YMCA CSE',close:110,r2:15,r3:10}],
+    'GJU-IT':[{tgt:'GJU CSE',close:260,r2:50,r3:35},{tgt:'DCRUST CSE',close:200,r2:30,r3:20},{tgt:'YMCA IT',close:160,r2:20,r3:12}],
+    'KUK-CSE':[{tgt:'GJU CSE',close:260,r2:55,r3:40},{tgt:'GJU AI & Data Science',close:230,r2:60,r3:42},{tgt:'DCRUST ECE',close:340,r2:38,r3:28}],
+    'KUK-ECE':[{tgt:'KUK CSE',close:420,r2:70,r3:55},{tgt:'GJU CSE',close:260,r2:60,r3:45},{tgt:'GJU CSE (AI/ML)',close:220,r2:55,r3:40}],
+    'MDU-CSE':[{tgt:'KUK CSE',close:420,r2:55,r3:38},{tgt:'GJU CSE',close:260,r2:32,r3:22},{tgt:'DCRUST ECE',close:340,r2:28,r3:18}],
+    'CDLU-CSE':[{tgt:'KUK CSE',close:420,r2:62,r3:48},{tgt:'GJU IT',close:310,r2:45,r3:32},{tgt:'MDU CSE',close:550,r2:70,r3:55}],
+    'CRSU-CSE':[{tgt:'KUK CSE',close:420,r2:58,r3:44},{tgt:'GJU CSE',close:260,r2:38,r3:26},{tgt:'DCRUST ECE',close:340,r2:32,r3:22}],
+    'DCRUST-ECE':[{tgt:'DCRUST CSE',close:200,r2:35,r3:22},{tgt:'GJU CSE',close:260,r2:48,r3:33},{tgt:'YMCA ECE',close:230,r2:28,r3:18}],
+    'NONE':[{tgt:'KUK CSE',close:420,r2:65,r3:52},{tgt:'GJU CSE',close:260,r2:45,r3:35},{tgt:'CDLU CSE',close:620,r2:80,r3:70}]
+  };
+
+  var tgts=targets[r1]||targets.NONE;
+  var r1lbl=r1==='NONE'?'No allotment':r1.replace('-',' — ');
+  var h='<div style="margin-bottom:12px;padding:10px 13px;background:var(--surface3);border-radius:10px;font-size:13px"><strong>Round 1:</strong> '+r1lbl+' · <strong>Your Rank:</strong> '+rank+'</div>';
+  h+='<div style="font-family:Syne,sans-serif;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:10px;letter-spacing:.08em">Upgrade Possibilities:</div>';
+  tgts.forEach(function(t){
+    var wc=rank<=t.close;
+    var r2=wc?t.r2:Math.max(5,t.r2-25);
+    var r3=wc?t.r3:Math.max(3,t.r3-20);
+    var c=r2>=60?'var(--g)':r2>=35?'var(--a)':'var(--r)';
+    h+='<div class="upgrade-row"><div class="up-target">'+t.tgt+' <span style="font-size:11px;color:var(--muted);font-weight:400">· Est. closing: '+t.close+'</span></div>';
+    h+='<div class="up-chances">';
+    h+='<div class="up-chance"><div class="up-pct" style="color:'+c+'">'+r2+'%</div><div class="up-lbl">Round 2</div></div>';
+    h+='<div class="up-chance"><div class="up-pct" style="color:var(--muted)">'+r3+'%</div><div class="up-lbl">Round 3</div></div>';
+    h+='</div></div>';
+  });
+  h+='<div class="note note-a mt12">?? Approximate analytical estimates based on 2025 seat patterns. Actual chances depend on student floats and official seat availability.</div>';
+  document.getElementById('uc-body').innerHTML=h;
+  showRes('uc-result');
+}
+
+function compareColleges(){
+  var c1k=document.getElementById('cc-col1').value;
+  var c2k=document.getElementById('cc-col2').value;
+  if(c1k===c2k){alert('Please select two different colleges');return;}
+  var c1=COL_INFO[c1k],c2=COL_INFO[c2k];
+  if(!c1||!c2)return;
+
+  var rows=[
+    ['Placement Avg',c1.placement,c2.placement,c1.rank<c2.rank],
+    ['Annual Fees',c1.fees,c2.fees,c1.rank<c2.rank],
+    ['Hostel',c1.hostel,c2.hostel,null],
+    ['Campus',c1.campus,c2.campus,null],
+    ['Haryana Ranking','#'+c1.rank+' in Haryana','#'+c2.rank+' in Haryana',c1.rank<c2.rank]
+  ];
+
+  var h='<div class="cmp-grid">';
+  h+='<div class="cmp-col"><div class="cmp-hdr ch1">'+c1k+'</div>';
+  rows.forEach(function(r){h+='<div class="cmp-row"><div class="cmp-lbl">'+r[0]+'</div><div class="cmp-val'+(r[2]===true?' cmp-win':'')+'">'+r[1]+'</div></div>';});
+  h+='</div>';
+  h+='<div class="cmp-col"><div class="cmp-hdr ch2">'+c2k+'</div>';
+  var c2vals=[c2.placement,c2.fees,c2.hostel,c2.campus,'#'+c2.rank+' in Haryana'];
+  rows.forEach(function(r,i){h+='<div class="cmp-row"><div class="cmp-lbl">'+r[0]+'</div><div class="cmp-val'+(r[2]===false?' cmp-win':'')+'">'+c2vals[i]+'</div></div>';});
+  h+='</div></div>';
+  h+='<div style="margin-top:11px;padding:11px 13px;background:var(--surface3);border-radius:10px;font-size:12.5px;color:var(--muted)">?? <strong>Recommendation:</strong> '+(c1.rank<c2.rank?c1k+' is generally considered the better option based on placement and reputation.':c2k+' is generally considered the better option.')+'</div>';
+  h+='<div class="note note-a mt12">Placement figures are approximate community-reported averages, not official placement statistics.</div>';
+  document.getElementById('cc-body').innerHTML=h;
+  showRes('cc-result');
+}
+
+function showCutoffs(){
+  var cat=document.getElementById('ca-cat').value;
+  var data=COLLEGE_DATA[cat]||COLLEGE_DATA.GEN;
+  document.getElementById('ca-title').textContent='?? Estimated 2025 Closing Ranks — '+cat+' Category';
+  var h='<div style="overflow-x:auto"><table class="dtable"><thead><tr><th>College</th><th>Branch</th><th>Opening</th><th>Closing</th></tr></thead><tbody>';
+  data.forEach(function(r){h+='<tr><td><strong>'+r.abbr+'</strong></td><td>'+r.branch+'</td><td>'+r.open+'</td><td>'+r.close+'</td></tr>';});
+  h+='</tbody></table></div><div style="margin-top:9px;font-size:12px;color:var(--muted)">Estimated values based on 2025 LEET allotment trends. Not official HSTES data. ±15% variation possible.</div>';
+  document.getElementById('ca-body').innerHTML=h;
+  showRes('ca-result');
+}
+
+// -- AI CHATBOT --
+async function sendAI(preset){
+  var inp=document.getElementById('ai-input');
+  var txt=preset||inp.value.trim();
+  if(!txt)return;
+  inp.value='';
+  addMsg(txt,'user');
+  var thinking=addMsg('? Thinking...','bot');
+  try{
+    var ctx='You are an expert AI assistant for Haryana LEET 2026 (B.Tech Lateral Entry). Help with: LEET syllabus (90 MCQs, 90 mins, Section A: Basic Sciences 25 marks, Section B: Electronics/CS 25 marks, Section C: Mechanical 20 marks, Section D: Other streams 20 marks), exam strategy, counselling process, college info. No negative marking. Answer in 3-5 concise sentences. If unrelated to LEET/HSBTE, say you can only help with LEET topics.';
+    // Call via Vercel API route (stores key server-side)
+    var res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:ctx+'\n\nStudent: '+txt})});
+    var d=await res.json();
+    thinking.remove();
+    addMsg(d.reply||'No response. Try the prediction tools above.',d.reply?'bot':'bot',!!d.reply);
+  }catch(e){
+    thinking.remove();
+    addMsg('?? Assistant is in beta version. Please try again later!','bot');
+  }
+}
+
+function addMsg(txt,cls,animate){
+  var msgs=document.getElementById('ai-messages');
+  var div=document.createElement('div');
+  div.className='cmsg '+cls;
+  msgs.appendChild(div);
+  if(animate&&txt){
+    var i=0;
+    (function type(){if(i<txt.length){div.textContent+=txt[i++];msgs.scrollTop=msgs.scrollHeight;setTimeout(type,11);}})();
+  }else{div.textContent=txt;}
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+document.getElementById('ai-input').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();sendAI();}});
+
+// -- STUDY PLANNER --
+var TOPICS_A=['Mathematics — Progressions & Complex Numbers','Mathematics — Trigonometry & Straight Lines','Mathematics — Differentiation & Integration','Mathematics — Probability & Statistics','Physics — Laws of Motion & Work Energy','Physics — Waves & Thermodynamics','Physics — Electrostatics & Optics','Chemistry — Water Treatment & pH','Chemistry — Electronic Configuration','Communication Skills — Grammar & Vocabulary','General Awareness — Haryana Technical Education'];
+var TOPICS_STREAM={CS:['Elements of Electrical Engg — Circuits & Theorems','Elements of Electronics — Semiconductors & Op-Amps','Digital Electronics — Logic Gates & Boolean Algebra','Computer Fundamentals — Organization & OS Concepts','Programming in C — Data Types, Control Flow, Arrays','Computer Networks — LAN/WAN/Internet Basics'],EE:['Electrical Circuits — EMF, Kirchhoff Laws, Network Theorems','AC Circuits — RMS, RLC, Resonance','Transformers — Single & Three Phase','DC Machines — Generator & Motor','Induction Motors — Principle & Construction','Electronics — Semiconductors, BJT, FET, Op-Amps'],ME:['Applied Mechanics — Friction, Centroid, Pulleys','Strength of Materials — Stress, Strain, BM & SF Diagrams','Thermodynamics — First Law, Second Law, Cycles','Fluid Mechanics — Viscosity, Bernoulli, Flow Types','Manufacturing — Lathe, Drilling, Milling, Welding','Automobile Engineering — Gear Box, Brakes, Clutches'],CE:['Soil Mechanics — Index Properties, Seepage','RCC Basics — Grades of Concrete, Mixing','Surveying — Chain, Compass, Benchmarks','Water Supply — Sources, Treatment, Demand','Foundations — Types','Roads & Bridges — Pavements, Classification']};
+var topicR={};
+
+function initTopics(){
+  var sa=document.getElementById('topics-sec-a');sa.innerHTML='';
+  TOPICS_A.forEach(function(t,i){var k='a_'+i;topicR[k]='medium';sa.innerHTML+=tHtml(k,t);});
+  var stream=document.getElementById('pl-stream').value;
+  var st=TOPICS_STREAM[stream]||TOPICS_STREAM.CS;
+  var ss=document.getElementById('topics-stream');ss.innerHTML='';
+  st.forEach(function(t,i){var k='b_'+i;topicR[k]='medium';ss.innerHTML+=tHtml(k,t);});
+  var snames={CS:'Section B — Computer Engineering (25 marks)',EE:'Section B — Electronics Engineering (25 marks)',ME:'Section C — Mechanical Engineering (20 marks)',CE:'Section D — Civil Engineering (20 marks)'};
+  document.getElementById('stream-sec-title').textContent=snames[stream]||'Section B — Stream Subject (25 marks)';
+}
+
+function tHtml(k,name){return'<div class="titem medium" id="ti_'+k+'"><div class="tname">'+name+'</div><div class="tbtns"><button class="tbtn tb-s" onclick="setT(\''+k+'\',\'strong\')">??</button><button class="tbtn tb-m on" onclick="setT(\''+k+'\',\'medium\')">??</button><button class="tbtn tb-w" onclick="setT(\''+k+'\',\'weak\')">??</button></div></div>';}
+
+function setT(k,r){
+  topicR[k]=r;
+  var el=document.getElementById('ti_'+k);el.className='titem '+r;
+  var bs=el.querySelectorAll('.tbtn');
+  bs.forEach(function(b){b.classList.remove('on');});
+  bs[r==='strong'?0:r==='medium'?1:2].classList.add('on');
+}
+
+document.getElementById('pl-stream').addEventListener('change',initTopics);
+
+function generateStudyPlan(){
+  var days=parseInt(document.getElementById('pl-days').value)||30;
+  var hours=parseInt(document.getElementById('pl-hours').value)||5;
+  var level=document.getElementById('pl-level').value;
+  var stream=document.getElementById('pl-stream').value;
+  var weak=Object.keys(topicR).filter(function(k){return topicR[k]==='weak';});
+  var medium=Object.keys(topicR).filter(function(k){return topicR[k]==='medium';});
+  var strong=Object.keys(topicR).filter(function(k){return topicR[k]==='strong';});
+  var allT=[...TOPICS_A,...(TOPICS_STREAM[stream]||TOPICS_STREAM.CS)];
+  function tn(k){var i=parseInt(k.split('_')[1]);return k.startsWith('a_')?TOPICS_A[i]:(TOPICS_STREAM[stream]||TOPICS_STREAM.CS)[i];}
+  var p1=Math.round(days*.35),p2=Math.round(days*.3),p3=Math.round(days*.2),p4=days-p1-p2-Math.round(days*.2);
+  var c='';
+  c+='<div style="margin-bottom:18px">';
+  c+='<h4 style="font-family:Syne,sans-serif;font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px">Your Preparation Level:</h4>';
+  c+='<div class="prog-item"><div class="prog-label"><span>Strong Topics</span><span>'+strong.length+'/'+allT.length+'</span></div><div class="prog-track"><div class="prog-fill" style="width:'+(strong.length/allT.length*100)+'%;background:var(--g)"></div></div></div>';
+  c+='<div class="prog-item"><div class="prog-label"><span>Medium Topics</span><span>'+medium.length+'</span></div><div class="prog-track"><div class="prog-fill" style="width:'+(medium.length/allT.length*100)+'%;background:var(--a)"></div></div></div>';
+  c+='<div class="prog-item"><div class="prog-label"><span>Weak Topics</span><span>'+weak.length+'</span></div><div class="prog-track"><div class="prog-fill" style="width:'+(weak.length/allT.length*100)+'%;background:var(--r)"></div></div></div>';
+  c+='</div>';
+  if(weak.length){c+='<div class="note note-r" style="margin-bottom:14px">?? <strong>Priority Weak Topics (3 hrs/day each):</strong><br>';weak.forEach(function(k){c+='• '+tn(k)+'<br>';});c+='</div>';}
+  c+='<div class="plan-phase" style="border-color:var(--r)"><h4 style="color:var(--r)">Phase 1 — Foundation (Days 1 to '+p1+')</h4>';
+  c+='<div class="plan-day"><div class="pday-num">Focus</div><div>Weak topics first: '+hours+' hrs/day · '+(hours>=3?'3 hrs weak topics, '+(hours-3)+' hrs medium topics':'All hours on weak topics')+'</div></div></div>';
+  c+='<div class="plan-phase" style="border-color:var(--a)"><h4 style="color:#92400e">Phase 2 — Core Concepts (Days '+(p1+1)+' to '+(p1+p2)+')</h4>';
+  c+='<div class="plan-day"><div class="pday-num">Focus</div><div>Medium topics — 2 hrs/topic · Revise weak topics 1 hr daily</div></div>';
+  c+='<div class="plan-day"><div class="pday-num">Tip</div><div>Solve 20-30 MCQs per day from sample papers. Focus on Section A Math.</div></div></div>';
+  c+='<div class="plan-phase" style="border-color:var(--b)"><h4 style="color:var(--b)">Phase 3 — Practice Phase (Days '+(p1+p2+1)+' to '+(p1+p2+p3)+')</h4>';
+  c+='<div class="plan-day"><div class="pday-num">Focus</div><div>PYQ papers + sample papers — 50 MCQs/day target</div></div>';
+  c+='<div class="plan-day"><div class="pday-num">Tip</div><div>Time yourself — 90 questions in 90 minutes strategy</div></div></div>';
+  c+='<div class="plan-phase" style="border-color:var(--g)"><h4 style="color:#065f46">Phase 4 — Revision (Last '+p4+' days)</h4>';
+  c+='<div class="plan-day"><div class="pday-num">Focus</div><div>Full mock tests + weak topic revision + formula sheets</div></div>';
+  c+='<div class="plan-day"><div class="pday-num">Tip</div><div>Burnout protection: 10-min break every 90 minutes of study</div></div></div>';
+  c+='<div style="background:var(--surface3);border-radius:var(--radius);padding:14px 16px;margin-top:14px">';
+  c+='<h4 style="font-family:Syne,sans-serif;font-size:13px;font-weight:800;margin-bottom:10px">?? Daily Routine ('+hours+' hours/day):</h4>';
+  var rem=hours,ri=[['Mathematics',Math.min(2,rem)],['Stream Subjects',Math.min(2,Math.max(0,rem-2))],['Physics/Chemistry',Math.min(1,Math.max(0,rem-4))],['MCQ Practice & Revision',Math.max(0,rem-5)]];
+  ri.forEach(function(r){if(r[1]>0)c+='<div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--border)"><span>'+r[0]+'</span><span style="font-weight:700">'+r[1]+' hr'+(r[1]>1?'s':'')+'</span></div>';});
+  c+='</div>';
+  document.getElementById('plan-content').innerHTML=c;
+  document.getElementById('planner-inputs').style.display='none';
+  document.getElementById('planner-output').style.display='block';
+}
+
+function resetPlanner(){
+  document.getElementById('planner-inputs').style.display='block';
+  document.getElementById('planner-output').style.display='none';
+}
+
+// -- REVIEWS --
+var selRating=0;
+function setRating(v){
+  selRating=v;
+  document.querySelectorAll('.star-btn').forEach(function(b){
+    b.classList.toggle('lit',parseInt(b.dataset.val)<=v);
+  });
+}
+
+async function submitReview(){
+  var msg=document.getElementById('rev-msg').value.trim();
+  var name=sessionStorage.getItem('prem_name')||'Anonymous';
+  var uid=sessionStorage.getItem('prem_uid');
+  var st=document.getElementById('rev-status'),btn=document.getElementById('btn-rev');
+  if(!selRating){st.style.display='block';st.style.color='var(--r)';st.textContent='Please select a star rating.';return;}
+  if(!msg||msg.length<10){st.style.display='block';st.style.color='var(--r)';st.textContent='Please write at least 10 characters.';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin-sm"></span> Submitting...';
+  try{
+    await sb.from('reviews').insert([{user_id:uid,full_name:name,rating:selRating,message:msg,is_approved:false}]);
+    st.style.display='block';st.style.color='var(--g)';st.textContent='? Review submitted! It will appear after admin approval. Thank you!';
+    document.getElementById('rev-msg').value='';setRating(0);
+  }catch(e){
+    st.style.display='block';st.style.color='var(--r)';st.textContent='?? Error submitting review. Please try again.';
+  }
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Review';
+}
+
+// -- SIDEBAR ACTIVE STATE ON SCROLL --
+var sections=['sec-rank','sec-college','sec-strategy','sec-choices','sec-upgrade','sec-demand','sec-compare','sec-ai','sec-planner','sec-reviews'];
+var sbBtns=document.querySelectorAll('.sb-item');
+window.addEventListener('scroll',function(){
+  var scrollY=window.scrollY+80;
+  sections.forEach(function(id,i){
+    var el=document.getElementById(id);
+    if(!el)return;
+    if(scrollY>=el.offsetTop){
+      sbBtns.forEach(function(b){b.classList.remove('active');});
+      if(sbBtns[i])sbBtns[i].classList.add('active');
+    }
+  });
+},{passive:true});
+
+// Init
+initTopics();
+showCutoffs();
+
+/* -- SECURITY -- */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12'||e.keyCode===123)e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){
+  var s=document.createElement('style');
+  s.textContent='@media print{body{display:none!important;}}';
+  document.head.appendChild(s);
+})();
+// Removed DevTools protection that was wiping the page (causing false positives)
+</script>
+</body>
+</html>

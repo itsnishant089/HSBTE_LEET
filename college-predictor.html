@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3142279668395491" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
+  <title>College Predictor — Haryana LEET 2025 | hsbteleet.com</title>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0e1a;--card:#111827;--card2:#161f30;--text:#e8edf5;--muted:#7b8db0;
+      --border:#1e2d45;--blue:#3b82f6;--indigo:#6366f1;--gold:#f59e0b;
+      --green:#22c55e;--red:#ef4444;--purple:#a855f7;--teal:#14b8a6;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+    /* -- ACCESS GUARD -- */
+    #access-denied{display:none;position:fixed;inset:0;background:#000;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied .lock{font-size:4rem;margin-bottom:16px;animation:pulse 1.5s ease infinite;}
+    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+    #access-denied h2{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:10px;}
+    #access-denied p{color:#94a3b8;max-width:380px;line-height:1.7;margin-bottom:24px;}
+    .btn-login{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:50px;
+      background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;font-weight:800;font-size:.95rem;text-decoration:none;
+      box-shadow:0 8px 24px rgba(99,102,241,.4);transition:.2s;}
+    .btn-login:hover{transform:translateY(-2px);}
+
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
+    .spin{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--indigo);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:14px;color:var(--muted);}
+
+    /* WATERMARK */
+    #wm-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;user-select:none;-webkit-user-select:none;}
+    .wm-row{position:absolute;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
+      letter-spacing:4px;text-transform:uppercase;color:transparent;
+      background-image:linear-gradient(135deg,rgba(99,102,241,.1) 0%,rgba(99,102,241,.18) 50%,rgba(99,102,241,.1) 100%);
+      -webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0.5px rgba(99,102,241,.2);
+      mix-blend-mode:screen;filter:blur(0.2px);transform:rotate(-28deg);transform-origin:left center;}
+
+    #main-page{display:none;}
+
+    /* NAVBAR */
+    .navbar{position:sticky;top:0;z-index:500;background:rgba(10,14,26,.92);
+      backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;
+      display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;}
+    .navbar::-webkit-scrollbar{display:none;}
+    .nav-brand{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:var(--indigo);
+      margin-right:20px;white-space:nowrap;text-decoration:none;flex-shrink:0;padding:16px 0;}
+    .nav-item{display:flex;align-items:center;gap:6px;padding:16px 13px;font-size:12.5px;font-weight:600;
+      color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;
+      transition:.18s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
+      border-radius:0;flex-shrink:0;}
+    .nav-item:hover{color:var(--text);}
+    .nav-item.active{border-bottom-color:var(--teal);color:#fff;}
+    .nav-right{margin-left:auto;flex-shrink:0;}
+    .nav-logout{padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);background:transparent;
+      color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;transition:.2s;}
+    .nav-logout:hover{border-color:var(--red);color:var(--red);}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:32px 20px 80px;position:relative;z-index:2;}
+
+    /* HERO */
+    .hero{background:linear-gradient(135deg,#0c1a22,#0f2b1f,#0d3321);
+      border-radius:24px;padding:34px 30px;margin-bottom:28px;
+      display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+      border:1px solid rgba(20,184,166,.2);box-shadow:0 0 50px rgba(20,184,166,.08);position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-40%;right:-5%;width:400px;height:400px;border-radius:50%;
+      background:radial-gradient(circle,rgba(20,184,166,.12) 0%,transparent 65%);pointer-events:none;}
+    .hero-icon{font-size:3.2rem;flex-shrink:0;}
+    .hero h1{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:800;margin-bottom:6px;color:#fff;}
+    .hero p{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.6;max-width:540px;}
+    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+    .hero-badge{background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.3);
+      border-radius:50px;padding:4px 12px;font-size:11.5px;font-weight:700;color:#5eead4;}
+
+    /* FORM CARD */
+    .form-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:28px;margin-bottom:24px;}
+    .form-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:800;color:#fff;
+      margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+    .form-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.5;}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:620px){.form-grid{grid-template-columns:1fr;}}
+    .form-group{display:flex;flex-direction:column;gap:7px;}
+    .form-group.full{grid-column:1/-1;}
+    .form-group label{font-size:11.5px;font-weight:700;color:#a5b4fc;text-transform:uppercase;letter-spacing:.5px;}
+    .form-inp,.form-select{
+      padding:12px 14px;border-radius:11px;border:1.5px solid var(--border);
+      background:rgba(255,255,255,.04);color:var(--text);font-size:.95rem;font-weight:600;
+      outline:none;width:100%;transition:.2s;font-family:'DM Sans',sans-serif;
+    }
+    .form-inp:focus,.form-select:focus{border-color:var(--teal);background:rgba(20,184,166,.05);}
+    .form-select option{background:#1a2332;}
+
+    /* BRANCH MULTI-SELECT */
+    .branch-grid{display:flex;flex-wrap:wrap;gap:8px;}
+    .branch-btn{padding:7px 14px;border-radius:50px;border:1.5px solid var(--border);
+      background:transparent;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;transition:.2s;}
+    .branch-btn:hover{border-color:var(--teal);color:var(--teal);}
+    .branch-btn.sel{background:rgba(20,184,166,.15);border-color:var(--teal);color:#5eead4;}
+
+    /* COLLEGE PREF ORDER */
+    .pref-list{display:flex;flex-direction:column;gap:8px;}
+    .pref-item{display:flex;align-items:center;gap:10px;padding:10px 14px;
+      background:var(--card2);border:1.5px solid var(--border);border-radius:10px;cursor:grab;}
+    .pref-item:active{cursor:grabbing;}
+    .pref-num{width:26px;height:26px;border-radius:50%;background:var(--indigo);
+      color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .pref-name{flex:1;font-size:13.5px;font-weight:600;color:var(--text);}
+    .pref-handle{color:var(--muted);font-size:.9rem;}
+
+    /* PREDICT BTN */
+    .predict-btn{
+      width:100%;padding:15px;background:linear-gradient(135deg,var(--teal),#0d9488);
+      color:#fff;border:none;border-radius:13px;font-size:1rem;font-weight:800;cursor:pointer;
+      font-family:'Space Grotesk',sans-serif;letter-spacing:.3px;transition:.2s;margin-top:8px;
+    }
+    .predict-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,184,166,.35);}
+
+    /* RESULTS */
+    #results-section{display:none;}
+    #results-section.show{display:block;animation:fadeUp .4s ease;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+    .results-hero{background:linear-gradient(135deg,rgba(20,184,166,.12),rgba(20,184,166,.04));
+      border:1px solid rgba(20,184,166,.25);border-radius:18px;padding:22px 24px;margin-bottom:20px;
+      display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+    .results-rank-big{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:900;
+      background:linear-gradient(135deg,var(--teal),#22c55e);-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .results-rank-label{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+
+    .result-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+    .result-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;
+      position:relative;overflow:hidden;transition:.2s;}
+    .result-card:hover{border-color:rgba(20,184,166,.3);transform:translateY(-2px);}
+    .result-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+    .rc-likely::before{background:linear-gradient(90deg,#22c55e,#4ade80);}
+    .rc-possible::before{background:linear-gradient(90deg,#f59e0b,#fbbf24);}
+    .rc-difficult::before{background:linear-gradient(90deg,#ef4444,#f87171);}
+    .rc-top{position:absolute;top:14px;right:14px;}
+    .chance-badge{display:inline-block;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800;}
+    .cb-likely{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.25);}
+    .cb-possible{background:rgba(245,158,11,.15);color:#fcd34d;border:1px solid rgba(245,158,11,.25);}
+    .cb-difficult{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.25);}
+    .rc-col-name{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:#fff;margin-bottom:4px;padding-right:80px;}
+    .rc-col-loc{font-size:11.5px;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:5px;}
+    .rc-branch-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+    .rc-branch{font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;}
+    .rcb-good{background:rgba(34,197,94,.1);color:#86efac;border:1px solid rgba(34,197,94,.2);}
+    .rcb-ok{background:rgba(245,158,11,.1);color:#fcd34d;border:1px solid rgba(245,158,11,.2);}
+    .rcb-hard{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2);}
+    .rc-cutoff-row{display:flex;gap:10px;flex-wrap:wrap;}
+    .rc-stat{background:var(--card2);border-radius:9px;padding:7px 12px;display:flex;flex-direction:column;align-items:center;}
+    .rc-stat-v{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:800;color:var(--blue);}
+    .rc-stat-l{font-size:10px;color:var(--muted);font-weight:600;margin-top:1px;text-align:center;}
+    .rc-tip{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.5;font-style:italic;}
+
+    .no-results{text-align:center;padding:40px 20px;color:var(--muted);}
+    .no-results .icon{font-size:3rem;margin-bottom:12px;}
+
+    @media(max-width:500px){.wrap{padding:20px 14px 60px;}.hero{padding:22px 16px;}.hero h1{font-size:1.3rem;}}
+  </style>
+</head>
+<body>
+
+<div id="access-denied">
+  <div class="lock">??</div>
+  <h2>Premium Access Required</h2>
+  <p>This page is only accessible to premium members. Please login to continue.</p>
+  <a href="/premium-login" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login to Premium</a>
+</div>
+
+<div id="page-loader">
+  <div class="spin"></div>
+  <p>Verifying access…</p>
+</div>
+
+<div id="wm-layer"></div>
+
+<div id="main-page">
+
+  <nav class="navbar">
+    <a href="/premium-papers" class="nav-brand">?? hsbteleet Premium</a>
+    <a href="/premium-papers" class="nav-item">?? Papers</a>
+    <a href="/rank-analysis" class="nav-item">?? Rank Analysis</a>
+    <button class="nav-item active">?? College Predictor</button>
+    <a href="/study-plan" class="nav-item">?? Study Plan</a>
+    <div class="nav-right">
+      <button class="nav-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <div class="hero">
+      <div class="hero-icon">??</div>
+      <div style="flex:1;min-width:200px;">
+        <h1>College Predictor — LEET 2025</h1>
+        <p>Tell us your score, category, preferred branch and college — we'll show you which colleges you're likely to get, possible options, and difficult ones.</p>
+        <div class="hero-badges">
+          <span class="hero-badge">?? Personalized</span>
+          <span class="hero-badge">?? Based on Real Cutoffs</span>
+          <span class="hero-badge">?? 25+ Colleges</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREDICTOR FORM -->
+    <div class="form-card">
+      <div class="form-title">?? Enter Your Details</div>
+      <div class="form-sub">Fill in your details to get personalized college predictions based on LEET 2025 cutoff data.</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Expected Score (out of 90)</label>
+          <input type="number" id="f-score" class="form-inp" min="0" max="90" placeholder="e.g. 38">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="f-cat" class="form-select">
+            <option value="gen">General (AIC)</option>
+            <option value="hogc">HOGC (Haryana General)</option>
+            <option value="sc">SC/ST</option>
+            <option value="obc">OBC / BC-A / BC-B</option>
+            <option value="ews">EWS</option>
+            <option value="esm">ESM (Ex-Servicemen)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Domicile Status</label>
+          <select id="f-domicile" class="form-select">
+            <option value="insider">Haryana Insider</option>
+            <option value="outsider">Outsider (Other State)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Diploma Stream</label>
+          <select id="f-stream" class="form-select">
+            <option value="cs">Computer Science / IT</option>
+            <option value="electronics">Electronics / ECE</option>
+            <option value="mechanical">Mechanical / Auto / Production</option>
+            <option value="civil">Civil Engineering</option>
+            <option value="electrical">Electrical Engineering</option>
+            <option value="other">Other (Agriculture, Textile, etc.)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Preferred B.Tech Branch (Select multiple)</label>
+          <div class="branch-grid" id="branch-grid">
+            <button class="branch-btn sel" data-b="cse" onclick="toggleBranch(this)">?? CSE</button>
+            <button class="branch-btn" data-b="it" onclick="toggleBranch(this)">?? IT</button>
+            <button class="branch-btn" data-b="csai" onclick="toggleBranch(this)">?? CSE AI/ML</button>
+            <button class="branch-btn" data-b="ece" onclick="toggleBranch(this)">?? ECE</button>
+            <button class="branch-btn" data-b="ee" onclick="toggleBranch(this)">? Electrical</button>
+            <button class="branch-btn" data-b="mech" onclick="toggleBranch(this)">?? Mechanical</button>
+            <button class="branch-btn" data-b="civil" onclick="toggleBranch(this)">??? Civil</button>
+            <button class="branch-btn" data-b="any" onclick="toggleBranch(this)">?? Any Branch</button>
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>College Location Preference</label>
+          <select id="f-location" class="form-select">
+            <option value="any">Any Location in Haryana</option>
+            <option value="north">North Haryana (Ambala, Kurukshetra, Sonipat)</option>
+            <option value="central">Central Haryana (Rohtak, Hisar, Bhiwani)</option>
+            <option value="south">South Haryana (Faridabad, Gurugram, Rewari)</option>
+            <option value="west">West Haryana (Sirsa, Fatehabad)</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="predict-btn" onclick="runPredictor()">?? Predict My Colleges ?</button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results-section">
+      <div class="results-hero">
+        <div>
+          <div class="results-rank-label">Your Estimated Rank</div>
+          <div class="results-rank-big" id="res-rank">—</div>
+          <div style="font-size:12px;color:var(--muted);" id="res-rank-range"></div>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div style="font-size:13px;color:var(--text);line-height:1.65;" id="res-summary"></div>
+        </div>
+      </div>
+
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:800;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+        ?? College Predictions
+        <span style="font-size:.78rem;font-weight:600;color:var(--muted);" id="res-count"></span>
+      </div>
+      <div class="result-cards" id="result-cards"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){var s=document.createElement('style');s.textContent='@media print{body{display:none!important;}}';document.head.appendChild(s);})();
+
+function injectWatermark(){
+  var mob=sessionStorage.getItem('prem_mob')||'';
+  var name=sessionStorage.getItem('prem_name')||'Premium';
+  var masked=mob?mob.slice(0,3)+'****'+mob.slice(-2):name.toUpperCase();
+  var txt='© hsbteleet.com   '+masked+'   PREMIUM';
+  var layer=document.getElementById('wm-layer');
+  if(!layer)return;
+  layer.innerHTML='';
+  var vw=window.innerWidth||1200;
+  var totalH=Math.max(document.documentElement.scrollHeight,window.innerHeight,3000);
+  var rowGap=90,rowWidth=Math.ceil(Math.sqrt(vw*vw+totalH*totalH))+400;
+  var rows=Math.ceil((totalH+vw)/rowGap)+4;
+  for(var r=0;r<rows;r++){
+    var div=document.createElement('div');div.className='wm-row';
+    div.style.top=(r*rowGap-200)+'px';div.style.left=(r%2===0?-60:-180)+'px';
+    div.style.width=rowWidth+'px';
+    var charPx=11,repeats=Math.ceil(rowWidth/(txt.length*charPx))+2;
+    div.textContent=Array(repeats).fill(txt).join('      ');
+    layer.appendChild(div);
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){injectWatermark();window.addEventListener('resize',injectWatermark);});
+
+async function verifyAccess(){
+  var uid=sessionStorage.getItem('prem_uid');
+  var ts=parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
+  try{
+    var {data,error}=await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){showDenied();return;}
+    sessionStorage.setItem('prem_ts',Date.now().toString());
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+  }catch(e){showDenied();}
+}
+function showDenied(){document.getElementById('page-loader').style.display='none';document.getElementById('access-denied').classList.add('show');}
+function doLogout(){['prem_uid','prem_mob','prem_name','prem_ts'].forEach(function(k){sessionStorage.removeItem(k);});window.location.href='./premium-login.html';}
+
+// branch toggle
+function toggleBranch(btn){btn.classList.toggle('sel');}
+
+// rank interpolation
+var rankPts=[{score:42,rank:57},{score:41,rank:57},{score:38,rank:112},{score:38,rank:131},{score:37,rank:153},{score:36,rank:346},{score:28,rank:750}];
+function interpRank(score){
+  if(score>=45)return Math.max(1,Math.round(57-(score-42)*12));
+  if(score<=15)return 1500+(15-score)*50;
+  var s=rankPts.slice().sort(function(a,b){return b.score-a.score;});
+  var u=null,l=null;
+  for(var i=0;i<s.length;i++){if(s[i].score>=score)u=s[i];else{l=s[i];break;}}
+  if(!u)return s[s.length-1].rank+(s[s.length-1].score-score)*45;
+  if(!l)return Math.max(1,s[0].rank-(score-s[0].score)*18);
+  var ratio=(score-l.score)/(u.score-l.score);
+  return Math.round(l.rank-ratio*(l.rank-u.rank));
+}
+function catMult(cat){return{gen:1,hogc:1.1,sc:1.9,obc:1.35,ews:1.15,esm:1.5}[cat]||1;}
+
+// college database with cutoffs
+var colleges=[
+  {id:'ymca',name:'J.C. Bose University (YMCA)',loc:'Faridabad',region:'south',
+   branches:{cse:{aic:1,hogc:3},it:{aic:7,hogc:41},ee:{aic:1,hogc:8},mech:{aic:40,hogc:51},ece:{aic:39,hogc:53},csai:{aic:null,hogc:75}},
+   tier:1,note:'Premier Govt. University. Very competitive CSE/IT seats.'},
+  {id:'dcrust',name:'DCRUST, Murthal',loc:'Murthal, Sonipat',region:'north',
+   branches:{cse:{aic:43,hogc:61},it:{aic:107,hogc:166},csai:{aic:91,hogc:155},ee:{aic:94,hogc:null},ece:{aic:null,hogc:127}},
+   tier:1,note:'Excellent reputation for CSE. AICTE approved govt. university.'},
+  {id:'ku',name:'Kurukshetra University (UIET)',loc:'Kurukshetra',region:'north',
+   branches:{cse:{aic:2,hogc:22},ece:{aic:177,hogc:330},csai:{aic:null,hogc:139},civil:{aic:34,hogc:66},ee:{aic:null,hogc:null}},
+   tier:1,note:'Strong CSE department. Ancient heritage campus.'},
+  {id:'gjust',name:'GJUS&T, Hisar',loc:'Hisar',region:'central',
+   branches:{cse:{aic:null,hogc:159},csai:{aic:69,hogc:83},ece:{aic:140,hogc:81},civil:{aic:55,hogc:20},ee:{aic:null,hogc:101}},
+   tier:1,note:'Good for CSE AI/ML and Civil branches.'},
+  {id:'mdu',name:'MDU (UIET), Rohtak',loc:'Rohtak',region:'central',
+   branches:{cse:{aic:null,hogc:159},ece:{aic:6,hogc:85},civil:{aic:36,hogc:66},ee:{aic:null,hogc:101},csai:{aic:null,hogc:83}},
+   tier:2,note:'State university with decent ECE and Civil branches.'},
+  {id:'cdlu',name:'Chaudhary Devi Lal University',loc:'Sirsa',region:'west',
+   branches:{cse:{aic:null,hogc:null},any:{aic:346,hogc:null}},
+   tier:2,note:'Student confirmed rank ~346 allotment in 2025. Good option for west Haryana.'},
+  {id:'igu',name:'Indira Gandhi University',loc:'Meerpur, Rewari',region:'south',
+   branches:{cse:{aic:null,hogc:159},civil:{aic:36,hogc:105},ee:{aic:null,hogc:419},ece:{aic:null,hogc:81}},
+   tier:2,note:'Growing university with reasonable cutoffs.'},
+  {id:'gu',name:'Gurugram University',loc:'Gurugram',region:'south',
+   branches:{cse:{aic:157,hogc:191},csai:{aic:280,hogc:201}},
+   tier:2,note:'CSE Cyber Security cutoff AIC 157. Good location.'},
+  {id:'bps',name:'BPS Women Univ., Sonipat',loc:'Khanpur Kalan, Sonipat',region:'north',
+   branches:{cse:{aic:null,hogc:null},civil:{aic:36,hogc:105},ece:{aic:null,hogc:196},mech:{aic:null,hogc:130}},
+   tier:2,note:'Women-only university. Good options for female candidates.'},
+  {id:'hec',name:'Haryana Engineering College, Jagadhari',loc:'Jagadhari, Yamunanagar',region:'north',
+   branches:{civil:{aic:34,hogc:66},cse:{aic:null,hogc:159},ee:{aic:null,hogc:310},mech:{aic:null,hogc:165}},
+   tier:3,note:'Govt. Engineering College. Decent infrastructure.'},
+  {id:'siet_karnal',name:'State Inst. of Engg. & Tech., Nilokheri',loc:'Nilokheri, Karnal',region:'north',
+   branches:{civil:{aic:36,hogc:105},cse:{aic:null,hogc:159},ee:{aic:94,hogc:null},mech:{aic:221,hogc:506}},
+   tier:3,note:'Govt. institute. Affordable fees and decent placement.'},
+];
+
+function getSelectedBranches(){
+  var sel=[];
+  document.querySelectorAll('.branch-btn.sel').forEach(function(b){sel.push(b.getAttribute('data-b'));});
+  return sel;
+}
+
+function getCollegeChance(college, rank, branches, region, cat){
+  // find best matching branch cutoff
+  var bestCutoff=null,bestBranch=null,bestBranchKey=null;
+  var useHogc=(cat==='hogc'||cat==='sc'||cat==='obc'||cat==='ews'||cat==='esm');
+  var anyBranchSel=branches.indexOf('any')!==-1;
+
+  for(var b in college.branches){
+    if(!anyBranchSel&&branches.indexOf(b)===-1) continue;
+    var cutoff=college.branches[b];
+    var cutoffVal=useHogc?(cutoff.hogc||cutoff.aic):cutoff.aic;
+    if(cutoffVal===null)cutoffVal=cutoff.hogc||cutoff.aic;
+    if(cutoffVal!==null&&(bestCutoff===null||cutoffVal>bestCutoff)){
+      bestCutoff=cutoffVal; bestBranch=b; bestBranchKey=b;
+    }
+  }
+  if(bestCutoff===null) return null;
+
+  var chance='difficult';
+  if(rank<=bestCutoff*1.1) chance='likely';
+  else if(rank<=bestCutoff*1.7) chance='possible';
+
+  // region filter — don't exclude, just note
+  var regionMatch=(region==='any'||college.region===region);
+
+  return {chance:chance, cutoff:bestCutoff, branch:bestBranchKey, regionMatch:regionMatch, college:college};
+}
+
+function runPredictor(){
+  var score=parseFloat(document.getElementById('f-score').value);
+  if(isNaN(score)||score<0||score>90){
+    document.getElementById('f-score').style.borderColor='#ef4444';
+    document.getElementById('f-score').focus(); return;
+  }
+  document.getElementById('f-score').style.borderColor='';
+  var cat=document.getElementById('f-cat').value;
+  var region=document.getElementById('f-location').value;
+  var branches=getSelectedBranches();
+  if(branches.length===0){alert('Please select at least one preferred branch.');return;}
+
+  var baseRank=interpRank(score);
+  var effRank=Math.round(baseRank/catMult(cat));
+  var lo=Math.max(1,effRank-30),hi=effRank+45;
+
+  document.getElementById('res-rank').textContent=effRank;
+  document.getElementById('res-rank-range').textContent='Range: '+lo+' – '+hi;
+
+  var catLabel={gen:'General (AIC)',hogc:'HOGC (Haryana General)',sc:'SC/ST',obc:'OBC/BC',ews:'EWS',esm:'ESM'}[cat]||cat;
+  document.getElementById('res-summary').textContent='Based on score '+score+' | Category: '+catLabel+' | Estimated rank ~'+effRank+'. Results below are based on last year\'s cutoffs — use as reference only.';
+
+  // compute results
+  var results=[];
+  colleges.forEach(function(col){
+    var res=getCollegeChance(col,effRank,branches,region,cat);
+    if(res) results.push(res);
+  });
+
+  // sort: likely first, then possible, then difficult
+  var order={likely:0,possible:1,difficult:2};
+  results.sort(function(a,b){return order[a.chance]-order[b.chance]||a.college.tier-b.college.tier;});
+
+  var branchNames={cse:'CSE',it:'IT',csai:'CSE AI/ML',ece:'ECE',ee:'Electrical',mech:'Mechanical',civil:'Civil',any:'Any Branch'};
+
+  document.getElementById('res-count').textContent=results.length+' colleges found';
+  document.getElementById('result-cards').innerHTML=results.map(function(r){
+    var col=r.college;
+    var chanceCls='rc-'+r.chance;
+    var badgeCls='cb-'+r.chance;
+    var badgeTxt=r.chance==='likely'?'? Likely':r.chance==='possible'?'? Possible':'? Difficult';
+    var branchCls=r.chance==='likely'?'rcb-good':r.chance==='possible'?'rcb-ok':'rcb-hard';
+    var regionNote=!r.regionMatch?'<div style="font-size:11.5px;color:var(--gold);margin-top:6px;">?? Outside your preferred region</div>':'';
+    return '<div class="result-card '+chanceCls+'">'
+      +'<div class="rc-top"><span class="chance-badge '+badgeCls+'">'+badgeTxt+'</span></div>'
+      +'<div class="rc-col-name">'+col.name+'</div>'
+      +'<div class="rc-col-loc"><i class="fas fa-map-marker-alt"></i>'+col.loc+'</div>'
+      +'<div class="rc-branch-row"><span class="rc-branch '+branchCls+'">'+branchNames[r.branch]+'</span></div>'
+      +'<div class="rc-cutoff-row">'
+      +'<div class="rc-stat"><span class="rc-stat-v">'+r.cutoff+'</span><span class="rc-stat-l">Cutoff<br>Rank</span></div>'
+      +'<div class="rc-stat"><span class="rc-stat-v">'+effRank+'</span><span class="rc-stat-l">Your Est.<br>Rank</span></div>'
+      +'</div>'
+      +'<div class="rc-tip">'+col.note+'</div>'
+      +regionNote
+      +'</div>';
+  }).join('');
+
+  if(results.length===0){
+    document.getElementById('result-cards').innerHTML='<div class="no-results"><div class="icon">??</div><p>No matching colleges found for the selected filters. Try selecting "Any Branch" or "Any Location" for more results.</p></div>';
+  }
+
+  var sec=document.getElementById('results-section');
+  sec.classList.add('show');
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+  injectWatermark();
+}
+
+verifyAccess();
+</script>
+<script defer src="/js/ads.js"></script>
+</body>
+</html>
