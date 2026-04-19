@@ -54,5 +54,11 @@
       "destination": "/",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/(?!html/|css/|js/|image/|partials/|api/|paper/|pdf/|404)([^.]+)",
+      "destination": "/html/$1.html"
+    }
   ]
 }
