@@ -47,6 +47,7 @@
       ]
     }
   ],
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/",
@@ -69,7 +70,7 @@
       "permanent": true
     },
     {
-      "source": "/:path.html",
+      "source": "/:path((?!partials|css|js|image|pdf|data).+)\\.html",
       "destination": "/:path",
       "permanent": true
     }

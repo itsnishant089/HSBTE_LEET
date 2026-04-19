@@ -12,36 +12,44 @@ export default async function handler(req) {
     return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
   }
 
-  const API_KEY = process.env.GEMINI_API_KEY || "YOUR_HARDCODED_API_KEY_HERE";
+  const API_KEY = process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY;
 
-  if (!API_KEY || API_KEY === "YOUR_HARDCODED_API_KEY_HERE") {
-    return new Response(JSON.stringify({ reply: "🤖 API Key is missing. Please set GEMINI_API_KEY." }), { status: 200 });
+  if (!API_KEY) {
+    return new Response(JSON.stringify({ reply: "🤖 API Key is missing. Please set GROQ_API_KEY." }), { status: 200 });
   }
 
   try {
     const { message } = await req.json();
     const CONTEXT = "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Concise only.";
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: `${CONTEXT}\n\nUser: ${message}` }] }],
-          generationConfig: { maxOutputTokens: 500, temperature: 0.7 }
-        })
-      }
-    );
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Concise only." },
+          { role: "user", content: message }
+        ],
+        max_tokens: 500,
+        temperature: 0.7
+      })
+    });
 
     const data = await response.json();
-    let reply = "";
+    console.log("Groq Raw Response:", JSON.stringify(data));
 
-    if (data.candidates && data.candidates.length > 0) {
-        reply = data.candidates[0].content?.parts?.[0]?.text || "No response text found.";
-    } else {
-        reply = "🤖 No response received. Safety block or API limit reached.";
+    if (!response.ok) {
+        return new Response(
+            JSON.stringify({ reply: "🤖 Groq Error: " + (data.error?.message || "Unknown error") }),
+            { status: 200, headers: { "Content-Type": "application/json" } }
+        );
     }
+
+    const reply = data.choices?.[0]?.message?.content || "🤖 Groq returned no answer.";
 
     return new Response(JSON.stringify({ reply }), {
       status: 200,
@@ -53,4 +61,3 @@ export default async function handler(req) {
     return new Response(JSON.stringify({ reply: "🤖 AI Assistant is currently in Beta." }), { status: 500 });
   }
 }
-

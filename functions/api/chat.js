@@ -7,9 +7,7 @@ export async function onRequestPost(context) {
   const { request, env } = context;
 
   // 1. API Key Selection
-  // You can set this in Cloudflare Dashboard -> Settings -> Environment Variables
-  // OR hardcode it here (NOT recommended for public repos)
-  const API_KEY = env.GEMINI_API_KEY || "YOUR_HARDCODED_API_KEY_HERE"; 
+  const API_KEY = env.GROQ_API_KEY || env.GEMINI_API_KEY || "YOUR_HARDCODED_API_KEY_HERE"; 
 
   if (!API_KEY || API_KEY === "YOUR_HARDCODED_API_KEY_HERE") {
     return new Response(
@@ -33,46 +31,35 @@ export async function onRequestPost(context) {
       });
     }
 
-    // 3. Call Gemini API
-    const CONTEXT = "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Be concise.";
-    
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: `${CONTEXT}\n\nUser: ${message}` }] }],
-          generationConfig: { maxOutputTokens: 500, temperature: 0.7 }
-        })
-      }
-    );
+    // 3. Call Groq AI API
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Be concise." },
+          { role: "user", content: message }
+        ],
+        max_tokens: 500,
+        temperature: 0.7
+      })
+    });
 
     const data = await response.json();
-    console.log("Gemini Raw Response:", JSON.stringify(data));
+    console.log("Groq Raw Response:", JSON.stringify(data));
 
     if (!response.ok) {
         return new Response(
-            JSON.stringify({ reply: "🤖 API Error: " + (data.error?.message || "Unknown error") }),
+            JSON.stringify({ reply: "🤖 Groq Error: " + (data.error?.message || "Unknown error") }),
             { status: 200, headers: { "Content-Type": "application/json" } }
         );
     }
 
-    // 4. Parse Response (Robust)
-    let text = "";
-    
-    if (data.candidates && data.candidates.length > 0) {
-        const candidate = data.candidates[0];
-        if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
-            text = candidate.content.parts[0].text;
-        } else if (candidate.finishReason === "SAFETY") {
-            text = "🛡️ Response blocked by AI safety filters. Try rephrasing.";
-        } else {
-            text = "⚠️ AI stopped responding (Reason: " + (candidate.finishReason || "unknown") + ")";
-        }
-    } else {
-        text = "🤖 Gemini returned no answer. Check your message or try again.";
-    }
+    const text = data.choices?.[0]?.message?.content || "🤖 Groq returned no answer.";
 
     // 5. Return Clean Response
     return new Response(JSON.stringify({ reply: text }), {
