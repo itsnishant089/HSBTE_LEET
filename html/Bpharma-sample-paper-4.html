@@ -246,7 +246,7 @@
         <p id="feedback-msg" style="font-size: 1.2rem; color: #546e7a;"></p>
         
         <button id="dl-btn" class="download-btn" onclick="downloadQAPDF()">
-            ?? DOWNLOAD RESULT & ANSWER KEY (PDF)
+            <i class="fas fa-download" aria-hidden="true"></i> DOWNLOAD RESULT & ANSWER KEY (PDF)
         </button>
 
         <div id="detailed-review"></div>
@@ -260,12 +260,12 @@ const examData = [
     // 1. PHARMACEUTICS
     { s: "Pharmaceutics", q: "Which equation is used to describe the rate of drug dissolution from a tablet?", o: ["Nernst Equation", "Noyes-Whitney Equation", "Hixson-Crowell Cube Root Law", "Stokes Law"], a: 1 },
     { s: "Pharmaceutics", q: "The 'Clarity Test' in parenterals is performed to detect particles up to what size?", o: ["5 microns", "10 microns", "50 microns", "100 microns"], a: 2 },
-    { s: "Pharmaceutics", q: "According to IP, 'Cold' storage temperature is defined as:", o: ["0°C to 5°C", "2°C to 8°C", "Below 0°C", "8°C to 25°C"], a: 1 },
+    { s: "Pharmaceutics", q: "According to IP, 'Cold' storage temperature is defined as:", o: ["0ï¿½C to 5ï¿½C", "2ï¿½C to 8ï¿½C", "Below 0ï¿½C", "8ï¿½C to 25ï¿½C"], a: 1 },
     { s: "Pharmaceutics", q: "Which mill works on the principle of combined Impact and Attrition?", o: ["Hammer Mill", "Fluid Energy Mill", "Ball Mill", "Roller Mill"], a: 2 },
     { s: "Pharmaceutics", q: "Plasticizers are added to HPMC capsules to:", o: ["Increase opacity", "Improve mechanical flexibility", "Enhance solubility", "Prevent microbial growth"], a: 1 },
-    { s: "Pharmaceutics", q: "For a dry powder inhaler (DPI), the ideal aerodynamic particle size range is:", o: ["0.5 to 1 µm", "1 to 5 µm", "10 to 20 µm", "Above 50 µm"], a: 1 },
+    { s: "Pharmaceutics", q: "For a dry powder inhaler (DPI), the ideal aerodynamic particle size range is:", o: ["0.5 to 1 ï¿½m", "1 to 5 ï¿½m", "10 to 20 ï¿½m", "Above 50 ï¿½m"], a: 1 },
     { s: "Pharmaceutics", q: "Which of the following is a 'Self-Emulsifying' drug delivery system component?", o: ["Bentonite", "Labrasol", "Talc", "Methyl cellulose"], a: 1 },
-    { s: "Pharmaceutics", q: "In 'Aseptic Area' (Grade A), the maximum number of permitted particles (= 0.5 µm) per cubic meter is:", o: ["3,520", "35,200", "3,52,000", "35,20,000"], a: 0 },
+    { s: "Pharmaceutics", q: "In 'Aseptic Area' (Grade A), the maximum number of permitted particles (= 0.5 ï¿½m) per cubic meter is:", o: ["3,520", "35,200", "3,52,000", "35,20,000"], a: 0 },
     { s: "Pharmaceutics", q: "The 'Schick Test' toxin is used to determine immunity against:", o: ["Tetanus", "Diphtheria", "Pertussis", "Tuberculosis"], a: 1 },
 
     // 2. PHARMACEUTICAL CHEMISTRY
@@ -359,7 +359,7 @@ const examData = [
     { s: "Hospital Pharmacy", q: "The 'Floor Stock System' is primarily used for:", o: ["Narcotics", "Non-chargeable floor items", "Expensive antibiotics", "Radio-pharmaceuticals"], a: 1 },
     { s: "Hospital Pharmacy", q: "What is the 'Incompatibility' called when two drugs form a eutectic mixture?", o: ["Therapeutic", "Physical", "Chemical", "Clinical"], a: 1 },
     { s: "Hospital Pharmacy", q: "A 'Large Volume Parenteral' (LVP) is one that has a volume greater than:", o: ["50 mL", "100 mL", "500 mL", "1000 mL"], a: 1 },
-    { s: "Hospital Pharmacy", q: "The 'HEPA' filter used in laminar air flow benches removes particles of size:", o: ["0.3 µm", "1.0 µm", "5.0 µm", "10.0 µm"], a: 0 },
+    { s: "Hospital Pharmacy", q: "The 'HEPA' filter used in laminar air flow benches removes particles of size:", o: ["0.3 ï¿½m", "1.0 ï¿½m", "5.0 ï¿½m", "10.0 ï¿½m"], a: 0 },
 
     // 11. PHARMACY LAW
     { s: "Pharmacy Law", q: "Under the 'New Drugs and Clinical Trials Rules 2019', Phase I trials are primarily for:", o: ["Efficacy", "Safety/Toxicity in healthy volunteers", "Post-marketing surveillance", "Comparison with standard drug"], a: 1 },
@@ -430,10 +430,10 @@ function calculateResult() {
         if(isCorrect) {
             score++;
             resultDiv.style.borderLeft = "5px solid var(--success)";
-            resultDiv.innerHTML = `<span class="status-correct">? Correct</span><br><strong>Q${idx+1}:</strong> ${item.q}<br><small>Answer: ${item.o[item.a]}</small>`;
+            resultDiv.innerHTML = `<span class="status-correct">&check; Correct</span><br><strong>Q${idx+1}:</strong> ${item.q}<br><small>Answer: ${item.o[item.a]}</small>`;
         } else {
             resultDiv.style.borderLeft = "5px solid var(--accent)";
-            resultDiv.innerHTML = `<span class="status-wrong">? Incorrect</span><br><strong>Q${idx+1}:</strong> ${item.q}<br><small>Correct: <b>${item.o[item.a]}</b> | Your Choice: ${userAnsText}</small>`;
+            resultDiv.innerHTML = `<span class="status-wrong">&times; Incorrect</span><br><strong>Q${idx+1}:</strong> ${item.q}<br><small>Correct: <b>${item.o[item.a]}</b> | Your Choice: ${userAnsText}</small>`;
         }
         reviewBox.appendChild(resultDiv);
     });
@@ -444,9 +444,9 @@ function calculateResult() {
     document.getElementById('final-score').innerText = `${score} / 90`;
     
     let msg = "";
-    if(score > 75) msg = "?? Excellent performance! You are on track for a top rank.";
-    else if(score > 50) msg = "?? Good effort. Review the incorrect topics to improve your score.";
-    else msg = "?? Focus more on fundamental PCI concepts and legal schedules.";
+if(score > 75) msg = "Excellent performance! You are on track for a top rank.";
+else if(score > 50) msg = "Good effort. Review the incorrect topics to improve your score.";
+else msg = "Focus more on fundamental PCI concepts and legal schedules.";
     document.getElementById('feedback-msg').innerText = msg;
     window.scrollTo(0,0);
 }
