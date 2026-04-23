@@ -17,7 +17,7 @@ export async function onRequest(context) {
   if (path.startsWith('/html/')) {
     const cleanPath = path.replace(/^\/html/, '').replace(/\.html$/, '');
     if (!cleanPath || cleanPath === '/') {
-        return Response.redirect(new URL('/', url.origin), 301);
+      return Response.redirect(new URL('/', url.origin), 301);
     }
     return Response.redirect(new URL(cleanPath, url.origin), 301);
   }
@@ -32,20 +32,21 @@ export async function onRequest(context) {
     return context.next();
   }
 
-  // 6. Internal Rewrite: /btech-leet -> /html/btech-leet.html
+  // 6. Internal Rewrite: /btech-leet -> /html/btech-leet
   // This is the core logic that supports the /html/ folder structure
   try {
-    const rewritePath = `/html${path}${path.endsWith('.html') ? '' : '.html'}`;
-    const newRequest = new Request(new URL(rewritePath, url.origin), context.request);
+    const cleanReqPath = path.endsWith('.html') ? path.replace(/\.html$/, '') : path;
     
-    const response = await context.env.ASSETS.fetch(newRequest);
+    // Create a new URL object based on the original URL
+    const rewriteUrl = new URL(url);
     
-    if (response.status === 404) {
-      // If the rewritten path is not found, try the original path or show 404
-      return context.next(); 
-    }
+    // Cloudflare Pages with "Clean URLs" enabled serves files without the .html extension.
+    // By setting the pathname to include /html, Pages will automatically look for
+    // /html/YOUR_PATH.html and serve it under this URL without returning a 308 redirect.
+    rewriteUrl.pathname = `/html${cleanReqPath}`;
     
-    return response;
+    // We create a new Request object to fetch the asset
+    return await context.env.ASSETS.fetch(new Request(rewriteUrl, context.request));
   } catch (e) {
     return context.next();
   }
