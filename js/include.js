@@ -1,96 +1,139 @@
 /**
- * include.js — loads [data-include] partials with in-memory caching.
- * The same partial file (e.g. /partials/header.html) is only fetched ONCE
- * per page load, even if multiple elements reference it.
- *
- * Also auto-injects the bottom navigation bar on every page.
+ * include.js
+ * Loads all [data-include] partials with caching.
+ * Auto-injects bottom navigation on all non-admin pages.
  */
+
 (function () {
   "use strict";
 
-  // In-memory cache: url → html string (lives for the page session)
+  // Cache for already fetched partials
   const partialCache = new Map();
 
+  /**
+   * Fetch partial HTML with cache
+   */
   async function fetchPartial(url) {
     if (partialCache.has(url)) {
       return partialCache.get(url);
     }
+
     const res = await fetch(url, {
-      // Tell the browser to use its HTTP cache aggressively
       cache: "force-cache"
     });
-    if (!res.ok) throw new Error(`Failed to load partial: ${url} (${res.status})`);
+
+    if (!res.ok) {
+      throw new Error(
+        `Failed to load partial: ${url} (${res.status})`
+      );
+    }
+
     const html = await res.text();
+
     partialCache.set(url, html);
+
     return html;
   }
 
+  /**
+   * Execute scripts inside included partials
+   */
   function executeScripts(container) {
-    container.querySelectorAll("script").forEach(oldScript => {
+    const scripts = container.querySelectorAll("script");
+
+    scripts.forEach(oldScript => {
       const newScript = document.createElement("script");
+
+      // Copy attributes
+      [...oldScript.attributes].forEach(attr => {
+        newScript.setAttribute(attr.name, attr.value);
+      });
+
       if (oldScript.src) {
         newScript.src = oldScript.src;
       } else {
         newScript.textContent = oldScript.textContent;
       }
-      oldScript.parentNode.replaceChild(newScript, oldScript);
+
+      oldScript.parentNode.replaceChild(
+        newScript,
+        oldScript
+      );
     });
   }
 
   /**
-   * Auto-inject bottom-nav partial if not already present.
-   * Inserts a placeholder div before the first footer include element.
+   * Auto inject bottom navigation
    */
   function autoInjectBottomNav() {
-    // Skip admin / premium-admin pages
     const path = window.location.pathname.toLowerCase();
-    if (path.includes('admin')) return;
 
-    // Check if bottom-nav include already exists
-    const existing = document.querySelector('[data-include*="bottom-nav"]');
+    // Skip admin pages
+    if (path.includes("admin")) return;
+
+    // Prevent duplicate nav
+    const existing = document.querySelector(
+      '[data-include*="bottom-nav"]'
+    );
+
     if (existing) return;
 
-    // Find the footer include to insert before it
-    const footerEl = document.querySelector('[data-include*="footer"]');
-    if (footerEl) {
-      const navDiv = document.createElement('div');
-      navDiv.setAttribute('data-include', '/partials/bottom-nav.html');
-      footerEl.parentNode.insertBefore(navDiv, footerEl);
-    }
+    // Create nav container
+    const navDiv = document.createElement("div");
+
+    navDiv.setAttribute(
+      "data-include",
+      "/partials/bottom-nav.html"
+    );
+
+    // Append at end of body
+    document.body.appendChild(navDiv);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Auto-inject bottom nav before processing includes
+  /**
+   * Load all partials
+   */
+  async function loadPartials() {
     autoInjectBottomNav();
 
-    const includes = document.querySelectorAll("[data-include]");
+    // Get ALL includes AFTER nav injection
+    const includes = [
+      ...document.querySelectorAll("[data-include]")
+    ];
 
     if (includes.length === 0) {
-      document.dispatchEvent(new Event("partialsLoaded"));
+      document.dispatchEvent(
+        new Event("partialsLoaded")
+      );
       return;
     }
 
-    let done = 0;
-    const total = includes.length;
+    await Promise.all(
+      includes.map(async el => {
+        const url = el.getAttribute("data-include");
 
-    function checkDone() {
-      done++;
-      if (done === total) {
-        document.dispatchEvent(new Event("partialsLoaded"));
-      }
-    }
+        try {
+          const html = await fetchPartial(url);
 
-    includes.forEach(el => {
-      const url = el.getAttribute("data-include");
-      fetchPartial(url)
-        .then(html => {
           el.innerHTML = html;
+
           executeScripts(el);
-        })
-        .catch(err => {
-          console.error("Error loading partial:", err);
-        })
-        .finally(checkDone);
-    });
-  });
-})();
+        } catch (err) {
+          console.error(
+            "Error loading partial:",
+            err
+          );
+        }
+      })
+    );
+
+    // Fire custom event after all partials loaded
+    document.dispatchEvent(
+      new Event("partialsLoaded")
+    );
+  }
+
+  // Start after page fully loaded
+  window.addEventListener("DOMContentLoaded", loadPartials);
+
+})();
