@@ -1036,7 +1036,7 @@
         <div class="panel on" id="panel-login">
           <div class="alert alert-warn on">
             <i class="fas fa-exclamation-triangle"></i>
-            <strong>Forgot password?</strong> WhatsApp admin at <strong>+91-7988316241</strong> with your registered
+            <strong>Forgot password?</strong> WhatsApp admin at <strong>nishant@hsbteleet.com</strong> with your registered
             mobile.
           </div>
           <div class="alert alert-err" id="lerr"></div>
@@ -1063,7 +1063,7 @@
             Account</button>
 
           <div class="divider">need help?</div>
-          <a href="https://wa.me/917988316241?text=Hi!%20I%20need%20help%20with%20my%20LEET%20Premium%20account."
+          <a href="https://mailto:nishant@hsbteleet.com"
             class="wa-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Contact Admin on WhatsApp</a>
         </div>
 
@@ -1114,7 +1114,7 @@
 
 
             <div class="alert alert-warn on" style="margin-bottom:14px">
-              <i class="fas fa-shield-alt"></i> Forgot password? Contact admin at <strong>+91-7988316241</strong>.
+              <i class="fas fa-shield-alt"></i> Forgot password? Contact admin at <strong>nishant@hsbteleet.com</strong>.
             </div>
 
             <button class="btn btn-v" id="btn-s1" onclick="doStep1()">Continue to Payment <i
@@ -1193,7 +1193,7 @@
 
     <div class="page-foot">
       <a href="https://hsbteleet.com">hsbteleet.com</a> &bull; Premium &bull; Ad-Free &bull; Secure Razorpay &bull; <a
-        href="https://wa.me/917988316241">Support</a>
+        href="https://mailto:nishant@hsbteleet.com">Support</a>
     </div>
 
   </div><!-- .page -->
@@ -1328,7 +1328,7 @@
           .eq('mobile', mob).eq('password_hash', pass).maybeSingle();
 
         if (error || !user) {
-          setAlert('lerr', '<i class="fas fa-times-circle"></i> Invalid mobile or password. Contact admin at <strong>+91-7988316241</strong>.', 'err');
+          setAlert('lerr', '<i class="fas fa-times-circle"></i> Invalid mobile or password. Contact admin at <strong>nishant@hsbteleet.com</strong>.', 'err');
           setBtn('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
           return;
         }
@@ -1501,7 +1501,7 @@
         setSession(nu.id);
         showSuccess(pending.full_name, 'FREE access via LEET2026! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
       } catch (e) {
-        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Contact +91-7988316241 if issue persists.', 'err');
+        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Contact nishant@hsbteleet.com if issue persists.', 'err');
         btn.disabled = false; btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
       }
     }
@@ -1597,7 +1597,7 @@
         showSuccess(pending.full_name, 'Payment confirmed!' + couponNote + ' Welcome email sent to ' + pending.email + '. Account active — ' + T.label + '.', pending.tier);
 
       } catch (e) {
-        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Error: ' + e.message + '. Your payment was processed — contact admin at <strong>+91-7988316241</strong> with Payment ID: <code style="font-size:11px;background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px">' + (rzp.razorpay_payment_id || 'N/A') + '</code>', 'err');
+        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Error: ' + e.message + '. Your payment was processed — contact admin at <strong>nishant@hsbteleet.com</strong> with Payment ID: <code style="font-size:11px;background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px">' + (rzp.razorpay_payment_id || 'N/A') + '</code>', 'err');
         btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹' + T.price + ' and Unlock Access</span>';
       }
     }
@@ -1653,7 +1653,7 @@
           '<strong>Mobile:</strong> ' + user.mobile + '<br>' +
           '<strong>Plan:</strong> ' + tier +
           '</div>' +
-          '<p style="color:#94a3b8;font-size:12px;margin-top:14px">If this was not you, contact admin immediately at +91-7988316241 via WhatsApp.</p>' +
+          '<p style="color:#94a3b8;font-size:12px;margin-top:14px">If this was not you, contact admin immediately at nishant@hsbteleet.com via WhatsApp.</p>' +
           '</div></div>';
 
         ejsSend(user.full_name || 'Student', user.email, user.email, 'Login Alert — HSBTE LEET ' + tier, user.mobile, html)
@@ -1689,7 +1689,7 @@
           '</div>' +
 
           '<p style="text-align:center;margin-top:18px"><a href="https://hsbteleet.com/premium-login.html" style="background:linear-gradient(135deg,#1a56db,#1240a8);color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:14px">Login to My Account →</a></p>' +
-          '<p style="color:#94a3b8;font-size:12px;margin-top:14px;text-align:center">Questions? WhatsApp admin at +91-7988316241</p>' +
+          '<p style="color:#94a3b8;font-size:12px;margin-top:14px;text-align:center">Questions? WhatsApp admin at nishant@hsbteleet.com</p>' +
           '</div></div>';
 
         ejsSend(d.name || 'Student', d.email, d.email, 'Welcome to HSBTE LEET ' + tier + '! 🎉', d.mobile, custHtml)

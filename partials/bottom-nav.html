@@ -1,0 +1,407 @@
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  FLOATING BOTTOM NAVIGATION BAR — Premium Mobile UI      -->
+<!--  Include via: <div data-include="partials/bottom-nav.html"> -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<style>
+/* ── Bottom Nav — Glassmorphism + Floating Home ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9990;
+  display: none; /* shown only on mobile via media query */
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 8px 0;
+  pointer-events: none;
+}
+
+.bottom-nav-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-bottom: none;
+  border-radius: 22px 22px 0 0;
+  box-shadow:
+    0 -4px 32px rgba(0, 0, 0, 0.08),
+    0 -1px 6px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  padding: 6px 4px 8px;
+  pointer-events: auto;
+  position: relative;
+}
+
+/* ── Individual Tab ── */
+.bnav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex: 1;
+  min-width: 0;
+  padding: 6px 2px 2px;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bnav-tab:active {
+  transform: scale(0.88);
+}
+
+/* Icon wrapper */
+.bnav-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #8b95a5;
+  transition: color 0.25s ease, transform 0.25s ease;
+  position: relative;
+}
+
+/* Label */
+.bnav-label {
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #8b95a5;
+  margin-top: 2px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+  line-height: 1;
+}
+
+/* Hover / Active state for regular tabs */
+.bnav-tab:hover .bnav-icon,
+.bnav-tab.active .bnav-icon {
+  color: #1a56db;
+  transform: translateY(-2px);
+}
+
+.bnav-tab:hover .bnav-label,
+.bnav-tab.active .bnav-label {
+  color: #1a56db;
+}
+
+/* Active indicator dot */
+.bnav-tab.active .bnav-icon::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #1a56db;
+  border-radius: 50%;
+  animation: bnav-dot-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ═══════════════════════════════════════ */
+/*  CENTER HOME BUTTON — Raised & Glowing */
+/* ═══════════════════════════════════════ */
+.bnav-tab.bnav-home {
+  position: relative;
+  flex: 1;
+  padding: 0 2px 2px;
+}
+
+.bnav-home-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a56db 0%, #2563eb 45%, #3b82f6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -18px;
+  margin: 0 auto;
+  box-shadow:
+    0 6px 24px rgba(26, 86, 219, 0.45),
+    0 2px 8px rgba(26, 86, 219, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.28s ease;
+  z-index: 2;
+}
+
+.bnav-home-btn i {
+  font-size: 22px;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  transition: transform 0.25s ease;
+}
+
+/* Glow ring */
+.bnav-home-btn::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(26, 86, 219, 0.2), rgba(59, 130, 246, 0.15));
+  z-index: -1;
+  animation: bnav-glow-pulse 2.5s ease-in-out infinite;
+}
+
+/* Outer ring shimmer */
+.bnav-home-btn::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(26, 86, 219, 0.12);
+  animation: bnav-ring-pulse 3s ease-in-out infinite;
+}
+
+.bnav-tab.bnav-home:active .bnav-home-btn {
+  transform: scale(0.9);
+}
+
+.bnav-tab.bnav-home:hover .bnav-home-btn {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow:
+    0 10px 36px rgba(26, 86, 219, 0.55),
+    0 4px 12px rgba(26, 86, 219, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.bnav-tab.bnav-home:hover .bnav-home-btn i {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.bnav-home .bnav-label {
+  margin-top: -12px;
+  color: #1a56db;
+  font-weight: 700;
+}
+
+/* ── Tab click ripple ── */
+.bnav-ripple {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(26, 86, 219, 0.12);
+  transform: scale(0);
+  opacity: 1;
+  pointer-events: none;
+  animation: bnav-ripple-out 0.5s ease forwards;
+}
+
+/* ── Animations ── */
+@keyframes bnav-dot-in {
+  from { transform: translateX(-50%) scale(0); opacity: 0; }
+  to   { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+@keyframes bnav-glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.08); }
+}
+
+@keyframes bnav-ring-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%      { opacity: 0.8; transform: scale(1.06); }
+}
+
+@keyframes bnav-ripple-out {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* ── Dark mode ── */
+body.dark-mode .bottom-nav-inner {
+  background: rgba(15, 23, 42, 0.88);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 -4px 32px rgba(0, 0, 0, 0.35),
+    0 -1px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .bnav-icon {
+  color: #64748b;
+}
+
+body.dark-mode .bnav-label {
+  color: #64748b;
+}
+
+body.dark-mode .bnav-tab:hover .bnav-icon,
+body.dark-mode .bnav-tab.active .bnav-icon {
+  color: #60a5fa;
+}
+
+body.dark-mode .bnav-tab:hover .bnav-label,
+body.dark-mode .bnav-tab.active .bnav-label {
+  color: #60a5fa;
+}
+
+body.dark-mode .bnav-tab.active .bnav-icon::after {
+  background: #60a5fa;
+}
+
+body.dark-mode .bnav-home .bnav-label {
+  color: #60a5fa;
+}
+
+body.dark-mode .bnav-ripple {
+  background: rgba(96, 165, 250, 0.15);
+}
+
+/* ═══════════════════════════════════════ */
+/*  SHOW ONLY ON MOBILE (≤768px)          */
+/* ═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+  }
+
+  /* Push page content above navbar */
+  body {
+    padding-bottom: 72px;
+  }
+
+  /* Adjust go-to-top button */
+  #goTopBtn,
+  .go-top-btn {
+    bottom: 88px !important;
+  }
+
+  /* Adjust chatbot */
+  #robot-chatbot {
+    bottom: 80px !important;
+  }
+
+  #chatbot-box {
+    bottom: 160px !important;
+  }
+}
+
+/* Hide on desktop */
+@media (min-width: 769px) {
+  .bottom-nav {
+    display: none !important;
+  }
+}
+</style>
+
+<nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+  <div class="bottom-nav-inner">
+
+    <!-- HSBTE PYQ -->
+    <a href="/hsbte-pyq" class="bnav-tab" data-nav="pyq" id="bnav-pyq">
+      <span class="bnav-icon"><i class="fa-solid fa-file-alt"></i></span>
+      <span class="bnav-label">PYQ</span>
+    </a>
+
+    <!-- Syllabus -->
+    <a href="/syllabus" class="bnav-tab" data-nav="syllabus" id="bnav-syllabus">
+      <span class="bnav-icon"><i class="fa-solid fa-book"></i></span>
+      <span class="bnav-label">Syllabus</span>
+    </a>
+
+    <!-- Home (Center — Raised) -->
+    <a href="/" class="bnav-tab bnav-home" data-nav="home" id="bnav-home">
+      <div class="bnav-home-btn">
+        <i class="fa-solid fa-house"></i>
+      </div>
+      <span class="bnav-label">Home</span>
+    </a>
+
+    <!-- Premium -->
+    <a href="/btech-leet-premium" class="bnav-tab" data-nav="premium" id="bnav-premium">
+      <span class="bnav-icon"><i class="fa-solid fa-crown"></i></span>
+      <span class="bnav-label">Premium</span>
+    </a>
+
+    <!-- LEET -->
+    <a href="/haryanaleet" class="bnav-tab" data-nav="leet" id="bnav-leet">
+      <span class="bnav-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+      <span class="bnav-label">LEET</span>
+    </a>
+
+  </div>
+</nav>
+
+<script>
+(function() {
+  'use strict';
+
+  // Highlight active tab based on current path
+  function setActiveTab() {
+    var path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+    var tabs = document.querySelectorAll('.bnav-tab');
+
+    var routeMap = {
+      '/hsbte-pyq': 'pyq',
+      '/syllabus': 'syllabus',
+      '/': 'home',
+      '': 'home',
+      '/btech-leet-premium': 'premium',
+      '/haryanaleet': 'leet'
+    };
+
+    var activeNav = routeMap[path] || '';
+
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
+      if (tab.getAttribute('data-nav') === activeNav) {
+        tab.classList.add('active');
+      }
+    });
+  }
+
+  // Add ripple effect on tap
+  function addRipple(e) {
+    var tab = e.currentTarget;
+    if (tab.classList.contains('bnav-home')) return; // Skip home button
+
+    // Remove existing ripples
+    var existing = tab.querySelector('.bnav-ripple');
+    if (existing) existing.remove();
+
+    var ripple = document.createElement('span');
+    ripple.className = 'bnav-ripple';
+
+    var icon = tab.querySelector('.bnav-icon');
+    if (icon) {
+      var rect = icon.getBoundingClientRect();
+      ripple.style.left = (rect.width / 2 - 18) + 'px';
+      ripple.style.top = (rect.height / 2 - 18) + 'px';
+      icon.appendChild(ripple);
+    }
+
+    setTimeout(function() { ripple.remove(); }, 500);
+  }
+
+  // Init
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setActiveTab();
+      document.querySelectorAll('.bnav-tab').forEach(function(tab) {
+        tab.addEventListener('click', addRipple);
+      });
+    });
+  } else {
+    setActiveTab();
+    document.querySelectorAll('.bnav-tab').forEach(function(tab) {
+      tab.addEventListener('click', addRipple);
+    });
+  }
+})();
+</script>

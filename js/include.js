@@ -2,6 +2,8 @@
  * include.js — loads [data-include] partials with in-memory caching.
  * The same partial file (e.g. /partials/header.html) is only fetched ONCE
  * per page load, even if multiple elements reference it.
+ *
+ * Also auto-injects the bottom navigation bar on every page.
  */
 (function () {
   "use strict";
@@ -35,7 +37,32 @@
     });
   }
 
+  /**
+   * Auto-inject bottom-nav partial if not already present.
+   * Inserts a placeholder div before the first footer include element.
+   */
+  function autoInjectBottomNav() {
+    // Skip admin / premium-admin pages
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes('admin')) return;
+
+    // Check if bottom-nav include already exists
+    const existing = document.querySelector('[data-include*="bottom-nav"]');
+    if (existing) return;
+
+    // Find the footer include to insert before it
+    const footerEl = document.querySelector('[data-include*="footer"]');
+    if (footerEl) {
+      const navDiv = document.createElement('div');
+      navDiv.setAttribute('data-include', '/partials/bottom-nav.html');
+      footerEl.parentNode.insertBefore(navDiv, footerEl);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
+    // Auto-inject bottom nav before processing includes
+    autoInjectBottomNav();
+
     const includes = document.querySelectorAll("[data-include]");
 
     if (includes.length === 0) {
@@ -66,4 +93,4 @@
         .finally(checkDone);
     });
   });
-})();
+})();
