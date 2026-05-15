@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LEET Counseling Help – Expert Admission Guidance at ₹49 | HSBTE LEET</title>
+<meta name="description" content="Get personalized LEET 2026 counseling — branch selection, college recommendations, rank-based guidance. Just ₹49 one-time."/>
+<link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
+<link rel="canonical" href="https://hsbteleet.com/counseling"/>
+<link rel="stylesheet" href="/css/main.css"/>
+<link rel="stylesheet" href="/css/counseling.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+<style>
+/* Improved UI/UX Styles */
+.ch-wrap { max-width: 800px; }
+.ch-card { border: none; box-shadow: 0 10px 30px rgba(11,22,40,0.06); border-radius: 16px; margin-bottom: 24px; padding-bottom: 30px; }
+.ch-card h2 { font-size: 1.4rem; color: var(--c-navy); border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; margin-bottom: 20px; }
+.ch-fg-radio { display:flex; gap:20px; margin-top:8px; flex-wrap: wrap; }
+.ch-fg-radio label { font-size:14px; font-weight:500; cursor:pointer; color:#475569; display:flex; align-items:center; gap:8px; background: #f8fafc; padding: 10px 16px; border-radius: 8px; border: 1px solid #e2e8f0; transition: all 0.2s; }
+.ch-fg-radio label:hover { background: #f1f5f9; border-color: #cbd5e1; }
+.ch-fg-radio input:checked + span { color: var(--c-blue); font-weight: 700; }
+.ch-fg-radio input { cursor:pointer; width: 16px; height: 16px; accent-color: var(--c-blue); }
+
+.dyn-row { display:flex; gap:12px; margin-bottom:12px; align-items:flex-start; flex-wrap:wrap; background:#f8fafc; padding:16px; border-radius:12px; border:1px solid #e2e8f0; position: relative; transition: all 0.2s; }
+.dyn-row:hover { border-color: #cbd5e1; background: #f1f5f9; }
+.dyn-row-flex { flex: 1; min-width: 200px; }
+.dyn-remove-btn { background: #fee2e2; color: #ef4444; border: none; border-radius: 8px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 28px; transition: all 0.2s; }
+.dyn-remove-btn:hover { background: #fecaca; color: #dc2626; }
+
+.btn-add-dyn { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; border-radius: 8px; padding: 10px 16px; cursor: pointer; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
+.btn-add-dyn:hover { background: #dcfce7; }
+
+.prefilled-card { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 1px solid #bae6fd; padding: 20px; border-radius: 14px; margin-bottom: 24px; position: relative; }
+.prefilled-card h4 { color: #0369a1; font-family: 'Syne', sans-serif; margin-bottom: 16px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.prefilled-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; font-size: 13px; }
+.prefilled-grid div { background: #fff; padding: 12px 16px; border-radius: 8px; border: 1px solid #e0f2fe; color: #475569; display: flex; flex-direction: column; gap: 4px; }
+.prefilled-grid strong { color: #0ea5e9; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.prefilled-grid span { color: #0f172a; font-weight: 600; font-size: 14px; }
+
+.btn-logout { position: absolute; top: 20px; right: 20px; background: #fff; color: #ef4444; border: 1px solid #fecaca; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+.btn-logout:hover { background: #fee2e2; }
+
+.form-section-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; color: var(--c-navy); margin: 32px 0 16px 0; display: flex; align-items: center; gap: 10px; }
+.form-section-title::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+
+.ch-fi { border-radius: 8px; border: 1px solid #cbd5e1; padding: 12px 16px; background: #fff; transition: all 0.2s; font-size: 14px; width: 100%; box-sizing: border-box; }
+.ch-fi:focus { border-color: var(--c-blue); box-shadow: 0 0 0 4px rgba(26,86,219,0.1); }
+.step-bar { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; max-width: 450px; margin-left: auto; margin-right: auto; padding-top: 20px; }
+.step-bar::before { content: ''; position: absolute; top: 35px; left: 0; width: 100%; height: 2px; background: #e2e8f0; z-index: 1; }
+.step { width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 2px solid #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #64748b; z-index: 2; transition: all 0.3s; position: relative; }
+.step.active { border-color: var(--c-blue); color: var(--c-blue); box-shadow: 0 0 0 4px rgba(26,86,219,0.1); }
+.step.done { background: var(--c-blue); border-color: var(--c-blue); color: #fff; }
+.step-label { position: absolute; top: 40px; font-size: 10px; white-space: nowrap; font-weight: 600; color: #94a3b8; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 0.5px; }
+.step.active .step-label { color: var(--c-blue); }
+.step.done .step-label { color: var(--c-navy); }
+</style>
+<script>
+// Block DevTools
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+  if(e.keyCode == 123) return false;
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+}
+</script>
+</head>
+<body style="background:#f8fafc">
+<div data-include="/partials/header.html"></div>
+
+<!-- HERO -->
+<section class="ch-hero" style="padding-bottom: 40px;">
+  <div class="ch-badges">
+    <span class="ch-badge green"><i class="fas fa-check-circle"></i> Expert Guidance</span>
+    <span class="ch-badge gold"><i class="fas fa-star"></i> ₹49 Only</span>
+    <span class="ch-badge"><i class="fas fa-headset"></i> Personalized</span>
+  </div>
+  <h1>LEET <span class="gold">Counseling Help</span><br>Expert Admission Guidance</h1>
+  <p class="sub">Confused about branch selection, college choices, or counseling strategy? Our experts analyze your rank and give you personalized recommendations.</p>
+  <div class="ch-price-tag"><span class="old">₹199</span> ₹49 Only • Lifetime Access</div>
+  <div style="margin-top:24px;">
+    <a href="/html/user-counseling.html" class="ch-btn ch-btn-gold" style="display:inline-flex; width:auto; padding:12px 24px; font-size:15px; border-radius:50px; align-items:center; gap:8px; text-decoration:none;"><i class="fas fa-search"></i> Track Your Request</a>
+  </div>
+</section>
+
+<div class="ch-wrap">
+
+<div class="step-bar">
+  <div class="step active" id="st-1">1<div class="step-label">Register</div></div>
+  <div class="step" id="st-2">2<div class="step-label">Payment</div></div>
+  <div class="step" id="st-3">3<div class="step-label">Form</div></div>
+</div>
+
+<!-- AUTH + FORM CARD -->
+<div class="ch-card" id="authCard">
+  <h2><i class="fas fa-sparkles"></i> What You Get</h2>
+  <div class="ch-features">
+    <div class="ch-feat"><div class="ch-feat-ico blue"><i class="fas fa-chart-line"></i></div><div><h4>Rank-Based Analysis</h4><p>We analyze your LEET rank and suggest realistic college + branch combos</p></div></div>
+    <div class="ch-feat"><div class="ch-feat-ico gold"><i class="fas fa-university"></i></div><div><h4>College Recommendations</h4><p>Get top 5 college suggestions based on cutoff data and your preferences</p></div></div>
+    <div class="ch-feat"><div class="ch-feat-ico green"><i class="fas fa-list-ol"></i></div><div><h4>Branch Priority Help</h4><p>We help you prioritize your branch choices for maximum allotment chance</p></div></div>
+    <div class="ch-feat"><div class="ch-feat-ico blue"><i class="fas fa-comments"></i></div><div><h4>Admin Response</h4><p>Our counseling expert reviews your request and sends detailed suggestions</p></div></div>
+  </div>
+  <hr style="border:0;border-top:1px solid #e2e8f0;margin:30px 0;">
+  <h2><i class="fas fa-user-circle"></i> Login or Register</h2>
+
+  <div class="ch-tabs">
+    <button class="ch-tab on" id="tab-login" onclick="cSwitch('login')"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <button class="ch-tab" id="tab-reg" onclick="cSwitch('register')"><i class="fas fa-user-plus"></i> Sign Up</button>
+  </div>
+
+  <!-- LOGIN -->
+  <div class="ch-panel on" id="p-login">
+    <div class="ch-alert ch-alert-err" id="l-err"></div>
+    <div class="ch-alert ch-alert-ok" id="l-ok"></div>
+    <div class="ch-fg"><label class="ch-fl">Email</label><input type="email" class="ch-fi" id="l-email" placeholder="your@email.com"/></div>
+    <div class="ch-fg"><label class="ch-fl">Password</label><input type="password" class="ch-fi" id="l-pass" placeholder="Your password"/></div>
+    <button class="ch-btn ch-btn-blue" id="btn-login" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Secure Login</button>
+  </div>
+
+  <!-- REGISTER -->
+  <div class="ch-panel" id="p-register">
+    <div class="ch-alert ch-alert-err" id="r-err"></div>
+    
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div class="ch-fg"><label class="ch-fl">Full Name *</label><input type="text" class="ch-fi" id="r-name" placeholder="Your full name"/></div>
+      <div class="ch-fg"><label class="ch-fl">Date of Birth *</label><input type="date" class="ch-fi" id="r-dob"/></div>
+    </div>
+    
+    <div class="ch-fg"><label class="ch-fl">Gender *</label>
+      <div class="ch-fg-radio">
+        <label><input type="radio" name="r-gender" value="Male" checked> <span>Male</span></label>
+        <label><input type="radio" name="r-gender" value="Female"> <span>Female</span></label>
+        <label><input type="radio" name="r-gender" value="Other"> <span>Other</span></label>
+      </div>
+    </div>
+
+    <div class="ch-fg"><label class="ch-fl">Category *</label>
+      <select class="ch-fi" id="r-category">
+        <option value="">Select Category</option>
+        <option value="General">General</option>
+        <option value="OBC">OBC (BCA/BCB)</option>
+        <option value="SC">SC / DSC</option>
+        <option value="ST">ST</option>
+        <option value="EWS">EWS</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="ch-fg"><label class="ch-fl">Have you completed Diploma from Haryana? *</label>
+      <div class="ch-fg-radio">
+        <label><input type="radio" name="r-diploma" value="Yes" checked> <span>Yes</span></label>
+        <label><input type="radio" name="r-diploma" value="No"> <span>No</span></label>
+      </div>
+    </div>
+
+    <div class="ch-fg"><label class="ch-fl">Are you a resident of Haryana? (Domicile) *</label>
+      <div class="ch-fg-radio">
+        <label><input type="radio" name="r-resident" value="Yes" checked> <span>Yes</span></label>
+        <label><input type="radio" name="r-resident" value="No"> <span>No</span></label>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div class="ch-fg"><label class="ch-fl">Mobile Number *</label><input type="tel" class="ch-fi" id="r-mob" placeholder="10-digit mobile" maxlength="10"/></div>
+      <div class="ch-fg"><label class="ch-fl">Email Address *</label><input type="email" class="ch-fi" id="r-email" placeholder="your@email.com"/></div>
+    </div>
+    
+    <div class="ch-fg"><label class="ch-fl">Password *</label><input type="password" class="ch-fi" id="r-pass" placeholder="Min 6 characters"/></div>
+    
+    <div class="ch-alert ch-alert-warn on" style="margin-bottom:20px; font-size: 13px;"><i class="fas fa-shield-alt"></i> Remember your password — there is no self-reset option.</div>
+    <button class="ch-btn ch-btn-blue" id="btn-reg" onclick="doRegister()"><i class="fas fa-user-plus"></i> Register & Continue to Payment</button>
+  </div>
+</div>
+
+<!-- PAYMENT CARD (hidden until register) -->
+<div class="ch-card" id="payCard" style="display:none">
+  <h2><i class="fas fa-lock"></i> Complete Payment</h2>
+  <div class="ch-alert ch-alert-err" id="pay-err"></div>
+
+  <div class="ch-coupon">
+    <label class="ch-fl">Have a coupon?</label>
+    <div class="ch-coupon-row">
+      <input type="text" class="ch-fi" id="c-input" placeholder="Enter code" maxlength="20" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"/>
+      <button onclick="applyCoupon()">Apply</button>
+    </div>
+    <div class="ch-coupon-msg" id="c-msg"></div>
+  </div>
+
+  <div class="ch-price-box">
+    <div class="ch-price-row"><span>Original Price</span><span id="orig-p">₹49</span></div>
+    <div class="ch-price-row" id="disc-row" style="display:none;color:#16a34a"><span id="disc-lbl">Discount</span><span id="disc-val">-₹0</span></div>
+    <div class="ch-price-row ch-price-total"><span>Total</span><span id="total-p">₹49</span></div>
+  </div>
+
+  <div id="pay-wrap">
+    <button class="ch-btn ch-btn-gold" id="btn-pay" onclick="doPay()"><i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹49 & Get Counseling</span></button>
+  </div>
+  <div id="free-wrap" style="display:none">
+    <button class="ch-btn ch-btn-green" id="btn-free" onclick="doFree()"><i class="fas fa-gift"></i> Claim FREE Access</button>
+  </div>
+</div>
+
+<!-- COUNSELING FORM (after payment/login) -->
+<div class="ch-card" id="formCard" style="display:none; padding-top: 30px;">
+  <h2 style="font-size: 1.6rem; border: none; margin-bottom: 10px;"><i class="fas fa-clipboard-check" style="color: var(--c-blue)"></i> Submit Counseling Request</h2>
+  <div class="ch-alert ch-alert-info on" style="margin-bottom: 24px;"><i class="fas fa-info-circle"></i> Fill your details below. Our expert will review and send personalized suggestions to your dashboard.</div>
+  
+  <div class="prefilled-card" id="prefilled-section" style="display:none">
+    <button class="btn-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <h4><i class="fas fa-user-check"></i> Pre-filled Demographics</h4>
+    <div class="prefilled-grid">
+      <div><strong>Full Name</strong> <span id="pf-name"></span></div>
+      <div><strong>Category</strong> <span id="pf-cat"></span></div>
+      <div><strong>Haryana Diploma</strong> <span id="pf-dip"></span></div>
+      <div><strong>Haryana Resident</strong> <span id="pf-res"></span></div>
+    </div>
+    <p style="font-size:11px;color:#64748b;margin-top:14px;margin-bottom:0;"><i class="fas fa-lock"></i> Sourced securely from your registration profile.</p>
+  </div>
+
+  <div class="ch-alert ch-alert-err" id="f-err"></div>
+  <div class="ch-alert ch-alert-ok" id="f-ok"></div>
+
+  <div class="form-section-title"><i class="fas fa-trophy" style="color:#f59e0b"></i> Academic Details</div>
+  <div class="ch-fg"><label class="ch-fl">Your LEET/Entrance Rank *</label><input type="number" class="ch-fi" id="f-rank" placeholder="e.g. 1500" min="1" style="max-width: 250px; font-weight: bold; font-size: 16px;"/></div>
+  
+  <div class="form-section-title"><i class="fas fa-laptop-code" style="color:var(--c-blue)"></i> Branch Preferences</div>
+  <div class="ch-fg">
+    <label class="ch-fl" style="margin-bottom: 10px;">Select up to 5 preferred branches in order of priority</label>
+    
+    <!-- Dynamic Branch Slots -->
+    <div id="branches-container" style="display:flex; flex-direction:column; gap:12px;">
+      <div class="dyn-row branch-row" style="margin-bottom:0;">
+        <div class="dyn-row-flex">
+          <label class="ch-fl">Branch Choice 1 (Most Preferred)</label>
+          <select class="ch-fi br-select" onchange="handleBranchOther(this)">
+            <option value="">Select branch</option><option>Computer Science (CSE)</option><option>Electronics (ECE)</option><option>Mechanical</option><option>Civil</option><option>Electrical</option><option>AI & ML</option><option>Information Technology</option><option>Automobile</option><option>Chemical</option><option>Other</option>
+          </select>
+          <input type="text" class="ch-fi dyn-branch-input br-other" placeholder="Type your preferred branch" style="display:none; margin-top:8px;"/>
+          <p style="font-size:11px;color:#64748b;margin-top:6px;"><i class="fas fa-lightbulb" style="color:#f59e0b"></i> <strong>Tip:</strong> CSE & AI/ML are highly competitive. For Govt colleges, rank 1-1200 is generally safe.</p>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn-add-dyn" onclick="addBranchRow()" style="margin-top:12px;"><i class="fas fa-plus"></i> Add Another Branch</button>
+  </div>
+
+  <div class="form-section-title"><i class="fas fa-university" style="color:#10b981"></i> Target Colleges</div>
+  
+  <div class="ch-fg" style="margin-bottom: 20px;">
+    <label style="display:flex; align-items:center; gap:8px; font-size:14px; color:#1e40af; background:#eff6ff; padding:12px; border-radius:8px; border:1px solid #bfdbfe; cursor:pointer; font-weight:600;">
+      <input type="checkbox" id="no-colleges-cb" style="width:18px;height:18px;" onchange="toggleColleges(this)">
+      I do not know about any college, just ask my preferred branch and suggest a college accordingly.
+    </label>
+  </div>
+
+  <div class="ch-fg" id="colleges-wrapper">
+    <label class="ch-fl" style="margin-bottom: 10px;">Specify any target colleges and the associated branch</label>
+    <div id="colleges-container">
+      <div class="dyn-row coll-row">
+        <div class="dyn-row-flex"><label class="ch-fl">College Name</label><input type="text" class="ch-fi coll-name" placeholder="e.g. DCRUST Murthal, MDU Rohtak"/></div>
+        <div class="dyn-row-flex"><label class="ch-fl">Associated Branch</label><input type="text" class="ch-fi coll-branch" placeholder="e.g. CSE"/></div>
+      </div>
+    </div>
+    <button type="button" class="btn-add-dyn" onclick="addCollegeRow()"><i class="fas fa-plus"></i> Add Another College</button>
+  </div>
+  
+  <div class="form-section-title"><i class="fas fa-comment-dots" style="color:#8b5cf6"></i> Additional Remarks</div>
+  <div class="ch-fg"><label class="ch-fl">Any specific requirements or questions?</label>
+    <textarea class="ch-fi" id="f-notes" placeholder="Example: I want a college near my hometown..." rows="4"></textarea>
+  </div>
+
+  <button class="ch-btn ch-btn-blue" id="btn-submit" onclick="submitRequest()" style="margin-top:30px; font-size: 16px; padding: 14px;"><i class="fas fa-paper-plane"></i> Submit Counseling Request</button>
+  <p style="text-align:center;font-size:13px;color:var(--c-txt3);margin-top:16px">Request submitted! Check your <a href="/user-counseling" style="color:var(--c-blue);font-weight:700;text-decoration:underline">dashboard</a> for admin response within 24-48 hours.</p>
+</div>
+
+<!-- FAQ -->
+<div class="ch-card">
+  <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+  <div class="ch-faq open"><div class="ch-fq" onclick="this.parentElement.classList.toggle('open')">What is LEET Counseling Help?<i class="fas fa-chevron-down" style="font-size:11px;margin-left:auto"></i></div><div class="ch-fa">Our counseling experts analyze your LEET rank, branch preferences, and target colleges to provide personalized recommendations for maximizing your chances during HSTES counseling.</div></div>
+  <div class="ch-faq"><div class="ch-fq" onclick="this.parentElement.classList.toggle('open')">How will I receive the response?<i class="fas fa-chevron-down" style="font-size:11px;margin-left:auto"></i></div><div class="ch-fa">After you submit your request, our admin reviews it within 24-48 hours and sends detailed suggestions to your dashboard at <a href="/user-counseling">user-counseling</a>.</div></div>
+  <div class="ch-faq"><div class="ch-fq" onclick="this.parentElement.classList.toggle('open')">Can I submit multiple requests?<i class="fas fa-chevron-down" style="font-size:11px;margin-left:auto"></i></div><div class="ch-fa">Yes! You can submit multiple requests — for example after each counseling round if your rank situation changes.</div></div>
+</div>
+
+
+</div><!-- /ch-wrap -->
+
+<!-- TRACK SECTION -->
+<section class="ch-track-section" style="background: linear-gradient(135deg, #f8fafc, #eff6ff); padding: 60px 20px; text-align: center; border-top: 1px solid #e2e8f0;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <div style="display:inline-flex; align-items:center; justify-content:center; width:64px; height:64px; background:#fff; border-radius:18px; box-shadow:0 10px 25px rgba(0,0,0,0.05); color:var(--c-blue); font-size:24px; margin-bottom:20px;">
+      <i class="fas fa-history"></i>
+    </div>
+    <h3 style="font-family: 'Syne', sans-serif; font-size: 1.6rem; color: var(--c-navy); margin-bottom: 12px;">Already submitted your request?</h3>
+    <p style="color: #64748b; font-size: 1rem; line-height: 1.6; margin-bottom: 30px;">Track your application status, view expert recommendations, and chat directly with our counseling team in your personal dashboard.</p>
+    <a href="/html/user-counseling.html" class="ch-btn ch-btn-gold" style="display:inline-flex; width:auto; padding:15px 40px; font-size:16px; border-radius:50px; align-items:center; gap:12px; text-decoration:none; box-shadow: 0 10px 20px rgba(245,158,11,0.2); transition: transform 0.2s;">
+      <i class="fas fa-search"></i> Track Your Request
+    </a>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+'use strict';
+var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+var RZP_KEY='rzp_live_SPbBEutqahnSN4';
+var EJS_SVC='service_zlxv3q4', EJS_PUB='byFleJ2hV770O_Mni', EJS_TPL='template_w2fdh1s';
+emailjs.init(EJS_PUB);
+var PRICE=49, PAISE=4900;
+var COUPONS={'HSBTE50':{label:'HSBTE50 — 50% off!',type:'percent',percent:50},'LEET2026':{label:'LEET2026 — 100% FREE!',type:'free'}};
+var pending=null, applied=null, curUser=null;
+
+function doLogout() {
+  sessionStorage.removeItem('counsel_uid');
+  sessionStorage.removeItem('counsel_name');
+  sessionStorage.removeItem('counsel_email');
+  curUser = null;
+  document.getElementById('formCard').style.display='none';
+  document.getElementById('authCard').style.display='block';
+  cSwitch('login');
+  document.getElementById('l-email').value = '';
+  document.getElementById('l-pass').value = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handleBranchOther(selectElem) {
+  var parent = selectElem.parentElement;
+  var input = parent.querySelector('.br-other');
+  if(selectElem.value === 'Other') {
+    input.style.display = 'block';
+    input.focus();
+  } else {
+    input.style.display = 'none';
+  }
+}
+
+function toggleColleges(cb) {
+  var wrapper = document.getElementById('colleges-wrapper');
+  if(cb.checked) {
+    wrapper.style.display = 'none';
+  } else {
+    wrapper.style.display = 'block';
+  }
+}
+
+function addBranchRow() {
+  var container = document.getElementById('branches-container');
+  var count = container.querySelectorAll('.branch-row').length + 1;
+  if(count > 5) {
+    alert("You can only add up to 5 branch preferences.");
+    return;
+  }
+  var div = document.createElement('div');
+  div.className = 'dyn-row branch-row';
+  div.style.marginBottom = '0';
+  div.innerHTML = `
+    <div class="dyn-row-flex">
+      <label class="ch-fl">Branch Choice `+count+`</label>
+      <select class="ch-fi br-select" onchange="handleBranchOther(this)">
+        <option value="">Select branch</option><option>Computer Science (CSE)</option><option>Electronics (ECE)</option><option>Mechanical</option><option>Civil</option><option>Electrical</option><option>AI & ML</option><option>Information Technology</option><option>Automobile</option><option>Chemical</option><option>Other</option>
+      </select>
+      <input type="text" class="ch-fi dyn-branch-input br-other" placeholder="Type your preferred branch" style="display:none; margin-top:8px;"/>
+    </div>
+    <button type="button" class="dyn-remove-btn" onclick="this.parentElement.remove(); updateBranchLabels();" title="Remove Branch"><i class="fas fa-trash"></i></button>
+  `;
+  container.appendChild(div);
+}
+
+function updateBranchLabels() {
+  var rows = document.getElementById('branches-container').querySelectorAll('.branch-row');
+  rows.forEach((row, idx) => {
+    var label = row.querySelector('.ch-fl');
+    if(idx === 0) label.textContent = "Branch Choice 1 (Most Preferred)";
+    else label.textContent = "Branch Choice " + (idx + 1);
+  });
+}
+
+function addCollegeRow() {
+  var container = document.getElementById('colleges-container');
+  var div = document.createElement('div');
+  div.className = 'dyn-row coll-row';
+  div.innerHTML = `
+    <div class="dyn-row-flex"><label class="ch-fl">College Name</label><input type="text" class="ch-fi coll-name" placeholder="e.g. DCRUST Murthal"/></div>
+    <div class="dyn-row-flex"><label class="ch-fl">Associated Branch</label><input type="text" class="ch-fi coll-branch" placeholder="e.g. CSE"/></div>
+    <button type="button" class="dyn-remove-btn" onclick="this.parentElement.remove()" title="Remove College"><i class="fas fa-trash"></i></button>
+  `;
+  container.appendChild(div);
+}
+
+function cSwitch(t){
+  document.querySelectorAll('.ch-tab').forEach(function(b){b.classList.remove('on')});
+  document.querySelectorAll('.ch-panel').forEach(function(p){p.classList.remove('on')});
+  document.getElementById('tab-'+(t==='login'?'login':'reg')).classList.add('on');
+  document.getElementById('p-'+(t==='login'?'login':'register')).classList.add('on');
+}
+function showAlert(id,html,type){var e=document.getElementById(id);if(!e)return;e.className='ch-alert ch-alert-'+type+' on';e.innerHTML=html;}
+function clearAlert(id){var e=document.getElementById(id);if(e){e.classList.remove('on');e.innerHTML='';}}
+
+function populateForm(u) {
+  document.getElementById('prefilled-section').style.display='block';
+  document.getElementById('pf-name').textContent = u.full_name || '—';
+  document.getElementById('pf-cat').textContent = u.category || '—';
+  document.getElementById('pf-dip').textContent = u.diploma_haryana===true ? 'Yes' : 'No';
+  document.getElementById('pf-res').textContent = u.resident_haryana===true ? 'Yes' : 'No';
+}
+
+(async function(){
+  var uid=sessionStorage.getItem('counsel_uid');
+  if(uid){
+    curUser={id:uid,name:sessionStorage.getItem('counsel_name'),email:sessionStorage.getItem('counsel_email')};
+    document.getElementById('authCard').style.display='none';
+    document.getElementById('formCard').style.display='block';
+    document.getElementById('st-1').className = 'step done';
+    document.getElementById('st-1').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Register</div>';
+    document.getElementById('st-2').className = 'step done';
+    document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
+    document.getElementById('st-3').className = 'step active';
+    var {data} = await sb.from('counseling_users').select('*').eq('id', uid).maybeSingle();
+    if(data) populateForm(data);
+  }
+})();
+
+function ejsSend(toName,toEmail,replyEmail,title,mobile,html){
+  return emailjs.send(EJS_SVC,EJS_TPL,{
+    to_name:toName,to_email:toEmail,email:replyEmail||toEmail,
+    title:title||'HSBTE LEET Counseling',mobile:mobile||'',html_message:html
+  });
+}
+
+function sendCounselingEmails(d){
+  try{
+    var amt=d.amount||49;
+    var htmlUser=`<div style="font-family:sans-serif;max-width:600px;margin:0 auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+      <div style="background:linear-gradient(135deg,#1a56db,#1e40af);padding:30px;text-align:center;">
+        <div style="font-size:3rem;margin-bottom:10px;">🎯</div>
+        <h1 style="color:#fff;margin:0;font-size:1.5rem;">Welcome to Expert Counseling!</h1>
+      </div>
+      <div style="padding:30px;background:#fff;color:#334155;">
+        <p>Hi <strong>${d.name}</strong>,</p>
+        <p>Your payment for <strong>HSBTE LEET Counseling Help</strong> is confirmed. Our experts are ready to analyze your profile.</p>
+        <div style="background:#f8fafc;padding:20px;border-radius:8px;margin:20px 0;font-size:14px;">
+          <strong>Order Details:</strong><br>
+          • Mobile: ${d.mobile}<br>
+          • Payment ID: ${d.payId || 'N/A'}<br>
+          • Amount: ₹${amt}
+        </div>
+        <p><strong>What next?</strong><br>1. Log in to your <a href="https://hsbteleet.com/user-counseling" style="color:#1a56db;font-weight:700;">Counseling Dashboard</a>.<br>2. Fill your Rank and Branch preferences.<br>3. Get expert suggestions within 24-48 hours.</p>
+        <div style="text-align:center;margin-top:30px;">
+          <a href="https://hsbteleet.com/user-counseling" style="background:#1a56db;color:#fff;padding:12px 30px;border-radius:50px;text-decoration:none;font-weight:700;">Open My Dashboard →</a>
+        </div>
+      </div>
+      <div style="background:#f1f5f9;padding:20px;text-align:center;font-size:12px;color:#64748b;">
+        Questions? Contact admin at nishant@hsbteleet.com
+      </div>
+    </div>`;
+    ejsSend(d.name,d.email,d.email,'Welcome to Counseling Help! 🎯',d.mobile,htmlUser);
+    var htmlAdmin=`<div style="font-family:sans-serif;padding:20px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;">
+      <h2 style="color:#166534;margin-top:0;">🆕 New Counseling Purchase</h2>
+      <p><strong>Student:</strong> ${d.name}<br>
+      <strong>Mobile:</strong> ${d.mobile}<br>
+      <strong>Email:</strong> ${d.email}<br>
+      <strong>Amount:</strong> ₹${amt}<br>
+      <strong>Payment ID:</strong> ${d.payId}</p>
+      <a href="https://hsbteleet.com/counseling-admin" style="background:#166534;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;display:inline-block;">View in Admin Panel →</a>
+    </div>`;
+    ejsSend('Admin','nishant@hsbteleet.com',d.email,'New Counseling Order — '+d.name,d.mobile,htmlAdmin);
+  }catch(e){console.error('Email error:',e);}
+}
+
+async function doLogin(){
+  clearAlert('l-err');clearAlert('l-ok');
+  var email=document.getElementById('l-email').value.trim();
+  var pass=document.getElementById('l-pass').value;
+  if(!email||!pass){showAlert('l-err','<i class="fas fa-times-circle"></i> Please fill all fields.','err');return;}
+  var btn=document.getElementById('btn-login');
+  btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Logging in...';
+  try{
+    var{data:u,error}=await sb.from('counseling_users').select('*').eq('email',email).eq('password_hash',pass).maybeSingle();
+    if(error||!u){showAlert('l-err','<i class="fas fa-times-circle"></i> Invalid email or password.','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Secure Login';return;}
+    
+    var{data:pay}=await sb.from('counseling_payments').select('id').eq('user_id',u.id).maybeSingle();
+    curUser={id:u.id,name:u.full_name,email:u.email};
+    sessionStorage.setItem('counsel_uid',u.id);
+    sessionStorage.setItem('counsel_name',u.full_name);
+    sessionStorage.setItem('counsel_email',u.email);
+    
+    if(!pay){
+      pending={full_name:u.full_name,mobile:u.mobile,email:u.email,id:u.id};
+      document.getElementById('authCard').style.display='none';
+      document.getElementById('payCard').style.display='block';
+      document.getElementById('st-1').className = 'step done';
+      document.getElementById('st-1').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Register</div>';
+      document.getElementById('st-2').className = 'step active';
+    } else {
+      document.getElementById('authCard').style.display='none';
+      document.getElementById('formCard').style.display='block';
+      document.getElementById('st-1').className = 'step done';
+      document.getElementById('st-1').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Register</div>';
+      document.getElementById('st-2').className = 'step done';
+      document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
+      document.getElementById('st-3').className = 'step active';
+      populateForm(u);
+    }
+  }catch(e){showAlert('l-err','<i class="fas fa-exclamation-triangle"></i> '+e.message,'err');}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Secure Login';
+}
+
+async function doRegister(){
+  clearAlert('r-err');
+  var name=document.getElementById('r-name').value.trim();
+  var dob=document.getElementById('r-dob').value;
+  var gender=document.querySelector('input[name="r-gender"]:checked').value;
+  var cat=document.getElementById('r-category').value;
+  var dip=document.querySelector('input[name="r-diploma"]:checked').value === 'Yes';
+  var res=document.querySelector('input[name="r-resident"]:checked').value === 'Yes';
+  var mob=document.getElementById('r-mob').value.trim();
+  var email=document.getElementById('r-email').value.trim();
+  var pass=document.getElementById('r-pass').value;
+
+  if(!name||!dob||!cat||!email||!/^\d{10}$/.test(mob)||!pass||pass.length<6){
+    showAlert('r-err','<i class="fas fa-times-circle"></i> Please fill all mandatory fields correctly. Mobile must be 10 digits, password min 6 chars.','err');return;
+  }
+  var btn=document.getElementById('btn-reg');
+  btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Registering...';
+  try{
+    var{data:ex}=await sb.from('counseling_users').select('id').eq('email',email).maybeSingle();
+    if(ex){showAlert('r-err','<i class="fas fa-user-check"></i> Email already registered. <button onclick="cSwitch(\'login\')" style="background:none;border:none;color:var(--c-blue);cursor:pointer;font-weight:700;text-decoration:underline">Login here →</button>','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-user-plus"></i> Register & Continue to Payment';return;}
+    
+    var payload = {
+      full_name:name, email:email, mobile:mob, password_hash:pass,
+      dob:dob, gender:gender, category:cat, diploma_haryana:dip, resident_haryana:res
+    };
+    
+    var{data:nu,error:uE}=await sb.from('counseling_users').insert([payload]).select('id, full_name, category, diploma_haryana, resident_haryana').single();
+    if(uE)throw new Error(uE.message);
+    
+    pending={full_name:name,mobile:mob,email:email,id:nu.id};
+    curUser={id:nu.id,name:name,email:email};
+    sessionStorage.setItem('counsel_uid',nu.id);
+    sessionStorage.setItem('counsel_name',name);
+    sessionStorage.setItem('counsel_email',email);
+    
+    populateForm(nu);
+    document.getElementById('authCard').style.display='none';
+    document.getElementById('payCard').style.display='block';
+    document.getElementById('st-1').className = 'step done';
+    document.getElementById('st-1').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Register</div>';
+    document.getElementById('st-2').className = 'step active';
+  }catch(e){showAlert('r-err','<i class="fas fa-exclamation-triangle"></i> '+e.message,'err');}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-user-plus"></i> Register & Continue to Payment';
+}
+
+function applyCoupon(){
+  var code=(document.getElementById('c-input').value||'').trim().toUpperCase();
+  var msg=document.getElementById('c-msg');
+  if(!code){msg.style.color='#92400e';msg.textContent='Enter a code first.';return;}
+  if(!COUPONS[code]){msg.style.color='#991b1b';msg.textContent='❌ Invalid code.';applied=null;resetPrice();return;}
+  var c=COUPONS[code];
+  var disc,final;
+  if(c.type==='free'){disc=PRICE;final=0;}else{disc=Math.round(PRICE*c.percent/100);final=PRICE-disc;}
+  applied={discount:disc,finalRs:final,finalPaise:final*100,type:c.type};
+  document.getElementById('disc-row').style.display='flex';
+  document.getElementById('disc-lbl').textContent='🏷 '+c.label;
+  document.getElementById('disc-val').textContent='-₹'+disc;
+  if(c.type==='free'){
+    document.getElementById('total-p').textContent='₹0 (FREE!)';
+    document.getElementById('pay-wrap').style.display='none';
+    document.getElementById('free-wrap').style.display='block';
+    msg.style.color='#15803d';msg.textContent='🎉 FREE access applied!';
+  }else{
+    document.getElementById('total-p').textContent='₹'+final;
+    document.getElementById('pay-txt').textContent='Pay ₹'+final+' & Get Counseling';
+    msg.style.color='#15803d';msg.textContent='✅ Save ₹'+disc+'!';
+  }
+}
+function resetPrice(){
+  document.getElementById('disc-row').style.display='none';
+  document.getElementById('total-p').textContent='₹'+PRICE;
+  document.getElementById('pay-txt').textContent='Pay ₹'+PRICE+' & Get Counseling';
+  document.getElementById('pay-wrap').style.display='block';
+  document.getElementById('free-wrap').style.display='none';
+}
+
+async function doFree(){
+  if(!pending||!applied||applied.type!=='free'){return;}
+  var btn=document.getElementById('btn-free');
+  btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Activating...';
+  try{
+    await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:'COUPON_FREE',amount:0,status:'free_coupon',coupon_used:document.getElementById('c-input').value.trim().toUpperCase()}]);
+    sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});
+    document.getElementById('payCard').style.display='none';
+    document.getElementById('formCard').style.display='block';
+    document.getElementById('st-2').className = 'step done';
+    document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
+    document.getElementById('st-3').className = 'step active';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }catch(e){showAlert('pay-err','<i class="fas fa-exclamation-triangle"></i> '+e.message,'err');btn.disabled=false;btn.innerHTML='<i class="fas fa-gift"></i> Claim FREE Access';}
+}
+
+function doPay(){
+  if(!pending){showAlert('pay-err','Session expired. Please reload.','err');return;}
+  clearAlert('pay-err');
+  var btn=document.getElementById('btn-pay');
+  btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Loading...';
+  var paise=(applied&&applied.finalPaise!==undefined)?applied.finalPaise:PAISE;
+  function go(){
+    var opts={
+      key:RZP_KEY,amount:paise,currency:'INR',
+      name:'HSBTE LEET Counseling',description:'Counseling Help — hsbteleet.com',
+      image:'https://hsbteleet.com/image/favicon.webp',
+      prefill:{contact:pending.mobile,email:pending.email},
+      theme:{color:'#1a56db'},
+      handler:function(r){completePayment(r);},
+      modal:{ondismiss:function(){showAlert('pay-err','<i class="fas fa-info-circle"></i> Payment cancelled.','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹'+PRICE+' & Get Counseling</span>';}}
+    };
+    try{var rzp=new window.Razorpay(opts);rzp.open();}catch(e){showAlert('pay-err',e.message,'err');}
+    btn.disabled=false;btn.innerHTML='<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹'+PRICE+' & Get Counseling</span>';
+  }
+  if(typeof window.Razorpay==='function'){go();}else{
+    var s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';
+    s.onload=go;s.onerror=function(){showAlert('pay-err','Failed to load payment gateway.','err');};
+    document.head.appendChild(s);
+  }
+}
+async function completePayment(r){
+  try{
+    var coupon=(document.getElementById('c-input').value||'').trim().toUpperCase();
+    var amt=(applied?applied.finalPaise:PAISE);
+    await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:r.razorpay_payment_id,amount:amt,status:'paid',coupon_used:coupon||null}]);
+    sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:r.razorpay_payment_id,amount:Math.round(amt/100)});
+    document.getElementById('payCard').style.display='none';
+    document.getElementById('formCard').style.display='block';
+    document.getElementById('st-2').className = 'step done';
+    document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
+    document.getElementById('st-3').className = 'step active';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }catch(e){showAlert('pay-err','Payment recorded on gateway but failed to save in our system. Please contact support.','err');}
+}
+
+async function submitRequest(){
+  clearAlert('f-err');clearAlert('f-ok');
+  
+  var rank=document.getElementById('f-rank').value;
+  if(!rank){showAlert('f-err','<i class="fas fa-times-circle"></i> Please enter your LEET/Entrance Rank.','err');return;}
+  
+  var branches = [];
+  document.querySelectorAll('.branch-row').forEach(row => {
+    var sel = row.querySelector('.br-select').value;
+    if(sel === 'Other') sel = row.querySelector('.br-other').value.trim();
+    if(sel) branches.push(sel);
+  });
+  
+  if(branches.length === 0){showAlert('f-err','<i class="fas fa-times-circle"></i> Please provide at least one Branch Choice.','err');return;}
+
+  var noColleges = document.getElementById('no-colleges-cb').checked;
+  var colleges = [];
+  var notes = document.getElementById('f-notes').value.trim();
+
+  if(noColleges) {
+    if(notes) notes = "STUDENT PREFERENCE: I do not know about any college, just ask my preferred branch and suggest a college accordingly. \n\n" + notes;
+    else notes = "STUDENT PREFERENCE: I do not know about any college, just ask my preferred branch and suggest a college accordingly.";
+  } else {
+    document.querySelectorAll('.coll-row').forEach(row => {
+      var cname = row.querySelector('.coll-name').value.trim();
+      var cbranch = row.querySelector('.coll-branch').value.trim();
+      if(cname || cbranch) {
+        colleges.push({ college: cname, branch: cbranch });
+      }
+    });
+  }
+
+  var btn=document.getElementById('btn-submit');
+  btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Submitting...';
+  try{
+    var payload = {
+      user_id: curUser.id,
+      rank: parseInt(rank),
+      branch_1: branches[0] || null,
+      branch_2: branches[1] || null,
+      branch_3: branches[2] || null,
+      branch_4: branches[3] || null,
+      branch_5: branches[4] || null,
+      college_preferences: colleges.length > 0 ? colleges : null,
+      notes: notes || null,
+      status: 'pending'
+    };
+    
+    var{error}=await sb.from('counseling_requests').insert([payload]);
+    if(error)throw new Error(error.message);
+    showAlert('f-ok','<i class="fas fa-check-circle"></i> Application submitted successfully! Redirecting to your dashboard...','ok');
+    setTimeout(() => { window.location.href = '/user-counseling'; }, 1000);
+    
+    document.getElementById('f-rank').value='';
+    document.getElementById('f-notes').value='';
+    document.getElementById('no-colleges-cb').checked = false;
+    toggleColleges(document.getElementById('no-colleges-cb'));
+    
+    document.getElementById('branches-container').innerHTML = `
+      <div class="dyn-row branch-row" style="margin-bottom:0;">
+        <div class="dyn-row-flex">
+          <label class="ch-fl">Branch Choice 1 (Most Preferred)</label>
+          <select class="ch-fi br-select" onchange="handleBranchOther(this)">
+            <option value="">Select branch</option><option>Computer Science (CSE)</option><option>Electronics (ECE)</option><option>Mechanical</option><option>Civil</option><option>Electrical</option><option>AI & ML</option><option>Information Technology</option><option>Automobile</option><option>Chemical</option><option>Other</option>
+          </select>
+          <input type="text" class="ch-fi dyn-branch-input br-other" placeholder="Type your preferred branch" style="display:none; margin-top:8px;"/>
+        </div>
+      </div>`;
+    document.getElementById('colleges-container').innerHTML = `
+      <div class="dyn-row coll-row">
+        <div class="dyn-row-flex"><label class="ch-fl">College Name</label><input type="text" class="ch-fi coll-name" placeholder="e.g. DCRUST Murthal"/></div>
+        <div class="dyn-row-flex"><label class="ch-fl">Associated Branch</label><input type="text" class="ch-fi coll-branch" placeholder="e.g. CSE"/></div>
+      </div>`;
+    
+  }catch(e){showAlert('f-err','<i class="fas fa-exclamation-triangle"></i> '+e.message,'err');}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Counseling Request';
+}
+</script>
+<div data-include="/partials/footer.html"></div>
+<script defer src="/js/search.js"></script>
+<script defer src="/js/main.js"></script>
+<script defer src="/js/include.js"></script>
+<script defer src="/js/translate.js"></script>
+</body>
+</html>

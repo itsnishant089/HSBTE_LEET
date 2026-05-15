@@ -188,7 +188,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="card">
         <div class="card-hdr"><div class="card-title"><i class="fas fa-users" style="color:var(--bl)"></i> All Users</div><span id="u-count" style="font-size:12px;color:var(--mu)">—</span></div>
         <div class="card-body np"><div class="tbl-wrap">
-          <table class="tbl"><thead><tr><th>Name</th><th>Mobile</th><th>Email</th><th>Tier</th><th>Paid ₹</th><th>Coupon</th><th>Refer By</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
+          <table class="tbl"><thead><tr><th>Name</th><th>Mobile / Email</th><th>Password</th><th>Tier</th><th>Paid ₹</th><th>Coupon</th><th>Refer By</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
           <tbody id="tb-users"><tr class="lr"><td colspan="10">Loading…</td></tr></tbody></table>
         </div></div>
       </div>
@@ -389,7 +389,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
 var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
 var ADMIN_PASS='Nishant@089';
+var EJS_SVC='service_zlxv3q4', EJS_PUB='byFleJ2hV770O_Mni', EJS_TPL='template_w2fdh1s';
 var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+emailjs.init(EJS_PUB);
 var curPage='dashboard';
 var usersCache=[];
 var confCb=null;
@@ -457,7 +459,7 @@ async function loadDash(){
 async function loadUsers(){
   try{
     var[uRes,pyRes,acRes,ulRes]=await Promise.all([
-      sb.from('premium_users').select('id,full_name,mobile,email,created_at').order('created_at',{ascending:false}),
+      sb.from('premium_users').select('id,full_name,mobile,email,password_hash,created_at').order('created_at',{ascending:false}),
       sb.from('premium_payments').select('user_id,amount,status'),
       sb.from('premium_access').select('user_id,is_active'),
       safe(sb.from('ultra_premium_users').select('user_id'))
@@ -496,7 +498,7 @@ function renderU(users){
   var tb=document.getElementById('tb-users');
   if(!users.length){tb.innerHTML='<tr class="lr"><td colspan="10">No users found.</td></tr>';return;}
   tb.innerHTML=users.map(function(u){
-    return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td><td style="font-size:12px">'+e(u.email||'—')+'</td>' +
+    return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code><br><span style="font-size:11px;color:var(--mu)">'+e(u.email||'—')+'</span></td><td><code style="font-size:12px;background:#f1f5f9;padding:2px 6px;border-radius:4px;color:#0369a1">'+e(u.password_hash||'—')+'</code></td>' +
     '<td>'+(u.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+'</td>' +
     '<td>₹'+(u.paid_rs||'—')+'</td>' +
     '<td>'+(u.coupon_used?'<span class="badge b-blue">'+e(u.coupon_used)+'</span>':'—')+'</td>' +

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counseling Admin Portal | HSBTE LEET</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+  <style>
+:root{--p:#7c3aed;--pd:#5b21b6;--pl:#ede9fe;--go:#f59e0b;--gd:#d97706;--gl:#fef3c7;--bl:#1a56db;--gr:#10b981;--re:#ef4444;--nv:#0a0f1e;--tx:#0f172a;--mu:#64748b;--bo:#e2e8f0;--ca:#fff;--bg:#f1f5f9}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+#login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0a0f1e,#1a0038);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.login-card{background:#fff;border-radius:22px;padding:40px 36px;max-width:400px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(124,58,237,.3)}
+.login-logo{font-size:2.5rem;margin-bottom:12px}
+.login-card h1{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:6px;color:var(--tx)}
+.login-card p{font-size:13px;color:var(--mu);margin-bottom:24px}
+.login-input{width:100%;padding:12px 15px;border:2px solid var(--bo);border-radius:10px;font-size:15px;color:var(--tx);background:#f8faff;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px}
+.login-input:focus{border-color:var(--p);background:#fff}
+.login-btn{width:100%;padding:13px;border:none;border-radius:50px;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;box-shadow:0 6px 20px rgba(124,58,237,.35);transition:all .22s}
+.login-btn:hover{transform:translateY(-2px)}
+.login-err{color:#ef4444;font-size:12.5px;margin-top:8px;display:none}
+.layout{display:flex;min-height:100vh}
+#sidebar{width:240px;background:var(--nv);flex-shrink:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-brand{padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-logo{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff}
+.sb-logo span{color:#c4b5fd}
+.sb-tagline{font-size:10.5px;color:rgba(255,255,255,.4);margin-top:3px}
+.sb-nav{padding:12px 0;flex:1}
+.sb-section{font-family:'Syne',sans-serif;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.3);padding:12px 18px 5px}
+.sb-link{display:flex;align-items:center;gap:10px;padding:10px 18px;color:rgba(255,255,255,.55);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;border:none;background:transparent;width:100%;text-align:left;border-left:3px solid transparent}
+.sb-link:hover{color:#fff;background:rgba(255,255,255,.06)}
+.sb-link.active{color:#fff;background:rgba(124,58,237,.25);border-left-color:#7c3aed}
+.sb-link i{width:16px;font-size:13.5px;flex-shrink:0}
+.sb-badge{margin-left:auto;background:#ef4444;color:#fff;border-radius:999px;padding:1px 7px;font-size:9.5px;font-weight:800;font-family:'Syne',sans-serif}
+.sb-footer{padding:16px 18px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-logout{width:100%;padding:10px;border:1px solid rgba(255,255,255,.15);border-radius:9px;background:transparent;color:rgba(255,255,255,.5);font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px}
+.sb-logout:hover{background:rgba(255,255,255,.08);color:#fff}
+.main{flex:1;overflow-x:hidden;min-width:0}
+.topbar{background:#fff;border-bottom:1px solid var(--bo);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--tx)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.admin-badge{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;padding:5px 13px;border-radius:999px;font-family:'Syne',sans-serif;font-size:10.5px;font-weight:800}
+.refresh-btn{padding:7px 13px;border:1.5px solid var(--bo);border-radius:8px;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:var(--mu);display:flex;align-items:center;gap:5px;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.refresh-btn:hover{border-color:var(--p);color:var(--p)}
+.page{display:none;padding:24px}
+.page.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--ca);border-radius:14px;padding:20px 18px;border:1px solid var(--bo);position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;border-radius:50%;transform:translate(30%,-30%);opacity:.08}
+.sc-blue::before{background:var(--bl)}.sc-purple::before{background:var(--p)}.sc-green::before{background:var(--gr)}.sc-gold::before{background:var(--go)}.sc-red::before{background:var(--re)}
+.stat-icon{font-size:1.6rem;margin-bottom:10px}
+.stat-val{font-family:'Syne',sans-serif;font-size:2rem;font-weight:900;color:var(--tx);line-height:1}
+.stat-lbl{font-size:12px;color:var(--mu);margin-top:5px;font-weight:600}
+.stat-sub{font-size:11px;color:var(--gr);margin-top:3px;font-weight:600}
+.card{background:var(--ca);border-radius:14px;border:1px solid var(--bo);overflow:hidden;margin-bottom:20px}
+.card-hdr{padding:14px 20px;border-bottom:1px solid var(--bo);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.card-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:8px}
+.card-body{padding:20px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:'Syne',sans-serif;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.b-green{background:#d1fae5;color:#065f46}.b-purple{background:var(--pl);color:var(--pd)}.b-gold{background:var(--gl);color:#92400e}.b-red{background:#fee2e2;color:#991b1b}.b-blue{background:#dbeafe;color:#1e40af}.b-gray{background:#f1f5f9;color:#475569}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;border:none;cursor:pointer;transition:all .18s;text-decoration:none}
+.btn-sm{padding:5px 10px;font-size:11px}
+.btn-purple{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff}.btn-purple:hover{opacity:.9}
+.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.btn-red{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
+.btn-blue{background:linear-gradient(135deg,#1a56db,#1240a8);color:#fff}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a}
+.btn-ghost{background:#f1f5f9;color:var(--tx);border:1px solid var(--bo)}
+.btn-ghost:hover{border-color:var(--p);color:var(--p)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.fi{padding:8px 13px;border:1.5px solid var(--bo);border-radius:9px;font-size:13px;color:var(--tx);background:#fff;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.fi:focus{border-color:var(--p)}
+.fs{padding:8px 28px 8px 13px;border:1.5px solid var(--bo);border-radius:9px;font-size:13px;color:var(--tx);background:#fff;outline:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+
+/* Forms */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.fl{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--mu);display:block;margin-bottom:5px;}
+.form-input,.form-select{width:100%;padding:10px 13px;border:1.5px solid var(--bo);border-radius:9px;font-size:14px;color:var(--tx);background:#f8faff;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.form-input:focus,.form-select:focus{border-color:var(--p);background:#fff}
+.alert{padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:14px;display:none;line-height:1.6}
+.alert.show{display:block}
+.alert-success{background:#f0fdf4;border:1px solid #86efac;color:#15803d}
+.alert-danger{background:#fff1f2;border:1px solid #fca5a5;color:#991b1b}
+.alert-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+
+/* Counseling Cards */
+.req-card{border:1px solid var(--bo);border-radius:14px;padding:20px;margin-bottom:16px;background:#fff;transition:box-shadow .2s}
+.req-card:hover{box-shadow:0 6px 24px rgba(11,22,40,.06)}
+.req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;font-size:13px;margin:10px 0;background:var(--bg);padding:12px;border-radius:8px;}
+.req-grid div{padding:4px 0}
+.req-grid strong{color:var(--tx);display:block;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--mu);margin-bottom:2px}
+.resp-box{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:16px;margin-top:16px}
+.resp-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.resp-inputs { display:grid; grid-template-columns:1fr 2fr 2fr; gap:10px; margin-bottom:10px; }
+.pref-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; }
+.pref-table th, .pref-table td { border: 1px solid var(--bo); padding: 6px 10px; text-align: left; }
+.pref-table th { background: var(--bg); color: var(--tx); font-family: 'Syne', sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; }
+.ch-fi { border-radius: 8px; border: 1px solid var(--bo); padding: 10px 14px; background: #fff; transition: all 0.2s; font-size: 13px; width: 100%; box-sizing: border-box; font-family:'Plus Jakarta Sans',sans-serif; }
+.ch-fi:focus { border-color: var(--p); outline:none; }
+.ch-fl{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--tx);display:block;margin-bottom:6px; margin-top:10px;}
+textarea.ch-fi { resize: vertical; min-height: 80px; }
+.spin{display:inline-block;width:14px;height:14px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+.rcb-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.rcb-row { display: flex; gap: 8px; align-items: center; background: #fff; padding: 8px; border: 1px solid var(--bo); border-radius: 8px; }
+.rcb-handle { cursor: grab; color: var(--mu); font-size: 14px; padding: 0 4px; }
+.rcb-idx { font-weight: bold; width: 24px; text-align: center; color: var(--p); font-size: 12px; }
+.rcb-col { flex: 2; }
+.rcb-br { flex: 2; }
+.rcb-btn { background: none; border: none; cursor: pointer; color: var(--mu); transition: color 0.2s; }
+.rcb-btn:hover { color: var(--p); }
+.rcb-btn.del:hover { color: var(--re); }
+
+@media(max-width:700px){#sidebar{display:none}.layout{flex-direction:column}.page{padding:16px}.resp-inputs{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.rcb-row{flex-direction:column;align-items:stretch}.rcb-handle{display:none}}
+  </style>
+  <script>
+  // Block DevTools
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  document.onkeydown = function(e) {
+    if(e.keyCode == 123) return false;
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+  }
+  </script>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">🛡️</div>
+    <h1>Counseling Admin</h1>
+    <p>hsbteleet.com — Restricted Access Only</p>
+    <input type="password" class="login-input" id="admin-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()" aria-label="Admin password"/>
+    <button class="login-btn" onclick="doLogin()"><i class="fas fa-shield-alt"></i> Login to Admin</button>
+    <div class="login-err" id="lerr">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<div class="layout" id="main-layout" style="display:none">
+  <div id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo">HSBTE<span>LEET</span>.com</div>
+      <div class="sb-tagline">Counseling Admin Panel v3</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Overview</div>
+      <button class="sb-link active" id="lnk-dashboard" onclick="gotoPage('dashboard',this)"><i class="fas fa-chart-pie"></i> Dashboard</button>
+      
+      <div class="sb-section">Requests</div>
+      <button class="sb-link" id="lnk-pending" onclick="gotoPage('pending',this)"><i class="fas fa-hourglass-half"></i> Pending <span class="sb-badge" id="bdg-p" style="background:var(--go);color:#0f172a">0</span></button>
+      <button class="sb-link" id="lnk-reviewed" onclick="gotoPage('reviewed',this)"><i class="fas fa-eye"></i> Reviewed</button>
+      <button class="sb-link" id="lnk-sent" onclick="gotoPage('sent',this)"><i class="fas fa-check-circle"></i> Sent & Approved</button>
+      <button class="sb-link" id="lnk-chats" onclick="gotoPage('chats',this)"><i class="fas fa-comments"></i> Student Chats <span class="sb-badge" id="bdg-c" style="background:#ef4444;color:#fff;display:none">0</span></button>
+      
+      <div class="sb-section">Tools</div>
+      <button class="sb-link" id="lnk-students" onclick="gotoPage('students',this)"><i class="fas fa-users"></i> Registered Students</button>
+      <button class="sb-link" id="lnk-adduser" onclick="gotoPage('adduser',this)"><i class="fas fa-user-plus"></i> Add User Manually</button>
+    </nav>
+    <div class="sb-footer">
+      <button class="sb-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="page-ttl">Dashboard</div>
+      <div class="topbar-right">
+        <button class="refresh-btn" onclick="reloadCurrent()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        <span class="admin-badge"><i class="fas fa-user-shield"></i> Nishant Admin</span>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card sc-green"><div class="stat-icon">💰</div><div class="stat-val" id="s-rev">₹0</div><div class="stat-lbl">Counseling Revenue</div></div>
+        <div class="stat-card sc-blue"><div class="stat-icon">📋</div><div class="stat-val" id="s-total">0</div><div class="stat-lbl">Total Requests</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">⏳</div><div class="stat-val" id="s-pending">0</div><div class="stat-lbl">Pending Requests</div></div>
+        <div class="stat-card sc-purple"><div class="stat-icon">✅</div><div class="stat-val" id="s-sent">0</div><div class="stat-lbl">Sent / Approved</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-title"><i class="fas fa-clock" style="color:var(--bl)"></i> Recent Requests</div>
+          <button class="btn btn-ghost btn-sm" onclick="gotoPage('pending')">View All Pending</button>
+        </div>
+        <div class="card-body" id="dash-recent" style="background:var(--bg)">
+          <p style="color:var(--mu); font-size:14px;"><i class="fas fa-spinner fa-spin"></i> Loading recent requests...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- REQUESTS LIST -->
+    <div class="page" id="page-requests">
+      <div class="filter-bar">
+        <input type="number" class="fi" id="fil-rank-min" placeholder="Min Rank" style="width:100px" onchange="loadRequests()"/>
+        <input type="number" class="fi" id="fil-rank-max" placeholder="Max Rank" style="width:100px" onchange="loadRequests()"/>
+        <select class="fi" id="fil-cat" style="width:130px" onchange="loadRequests()">
+          <option value="">All Categories</option>
+          <option value="General">General</option><option value="OBC">OBC</option><option value="SC">SC</option><option value="ST">ST</option><option value="EWS">EWS</option>
+        </select>
+        <input type="text" class="fi" id="fil-search" placeholder="Search Name/Mobile..." style="width:180px" onkeyup="if(event.key==='Enter')loadRequests()"/>
+        <button class="btn btn-purple" onclick="loadRequests()"><i class="fas fa-search"></i> Apply</button>
+        <div style="margin-left:auto; display:flex; gap:8px;">
+          <button class="btn btn-sm btn-ghost" onclick="bulkStatus('sent')">Bulk Mark Sent</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr"><div class="card-title" id="req-ttl"><i class="fas fa-list-alt" style="color:var(--bl)"></i> Requests</div></div>
+        <div class="card-body" id="reqList" style="background:var(--bg)">
+          <p style="color:var(--mu); font-size:14px;"><i class="fas fa-spinner fa-spin"></i> Loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD USER MANUALLY -->
+    <div class="page" id="page-adduser">
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-user-plus" style="color:var(--gr)"></i> Add Counseling User Manually</div></div>
+        <div class="card-body">
+          <div class="alert alert-warn show" style="margin-bottom:16px"><i class="fas fa-info-circle"></i> Use this for students who paid via direct UPI. This will create their account and bypass the payment wall. They still need to login to submit their branch choices.</div>
+          <div id="au-alrt" class="alert"></div>
+          
+          <div class="form-row">
+            <div><label class="fl">Full Name</label><input type="text" class="form-input" id="au-name" placeholder="Student's name"/></div>
+            <div><label class="fl">Mobile Number</label><input type="tel" class="form-input" id="au-mob" placeholder="10-digit mobile" maxlength="10"/></div>
+          </div>
+          <div class="form-row">
+            <div><label class="fl">Email Address</label><input type="email" class="form-input" id="au-email" placeholder="student@example.com"/></div>
+            <div><label class="fl">Password (Optional)</label><input type="text" class="form-input" id="au-pass" placeholder="Leaves blank to use Mobile as password"/></div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label class="fl">Category</label>
+              <select class="form-select" id="au-cat">
+                <option value="General">General</option><option value="OBC">OBC (BCA/BCB)</option><option value="SC">SC / DSC</option><option value="ST">ST</option><option value="EWS">EWS</option><option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+               <label class="fl">Gender</label>
+               <select class="form-select" id="au-gen"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+             <div><label class="fl">Date of Birth</label><input type="date" class="form-input" id="au-dob"/></div>
+             <div><label class="fl">Amount Paid (₹)</label><input type="number" class="form-input" id="au-paid" placeholder="49"/></div>
+          </div>
+          
+          <button class="btn btn-green" style="margin-top:10px" onclick="doAddUser()" id="au-btn"><i class="fas fa-check-circle"></i> Create User & Mark as Paid</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REGISTERED STUDENTS -->
+    <div class="page" id="page-students">
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-title"><i class="fas fa-users" style="color:var(--bl)"></i> All Registered Students</div>
+          <button class="btn btn-ghost btn-sm" onclick="loadStudents()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div class="card-body" id="stuList">
+          <p style="color:var(--mu); font-size:14px;"><i class="fas fa-spinner fa-spin"></i> Loading students...</p>
+        </div>
+      </div>
+    </div>
+    <!-- CHATS -->
+    <div class="page" id="page-chats">
+      <div style="display:grid; grid-template-columns: 300px 1fr; gap: 20px; height: calc(100vh - 180px);">
+        <div class="card" style="display:flex; flex-direction:column;">
+          <div class="card-hdr"><div class="card-title">Recent Conversations</div></div>
+          <div class="card-body" id="chat-user-list" style="flex:1; overflow-y:auto; padding:0; background: #fff;">
+            <p style="padding:20px; color:var(--mu); font-size:13px;">Loading conversations...</p>
+          </div>
+        </div>
+        <div class="card" style="display:flex; flex-direction:column;">
+          <div class="card-hdr" style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="card-title" id="chat-active-title">Select a student to chat</div>
+            <div id="chat-user-meta" style="font-size:12px; color:var(--mu)"></div>
+          </div>
+          <div class="card-body" id="admin-chat-window" style="flex:1; overflow-y:auto; background:#f8fafc; padding:20px; display:flex; flex-direction:column; gap:12px;">
+             <p style="text-align:center; color:#94a3b8; margin-top:100px;">Click on a student from the left list to start replying.</p>
+          </div>
+          <div style="padding:15px; border-top:1px solid #e2e8f0; display:flex; gap:10px; background: #fff;">
+            <input type="text" id="admin-chat-input" class="form-input" placeholder="Type reply..." style="flex:1" onkeydown="if(event.key==='Enter')sendAdminChat()"/>
+            <button class="btn btn-blue" onclick="sendAdminChat()" id="btn-admin-send"><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+'use strict';
+var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var ADMIN_PASS='Nishant@089';
+var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+var curCat = 'dashboard';
+var ALLOTMENTS = {};
+var USER_MAP = {};
+var activeChatUser = null;
+
+function doLogin(){
+  var p=document.getElementById('admin-pass').value;
+  if(p===ADMIN_PASS){
+    sessionStorage.setItem('counsel_admin','1');
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('main-layout').style.display='flex';
+    loadDash();
+  }else{
+    var e=document.getElementById('lerr');e.style.display='block';
+    document.getElementById('admin-pass').value='';
+    setTimeout(function(){e.style.display='none';},3000);
+  }
+}
+function doLogout(){sessionStorage.removeItem('counsel_admin');location.reload();}
+(function(){
+  if(sessionStorage.getItem('counsel_admin')==='1'){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('main-layout').style.display='flex';
+    loadDash();
+    setInterval(updateChatBadge, 30000);
+  }
+})();
+
+function esc(s){if(s===null||s===undefined||s==='')return'—';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function fd(d){if(!d)return'—';return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});}
+
+function reloadCurrent() {
+  if(curCat === 'dashboard') loadDash();
+  else if(curCat === 'adduser') {}
+  else if(curCat === 'students') loadStudents();
+  else if(curCat === 'chats') loadChatConversations();
+  else loadRequests();
+}
+
+function gotoPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-link').forEach(b => b.classList.remove('active'));
+  
+  if(name === 'dashboard') {
+    document.getElementById('page-dashboard').classList.add('active');
+    document.getElementById('page-ttl').textContent = 'Dashboard';
+    if(btn) btn.classList.add('active');
+    else document.getElementById('lnk-dashboard').classList.add('active');
+    curCat = 'dashboard';
+    loadDash();
+  } else if(name === 'adduser') {
+    document.getElementById('page-adduser').classList.add('active');
+    document.getElementById('page-ttl').textContent = 'Add User Manually';
+    if(btn) btn.classList.add('active');
+    else document.getElementById('lnk-adduser').classList.add('active');
+    curCat = 'adduser';
+  } else if(name === 'students') {
+    document.getElementById('page-students').classList.add('active');
+    document.getElementById('page-ttl').textContent = 'Registered Students';
+    if(btn) btn.classList.add('active');
+    else document.getElementById('lnk-students').classList.add('active');
+    curCat = 'students';
+    loadStudents();
+  } else if(name === 'chats') {
+    document.getElementById('page-chats').classList.add('active');
+    document.getElementById('page-ttl').textContent = 'Student Chats';
+    if(btn) btn.classList.add('active');
+    else document.getElementById('lnk-chats').classList.add('active');
+    curCat = 'chats';
+    loadChatConversations();
+  } else {
+    // pending, reviewed, sent
+    document.getElementById('page-requests').classList.add('active');
+    curCat = name;
+    var ttls = {pending:'Pending Requests', reviewed:'Reviewed Requests', sent:'Sent & Approved'};
+    document.getElementById('page-ttl').textContent = ttls[name];
+    document.getElementById('req-ttl').innerHTML = '<i class="fas fa-list-alt" style="color:var(--bl)"></i> ' + ttls[name];
+    if(btn) btn.classList.add('active');
+    else document.getElementById('lnk-'+name).classList.add('active');
+    
+    document.getElementById('fil-rank-max').value = '';
+    loadRequests();
+  }
+}
+
+async function loadDash(){
+  if(sessionStorage.getItem('counsel_admin')!=='1') return;
+  
+  try {
+    // Stats: Revenue
+    var {data:py} = await sb.from('counseling_payments').select('amount').eq('status','paid');
+    var rev = (py||[]).reduce((sum, p) => sum + Math.round((p.amount||0)/100), 0);
+    document.getElementById('s-rev').textContent = '₹' + rev;
+
+    // Stats: Requests
+    var {data:reqs} = await sb.from('counseling_requests').select('*,counseling_users!inner(full_name,mobile)').order('submitted_at',{ascending:false});
+    var tot = (reqs||[]).length, pen = 0, revC = 0, snt = 0;
+    (reqs||[]).forEach(r => {
+      if(r.status==='pending') pen++;
+      else if(r.status==='reviewed') revC++;
+      else if(r.status==='sent') snt++;
+    });
+    
+    document.getElementById('s-total').textContent = tot;
+    document.getElementById('s-pending').textContent = pen;
+    document.getElementById('bdg-p').textContent = pen;
+    document.getElementById('s-sent').textContent = snt;
+    updateChatBadge();
+
+    // Recent 5 Pending
+    var recentHtml = '';
+    var pendingReqs = (reqs||[]).filter(r => r.status==='pending').slice(0, 5);
+    if(pendingReqs.length === 0) {
+      recentHtml = '<div style="color:var(--mu);text-align:center;padding:20px"><i class="fas fa-check-circle" style="color:var(--gr)"></i> All caught up! No pending requests.</div>';
+    } else {
+      pendingReqs.forEach(r => {
+        var u = r.counseling_users;
+        recentHtml += `
+          <div style="background:#fff;border:1px solid var(--bo);border-radius:10px;padding:12px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-weight:700;color:var(--tx)">${esc(u.full_name)} <span style="font-size:11px;color:var(--mu);font-weight:400;margin-left:8px">${fd(r.submitted_at)}</span></div>
+              <div style="font-size:12px;color:var(--mu);margin-top:4px">Rank: <strong style="color:#e11d48">${r.rank}</strong> • Mobile: ${esc(u.mobile)}</div>
+            </div>
+            <button class="btn btn-sm btn-ghost" onclick="gotoPage('pending')">Review →</button>
+          </div>
+        `;
+      });
+    }
+    document.getElementById('dash-recent').innerHTML = recentHtml;
+    
+  } catch(e) {
+    document.getElementById('dash-recent').innerHTML = '<div style="color:red">Error loading dashboard: '+e.message+'</div>';
+  }
+}
+
+async function loadRequests(){
+  if(sessionStorage.getItem('counsel_admin')!=='1') return;
+  document.getElementById('reqList').innerHTML = '<p style="color:var(--mu); font-size:14px;"><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
+  
+  var q=sb.from('counseling_requests').select('*,counseling_users!inner(full_name,email,mobile,category,diploma_haryana,resident_haryana,gender,dob)').order('submitted_at',{ascending:false});
+  
+  if(curCat === 'pending' || curCat === 'reviewed' || curCat === 'sent') {
+    q = q.eq('status', curCat);
+  }
+  
+  var rmin=document.getElementById('fil-rank-min').value;
+  var rmax=document.getElementById('fil-rank-max').value;
+  if(rmin)q=q.gte('rank',parseInt(rmin));
+  if(rmax)q=q.lte('rank',parseInt(rmax));
+  
+  var cat = document.getElementById('fil-cat').value;
+  if(cat) q = q.eq('counseling_users.category', cat);
+  
+  var search = document.getElementById('fil-search').value.trim().toLowerCase();
+  
+  var{data:reqs,error}=await q;
+  if(error){document.getElementById('reqList').innerHTML='<div style="color:red">'+error.message+'</div>';return;}
+
+  if(search) {
+    reqs = reqs.filter(r => 
+      r.counseling_users.full_name.toLowerCase().includes(search) || 
+      r.counseling_users.mobile.includes(search) ||
+      r.counseling_users.email.toLowerCase().includes(search)
+    );
+  }
+
+  if(!reqs||!reqs.length){document.getElementById('reqList').innerHTML='<div style="color:var(--mu);text-align:center;padding:20px"><i class="fas fa-info-circle"></i> No requests found matching criteria.</div>';return;}
+
+  var html='';
+  for(var i=0;i<reqs.length;i++){
+    var r=reqs[i];
+    var u=r.counseling_users;
+    USER_MAP[r.id] = u;
+    var{data:resp}=await sb.from('counseling_responses').select('*').eq('request_id',r.id).maybeSingle();
+    var st=r.status||'pending';
+    
+    var badgeClass = st==='sent'?'b-green':(st==='reviewed'?'b-purple':'b-gold');
+
+    html+='<div class="req-card" id="req-'+r.id+'">';
+    html+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap">';
+    html+='<input type="checkbox" class="req-check" value="'+r.id+'" style="width:18px;height:18px;cursor:pointer"/>';
+    html+='<strong style="font-family:Syne,sans-serif;font-size:1.1rem;color:var(--tx)">'+esc(u.full_name)+'</strong>';
+    html+='<span class="badge '+badgeClass+'">'+st.toUpperCase()+'</span>';
+    html+='<span style="font-size:11px;color:var(--mu);margin-left:auto">'+fd(r.submitted_at)+'</span>';
+    html+='</div>';
+
+    html+='<div class="req-grid">';
+    html+='<div><strong>Rank</strong><span style="color:#e11d48;font-weight:bold;font-size:15px">'+r.rank+'</span></div>';
+    html+='<div><strong>Category</strong>'+esc(u.category)+'</div>';
+    html+='<div><strong>Haryana Diploma</strong>'+(u.diploma_haryana===true?'Yes':'No')+'</div>';
+    html+='<div><strong>Haryana Domicile</strong>'+(u.resident_haryana===true?'Yes':'No')+'</div>';
+    html+='<div><strong>Gender</strong>'+esc(u.gender)+'</div>';
+    html+='<div><strong>DOB</strong>'+esc(u.dob)+'</div>';
+    html+='<div><strong>Mobile</strong><code style="background:var(--bo);padding:2px 4px;border-radius:4px">'+esc(u.mobile)+'</code></div>';
+    html+='<div><strong>Email</strong><span style="word-break:break-all">'+esc(u.email)+'</span></div>';
+    html+='</div>';
+
+    html+='<div style="font-size:13px;color:var(--tx);margin:10px 0;background:#fff;border:1px solid var(--bo);padding:10px;border-radius:8px"><strong style="color:var(--tx)">Branch Choices:</strong> ';
+    html+=[r.branch_1,r.branch_2,r.branch_3,r.branch_4,r.branch_5].filter(Boolean).join(' <i class="fas fa-arrow-right" style="font-size:10px;color:var(--mu);margin:0 4px"></i> ')+'</div>';
+
+    if(r.college_preferences && r.college_preferences.length > 0) {
+      html += '<div style="margin-bottom:12px"><strong style="font-size:12px;color:var(--tx);display:block;margin-bottom:4px">Preferred Colleges:</strong><table class="pref-table"><tr><th>College Name</th><th>Associated Branch</th></tr>';
+      r.college_preferences.forEach(col => {
+        html += '<tr><td>'+esc(col.college)+'</td><td>'+esc(col.branch)+'</td></tr>';
+      });
+      html += '</table></div>';
+    }
+
+    if(r.notes) {
+      html += '<div style="font-size:12px;color:#92400e;background:#fffbeb;border:1px dashed #fcd34d;padding:8px;border-radius:6px;margin-bottom:8px"><strong style="color:#b45309">Student Notes:</strong> '+esc(r.notes)+'</div>';
+    }
+
+    // Response form
+    html+='<div class="resp-box">';
+    html+='<h4 style="margin:0 0 10px 0;color:#166534;font-size:14px;font-family:Syne,sans-serif"><i class="fas fa-edit"></i> Admin Response</h4>';
+    
+    // 3 inputs for allotment
+    var choices = (resp && resp.allotment_choices) ? resp.allotment_choices : [];
+    if(resp && resp.suggested_college && choices.length === 0) {
+      choices.push({ college: resp.suggested_college, branch: resp.suggested_branch || '' });
+    }
+    ALLOTMENTS[r.id] = choices;
+
+    html+='<label class="ch-fl">Recommended Allotment Choices (Drag to reorder)</label>';
+    html+='<div class="resp-choices-builder" id="rcb-'+r.id+'">';
+    html+='<div class="rcb-list" id="rcb-list-'+r.id+'"></div>';
+    html+='<div class="rcb-actions" style="display:flex;gap:8px;margin-bottom:10px;">';
+    html+='<button type="button" class="btn btn-ghost btn-sm" onclick="addChoice(\''+r.id+'\')"><i class="fas fa-plus"></i> Add Choice</button>';
+    html+='<button type="button" class="btn btn-ghost btn-sm" onclick="toggleJson(\''+r.id+'\')"><i class="fas fa-code"></i> Import/Export JSON</button>';
+    html+='</div>';
+    html+='<div id="json-box-'+r.id+'" style="display:none;margin-bottom:10px;"><textarea class="ch-fi" id="json-val-'+r.id+'" placeholder=\'[{"college":"Example College", "branch":"CSE"}]\'>'+JSON.stringify(choices, null, 2)+'</textarea><button type="button" class="btn btn-blue btn-sm" style="margin-top:6px;" onclick="importJson(\''+r.id+'\')">Apply JSON</button></div>';
+    html+='</div>';
+
+    // Fallback for legacy suggestions
+    if(resp && resp.admin_suggestions) {
+       html+='<div><label class="ch-fl">Legacy Suggestions</label><textarea class="ch-fi" id="sug-'+r.id+'" readonly>'+esc(resp.admin_suggestions)+'</textarea></div>';
+    }
+
+    html+='<div><label class="ch-fl">Admin Remarks / Notes (Visible to user)</label><textarea class="ch-fi" id="note-'+r.id+'" placeholder="Internal notes or extra remarks...">'+(resp?esc(resp.notes||''):'')+'</textarea></div>';
+    html+='<div style="max-width:200px"><label class="ch-fl">Status</label><select class="ch-fi" id="st-'+r.id+'"><option value="pending"'+(st==='pending'?' selected':'')+'>Pending</option><option value="reviewed"'+(st==='reviewed'?' selected':'')+'>Reviewed</option><option value="sent"'+(st==='sent'?' selected':'')+'>Sent</option></select></div>';
+    
+    html+='<div class="resp-actions">';
+    // Send Response correctly passes "this"
+    html+='<button class="btn btn-green" onclick="sendResponse(\''+r.id+'\', this)"><i class="fas fa-paper-plane"></i> Save & Update Status</button>';
+    html+='<button type="button" class="btn btn-ghost" onclick="sendMsg(\'email\', \''+r.id+'\', \''+esc(u.full_name)+'\', \''+esc(u.email)+'\')"><i class="fas fa-envelope" style="color:var(--mu)"></i> Email Student</button>';
+    html+='<button type="button" class="btn btn-ghost" onclick="sendMsg(\'wa\', \''+r.id+'\', \''+esc(u.full_name)+'\', \''+esc(u.mobile)+'\')"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</button>';
+    html+='</div></div>';
+    html+='</div>';
+  }
+  document.getElementById('reqList').innerHTML=html;
+  for(var i=0; i<reqs.length; i++){
+    renderChoices(reqs[i].id);
+  }
+}
+
+var draggedIdx = null;
+function dragStart(e, reqId, idx) {
+  draggedIdx = idx;
+  e.dataTransfer.setData('text/plain', reqId);
+}
+function dragOver(e) {
+  e.preventDefault();
+}
+function drop(e, reqId, dropIdx) {
+  e.preventDefault();
+  var dragReqId = e.dataTransfer.getData('text/plain');
+  if(dragReqId !== reqId || draggedIdx === null || draggedIdx === dropIdx) return;
+  var arr = ALLOTMENTS[reqId];
+  var item = arr.splice(draggedIdx, 1)[0];
+  arr.splice(dropIdx, 0, item);
+  renderChoices(reqId);
+}
+function renderChoices(reqId) {
+  var list = document.getElementById('rcb-list-'+reqId);
+  if(!list) return;
+  var arr = ALLOTMENTS[reqId] || [];
+  var html = '';
+  arr.forEach((ch, idx) => {
+    html += '<div class="rcb-row" draggable="true" ondragstart="dragStart(event, \''+reqId+'\', '+idx+')" ondragover="dragOver(event)" ondrop="drop(event, \''+reqId+'\', '+idx+')">';
+    html += '<div class="rcb-handle" title="Drag to reorder"><i class="fas fa-grip-vertical"></i></div>';
+    html += '<div class="rcb-idx">'+(idx+1)+'</div>';
+    html += '<input type="text" class="ch-fi rcb-col" value="'+esc(ch.college)+'" onchange="updateCh(\''+reqId+'\', '+idx+', \'college\', this.value)" placeholder="College Name"/>';
+    html += '<input type="text" class="ch-fi rcb-br" value="'+esc(ch.branch)+'" onchange="updateCh(\''+reqId+'\', '+idx+', \'branch\', this.value)" placeholder="Branch"/>';
+    html += '<button type="button" class="rcb-btn del" onclick="removeCh(\''+reqId+'\', '+idx+')"><i class="fas fa-trash"></i></button>';
+    html += '</div>';
+  });
+  list.innerHTML = html;
+  var ta = document.getElementById('json-val-'+reqId);
+  if(ta) ta.value = JSON.stringify(arr, null, 2);
+}
+function addChoice(reqId) {
+  ALLOTMENTS[reqId].push({college: '', branch: ''});
+  renderChoices(reqId);
+}
+function updateCh(reqId, idx, field, val) {
+  ALLOTMENTS[reqId][idx][field] = val;
+  var ta = document.getElementById('json-val-'+reqId);
+  if(ta) ta.value = JSON.stringify(ALLOTMENTS[reqId], null, 2);
+}
+function removeCh(reqId, idx) {
+  ALLOTMENTS[reqId].splice(idx, 1);
+  renderChoices(reqId);
+}
+function toggleJson(reqId) {
+  var b = document.getElementById('json-box-'+reqId);
+  b.style.display = b.style.display === 'none' ? 'block' : 'none';
+}
+function importJson(reqId) {
+  try {
+    var val = document.getElementById('json-val-'+reqId).value;
+    var parsed = JSON.parse(val);
+    if(!Array.isArray(parsed)) throw new Error("Not an array");
+    ALLOTMENTS[reqId] = parsed;
+    renderChoices(reqId);
+    alert('JSON Applied Successfully');
+  } catch(e) {
+    alert('Invalid JSON format! Must be an array of objects.');
+  }
+}
+
+function sendMsg(type, reqId, name, contact) {
+  var arr = ALLOTMENTS[reqId] || [];
+  var notesEl = document.getElementById('note-'+reqId);
+  var notes = notesEl ? notesEl.value.trim() : '';
+  
+  var msg = "Hello " + (type==='wa' ? "*"+name+"*" : name) + ",\n\nWe have reviewed your LEET Counseling request. Here are our recommendations:\n\n";
+  
+  if(arr.length > 0) {
+    arr.forEach((ch, i) => {
+      msg += (type==='wa' ? "*"+(i+1)+".*" : (i+1)+".") + " " + ch.college + " " + (type==='wa' ? "_("+ch.branch+")_" : "("+ch.branch+")") + "\n";
+    });
+  } else {
+    msg += "Please login to your dashboard to view the suggestions.\n";
+  }
+  
+  if(notes) {
+    msg += "\n" + (type==='wa' ? "*Remarks:*" : "Remarks:") + " " + notes + "\n";
+  }
+  
+  msg += "\nCheck your full detailed dashboard here: https://hsbteleet.com/user-counseling\n\nRegards,\n" + (type==='wa' ? "*HSBTE LEET Admin*" : "HSBTE LEET Admin");
+
+  if(type === 'wa') {
+    window.open("https://wa.me/91" + contact + "?text=" + encodeURIComponent(msg), "_blank");
+  } else {
+    window.location.href = "mailto:" + contact + "?subject=HSBTE LEET Counseling Update&body=" + encodeURIComponent(msg);
+  }
+}
+
+// EmailJS Initialization
+(function() {
+  emailjs.init("byFleJ2hV770O_Mni");
+})();
+
+async function ejsSend(params) {
+  try {
+    return await emailjs.send("service_zlxv3q4", "template_w2fdh1s", params);
+  } catch (e) {
+    console.error("EmailJS Error:", e);
+    throw e;
+  }
+}
+
+async function sendResponseNotification(user, notes) {
+  const html = `
+    <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <div style="background: linear-gradient(135deg, #7c3aed, #5b21b6); padding: 30px; text-align: center; color: white;">
+        <h1 style="margin: 0; font-size: 24px;">Counseling Response Ready!</h1>
+        <p style="margin: 10px 0 0; opacity: 0.9;">Good news, ${user.name}! Your strategy is ready.</p>
+      </div>
+      <div style="padding: 30px; color: #1e293b; line-height: 1.6;">
+        <p>Hello <strong>${user.name}</strong>,</p>
+        <p>Our experts have reviewed your LEET counseling request and prepared a personalized allotment strategy for you.</p>
+        
+        <div style="background: #f8fafc; border-left: 4px solid #7c3aed; padding: 15px; margin: 20px 0;">
+          <strong>Admin Remarks:</strong><br/>
+          ${notes || "Please check your dashboard for full details."}
+        </div>
+
+        <p style="text-align: center; margin: 30px 0;">
+          <a href="https://hsbteleet.com/user-counseling" style="background: #7c3aed; color: white; padding: 14px 28px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block;">View My Recommendation</a>
+        </p>
+
+        <p style="font-size: 13px; color: #64748b;">If you have any questions, you can chat with the admin directly from your dashboard.</p>
+      </div>
+      <div style="background: #f1f5f9; padding: 20px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #e2e8f0;">
+        © ${new Date().getFullYear()} HSBTE LEET. All rights reserved.
+      </div>
+    </div>
+  `;
+
+  return ejsSend({
+    to_name: user.name,
+    to_email: user.email,
+    subject: "Update: Your Counseling Recommendation is Ready!",
+    html_message: html
+  });
+}
+
+async function sendResponse(reqId, btn){
+  var notes=document.getElementById('note-'+reqId).value.trim();
+  var status=document.getElementById('st-'+reqId).value;
+  var choices = ALLOTMENTS[reqId] || [];
+  
+  var origHtml = btn.innerHTML;
+  btn.innerHTML = '<span class="spin"></span> Saving...';
+  btn.disabled = true;
+
+  try{
+    // Check if response exists
+    var{data:existing}=await sb.from('counseling_responses').select('*').eq('request_id',reqId).maybeSingle();
+    if(existing){
+      var history = existing.history || [];
+      // Push current into history before update
+      history.push({
+        allotment_choices: existing.allotment_choices,
+        notes: existing.notes,
+        responded_at: existing.responded_at || existing.created_at
+      });
+      
+      var {error:e1} = await sb.from('counseling_responses').update({
+        allotment_choices: choices,
+        notes:notes, 
+        responded_at:new Date().toISOString(),
+        history: history
+      }).eq('id',existing.id);
+      if(e1) throw e1;
+    }else{
+      var {error:e2} = await sb.from('counseling_responses').insert([{
+        request_id:reqId, allotment_choices: choices, notes:notes
+      }]);
+      if(e2) throw e2;
+    }
+    var {error:e3} = await sb.from('counseling_requests').update({status:status}).eq('id',reqId);
+    if(e3) throw e3;
+
+    // Send notification to user
+    if(USER_MAP[reqId]) {
+      sendResponseNotification(USER_MAP[reqId], notes);
+    }
+
+    alert('Response saved & status updated successfully! Notification sent.');
+    if(curCat === 'dashboard') loadDash();
+    else loadRequests();
+  }catch(e){alert('Error saving response: '+e.message); btn.innerHTML = origHtml; btn.disabled = false;}
+}
+
+async function doAddUser() {
+  var name = document.getElementById('au-name').value.trim();
+  var mob = document.getElementById('au-mob').value.trim();
+  var email = document.getElementById('au-email').value.trim();
+  var pass = document.getElementById('au-pass').value.trim() || mob;
+  var cat = document.getElementById('au-cat').value;
+  var gen = document.getElementById('au-gen').value;
+  var dob = document.getElementById('au-dob').value;
+  var paid = parseInt(document.getElementById('au-paid').value) || 0;
+  var alrt = document.getElementById('au-alrt');
+  var btn = document.getElementById('au-btn');
+  
+  if(!name || !/^\d{10}$/.test(mob) || !email || !dob) {
+    alrt.className = 'alert alert-danger show';
+    alrt.textContent = 'Please fill Full Name, valid 10-digit Mobile, Email, and DOB.';
+    return;
+  }
+  
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Creating...';
+  alrt.className = 'alert';
+  
+  try {
+    var {data:nu, error:uE} = await sb.from('counseling_users').insert([{
+      full_name: name, mobile: mob, email: email, password_hash: pass,
+      category: cat, gender: gen, dob: dob, diploma_haryana: false, resident_haryana: true,
+      created_at: new Date().toISOString()
+    }]).select('id').single();
+    
+    if(uE) throw uE;
+    
+    var {error:pE} = await sb.from('counseling_payments').insert([{
+      user_id: nu.id, razorpay_payment_id: 'MANUAL_ADMIN_ADD', amount: paid * 100, status: 'paid', created_at: new Date().toISOString()
+    }]);
+    if(pE) throw pE;
+    
+    alrt.className = 'alert alert-success show';
+    alrt.textContent = 'User ' + name + ' created successfully! They can now login and submit requests.';
+    document.getElementById('au-name').value = '';
+    document.getElementById('au-mob').value = '';
+    document.getElementById('au-email').value = '';
+    document.getElementById('au-pass').value = '';
+    
+    if(curCat === 'dashboard') loadDash();
+  } catch(e) {
+    showAlert('au-alert', '<i class="fas fa-times-circle"></i> ' + e.message, 'err');
+  }
+  btn.disabled = false; btn.innerHTML = '<i class="fas fa-check-circle"></i> Create User & Mark as Paid';
+}
+
+async function bulkStatus(st) {
+  var checks = document.querySelectorAll('.req-check:checked');
+  if(!checks.length) { alert("Please select requests first."); return; }
+  if(!confirm("Mark " + checks.length + " requests as " + st.toUpperCase() + "?")) return;
+  
+  try {
+    var ids = Array.from(checks).map(c => c.value);
+    var {error} = await sb.from('counseling_requests').update({status: st}).in('id', ids);
+    if(error) throw error;
+    alert("Bulk update successful!");
+    loadRequests();
+  } catch(e) { alert("Bulk update failed: " + e.message); }
+}
+
+async function loadStudents() {
+  var list = document.getElementById('stuList');
+  list.innerHTML = '<p style="color:var(--mu); font-size:14px; padding:20px;"><i class="fas fa-spinner fa-spin"></i> Loading students...</p>';
+  try {
+    var {data: users, error} = await sb.from('counseling_users').select('*').order('created_at', {ascending: false});
+    if(error) throw error;
+    var {data: pays} = await sb.from('counseling_payments').select('user_id, status, amount');
+    var payMap = {};
+    if(pays) {
+       pays.forEach(p => {
+         if(p.status === 'paid') payMap[p.user_id] = true;
+       });
+    }
+
+    if(!users || users.length === 0) {
+      list.innerHTML = '<p style="padding:20px; color:var(--mu);">No registered students found.</p>';
+      return;
+    }
+    
+    var html = '<div style="overflow-x:auto;"><table class="pref-table" style="width:100%;font-size:12px;">';
+    html += '<tr><th>Status</th><th>Name</th><th>Email / Mobile</th><th>Password</th><th>Category / Gender</th><th>Reg. Date</th></tr>';
+    
+    users.forEach(u => {
+      var isPaid = payMap[u.id] ? '<span class="sb-badge" style="background:#dcfce7;color:#166534">Paid</span>' : '<span class="sb-badge" style="background:#fee2e2;color:#991b1b">Unpaid</span>';
+      html += '<tr>';
+      html += '<td>'+isPaid+'</td>';
+      html += '<td><strong>'+esc(u.full_name)+'</strong></td>';
+      html += '<td>'+esc(u.email)+'<br><code style="background:var(--bo);padding:2px;border-radius:4px">'+esc(u.mobile)+'</code></td>';
+      html += '<td><code style="background:#f1f5f9;padding:4px 6px;border-radius:6px;color:#0369a1;font-weight:700;">'+esc(u.password_hash)+'</code></td>';
+      html += '<td>'+esc(u.category||'—')+' / '+esc(u.gender||'—')+'</td>';
+      html += '<td>'+fd(u.created_at)+'</td>';
+      html += '</tr>';
+    });
+    html += '</table></div>';
+    list.innerHTML = html;
+  } catch(e) {
+    list.innerHTML = '<div class="alert alert-danger show" style="margin:20px">Error loading students: '+e.message+'</div>';
+  }
+}
+
+async function updateChatBadge() {
+  try {
+    var {data, error} = await sb.from('counseling_chats').select('id').eq('sender', 'student').eq('is_read', false);
+    var bdg = document.getElementById('bdg-c');
+    if(data && data.length > 0) {
+      bdg.textContent = data.length;
+      bdg.style.display = 'inline-block';
+    } else {
+      bdg.style.display = 'none';
+    }
+  } catch(e) {}
+}
+
+async function loadChatConversations() {
+  var list = document.getElementById('chat-user-list');
+  try {
+    var {data: msgs, error} = await sb.from('counseling_chats').select('*, counseling_users(full_name, email, mobile)').order('created_at', {ascending: false});
+    if(error) throw error;
+    
+    // Group by user
+    var users = {};
+    msgs.forEach(m => {
+      if(!users[m.user_id]) {
+        users[m.user_id] = {
+          name: m.counseling_users.full_name,
+          email: m.counseling_users.email,
+          mobile: m.counseling_users.mobile,
+          lastMsg: m.message,
+          lastAt: m.created_at,
+          unread: !m.is_read && m.sender === 'student'
+        };
+      }
+    });
+
+    var html = '';
+    var sortedIds = Object.keys(users).sort((a,b) => new Date(users[b].lastAt) - new Date(users[a].lastAt));
+    
+    if(sortedIds.length === 0) {
+      list.innerHTML = '<p style="padding:20px; color:var(--mu);">No conversations found.</p>';
+      return;
+    }
+
+    sortedIds.forEach(uid => {
+      var u = users[uid];
+      html += `
+        <div class="chat-user-item ${activeChatUser === uid ? 'active' : ''}" onclick="openChat('${uid}', '${esc(u.name)}', '${esc(u.email)}')" style="padding:12px 16px; border-bottom:1px solid #f1f5f9; cursor:pointer; position:relative; ${u.unread ? 'background:#eff6ff' : ''}">
+          <div style="font-weight:700; font-size:14px; color:var(--tx)">${esc(u.name)} ${u.unread ? '<span style="color:#ef4444">•</span>' : ''}</div>
+          <div style="font-size:12px; color:var(--mu); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${esc(u.lastMsg)}</div>
+          <div style="font-size:10px; color:var(--mu); margin-top:4px;">${fd(u.lastAt)}</div>
+        </div>`;
+    });
+    list.innerHTML = html;
+  } catch(e) { list.innerHTML = '<p style="padding:20px; color:red;">'+e.message+'</p>'; }
+}
+
+async function openChat(uid, name, email) {
+  activeChatUser = uid;
+  document.getElementById('chat-active-title').textContent = name;
+  document.getElementById('chat-user-meta').textContent = email;
+  document.querySelectorAll('.chat-user-item').forEach(i => i.classList.remove('active'));
+  loadAdminMessages(uid);
+  
+  // Mark as read
+  await sb.from('counseling_chats').update({is_read: true}).eq('user_id', uid).eq('sender', 'student');
+  updateChatBadge();
+}
+
+async function loadAdminMessages(uid) {
+  if(activeChatUser !== uid) return;
+  var win = document.getElementById('admin-chat-window');
+  try {
+    var {data, error} = await sb.from('counseling_chats').select('*').eq('user_id', uid).order('created_at', {ascending: true});
+    if(error) throw error;
+    
+    var html = '';
+    data.forEach(m => {
+      var isAdmin = m.sender === 'admin';
+      html += `
+        <div style="max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; ${isAdmin ? 'align-self: flex-end; background: var(--bl); color: #fff;' : 'align-self: flex-start; background: #fff; border: 1px solid #e2e8f0; color: #1e293b;'}">
+          ${esc(m.message)}
+          <div style="font-size: 9px; margin-top: 4px; opacity: 0.7; text-align: right;">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+        </div>`;
+    });
+    win.innerHTML = html;
+    win.scrollTop = win.scrollHeight;
+  } catch(e) { win.innerHTML = '<p style="color:red">'+e.message+'</p>'; }
+}
+
+async function sendAdminChat() {
+  var input = document.getElementById('admin-chat-input');
+  var msg = input.value.trim();
+  if(!msg || !activeChatUser) return;
+  
+  var btn = document.getElementById('btn-admin-send');
+  btn.disabled = true;
+  try {
+    var {error} = await sb.from('counseling_chats').insert([{
+      user_id: activeChatUser,
+      sender: 'admin',
+      message: msg,
+      is_read: true
+    }]);
+    if(error) throw error;
+    input.value = '';
+    loadAdminMessages(activeChatUser);
+    loadChatConversations();
+  } catch(e) { alert("Failed to send message: " + e.message); }
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>

@@ -1036,7 +1036,7 @@
         <div class="panel on" id="panel-login">
           <div class="alert alert-warn on">
             <i class="fas fa-exclamation-triangle"></i>
-            <strong>Forgot password?</strong> WhatsApp admin at <strong>nishant@hsbteleet.com</strong> with your registered
+            <strong>Forgot password?</strong> Email admin at <strong>nishant@hsbteleet.com</strong> with your registered
             mobile.
           </div>
           <div class="alert alert-err" id="lerr"></div>
@@ -1063,8 +1063,8 @@
             Account</button>
 
           <div class="divider">need help?</div>
-          <a href="https://mailto:nishant@hsbteleet.com"
-            class="wa-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Contact Admin on WhatsApp</a>
+          <a href="mailto:nishant@hsbteleet.com"
+            class="wa-btn" rel="noopener"><i class="fas fa-envelope"></i> Contact Admin via Email</a>
         </div>
 
         <!-- ── REGISTER PANEL ── -->
@@ -1193,7 +1193,7 @@
 
     <div class="page-foot">
       <a href="https://hsbteleet.com">hsbteleet.com</a> &bull; Premium &bull; Ad-Free &bull; Secure Razorpay &bull; <a
-        href="https://mailto:nishant@hsbteleet.com">Support</a>
+        href="mailto:nishant@hsbteleet.com">Support</a>
     </div>
 
   </div><!-- .page -->
@@ -1501,7 +1501,7 @@
         setSession(nu.id);
         showSuccess(pending.full_name, 'FREE access via LEET2026! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
       } catch (e) {
-        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Contact nishant@hsbteleet.com if issue persists.', 'err');
+        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Email nishant@hsbteleet.com if issue persists.', 'err');
         btn.disabled = false; btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
       }
     }
@@ -1653,7 +1653,7 @@
           '<strong>Mobile:</strong> ' + user.mobile + '<br>' +
           '<strong>Plan:</strong> ' + tier +
           '</div>' +
-          '<p style="color:#94a3b8;font-size:12px;margin-top:14px">If this was not you, contact admin immediately at nishant@hsbteleet.com via WhatsApp.</p>' +
+          '<p style="color:#94a3b8;font-size:12px;margin-top:14px">If this was not you, contact admin immediately at nishant@hsbteleet.com.</p>' +
           '</div></div>';
 
         ejsSend(user.full_name || 'Student', user.email, user.email, 'Login Alert — HSBTE LEET ' + tier, user.mobile, html)
@@ -1689,7 +1689,7 @@
           '</div>' +
 
           '<p style="text-align:center;margin-top:18px"><a href="https://hsbteleet.com/premium-login.html" style="background:linear-gradient(135deg,#1a56db,#1240a8);color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;font-size:14px">Login to My Account →</a></p>' +
-          '<p style="color:#94a3b8;font-size:12px;margin-top:14px;text-align:center">Questions? WhatsApp admin at nishant@hsbteleet.com</p>' +
+          '<p style="color:#94a3b8;font-size:12px;margin-top:14px;text-align:center">Questions? Email admin at nishant@hsbteleet.com</p>' +
           '</div></div>';
 
         ejsSend(d.name || 'Student', d.email, d.email, 'Welcome to HSBTE LEET ' + tier + '! 🎉', d.mobile, custHtml)

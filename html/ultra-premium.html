@@ -539,7 +539,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
       <button class="ntab on" onclick="scrollTo(0,0)"><i class="fas fa-tools"></i> Tools</button>
       <a class="ntab" href="/premium-papers"><i class="fas fa-book-open"></i> Papers</a>
       <a class="ntab" href="/btech-leet-premium"><i class="fas fa-crown"></i> Plans</a>
-      <a class="ntab" href="https://mailto:nishant@hsbteleet.com" target="_blank"><i class="fab fa-whatsapp"></i> Help</a>
+      <a class="ntab" href="mailto:nishant@hsbteleet.com" target="_blank"><i class="fas fa-envelope"></i> Help</a>
     </div>
     <div class="nav-right">
       <div class="nav-user-chip"><i class="fas fa-user-check"></i> <span id="nav-name">Student</span></div>
@@ -1219,8 +1219,8 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
 </div><!-- end main-content -->
 </div><!-- end page-layout -->
 
-<!-- WHATSAPP FLOAT -->
-<a href="https://mailto:nishant@hsbteleet.com" class="wa-float" target="_blank" title="WhatsApp Support"><i class="fab fa-whatsapp"></i></a>
+<!-- EMAIL SUPPORT FLOAT -->
+<a href="mailto:nishant@hsbteleet.com" class="wa-float" title="Email Support"><i class="fas fa-envelope"></i></a>
 
 <script>
 'use strict';
@@ -1482,7 +1482,7 @@ function predictColleges(){
   });
 
   if(!results.length){
-    document.getElementById('cp-body').innerHTML='<div style="padding:14px;color:var(--muted);font-size:13px;text-align:center"><i class="fas fa-circle-info" aria-hidden="true"></i> No strong predictions for rank '+rank+' in '+cat+'. Contact admin at nishant@hsbteleet.com for personal guidance.</div>';
+    document.getElementById('cp-body').innerHTML='<div style="padding:14px;color:var(--muted);font-size:13px;text-align:center"><i class="fas fa-circle-info" aria-hidden="true"></i> No strong predictions for rank '+rank+' in '+cat+'. Try our <a href="/counseling" style="color:var(--v);font-weight:700">Counseling Help</a> for personal guidance or email <strong>nishant@hsbteleet.com</strong>.</div>';
     showRes('cp-result');return;
   }
 
