@@ -91,9 +91,26 @@
   }
 
   /**
+   * Ensure FontAwesome is loaded
+   */
+  function ensureFontAwesome() {
+    const faUrl = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css";
+    const existing = document.querySelector(`link[href*="font-awesome"]`);
+
+    if (!existing) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = faUrl;
+      document.head.appendChild(link);
+      console.log("FontAwesome injected by include.js");
+    }
+  }
+
+  /**
    * Load all partials
    */
   async function loadPartials() {
+    ensureFontAwesome();
     autoInjectBottomNav();
 
     // Get ALL includes AFTER nav injection
