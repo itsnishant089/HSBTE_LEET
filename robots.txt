@@ -44,7 +44,7 @@ Allow: /Plastic
 Allow: /Textile-Design
 Allow: /Textile-Processing
 Allow: /Textile-Technology
-Allow: /syllabus
+Allow: /hsbte-syllabus
 Allow: /leet-sample-paper
 Allow: /hsbte-result
 Allow: /contact

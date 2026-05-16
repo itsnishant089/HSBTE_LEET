@@ -53,6 +53,21 @@
       "source": "/index",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/html/syllabus.html",
+      "destination": "/hsbte-syllabus",
+      "permanent": true
+    },
+    {
+      "source": "/syllabus",
+      "destination": "/hsbte-syllabus",
+      "permanent": true
+    },
+    {
+      "source": "/syllabus/syllabus.html",
+      "destination": "/hsbte-syllabus",
+      "permanent": true
     }
   ],
   "rewrites": [
