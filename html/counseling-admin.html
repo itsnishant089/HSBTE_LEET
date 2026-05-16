@@ -208,6 +208,11 @@ textarea.ch-fi { resize: vertical; min-height: 80px; }
           <option value="General">General</option><option value="OBC">OBC</option><option value="SC">SC</option><option value="ST">ST</option><option value="EWS">EWS</option>
         </select>
         <input type="text" class="fi" id="fil-search" placeholder="Search Name/Mobile..." style="width:180px" onkeyup="if(event.key==='Enter')loadRequests()"/>
+        <select class="fi" id="fil-sort" style="width:160px" onchange="loadRequests()">
+          <option value="submitted_at:desc">Newest First</option>
+          <option value="rank:asc">Rank (Low to High)</option>
+          <option value="rank:desc">Rank (High to Low)</option>
+        </select>
         <button class="btn btn-purple" onclick="loadRequests()"><i class="fas fa-search"></i> Apply</button>
         <div style="margin-left:auto; display:flex; gap:8px;">
           <button class="btn btn-sm btn-ghost" onclick="bulkStatus('sent')">Bulk Mark Sent</button>
@@ -252,6 +257,9 @@ textarea.ch-fi { resize: vertical; min-height: 80px; }
           </div>
           <div class="form-row">
              <div><label class="fl">Date of Birth</label><input type="date" class="form-input" id="au-dob"/></div>
+             <div><label class="fl">Entrance Rank</label><input type="number" class="form-input" id="au-rank" placeholder="e.g. 1500"/></div>
+          </div>
+          <div class="form-row">
              <div><label class="fl">Amount Paid (₹)</label><input type="number" class="form-input" id="au-paid" placeholder="49"/></div>
           </div>
           
@@ -265,7 +273,10 @@ textarea.ch-fi { resize: vertical; min-height: 80px; }
       <div class="card">
         <div class="card-hdr">
           <div class="card-title"><i class="fas fa-users" style="color:var(--bl)"></i> All Registered Students</div>
-          <button class="btn btn-ghost btn-sm" onclick="loadStudents()"><i class="fas fa-sync-alt"></i> Refresh</button>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-red btn-sm" id="btn-clean-stu" onclick="deleteDuplicateStudents()"><i class="fas fa-broom"></i> Clean Duplicates</button>
+            <button class="btn btn-ghost btn-sm" onclick="loadStudents()"><i class="fas fa-sync-alt"></i> Refresh</button>
+          </div>
         </div>
         <div class="card-body" id="stuList">
           <p style="color:var(--mu); font-size:14px;"><i class="fas fa-spinner fa-spin"></i> Loading students...</p>
@@ -447,7 +458,12 @@ async function loadRequests(){
   if(sessionStorage.getItem('counsel_admin')!=='1') return;
   document.getElementById('reqList').innerHTML = '<p style="color:var(--mu); font-size:14px;"><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
   
-  var q=sb.from('counseling_requests').select('*,counseling_users!inner(full_name,email,mobile,category,diploma_haryana,resident_haryana,gender,dob)').order('submitted_at',{ascending:false});
+  var sortVal = document.getElementById('fil-sort').value;
+  var sortParts = sortVal.split(':');
+  var sortCol = sortParts[0];
+  var sortAsc = sortParts[1] === 'asc';
+
+  var q=sb.from('counseling_requests').select('*,counseling_users!inner(full_name,email,mobile,category,diploma_haryana,resident_haryana,gender,dob)').order(sortCol,{ascending:sortAsc});
   
   if(curCat === 'pending' || curCat === 'reviewed' || curCat === 'sent') {
     q = q.eq('status', curCat);
@@ -495,7 +511,10 @@ async function loadRequests(){
     html+='</div>';
 
     html+='<div class="req-grid">';
-    html+='<div><strong>Rank</strong><span style="color:#e11d48;font-weight:bold;font-size:15px">'+r.rank+'</span></div>';
+    html+='<div style="background:#fff1f2; border:1px solid #fecaca; border-radius:10px; padding:10px !important; display:flex; flex-direction:column; align-items:center; justify-content:center; grid-row: span 2;">';
+    html+='<strong style="color:#e11d48; font-size:10px; margin-bottom:4px;">OFFICIAL RANK</strong>';
+    html+='<span style="color:#e11d48;font-weight:900;font-size:24px;line-height:1;">'+r.rank+'</span>';
+    html+='</div>';
     html+='<div><strong>Category</strong>'+esc(u.category)+'</div>';
     html+='<div><strong>Haryana Diploma</strong>'+(u.diploma_haryana===true?'Yes':'No')+'</div>';
     html+='<div><strong>Haryana Domicile</strong>'+(u.resident_haryana===true?'Yes':'No')+'</div>';
@@ -762,13 +781,14 @@ async function doAddUser() {
   var cat = document.getElementById('au-cat').value;
   var gen = document.getElementById('au-gen').value;
   var dob = document.getElementById('au-dob').value;
+  var rank = document.getElementById('au-rank').value.trim();
   var paid = parseInt(document.getElementById('au-paid').value) || 0;
   var alrt = document.getElementById('au-alrt');
   var btn = document.getElementById('au-btn');
   
-  if(!name || !/^\d{10}$/.test(mob) || !email || !dob) {
+  if(!name || !/^\d{10}$/.test(mob) || !email || !dob || !rank) {
     alrt.className = 'alert alert-danger show';
-    alrt.textContent = 'Please fill Full Name, valid 10-digit Mobile, Email, and DOB.';
+    alrt.textContent = 'Please fill Full Name, valid 10-digit Mobile, Email, DOB, and Rank.';
     return;
   }
   
@@ -778,7 +798,8 @@ async function doAddUser() {
   try {
     var {data:nu, error:uE} = await sb.from('counseling_users').insert([{
       full_name: name, mobile: mob, email: email, password_hash: pass,
-      category: cat, gender: gen, dob: dob, diploma_haryana: false, resident_haryana: true,
+      category: cat, gender: gen, dob: dob, rank: parseInt(rank),
+      diploma_haryana: false, resident_haryana: true,
       created_at: new Date().toISOString()
     }]).select('id').single();
     
@@ -837,7 +858,7 @@ async function loadStudents() {
     }
     
     var html = '<div style="overflow-x:auto;"><table class="pref-table" style="width:100%;font-size:12px;">';
-    html += '<tr><th>Status</th><th>Name</th><th>Email / Mobile</th><th>Password</th><th>Category / Gender</th><th>Reg. Date</th></tr>';
+    html += '<tr><th>Status</th><th>Name</th><th>Email / Mobile</th><th>Rank</th><th>Password</th><th>Category / Gender</th><th>Reg. Date</th></tr>';
     
     users.forEach(u => {
       var isPaid = payMap[u.id] ? '<span class="sb-badge" style="background:#dcfce7;color:#166534">Paid</span>' : '<span class="sb-badge" style="background:#fee2e2;color:#991b1b">Unpaid</span>';
@@ -845,6 +866,7 @@ async function loadStudents() {
       html += '<td>'+isPaid+'</td>';
       html += '<td><strong>'+esc(u.full_name)+'</strong></td>';
       html += '<td>'+esc(u.email)+'<br><code style="background:var(--bo);padding:2px;border-radius:4px">'+esc(u.mobile)+'</code></td>';
+      html += '<td><strong style="color:#e11d48; font-size:14px;">'+esc(u.rank||'—')+'</strong></td>';
       html += '<td><code style="background:#f1f5f9;padding:4px 6px;border-radius:6px;color:#0369a1;font-weight:700;">'+esc(u.password_hash)+'</code></td>';
       html += '<td>'+esc(u.category||'—')+' / '+esc(u.gender||'—')+'</td>';
       html += '<td>'+fd(u.created_at)+'</td>';
@@ -854,6 +876,61 @@ async function loadStudents() {
     list.innerHTML = html;
   } catch(e) {
     list.innerHTML = '<div class="alert alert-danger show" style="margin:20px">Error loading students: '+e.message+'</div>';
+  }
+}
+
+async function deleteDuplicateStudents() {
+  if(!confirm("Scan and delete duplicate student accounts? (Keeps only the most recent entry for each mobile/email)")) return;
+  
+  var btn = document.getElementById('btn-clean-stu');
+  var oldHtml = btn.innerHTML;
+  btn.innerHTML = '<span class="spin"></span> Cleaning...';
+  btn.disabled = true;
+
+  try {
+    var {data: users, error} = await sb.from('counseling_users').select('id, mobile, email, created_at').order('created_at', {ascending: false});
+    if(error) throw error;
+    
+    if(!users || users.length === 0) {
+      alert("No students to scan.");
+      return;
+    }
+
+    var seenMobile = {}, seenEmail = {}, toDelete = [];
+    users.forEach(u => {
+      var isDup = false;
+      if(u.mobile) {
+        if(seenMobile[u.mobile]) isDup = true;
+        else seenMobile[u.mobile] = true;
+      }
+      if(u.email) {
+        if(seenEmail[u.email]) isDup = true;
+        else seenEmail[u.email] = true;
+      }
+      if(isDup) toDelete.push(u.id);
+    });
+
+    if(toDelete.length === 0) {
+      alert("No duplicate students found! (Based on same mobile or email)");
+    } else {
+      if(confirm("Found " + toDelete.length + " duplicates. Proceed with deletion?")) {
+        // Delete related data first to avoid orphaned records
+        for (const uid of toDelete) {
+           await sb.from('counseling_requests').delete().eq('user_id', uid);
+           await sb.from('counseling_payments').delete().eq('user_id', uid);
+           await sb.from('counseling_chats').delete().eq('user_id', uid);
+        }
+        var {error: delErr} = await sb.from('counseling_users').delete().in('id', toDelete);
+        if(delErr) throw delErr;
+        alert("Successfully deleted " + toDelete.length + " duplicates!");
+        loadStudents();
+      }
+    }
+  } catch(e) {
+    alert("Error cleaning duplicates: " + e.message);
+  } finally {
+    btn.innerHTML = oldHtml;
+    btn.disabled = false;
   }
 }
 

@@ -183,6 +183,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         <input class="fi" id="u-q" placeholder="Search name, mobile, email…" oninput="filterU()" style="flex:1;min-width:180px"/>
         <select class="fs" id="u-tier" onchange="filterU()"><option value="">All Tiers</option><option value="premium">Premium</option><option value="ultra">Ultra</option></select>
         <select class="fs" id="u-status" onchange="filterU()"><option value="">All Status</option><option value="true">Active</option><option value="false">Blocked</option></select>
+        <button class="btn btn-red" id="btn-clean-u" onclick="deleteDuplicatePremiumUsers()"><i class="fas fa-broom"></i> Clean Duplicates</button>
         <button class="btn btn-ghost" onclick="exportCSV()"><i class="fas fa-download"></i> Export</button>
       </div>
       <div class="card">
@@ -826,6 +827,61 @@ async function doLookup(){
     var ib=function(l,v){return'<div class="info-block"><div class="info-block-lbl">'+l+'</div><div class="info-block-val">'+e(String(v||'—'))+'</div></div>';};
     cont.innerHTML='<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-user" style="color:var(--bl)"></i> '+e(usr.full_name||'—')+'</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(usr.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+(usr.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+(isu?'<span class="badge b-purple"><i class="fas fa-check"></i> Ultra Table</span>':'<span class="badge b-red">Not in Ultra Table</span>')+'</div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px">'+ib('Mobile',usr.mobile)+ib('Email',usr.email)+ib('Paid',usr.paid_rs?'₹'+usr.paid_rs:'—')+ib('Payment ID',usr.razorpay_payment_id||'—')+ib('Coupon',usr.coupon_used||'None')+ib('Referred By',usr.refer_by||'None')+ib('Referrals Made',(rfd?rfd.count:0)+' person(s)')+ib('Refund Status',refStatus)+ib('Joined',fd(usr.created_at))+ib('Payment Status',usr.payment_status||'—')+'</div>'+(rus&&rus.length?'<div style="margin-top:12px"><strong style="font-size:11px;font-family:Syne,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)">People They Referred:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">'+rus.map(function(u){return'<div style="font-size:13px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid var(--bo)"><strong>'+e(u.referee_name||'—')+'</strong> · '+e(u.referee_mobile)+' · '+u.referee_tier+' · ₹'+u.amount_paid_rs+' · '+fd(u.used_at)+'</div>';}).join('')+'</div></div>':'')+'<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><a class="btn btn-green" href="https://wa.me/91'+e(usr.mobile)+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+(usr.tier!=='ultra'?'<button class="btn btn-ultra" onclick="upgradeToUltra(\''+escInline(usr.id)+'\',\''+escInline(usr.mobile)+'\',\''+escInline(usr.full_name||'')+'\',\''+escInline(usr.email||'')+'\')"><i class="fas fa-rocket"></i> Upgrade to Ultra</button>':'<span class="badge b-purple" style="padding:8px 14px;font-size:11px"><i class="fas fa-rocket"></i> Already Ultra Premium</span>')+'<button class="btn btn-danger" onclick="removeUser(\''+escInline(usr.id)+'\',\''+escInline(usr.full_name||'')+'\')"><i class="fas fa-trash"></i> Remove User</button>'+(usr.is_active!==false?'<button class="btn btn-red" onclick="toggleActive(\''+escInline(usr.id)+'\',false,\''+escInline(usr.full_name)+'\')"><i class="fas fa-ban"></i> Block</button>':'<button class="btn btn-green" onclick="toggleActive(\''+escInline(usr.id)+'\',true,\''+escInline(usr.full_name)+'\')"><i class="fas fa-check"></i> Activate</button>')+'</div></div></div>';
   }catch(err){cont.innerHTML='<div class="alert alert-danger show">Search failed. Please try again.</div>';}
+}
+
+async function deleteDuplicatePremiumUsers() {
+  if(!confirm("Scan and delete duplicate premium user accounts? (Keeps only the most recent entry for each mobile/email)")) return;
+  
+  var btn = document.getElementById('btn-clean-u');
+  var oldHtml = btn.innerHTML;
+  btn.innerHTML = '<span class="spin"></span> Cleaning...';
+  btn.disabled = true;
+
+  try {
+    var {data: users, error} = await sb.from('premium_users').select('id, mobile, email, created_at').order('created_at', {ascending: false});
+    if(error) throw error;
+    
+    if(!users || users.length === 0) {
+      alert("No users to scan.");
+      return;
+    }
+
+    var seenMobile = {}, seenEmail = {}, toDelete = [];
+    users.forEach(u => {
+      var isDup = false;
+      if(u.mobile) {
+        if(seenMobile[u.mobile]) isDup = true;
+        else seenMobile[u.mobile] = true;
+      }
+      if(u.email) {
+        if(seenEmail[u.email]) isDup = true;
+        else seenEmail[u.email] = true;
+      }
+      if(isDup) toDelete.push(u.id);
+    });
+
+    if(toDelete.length === 0) {
+      alert("No duplicate users found! (Based on same mobile or email)");
+    } else {
+      if(confirm("Found " + toDelete.length + " duplicates. Proceed with deletion?")) {
+        // Delete related data first (access, payments)
+        for (const uid of toDelete) {
+           await sb.from('premium_access').delete().eq('user_id', uid);
+           await sb.from('premium_payments').delete().eq('user_id', uid);
+           try { await sb.from('ultra_premium_users').delete().eq('user_id', uid); } catch(e){}
+        }
+        var {error: delErr} = await sb.from('premium_users').delete().in('id', toDelete);
+        if(delErr) throw delErr;
+        alert("Successfully deleted " + toDelete.length + " duplicates!");
+        loadUsers();
+      }
+    }
+  } catch(e) {
+    alert("Error cleaning duplicates: " + e.message);
+  } finally {
+    btn.innerHTML = oldHtml;
+    btn.disabled = false;
+  }
 }
 
 function openConf(t,m){document.getElementById('conf-title').textContent=t;document.getElementById('conf-msg').textContent=m;document.getElementById('conf-modal').classList.add('show');}

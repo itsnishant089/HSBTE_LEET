@@ -127,8 +127,9 @@ document.onkeydown = function(e) {
     
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
       <div class="ch-fg"><label class="ch-fl">Full Name *</label><input type="text" class="ch-fi" id="r-name" placeholder="Your full name"/></div>
-      <div class="ch-fg"><label class="ch-fl">Date of Birth *</label><input type="date" class="ch-fi" id="r-dob"/></div>
+      <div class="ch-fg"><label class="ch-fl">LEET/Entrance Rank *</label><input type="number" class="ch-fi" id="r-rank" placeholder="e.g. 1500"/></div>
     </div>
+    <div class="ch-fg"><label class="ch-fl">Date of Birth *</label><input type="date" class="ch-fi" id="r-dob" style="width:100%"/></div>
     
     <div class="ch-fg"><label class="ch-fl">Gender *</label>
       <div class="ch-fg-radio">
@@ -214,6 +215,7 @@ document.onkeydown = function(e) {
     <h4><i class="fas fa-user-check"></i> Pre-filled Demographics</h4>
     <div class="prefilled-grid">
       <div><strong>Full Name</strong> <span id="pf-name"></span></div>
+      <div><strong>Entrance Rank</strong> <span id="pf-rank" style="color:#dc2626; font-weight:bold"></span></div>
       <div><strong>Category</strong> <span id="pf-cat"></span></div>
       <div><strong>Haryana Diploma</strong> <span id="pf-dip"></span></div>
       <div><strong>Haryana Resident</strong> <span id="pf-res"></span></div>
@@ -403,9 +405,11 @@ function clearAlert(id){var e=document.getElementById(id);if(e){e.classList.remo
 function populateForm(u) {
   document.getElementById('prefilled-section').style.display='block';
   document.getElementById('pf-name').textContent = u.full_name || '—';
+  document.getElementById('pf-rank').textContent = u.rank || '—';
   document.getElementById('pf-cat').textContent = u.category || '—';
   document.getElementById('pf-dip').textContent = u.diploma_haryana===true ? 'Yes' : 'No';
   document.getElementById('pf-res').textContent = u.resident_haryana===true ? 'Yes' : 'No';
+  if(u.rank) document.getElementById('f-rank').value = u.rank;
 }
 
 (async function(){
@@ -512,6 +516,7 @@ async function doLogin(){
 async function doRegister(){
   clearAlert('r-err');
   var name=document.getElementById('r-name').value.trim();
+  var rank=document.getElementById('r-rank').value.trim();
   var dob=document.getElementById('r-dob').value;
   var gender=document.querySelector('input[name="r-gender"]:checked').value;
   var cat=document.getElementById('r-category').value;
@@ -521,8 +526,8 @@ async function doRegister(){
   var email=document.getElementById('r-email').value.trim();
   var pass=document.getElementById('r-pass').value;
 
-  if(!name||!dob||!cat||!email||!/^\d{10}$/.test(mob)||!pass||pass.length<6){
-    showAlert('r-err','<i class="fas fa-times-circle"></i> Please fill all mandatory fields correctly. Mobile must be 10 digits, password min 6 chars.','err');return;
+  if(!name||!rank||!dob||!cat||!email||!/^\d{10}$/.test(mob)||!pass||pass.length<6){
+    showAlert('r-err','<i class="fas fa-times-circle"></i> Please fill all mandatory fields correctly. Rank is required. Mobile must be 10 digits, password min 6 chars.','err');return;
   }
   var btn=document.getElementById('btn-reg');
   btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Registering...';
@@ -532,7 +537,8 @@ async function doRegister(){
     
     var payload = {
       full_name:name, email:email, mobile:mob, password_hash:pass,
-      dob:dob, gender:gender, category:cat, diploma_haryana:dip, resident_haryana:res
+      dob:dob, gender:gender, category:cat, diploma_haryana:dip, resident_haryana:res,
+      rank: parseInt(rank)
     };
     
     var{data:nu,error:uE}=await sb.from('counseling_users').insert([payload]).select('id, full_name, category, diploma_haryana, resident_haryana').single();

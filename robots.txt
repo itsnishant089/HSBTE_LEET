@@ -2,7 +2,7 @@ Sitemap: https://hsbteleet.com/sitemap.xml
 
 User-agent: *
 
-# Allow all important pages (block nothing critical)
+# Allow all important pages
 Disallow:
 
 # Main site entry
@@ -61,28 +61,22 @@ Allow: /haryana-diploma-info
 # Haryana LEET 2026 hub
 Allow: /haryana-leet-2026
 
-
-
 # Also allow asset folders so main pages render correctly
 Allow: /css/
 Allow: /js/
 Allow: /image/
 Allow: /partials/
 
-# Sitemap location
-Sitemap: https://hsbteleet.com/sitemap.xml
-
-
-
-# Premium section - public landing page allowed, protected pages blocked
-Allow: /html/btech-leet-premium.html
+# Premium section
 Allow: /btech-leet-premium
+Allow: /premium-login
+Allow: /premium-papers
 
-# Block protected premium pages from indexing
-Disallow: /html/premium-login.html
-Disallow: /html/premium-papers.html
+# Block protected admin pages from indexing
 Disallow: /html/premium-admin.html
 Disallow: /html/admin.html
+Disallow: /html/counseling-admin.html
 
 # Block all PDFs from being indexed (protect premium content)
 Disallow: /pdf/
+Disallow: /syllabus/*.pdf

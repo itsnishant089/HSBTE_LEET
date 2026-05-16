@@ -327,7 +327,7 @@
       + '<p style="margin:0 0 12px 0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;">&#128218; Quick Access</p>'
       + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
       + '<tr>'
-      + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/syllabus/syllabus.html" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128203;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Syllabus</div><div style="font-size:11.5px;color:#9ca3af;">Full LEET syllabus, topic-wise</div></a></td>'
+      + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/syllabus/hsbte-syllabus" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128203;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Syllabus</div><div style="font-size:11.5px;color:#9ca3af;">Full LEET syllabus, topic-wise</div></a></td>'
       + '<td width="2%" style="font-size:0;">&nbsp;</td>'
       + '<td width="49%" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;vertical-align:top;"><a href="https://hsbteleet.com/haryanaleet" style="text-decoration:none;"><div style="font-size:18px;margin-bottom:5px;">&#128221;</div><div style="font-size:13px;font-weight:700;color:#111111;margin-bottom:2px;">Haryana LEET</div><div style="font-size:11.5px;color:#9ca3af;">Sample papers &amp; practice sets</div></a></td>'
       + '</tr>'
@@ -358,7 +358,7 @@
       // Footer
       + emailFooter([
         { href: 'https://hsbteleet.com', label: 'Website' },
-        { href: 'https://hsbteleet.com/syllabus/syllabus.html', label: 'Syllabus' },
+        { href: 'https://hsbteleet.com/syllabus/hsbte-syllabus', label: 'Syllabus' },
         { href: 'https://hsbteleet.com/hsbte-pyq', label: 'PYQs' }
       ])
 
