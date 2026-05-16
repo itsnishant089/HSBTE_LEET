@@ -30,7 +30,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://hsbteleet.com/syllabus/syllabus.html</loc>
+    <loc>https://hsbteleet.com/hsbte-syllabus</loc>
     <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -701,15 +701,39 @@
   </url>
   <url>
     <loc>https://hsbteleet.com/contact</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Premium Sample Papers landing page (public) -->
+  <!-- Premium & New Utilities -->
   <url>
-    <loc>https://hsbteleet.com/html/btech-leet-premium.html</loc>
-    <lastmod>2026-03-11</lastmod>
+    <loc>https://hsbteleet.com/ultra-premium</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/rank-analysis</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/study-plan</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/college-predictor</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-leet-premium</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

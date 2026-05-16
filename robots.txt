@@ -1,5 +1,4 @@
-# robots.txt for HSBTE LEET - Haryana Polytechnic
-# https://hsbteleet.com/robots.txt
+Sitemap: https://hsbteleet.com/sitemap.xml
 
 User-agent: *
 
@@ -72,8 +71,6 @@ Allow: /partials/
 
 # Sitemap location
 Sitemap: https://hsbteleet.com/sitemap.xml
-Allow: /sitemap.xml
-Allow: /ads.txt
 
 
 

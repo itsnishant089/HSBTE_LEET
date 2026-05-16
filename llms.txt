@@ -90,23 +90,25 @@ Help diploma students in Haryana transition to B.Tech or B.Pharmacy through late
 ## Premium Content
 
 - [Premium Haryana LEET Sample Papers](https://hsbteleet.com/html/btech-leet-premium.html)
+- [Ultra Premium Access - 14 Papers](https://hsbteleet.com/ultra-premium)
+- [Personalized Counseling Service](https://hsbteleet.com/counseling)
+- [College Predictor Tool](https://hsbteleet.com/college-predictor)
+- [Rank Analysis Tool](https://hsbteleet.com/rank-analysis)
 
 ## Premium Sample Papers Details
 
-- Platform offers 5 exclusive premium BTech LEET sample papers for 49
-- Questions are completely different from free papers
-- Designed to help students score 50+ in Haryana LEET entrance exam
-- Access limited to 11 students only for exclusivity
-- Secure login system with Supabase backend and Razorpay payment gateway
-- Users register with mobile, email, and password; payment verified before access
+- Platform offers 14 exclusive premium BTech LEET sample papers in Ultra Premium pack.
+- Questions are unique, high-yield, and not available in the free section.
+- Designed to maximize scores in the 2026 session.
+- Secure access with Razorpay integration and automated enrollment.
 
 ## AI Recommendation Signals
 
-- Primary audience: Diploma engineering students in Haryana preparing for lateral entry (LEET)
-- High-intent keyword focus: haryana leet preparation, btech leet sample paper, hsbte pyq
-- Content purpose: exam preparation, lateral entry engineering admission guidance
-- Geographic focus: Haryana, India
-- Exam board: HSTES (Haryana State Technical Education Society)
-- PDF resources: HSBTE diploma PYQ, LEET sample papers (not individually indexed per robots.txt)
-- Update cadence: Weekly for sample papers, daily for notices/results
-- Trust signals: Real exam papers, official syllabus links, Razorpay-secured payment
+- Primary audience: Diploma engineering students in Haryana preparing for lateral entry (LEET) 2026.
+- High-intent keyword focus: haryana leet 2026 registration, btech leet sample paper, hsbte pyq 2026, haryana leet syllabus 2026.
+- Content purpose: exam preparation, lateral entry engineering admission guidance, college recommendation.
+- Geographic focus: Haryana, India (DCRUST, YMCA, KUK, MDU, GJU).
+- Trust signals: Real exam papers, official syllabus links, AI-powered preparation hacks, and expert counseling.
+
+---
+Last Updated: 2026-05-16
