@@ -344,19 +344,21 @@ body.dark-mode .bnav-ripple {
 
   // Highlight active tab based on current path
   function setActiveTab() {
-    var path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+    var path = window.location.pathname.toLowerCase();
     var tabs = document.querySelectorAll('.bnav-tab');
+    var activeNav = '';
 
-    var routeMap = {
-      '/hsbte-pyq': 'pyq',
-      '/hsbte-syllabus': 'syllabus',
-      '/': 'home',
-      '': 'home',
-      '/btech-leet-premium': 'premium',
-      '/haryanaleet': 'leet'
-    };
-
-    var activeNav = routeMap[path] || '';
+    if (path.includes('pyq')) {
+      activeNav = 'pyq';
+    } else if (path.includes('syllabus')) {
+      activeNav = 'syllabus';
+    } else if (path.includes('premium')) {
+      activeNav = 'premium';
+    } else if (path.includes('leet')) {
+      activeNav = 'leet';
+    } else if (path === '/' || path.endsWith('index.html') || path.endsWith('/')) {
+      activeNav = 'home';
+    }
 
     tabs.forEach(function(tab) {
       tab.classList.remove('active');

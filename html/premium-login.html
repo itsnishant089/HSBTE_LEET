@@ -1635,35 +1635,7 @@
       });
     }
 
-    // ── LOGIN EMAIL: User only, NOT admin ──
-    function sendLoginEmail(user) {
-      try {
-        var tier = (user.tier === 'ultra') ? 'Ultra Premium' : 'Premium';
-        var html =
-          '<div style="font-family:sans-serif;max-width:560px;padding:0">' +
-          '<div style="background:linear-gradient(135deg,#0a1628,#1a56db);padding:28px 32px;text-align:center;border-radius:12px 12px 0 0">' +
-          '<div style="font-size:2.2rem;margin-bottom:8px">👋</div>' +
-          '<h2 style="color:#fff;font-size:1.3rem;margin:0">Login Alert — HSBTE LEET ' + tier + '</h2>' +
-          '</div>' +
-          '<div style="padding:24px 32px;background:#fff;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px">' +
-          '<p style="color:#475569;font-size:14px;line-height:1.7">Hi <strong>' + user.full_name + '</strong>,</p>' +
-          '<p style="color:#475569;font-size:14px;line-height:1.7">You just logged into your <strong>' + tier + '</strong> account on hsbteleet.com.</p>' +
-          '<div style="background:#f8fafc;border-radius:10px;padding:14px 16px;margin:14px 0;font-size:13px;color:#475569">' +
-          '<strong>Login Time:</strong> ' + ts() + '<br>' +
-          '<strong>Mobile:</strong> ' + user.mobile + '<br>' +
-          '<strong>Plan:</strong> ' + tier +
-          '</div>' +
-          '<p style="color:#94a3b8;font-size:12px;margin-top:14px">If this was not you, contact admin immediately at nishant@hsbteleet.com.</p>' +
-          '</div></div>';
-
-        ejsSend(user.full_name || 'Student', user.email, user.email, 'Login Alert — HSBTE LEET ' + tier, user.mobile, html)
-          .then(function (r) { console.log('[LEET] Login email → user:', r.status); })
-          .catch(function (e) { console.warn('[LEET] Login email err:', e); });
-
-        // ── NO admin email on login ──
-
-      } catch (e) { console.warn('[LEET] sendLoginEmail err:', e); }
-    }
+    // ── LOGIN EMAIL: Removed as requested ──
 
     // ── REGISTRATION EMAILS: Welcome to user + Alert to admin ──
     function sendRegistrationEmails(d) {

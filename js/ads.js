@@ -265,11 +265,18 @@
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      window.setTimeout(injectAds, 1500);
+  function initAdsOnInteraction() {
+    if (adsInjected) return;
+    injectAds();
+    ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function (e) {
+      window.removeEventListener(e, initAdsOnInteraction);
     });
-  } else {
-    window.setTimeout(injectAds, 1500);
   }
+
+  ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function (e) {
+    window.addEventListener(e, initAdsOnInteraction, { passive: true });
+  });
+
+  // Fallback timeout in case of no user interaction
+  window.setTimeout(initAdsOnInteraction, 4000);
 })();

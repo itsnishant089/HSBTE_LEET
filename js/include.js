@@ -68,8 +68,8 @@
   function autoInjectBottomNav() {
     const path = window.location.pathname.toLowerCase();
 
-    // Skip admin pages
-    if (path.includes("admin")) return;
+    // Skip admin pages and premium pages
+    if (path.includes("admin") || path.includes("premium")) return;
 
     // Prevent duplicate nav
     const existing = document.querySelector(

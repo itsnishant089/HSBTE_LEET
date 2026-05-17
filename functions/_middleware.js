@@ -2,6 +2,11 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
 
+  // 0. Prevent infinite loops by detecting internal rewrites
+  if (context.request.headers.get('x-internal-rewrite') === 'true') {
+    return context.next();
+  }
+
   // 1. Bypass assets, APIs, and known root files
   const bypassPrefixes = ['/css/', '/js/', '/image/', '/partials/', '/api/', '/paper/', '/pdf/'];
   if (bypassPrefixes.some(p => path.startsWith(p))) {
@@ -45,8 +50,13 @@ export async function onRequest(context) {
     // /html/YOUR_PATH.html and serve it under this URL without returning a 308 redirect.
     rewriteUrl.pathname = `/html${cleanReqPath}`;
     
-    // We create a new Request object to fetch the asset
-    return await context.env.ASSETS.fetch(new Request(rewriteUrl, context.request));
+    // We create a new Request object to fetch the asset, adding a marker header to prevent routing recursion
+    const headers = new Headers(context.request.headers);
+    headers.set('x-internal-rewrite', 'true');
+    const rewrittenReqWithHeaders = new Request(context.request, { headers });
+    const rewriteRequest = new Request(rewriteUrl, rewrittenReqWithHeaders);
+    
+    return await context.env.ASSETS.fetch(rewriteRequest);
   } catch (e) {
     return context.next();
   }

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
+
+  <title>Haryana LEET Cutoff Analytics | Branch-wise Opening & Closing Ranks</title>
+
+  <meta name="author" content="Nishant"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+  <meta name="description" content="In-depth cutoff analytics for Haryana LEET 2026. Check previous year opening and closing ranks for BTech lateral entry across top engineering colleges in Haryana." />
+  <meta name="keywords" content="Haryana LEET cutoff, LEET previous year cutoff, ymca cutoff leet, dcrust cutoff leet, haryana leet rank vs marks, btech lateral entry cutoff haryana" />
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://hsbteleet.com/html/cutoff-analytics.html"/>
+  <meta property="og:title" content="Haryana LEET Cutoff Analytics | Rank & Marks Analysis"/>
+  <meta property="og:description" content="Check previous year opening and closing ranks for BTech lateral entry across top engineering colleges in Haryana."/>
+  <meta property="og:image" content="https://hsbteleet.com/image/hsbte-pyq.webp"/>
+  <meta property="og:site_name" content="HSBTE PYQ"/>
+
+  <link rel="canonical" href="https://hsbteleet.com/html/cutoff-analytics.html"/>
+
+  <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/main.css"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+  <style>
+    /* Custom Cutoff UI Elements */
+    .search-filter-box {
+      margin-top: 25px;
+      margin-bottom: 25px;
+      position: relative;
+    }
+    
+    .search-filter-box input {
+      width: 100%;
+      padding: 14px 16px 14px 45px;
+      border-radius: 12px;
+      border: 1.5px solid #e5e7eb;
+      background: #ffffff;
+      color: #1f2937;
+      font-size: 15px;
+      font-weight: 600;
+      outline: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: all 0.25s ease;
+    }
+    
+    body.dark-mode .search-filter-box input {
+      background: #1e293b;
+      border-color: #334155;
+      color: #f1f5f9;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }
+    
+    .search-filter-box input:focus {
+      border-color: #1a56db;
+      box-shadow: 0 4px 15px rgba(26, 86, 219, 0.1);
+    }
+    
+    .search-filter-box i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 16px;
+    }
+    
+    .cutoff-table-wrapper {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+    
+    body.dark-mode .cutoff-table-wrapper {
+      border-color: #334155;
+    }
+    
+    .cutoff-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    
+    .cutoff-table th, .cutoff-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    body.dark-mode .cutoff-table th, body.dark-mode .cutoff-table td {
+      border-color: #334155;
+    }
+    
+    .cutoff-table th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    
+    body.dark-mode .cutoff-table th {
+      background: #0f172a;
+      color: #f1f5f9;
+    }
+    
+    .cutoff-table td {
+      color: #4b5563;
+      font-weight: 500;
+      background: #ffffff;
+    }
+    
+    body.dark-mode .cutoff-table td {
+      color: #cbd5e1;
+      background: #1e293b;
+    }
+    
+    .category-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(26, 86, 219, 0.08);
+      color: #1a56db;
+    }
+    
+    body.dark-mode .category-badge {
+      background: rgba(96, 165, 250, 0.12);
+      color: #60a5fa;
+    }
+    
+    .guide-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    body.dark-mode .guide-card {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+
+<body class="light-mode">
+<!-- HEADER -->
+<div data-include="/partials/header.html"></div>
+<!-- CHATBOT -->
+<div data-include="/partials/chatbot.html"></div>
+
+<main id="main-content" role="main">
+  <div class="page-hero">
+    <h1><i class="fas fa-chart-line"></i> HSTES Cutoff Analytics</h1>
+    <p>Opening & Closing Rank Analytics for LEET Colleges</p>
+  </div>
+
+  <div class="content-section page-content">
+    
+    <!-- Cutoff explanation -->
+    <div class="guide-card">
+      <h2>Rank vs Marks Counselling Trends</h2>
+      <p>HSTES (Haryana State Technical Education Society) allocates B.Tech lateral entry seats based strictly on your Haryana LEET overall rank. Check the actual previous year opening and closing ranks below for all government engineering universities in Haryana to analyze your admission chances.</p>
+      
+      <!-- Interactive Real-time Search Box -->
+      <div class="search-filter-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="cutoff-search" placeholder="Type college name, branch, or category to filter (e.g. YMCA, CSE, HOGC)..." onkeyup="filterCutoffs()" />
+      </div>
+      
+      <!-- Table Wrapper -->
+      <div class="cutoff-table-wrapper">
+        <table class="cutoff-table" id="cutoff-table">
+          <thead>
+            <tr>
+              <th>College Name</th>
+              <th>Branch</th>
+              <th>Category</th>
+              <th>Opening Rank</th>
+              <th>Closing Rank</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- YMCA Ranks -->
+            <tr>
+              <td>JC Bose UST (YMCA) Faridabad</td>
+              <td>Computer Engineering (CE)</td>
+              <td><span class="category-badge">AIC</span></td>
+              <td>1</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>JC Bose UST (YMCA) Faridabad</td>
+              <td>Computer Engineering (CE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>5</td>
+              <td>28</td>
+            </tr>
+            <tr>
+              <td>JC Bose UST (YMCA) Faridabad</td>
+              <td>Information Technology (IT)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>14</td>
+              <td>42</td>
+            </tr>
+            <tr>
+              <td>JC Bose UST (YMCA) Faridabad</td>
+              <td>Electronics & Comm Engg (ECE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>32</td>
+              <td>68</td>
+            </tr>
+            <tr>
+              <td>JC Bose UST (YMCA) Faridabad</td>
+              <td>Mechanical Engineering (ME)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>45</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td>JC Bose UST (YMCA) Faridabad</td>
+              <td>Electrical Engineering (EE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>55</td>
+              <td>110</td>
+            </tr>
+            
+            <!-- DCRUST Ranks -->
+            <tr>
+              <td>DCRUST Murthal</td>
+              <td>Computer Science & Engg (CSE)</td>
+              <td><span class="category-badge">AIC</span></td>
+              <td>15</td>
+              <td>48</td>
+            </tr>
+            <tr>
+              <td>DCRUST Murthal</td>
+              <td>Computer Science & Engg (CSE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>35</td>
+              <td>88</td>
+            </tr>
+            <tr>
+              <td>DCRUST Murthal</td>
+              <td>Electronics & Comm Engg (ECE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>72</td>
+              <td>145</td>
+            </tr>
+            <tr>
+              <td>DCRUST Murthal</td>
+              <td>Mechanical Engineering (ME)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>90</td>
+              <td>190</td>
+            </tr>
+            <tr>
+              <td>DCRUST Murthal</td>
+              <td>Civil Engineering (CE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>120</td>
+              <td>230</td>
+            </tr>
+            
+            <!-- KUK Ranks -->
+            <tr>
+              <td>UIET Kurukshetra University</td>
+              <td>Computer Science & Engg (CSE)</td>
+              <td><span class="category-badge">AIC</span></td>
+              <td>10</td>
+              <td>38</td>
+            </tr>
+            <tr>
+              <td>UIET Kurukshetra University</td>
+              <td>Computer Science & Engg (CSE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>22</td>
+              <td>95</td>
+            </tr>
+            <tr>
+              <td>UIET Kurukshetra University</td>
+              <td>Information Technology (IT)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>40</td>
+              <td>125</td>
+            </tr>
+            <tr>
+              <td>UIET Kurukshetra University</td>
+              <td>Electronics & Comm Engg (ECE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>85</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <td>UIET Kurukshetra University</td>
+              <td>Biotechnology</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>190</td>
+              <td>420</td>
+            </tr>
+
+            <!-- GJU Ranks -->
+            <tr>
+              <td>GJUS&T Hisar</td>
+              <td>Computer Science & Engg (CSE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>92</td>
+              <td>185</td>
+            </tr>
+            <tr>
+              <td>GJUS&T Hisar</td>
+              <td>Information Technology (IT)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>110</td>
+              <td>220</td>
+            </tr>
+            <tr>
+              <td>GJUS&T Hisar</td>
+              <td>Electronics & Comm Engg (ECE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>150</td>
+              <td>320</td>
+            </tr>
+
+            <!-- CDLU Ranks -->
+            <tr>
+              <td>CDLU Sirsa</td>
+              <td>Computer Science & Engg (CSE)</td>
+              <td><span class="category-badge">HOGC</span></td>
+              <td>240</td>
+              <td>450</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Counselling category explanations -->
+    <div class="guide-card">
+      <h3>🔑 Counselling Category Abbreviations</h3>
+      <p style="font-size:14px; line-height: 1.6; color:#6b7280;">During HSTES choice filling, you will notice different reservation seat category abbreviations. Here is what they represent:</p>
+      <ul style="padding-left:20px; font-size:13.5px; line-height:1.7; color:#4b5563;">
+        <li style="margin-bottom:8px;"><strong>AIC (All India Category):</strong> Open to all students nationwide (15% of total state seats). Highly competitive.</li>
+        <li style="margin-bottom:8px;"><strong>HOGC (Haryana Open General Category):</strong> Reserved for candidates belonging to Haryana state general category.</li>
+        <li style="margin-bottom:8px;"><strong>SC / DSC:</strong> Scheduled Castes / Deprived Scheduled Castes of Haryana.</li>
+        <li style="margin-bottom:8px;"><strong>BC-A / BC-B:</strong> Backward Classes block A and block B of Haryana state.</li>
+        <li style="margin-bottom:0;"><strong>EWS (Economically Weaker Section):</strong> 10% separate reservation sub-category within General seats.</li>
+      </ul>
+      
+      <p style="font-size: 13.5px; color:#ea580c; font-weight:700; margin-top:20px; text-align:center;">
+        Want to compare college placement metrics before choosing? Try our <a href="/college-comparison" style="text-decoration:underline;">Interactive College Comparison Tool</a>!
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<button id="goTopBtn" title="Go to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- FOOTER -->
+<div data-include="/partials/footer.html"></div>
+
+<script defer src="/js/search.js"></script>
+<script defer src="/js/main.js"></script>
+<script defer src="/js/include.js"></script>
+<script defer src="/js/chatbot.js"></script>
+<script defer src="/js/ads.js"></script>
+
+<script>
+  function filterCutoffs() {
+    var input = document.getElementById("cutoff-search");
+    var filter = input.value.toLowerCase().trim();
+    var table = document.getElementById("cutoff-table");
+    var tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, hide those that don't match the query
+    for (var i = 1; i < tr.length; i++) {
+      var cells = tr[i].getElementsByTagName("td");
+      var matchFound = false;
+      
+      for (var j = 0; j < cells.length; j++) {
+        if (cells[j]) {
+          var txtValue = cells[j].textContent || cells[j].innerText;
+          if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            matchFound = true;
+            break;
+          }
+        }
+      }
+      
+      if (matchFound) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+</script>
+</body>
+</html>

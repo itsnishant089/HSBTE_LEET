@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 <!-- Animated Typing Header -->
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=30&pause=1000&color=F0B429&center=true&vCenter=true&width=700&lines=HSBTE+LEET+Website+%F0%9F%93%9A;Free+Education+for+Haryana+Students;250%2B+Pages+of+Exam+Content;AI+Chatbot+%2B+Premium+Papers;Built+with+%E2%9D%A4%EF%B8%8F+for+Haryana" alt="Typing SVG" />
@@ -189,7 +189,7 @@ wrangler pages dev .
 | 🌐 Live Site | [hsbteleet.com](https://hsbteleet.com) |
 | 👤 Developer | [itsnishant.com](https://itsnishant.com) |
 | 💼 LinkedIn | [nishant-4aa891346](https://www.linkedin.com/in/nishant-4aa891346/) |
-| 📞 Support | +91 7988316241 |
+| 📞 Support | [support@hsbteleet.com](mailto:support@hsbteleet.com) |
 
 </div>
 
