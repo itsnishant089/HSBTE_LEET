@@ -1,209 +1,145 @@
-<div align="center">
+# HSBTE LEET Website
 
-<!-- Animated Typing Header -->
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=30&pause=1000&color=F0B429&center=true&vCenter=true&width=700&lines=HSBTE+LEET+Website+%F0%9F%93%9A;Free+Education+for+Haryana+Students;250%2B+Pages+of+Exam+Content;AI+Chatbot+%2B+Premium+Papers;Built+with+%E2%9D%A4%EF%B8%8F+for+Haryana" alt="Typing SVG" />
+Educational website for Haryana diploma students and LEET aspirants. The project combines HSBTE previous year question papers, LEET preparation resources, counselling tools, and branch-wise study material in a static-first site with lightweight serverless support.
 
-<br/>
+## Snapshot
 
-<!-- Status badges -->
-<a href="https://hsbteleet.com">
-  <img src="https://img.shields.io/website?url=https%3A%2F%2Fhsbteleet.com&up_message=LIVE&up_color=00D4B4&down_color=EF4444&style=for-the-badge&logo=cloudflare&logoColor=white&label=hsbteleet.com"/>
-</a>
-&nbsp;
-<img src="https://img.shields.io/badge/Pages-250%2B-F0B429?style=for-the-badge&logo=files&logoColor=white"/>
-&nbsp;
-<img src="https://img.shields.io/badge/Coverage-LEET%20%2B%20HSBTE-00D4B4?style=for-the-badge"/>
-&nbsp;
-<img src="https://img.shields.io/badge/AI%20Chatbot-Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
+- Live domain: `https://hsbteleet.com`
+- HTML pages: `267`
+- Question paper PDFs: `7679`
+- Core PDF resources: `17`
+- Image assets: `63`
+- Primary audience: Haryana diploma students, B.Tech LEET aspirants, B.Pharmacy LEET aspirants
 
-<br/><br/>
+## What Was Updated
 
-<!-- Social row -->
-<a href="https://hsbteleet.com"><img src="https://img.shields.io/badge/Website-hsbteleet.com-F0B429?style=flat-square&logo=googlechrome&logoColor=white"/></a>
-&nbsp;
-<a href="https://github.com/itsnishant089"><img src="https://img.shields.io/badge/GitHub-itsnishant089-181717?style=flat-square&logo=github&logoColor=white"/></a>
-&nbsp;
-<a href="https://itsnishant.com"><img src="https://img.shields.io/badge/Author-itsnishant.com-A855F7?style=flat-square&logo=person&logoColor=white"/></a>
-&nbsp;
-<img src="https://img.shields.io/badge/Hosted%20on-Cloudflare%20Pages-F38020?style=flat-square&logo=cloudflare&logoColor=white"/>
-&nbsp;
-<img src="https://img.shields.io/badge/Payments-Razorpay-0055FA?style=flat-square&logo=razorpay&logoColor=white"/>
+This repo now includes stronger SEO coverage around key admissions dates:
 
-</div>
+- Added `/btech-leet-key-dates`
+- Added `/b-pharmacy-leet-key-dates`
+- Rebuilt `/leet-tentative-dates` as a course-selection hub instead of an outdated generic page
+- Rewired the “Tentative Key Dates” cards on the B.Tech and B.Pharmacy landing pages
+- Updated `sitemap.xml`, `robots.txt`, and on-site search discovery
+- Cleaned canonical and Open Graph URLs for `cutoff-analytics` and `college-comparison`
+- Refreshed internal links on the homepage to use clean, crawlable URLs
 
----
+## SEO Analysis
 
-> 📖 **A high-performance educational platform for Haryana LEET & HSBTE diploma students. Features include 250+ content pages, PYQs, detailed syllabus, premium sample papers, and an AI-powered study assistant (Gemini).**
+### Current strengths
 
----
+- Large topical coverage with many branch and semester pages
+- Clean URL rewrites already enabled through `vercel.json`
+- Strong internal search layer in `js/search.js`
+- Existing structured data usage on important LEET pages
+- Dedicated hub pages for syllabus, counselling, sample papers, and overview content
 
-## 📊 At a Glance
+### Improvements shipped in this update
 
-<div align="center">
+- Split one weak “tentative dates” page into two intent-specific landing pages
+- Added exact 2026-27 dates directly in indexable HTML instead of sending users off-site
+- Improved internal linking for date-related queries
+- Added search keywords for new date pages and important tools
+- Added sitemap and robots coverage for newly important routes
+- Fixed canonical direction for analytics-style pages that were still pointing to `/html/...`
 
-| 📄 Pages | 🎓 Coverage | 🤖 AI | 💳 Payments | ⚡ Hosting |
-|:---:|:---:|:---:|:---:|:---:|
-| 250+ HTML | LEET + HSBTE | Gemini Chatbot | Razorpay | Cloudflare Pages |
+### Remaining SEO opportunities
 
-</div>
+- Standardize metadata quality across older branch pages
+- Replace remaining legacy `/html/...` internal links on older pages with clean URLs
+- Normalize structured data patterns across all top-level pages
+- Reduce encoding/mojibake issues on some older files
+- Consider generating `sitemap.xml` automatically from the route set to avoid drift
 
----
+## Important SEO Routes
 
-## ✨ Features
+- `/`
+- `/haryanaleet`
+- `/haryana-leet-2026`
+- `/btech-leet`
+- `/btech-leet-key-dates`
+- `/B-Pharmacy-leet`
+- `/b-pharmacy-leet-key-dates`
+- `/leet-tentative-dates`
+- `/haryana-leet-syllabus`
+- `/haryana-leet-counselling`
+- `/leet-sample-paper`
+- `/cutoff-analytics`
+- `/college-comparison`
 
-### 🆓 Free Resources
-- **HSBTE Previous Year Papers**: Comprehensive collection of PYQs across 40+ diploma branches.
-- **Haryana LEET Guide**: Complete preparation material for B.Tech & B.Pharmacy lateral entry.
-- **Syllabus & Notes**: Structured syllabus PDFs, exam patterns, and formula cheat sheets.
-- **AI Study Buddy**: Integrated chatbot powered by Google Gemini API for instant academic help.
+## Analytics and Monetization
 
-### 💎 Premium Offerings
-- **Handcrafted Sample Papers**: High-quality practice sets designed for exam success.
-- **Instant Access**: Seamless Razorpay integration for quick content unlocking (₹49 - ₹79).
+### Analytics currently used
 
-### 🛠️ Infrastructure & Tech
-- **Edge Architecture**: Hosted on Cloudflare Pages for ultra-low latency globally.
-- **PWA Ready**: Offline capabilities and home-screen installation via Service Workers.
-- **Smart Analytics**: Deep insights via GA4 and Microsoft Clarity (session recording).
+- Google Analytics 4: `G-WR1BG2HCE0`
+- Microsoft Clarity: `vesdg7gqcq`
 
----
+### Ads
 
-## 🛠️ Tech Stack
+- AdSense is injected through `js/ads.js`
+- The ad injector excludes premium and sensitive routes and guards against footer-ad placement issues
 
-<div align="center">
+## Tech Stack
 
-**Frontend & Logic**
+- HTML
+- CSS
+- Vanilla JavaScript
+- Cloudflare Pages Functions
+- Vercel-style clean URL rewrites in `vercel.json`
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+## Project Structure
 
-**Backend & Serverless**
-
-![Cloudflare](https://img.shields.io/badge/Cloudflare%20Functions-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-
-**Tools & Integrations**
-
-![Razorpay](https://img.shields.io/badge/Razorpay-0055FA?style=for-the-badge&logo=razorpay&logoColor=white)
-![Gemini](https://img.shields.io/badge/Google%20Gemini%20API-4285F4?style=for-the-badge&logo=google&logoColor=white)
-![GA4](https://img.shields.io/badge/Google%20Analytics%204-E37400?style=for-the-badge&logo=googleanalytics&logoColor=white)
-
-</div>
-
----
-
-## 📁 Project Structure
-
-```bash
-📂 HSBTE_LEET/
-├── index.html              # Main landing page
-├── _headers                # Security & Cache headers (Cloudflare)
-├── _redirects              # URL rewrites & redirects
-├── wrangler.toml           # Cloudflare Pages configuration
-│
-├── 📂 functions/           # Cloudflare Pages Functions (Edge Backend)
-│   └── 📂 api/
-│       └── chat.js         # Gemini-powered AI Chatbot Logic
-│
-├── 📂 html/                # 250+ Educational content pages
-├── 📂 css/                 # Global styles & layout modules
-├── 📂 js/                  # Client-side logic (UI, Chatbot, PWA)
-├── 📂 partials/            # Injectable components (Header, Chatbot UI)
-│
-├── 📂 paper/               # PYQ PDF database
-├── 📂 pdf/                 # Syllabus & Formula sheets
-├── 📂 image/               # Optimized assets (.webp)
-│
-├── sw.js                   # Service Worker (Offline Support)
-├── sitemap.xml             # SEO Sitemap
-└── robots.txt              # Search Engine Metadata
+```text
+HSBTE_LEET/
+|-- index.html
+|-- html/                 # Main site routes and content pages
+|-- css/                  # Shared styling
+|-- js/                   # Search, UI, chatbot, ads, utilities
+|-- partials/             # Shared header, footer, chatbot, bottom nav
+|-- paper/                # Question paper PDFs
+|-- pdf/                  # LEET and syllabus PDFs
+|-- image/                # Site assets
+|-- functions/            # Serverless endpoints
+|-- sitemap.xml
+|-- robots.txt
+|-- vercel.json
 ```
 
----
+## Key Files for SEO Work
 
-## 🔑 Environment Variables
+- `index.html`: homepage metadata and major internal links
+- `partials/header.html`: crawl-critical navigation
+- `partials/footer.html`: repeated internal links and trust signals
+- `js/search.js`: internal search discovery and keyword routing
+- `sitemap.xml`: crawl coverage
+- `robots.txt`: allow/disallow and sitemap declaration
+- `html/btech-leet-key-dates.html`: B.Tech dates landing page
+- `html/b-pharmacy-leet-key-dates.html`: B.Pharmacy dates landing page
+- `html/leet-tentative-dates.html`: schedule hub page
 
-| Variable | Required | Description |
-|---|:---:|---|
-| `GEMINI_API_KEY` | ✅ Yes | Required for the AI Chatbot backend functionality. |
+## Local Development
 
-**Setup:**
-- **Local**: Add to `.dev.vars` for Wrangler dev mode.
-- **Production**: Set in **Cloudflare Dashboard → Pages → Settings → Environment Variables**.
+Run the site locally with a static server or through the platform workflow already used in the repo.
 
----
+If Cloudflare Pages Functions are needed:
 
-## 💻 Local Development
-
-> 💡 The project uses **Cloudflare Pages Functions**. For full functionality (including AI Chatbot), use Wrangler.
-
-**Step 1: Install Wrangler**
 ```bash
-npm install -g wrangler
-```
-
-**Step 2: Run Development Server**
-```bash
-# Serves static assets + Edge functions
 wrangler pages dev .
 ```
 
----
+## SEO Publishing Checklist
 
-## 🚀 Deployment (Cloudflare Pages)
+When adding a new important page:
 
-1. **Connect Repository**: Link your GitHub repo to Cloudflare Pages.
-2. **Configure Build Settings**:
-   - **Framework Preset**: None (Static site)
-   - **Build Command**: (Leave empty)
-   - **Build Output Directory**: `.`
-3. **Set Secrets**: Add your `GEMINI_API_KEY` in the Environment Variables tab.
-4. **Deploy**: Cloudflare will automatically deploy your site and functions on every push.
+1. Create a clean URL under `html/`.
+2. Add a unique `<title>`, description, canonical, OG, and Twitter tags.
+3. Add at least one structured data block when relevant.
+4. Link the page from an existing strong page.
+5. Add the route to `js/search.js`.
+6. Add the route to `sitemap.xml`.
+7. Add the route to `robots.txt` if it should be crawled.
+8. Prefer clean internal URLs like `/page-name` over `/html/page-name.html`.
 
----
+## Notes
 
-## 🤝 Contributing & Standards
-
-- **Clean URLs**: New pages in `html/` are automatically mapped (e.g., `/html/syllabus.html` → `/syllabus`).
-- **Modularity**: Use `partials/` for any repeating HTML elements.
-- **Performance**: Compress all images to `.webp` before adding to `image/`.
-- **Atomic Commits**: Keep changes focused and descriptive.
-
----
-
-## 👥 Audience
-
-| 🎓 Diploma Students | 🚀 LEET Aspirants |
-|---|---|
-| Haryana polytechnic students looking for semester resources and exam guidance. | Aspirants preparing for Lateral Entry into B.Tech/B.Pharmacy courses. |
-
----
-
-## 📬 Contact & Links
-
-<div align="center">
-
-| Channel | Link |
-|---|---|
-| 🌐 Live Site | [hsbteleet.com](https://hsbteleet.com) |
-| 👤 Developer | [itsnishant.com](https://itsnishant.com) |
-| 💼 LinkedIn | [nishant-4aa891346](https://www.linkedin.com/in/nishant-4aa891346/) |
-| 📞 Support | [support@hsbteleet.com](mailto:support@hsbteleet.com) |
-
-</div>
-
----
-
-<div align="center">
-
-<!-- Animated footer -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=F0B429,00D4B4&height=80&section=footer&animation=twinkling" width="100%"/>
-
-**Empowering Students across Haryana 🚀**
-
-*Free · Open · AI-Enhanced · [hsbteleet.com](https://hsbteleet.com)*
-
-![Visitor Count](https://komarev.com/ghpvc/?username=itsnishant089&color=F0B429&style=flat-square&label=Repo+Views)
-
-</div>
+- This site is informational and not an official HSBTE or HSTES website.
+- Admission dates and rules can change, so official portals must remain the final source of truth.

@@ -98,7 +98,7 @@ async function buildSearchIndex() {
 if (isIndexLoaded) return;
 
 // Try to load from localStorage first
-const CACHE_KEY = 'hsbte_search_index_v2';
+const CACHE_KEY = 'hsbte_search_index_v3';
 const cached = localStorage.getItem(CACHE_KEY);
 if (cached) {
     try {
@@ -251,6 +251,12 @@ keywords: ['btech leet', 'btech', 'b.tech leet', 'b tech leet', 'btech lateral e
 },
 {
 type: 'page',
+title: 'BTech LEET Key Dates 2026-27',
+url: `${basePath}btech-leet-key-dates`,
+keywords: ['btech leet key dates', 'btech leet dates', 'btech important dates', 'btech leet counselling dates', 'btech leet exam date 2026', 'haryana btech leet key dates', 'ocet btech dates']
+},
+{
+type: 'page',
 title: 'BTech LEET Sample Papers',
 url: `${basePath}btech-leet-sample-paper`,
 keywords: ['btech leet sample paper', 'btech sample paper', 'btech leet sample', 'btech mock paper', 'btech practice paper', 'btech leet practice', 'sample paper btech', 'btech leet mock', 'btech leet papers', 'btech sample', 'btech practice', 'btech mock', 'btech leet pyq', 'btech leet previous year']
@@ -260,6 +266,12 @@ type: 'page',
 title: 'B. Pharmacy LEET Information',
 url: `${basePath}B-Pharmacy-leet`,
 keywords: ['b pharmacy leet', 'bpharmacy leet', 'b.pharmacy leet', 'b pharmacy lateral entry', 'pharmacy leet', 'bpharm leet', 'b pharm leet', 'bpharmacy', 'b pharmacy', 'pharmacy lateral entry', 'b pharmacy information', 'b pharmacy syllabus', 'b pharmacy exam pattern', 'b pharmacy cutoff', 'b pharmacy key dates', 'b pharmacy leet 2025', 'b pharmacy leet 2026', 'b pharmacy leet 2027']
+},
+{
+type: 'page',
+title: 'B. Pharmacy LEET Key Dates 2026-27',
+url: `${basePath}b-pharmacy-leet-key-dates`,
+keywords: ['b pharmacy leet key dates', 'b pharmacy dates', 'bpharmacy key dates', 'b pharmacy important dates', 'b pharmacy leet exam date 2026', 'haryana b pharmacy leet schedule', 'd pharmacy lateral entry dates']
 },
 {
 type: 'page',
@@ -299,9 +311,21 @@ keywords: ['leet sample papers', 'haryana leet sample papers', 'leet papers', 'l
 },
 {
 type: 'page',
-title: 'LEET Tentative Key Dates',
+title: 'LEET Key Dates Hub',
 url: `${basePath}leet-tentative-dates`,
-keywords: ['leet tentative dates', 'leet key dates', 'haryana leet schedule', 'leet exam dates', 'leet counselling dates', 'haryana leet 2026 dates']
+keywords: ['leet tentative dates', 'leet key dates', 'haryana leet schedule', 'leet exam dates', 'leet counselling dates', 'haryana leet 2026 dates', 'btech leet key dates', 'b pharmacy leet key dates']
+},
+{
+type: 'page',
+title: 'Haryana LEET Cutoff Analytics',
+url: `${basePath}cutoff-analytics`,
+keywords: ['cutoff analytics', 'haryana leet cutoff analytics', 'btech cutoff analytics', 'leet rank analysis', 'opening closing rank', 'cutoff trends']
+},
+{
+type: 'page',
+title: 'Haryana LEET College Comparison',
+url: `${basePath}college-comparison`,
+keywords: ['college comparison', 'haryana leet college comparison', 'ymca vs dcrust', 'best college for leet', 'compare leet colleges']
 },
 {
 type: 'page',

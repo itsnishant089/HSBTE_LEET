@@ -17,10 +17,13 @@ Allow: /Architectural-Assistantship
 Allow: /Automation
 Allow: /Automobile
 Allow: /B-Pharmacy-leet
+Allow: /b-pharmacy-leet-key-dates
 Allow: /btech-leet-sample-paper
 Allow: /btech-leet
+Allow: /btech-leet-key-dates
 Allow: /Ceramic
 Allow: /Chemical
+Allow: /college-comparison
 Allow: /civil
 Allow: /computer-pyq
 Allow: /d-pharmacy
@@ -54,6 +57,7 @@ Allow: /leet-syllabus
 Allow: /leet-tentative-dates
 Allow: /leet-overview
 Allow: /last-year-cutoff
+Allow: /cutoff-analytics
 Allow: /leet-preparation-guide
 Allow: /leet-counselling
 Allow: /haryana-diploma-info

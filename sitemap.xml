@@ -119,7 +119,7 @@
   </url>
   <url>
     <loc>https://hsbteleet.com/leet-tentative-dates</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -129,13 +129,31 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://hsbteleet.com/cutoff-analytics</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/college-comparison</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- ══════════════════════════════════════
        BTECH LEET
   ══════════════════════════════════════ -->
   <url>
     <loc>https://hsbteleet.com/btech-leet</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/btech-leet-key-dates</loc>
+    <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -217,7 +235,13 @@
   ══════════════════════════════════════ -->
   <url>
     <loc>https://hsbteleet.com/B-Pharmacy-leet</loc>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/b-pharmacy-leet-key-dates</loc>
+    <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
