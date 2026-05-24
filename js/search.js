@@ -98,7 +98,7 @@ async function buildSearchIndex() {
 if (isIndexLoaded) return;
 
 // Try to load from localStorage first
-const CACHE_KEY = 'hsbte_search_index_v3';
+const CACHE_KEY = 'hsbte_search_index_v4';
 const cached = localStorage.getItem(CACHE_KEY);
 if (cached) {
     try {
@@ -404,6 +404,26 @@ type: 'page',
 title: 'Contact Us',
 url: `${basePath}contact`,
 keywords: ['contact', 'support', 'help', 'email', 'about us']
+}
+);
+searchIndex.push(
+{
+type: 'page',
+title: 'Haryana LEET OCET Documents 2026',
+url: `${basePath}haryana-leet-ocet-documents`,
+keywords: ['haryana leet ocet documents', 'ocet documents 2026', 'haryana leet admit card documents', 'leet registration documents', 'ocet exam day checklist']
+},
+{
+type: 'page',
+title: 'Haryana LEET Admission Documents 2026',
+url: `${basePath}haryana-leet-admission-documents`,
+keywords: ['haryana leet admission documents', 'leet reporting documents', 'haryana leet joining documents', 'btech lateral entry admission checklist', 'hstes admission document list']
+},
+{
+type: 'page',
+title: 'Haryana LEET Seat Intake 2026',
+url: `${basePath}haryana-leet-seat-intake`,
+keywords: ['haryana leet seat intake', 'btech lateral entry seat matrix haryana', 'branch wise seat intake 2026', 'haryana leet colleges seat intake', 'appendix f haryana leet']
 }
 );
 for (let i = 1; i <= 11; i++) {

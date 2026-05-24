@@ -1,4 +1,17 @@
-const CACHE_NAME = 'hsbte-leet-v3';
+const CACHE_NAME = 'hsbte-leet-v4';
+const NETWORK_ONLY_PATHS = [
+  '/counseling',
+  '/counseling-admin',
+  '/user-counseling',
+  '/premium-login',
+  '/premium-admin',
+  '/html/counseling.html',
+  '/html/counseling-admin.html',
+  '/html/user-counseling.html',
+  '/html/premium-login.html',
+  '/html/premium-admin.html',
+  '/js/lead-capture.js'
+];
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -41,9 +54,15 @@ self.addEventListener('activate', event => {
 /** Fetch Event: Stale-While-Revalidate Strategy */
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+  const shouldBypassCache = NETWORK_ONLY_PATHS.some(path => url.pathname === path || url.pathname.endsWith(path));
 
   // We don't cache API calls or Google Analytics/Clarity in SW (they have their own logic)
   if (url.origin !== self.location.origin || url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  if (shouldBypassCache) {
+    event.respondWith(fetch(event.request));
     return;
   }
 

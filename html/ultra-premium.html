@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="https://hsbteleet.com/image/favicon.webp"/>
-<title>Ultra Premium Tools | Haryana LEET 2026 Smart Counselling | hsbteleet.com</title>
-<meta name="description" content="India's first smart LEET counselling platform. AI College Predictor, Rank Predictor, Choice Filling, Study Planner - built by a Haryana Polytechnic student. Real 2025 data."/>
-<meta name="keywords" content="haryana leet college predictor 2026, haryana leet rank predictor, smart leet counselling, haryana leet choice filling, ymca leet cutoff, dcrust leet cutoff, gju leet cutoff, kuk leet cutoff, cdlu sirsa leet, haryana leet study plan 2026, hsbteleet ultra premium"/>
+<title>Ultra Premium Tools | Haryana LEET 2026 Rank Predictor, College Predictor & Cutoff Dashboard | hsbteleet.com</title>
+<meta name="description" content="Haryana LEET 2026 rank predictor, college predictor, upgrade calculator, college comparison, cutoff analyzer, AI assistant and study planner built on 2025 Haryana LEET trend data."/>
+<meta name="keywords" content="haryana leet college predictor 2026, haryana leet rank predictor, haryana leet cutoff analyzer, haryana leet college comparison, ymca leet cutoff, dcrust leet cutoff, gju leet cutoff, kuk leet cutoff, nilokheri leet cutoff, gurugram university leet cutoff, haryana leet study plan 2026, hsbteleet ultra premium"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://hsbteleet.com/ultra-premium"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/>
@@ -557,8 +557,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
   <button class="sb-item active" onclick="scrollToSec('sec-rank')"><i class="fas fa-chart-bar"></i> Rank Analysis</button>
   <button class="sb-item" onclick="scrollToSec('sec-college')"><i class="fas fa-university"></i> College Predictor</button>
   <div class="sb-section">Counselling</div>
-  <button class="sb-item" onclick="scrollToSec('sec-strategy')"><i class="fas fa-map-marked-alt"></i> Strategy Advisor</button>
-  <button class="sb-item" onclick="scrollToSec('sec-choices')"><i class="fas fa-list-ol"></i> Choice Filling</button>
   <button class="sb-item" onclick="scrollToSec('sec-upgrade')"><i class="fas fa-level-up-alt"></i> Upgrade Calculator</button>
   <div class="sb-section">Data</div>
   <button class="sb-item" onclick="scrollToSec('sec-demand')"><i class="fas fa-fire"></i> Branch Demand</button>
@@ -579,7 +577,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
     <div class="hero-inner">
       <div class="hero-eyebrow"><i class="fas fa-rocket"></i> Ultra Premium - Haryana LEET 2026</div>
       <h1>India's First Smart<br><span class="hl">LEET Counselling Platform</span></h1>
-      <p>AI-powered college predictor, rank analysis, choice filling optimizer and study planner - all built on real 2025 Haryana LEET allotment data.</p>
+      <p>Rank predictor, college predictor, cutoff explorer, upgrade analysis and study planner built on real 2025 Haryana LEET allotment data.</p>
       <div class="hero-pills">
         <span class="hpill hpill-g"><i class="fas fa-ban"></i> 100% Ad-Free</span>
         <span class="hpill hpill-a"><i class="fas fa-database"></i> Real 2025 Data</span>
@@ -599,19 +597,17 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
   <!-- DASHBOARD -->
   <div class="dash-bar">
     <div class="dash-greet">Welcome, <span id="dash-name">Student</span> <i class="fas fa-circle-check" aria-hidden="true"></i> &mdash; Ultra Premium Active</div>
-    <div class="dash-chips">
-      <div class="dash-chip"><div class="dash-chip-v">90</div><div class="dash-chip-l">Max Marks</div></div>
-      <div class="dash-chip"><div class="dash-chip-v">2025</div><div class="dash-chip-l">Data Year</div></div>
-      <div class="dash-chip"><div class="dash-chip-v">10+</div><div class="dash-chip-l">Smart Tools</div></div>
-    </div>
+      <div class="dash-chips">
+        <div class="dash-chip"><div class="dash-chip-v">90</div><div class="dash-chip-l">Max Marks</div></div>
+        <div class="dash-chip"><div class="dash-chip-v">2025</div><div class="dash-chip-l">Data Year</div></div>
+        <div class="dash-chip"><div class="dash-chip-v">8+</div><div class="dash-chip-l">Smart Tools</div></div>
+      </div>
   </div>
 
   <!-- MOBILE TABS -->
   <div class="section-tabs">
     <button class="stab on" onclick="scrollToSec('sec-rank')"><i class="fas fa-circle-info" aria-hidden="true"></i> Rank</button>
     <button class="stab" onclick="scrollToSec('sec-college')"><i class="fas fa-circle-info" aria-hidden="true"></i> Colleges</button>
-    <button class="stab" onclick="scrollToSec('sec-strategy')"><i class="fas fa-circle-info" aria-hidden="true"></i> Strategy</button>
-    <button class="stab" onclick="scrollToSec('sec-choices')"><i class="fas fa-circle-info" aria-hidden="true"></i> AI Choices</button>
     <button class="stab" onclick="scrollToSec('sec-upgrade')"><i class="fas fa-circle-info" aria-hidden="true"></i> Upgrade</button>
     <button class="stab" onclick="scrollToSec('sec-cutoff')"><i class="fas fa-circle-info" aria-hidden="true"></i> Cutoffs</button>
     <button class="stab" onclick="scrollToSec('sec-ai')"><i class="fas fa-circle-info" aria-hidden="true"></i> AI Chat</button>
@@ -619,14 +615,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
   </div>
 
   <!-- -- RANK ANALYSIS -- -->
-  <section id="sec-rank">
+  <!-- <section id="sec-rank">
     <div class="sec-hd">
       <div class="sec-hd-left">
         <h2><i class="fas fa-circle-info" aria-hidden="true"></i> Rank and Score Analysis</h2>
         <p>Enter marks to predict your rank, or enter rank for zone analysis</p>
       </div>
       <span class="sec-pill sp-v">Rank Analysis</span>
-    </div>
+    </div> -->
     <div class="tool-grid">
 
       <!-- RANK PREDICTOR -->
@@ -762,154 +758,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
             <div class="rbox-hd rh-v"><i class="fas fa-circle-info" aria-hidden="true"></i> Possible College Allotments (2025 Trend)</div>
             <div class="rbox-body" id="cp-body"></div>
           </div>
-          <div class="note note-b mt12"><i class="fas fa-circle-info" aria-hidden="true"></i> Data reference: Rank 57 -> YMCA IT, Rank 112-131 -> YMCA (GEN/Outsider), Rank 153 -> GJU/YMCA range, Rank 346 -> CDLU Sirsa CSE, marks 28 (~Rank 750). All predictions have +/-15% variation.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- -- STRATEGY ADVISOR -- -->
-  <section id="sec-strategy">
-    <div class="sec-hd">
-      <div class="sec-hd-left">
-        <h2><i class="fas fa-circle-info" aria-hidden="true"></i> Smart Counselling Advisor</h2>
-        <p>Tell us your dream - we build your complete Dream - Safe - Backup strategy</p>
-      </div>
-      <span class="sec-pill sp-g">Strategy Tool</span>
-    </div>
-    <div class="tool-grid">
-      <div class="tc full">
-        <div class="tc-hd hg">
-          <div class="tc-ico"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
-          <div><div class="tc-title">Smart Counselling Advisor</div><div class="tc-sub">Complete choice-based strategy with seat competition indicator and warnings</div></div>
-        </div>
-        <div class="tc-body">
-          <div class="frow" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
-            <div>
-              <label class="fl" for="sca-rank">Your Rank</label>
-              <input type="number" class="fi" id="sca-rank" placeholder="e.g. 153" min="1"/>
-            </div>
-            <div>
-              <label class="fl" for="sca-cat">Category</label>
-              <select class="fs" id="sca-cat">
-                <option value="GEN">GEN (HOGC)</option>
-                <option value="AIC">AIC</option>
-                <option value="SC">SC</option>
-                <option value="BC_A">BC-A</option>
-                <option value="BC_B">BC-B</option>
-                <option value="EWS">EWS</option>
-              </select>
-            </div>
-            <div>
-              <label class="fl" for="sca-dream-college">Dream College</label>
-              <select class="fs" id="sca-dream-college">
-                <option value="YMCA">YMCA Faridabad</option>
-                <option value="DCRUST">DCRUST Murthal</option>
-                <option value="GJU">GJU Hisar</option>
-                <option value="KUK">KUK Kurukshetra</option>
-                <option value="CDLU">CDLU Sirsa</option>
-                <option value="MDU">MDU Rohtak</option>
-                <option value="CRSU">CRSU Jind</option>
-                <option value="ANY">Best Available</option>
-              </select>
-            </div>
-            <div>
-              <label class="fl" for="sca-dream-branch">Dream Branch</label>
-              <select class="fs" id="sca-dream-branch">
-                <option value="CSE">CSE</option>
-                <option value="CSE (AI/ML)">CSE (AI/ML)</option>
-                <option value="AI & Data Science">AI &amp; Data Science</option>
-                <option value="IT">IT (YMCA / GJU only)</option>
-                <option value="ECE">ECE</option>
-                <option value="Electrical">Electrical</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="Civil">Civil</option>
-                <option value="Chemical">Chemical (DCRUST only)</option>
-                <option value="Robotics & AI">Robotics &amp; AI (YMCA only)</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn btn-g" onclick="buildSmartStrategy()" style="max-width:280px"><i class="fas fa-map-marked-alt"></i> Build My Complete Strategy</button>
-          <div class="rbox" id="sca-result">
-            <div class="rbox-hd rh-g"><i class="fas fa-circle-info" aria-hidden="true"></i> Your Complete Counselling Strategy</div>
-            <div class="rbox-body" id="sca-body"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- -- AI CHOICE FILLING + MISTAKE DETECTOR -- -->
-  <section id="sec-choices">
-    <div class="sec-hd">
-      <div class="sec-hd-left">
-        <h2><i class="fas fa-circle-info" aria-hidden="true"></i> AI Choice Filling <span class="ai-tag">AI</span></h2>
-        <p>AI generates your optimal choice order and checks for ordering mistakes</p>
-      </div>
-      <span class="sec-pill sp-p">AI Powered</span>
-    </div>
-    <div class="tool-grid">
-
-      <!-- AI CHOICE FILLING -->
-      <div class="tc">
-        <div class="tc-hd hp">
-          <div class="tc-ico"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
-          <div><div class="tc-title">AI Choice Filling Generator<span class="ai-tag">AI</span></div><div class="tc-sub">AI generates optimal choice order with reasoning</div></div>
-        </div>
-        <div class="tc-body">
-          <div class="frow">
-            <div>
-              <label class="fl" for="cf-rank">Your Rank</label>
-              <input type="number" class="fi" id="cf-rank" placeholder="e.g. 200" min="1"/>
-            </div>
-            <div>
-              <label class="fl" for="cf-cat">Category</label>
-              <select class="fs" id="cf-cat">
-                <option value="GEN">GEN (HOGC)</option>
-                <option value="AIC">AIC</option>
-                <option value="SC">SC</option>
-                <option value="BC_A">BC-A</option>
-                <option value="BC_B">BC-B</option>
-                <option value="EWS">EWS</option>
-              </select>
-            </div>
-          </div>
-          <label class="fl" for="cf-pref">Preferred Branch</label>
-          <select class="fs" id="cf-pref">
-            <option value="CSE">CSE</option>
-            <option value="CSE (AI/ML)">CSE (AI/ML)</option>
-            <option value="AI & Data Science">AI &amp; Data Science</option>
-            <option value="IT">IT (YMCA / GJU only)</option>
-            <option value="ECE">ECE</option>
-            <option value="Electrical">Electrical</option>
-            <option value="Mechanical">Mechanical</option>
-            <option value="Civil">Civil</option>
-            <option value="Chemical">Chemical (DCRUST only)</option>
-            <option value="Robotics & AI">Robotics &amp; AI (YMCA only)</option>
-          </select>
-          <button class="btn btn-p" onclick="generateAIChoices()" id="btn-cf"><i class="fas fa-robot"></i> Generate AI Choice Order</button>
-          <div class="rbox" id="cf-result">
-            <div class="rbox-hd rh-p"><i class="fas fa-circle-info" aria-hidden="true"></i> AI Generated Choice Filling Order</div>
-            <div class="rbox-body" id="cf-body"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MISTAKE DETECTOR -->
-      <div class="tc">
-        <div class="tc-hd ha">
-          <div class="tc-ico"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
-          <div><div class="tc-title">Choice Mistake Detector</div><div class="tc-sub">Check your choice order for mistakes before submission</div></div>
-        </div>
-        <div class="tc-body">
-          <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Enter your planned choices (one per line). Format: College - Branch</p>
-          <label class="fl" for="cmd-choices">Your Choices (one per line)</label>
-          <textarea id="cmd-choices" class="fi" rows="7" placeholder="Example:&#10;1. YMCA Faridabad - CSE&#10;2. DCRUST Murthal - ECE&#10;3. GJU Hisar - CSE (AI/ML)&#10;4. KUK - CSE&#10;5. MDU Rohtak - CSE" style="resize:vertical;font-size:13px;line-height:1.6"></textarea>
-          <button class="btn btn-a" onclick="detectMistakes()"><i class="fas fa-search"></i> Check My Choices</button>
-          <div class="rbox" id="cmd-result">
-            <div class="rbox-hd rh-a"><i class="fas fa-circle-info" aria-hidden="true"></i> Choice Analysis Report</div>
-            <div class="rbox-body" id="cmd-body"></div>
-          </div>
+          <div class="note note-b mt12"><i class="fas fa-circle-info" aria-hidden="true"></i> Trend anchors used here include 37 marks - Rank ~153, 39 marks - Rank ~115-130, 36 marks - Rank ~346 and 28 marks - Rank ~786. Low-score ranges naturally vary more, so use this as a planning estimate, not an official rank card.</div>
         </div>
       </div>
     </div>
@@ -969,9 +818,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
                 <option value="DCRUST">DCRUST Murthal</option>
                 <option value="GJU">GJU Hisar</option>
                 <option value="KUK">KUK Kurukshetra</option>
-                <option value="CDLU">CDLU Sirsa</option>
                 <option value="MDU">MDU Rohtak</option>
+                <option value="GU">Gurugram University</option>
+                <option value="SIETN">SIET Nilokheri</option>
+                <option value="SIETP">SIET Panchkula</option>
+                <option value="IGU">Indira Gandhi University</option>
                 <option value="CRSU">CRSU Jind</option>
+                <option value="CDLU">CDLU Sirsa</option>
+                <option value="HAU">HAU Hisar</option>
               </select>
             </div>
             <div>
@@ -981,9 +835,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
                 <option value="YMCA">YMCA Faridabad</option>
                 <option value="GJU">GJU Hisar</option>
                 <option value="KUK">KUK Kurukshetra</option>
-                <option value="CDLU">CDLU Sirsa</option>
                 <option value="MDU">MDU Rohtak</option>
+                <option value="GU">Gurugram University</option>
+                <option value="SIETN">SIET Nilokheri</option>
+                <option value="SIETP">SIET Panchkula</option>
+                <option value="IGU">Indira Gandhi University</option>
                 <option value="CRSU">CRSU Jind</option>
+                <option value="CDLU">CDLU Sirsa</option>
+                <option value="HAU">HAU Hisar</option>
               </select>
             </div>
           </div>
@@ -1228,7 +1087,6 @@ body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var
 // -- CONFIG --
 var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
 var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
-var GEMINI_KEY = 'AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Replace with actual key
 var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 
 // -- AUTH GUARD --
@@ -1367,23 +1225,113 @@ var COL_INFO = {
   CDLU:{full:'Chaudhary Devi Lal University, Sirsa',placement:'Rs 3-5 LPA avg',hostel:'Available',campus:'Sirsa, Haryana',fees:'~Rs 45,000/year',rank:7}
 };
 
+var EXTRA_COLLEGE_ROWS = {
+  GEN:[
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'CSE',open:131,close:265,govt:true},
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'CSE (Artificial Intelligence)',open:54,close:219,govt:true},
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'CSE (Cyber Security)',open:144,close:364,govt:true},
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'CSE (Internet of Things)',open:366,close:453,govt:true},
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'Electrical',open:280,close:492,govt:true},
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'Electronics (VLSI)',open:436,close:511,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Computer Engg.',open:38,close:153,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'CSE (AI/ML)',open:225,close:304,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Civil',open:175,close:571,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Electrical',open:183,close:748,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'ECE',open:531,close:776,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Mechanical',open:326,close:326,govt:true},
+    {college:'State Institute of Engineering and Technology, Panchkula',abbr:'SIETP',branch:'CSE (Cyber Security)',open:33,close:583,govt:true},
+    {college:'State Institute of Engineering and Technology, Panchkula',abbr:'SIETP',branch:'CSE (AI/ML)',open:66,close:287,govt:true},
+    {college:'Indira Gandhi University, Meerpur, Rewari',abbr:'IGU',branch:'CSE',open:239,close:457,govt:true},
+    {college:'College of Agriculture Engg. and Technology, CCS HAU, Hisar',abbr:'HAU',branch:'Agriculture Engg.',open:95,close:235,govt:true},
+    {college:'Faculty of Engineering and Technology, BPSMV, Khanpur Kalan',abbr:'BPSMV',branch:'CSE (Girls Only)',open:295,close:466,govt:true},
+    {college:'Faculty of Engineering and Technology, BPSMV, Khanpur Kalan',abbr:'BPSMV',branch:'IT (Girls Only)',open:497,close:1049,govt:true}
+  ],
+  EWS:[
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'CSE',open:192,close:472,govt:true},
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'CSE (Artificial Intelligence)',open:442,close:514,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Civil',open:254,close:1189,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Electrical',open:139,close:971,govt:true}
+  ],
+  SC:[
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Computer Engg.',open:616,close:634,govt:true},
+    {college:'State Institute of Engineering and Technology, Nilokheri, Karnal',abbr:'SIETN',branch:'Mechanical',open:626,close:626,govt:true},
+    {college:'Gurugram University, Sector 51, Gurugram',abbr:'GU',branch:'CSE',open:474,close:603,govt:true}
+  ]
+};
+
+Object.keys(EXTRA_COLLEGE_ROWS).forEach(function(cat){
+  COLLEGE_DATA[cat] = COLLEGE_DATA[cat] || [];
+  EXTRA_COLLEGE_ROWS[cat].forEach(function(row){
+    var exists = COLLEGE_DATA[cat].some(function(item){
+      return item.abbr === row.abbr && item.branch === row.branch;
+    });
+    if(!exists) COLLEGE_DATA[cat].push(row);
+  });
+});
+
+Object.assign(COL_RANK, {
+  GU:6,
+  SIETN:7,
+  SIETP:8,
+  IGU:9,
+  CRSU:10,
+  CDLU:11,
+  HAU:12,
+  BPSMV:13
+});
+
+Object.assign(COL_INFO, {
+  GU:{full:'Gurugram University, Gurugram',placement:'Rs 4.5-6 LPA avg',hostel:'Mostly day-scholar / city stay mix',campus:'Urban - Sector 51, Gurugram',fees:'~Rs 79,970/year',rank:6},
+  SIETN:{full:'State Institute of Engineering and Technology, Nilokheri, Karnal',placement:'Rs 3.8-5 LPA avg',hostel:'Available',campus:'Govt. institute campus - Karnal',fees:'~Rs 40,000/year',rank:7},
+  SIETP:{full:'State Institute of Engineering and Technology, Panchkula',placement:'Rs 4-5.5 LPA avg',hostel:'Limited',campus:'Tricity-linked - Panchkula',fees:'~Rs 40,000/year',rank:8},
+  IGU:{full:'Indira Gandhi University, Meerpur, Rewari',placement:'Rs 3.8-5 LPA avg',hostel:'Available',campus:'Large - Meerpur, Rewari',fees:'~Rs 52,040/year',rank:9},
+  CRSU:{full:'Chaudhary Ranbir Singh University, Jind',placement:'Rs 3.5-5 LPA avg',hostel:'Available',campus:'Jind, Haryana',fees:'~Rs 50,000/year',rank:10},
+  CDLU:{full:'Chaudhary Devi Lal University, Sirsa',placement:'Rs 3-4.5 LPA avg',hostel:'Available',campus:'Sirsa, Haryana',fees:'~Rs 40,000/year',rank:11},
+  HAU:{full:'College of Agriculture Engineering and Technology, CCS HAU, Hisar',placement:'Rs 4-6 LPA avg',hostel:'Available',campus:'Agriculture-focused university campus, Hisar',fees:'~Rs 15,000-18,500/year',rank:12},
+  BPSMV:{full:'Faculty of Engineering and Technology, BPSMV, Khanpur Kalan',placement:'Rs 3.5-4.5 LPA avg',hostel:'Available',campus:'Women university campus, Sonipat',fees:'~Rs 46,400/year',rank:13}
+});
+
+var RANK_CALIBRATION = [
+  {marks:90, rank:1},
+  {marks:80, rank:12},
+  {marks:70, rank:48},
+  {marks:60, rank:118},
+  {marks:50, rank:255},
+  {marks:45, rank:430},
+  {marks:40, rank:610},
+  {marks:39, rank:122},
+  {marks:38, rank:138},
+  {marks:37, rank:153},
+  {marks:36, rank:346},
+  {marks:34, rank:500},
+  {marks:30, rank:700},
+  {marks:28, rank:786},
+  {marks:24, rank:1030},
+  {marks:20, rank:1350},
+  {marks:15, rank:1760},
+  {marks:10, rank:2200},
+  {marks:0, rank:2800}
+];
+
+function interpolateRank(marks){
+  if(marks >= RANK_CALIBRATION[0].marks) return RANK_CALIBRATION[0].rank;
+  if(marks <= RANK_CALIBRATION[RANK_CALIBRATION.length - 1].marks) return RANK_CALIBRATION[RANK_CALIBRATION.length - 1].rank;
+  for(var i = 0; i < RANK_CALIBRATION.length - 1; i++){
+    var hi = RANK_CALIBRATION[i];
+    var lo = RANK_CALIBRATION[i + 1];
+    if(marks <= hi.marks && marks >= lo.marks){
+      if(marks === hi.marks) return hi.rank;
+      if(marks === lo.marks) return lo.rank;
+      var ratio = (marks - lo.marks) / (hi.marks - lo.marks);
+      return Math.round(lo.rank + (hi.rank - lo.rank) * ratio);
+    }
+  }
+  return 2800;
+}
+
 // -- CALIBRATED RANK PREDICTOR --
 function marksToBaseRank(m){
-  if(m>=39&&m<=40) return Math.round(112-(m-39)*22);
-  if(m===38) return 130;
-  if(m===37) return 153;
-  if(m===36) return 346;
-  if(m===28) return 750;
-  if(m>=80) return Math.round(10+(90-m)*3);
-  if(m>=70) return Math.round(40+(80-m)*7);
-  if(m>=60) return Math.round(110+(70-m)*12);
-  if(m>=50) return Math.round(230+(60-m)*18);
-  if(m>=45) return Math.round(410+(50-m)*30);
-  if(m>=40) return Math.round(560+(45-m)*30);
-  if(m>=34) return Math.round(500+(36-m)*75);
-  if(m>=30) return Math.round(650+(34-m)*75);
-  if(m>=28) return Math.round(750+(30-m)*50);
-  return Math.round(850+(28-m)*60);
+  return interpolateRank(m);
 }
 
 function predictRank(){
@@ -1393,24 +1341,24 @@ function predictRank(){
   if(isNaN(marks)||marks<0||marks>90){showErr('rp-err');return;}
 
   var base=marksToBaseRank(marks);
-  var mult={GEN:1,AIC:0.8,EWS:0.93,BC_A:1.25,BC_B:1.35,SC:1.8}[cat]||1;
-  var adj=cat!=='GEN'?Math.round(base*mult):base;
-  var lo=Math.max(1,Math.round(adj*0.85)),hi=Math.round(adj*1.15);
+  var variance=marks>=45?0.08:(marks>=35?0.1:0.12);
+  var lo=Math.max(1,Math.round(base*(1-variance))),hi=Math.round(base*(1+variance));
 
   document.getElementById('rp-val').textContent=lo+' - '+hi;
 
   var zone,zc,bg;
-  if(adj<=120){zone='Elite Zone - Top colleges, CSE/IT possible';zc='#6366f1';bg='#eef2ff';}
-  else if(adj<=250){zone='Excellent Zone - YMCA CSE/IT or DCRUST CSE';zc='#2563eb';bg='#eff6ff';}
-  else if(adj<=450){zone='Good Zone - GJU CSE or DCRUST ECE';zc='#10b981';bg='#ecfdf5';}
-  else if(adj<=700){zone='Average Zone - KUK/CDLU CSE range';zc='#f59e0b';bg:'#fef9ec';}
-  else{zone='Below Average - Focus on CDLU or lower colleges';zc='#ef4444';bg='#fff1f2';}
+  if(base<=120){zone='Elite Zone - YMCA / top CSE or IT range';zc='#6366f1';bg='#eef2ff';}
+  else if(base<=250){zone='Strong Zone - DCRUST / GJU / top govt. seats';zc='#2563eb';bg='#eff6ff';}
+  else if(base<=450){zone='Competitive Zone - KUK / MDU / Gurugram University range';zc='#10b981';bg='#ecfdf5';}
+  else if(base<=800){zone='Practical Zone - SIET, IGU, CDLU and mixed branch options';zc='#f59e0b';bg='#fef9ec';}
+  else{zone='Stretch Zone - keep backup colleges and more branches open';zc='#ef4444';bg='#fff1f2';}
   bg=bg||'#fef9ec';
 
   document.getElementById('rp-zone').innerHTML='<div style="background:'+bg+';border-radius:10px;padding:10px 13px;margin-top:10px;font-size:14px;font-weight:800;color:'+zc+'">'+zone+'</div>';
 
-  var tips=marks<50?'Focus heavily on Mathematics (8 marks) and your stream subjects. No negative marking - attempt all 90. Even 5-10 more marks drastically improves rank.':marks<65?'Good score potential. Focus on weak areas in stream section. Solve PYQ papers for time management.':'Strong score! Focus on exam-day strategy - time management, attempting all questions, revision.';
-  document.getElementById('rp-tip').textContent='Strategy: '+tips;
+  var tips=marks<50?'Focus heavily on Mathematics (8 marks) and your stream subjects. No negative marking means you should still attempt all 90 questions. Even 3-5 extra marks can move you hundreds of ranks in this zone.':marks<65?'Good scoring band. Clean up weak stream topics and keep mock timing tight. Your biggest gains will come from fewer silly mistakes in Basic Sciences.':'Strong score territory. Focus on speed, final revision and attempting every easy question first.';
+  var catNote=cat==='GEN'?'Rank is merit-based; category matters more during seat allotment than while estimating your raw OCET rank.':'Rank is still merit-based; your '+cat+' category mainly helps later in counselling and cutoff access, not in the mark-to-rank conversion itself.';
+  document.getElementById('rp-tip').innerHTML='Strategy: '+tips+'<br><span style="color:var(--muted)">'+catNote+'</span>';
   showRes('rp-result');
 }
 
@@ -1421,8 +1369,10 @@ function analyzeRank(){
   if(isNaN(rank)||rank<1){showErr('ra-err');return;}
 
   var tot=2800,pct=Math.min(100,Math.max(1,Math.round(((tot-rank+1)/tot)*100)));
-  var mult={GEN:1,AIC:0.8,EWS:0.93,BC_A:1.25,BC_B:1.35,SC:1.8}[cat]||1;
-  var nr=rank/mult;
+  var nr=rank;
+  var catHint=cat==='GEN'
+    ? 'General category planning should focus on safe ordering and more backup choices.'
+    : 'Your selected '+cat+' category can improve counselling options compared with open-category cutoffs.';
 
   var zone,zc,desc,advice;
   if(nr<=60){zone='Elite';zc='#6366f1';desc='Top 2%';advice='YMCA CSE/IT or DCRUST CSE almost guaranteed. Fill these as top choices.';}
@@ -1440,6 +1390,7 @@ function analyzeRank(){
   h+='<div style="background:var(--surface3);border-radius:10px;padding:12px;text-align:center"><div style="font-family:Syne,sans-serif;font-size:1.4rem;font-weight:900;color:var(--g)">'+pct+'%ile</div><div style="font-size:10px;color:var(--muted)">Approx Percentile</div></div>';
   h+='</div>';
   h+='<div style="padding:11px 13px;background:#f0f9ff;border-radius:10px;font-size:13px;line-height:1.65;text-align:left"><strong><i class="fas fa-circle-info" aria-hidden="true"></i> Advice:</strong> '+advice+'</div>';
+  h+='<div style="font-size:12px;color:var(--muted);margin-top:10px;text-align:left">'+catHint+'</div>';
   h+='</div>';
   document.getElementById('ra-body').innerHTML=h;
   showRes('ra-result');
@@ -1477,8 +1428,9 @@ function predictColleges(){
   var ord={'High':0,'Possible':1,'Low':2};
   results.sort(function(a,b){
     if(ord[a.ch]!==ord[b.ch])return ord[a.ch]-ord[b.ch];
+    if(a.bm!==b.bm)return(a.bm?0:1)-(b.bm?0:1);
     if(a.cr!==b.cr)return a.cr-b.cr;
-    return(a.bm?0:1)-(b.bm?0:1);
+    return a.close-b.close;
   });
 
   if(!results.length){
@@ -1669,9 +1621,23 @@ function compareColleges(){
   var c1=COL_INFO[c1k],c2=COL_INFO[c2k];
   if(!c1||!c2)return;
 
+  function parseLpa(str){
+    var m=String(str||'').match(/(\d+(?:\.\d+)?)/);
+    return m?parseFloat(m[1]):0;
+  }
+  function parseFee(str){
+    var m=String(str||'').replace(/[^0-9]/g,'');
+    return m?parseInt(m,10):0;
+  }
+
+  var c1Placement=parseLpa(c1.placement);
+  var c2Placement=parseLpa(c2.placement);
+  var c1Fees=parseFee(c1.fees);
+  var c2Fees=parseFee(c2.fees);
+
   var rows=[
-    ['Placement Avg',c1.placement,c2.placement,c1.rank<c2.rank],
-    ['Annual Fees',c1.fees,c2.fees,c1.rank<c2.rank],
+    ['Placement Avg',c1.placement,c2.placement,c1Placement>=c2Placement],
+    ['Annual Fees',c1.fees,c2.fees,c1Fees<=c2Fees],
     ['Hostel',c1.hostel,c2.hostel,null],
     ['Campus',c1.campus,c2.campus,null],
     ['Haryana Ranking','#'+c1.rank+' in Haryana','#'+c2.rank+' in Haryana',c1.rank<c2.rank]
@@ -1685,7 +1651,10 @@ function compareColleges(){
   var c2vals=[c2.placement,c2.fees,c2.hostel,c2.campus,'#'+c2.rank+' in Haryana'];
   rows.forEach(function(r,i){h+='<div class="cmp-row"><div class="cmp-lbl">'+r[0]+'</div><div class="cmp-val'+(r[2]===false?' cmp-win':'')+'">'+c2vals[i]+'</div></div>';});
   h+='</div></div>';
-  h+='<div style="margin-top:11px;padding:11px 13px;background:var(--surface3);border-radius:10px;font-size:12.5px;color:var(--muted)"><i class="fas fa-circle-info" aria-hidden="true"></i> <strong>Recommendation:</strong> '+(c1.rank<c2.rank?c1k+' is generally considered the better option based on placement and reputation.':c2k+' is generally considered the better option.')+'</div>';
+  var placementLeader=c1Placement>=c2Placement?c1k:c2k;
+  var budgetLeader=c1Fees<=c2Fees?c1k:c2k;
+  var reputationLeader=c1.rank<c2.rank?c1k:c2k;
+  h+='<div style="margin-top:11px;padding:11px 13px;background:var(--surface3);border-radius:10px;font-size:12.5px;color:var(--muted)"><i class="fas fa-circle-info" aria-hidden="true"></i> <strong>Recommendation:</strong> For placement-first students, prefer <strong>'+placementLeader+'</strong>. For budget-conscious planning, <strong>'+budgetLeader+'</strong> is the cheaper option. Overall reputation and recent LEET demand are currently stronger for <strong>'+reputationLeader+'</strong>.</div>';
   h+='<div class="note note-a mt12">Placement figures are approximate community-reported averages, not official placement statistics.</div>';
   document.getElementById('cc-body').innerHTML=h;
   showRes('cc-result');
@@ -1838,7 +1807,7 @@ async function submitReview(){
 }
 
 // -- SIDEBAR ACTIVE STATE ON SCROLL --
-var sections=['sec-rank','sec-college','sec-strategy','sec-choices','sec-upgrade','sec-demand','sec-compare','sec-ai','sec-planner','sec-reviews'];
+var sections=['sec-rank','sec-college','sec-upgrade','sec-demand','sec-compare','sec-ai','sec-planner','sec-reviews'];
 var sbBtns=document.querySelectorAll('.sb-item');
 window.addEventListener('scroll',function(){
   var scrollY=window.scrollY+80;

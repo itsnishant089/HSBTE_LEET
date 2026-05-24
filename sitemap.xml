@@ -70,6 +70,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://hsbteleet.com/haryana-leet-ocet-documents</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/haryana-leet-admission-documents</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://hsbteleet.com/haryana-leet-cutoff</loc>
     <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -79,6 +91,12 @@
     <loc>https://hsbteleet.com/haryana-leet-colleges</loc>
     <lastmod>2026-02-27</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hsbteleet.com/haryana-leet-seat-intake</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
