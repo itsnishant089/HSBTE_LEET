@@ -645,7 +645,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:.79rem;min-width:960px}
 var SUPABASE_URL      = 'https://jnsowbnkccddcrkuonan.supabase.co';
 var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impuc293Ym5rY2NkZGNya3VvbmFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjY0MzksImV4cCI6MjA4NzcwMjQzOX0.PbiJI8SOxjgDPAP0njNN8aIW3yArJmstxi_VRhPuM5k';
 var ADMIN_PASSWORD    = 'Nishant@089';
-var PER_PAGE          = 25;
+var PER_PAGE          = 50;
 
 var allLeads=[],filtered=[],selected=new Set(),sortCol='created_at',sortAsc=false;
 var curPage=1,sbClient=null,arTimer=null,arCountdown=120,arOn=false;
@@ -706,22 +706,65 @@ $id('btn-logout').addEventListener('click',function(){
 });
 
 /* -- FETCH -- */
-function fetchLeads(){
-  renderSkeleton();footEl.textContent='Loading-';
-  loadSB(function(err){
-    if(err){toast('Failed to load Supabase SDK.','error');return;}
-    var c=getClient();if(!c){toast('Client unavailable.','error');return;}
-    c.from('leet_leads').select('*').order('created_at',{ascending:false})
-      .then(function(res){
-        if(res.error){toast('DB error: '+res.error.message,'error');return;}
-        allLeads=res.data||[];
-        updEl.textContent='Updated '+fmtDate(new Date().toISOString());
-        updateStats();updateCharts();populateDropdowns();applyFilters();
-        toast('Loaded '+allLeads.length+' leads.','success');
-      }).catch(function(e){toast('Error: '+e.message,'error');});
+async function fetchLeads() {
+  renderSkeleton();
+  footEl.textContent = 'Loading...';
+
+  loadSB(async function(err) {
+    if (err) {
+      toast('Failed to load Supabase SDK.', 'error');
+      return;
+    }
+
+    const c = getClient();
+    if (!c) {
+      toast('Client unavailable.', 'error');
+      return;
+    }
+
+    try {
+      let allData = [];
+      let from = 0;
+      let batchSize = 1000;
+      let done = false;
+
+      while (!done) {
+        const { data, error } = await c
+          .from('leet_leads')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .range(from, from + batchSize - 1);
+
+        if (error) throw error;
+
+        allData = allData.concat(data || []);
+
+        if (!data || data.length < batchSize) {
+          done = true;
+        } else {
+          from += batchSize;
+        }
+      }
+
+      allLeads = allData;
+
+      console.log('Fetched Leads:', allLeads.length);
+
+      updEl.textContent =
+        'Updated ' + fmtDate(new Date().toISOString());
+
+      updateStats();
+      updateCharts();
+      populateDropdowns();
+      applyFilters();
+
+      toast('Loaded ' + allLeads.length + ' leads.', 'success');
+
+    } catch (e) {
+      toast('Error: ' + e.message, 'error');
+    }
   });
 }
-
 function renderSkeleton(){var h='';for(var i=0;i<8;i++){h+='<tr><td></td><td></td>';[90,130,80,110,140,90,150,110,70].forEach(function(w){h+='<td><div class="sk-bar" style="width:'+w+'px"></div></td>';});h+='</tr>';}tbody.innerHTML=h;}
 
 /* -- DROPDOWNS -- */
