@@ -136,6 +136,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="sb-section">Overview</div>
       <button class="sb-link active" onclick="gotoPage('dashboard',this)"><i class="fas fa-chart-pie"></i> Dashboard</button>
       <button class="sb-link" onclick="gotoPage('users',this)"><i class="fas fa-users"></i> All Users <span class="sb-badge" id="bdg-u">0</span></button>
+      <button class="sb-link" onclick="gotoPage('leetleads',this)"><i class="fas fa-graduation-cap"></i> LEET Leads <span class="sb-badge" id="bdg-leads">0</span></button>
       <div class="sb-section">Finance</div>
       <button class="sb-link" onclick="gotoPage('payments',this)"><i class="fas fa-rupee-sign"></i> Payments</button>
       <button class="sb-link" onclick="gotoPage('referrals',this)"><i class="fas fa-share-alt"></i> Referrals <span class="sb-badge" id="bdg-r" style="background:#f59e0b;color:#0f172a">0</span></button>
@@ -375,6 +376,20 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </div>
 </div>
 
+<!-- LEET LEADS -->
+<div class="page" id="page-leetleads" style="display:none; padding:24px;">
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title"><i class="fas fa-graduation-cap"></i> LEET Popup Leads</div>
+    </div>
+    <div class="card-body np">
+      <div class="tbl-wrap">
+      <table class="tbl"><thead><tr><th>Name</th><th>Mobile</th><th>Email</th><th>College</th><th>Branch</th><th>Date</th><th>Shift</th><th>Submitted</th></tr></thead><tbody id="tb-leads"><tr class="lr"><td colspan="8">Loading leads...</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="conf-modal">
   <div class="modal-box">
     <h3 id="conf-title">Confirm Action</h3>
@@ -420,12 +435,12 @@ function gotoPage(name,btn){
   document.querySelectorAll('.sb-link').forEach(function(b){b.classList.remove('active');});
   document.getElementById('page-'+name).classList.add('active');
   if(btn)btn.classList.add('active');
-  var ttls={dashboard:'Dashboard',users:'All Users',payments:'Payments',referrals:'Referrals and Refunds',reviews:'Student Reviews',send:'Send Message',adduser:'Add User Manually',lookup:'User Lookup'};
+  var ttls={dashboard:'Dashboard',users:'All Users',payments:'Payments',referrals:'Referrals and Refunds',reviews:'Student Reviews',send:'Send Message',adduser:'Add User Manually',lookup:'User Lookup',leetleads:'LEET Popup Leads'};
   document.getElementById('page-ttl').textContent=ttls[name]||name;
   curPage=name;loadPage(name);
 }
 function reloadPage(){loadPage(curPage);}
-function loadPage(n){if(n==='dashboard')loadDash();else if(n==='users')loadUsers();else if(n==='payments')loadPay();else if(n==='referrals')loadRefs();else if(n==='reviews')loadRevs();}
+function loadPage(n){if(n==='dashboard')loadDash();else if(n==='users')loadUsers();else if(n==='payments')loadPay();else if(n==='referrals')loadRefs();else if(n==='reviews')loadRevs();else if(n==='leetleads')loadLeads();}
 function safe(q){return q.then(function(r){return r.error?{data:[],error:r.error}:r;}).catch(function(){return{data:[]};});}
 function initAdmin(){loadDash();document.getElementById('wm-type').addEventListener('change',toggleCustom);}
 
@@ -457,6 +472,24 @@ async function loadDash(){
       return'<tr><td><strong>'+e(r.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(r.mobile||'—')+'</code></td><td><span class="badge b-gold">Premium</span></td><td>₹'+(amtRs||'—')+'</td><td style="color:var(--mu);font-size:12px">'+fd(r.created_at)+'</td></tr>';
     }).join('');
   }catch(err){console.error(err);}
+}
+
+async function loadLeads(){
+  try{
+    var res = await sb.from('btech_leet_leads').select('*').order('created_at',{ascending:false});
+    if(res.error)throw res.error;
+    var data = res.data||[];
+    var tb = document.getElementById('tb-leads');
+    if(!data.length){tb.innerHTML='<tr class="lr"><td colspan="8">No leads found.</td></tr>';return;}
+    tb.innerHTML = data.map(function(r){
+      return '<tr><td><strong>'+e(r.name||'—')+'</strong></td><td><code style="font-size:12px">'+e(r.mobile||'—')+'</code></td><td>'+e(r.email||'—')+'</td><td>'+e(r.college||'—')+'</td><td>'+e(r.branch||'—')+'</td><td>'+e(r.exam_date||'—')+'</td><td>'+e(r.shift||'—')+'</td><td style="color:var(--mu);font-size:12px">'+fd(r.created_at)+'</td></tr>';
+    }).join('');
+    var bdg = document.getElementById('bdg-leads');
+    if (bdg) bdg.textContent = data.length;
+  }catch(err){
+    console.error(err);
+    document.getElementById('tb-leads').innerHTML='<tr class="lr"><td colspan="8" style="color:red">Failed to load data.</td></tr>';
+  }
 }
 
 async function loadUsers(){
