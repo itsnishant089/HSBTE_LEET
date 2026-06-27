@@ -232,10 +232,16 @@ function runWhenReady(fn) {
 }
 
 runWhenReady(() => {
+  console.log('[POPUP DEBUG] runWhenReady fired');
   // Show on all pages, but stop showing after July 1, 2026
   const cutoffDate = new Date('2026-07-02T00:00:00');
-  if (new Date() >= cutoffDate) return;
-  if (localStorage.getItem('btech_leet_popup_filled')) return;
+  const now = new Date();
+  console.log('[POPUP DEBUG] now:', now.toISOString(), 'cutoff:', cutoffDate.toISOString(), 'past cutoff:', now >= cutoffDate);
+  if (now >= cutoffDate) { console.log('[POPUP DEBUG] BLOCKED: past cutoff date'); return; }
+  const alreadyFilled = localStorage.getItem('btech_leet_popup_filled');
+  console.log('[POPUP DEBUG] alreadyFilled:', alreadyFilled);
+  if (alreadyFilled) { console.log('[POPUP DEBUG] BLOCKED: already filled'); return; }
+  console.log('[POPUP DEBUG] All checks passed, popup will show in 2.5s');
 
   // Load Supabase JS
   function loadSupabase(cb) {
@@ -285,10 +291,12 @@ runWhenReady(() => {
 
   // Wait a bit before showing to not disrupt page load
   setTimeout(() => {
+    console.log('[POPUP DEBUG] setTimeout fired, injecting popup HTML');
     // If user filled it while another tab was open
-    if (localStorage.getItem('btech_leet_popup_filled')) return;
+    if (localStorage.getItem('btech_leet_popup_filled')) { console.log('[POPUP DEBUG] BLOCKED in setTimeout: already filled'); return; }
 
     document.body.insertAdjacentHTML('beforeend', modalHTML);
+    console.log('[POPUP DEBUG] Popup HTML injected into body');
     const overlay = document.getElementById('leet-popup-overlay');
     const box = document.getElementById('leet-popup-box');
     const closeBtn = document.getElementById('leet-popup-close');
