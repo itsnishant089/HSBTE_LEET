@@ -112,106 +112,9 @@
     (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y) })(window, document, "clarity", "script", "vesdg7gqcq");
   </script>
 
-  <style>
-    .portal-banner {
-      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-      border-radius: 16px;
-      padding: 40px;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 30px;
-      box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.4);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .portal-banner::before {
-      content: '';
-      position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 200px;
-      height: 200px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-    }
-
-    .portal-title {
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .portal-desc {
-      font-size: 16px;
-      opacity: 0.9;
-      margin-bottom: 25px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .portal-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #f59e0b;
-      color: #0f172a;
-      font-size: 18px;
-      font-weight: 800;
-      padding: 15px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      z-index: 2;
-    }
-
-    .portal-btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
-      color: #0f172a;
-    }
-
-    .seo-content {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 30px;
-      margin-top: 30px;
-    }
-
-    body.dark-mode .seo-content {
-      background: #1e293b;
-      border-color: #334155;
-    }
-
-    body.dark-mode .portal-banner {
-      background: linear-gradient(135deg, #0f172a, #1d4ed8);
-    }
-
-    .step-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .step-list li {
-      padding: 15px;
-      margin-bottom: 10px;
-      background: #f8fafc;
-      border-left: 4px solid #3b82f6;
-      border-radius: 4px 8px 8px 4px;
-    }
-
-    body.dark-mode .step-list li {
-      background: #0f172a;
-    }
-  </style>
-
 </head>
 
-<body>
+<body class="admit-card-page">
 
   <!-- HEADER -->
   <div data-include="/partials/header.html"></div>
@@ -232,7 +135,7 @@
         reporting time, and guidelines for the upcoming OCET examination.
       </p>
 
-      <div class="portal-banner">
+      <div class="portal-banner admit-card">
         <h2 class="portal-title">Official Admit Card Portal</h2>
         <p class="portal-desc">Access the HSTES official portal (techadmissionshry.gov.in) to download your Hall Ticket.
         </p>
@@ -262,28 +165,28 @@
 
         <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--bo);">
 
-        <h2>Details Mentioned on BTech / BPharmacy LEET Admit Card</h2>
+        <h2 class="section-title">Details Mentioned on BTech / BPharmacy LEET Admit Card</h2>
         <p>Your <strong>hsbte leet admit card</strong> or <strong>hstes ocet admit card</strong> will contain the
           following critical information. Please ensure everything is printed correctly:</p>
-        <ul>
-          <li>Candidate's Full Name and Photograph</li>
-          <li><strong>Haryana LEET 2026 Roll Number</strong> and Application ID</li>
-          <li>Date of Birth and Category</li>
-          <li>Complete Address of the <strong>Haryana LEET Test Center</strong></li>
-          <li><strong>Haryana LEET Timings</strong> (Shift 1, Shift 2, or Shift 3)</li>
-          <li>Reporting Time at the Examination Center</li>
-          <li>Signature of the Candidate and Exam Authority</li>
-          <li>Important <strong>Leet Exam Day Guidelines</strong> and Instructions</li>
+        <ul class="info-list">
+          <li><i class="fas fa-id-badge"></i> Candidate's Full Name and Photograph</li>
+          <li><i class="fas fa-hashtag"></i> <strong>Haryana LEET 2026 Roll Number</strong> and Application ID</li>
+          <li><i class="fas fa-calendar-alt"></i> Date of Birth and Category</li>
+          <li><i class="fas fa-map-marker-alt"></i> Complete Address of the <strong>Haryana LEET Test Center</strong></li>
+          <li><i class="fas fa-clock"></i> <strong>Haryana LEET Timings</strong> (Shift 1, Shift 2, or Shift 3)</li>
+          <li><i class="fas fa-hourglass-start"></i> Reporting Time at the Examination Center</li>
+          <li><i class="fas fa-signature"></i> Signature of the Candidate and Exam Authority</li>
+          <li><i class="fas fa-list-ul"></i> Important <strong>Leet Exam Day Guidelines</strong> and Instructions</li>
         </ul>
         <p><em>If you spot any discrepancies (e.g., spelling mistake in name, wrong photo), contact the <strong>hstes
               helpline admit card</strong> immediately for correction.</em></p>
 
         <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--bo);">
 
-        <h2>Important Exam Day Guidelines (What to Carry)</h2>
+        <h2 class="section-title">Important Exam Day Guidelines (What to Carry)</h2>
         <p>Candidates appearing for the <strong>lateral entry engineering haryana admit card</strong> or pharmacy exams
           must strictly follow the rules:</p>
-        <ol>
+        <ol class="guideline-list">
           <li><strong>Printed Admit Card:</strong> A clear, preferably color printout of the downloaded
             <strong>techadmissionshry admit card</strong>.</li>
           <li><strong>Valid ID Proof:</strong> Original Aadhar Card, PAN Card, Voter ID, or Passport (<strong>leet admit
@@ -298,24 +201,32 @@
 
         <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--bo);">
 
-        <h2>Frequently Asked Questions (Admit Card)</h2>
-        <div style="margin-top: 20px;">
-          <h3>When will the Haryana LEET Admit Card 2026 be released?</h3>
-          <p>The <strong>haryana leet admit card release date 2026</strong> is typically 7-10 days before the OCET
-            examination date. Check the official <strong>techadmissionshry.gov.in admit card download 2026</strong> page
-            for live updates.</p>
+        <h2 class="section-title">Frequently Asked Questions (Admit Card)</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <h3>When will the Haryana LEET Admit Card 2026 be released?</h3>
+            <p>The <strong>haryana leet admit card release date 2026</strong> is typically 7-10 days before the OCET
+              examination date. Check the official <strong>techadmissionshry.gov.in admit card download 2026</strong> page
+              for live updates.</p>
+          </div>
 
-          <h3>I forgot my application number. How can I download my admit card?</h3>
-          <p>You can recover your application number through the <strong>forgot password leet admit card</strong> option
-            on the student login portal by entering your registered mobile number and email ID.</p>
+          <div class="faq-item">
+            <h3>I forgot my application number. How can I download my admit card?</h3>
+            <p>You can recover your application number through the <strong>forgot password leet admit card</strong> option
+              on the student login portal by entering your registered mobile number and email ID.</p>
+          </div>
 
-          <h3>Can I show a digital copy of the admit card on my phone?</h3>
-          <p>No, a hard copy (printout) of the <strong>print admit card haryana leet</strong> is mandatory for entry
-            into the examination hall.</p>
+          <div class="faq-item">
+            <h3>Can I show a digital copy of the admit card on my phone?</h3>
+            <p>No, a hard copy (printout) of the <strong>print admit card haryana leet</strong> is mandatory for entry
+              into the examination hall.</p>
+          </div>
 
-          <h3>Is the admit card same for B.Tech and B.Pharmacy?</h3>
-          <p>The portal is the same, but you must select your specific course to generate the respective <strong>btech
-              leet admit card 2026 haryana</strong> or <strong>bpharmacy leet admit card 2026 haryana</strong>.</p>
+          <div class="faq-item">
+            <h3>Is the admit card same for B.Tech and B.Pharmacy?</h3>
+            <p>The portal is the same, but you must select your specific course to generate the respective <strong>btech
+                leet admit card 2026 haryana</strong> or <strong>bpharmacy leet admit card 2026 haryana</strong>.</p>
+          </div>
         </div>
       </div>
 

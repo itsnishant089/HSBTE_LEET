@@ -108,91 +108,8 @@
     (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vesdg7gqcq");
   </script>
   
-  <style>
-    .portal-banner {
-      background: linear-gradient(135deg, #059669, #10b981);
-      border-radius: 16px;
-      padding: 40px;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 30px;
-      box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.4);
-      position: relative;
-      overflow: hidden;
-    }
-    .portal-banner::before {
-      content: '';
-      position: absolute;
-      top: -50px; left: -50px;
-      width: 200px; height: 200px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-    }
-    .portal-title {
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 2;
-    }
-    .portal-desc {
-      font-size: 16px;
-      opacity: 0.9;
-      margin-bottom: 25px;
-      position: relative;
-      z-index: 2;
-    }
-    .portal-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #fff;
-      color: #065f46;
-      font-size: 18px;
-      font-weight: 800;
-      padding: 15px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      z-index: 2;
-    }
-    .portal-btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
-    }
-    .seo-content {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 30px;
-      margin-top: 30px;
-    }
-    body.dark-mode .seo-content {
-      background: #1e293b;
-      border-color: #334155;
-    }
-    body.dark-mode .portal-banner {
-      background: linear-gradient(135deg, #064e3b, #047857);
-    }
-    .step-list {
-      list-style: none;
-      padding: 0;
-    }
-    .step-list li {
-      padding: 15px;
-      margin-bottom: 10px;
-      background: #f8fafc;
-      border-left: 4px solid #10b981;
-      border-radius: 4px 8px 8px 4px;
-    }
-    body.dark-mode .step-list li {
-      background: #0f172a;
-    }
-  </style>
-
 </head>
-<body>
+<body class="rank-card-page">
 
   <!-- HEADER -->
   <div data-include="/partials/header.html"></div>
@@ -212,7 +129,7 @@
         Check your official B.Tech LEET and B.Pharmacy LEET Result. Download your inter-se merit rank card to participate in the HSTES counselling process.
       </p>
 
-      <div class="portal-banner">
+      <div class="portal-banner rank-card">
         <h2 class="portal-title">Official Result Portal</h2>
         <p class="portal-desc">Access the HSTES official portal (techadmissionshry.gov.in) to view your Inter-Se Merit Rank Card.</p>
         <a href="https://techadmissionshry.gov.in/onlinetest/frmviewresultDIP" target="_blank" rel="noopener noreferrer" class="portal-btn">
@@ -234,21 +151,21 @@
 
         <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--bo);">
 
-        <h2>Understanding Your Haryana LEET Rank Card</h2>
+        <h2 class="section-title">Understanding Your Haryana LEET Rank Card</h2>
         <p>The <strong>hsbte leet rank card</strong> or <strong>hstes ocet scorecard</strong> is the single most important document for admission. It includes the following details:</p>
-        <ul>
-          <li><strong>Marks Scored:</strong> Your total score out of 90 marks in the OCET exam.</li>
-          <li><strong>Inter-Se Merit (State Rank):</strong> Your overall rank among all candidates appearing in Haryana.</li>
-          <li><strong>Category Rank:</strong> Your specific rank within your reserved category (e.g., BCA, BCB, SC, EWS).</li>
-          <li>Candidate Name, Roll Number, and Father's Name for verification.</li>
+        <ul class="info-list">
+          <li><i class="fas fa-check-circle"></i> <strong>Marks Scored:</strong> Your total score out of 90 marks in the OCET exam.</li>
+          <li><i class="fas fa-trophy"></i> <strong>Inter-Se Merit (State Rank):</strong> Your overall rank among all candidates appearing in Haryana.</li>
+          <li><i class="fas fa-users"></i> <strong>Category Rank:</strong> Your specific rank within your reserved category (e.g., BCA, BCB, SC, EWS).</li>
+          <li><i class="fas fa-id-card"></i> Candidate Name, Roll Number, and Father's Name for verification.</li>
         </ul>
         <p><em>The admissions to top government universities like YMCA, DCRUST, and GJU depend entirely on your Inter-Se Merit <strong>haryana leet rank</strong>.</em></p>
 
         <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--bo);">
 
-        <h2>Haryana LEET Inter-Se Merit Tie-Breaking Rules</h2>
+        <h2 class="section-title">Haryana LEET Inter-Se Merit Tie-Breaking Rules</h2>
         <p>If two or more candidates score the same marks in the <strong>computer based test haryana leet result</strong>, the tie is resolved using the following criteria in sequence:</p>
-        <ol>
+        <ol class="guideline-list">
           <li>Candidates with higher marks in Mathematics will be ranked higher.</li>
           <li>If the tie persists, candidates with higher marks in Physics will be ranked higher.</li>
           <li>If still tied, candidates with higher marks in Chemistry will get preference.</li>
@@ -257,19 +174,27 @@
 
         <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--bo);">
 
-        <h2>Frequently Asked Questions (Result & Rank Card)</h2>
-        <div style="margin-top: 20px;">
-          <h3>When will the Haryana LEET Rank Card 2026 be announced?</h3>
-          <p>The <strong>haryana leet result release date 2026</strong> is generally 1-2 weeks after the successful completion of the online exam. Check the <strong>techadmissionshry.gov.in result download 2026</strong> link provided above for real-time updates.</p>
+        <h2 class="section-title">Frequently Asked Questions (Result & Rank Card)</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <h3>When will the Haryana LEET Rank Card 2026 be announced?</h3>
+            <p>The <strong>haryana leet result release date 2026</strong> is generally 1-2 weeks after the successful completion of the online exam. Check the <strong>techadmissionshry.gov.in result download 2026</strong> link provided above for real-time updates.</p>
+          </div>
           
-          <h3>I lost my roll number. How can I check my result?</h3>
-          <p>If you forgot your roll number, check the PDF of your Admit Card or your registered email/SMS for the details. You cannot check the <strong>haryana leet result without roll number</strong> on the public portal without logging into your student dashboard.</p>
+          <div class="faq-item">
+            <h3>I lost my roll number. How can I check my result?</h3>
+            <p>If you forgot your roll number, check the PDF of your Admit Card or your registered email/SMS for the details. You cannot check the <strong>haryana leet result without roll number</strong> on the public portal without logging into your student dashboard.</p>
+          </div>
           
-          <h3>What should I do after checking my rank?</h3>
-          <p>Once you download your <strong>btech leet rank card 2026 haryana</strong>, wait for the HSTES counseling schedule. You will need to participate in online choice filling to secure your <strong>btech leet seat allotment rank</strong> based admission.</p>
+          <div class="faq-item">
+            <h3>What should I do after checking my rank?</h3>
+            <p>Once you download your <strong>btech leet rank card 2026 haryana</strong>, wait for the HSTES counseling schedule. You will need to participate in online choice filling to secure your <strong>btech leet seat allotment rank</strong> based admission.</p>
+          </div>
           
-          <h3>Is the Rank Card valid for B.Pharmacy LEET?</h3>
-          <p>Yes, the same procedure applies for <strong>bpharmacy leet rank card 2026 haryana</strong>. Ensure you selected the B.Pharmacy course from the drop-down on the result portal.</p>
+          <div class="faq-item">
+            <h3>Is the Rank Card valid for B.Pharmacy LEET?</h3>
+            <p>Yes, the same procedure applies for <strong>bpharmacy leet rank card 2026 haryana</strong>. Ensure you selected the B.Pharmacy course from the drop-down on the result portal.</p>
+          </div>
         </div>
       </div>
       

@@ -250,6 +250,7 @@ runWhenReady(() => {
   const modalHTML = `
     <div id="leet-popup-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.8);backdrop-filter:blur(5px);z-index:999999;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s ease;">
       <div id="leet-popup-box" style="background:#fff;border-radius:16px;width:90%;max-width:450px;padding:30px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);transform:translateY(20px);transition:transform 0.4s ease;max-height:90vh;overflow-y:auto;position:relative;">
+        <button id="leet-popup-close" style="position:absolute;top:15px;right:15px;background:none;border:none;font-size:24px;cursor:pointer;color:#64748b;transition:color 0.2s;">&times;</button>
         <div style="text-align:center;margin-bottom:20px;">
           <div style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 15px;"><i class="fas fa-graduation-cap"></i></div>
           <h2 style="font-size:22px;color:#1e293b;margin:0 0 8px;font-weight:700;">Ace Your LEET Exam!</h2>
@@ -305,7 +306,7 @@ runWhenReady(() => {
       setTimeout(() => overlay.remove(), 400);
     };
 
-    closeBtn.onclick = closePopup;
+    if (closeBtn) closeBtn.onclick = closePopup;
 
     // Handle form submit
     form.onsubmit = (e) => {
