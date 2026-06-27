@@ -3,7 +3,7 @@
  */
 
 // ─── Global Error Handler ───────────────────────────────────────────────
-window.addEventListener('error', function(e) {
+window.addEventListener('error', function (e) {
   console.warn('Caught JS error:', e.message, 'at', e.filename, ':', e.lineno);
   return true; // Prevents the error from bubble-crashing some browsers
 });
@@ -62,7 +62,7 @@ function initLanguageSelect() {
   const languageSelect = document.getElementById("languageSelect");
   if (!languageSelect) return;
 
-  languageSelect.onchange = function() {
+  languageSelect.onchange = function () {
     const lang = this.value;
     if (!lang) return;
     const checkCount = 0;
@@ -104,7 +104,7 @@ function setTextSize(size) {
     document.body.classList.remove("text-small", "text-medium", "text-large");
     document.body.classList.add("text-" + size);
     localStorage.setItem("textSize", size);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 /** FAQ Accordions */
@@ -114,10 +114,10 @@ function setTextSize(size) {
     if (!btn) return;
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
-    
+
     // Close others
     document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    
+
     if (!isOpen) {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Recovery helper...
   setTimeout(() => {
     if (!document.body.classList.contains("partials-ready")) {
-       document.dispatchEvent(new Event("partialsLoaded"));
+      document.dispatchEvent(new Event("partialsLoaded"));
     }
   }, 2000);
 });
@@ -223,7 +223,15 @@ document.addEventListener("partialsLoaded", () => {
 });
 
 // --- BTech LEET / Haryana LEET / Premium Popup ---
-document.addEventListener("DOMContentLoaded", () => {
+function runWhenReady(fn) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    fn();
+  }
+}
+
+runWhenReady(() => {
   const path = window.location.pathname.toLowerCase();
   const shouldShow = path.includes('btech') || path.includes('haryana-leet') || path.includes('haryanaleet') || path.includes('premium');
   if (!shouldShow) return;
@@ -242,7 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalHTML = `
     <div id="leet-popup-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.8);backdrop-filter:blur(5px);z-index:999999;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s ease;">
       <div id="leet-popup-box" style="background:#fff;border-radius:16px;width:90%;max-width:450px;padding:30px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);transform:translateY(20px);transition:transform 0.4s ease;max-height:90vh;overflow-y:auto;position:relative;">
-        <button id="leet-popup-close" style="position:absolute;top:15px;right:15px;background:none;border:none;font-size:24px;cursor:pointer;color:#64748b;transition:color 0.2s;">&times;</button>
         <div style="text-align:center;margin-bottom:20px;">
           <div style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 15px;"><i class="fas fa-graduation-cap"></i></div>
           <h2 style="font-size:22px;color:#1e293b;margin:0 0 8px;font-weight:700;">Ace Your LEET Exam!</h2>
@@ -279,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     // If user filled it while another tab was open
     if (localStorage.getItem('btech_leet_popup_filled')) return;
-    
+
     document.body.insertAdjacentHTML('beforeend', modalHTML);
     const overlay = document.getElementById('leet-popup-overlay');
     const box = document.getElementById('leet-popup-box');
@@ -344,7 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- BTech LEET Quick Links Injector ---
-document.addEventListener("DOMContentLoaded", () => {
+runWhenReady(() => {
   const path = window.location.pathname.toLowerCase();
   // Inject on ALL LEET-related pages: btech, bpharmacy, haryana-leet, premium, sample papers, section papers
   const showQuickLinks = path.includes('btech') || path.includes('b-pharmacy') || path.includes('bpharma') || path.includes('haryana-leet') || path.includes('haryanaleet') || path.includes('leet-') || path.includes('premium') || path.includes('section-') || path.includes('sample-paper');
