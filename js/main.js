@@ -232,9 +232,9 @@ function runWhenReady(fn) {
 }
 
 runWhenReady(() => {
-  const path = window.location.pathname.toLowerCase();
-  const shouldShow = path.includes('btech') || path.includes('haryana-leet') || path.includes('haryanaleet') || path.includes('premium');
-  if (!shouldShow) return;
+  // Show on all pages, but stop showing after July 1, 2026
+  const cutoffDate = new Date('2026-07-02T00:00:00');
+  if (new Date() >= cutoffDate) return;
   if (localStorage.getItem('btech_leet_popup_filled')) return;
 
   // Load Supabase JS
