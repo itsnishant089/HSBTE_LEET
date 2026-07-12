@@ -42,7 +42,7 @@
     @keyframes spin{to{transform:rotate(360deg);}}
     #page-loader p{font-size:15px;color:var(--muted);}
 
-    /* ── WATERMARK  (strong & visible) ── */
+    /* ── WATERMARK ── */
     #wm-layer{
       position:fixed;inset:0;pointer-events:none;z-index:8888;
       overflow:hidden;user-select:none;
@@ -54,7 +54,7 @@
       font-size:15px;
       font-weight:800;
       letter-spacing:3px;
-      color:rgba(26,86,219,0.13);   /* clearly visible */
+      color:rgba(26,86,219,0.13);
       transform:rotate(-30deg);
       transform-origin:left center;
     }
@@ -306,7 +306,7 @@ document.addEventListener('keydown',function(e){
 });
 (function(){var s=document.createElement('style');s.textContent='@media print{body{display:none!important;}}';document.head.appendChild(s);})();
 
-/* ── WATERMARK — strong & tiled ── */
+/* ── WATERMARK ── */
 function injectWatermark(){
   var mob  = sessionStorage.getItem('prem_mob')  || '';
   var name = sessionStorage.getItem('prem_name') || 'Premium';
@@ -316,11 +316,9 @@ function injectWatermark(){
   var layer = document.getElementById('wm-layer');
   layer.innerHTML = '';
 
-  /* Layout: rows every 90px across full viewport, offset alternately */
   var vw = Math.max(document.documentElement.clientWidth,1400);
   var vh = Math.max(document.documentElement.clientHeight,900);
 
-  /* We draw rows covering 3x viewport height so scrolling keeps watermark */
   var totalH = vh * 3;
   var rowGap  = 90;
   var rows    = Math.ceil(totalH / rowGap) + 4;
@@ -333,7 +331,6 @@ function injectWatermark(){
     div.style.top  = topVal + 'px';
     div.style.left = leftVal + 'px';
     div.style.width = (vw * 2.5) + 'px';
-    /* repeat text across row */
     var repeats = Math.ceil((vw * 2.5) / (txt.length * 9)) + 3;
     div.textContent = Array(repeats).fill(txt).join('   ');
     layer.appendChild(div);
@@ -350,7 +347,6 @@ async function verifyAccess(){
     var {data,error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
     if(error||!data||!data.is_active){showDenied();return;}
     sessionStorage.setItem('prem_ts',Date.now().toString());
-    /* Show page */
     document.getElementById('page-loader').style.display='none';
     document.getElementById('main-page').style.display='block';
     injectWatermark();
@@ -366,139 +362,130 @@ function showDenied(){
 
 /* ── QUESTIONS DATA ── */
 const questions = [
+// ── a-1 MATHEMATICS (8) ──────────────────────────────────────────
+{s:"a-1 Mathematics",q:"If A is a 3×3 matrix with |A| = 5, then |2A| equals:",o:["10","40","80","20"],a:1},
+{s:"a-1 Mathematics",q:"The sum of first 20 terms of the AP 3, 7, 11, 15, ... is:",o:["820","810","800","790"],a:0},
+{s:"a-1 Mathematics",q:"log₁₀(100) + log₁₀(0.01) equals:",o:["4","0","2","−2"],a:1},
+{s:"a-1 Mathematics",q:"∫ sin²x dx equals:",o:["x/2 − sin2x/4 + C","x/2 + sin2x/4 + C","−cos²x + C","sinx·cosx + C"],a:0},
+{s:"a-1 Mathematics",q:"If the determinant |2 3; 4 x| = 0, then x equals:",o:["6","8","3","4"],a:0},
+{s:"a-1 Mathematics",q:"The 10th term of a GP with first term 3 and common ratio 2 is:",o:["1536","3072","768","1024"],a:0},
+{s:"a-1 Mathematics",q:"d/dx (eˣ·sinx) equals:",o:["eˣ(sinx + cosx)","eˣ·cosx","eˣ·sinx","eˣ(sinx − cosx)"],a:0},
+{s:"a-1 Mathematics",q:"If ⁿC₂ = 28, then n equals:",o:["7","8","6","9"],a:1},
 
-        // ── SECTION a: BASIC SCIENCES (Q1–25) ─────────────────────────────
+// ── a-2 PHYSICS (8) ──────────────────────────────────────────────
+{s:"a-2 Physics",q:"A body of mass 2 kg is moving with velocity 3 m/s. Its kinetic energy is:",o:["9 J","18 J","6 J","3 J"],a:0},
+{s:"a-2 Physics",q:"The time period of a simple pendulum of length 1 m (g=10 m/s²) is approximately:",o:["1 s","2 s","3 s","0.5 s"],a:1},
+{s:"a-2 Physics",q:"Two resistors of 6Ω and 3Ω are connected in parallel. The equivalent resistance is:",o:["9 Ω","2 Ω","4.5 Ω","1.5 Ω"],a:1},
+{s:"a-2 Physics",q:"A transformer has 200 primary turns and 1000 secondary turns. If input voltage is 220V, output voltage is:",o:["44 V","1100 V","440 V","2200 V"],a:1},
+{s:"a-2 Physics",q:"A projectile is fired at 45° with initial velocity 20 m/s. Maximum height reached (g=10 m/s²) is:",o:["10 m","20 m","5 m","40 m"],a:0},
+{s:"a-2 Physics",q:"The unit of magnetic flux is:",o:["Tesla","Weber","Henry","Ampere"],a:1},
+{s:"a-2 Physics",q:"The refractive index of glass is 1.5. The speed of light in glass (c=3×10⁸ m/s) is:",o:["2×10⁸ m/s","4.5×10⁸ m/s","1.5×10⁸ m/s","3×10⁸ m/s"],a:0},
+{s:"a-2 Physics",q:"In SHM, acceleration is maximum at:",o:["Mean position","Extreme position","Mid-way between mean and extreme","Acceleration is constant"],a:1},
 
-        // a-1 MATHEMATICS (8 questions)
-        { s: "a-1 Mathematics", q: "If the sum of first n terms of an AP is 3n² + 5n, then the common difference is:", o: ["3","5","6","8"], a: 2 },
-        { s: "a-1 Mathematics", q: "The value of (1 + i)⁸ where i = √(−1) is:", o: ["16","−16","16i","−16i"], a: 0 },
-        { s: "a-1 Mathematics", q: "log₅ 125 equals:", o: ["3","5","25","1/3"], a: 0 },
-        { s: "a-1 Mathematics", q: "The number of ways to select 3 students from 10 is:", o: ["30","120","720","10"], a: 1 },
-        { s: "a-1 Mathematics", q: "The 4th term in the expansion of (x + 2)⁶ is:", o: ["160x³","240x³","60x³","480x³"], a: 0 },
-        { s: "a-1 Mathematics", q: "Two cards are drawn from a pack of 52. Probability both are aces:", o: ["1/221","2/221","4/52","1/13"], a: 0 },
-        { s: "a-1 Mathematics", q: "If A = [[3,1],[2,4]], then |A| is:", o: ["10","14","12","8"], a: 0 },
-        { s: "a-1 Mathematics", q: "∫ (3x² + 2x) dx equals:", o: ["x³ + x² + C","6x + 2 + C","3x³ + x² + C","x² + x + C"], a: 0 },
+// ── a-3 CHEMISTRY (3) ────────────────────────────────────────────
+{s:"a-3 Chemistry",q:"The pH of a 0.001 M HCl solution is:",o:["1","2","3","4"],a:2},
+{s:"a-3 Chemistry",q:"The molecular formula of methane is:",o:["C₂H₆","CH₄","C₂H₄","C₃H₈"],a:1},
+{s:"a-3 Chemistry",q:"Temporary hardness of water is caused by:",o:["CaSO₄ and MgSO₄","Ca(HCO₃)₂ and Mg(HCO₃)₂","NaCl","KCl"],a:1},
 
-        // a-2 PHYSICS (8 questions)
-        { s: "a-2 Physics", q: "Dimensional formula of angular momentum is:", o: ["ML²T⁻¹","MLT⁻²","ML²T⁻²","MLT⁻¹"], a: 0 },
-        { s: "a-2 Physics", q: "A car accelerates from rest to 20 m/s in 4 s. Distance covered is:", o: ["40 m","80 m","160 m","20 m"], a: 0 },
-        { s: "a-2 Physics", q: "Work done against gravity to lift a 5 kg mass to 3 m height (g=10):", o: ["150 J","50 J","300 J","15 J"], a: 0 },
-        { s: "a-2 Physics", q: "Surface tension acts along the surface and has SI unit:", o: ["N/m","N/m²","Pa·s","J"], a: 0 },
-        { s: "a-2 Physics", q: "The time period of a simple pendulum is proportional to:", o: ["√L","L","L²","1/√L"], a: 0 },
-        { s: "a-2 Physics", q: "A disc rotating at 600 rpm has angular velocity:", o: ["20π rad/s","60π rad/s","10π rad/s","30 rad/s"], a: 0 },
-        { s: "a-2 Physics", q: "Lens formula is 1/v − 1/u = 1/f. For object at 30 cm and f = 10 cm (convex), image distance v:", o: ["15 cm","20 cm","30 cm","10 cm"], a: 0 },
-        { s: "a-2 Physics", q: "The energy stored in a capacitor C charged to voltage V is:", o: ["CV²/2","CV","C²V","CV²"], a: 0 },
+// ── a-4 COMMUNICATION SKILLS (3) ─────────────────────────────────
+{s:"a-4 Communication Skills",q:"Choose the correct spelling:",o:["Accomodation","Accommodation","Acommodation","Acomodation"],a:1},
+{s:"a-4 Communication Skills",q:"The synonym of 'Benevolent' is:",o:["Cruel","Kind","Angry","Lazy"],a:1},
+{s:"a-4 Communication Skills",q:"'He has been working here ___ 2010.' Fill in the blank:",o:["since","for","from","at"],a:0},
 
-        // a-3 CHEMISTRY (3 questions)
-        { s: "a-3 Chemistry", q: "Permanent hardness of water can be removed by:", o: ["Boiling","Adding lime","Ion exchange method","Filtering"], a: 2 },
-        { s: "a-3 Chemistry", q: "The electronic configuration of Na (Z=11) is:", o: ["2,8,1","2,8,2","2,9","2,7,2"], a: 0 },
-        { s: "a-3 Chemistry", q: "A solution having pH = 2 is:", o: ["Neutral","Weakly acidic","Strongly acidic","Basic"], a: 2 },
+// ── a-5 GENERAL AWARENESS (3) ────────────────────────────────────
+{s:"a-5 General Awareness",q:"DCRUST (Deenbandhu Chhotu Ram University of Science & Technology) is located in:",o:["Sonipat","Murthal","Hisar","Karnal"],a:1},
+{s:"a-5 General Awareness",q:"The first speaker of the Haryana Legislative Assembly was:",o:["Rao Birendra Singh","Shri Rao Birendra Singh","Shri Shanno Devi","Shri Radha Krishan"],a:0},
+{s:"a-5 General Awareness",q:"The Sun Temple (Konark) is located in which state?",o:["Rajasthan","Odisha","Tamil Nadu","Gujarat"],a:1},
 
-        // a-4 COMMUNICATION SKILLS (3 questions)
-        { s: "a-4 Communication Skills", q: "Synonym of 'Diligent' is:", o: ["Lazy","Hardworking","Careless","Dull"], a: 1 },
-        { s: "a-4 Communication Skills", q: "She was tired ___ working all day. (Fill in blank):", o: ["for","by","of","with"], a: 2 },
-        { s: "a-4 Communication Skills", q: "Change to passive: 'The teacher praised the student.'", o: ["The student was praised by the teacher.","The student is praised by teacher.","The student praised the teacher.","The teacher was praised by the student."], a: 0 },
+// ── b-1 ELECTRICAL ENGINEERING (9) ───────────────────────────────
+{s:"b-1 Electrical Engineering",q:"A 100V battery is connected across a 20Ω resistor. The current flowing is:",o:["2 A","5 A","10 A","0.5 A"],a:1},
+{s:"b-1 Electrical Engineering",q:"In a star (Y) connected system, line voltage equals ___ times phase voltage:",o:["√3","2","3","1/√3"],a:0},
+{s:"b-1 Electrical Engineering",q:"The EMF equation of a transformer is E = 4.44fΦₘN. If f=50Hz, Φₘ=0.05Wb and N=100, then E is:",o:["1110 V","111 V","222 V","555 V"],a:0},
+{s:"b-1 Electrical Engineering",q:"A DC shunt motor has the characteristic that its field winding is connected in:",o:["Series with armature","Parallel with armature","Neither series nor parallel","Through external resistance only"],a:1},
+{s:"b-1 Electrical Engineering",q:"Kirchhoff's Current Law (KCL) states that the algebraic sum of currents at any node is:",o:["Maximum","Minimum","Zero","Infinity"],a:2},
+{s:"b-1 Electrical Engineering",q:"The power factor of a purely resistive circuit is:",o:["0","0.5","1","0.8"],a:2},
+{s:"b-1 Electrical Engineering",q:"The efficiency of a transformer is maximum when:",o:["Core loss = Copper loss","Core loss > Copper loss","Core loss < Copper loss","At no load"],a:0},
+{s:"b-1 Electrical Engineering",q:"A 3-phase induction motor rotates at 1440 RPM when the synchronous speed is 1500 RPM. The slip is:",o:["2%","4%","6%","8%"],a:1},
+{s:"b-1 Electrical Engineering",q:"Which type of DC motor is used for electric traction?",o:["Shunt motor","Series motor","Compound motor","Separately excited motor"],a:1},
 
-        // a-5 GENERAL AWARENESS (3 questions)
-        { s: "a-5 General Awareness", q: "The Haryana LEET entrance test has how many questions:", o: ["75","90","100","120"], a: 1 },
-        { s: "a-5 General Awareness", q: "Chandigarh is the capital of Haryana and also of:", o: ["Himachal Pradesh","Punjab","Uttarakhand","Rajasthan"], a: 1 },
-        { s: "a-5 General Awareness", q: "Online counseling for LEET admission in Haryana is conducted by:", o: ["HBSE","HSTES","UPSC","NIT Kurukshetra"], a: 1 },
+// ── b-2 ELECTRONICS ENGINEERING (8) ──────────────────────────────
+{s:"b-2 Electronics Engineering",q:"In a common emitter BJT amplifier, the output is ___ with respect to input:",o:["In phase","180° out of phase","90° out of phase","45° out of phase"],a:1},
+{s:"b-2 Electronics Engineering",q:"The truth table output for a 2-input AND gate when both inputs are 1 is:",o:["0","1","Undefined","High impedance"],a:1},
+{s:"b-2 Electronics Engineering",q:"A full-wave rectifier uses ___ diodes:",o:["1","2 or 4","3","5"],a:1},
+{s:"b-2 Electronics Engineering",q:"MOSFET stands for:",o:["Metal Oxide Semiconductor Field Effect Transistor","Metal Output Semiconductor Field Effect Transistor","Metal Oxide Source Field Effect Transistor","Metal Oxide Semiconductor Frequency Effect Transistor"],a:0},
+{s:"b-2 Electronics Engineering",q:"The number of flip-flops required to build a MOD-16 counter is:",o:["2","3","4","8"],a:2},
+{s:"b-2 Electronics Engineering",q:"In an SCR, once triggered, the gate ___ control over conduction:",o:["Maintains full","Loses","Partially retains","Gains more"],a:1},
+{s:"b-2 Electronics Engineering",q:"The gain of a non-inverting op-amp is given by:",o:["−Rf/Rin","1 + Rf/Rin","Rf/Rin","1 − Rf/Rin"],a:1},
+{s:"b-2 Electronics Engineering",q:"In FM (Frequency Modulation), what parameter of the carrier wave is varied?",o:["Amplitude","Frequency","Phase","Wavelength"],a:1},
 
-        // ── SECTION b: ELECTRONICS STREAM (Q26–50) ───────────────────────
+// ── b-3 COMPUTER ENGINEERING (8) ─────────────────────────────────
+{s:"b-3 Computer Engineering",q:"In C, the size of an int on a 32-bit system is typically:",o:["1 byte","2 bytes","4 bytes","8 bytes"],a:2},
+{s:"b-3 Computer Engineering",q:"Which data structure uses FIFO (First In First Out) principle?",o:["Stack","Queue","Tree","Graph"],a:1},
+{s:"b-3 Computer Engineering",q:"The binary equivalent of decimal number 25 is:",o:["11001","10011","11010","10101"],a:0},
+{s:"b-3 Computer Engineering",q:"In C language, which keyword is used to exit from a loop?",o:["exit","return","break","continue"],a:2},
+{s:"b-3 Computer Engineering",q:"RAM is a ___ memory:",o:["Non-volatile","Volatile","Permanent","Read-only"],a:1},
+{s:"b-3 Computer Engineering",q:"The worst-case time complexity of bubble sort is:",o:["O(n)","O(n log n)","O(n²)","O(log n)"],a:2},
+{s:"b-3 Computer Engineering",q:"In a CPU, the ALU performs:",o:["Memory management","Arithmetic and logical operations","Input/output control","Instruction fetching only"],a:1},
+{s:"b-3 Computer Engineering",q:"Which of the following is NOT an operating system?",o:["Linux","Windows","Oracle","macOS"],a:2},
 
-        // b-1 ELECTRICAL ENGINEERING (9 questions)
-        { s: "b-1 Electrical Engineering", q: "EMF stands for:", o: ["Electro Magnetic Force","Electromotive Force","Electric Magnetic Field","Electron Motion Factor"], a: 1 },
-        { s: "b-1 Electrical Engineering", q: "According to KVL, the sum of voltages around a closed loop is:", o: ["Maximum","Minimum","Zero","Equal to supply voltage"], a: 2 },
-        { s: "b-1 Electrical Engineering", q: "Faraday's second law states that induced EMF is proportional to rate of change of:", o: ["Current","Resistance","Flux","Voltage"], a: 2 },
-        { s: "b-1 Electrical Engineering", q: "The RMS value of a sinusoidal current with peak value Im is:", o: ["Im/√2","Im/2","Im√2","Im/π"], a: 0 },
-        { s: "b-1 Electrical Engineering", q: "At series resonance, the impedance of an RLC circuit is:", o: ["Maximum","Zero","Equal to R (minimum)","Infinite"], a: 2 },
-        { s: "b-1 Electrical Engineering", q: "An ideal transformer has efficiency:", o: ["50%","75%","90%","100%"], a: 3 },
-        { s: "b-1 Electrical Engineering", q: "In a DC shunt motor, speed is approximately proportional to:", o: ["Back EMF / Flux","Flux × Current","Torque × Speed","Armature current"], a: 0 },
-        { s: "b-1 Electrical Engineering", q: "Synchronous speed of a 4-pole, 50 Hz motor is:", o: ["1500 rpm","3000 rpm","750 rpm","1000 rpm"], a: 0 },
-        { s: "b-1 Electrical Engineering", q: "High voltage transmission reduces:", o: ["Power generated","Line current and I²R losses","Frequency","Insulation cost"], a: 1 },
+// ── c-1 MECHANICAL ENGINEERING (8) ───────────────────────────────
+{s:"c-1 Mechanical Engineering",q:"The SI unit of stress is:",o:["Newton","Pascal (N/m²)","Joule","Watt"],a:1},
+{s:"c-1 Mechanical Engineering",q:"In a 4-stroke IC engine, the power stroke occurs in the ___ stroke:",o:["First","Second","Third","Fourth"],a:2},
+{s:"c-1 Mechanical Engineering",q:"Young's modulus of a material is the ratio of:",o:["Shear stress to shear strain","Lateral strain to longitudinal strain","Stress to strain within elastic limit","Volume stress to volume strain"],a:2},
+{s:"c-1 Mechanical Engineering",q:"The Carnot cycle efficiency between temperatures 600K and 300K is:",o:["25%","50%","75%","100%"],a:1},
+{s:"c-1 Mechanical Engineering",q:"Bernoulli's equation is based on the conservation of:",o:["Mass","Energy","Momentum","Angular momentum"],a:1},
+{s:"c-1 Mechanical Engineering",q:"The maximum bending moment in a simply supported beam with a central point load W and span L is:",o:["WL/2","WL/4","WL/8","WL"],a:1},
+{s:"c-1 Mechanical Engineering",q:"Reynolds number is used to determine:",o:["Type of fluid","Type of flow (laminar or turbulent)","Pressure drop","Fluid density"],a:1},
+{s:"c-1 Mechanical Engineering",q:"Heat transfer by radiation follows the ___ law:",o:["Newton's law of cooling","Fourier's law","Stefan-Boltzmann law","Fick's law"],a:2},
 
-        // b-2 ELECTRONICS ENGINEERING (8 questions)
-        { s: "b-2 Electronics Engineering", q: "Resolution of a measuring instrument means:", o: ["Maximum measurable value","Smallest detectable change in input","Accuracy percentage","Full scale range"], a: 1 },
-        { s: "b-2 Electronics Engineering", q: "A CRO displays voltage on its:", o: ["X-axis only","Y-axis (vertical plates)","Both axes equally","Neither axis"], a: 1 },
-        { s: "b-2 Electronics Engineering", q: "A PN junction diode allows current primarily in:", o: ["Reverse bias","Forward bias","Both directions equally","No direction"], a: 1 },
-        { s: "b-2 Electronics Engineering", q: "The common base configuration of BJT has current gain:", o: ["β (> 1)","α (< 1)","Equal to 1 always","Zero"], a: 1 },
-        { s: "b-2 Electronics Engineering", q: "Boolean expression: A + Ā equals:", o: ["0","A","1","2A"], a: 2 },
-        { s: "b-2 Electronics Engineering", q: "The hexadecimal equivalent of binary 10111100 is:", o: ["BC","CB","BD","DC"], a: 0 },
-        { s: "b-2 Electronics Engineering", q: "An SCR can be turned ON by applying:", o: ["Negative gate pulse","Positive gate trigger pulse","Removing anode voltage","Reducing temperature"], a: 1 },
-        { s: "b-2 Electronics Engineering", q: "DIAC conducts when terminal voltage exceeds its:", o: ["Holding voltage","Breakover voltage","Gate voltage","Zero crossing"], a: 1 },
+// ── c-2 PRODUCTION ENGINEERING (6) ───────────────────────────────
+{s:"c-2 Production Engineering",q:"In lathe machine, the cutting speed is given by V = πDN/1000. If D=50mm and N=400rpm, V is:",o:["62.8 m/min","31.4 m/min","125.6 m/min","20 m/min"],a:0},
+{s:"c-2 Production Engineering",q:"Sand casting uses ___ as the primary moulding material:",o:["Metal","Plaster","Sand (silica sand with binder)","Ceramic only"],a:2},
+{s:"c-2 Production Engineering",q:"The welding process that uses a consumable electrode coated with flux is:",o:["TIG welding","MIG welding","SMAW (Shielded Metal Arc Welding)","Gas welding"],a:2},
+{s:"c-2 Production Engineering",q:"A micrometer has a least count of:",o:["0.1 mm","0.01 mm","0.001 mm","1 mm"],a:1},
+{s:"c-2 Production Engineering",q:"First angle projection is used in ___ countries:",o:["USA and Canada","India and European countries","Japan only","Australia only"],a:1},
+{s:"c-2 Production Engineering",q:"Annealing is a heat treatment process used to:",o:["Increase hardness","Increase brittleness","Soften the material and relieve internal stresses","Add carbon to surface"],a:2},
 
-        // b-3 COMPUTER ENGINEERING (8 questions)
-        { s: "b-3 Computer Engineering", q: "The CPU consists of ALU and:", o: ["Memory unit","Control unit","I/O unit","Cache only"], a: 1 },
-        { s: "b-3 Computer Engineering", q: "Which of the following is an example of a high-level language?", o: ["Assembly","Machine code","Python","Binary"], a: 2 },
-        { s: "b-3 Computer Engineering", q: "A compiler translates the entire source code:", o: ["Line by line","All at once into machine code","Into assembly only","Into Java bytecode"], a: 1 },
-        { s: "b-3 Computer Engineering", q: "In C language, an array name acts as a pointer to its:", o: ["Last element","Middle element","First element","Random element"], a: 2 },
-        { s: "b-3 Computer Engineering", q: "Cache memory is:", o: ["Slower than RAM","Faster than RAM, placed between CPU and RAM","Slower than Hard disk","Same speed as ROM"], a: 1 },
-        { s: "b-3 Computer Engineering", q: "An operating system manages:", o: ["Only hardware","Only software","Hardware and software resources","Only memory"], a: 2 },
-        { s: "b-3 Computer Engineering", q: "LAN (Local Area Network) typically spans:", o: ["A continent","A country","A city or campus","A single building or campus area"], a: 3 },
-        { s: "b-3 Computer Engineering", q: "In C, 'struct' keyword is used to define a:", o: ["Function","Loop","User-defined data structure","Pointer"], a: 2 },
+// ── c-3 AUTOMOBILE ENGINEERING (6) ───────────────────────────────
+{s:"c-3 Automobile Engineering",q:"BHP stands for:",o:["Basic Horse Power","Brake Horse Power","Boiler Horse Power","Binary Horse Power"],a:1},
+{s:"c-3 Automobile Engineering",q:"The purpose of a clutch in a vehicle is to:",o:["Apply brakes","Connect and disconnect engine from transmission","Steer the vehicle","Control speed"],a:1},
+{s:"c-3 Automobile Engineering",q:"In a 4-stroke petrol engine, the firing order for a 4-cylinder engine is commonly:",o:["1-2-3-4","1-3-4-2","1-4-3-2","1-2-4-3"],a:1},
+{s:"c-3 Automobile Engineering",q:"The component that converts reciprocating motion to rotary motion in an IC engine is:",o:["Camshaft","Crankshaft","Piston","Connecting rod"],a:1},
+{s:"c-3 Automobile Engineering",q:"Tyre pressure is measured in:",o:["Newton","Pascal or PSI","Ampere","Volt"],a:1},
+{s:"c-3 Automobile Engineering",q:"A catalytic converter in a vehicle is used to:",o:["Increase fuel efficiency","Reduce harmful exhaust emissions (CO, HC, NOx)","Cool the engine","Filter engine oil"],a:1},
 
-        // ── SECTION c: MECHANICAL STREAM (Q51–70) ────────────────────────
+// ── d-1 CIVIL ENGINEERING (5) ────────────────────────────────────
+{s:"d-1 Civil Engineering",q:"The standard size of a brick in India (IS standard) is:",o:["190mm × 90mm × 90mm","200mm × 100mm × 100mm","230mm × 110mm × 75mm","190mm × 90mm × 40mm"],a:0},
+{s:"d-1 Civil Engineering",q:"The water-cement ratio for M20 grade concrete is approximately:",o:["0.55","0.45","0.65","0.35"],a:1},
+{s:"d-1 Civil Engineering",q:"Plumb bob is used to check:",o:["Horizontal alignment","Verticality (plumbness)","Level","Slope"],a:1},
+{s:"d-1 Civil Engineering",q:"The instrument used in surveying to measure horizontal and vertical angles is:",o:["Chain","Theodolite","Level","Compass"],a:1},
+{s:"d-1 Civil Engineering",q:"Portland cement was invented by:",o:["Isaac Newton","Joseph Aspdin","Thomas Edison","James Watt"],a:1},
 
-        // c-1 MECHANICAL ENGINEERING (8 questions)
-        { s: "c-1 Mechanical Engineering", q: "The coefficient of friction μ = Friction force / ___:", o: ["Applied force","Normal reaction","Weight","Area"], a: 1 },
-        { s: "c-1 Mechanical Engineering", q: "Efficiency of a machine = (M.A. / V.R.) × 100. If MA=4 and VR=5, efficiency is:", o: ["50%","60%","80%","125%"], a: 2 },
-        { s: "c-1 Mechanical Engineering", q: "Young's modulus E = Stress / ___:", o: ["Force","Strain","Area","Length"], a: 1 },
-        { s: "c-1 Mechanical Engineering", q: "For a simply supported beam with central load W and span L, maximum shear force is:", o: ["WL/4","W/2","WL/8","W"], a: 1 },
-        { s: "c-1 Mechanical Engineering", q: "The Otto cycle efficiency depends only on:", o: ["Fuel type","Compression ratio","Engine size","Cooling method"], a: 1 },
-        { s: "c-1 Mechanical Engineering", q: "Fourier's law governs heat transfer by:", o: ["Convection","Conduction","Radiation","All modes"], a: 1 },
-        { s: "c-1 Mechanical Engineering", q: "Bernoulli's theorem applies to fluid flow that is:", o: ["Viscous and turbulent","Compressible and unsteady","Inviscid, incompressible and steady","Only at rest"], a: 2 },
-        { s: "c-1 Mechanical Engineering", q: "Venturimeter works on the principle of:", o: ["Continuity equation only","Bernoulli's theorem and continuity equation","Pascal's law","Archimedes principle"], a: 1 },
+// ── d-2 TEXTILE ENGINEERING (5) ──────────────────────────────────
+{s:"d-2 Textile Engineering",q:"Cotton fibre is obtained from the ___ of the cotton plant:",o:["Stem","Leaf","Seed (boll)","Root"],a:2},
+{s:"d-2 Textile Engineering",q:"The process of converting fibres into yarn is called:",o:["Weaving","Spinning","Dyeing","Knitting"],a:1},
+{s:"d-2 Textile Engineering",q:"Jute is known as the ___ fibre:",o:["King","Queen","Golden","Silver"],a:2},
+{s:"d-2 Textile Engineering",q:"Plain weave is the ___ type of fabric construction:",o:["Most complex","Simplest and most common","Least durable","Heaviest"],a:1},
+{s:"d-2 Textile Engineering",q:"Mercerization of cotton fabric is done with:",o:["Dilute H₂SO₄","Concentrated NaOH (caustic soda)","HCl","Bleaching powder"],a:1},
 
-        // c-2 PRODUCTION ENGINEERING (6 questions)
-        { s: "c-2 Production Engineering", q: "In a lathe, depth of cut is measured in the direction:", o: ["Along the axis of work","Perpendicular to the machined surface (radial)","Along tool movement","Diagonally"], a: 1 },
-        { s: "c-2 Production Engineering", q: "The Rockwell hardness test uses:", o: ["Steel ball only","Diamond indenter or steel ball under specific loads","Vickers pyramid","Brinell ball at 3000 kg"], a: 1 },
-        { s: "c-2 Production Engineering", q: "Orthographic projection in first angle has the top view placed:", o: ["Above front view","Below front view","To the right of front view","To the left"], a: 1 },
-        { s: "c-2 Production Engineering", q: "A match plate pattern is used in:", o: ["Die casting","Machine moulding in foundry","Injection moulding","Forging"], a: 1 },
-        { s: "c-2 Production Engineering", q: "In industrial management, span of control means:", o: ["Production target","Number of subordinates one manager can effectively supervise","Quality standard","Machine capacity"], a: 1 },
-        { s: "c-2 Production Engineering", q: "Thermoplastics can be recycled because they:", o: ["Cross-link on heating","Soften on heating and harden on cooling","Decompose at 200°C","Absorb water"], a: 1 },
+// ── d-3 CHEMICAL/PRINTING (2) ────────────────────────────────────
+{s:"d-3 Chemical/Printing Engineering",q:"The process of separating crude oil into fractions based on boiling points is called:",o:["Filtration","Fractional distillation","Crystallization","Sublimation"],a:1},
+{s:"d-3 Chemical/Printing Engineering",q:"In offset printing, the image is first transferred to a ___ before printing on paper:",o:["Screen","Blanket cylinder (rubber blanket)","Gravure cylinder","Letterpress block"],a:1},
 
-        // c-3 AUTOMOBILE ENGINEERING (6 questions)
-        { s: "c-3 Automobile Engineering", q: "The clutch is located between the engine and the:", o: ["Differential","Gearbox","Wheel","Axle"], a: 1 },
-        { s: "c-3 Automobile Engineering", q: "In a 4-stroke engine, the power stroke is the ___ stroke:", o: ["1st","2nd","3rd","4th"], a: 2 },
-        { s: "c-3 Automobile Engineering", q: "Disc brakes are more efficient than drum brakes due to:", o: ["Lower cost","Better heat dissipation and consistent performance","More weight","Simpler design"], a: 1 },
-        { s: "c-3 Automobile Engineering", q: "The differential allows:", o: ["Engine to disengage","Wheels to rotate at different speeds during cornering","Fuel injection","Gear shifting"], a: 1 },
-        { s: "c-3 Automobile Engineering", q: "Radial tyre has plies arranged:", o: ["Diagonally at 45°","At 90° to direction of travel (radially)","Parallel to tread","Randomly"], a: 1 },
-        { s: "c-3 Automobile Engineering", q: "In an electric vehicle, kinetic energy during braking is recovered by:", o: ["Friction brakes only","Regenerative braking (electric motor acts as generator)","Engine compression","Air resistance"], a: 1 },
+// ── d-4 CERAMIC ENGINEERING (2) ──────────────────────────────────
+{s:"d-4 Ceramic Engineering",q:"The main raw material for manufacturing cement is:",o:["Silica only","Limestone and clay","Iron ore","Bauxite"],a:1},
+{s:"d-4 Ceramic Engineering",q:"Kiln is used in ceramic industry for:",o:["Mixing raw materials","Firing (burning/sintering) ceramic products at high temperatures","Grinding materials","Cooling products"],a:1},
 
-        // ── SECTION d: OTHER ENGINEERING STREAMS (Q71–90) ────────────────
+// ── d-5 FOOD TECHNOLOGY (2) ──────────────────────────────────────
+{s:"d-5 Food Technology",q:"Pasteurization of milk is done at:",o:["100°C for 30 min","72°C for 15 seconds (HTST method)","50°C for 1 hour","120°C for 5 seconds"],a:1},
+{s:"d-5 Food Technology",q:"Vitamin C is also known as:",o:["Retinol","Ascorbic acid","Thiamine","Riboflavin"],a:1},
 
-        // d-1 CIVIL ENGINEERING (5 questions)
-        { s: "d-1 Civil Engineering", q: "Standard size of a conventional brick in India is:", o: ["190×90×90 mm","230×115×75 mm","200×100×100 mm","150×75×75 mm"], a: 0 },
-        { s: "d-1 Civil Engineering", q: "The liquid limit of soil is determined using:", o: ["Proctor test","Casagrande apparatus","Sieve analysis","Hydrometer"], a: 1 },
-        { s: "d-1 Civil Engineering", q: "Raft foundation is preferred when:", o: ["Soil has very high bearing capacity","Individual footings cover > 50% area or soil is weak","Only for bridges","Only for 1-storey buildings"], a: 1 },
-        { s: "d-1 Civil Engineering", q: "Flexible pavement distributes load through:", o: ["Slab/beam action","Grain-to-grain layer transmission","Arch action","Cable tension"], a: 1 },
-        { s: "d-1 Civil Engineering", q: "Drip irrigation is most suitable for:", o: ["Paddy fields","Orchards and vegetables (high efficiency)","Large flat wheat fields","Flood-prone areas"], a: 1 },
-
-        // d-2 TEXTILE ENGINEERING (5 questions)
-        { s: "d-2 Textile Engineering", q: "Cotton is classified as a ___ fibre:", o: ["Synthetic","Mineral","Natural cellulosic","Protein"], a: 2 },
-        { s: "d-2 Textile Engineering", q: "The English count (Ne) of yarn increases as yarn becomes:", o: ["Thicker","Finer (higher count = finer yarn)","Heavier","Shorter"], a: 1 },
-        { s: "d-2 Textile Engineering", q: "Warp yarn runs in the ___ direction of fabric:", o: ["Width (horizontal)","Length (vertical, along loom)","Diagonal","Random"], a: 1 },
-        { s: "d-2 Textile Engineering", q: "Reactive dyes form a covalent bond with:", o: ["Polyester","Nylon","Cotton (cellulosic fibres)","Acrylic"], a: 2 },
-        { s: "d-2 Textile Engineering", q: "Bleaching of textile material is done to:", o: ["Add colour","Remove natural colouring and whiten the fabric","Soften the fabric","Add weight"], a: 1 },
-
-        // d-3 CHEMICAL / PRINTING ENGINEERING (2 questions)
-        { s: "d-3 Chemical/Printing Engineering", q: "Offset printing works because oil-based ink and water:", o: ["Mix easily","Do not mix (oil repels water)","React chemically","Are the same density"], a: 1 },
-        { s: "d-3 Chemical/Printing Engineering", q: "The Haber process manufactures:", o: ["Sulphuric acid","Ammonia","Nitric acid","Chlorine"], a: 1 },
-
-        // d-4 CERAMIC ENGINEERING (2 questions)
-        { s: "d-4 Ceramic Engineering", q: "Vitrification in ceramics refers to:", o: ["Applying a glaze coating","Formation of glassy phase at high temperature filling pores","Drying the ware","Raw material preparation"], a: 1 },
-        { s: "d-4 Ceramic Engineering", q: "Porcelain is ___ compared to earthenware:", o: ["More porous and opaque","Non-porous, translucent, fired at higher temperature","Cheaper and softer","Lower quality"], a: 1 },
-
-        // d-5 FOOD TECHNOLOGY (2 questions)
-        { s: "d-5 Food Technology", q: "HTST pasteurization of milk uses temperature:", o: ["63°C for 30 minutes","72°C for 15 seconds","100°C for 10 minutes","135°C for 2 seconds"], a: 1 },
-        { s: "d-5 Food Technology", q: "Pulses are an important source of ___ in the diet:", o: ["Fats","Plant protein","Vitamin D","Simple sugars"], a: 1 },
-
-        // d-6 OTHERS (4 questions)
-        { s: "d-6 Others", q: "A tractor-mounted plough is an example of ___ equipment:", o: ["Road construction","Farm / agricultural equipment","Mining machinery","Textile machinery"], a: 1 },
-        { s: "d-6 Others", q: "The architectural style of Qutub Minar in Delhi is:", o: ["South Indian Dravidian","Indo-Islamic (early sultanate)","Mughal baroque","Buddhist"], a: 1 },
-        { s: "d-6 Others", q: "Fashion Technology includes knowledge of:", o: ["Chemical process control","Garment manufacturing machines and tools","Bridge construction","Software development"], a: 1 },
-        { s: "d-6 Others", q: "A sewing machine in garment manufacturing uses ___ threading system:", o: ["Single thread (lockstitch uses two threads: needle + bobbin)","No thread","Five threads always","Only chain stitch"], a: 0 }
-    ];
+// ── d-6 OTHERS (4) ───────────────────────────────────────────────
+{s:"d-6 Others",q:"The crop that requires standing water for growth is:",o:["Wheat","Rice (paddy)","Maize","Barley"],a:1},
+{s:"d-6 Others",q:"The Ellora Caves are located in:",o:["Gujarat","Maharashtra","Rajasthan","Madhya Pradesh"],a:1},
+{s:"d-6 Others",q:"Pandit Jasraj was a renowned:",o:["Tabla player","Classical vocalist (Hindustani music)","Sitar player","Dancer"],a:1},
+{s:"d-6 Others",q:"The process of converting raw wool from sheep into thread is called:",o:["Weaving","Spinning","Ginning","Carding"],a:1}
+];
 
 /* ── QUIZ BUILD ── */
 var timerInterval, timeLeft = TIMER_SEC;
@@ -607,4 +594,3 @@ verifyAccess();
 </script>
 </body>
 </html>
-

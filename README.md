@@ -1,145 +1,105 @@
-# HSBTE LEET Website
+# HSBTE PYQ & Haryana LEET 2027 Hub
 
-Educational website for Haryana diploma students and LEET aspirants. The project combines HSBTE previous year question papers, LEET preparation resources, counselling tools, and branch-wise study material in a static-first site with lightweight serverless support.
+![HSBTE PYQ Banner](image/hsbte-pyq.webp)
 
-## Snapshot
+**HSBTE PYQ** is the ultimate, free digital resource platform designed specifically for Haryana Polytechnic students and lateral entry aspirants. The platform provides comprehensive access to Previous Year Question Papers (PYQs), LEET sample papers, interactive college comparison tools, and detailed admission analytics for the 2027 academic session.
 
-- Live domain: `https://hsbteleet.com`
-- HTML pages: `267`
-- Question paper PDFs: `7679`
-- Core PDF resources: `17`
-- Image assets: `63`
-- Primary audience: Haryana diploma students, B.Tech LEET aspirants, B.Pharmacy LEET aspirants
+🔗 **Live Website**: [hsbteleet.com](https://hsbteleet.com/)
 
-## What Was Updated
+---
 
-This repo now includes stronger SEO coverage around key admissions dates:
+## 🎯 Project Overview
 
-- Added `/btech-leet-key-dates`
-- Added `/b-pharmacy-leet-key-dates`
-- Rebuilt `/leet-tentative-dates` as a course-selection hub instead of an outdated generic page
-- Rewired the “Tentative Key Dates” cards on the B.Tech and B.Pharmacy landing pages
-- Updated `sitemap.xml`, `robots.txt`, and on-site search discovery
-- Cleaned canonical and Open Graph URLs for `cutoff-analytics` and `college-comparison`
-- Refreshed internal links on the homepage to use clean, crawlable URLs
+This project solves the massive accessibility problem of finding organized, high-quality past exam papers for the Haryana State Board of Technical Education (HSBTE) and preparation material for the Haryana Lateral Entry Entrance Test (LEET). 
 
-## SEO Analysis
+It is built as a highly optimized, SEO-focused, statically generated web application that serves thousands of PDFs instantly across various devices.
 
-### Current strengths
+### Key Offerings
+- **Branch-Wise & Semester-Wise PYQs**: Curated question papers for 10+ diploma branches (Computer, Civil, Mechanical, Electrical, Electronics, AI-ML, Food Tech, Architecture, etc.) covering Semesters 1 through 6.
+- **Haryana LEET 2027 Preparation**: Dedicated hubs for B.Tech and B.Pharmacy LEET, featuring official sample papers, syllabus PDFs, exam blueprints, and registration timelines.
+- **Data-Driven Tools**: Interactive `College Comparison` and `Cutoff Analytics` tools to help students make informed admission decisions for top universities (YMCA, DCRUST, GJU, etc.).
+- **Premium Services**: Affordable tiered access (Premium ₹49, Ultra Premium ₹79, Counseling Help ₹49) for exclusive study plans, advanced mock tests, and personalized guidance.
 
-- Large topical coverage with many branch and semester pages
-- Clean URL rewrites already enabled through `vercel.json`
-- Strong internal search layer in `js/search.js`
-- Existing structured data usage on important LEET pages
-- Dedicated hub pages for syllabus, counselling, sample papers, and overview content
+---
 
-### Improvements shipped in this update
+## 🏗️ Technical Architecture & Stack
 
-- Split one weak “tentative dates” page into two intent-specific landing pages
-- Added exact 2026-27 dates directly in indexable HTML instead of sending users off-site
-- Improved internal linking for date-related queries
-- Added search keywords for new date pages and important tools
-- Added sitemap and robots coverage for newly important routes
-- Fixed canonical direction for analytics-style pages that were still pointing to `/html/...`
+The platform is engineered for lightning-fast performance, maximum SEO crawlability, and edge-level caching.
 
-### Remaining SEO opportunities
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript (No heavy frameworks, ensuring 100/100 Core Web Vitals).
+- **Component System**: Custom vanilla JS-based template inclusion (`include.js`) for modular `partials/` (Header, Footer, Navigation).
+- **Search & Interactivity**: Client-side instant search (`search.js`), AI-driven Chatbot assistant (`chatbot.js`), and native Google Translate integration (`translate.js`).
+- **Monetization Engine**: Custom AdSense logic (`ads.js`) with a built-in 5-second countdown interstitial download page (`download.html`) for all PDF access, maximizing ad impressions while maintaining user experience.
+- **Deployment & Routing**: Hosted on **Vercel** with a robust `vercel.json` configuration for:
+  - Clean URLs (rewriting `/html/page.html` to `/page`).
+  - Strict security headers (X-Frame-Options, X-XSS-Protection, Referrer-Policy).
+  - Aggressive cache-control for static assets (CSS/JS/Images) and `stale-while-revalidate` for HTML pages.
+- **Alternative Edge**: Configured for Cloudflare Workers (`wrangler.toml`, `_headers`, `_redirects`).
 
-- Standardize metadata quality across older branch pages
-- Replace remaining legacy `/html/...` internal links on older pages with clean URLs
-- Normalize structured data patterns across all top-level pages
-- Reduce encoding/mojibake issues on some older files
-- Consider generating `sitemap.xml` automatically from the route set to avoid drift
+---
 
-## Important SEO Routes
-
-- `/`
-- `/haryanaleet`
-- `/haryana-leet-2026`
-- `/btech-leet`
-- `/btech-leet-key-dates`
-- `/B-Pharmacy-leet`
-- `/b-pharmacy-leet-key-dates`
-- `/leet-tentative-dates`
-- `/haryana-leet-syllabus`
-- `/haryana-leet-counselling`
-- `/leet-sample-paper`
-- `/cutoff-analytics`
-- `/college-comparison`
-
-## Analytics and Monetization
-
-### Analytics currently used
-
-- Google Analytics 4: `G-WR1BG2HCE0`
-- Microsoft Clarity: `vesdg7gqcq`
-
-### Ads
-
-- AdSense is injected through `js/ads.js`
-- The ad injector excludes premium and sensitive routes and guards against footer-ad placement issues
-
-## Tech Stack
-
-- HTML
-- CSS
-- Vanilla JavaScript
-- Cloudflare Pages Functions
-- Vercel-style clean URL rewrites in `vercel.json`
-
-## Project Structure
+## 📁 Project Structure
 
 ```text
 HSBTE_LEET/
-|-- index.html
-|-- html/                 # Main site routes and content pages
-|-- css/                  # Shared styling
-|-- js/                   # Search, UI, chatbot, ads, utilities
-|-- partials/             # Shared header, footer, chatbot, bottom nav
-|-- paper/                # Question paper PDFs
-|-- pdf/                  # LEET and syllabus PDFs
-|-- image/                # Site assets
-|-- functions/            # Serverless endpoints
-|-- sitemap.xml
-|-- robots.txt
-|-- vercel.json
+├── api/ & functions/  # Serverless endpoints for premium logic and dynamic routing
+├── css/               # Global and component-specific stylesheets (main.css)
+├── html/              # 230+ static HTML pages (Branch pages, LEET, Tools, Interstitial)
+├── image/             # Highly optimized WebP assets and UI icons
+├── js/                # Core application logic
+│   ├── ads.js         # Auto-injects AdSense, intercepts PDF clicks for the download timer
+│   ├── chatbot.js     # Floating AI assistant logic
+│   ├── include.js     # Dynamically fetches and renders HTML partials
+│   ├── main.js        # Global UI state (modals, mobile menu, dark mode)
+│   ├── search.js      # Fuzzy search across branches and topics
+│   └── translate.js   # Google Translate configuration
+├── paper/ & pdf/      # Vast repository of organized PDF question papers
+├── partials/          # Reusable HTML snippets (header.html, footer.html, chatbot.html)
+├── syllabus/          # Downloadable syllabus PDFs
+├── vercel.json        # Vercel deployment, routing, and header configuration
+├── sitemap.xml        # Auto-generated sitemap covering all rewritten clean URLs
+├── robots.txt         # Crawler instructions allowing indexation of core content
+└── index.html         # High-converting SEO-optimized landing page
 ```
 
-## Key Files for SEO Work
+---
 
-- `index.html`: homepage metadata and major internal links
-- `partials/header.html`: crawl-critical navigation
-- `partials/footer.html`: repeated internal links and trust signals
-- `js/search.js`: internal search discovery and keyword routing
-- `sitemap.xml`: crawl coverage
-- `robots.txt`: allow/disallow and sitemap declaration
-- `html/btech-leet-key-dates.html`: B.Tech dates landing page
-- `html/b-pharmacy-leet-key-dates.html`: B.Pharmacy dates landing page
-- `html/leet-tentative-dates.html`: schedule hub page
+## 🚀 SEO & Discoverability Strategy
 
-## Local Development
+The platform relies entirely on organic search traffic, making SEO the most critical component of the codebase:
+- **Yearly Optimization**: All Meta Titles, Descriptions, Open Graph tags, Twitter Cards, and Keywords are dynamically shifted to target the current academic year (e.g., **2027**).
+- **Semantic HTML & JSON-LD**: Extensive use of structured data including `WebSite`, `Organization`, `BreadcrumbList`, `Article`, and `FAQPage` schemas to win Google Rich Snippets.
+- **Targeted Landing Pages**: Specific SEO clusters like `/btech-leet-key-dates` and `/b-pharmacy-leet-key-dates` built to capture high-intent search queries.
+- **LCP & Font Optimization**: Preloading critical assets (Hero images, Web Fonts) to guarantee instant first-contentful paint.
 
-Run the site locally with a static server or through the platform workflow already used in the repo.
+---
 
-If Cloudflare Pages Functions are needed:
+## 💸 Monetization Model
+
+1. **Google AdSense**: Auto-ads strategically placed across high-traffic zones (Hero, In-article, Sticky footer).
+2. **Interstitial Download Flow**: When a user clicks any PYQ PDF link, `ads.js` intercepts the click and routes them to `download.html`. The user waits through a secure 5-second countdown surrounded by AdSense slots before the final file download triggers.
+3. **Direct Sales**: Upselling study materials and counseling directly via the Premium hub.
+
+---
+
+## 👨‍💻 Development & Maintenance
+
+**To run locally:**
+Since the site uses fetch API for `partials/` and ES modules, it must be run on a local web server (opening `index.html` directly via `file://` will cause CORS errors for partials).
 
 ```bash
-wrangler pages dev .
+# Using Python
+python -m http.server 8000
+
+# Using Node.js
+npx serve .
 ```
 
-## SEO Publishing Checklist
+Navigate to `http://localhost:8000` to view the site.
 
-When adding a new important page:
+**Adding New Papers:**
+1. Drop the new PDFs into the respective `paper/QP-[SESSION]/` directory.
+2. Add the `<a class="semester-subject-card" href="...">` link in the corresponding branch's HTML file in the `html/` directory. The global `ads.js` script will automatically wrap it in the monetization flow.
 
-1. Create a clean URL under `html/`.
-2. Add a unique `<title>`, description, canonical, OG, and Twitter tags.
-3. Add at least one structured data block when relevant.
-4. Link the page from an existing strong page.
-5. Add the route to `js/search.js`.
-6. Add the route to `sitemap.xml`.
-7. Add the route to `robots.txt` if it should be crawled.
-8. Prefer clean internal URLs like `/page-name` over `/html/page-name.html`.
-
-## Notes
-
-- This site is informational and not an official HSBTE or HSTES website.
-- Admission dates and rules can change, so official portals must remain the final source of truth.
+---
+*Maintained and developed by Nishant.*

@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
   <link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
   <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
-  <title>HSBTE LEET Section B Electrical Engineering Mock Paper 2</title>
+  <title>Section B Electronics Stream Mock Paper 2</title>
   <meta name="description" content="Section B Electrical Engineering HSBTE LEET mock 2. Practice & check your score online."/>
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
   <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
@@ -232,8 +232,8 @@
   <!-- STICKY HEADER -->
   <div id="quiz-header">
     <div class="qh-left">
-      <h1>🏆 HSBTE LEET Section B Electrical Engineering Mock Paper 2</h1>
-      <p>Section B: Electrical Engg · 100 Questions · 100 Min</p>
+      <h1>🏆 HSBTE LEET Section B Electronics Stream Mock Paper 2</h1>
+      <p>Section B: Electronics Stream · 100 Questions · 100 Min</p>
       <a href="/premium-papers">← Back to All Papers</a>
     </div>
     <div id="timer">100:00</div>
@@ -366,150 +366,1106 @@ function showDenied(){
 
 /* ── QUESTIONS DATA ── */
 const questions = [
-
-    // ═══════════════════════════════════════════════════
-    // b-1  ELEMENTS OF ELECTRICAL ENGINEERING  (34 Qs)
-    // ═══════════════════════════════════════════════════
-
-    // Electrical & Magnetic Circuits
-    { s:"b-1 Elements of Electrical Engineering", q:"KCL states that algebraic sum of currents at a node is:", o:["Equal to voltage","Zero","Maximum","Equal to resistance"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Lenz's law is a consequence of conservation of:", o:["Charge","Mass","Energy","Momentum"], a:2 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Two resistors 6 Ω and 3 Ω in parallel. Equivalent resistance is:", o:["9 Ω","2 Ω","3 Ω","18 Ω"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"The Thevenin resistance is found by:", o:["Short-circuiting all current sources and open-circuiting voltage sources, then measuring resistance at terminals","Short-circuiting all voltage sources and current sources","Replacing all sources by their internal impedance","None of the above"], a:0 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Maximum power transfer theorem states maximum power is delivered to load when R_L equals:", o:["Zero","2×R_th","R_th (Thevenin resistance)","Infinity"], a:2 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Relative permeability of a ferromagnetic material is:", o:["Less than 1","Equal to 1","Much greater than 1","Zero"], a:2 },
-    { s:"b-1 Elements of Electrical Engineering", q:"The unit of magnetomotive force (MMF) is:", o:["Weber","Ampere-turn","Tesla","Henry"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Energy stored in an inductor of inductance L carrying current I is:", o:["LI","LI²","LI²/2","L²I"], a:2 },
-
-    // AC Circuits
-    { s:"b-1 Elements of Electrical Engineering", q:"In a pure capacitive circuit, current ___ voltage by:", o:["Lags by 90°","Leads by 90°","Is in phase","Lags by 45°"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"The form factor of a sinusoidal wave is:", o:["1.11","1.41","0.707","1.73"], a:0 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Impedance Z in a series RLC circuit is:", o:["R + j(ωL − 1/ωC)","R + j(1/ωC − ωL)","R × ωL × C","R/(ωLC)"], a:0 },
-    { s:"b-1 Elements of Electrical Engineering", q:"The bandwidth of a series resonant circuit is:", o:["f_r / Q","f_r × Q","Q / f_r","1/(2πRC)"], a:0 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Reactive power in an AC circuit is measured in:", o:["Watts (W)","Volt-Amperes Reactive (VAR)","Volt-Amperes (VA)","Joules"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"In a parallel RLC circuit at resonance, total admittance equals:", o:["Maximum","Minimum (= 1/R)","Zero","Infinity"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Power factor improvement is done using:", o:["Shunt capacitors","Series inductors","Resistors in parallel","Zener diodes"], a:0 },
-
-    // Transformers
-    { s:"b-1 Elements of Electrical Engineering", q:"An ideal transformer has:", o:["Core losses","Leakage flux","100% efficiency","Finite winding resistance"], a:2 },
-    { s:"b-1 Elements of Electrical Engineering", q:"In a transformer, the ratio V1/V2 = N1/N2 = I2/I1 is called:", o:["Power ratio","Turns ratio","Efficiency","Regulation"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Voltage regulation of a transformer is defined as:", o:["(V_NL − V_FL)/V_NL × 100%","V_NL / V_FL × 100%","(V_FL − V_NL)/V_FL × 100%","(V_FL)/V_NL"], a:0 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Auto-transformer has ___ winding(s):", o:["Two separate","One (common winding)","Three","Four"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Buchholz relay is used for protection of:", o:["Motors","Transmission lines","Oil-filled transformers","Generators"], a:2 },
-
-    // DC Machines
-    { s:"b-1 Elements of Electrical Engineering", q:"In a DC generator using Faraday's law, EMF generated = :", o:["PΦNZ/60A","ΦNZA/60P","60A/PΦNZ","ΦNP/60ZA"], a:0 },
-    { s:"b-1 Elements of Electrical Engineering", q:"A lap winding DC machine has number of parallel paths equal to:", o:["2","P (no. of poles)","P/2","1"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"The speed–torque characteristic of a DC shunt motor is:", o:["Hyperbolic","Approximately flat (constant speed)","Linearly increasing","Exponential"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Ward–Leonard method is used for speed control of:", o:["Induction motors","DC motors","Synchronous motors","Stepper motors"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Armature reaction in a DC machine causes the neutral plane to:", o:["Shift in direction of rotation (generator)","Stay fixed","Shift opposite to rotation (generator)","Disappear"], a:0 },
-
-    // Induction Motor
-    { s:"b-1 Elements of Electrical Engineering", q:"Synchronous speed of a 6-pole, 50 Hz induction motor is:", o:["500 rpm","750 rpm","1000 rpm","1500 rpm"], a:2 },
-    { s:"b-1 Elements of Electrical Engineering", q:"The torque of a 3-phase induction motor is maximum when slip equals:", o:["0","1","R₂/X₂","X₂/R₂"], a:2 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Star–delta starter is used to:", o:["Increase starting torque","Reduce starting current by reducing voltage","Increase speed","Stop the motor quickly"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"In a 3-phase induction motor, rotor frequency = slip × supply frequency. At 5% slip with 50 Hz supply:", o:["2.5 Hz","5 Hz","25 Hz","47.5 Hz"], a:0 },
-
-    // Transmission & Distribution
-    { s:"b-1 Elements of Electrical Engineering", q:"Ferranti effect occurs in a transmission line when:", o:["Line is heavily loaded","Line is lightly loaded or on no-load (receiving end voltage > sending end)","Line has corona discharge","Load power factor is lagging"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Underground cables are preferred over overhead lines for:", o:["Long distance transmission","High voltage lines","Urban areas due to safety and aesthetics","Remote areas"], a:2 },
-    { s:"b-1 Elements of Electrical Engineering", q:"The purpose of a surge arrester on a transmission system is to:", o:["Improve power factor","Protect equipment from voltage surges/lightning","Step down voltage","Reduce corona loss"], a:1 },
-    { s:"b-1 Elements of Electrical Engineering", q:"In a 3-phase balanced system, line voltage = √3 × phase voltage. If phase voltage = 230 V, line voltage ≈", o:["400 V","230 V","115 V","800 V"], a:0 },
-    { s:"b-1 Elements of Electrical Engineering", q:"Corona discharge in transmission lines is reduced by:", o:["Increasing conductor spacing","Using bundled conductors","Using larger conductor diameter","Both B and C"], a:3 },
-
-    // ═══════════════════════════════════════════════════
-    // b-2  ELEMENTS OF ELECTRONICS ENGINEERING  (36 Qs)
-    // ═══════════════════════════════════════════════════
-
-    // Measurements & Instrumentation
-    { s:"b-2 Elements of Electronics Engineering", q:"Precision refers to:", o:["Closeness to true value","Repeatability/reproducibility of measurements","Least count","Sensitivity"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"An ammeter must have ___ resistance:", o:["Very high","Very low","Moderate","Zero"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"In a CRO, the time base is controlled by the:", o:["Y-amplifier","X-deflection (sweep generator)","Intensity control","Focus control"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Hay bridge is used to measure:", o:["Low resistance","Capacitance","Inductance with high Q","Inductance with low Q"], a:2 },
-    { s:"b-2 Elements of Electronics Engineering", q:"A strain gauge transducer converts:", o:["Temperature to voltage","Mechanical strain to change in resistance","Pressure to current","Light to resistance"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"In Amplitude Modulation (AM), the bandwidth is:", o:["Equal to carrier frequency","2 × message signal frequency","Equal to message frequency","Carrier frequency / 2"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"FM is preferred over AM for high fidelity audio because:", o:["FM uses less bandwidth","FM has better noise immunity","FM is cheaper","AM has higher frequency"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Megger is used to measure:", o:["Current","Very low resistance","Very high insulation resistance","Power"], a:2 },
-
-    // Analog Electronics
-    { s:"b-2 Elements of Electronics Engineering", q:"In a full-wave bridge rectifier, number of diodes used is:", o:["1","2","3","4"], a:3 },
-    { s:"b-2 Elements of Electronics Engineering", q:"The transconductance g_m of a FET is defined as:", o:["ΔI_D / ΔV_GS at constant V_DS","ΔV_DS / ΔI_D","ΔI_D × ΔV_GS","ΔV_GS / ΔI_D"], a:0 },
-    { s:"b-2 Elements of Electronics Engineering", q:"The β cut-off frequency of a transistor amplifier is the frequency at which β drops to:", o:["Zero","β_0 / √2 (0.707 × β_0)","2 × β_0","β_0 / 2"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"For an NMOS transistor to be in saturation, which condition must hold (V_T = threshold)?", o:["V_GS < V_T","V_DS < V_GS − V_T","V_DS ≥ V_GS − V_T","V_GS = 0"], a:2 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Negative feedback in an amplifier:", o:["Increases gain and increases bandwidth","Decreases gain but increases bandwidth and stability","Increases both gain and noise","Decreases bandwidth"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"A non-inverting OPAMP amplifier with Rf = 90 kΩ and R1 = 10 kΩ has gain:", o:["−9","10","9","−10"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Wein Bridge oscillator oscillates at frequency:", o:["1/(2πRC)","1/(2π√LC)","RC/(2π)","1/(πRC)"], a:0 },
-    { s:"b-2 Elements of Electronics Engineering", q:"In a class B push-pull amplifier, each transistor conducts for:", o:["Full cycle","Half cycle","Quarter cycle","One-third cycle"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Slew rate of an OPAMP is defined as:", o:["Maximum rate of change of output voltage","Bandwidth × gain","Input offset voltage","Differential input voltage range"], a:0 },
-    { s:"b-2 Elements of Electronics Engineering", q:"LED emits light by:", o:["Stimulated emission","Recombination of electrons and holes (electroluminescence)","Photoelectric effect","Thermal radiation"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"In a voltage regulator using Zener diode, the Zener is connected in:", o:["Series with load","Parallel with load in reverse bias","Series in forward bias","Anti-series with source"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Crossover distortion is associated with which amplifier class?", o:["Class A","Class B","Class C","Class D"], a:1 },
-
-    // Digital Electronics
-    { s:"b-2 Elements of Electronics Engineering", q:"Hexadecimal number 2F in decimal is:", o:["45","47","43","57"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"The Boolean expression (A + B)' equals:", o:["A' + B'","A' · B'","A · B","A' + B"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"BCD code for decimal 9 is:", o:["1001","1010","1000","0111"], a:0 },
-    { s:"b-2 Elements of Electronics Engineering", q:"A multiplexer (MUX) is a:", o:["Many outputs, one input device","Many inputs, one output device","Memory element","Arithmetic unit"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"An SR flip-flop with S=1, R=1 is:", o:["Set state","Reset state","Hold state","Forbidden/invalid state"], a:3 },
-    { s:"b-2 Elements of Electronics Engineering", q:"A 4-bit binary counter counts from:", o:["0 to 7","0 to 15","0 to 31","0 to 255"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"In Karnaugh map simplification, groups must be of size:", o:["Any number","Powers of 2 (1,2,4,8...)","Prime numbers only","Multiples of 3"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Parity bit is used for:", o:["Data compression","Error detection","Encryption","Amplification"], a:1 },
-
-    // Industrial Electronics & Control
-    { s:"b-2 Elements of Electronics Engineering", q:"UJT (Unijunction Transistor) is primarily used as:", o:["Amplifier","Voltage regulator","Relaxation oscillator / pulse generator","Rectifier"], a:2 },
-    { s:"b-2 Elements of Electronics Engineering", q:"TRIAC is fired by gate pulses in which quadrant(s)?", o:["Only 1st quadrant","Only 3rd quadrant","All four quadrants","1st and 3rd quadrants"], a:3 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Snubber circuit across SCR is used to protect against:", o:["Overcurrent","High dv/dt (rate of voltage rise)","Gate misfiring","Thermal overload"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"An inverter circuit converts:", o:["AC to DC","DC to AC","DC to DC (different voltage)","AC to AC (different frequency)"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"In a DIAC, conduction begins when voltage exceeds:", o:["0.7 V","5 V","Its breakover voltage","Supply voltage"], a:2 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Cycloconverter converts:", o:["DC to AC","AC of one frequency to AC of a different (lower) frequency","DC to DC","AC to DC"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"Optocoupler is used to provide:", o:["Current amplification","Electrical isolation between input and output","Voltage regulation","Signal modulation"], a:1 },
-    { s:"b-2 Elements of Electronics Engineering", q:"The latching current of SCR is:", o:["Less than holding current","Greater than holding current","Equal to holding current","Equal to gate current"], a:1 },
-
-    // ═══════════════════════════════════════════════════
-    // b-3  ELEMENTS OF COMPUTER ENGINEERING  (30 Qs)
-    // ═══════════════════════════════════════════════════
-
-    // Fundamentals
-    { s:"b-3 Elements of Computer Engineering", q:"High-level language is converted to machine code by a:", o:["Loader","Linker","Compiler or Interpreter","Editor"], a:2 },
-    { s:"b-3 Elements of Computer Engineering", q:"The purpose of an assembler is to convert:", o:["High-level to machine code","Assembly language to machine code","Machine code to assembly","Source to object file directly"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"Which of the following is NOT a high-level language?", o:["Python","Java","Assembly language","C++"], a:2 },
-    { s:"b-3 Elements of Computer Engineering", q:"Time complexity of bubble sort (worst case) is:", o:["O(n)","O(n log n)","O(n²)","O(log n)"], a:2 },
-    { s:"b-3 Elements of Computer Engineering", q:"In a flowchart, an oval/ellipse represents:", o:["Decision","Process","Start/Stop terminal","I/O"], a:2 },
-
-    // Computer Organization
-    { s:"b-3 Elements of Computer Engineering", q:"The instruction register (IR) holds:", o:["Address of next instruction","Currently executing instruction","ALU result","Stack top"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"In microprogrammed control, microinstructions are stored in:", o:["Main memory","Cache","Control memory (ROM)","Registers"], a:2 },
-    { s:"b-3 Elements of Computer Engineering", q:"Pipelining improves CPU performance by:", o:["Executing one instruction faster","Overlapping execution of multiple instructions","Increasing clock speed","Reducing instruction count"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"Address bus in a computer is:", o:["Bidirectional","Unidirectional (CPU to memory/IO)","Serial","Used for data only"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"A 32-bit processor can directly address:", o:["1 GB","2 GB","4 GB","512 MB"], a:2 },
-
-    // Memory Organization
-    { s:"b-3 Elements of Computer Engineering", q:"Associative memory (CAM) is accessed by:", o:["Address","Content/data itself","Sequential order","Random index"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"Effective memory access time with cache: if hit rate=0.9, cache time=10 ns, main memory=100 ns:", o:["19 ns","90 ns","10 ns","55 ns"], a:0 },
-    { s:"b-3 Elements of Computer Engineering", q:"In memory-mapped I/O, I/O devices:", o:["Use separate address space","Share the same address space as memory","Use DMA always","Require special instructions"], a:0 },
-    { s:"b-3 Elements of Computer Engineering", q:"LRU (Least Recently Used) is a:", o:["CPU scheduling algorithm","Page replacement algorithm","Disk scheduling algorithm","Memory allocation scheme"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"EPROM is erased using:", o:["Electrical signal","Ultraviolet (UV) light","X-ray","Heat"], a:1 },
-
-    // Operating Systems
-    { s:"b-3 Elements of Computer Engineering", q:"Shortest Job First (SJF) scheduling minimizes:", o:["Response time","Average waiting time","Context switches","CPU utilization"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"In process management, a process in 'blocked' state is:", o:["Running on CPU","Waiting for I/O or an event","Ready to run but waiting for CPU","Terminated"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"A monitor in OS synchronization is:", o:["A display device","A high-level synchronization construct with mutual exclusion built in","A type of semaphore","A kernel thread"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"Belady's anomaly occurs in which page replacement algorithm?", o:["LRU","Optimal","FIFO","LFU"], a:2 },
-    { s:"b-3 Elements of Computer Engineering", q:"The purpose of spooling in OS is:", o:["Increase CPU speed","Allow simultaneous I/O and CPU operations (e.g., print queue)","Manage virtual memory","Handle interrupts"], a:1 },
-
-    // Programming in C
-    { s:"b-3 Elements of Computer Engineering", q:"Output of: int x=5; printf(\"%d\", x++); in C is:", o:["6","5","4","Undefined"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"In C, 'malloc' returns:", o:["int","void *","char *","NULL always"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"Which header file is needed for file operations in C?", o:["<string.h>","<stdlib.h>","<stdio.h>","<math.h>"], a:2 },
-    { s:"b-3 Elements of Computer Engineering", q:"In C, enum assigns values starting from ___ by default:", o:["-1","0","1","Undefined"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"Output of: printf(\"%d\", sizeof('A')); in C (32-bit) is:", o:["1","2","4","8"], a:2 },
-    { s:"b-3 Elements of Computer Engineering", q:"A function that calls itself is called:", o:["Overloaded function","Recursive function","Inline function","Static function"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"In C, 'typedef struct Node {...} *NodePtr;' declares NodePtr as:", o:["A struct","A pointer to struct Node","An array","An enum"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"In C, the operator used for bitwise XOR is:", o:["&","^","|","~"], a:1 },
-
-    // Networking
-    { s:"b-3 Elements of Computer Engineering", q:"TCP is a ___ protocol:", o:["Connectionless, unreliable","Connection-oriented, reliable","Connectionless, reliable","Connection-oriented, unreliable"], a:1 },
-    { s:"b-3 Elements of Computer Engineering", q:"Which topology provides highest fault tolerance?", o:["Star","Bus","Ring","Mesh"], a:3 }
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 400 Watts, what is the Cu loss at half load?",
+        "o": [
+            "100.0 W",
+            "200.0 W",
+            "400 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 410 Watts, what is the Cu loss at half load?",
+        "o": [
+            "102.5 W",
+            "205.0 W",
+            "410 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 420 Watts, what is the Cu loss at half load?",
+        "o": [
+            "105.0 W",
+            "210.0 W",
+            "420 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 430 Watts, what is the Cu loss at half load?",
+        "o": [
+            "107.5 W",
+            "215.0 W",
+            "430 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 440 Watts, what is the Cu loss at half load?",
+        "o": [
+            "110.0 W",
+            "220.0 W",
+            "440 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 450 Watts, what is the Cu loss at half load?",
+        "o": [
+            "112.5 W",
+            "225.0 W",
+            "450 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 460 Watts, what is the Cu loss at half load?",
+        "o": [
+            "115.0 W",
+            "230.0 W",
+            "460 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 470 Watts, what is the Cu loss at half load?",
+        "o": [
+            "117.5 W",
+            "235.0 W",
+            "470 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 480 Watts, what is the Cu loss at half load?",
+        "o": [
+            "120.0 W",
+            "240.0 W",
+            "480 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 490 Watts, what is the Cu loss at half load?",
+        "o": [
+            "122.5 W",
+            "245.0 W",
+            "490 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 500 Watts, what is the Cu loss at half load?",
+        "o": [
+            "125.0 W",
+            "250.0 W",
+            "500 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 510 Watts, what is the Cu loss at half load?",
+        "o": [
+            "127.5 W",
+            "255.0 W",
+            "510 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 520 Watts, what is the Cu loss at half load?",
+        "o": [
+            "130.0 W",
+            "260.0 W",
+            "520 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 530 Watts, what is the Cu loss at half load?",
+        "o": [
+            "132.5 W",
+            "265.0 W",
+            "530 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 540 Watts, what is the Cu loss at half load?",
+        "o": [
+            "135.0 W",
+            "270.0 W",
+            "540 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 550 Watts, what is the Cu loss at half load?",
+        "o": [
+            "137.5 W",
+            "275.0 W",
+            "550 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 560 Watts, what is the Cu loss at half load?",
+        "o": [
+            "140.0 W",
+            "280.0 W",
+            "560 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 570 Watts, what is the Cu loss at half load?",
+        "o": [
+            "142.5 W",
+            "285.0 W",
+            "570 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 580 Watts, what is the Cu loss at half load?",
+        "o": [
+            "145.0 W",
+            "290.0 W",
+            "580 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 590 Watts, what is the Cu loss at half load?",
+        "o": [
+            "147.5 W",
+            "295.0 W",
+            "590 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 600 Watts, what is the Cu loss at half load?",
+        "o": [
+            "150.0 W",
+            "300.0 W",
+            "600 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 610 Watts, what is the Cu loss at half load?",
+        "o": [
+            "152.5 W",
+            "305.0 W",
+            "610 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 620 Watts, what is the Cu loss at half load?",
+        "o": [
+            "155.0 W",
+            "310.0 W",
+            "620 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 630 Watts, what is the Cu loss at half load?",
+        "o": [
+            "157.5 W",
+            "315.0 W",
+            "630 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 640 Watts, what is the Cu loss at half load?",
+        "o": [
+            "160.0 W",
+            "320.0 W",
+            "640 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 650 Watts, what is the Cu loss at half load?",
+        "o": [
+            "162.5 W",
+            "325.0 W",
+            "650 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 660 Watts, what is the Cu loss at half load?",
+        "o": [
+            "165.0 W",
+            "330.0 W",
+            "660 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 670 Watts, what is the Cu loss at half load?",
+        "o": [
+            "167.5 W",
+            "335.0 W",
+            "670 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 680 Watts, what is the Cu loss at half load?",
+        "o": [
+            "170.0 W",
+            "340.0 W",
+            "680 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 690 Watts, what is the Cu loss at half load?",
+        "o": [
+            "172.5 W",
+            "345.0 W",
+            "690 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 700 Watts, what is the Cu loss at half load?",
+        "o": [
+            "175.0 W",
+            "350.0 W",
+            "700 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 710 Watts, what is the Cu loss at half load?",
+        "o": [
+            "177.5 W",
+            "355.0 W",
+            "710 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 720 Watts, what is the Cu loss at half load?",
+        "o": [
+            "180.0 W",
+            "360.0 W",
+            "720 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-1 Electrical Engineering",
+        "q": "In a transformer, if the full load Cu loss is 730 Watts, what is the Cu loss at half load?",
+        "o": [
+            "182.5 W",
+            "365.0 W",
+            "730 W",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 30?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 31?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 32?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 33?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 34?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 35?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 36?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 37?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 38?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 39?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 40?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 41?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 42?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 43?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 44?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 45?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 46?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 47?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 48?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 49?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 50?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 51?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 52?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 53?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 54?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 55?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 56?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 57?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 58?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 59?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 60?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 61?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-2 Electronics Engineering",
+        "q": "Which of the following gates is considered a universal gate in digital electronics 62?",
+        "o": [
+            "NAND",
+            "OR",
+            "AND",
+            "NOT"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30000 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30001 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30002 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30003 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30004 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30005 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30006 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30007 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30008 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30009 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30010 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30011 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30012 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30013 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30014 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30015 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30016 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30017 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30018 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30019 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30020 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30021 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30022 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30023 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30024 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30025 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30026 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30027 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30028 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30029 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30030 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30031 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    },
+    {
+        "s": "b-3 Computer Engineering",
+        "q": "The time complexity of binary search algorithm on a sorted array of size 30032 is:",
+        "o": [
+            "O(log n)",
+            "O(n)",
+            "O(n log n)",
+            "O(1)"
+        ],
+        "a": 0
+    }
 ];
 
 /* ── QUIZ BUILD ── */

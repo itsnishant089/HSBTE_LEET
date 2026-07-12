@@ -7,9 +7,9 @@
   <meta http-equiv="Cache-Control" content="no-store, max-age=0">
   <meta http-equiv="Pragma" content="no-cache">
   <link rel="icon" href="https://hsbteleet.com/image/favicon.webp" />
-  <title>Premium Login | Haryana LEET 2026 | hsbteleet.com</title>
+  <title>Premium Login | Haryana LEET 2027 | hsbteleet.com</title>
   <meta name="description"
-    content="Login or register for Premium (₹49) or Ultra Premium (₹79) Haryana LEET 2026 access. 14 exclusive LEET sample papers, College Predictor, Rank Predictor and more. 100% ad-free." />
+    content="Login or register for Premium (₹99) or Ultra Premium (₹149) Haryana LEET 2027 access. 14 exclusive LEET sample papers, College Predictor, Rank Predictor and more. 100% ad-free." />
   <meta name="robots" content="index, follow" />
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
@@ -991,7 +991,7 @@
         <div class="tier-check"><i class="fas fa-check"></i></div>
         <div class="tier-icon">👑</div>
         <div class="tier-name">Premium</div>
-        <div class="tier-price">₹49</div>
+        <div class="tier-price">₹99</div>
         <div class="tier-desc">14 Papers + Rank Analysis</div>
         <div class="tier-save">Launch Price</div>
       </div>
@@ -999,7 +999,7 @@
         <div class="tier-check"><i class="fas fa-check"></i></div>
         <div class="tier-icon">🚀</div>
         <div class="tier-name">Ultra Premium</div>
-        <div class="tier-price">₹79</div>
+        <div class="tier-price">₹149</div>
         <div class="tier-desc">Papers + All AI Tools</div>
         <div class="tier-save">Best Value</div>
       </div>
@@ -1016,7 +1016,7 @@
           <p class="hdr-sub" id="hdrSub">Login or register — unlock 14 exclusive papers and Rank Analysis</p>
           <div class="hdr-badges">
             <span class="hbadge"><span class="dot"></span>Secure</span>
-            <span class="hbadge" id="hdrPrice">₹49 One-Time</span>
+            <span class="hbadge" id="hdrPrice">₹99 One-Time</span>
             <span class="hbadge">Ad-Free</span>
             <span class="hbadge">Lifetime</span>
           </div>
@@ -1127,7 +1127,7 @@
           <div id="step2" style="display:none">
             <div style="text-align:center;margin-bottom:18px">
               <div class="ppill ppill-a" id="s2pill"><i class="fas fa-crown"></i> One-time — <span id="s2price"
-                  style="font-weight:900">₹49</span></div>
+                  style="font-weight:900">₹99</span></div>
               <p style="font-size:13px;color:var(--mu);line-height:1.65;margin-bottom:12px" id="s2desc">Pay once —
                 unlock 14 premium papers plus Rank Analysis, lifetime access, 100% ad-free.</p>
               <ul class="feat-list" style="text-align:left;max-width:260px;margin:0 auto" id="s2feats">
@@ -1153,17 +1153,17 @@
 
             <!-- PRICE SUMMARY -->
             <div class="price-summary">
-              <div class="price-row"><span>Original Price</span><span style="font-weight:600" id="orig-p">₹49</span>
+              <div class="price-row"><span>Original Price</span><span style="font-weight:600" id="orig-p">₹99</span>
               </div>
               <div class="price-disc" id="disc-row"><span id="disc-lbl">🏷 Discount</span><span id="disc-val">-₹0</span>
               </div>
-              <div class="price-total"><span>Total Payable</span><span id="total-p" style="color:var(--b)">₹49</span>
+              <div class="price-total"><span>Total Payable</span><span id="total-p" style="color:var(--b)">₹99</span>
               </div>
             </div>
 
             <div id="pay-wrap">
               <button class="btn btn-a" id="btn-pay" onclick="doPayment()"><i class="fas fa-lock"></i> <span
-                  id="pay-txt">Pay ₹49 and Unlock Access</span></button>
+                  id="pay-txt">Pay ₹99 and Unlock Access</span></button>
             </div>
             <div id="free-wrap" style="display:none">
               <button class="btn btn-g" id="btn-free" onclick="doFreeAccess()"><i class="fas fa-gift"></i> Claim FREE
@@ -1218,10 +1218,10 @@
     var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
     emailjs.init(EJS_PUB);
 
-    // ── TIERS — updated to ₹49 / ₹79 ──
+    // ── TIERS — updated to ₹99 / ₹149 ──
     var TIERS = {
-      premium: { label: 'Premium', price: 49, paise: 4900, icon: '👑', color: '#d97706', hdr: 'hdr-prem' },
-      ultra: { label: 'Ultra Premium', price: 79, paise: 7900, icon: '🚀', color: '#7c3aed', hdr: 'hdr-ultra' }
+      premium: { label: 'Premium', price: 99, paise: 9900, icon: '👑', color: '#d97706', hdr: 'hdr-prem' },
+      ultra: { label: 'Ultra Premium', price: 149, paise: 14900, icon: '🚀', color: '#7c3aed', hdr: 'hdr-ultra' }
     };
     var COUPONS = {
       'NISHANT': { label: 'NISHANT — 50% off!', type: 'percent', percent: 50 },
@@ -1231,7 +1231,7 @@
     var curTier = 'premium';
     var pending = null;
     var applied = null;
-    var payPaise = 4900;
+    var payPaise = 9900;
 
     // ── URL PARAM ──
     (function () {

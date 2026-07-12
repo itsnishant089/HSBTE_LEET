@@ -279,4 +279,23 @@
 
   // Fallback timeout in case of no user interaction
   window.setTimeout(initAdsOnInteraction, 4000);
+
+  // --- INTERCEPT ALL PAPER DOWNLOAD CLICKS ---
+  // Redirect to download.html with 5-second countdown & ads
+  document.addEventListener('click', function(e) {
+    // Find if the clicked element or its parent is a link
+    const target = e.target.closest('a');
+    if (!target) return;
+
+    const href = target.getAttribute('href');
+    if (!href) return;
+
+    // If the link is to a PDF or in the /paper/ directory
+    if (href.indexOf('/paper/') !== -1 || href.toLowerCase().endsWith('.pdf')) {
+      e.preventDefault();
+      // Redirect to the interstitial page
+      window.location.href = '/html/download.html?file=' + encodeURIComponent(href);
+    }
+  });
+
 })();

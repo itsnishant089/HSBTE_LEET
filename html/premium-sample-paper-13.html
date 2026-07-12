@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
+  <title>HSBTE LEET Premium Sample Paper 13 | Haryana LEET Practice</title>
+  <meta name="description" content="HSBTE LEET premium sample Paper 13 — physics focus mock. Submit & check your score."/>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://hsbteleet.com/"},
+    {"@type":"ListItem","position":2,"name":"Haryana LEET","item":"https://hsbteleet.com/haryanaleet"},
+    {"@type":"ListItem","position":3,"name":"Premium Papers","item":"https://hsbteleet.com/premium-papers"}
+  ]}
+  </script>
+  <style>
+    :root{
+      --pri:#1a56db;--gold:#f59e0b;--success:#16a34a;--danger:#ef4444;
+      --warn:#f59e0b;--bg:#f0f4ff;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* ── ACCESS DENIED ── */
+    #access-denied{display:none;position:fixed;inset:0;background:#0f172a;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied h2{font-size:1.6rem;font-weight:800;margin:18px 0 12px;}
+    #access-denied p{opacity:.8;max-width:400px;line-height:1.7;margin-bottom:22px;}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:50px;
+      background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-size:.95rem;font-weight:800;text-decoration:none;}
+
+    /* ── LOADER ── */
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
+    .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:var(--pri);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:15px;color:var(--muted);}
+
+    /* ── WATERMARK  (strong & visible) ── */
+    #wm-layer{
+      position:fixed;inset:0;pointer-events:none;z-index:8888;
+      overflow:hidden;user-select:none;
+    }
+    .wm-row{
+      position:absolute;
+      white-space:nowrap;
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:3px;
+      color:rgba(26,86,219,0.13);   /* clearly visible */
+      transform:rotate(-30deg);
+      transform-origin:left center;
+    }
+
+    /* ── STICKY HEADER BAR ── */
+    #quiz-header{
+      position:sticky;top:0;z-index:500;
+      background:linear-gradient(135deg,#0f172a 0%,#1a3a6e 60%,#1a56db 100%);
+      color:#fff;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+      border-bottom:3px solid var(--gold);
+      box-shadow:0 4px 20px rgba(26,86,219,.25);
+    }
+    .qh-left h1{font-size:1.1rem;font-weight:800;margin-bottom:2px;}
+    .qh-left p{font-size:11.5px;opacity:.78;}
+    .qh-left a{font-size:11px;color:#fcd34d;text-decoration:none;opacity:.9;}
+    .qh-left a:hover{opacity:1;text-decoration:underline;}
+    #timer{font-size:1.4rem;font-weight:900;color:#fef08a;
+      background:rgba(0,0,0,.3);padding:7px 16px;border-radius:10px;
+      border:1.5px solid rgba(254,240,138,.3);letter-spacing:1px;font-variant-numeric:tabular-nums;}
+    #timer.danger{color:#fca5a5;border-color:rgba(252,165,165,.4);animation:pulse .7s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+    /* ── SECURITY BAR ── */
+    .sec-bar{
+      background:#fef3c7;border-left:4px solid #f59e0b;
+      padding:10px 18px;font-size:12.5px;color:#92400e;
+      display:flex;align-items:center;gap:10px;
+    }
+
+    /* ── MAIN WRAP ── */
+    .quiz-wrap{max-width:900px;margin:0 auto;padding:22px 16px 60px;}
+
+    /* ── SECTION DIVIDER ── */
+    .sec-div{
+      display:flex;align-items:center;gap:12px;
+      background:linear-gradient(135deg,#1a56db,#7c3aed);
+      color:#fff;padding:11px 20px;border-radius:10px;
+      margin:28px 0 16px;font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    }
+    .sec-div .sec-icon{font-size:1.2rem;}
+
+    /* ── QUESTION CARD ── */
+    .q-card{
+      background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+      padding:22px 20px;margin-bottom:18px;
+      transition:border-color .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
+    }
+    .q-card::before{
+      content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+      background:linear-gradient(180deg,var(--pri),#7c3aed);border-radius:4px 0 0 4px;
+    }
+    .q-card:hover{border-color:#bfdbfe;box-shadow:0 4px 18px rgba(26,86,219,.1);}
+    .q-card.answered{border-color:#bbf7d0;background:#f0fdf4;}
+    .q-card.answered::before{background:linear-gradient(180deg,#16a34a,#22c55e);}
+    .q-num{font-size:11px;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+    .q-num .q-badge{background:#eff6ff;border:1px solid #bfdbfe;padding:2px 8px;border-radius:20px;font-size:10px;}
+    .q-text{font-size:1rem;font-weight:600;line-height:1.6;color:var(--text);margin-bottom:16px;}
+    .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+    @media(max-width:520px){.opts{grid-template-columns:1fr;}}
+    .opt{
+      display:flex;align-items:center;gap:10px;
+      padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+      cursor:pointer;transition:all .18s;font-size:.92rem;color:var(--text);
+    }
+    .opt:hover{background:#eff6ff;border-color:#93c5fd;transform:translateX(2px);}
+    .opt input{accent-color:var(--pri);width:15px;height:15px;flex-shrink:0;cursor:pointer;}
+    .opt.sel{background:#eff6ff;border-color:var(--pri);font-weight:600;}
+    .opt-letter{
+      width:24px;height:24px;border-radius:50%;background:var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:800;color:var(--muted);flex-shrink:0;transition:.18s;
+    }
+    .opt.sel .opt-letter{background:var(--pri);color:#fff;}
+
+    /* ── SUBMIT AREA ── */
+    .submit-wrap{text-align:center;padding:28px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-top:10px;}
+    .submit-wrap p{font-size:14px;color:var(--muted);margin-bottom:16px;}
+    #progress-bar-wrap{background:#e2e8f0;border-radius:20px;height:8px;margin-bottom:16px;overflow:hidden;}
+    #progress-bar{height:100%;background:linear-gradient(90deg,var(--pri),#7c3aed);border-radius:20px;transition:width .3s;}
+    #progress-text{font-size:13px;font-weight:700;color:var(--pri);margin-bottom:16px;}
+    .btn-submit{
+      display:inline-flex;align-items:center;gap:9px;
+      padding:15px 40px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+      font-size:1.05rem;font-weight:800;transition:all .2s;
+      box-shadow:0 6px 20px rgba(22,163,74,.3);
+    }
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(22,163,74,.4);}
+    .btn-submit:active{transform:translateY(0);}
+
+    /* ── RESULTS ── */
+    #results{display:none;}
+    .results-hero{
+      background:linear-gradient(135deg,#0f172a,#1a3a6e,#1a56db);
+      color:#fff;border-radius:20px;padding:30px;text-align:center;margin-bottom:24px;
+    }
+    .results-hero h2{font-size:1.6rem;font-weight:900;margin-bottom:6px;}
+    .results-hero p{opacity:.8;font-size:14px;}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;}
+    .score-card{background:var(--card);border-radius:16px;padding:20px 16px;text-align:center;border:2px solid var(--border);transition:.2s;}
+    .score-card:hover{transform:translateY(-3px);}
+    .score-card .s-val{font-size:2.2rem;font-weight:900;display:block;margin-bottom:4px;}
+    .score-card .s-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+    .s-correct{border-color:#86efac;} .s-correct .s-val{color:#16a34a;}
+    .s-wrong{border-color:#fca5a5;}   .s-wrong .s-val{color:#ef4444;}
+    .s-skip{border-color:#fde68a;}    .s-skip .s-val{color:#d97706;}
+    .s-att{border-color:#bfdbfe;}     .s-att .s-val{color:var(--pri);}
+    .s-score{border-color:#ddd6fe;}   .s-score .s-val{color:#7c3aed;}
+    .s-total{border-color:#e2e8f0;}   .s-total .s-val{color:var(--text);}
+
+    /* result action buttons */
+    .result-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:20px 0;}
+    .btn-retake{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 32px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--pri),#1d4ed8);color:#fff;
+      font-size:.95rem;font-weight:800;transition:all .2s;
+    }
+    .btn-retake:hover{transform:translateY(-2px);}
+    .btn-back-papers{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 28px;border-radius:50px;
+      background:#f1f5f9;color:var(--text);font-size:.95rem;font-weight:700;
+      text-decoration:none;border:2px solid var(--border);transition:.2s;
+    }
+    .btn-back-papers:hover{border-color:var(--pri);background:#eff6ff;}
+
+    /* ── REVIEW SECTION ── */
+    .review-header{font-size:1.1rem;font-weight:800;margin:24px 0 14px;color:var(--text);display:flex;align-items:center;gap:8px;}
+    .r-card{border-radius:12px;padding:18px 20px;margin-bottom:14px;border:2px solid;}
+    .r-correct{background:#f0fdf4;border-color:#86efac;}
+    .r-wrong{background:#fff5f5;border-color:#fca5a5;}
+    .r-skip{background:#fffbeb;border-color:#fde68a;}
+    .r-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:8px;}
+    .r-badge.b-c{background:#dcfce7;color:#15803d;}
+    .r-badge.b-w{background:#fee2e2;color:#991b1b;}
+    .r-badge.b-s{background:#fef3c7;color:#92400e;}
+    .r-qnum{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:5px;}
+    .r-q{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:10px;}
+    .r-ans-correct{font-size:.88rem;font-weight:700;color:#15803d;display:flex;align-items:center;gap:6px;}
+    .r-ans-wrong{font-size:.88rem;font-weight:700;color:#991b1b;display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+
+    @media(max-width:600px){
+      .qh-left h1{font-size:.95rem;}
+      #timer{font-size:1.2rem;padding:6px 12px;}
+      .q-card{padding:16px 14px;}
+    }
+  </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+
+<!-- ACCESS DENIED -->
+<div id="access-denied">
+  <div style="font-size:3.5rem">🔒</div>
+  <h2>Premium Access Only</h2>
+  <p>Login with your premium account to access this paper.</p>
+  <a href="/premium-login" class="btn-back">🔑 Login / Get Access</a>
+</div>
+
+<!-- LOADER -->
+<div id="page-loader">
+  <div class="spinner"></div>
+  <p>Verifying premium access…</p>
+</div>
+
+<!-- WATERMARK LAYER (filled by JS) -->
+<div id="wm-layer" aria-hidden="true"></div>
+
+<!-- MAIN PAGE -->
+<div id="main-page" style="display:none;">
+
+  <!-- STICKY HEADER -->
+  <div id="quiz-header">
+    <div class="qh-left">
+      <h1>🏆 HSBTE LEET Premium Sample Paper 13</h1>
+      <p>Full Syllabus · 90 Questions · 90 Min</p>
+      <a href="/premium-papers">← Back to All Papers</a>
+    </div>
+    <div id="timer">90:00</div>
+  </div>
+
+  <!-- SECURITY BAR -->
+  <div class="sec-bar">
+    🛡️ <strong>Premium Content:</strong> Sharing, screenshotting or printing is strictly prohibited. This paper is watermarked to your account. Contact: <strong>nishant@hsbteleet.com</strong>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+      <div id="questions-list"></div>
+
+      <!-- SUBMIT AREA -->
+      <div class="submit-wrap">
+        <div id="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+        <div id="progress-text">0 of 90 answered</div>
+        <p>Submit when done — you'll see Correct, Wrong & Skipped instantly.</p>
+        <button class="btn-submit" onclick="submitExam()">✅ Submit Exam & See Score</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+      <div class="results-hero">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🎯</div>
+        <h2>Your Score Report</h2>
+        <p id="score-subtitle">hsbteleet.com · Premium Mock Test</p>
+      </div>
+
+      <div class="score-grid">
+        <div class="score-card s-correct"><span class="s-val" id="res-cor">0</span><span class="s-lbl">✅ Correct</span></div>
+        <div class="score-card s-wrong"><span class="s-val" id="res-wro">0</span><span class="s-lbl">❌ Wrong</span></div>
+        <div class="score-card s-skip"><span class="s-val" id="res-skp">0</span><span class="s-lbl">⏭ Skipped</span></div>
+        <div class="score-card s-att"><span class="s-val" id="res-att">0</span><span class="s-lbl">📝 Attempted</span></div>
+        <div class="score-card s-score"><span class="s-val" id="res-scr">0</span><span class="s-lbl">🏅 Score (4,−1)</span></div>
+        <div class="score-card s-total"><span class="s-val" id="res-tot">90</span><span class="s-lbl">📋 Total Qs</span></div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-retake" onclick="location.reload()">🔄 Retake Test</button>
+        <a href="/premium-papers" class="btn-back-papers">📚 All Papers</a>
+      </div>
+
+      <div class="review-header">📋 Detailed Question Review</div>
+      <div id="review-area"></div>
+    </div>
+
+  </div>
+</div><!-- /main-page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+var TIMER_SEC = 5400;
+var PAPER_TITLE = 'HSBTE LEET Premium Sample Paper 13';
+
+/* ── SECURITY ── */
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+  if(e.ctrlKey&&e.shiftKey&&['I','J','C','S'].includes(e.key))e.preventDefault();
+});
+(function(){var s=document.createElement('style');s.textContent='@media print{body{display:none!important;}}';document.head.appendChild(s);})();
+
+/* ── WATERMARK — strong & tiled ── */
+function injectWatermark(){
+  var mob  = sessionStorage.getItem('prem_mob')  || '';
+  var name = sessionStorage.getItem('prem_name') || 'Premium';
+  var masked = mob ? mob.slice(0,3)+'****'+mob.slice(-2) : name;
+  var txt = '© hsbteleet.com  ' + masked + '  PREMIUM  ';
+
+  var layer = document.getElementById('wm-layer');
+  layer.innerHTML = '';
+
+  /* Layout: rows every 90px across full viewport, offset alternately */
+  var vw = Math.max(document.documentElement.clientWidth,1400);
+  var vh = Math.max(document.documentElement.clientHeight,900);
+
+  /* We draw rows covering 3x viewport height so scrolling keeps watermark */
+  var totalH = vh * 3;
+  var rowGap  = 90;
+  var rows    = Math.ceil(totalH / rowGap) + 4;
+
+  for(var r = 0; r < rows; r++){
+    var div = document.createElement('div');
+    div.className = 'wm-row';
+    var topVal  = (r * rowGap) - rowGap;
+    var leftVal = (r % 2 === 0) ? -120 : -60;
+    div.style.top  = topVal + 'px';
+    div.style.left = leftVal + 'px';
+    div.style.width = (vw * 2.5) + 'px';
+    /* repeat text across row */
+    var repeats = Math.ceil((vw * 2.5) / (txt.length * 9)) + 3;
+    div.textContent = Array(repeats).fill(txt).join('   ');
+    layer.appendChild(div);
+  }
+}
+
+/* ── ACCESS VERIFICATION ── */
+async function verifyAccess(){
+  var uid = sessionStorage.getItem('prem_uid');
+  var ts  = parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
+  try{
+    var sb = window.supabase.createClient(SUPA_URL,SUPA_KEY);
+    var {data,error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){showDenied();return;}
+    sessionStorage.setItem('prem_ts',Date.now().toString());
+    /* Show page */
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+    buildQuiz();
+    startTimer();
+  }catch(e){showDenied();}
+}
+
+function showDenied(){
+  document.getElementById('page-loader').style.display='none';
+  document.getElementById('access-denied').classList.add('show');
+}
+
+/* ── QUESTIONS DATA ── */
+const questions = [
+// ── a-1 MATHEMATICS (8) ──────────────────────────────────────────
+{s:"a-1 Mathematics",q:"If α and β are roots of 2x²−5x+3=0, then α²+β² equals:",o:["7/4","13/4","19/4","25/4"],a:1},
+{s:"a-1 Mathematics",q:"The sum of all integers from 1 to 100 that are divisible by 3 or 5 is:",o:["2318","2418","2468","2368"],a:1},
+{s:"a-1 Mathematics",q:"If |z − 2| = |z − 4|, then the locus of z in Argand plane is:",o:["Circle with centre 3","Perpendicular bisector of segment joining (2,0) and (4,0): x=3","Ellipse","Hyperbola"],a:1},
+{s:"a-1 Mathematics",q:"log₃ 5 × log₅ 7 × log₇ 3 equals:",o:["0","1","3","5"],a:1},
+{s:"a-1 Mathematics",q:"The middle term in expansion of (x + 1/x)¹⁰ is:",o:["252","210x²","252/x","252 (independent of x)"],a:3},
+{s:"a-1 Mathematics",q:"If A is a 3×3 matrix with |A|=4, then |3A| equals:",o:["12","36","108","324"],a:2},
+{s:"a-1 Mathematics",q:"∫₀^(π/2) sin²x dx equals:",o:["π/2","π/4","1","π/8"],a:1},
+{s:"a-1 Mathematics",q:"For the function f(x)=x³−3x, the local maximum value is:",o:["0","2","−2","1"],a:1},
+
+// ── a-2 PHYSICS (8) ──────────────────────────────────────────────
+{s:"a-2 Physics",q:"A projectile is fired at 60° to horizontal with velocity 40 m/s. Its range on horizontal ground (g=10 m/s²) is:",o:["80√3 m","160 m","80 m","40√3 m"],a:0},
+{s:"a-2 Physics",q:"Moment of inertia of a solid cylinder of mass M, radius R about its own axis is:",o:["MR²","MR²/2","2MR²/3","MR²/4"],a:1},
+{s:"a-2 Physics",q:"A wire of length L, radius r and Young's modulus Y is stretched by force F. Extension produced is:",o:["FL/πr²Y","2FL/πr²Y","FL/2πr²Y","FLπr²/Y"],a:0},
+{s:"a-2 Physics",q:"Two simple pendulums of lengths 1 m and 4 m start oscillating together. They will be in phase again after the shorter one completes:",o:["1 oscillation","2 oscillations","4 oscillations","8 oscillations"],a:1},
+{s:"a-2 Physics",q:"Critical angle for total internal reflection when light goes from glass (n=1.5) to air is:",o:["sin⁻¹(2/3)","cos⁻¹(2/3)","tan⁻¹(2/3)","sin⁻¹(3/2)"],a:0},
+{s:"a-2 Physics",q:"Energy stored in inductor L carrying current I is:",o:["LI","LI²","LI²/2","L²I/2"],a:2},
+{s:"a-2 Physics",q:"The threshold frequency in photoelectric effect is the frequency below which:",o:["Emission is very slow","No photoelectric emission occurs regardless of intensity","Emission is maximum","Only X-rays cause emission"],a:1},
+{s:"a-2 Physics",q:"A capacitor of 4 μF is charged to 200 V. Charge stored is:",o:["800 μC","8 μC","50 μC","0.8 mC"],a:3},
+
+// ── a-3 CHEMISTRY (3) ────────────────────────────────────────────
+{s:"a-3 Chemistry",q:"Zeolite used in ion exchange softening of water exchanges Ca²⁺ and Mg²⁺ ions with:",o:["H⁺ ions","OH⁻ ions","Na⁺ ions","Cl⁻ ions"],a:2},
+{s:"a-3 Chemistry",q:"Equivalent weight of Ca(OH)₂ (mol. wt = 74) acting as a base is:",o:["74","37","18.5","148"],a:1},
+{s:"a-3 Chemistry",q:"The element with Z=26 (Iron) has electronic configuration:",o:["[Ar] 4s² 3d⁶","[Ar] 4s¹ 3d⁷","[Ar] 4s² 3d⁵","[Ar] 3d⁸"],a:0},
+
+// ── a-4 COMMUNICATION SKILLS (3) ─────────────────────────────────
+{s:"a-4 Communication Skills",q:"Choose the correct sentence:",o:["Neither Ram nor his brothers was present.","Neither Ram nor his brothers were present.","Neither Ram nor his brothers are present.","Neither Ram nor his brothers have present."],a:1},
+{s:"a-4 Communication Skills",q:"Antonym of 'Verbose' is:",o:["Talkative","Concise","Loquacious","Wordy"],a:1},
+{s:"a-4 Communication Skills",q:"'She works hard so that she ___ succeed.' Correct option:",o:["will","would","may","can"],a:2},
+
+// ── a-5 GENERAL AWARENESS (3) ────────────────────────────────────
+{s:"a-5 General Awareness",q:"HSTES stands for:",o:["Haryana State Technical Education Society","Haryana Secondary Technical Exam Society","Higher State Technical Education System","Haryana State Teacher Education Scheme"],a:0},
+{s:"a-5 General Awareness",q:"The number of districts in Haryana (as of 2024) is:",o:["21","22","23","24"],a:1},
+{s:"a-5 General Awareness",q:"For LEET admission, the minimum percentage in Diploma required for general category is:",o:["45%","50%","55%","60%"],a:1},
+
+// ── b-1 ELECTRICAL ENGINEERING (9) ───────────────────────────────
+{s:"b-1 Electrical Engineering",q:"A 10 Ω and 40 Ω resistor are connected in parallel. Equivalent resistance is:",o:["50 Ω","8 Ω","25 Ω","4 Ω"],a:1},
+{s:"b-1 Electrical Engineering",q:"Thevenin's theorem replaces a complex network with respect to load terminals by a ___ source:",o:["Current source in parallel with resistance","Voltage source in series with resistance","Current source in series","Voltage source alone"],a:1},
+{s:"b-1 Electrical Engineering",q:"Reluctance of a magnetic circuit is analogous to ___ in electric circuit:",o:["EMF","Current","Resistance","Flux"],a:2},
+{s:"b-1 Electrical Engineering",q:"Power factor of a purely inductive circuit is:",o:["Unity","0.5 lagging","Zero lagging","0.866 lagging"],a:2},
+{s:"b-1 Electrical Engineering",q:"The efficiency of a transformer at maximum load is given when:",o:["Copper loss = iron loss (core loss)","Copper loss is maximum","Iron loss is zero","Load is half of rated"],a:0},
+{s:"b-1 Electrical Engineering",q:"Back EMF in a DC motor is Eb = V − IaRa. If V=220V, Ia=10A, Ra=1Ω, then Eb is:",o:["230 V","210 V","220 V","200 V"],a:1},
+{s:"b-1 Electrical Engineering",q:"Slip of a 3-phase induction motor at standstill (start) is:",o:["0","0.5","1","Negative"],a:2},
+{s:"b-1 Electrical Engineering",q:"Ferranti effect in transmission lines occurs at:",o:["Full load","No load or light load (receiving-end voltage exceeds sending-end)","Short circuit","Overload"],a:1},
+{s:"b-1 Electrical Engineering",q:"The Scott connection in transformers converts:",o:["3-phase to 2-phase supply","Single-phase to 3-phase","DC to AC","High voltage to low voltage"],a:0},
+
+// ── b-2 ELECTRONICS ENGINEERING (8) ──────────────────────────────
+{s:"b-2 Electronics Engineering",q:"The CMRR of an ideal op-amp is:",o:["Zero","Unity","Infinity","Equal to voltage gain"],a:2},
+{s:"b-2 Electronics Engineering",q:"In a Colpitts oscillator, frequency is determined by:",o:["Resistors only","Inductor and two capacitors in feedback network","Single capacitor and resistor","RC network"],a:1},
+{s:"b-2 Electronics Engineering",q:"The Gray code equivalent of decimal 6 is:",o:["0101","0110","0100","1001"],a:0},
+{s:"b-2 Electronics Engineering",q:"A full-wave rectifier (centre-tap) has ripple frequency of ___ times the input frequency:",o:["1","2","0.5","4"],a:1},
+{s:"b-2 Electronics Engineering",q:"The holding current of an SCR is:",o:["Current to trigger the gate","Minimum anode current to keep SCR in ON state","Gate turn-off current","Latching current at turn-on"],a:1},
+{s:"b-2 Electronics Engineering",q:"Zener diode is operated in ___ bias for voltage regulation:",o:["Forward","Reverse (breakdown region)","Zero","Both alternately"],a:1},
+{s:"b-2 Electronics Engineering",q:"Slew rate of an op-amp is defined as:",o:["Open loop gain","Maximum rate of change of output voltage (V/μs)","Input offset voltage","Common mode gain"],a:1},
+{s:"b-2 Electronics Engineering",q:"2's complement of 8-bit binary 00110101 is:",o:["11001010","11001011","11010011","11001100"],a:1},
+
+// ── b-3 COMPUTER ENGINEERING (8) ─────────────────────────────────
+{s:"b-3 Computer Engineering",q:"Which addressing mode is used in 'MOV AX, [1234H]'?",o:["Immediate","Register","Direct (absolute)","Indirect"],a:2},
+{s:"b-3 Computer Engineering",q:"In pipeline processing, if CPI=1 and clock=500 MHz, throughput for 5-stage pipeline is approximately:",o:["500 MIPS","100 MIPS","2500 MIPS","250 MIPS"],a:0},
+{s:"b-3 Computer Engineering",q:"Belady's anomaly occurs in which page replacement algorithm?",o:["LRU","Optimal","FIFO","LFU"],a:2},
+{s:"b-3 Computer Engineering",q:"In C, 'static' local variable inside a function means:",o:["It is deleted every function call","It retains its value between function calls (persists)","It is shared globally","It is initialised to random value"],a:1},
+{s:"b-3 Computer Engineering",q:"Time complexity of binary search on sorted array of n elements is:",o:["O(n)","O(n²)","O(log n)","O(n log n)"],a:2},
+{s:"b-3 Computer Engineering",q:"Deadlock prevention removes one of the four conditions. 'Hold and Wait' condition is prevented by:",o:["Allowing preemption","Ensuring process requests all resources at once before execution","Using only one resource type","Breaking circular wait"],a:1},
+{s:"b-3 Computer Engineering",q:"A 32-bit processor can directly address a maximum of:",o:["1 GB","2 GB","4 GB","8 GB"],a:2},
+{s:"b-3 Computer Engineering",q:"In C, 'sizeof(int)' on a 32-bit system returns:",o:["2","4","8","1"],a:1},
+
+// ── c-1 MECHANICAL ENGINEERING (8) ───────────────────────────────
+{s:"c-1 Mechanical Engineering",q:"A body is projected at 45° for maximum range. The ratio of max height to range is:",o:["1:4","1:2","2:1","1:1"],a:0},
+{s:"c-1 Mechanical Engineering",q:"The polar moment of inertia J of a solid circular shaft of diameter D is:",o:["πD³/16","πD⁴/32","πD⁴/64","πD³/32"],a:1},
+{s:"c-1 Mechanical Engineering",q:"Efficiency of Carnot engine working between 627°C and 27°C is:",o:["50%","60%","66.7%","75%"],a:2},
+{s:"c-1 Mechanical Engineering",q:"For a thin cylinder of radius r, thickness t, internal pressure p: hoop stress = pr/t. If p doubles and r/t ratio stays same, hoop stress:",o:["Stays same","Doubles","Halves","Quadruples"],a:1},
+{s:"c-1 Mechanical Engineering",q:"In Otto cycle, heat is added at:",o:["Constant pressure","Constant temperature","Constant volume","Constant entropy"],a:2},
+{s:"c-1 Mechanical Engineering",q:"Stefan-Boltzmann law for radiation: Q = εσAT⁴. For a black body ε =",o:["0","0.5","Between 0 and 1","1"],a:3},
+{s:"c-1 Mechanical Engineering",q:"Kinematic viscosity ν = μ/ρ. If μ=0.9 N·s/m² and ρ=900 kg/m³, then ν is:",o:["810 m²/s","0.001 m²/s","0.1 m²/s","1×10⁻³ m²/s"],a:3},
+{s:"c-1 Mechanical Engineering",q:"The Froude number is the ratio of inertial force to:",o:["Viscous force","Gravity force","Surface tension force","Elastic force"],a:1},
+
+// ── c-2 PRODUCTION ENGINEERING (6) ───────────────────────────────
+{s:"c-2 Production Engineering",q:"Tool signature of a single point cutting tool: 8-7-6-9-15-16-0.8. The first number (8°) represents:",o:["Side rake angle","Back rake angle","End relief angle","Nose radius"],a:1},
+{s:"c-2 Production Engineering",q:"Vernier caliper with 25 divisions on vernier scale equal to 24 mm has least count:",o:["0.1 mm","0.04 mm","0.02 mm","0.01 mm"],a:1},
+{s:"c-2 Production Engineering",q:"Hardness test that uses 10 mm steel ball with 3000 kg load is:",o:["Vickers","Rockwell B","Brinell","Shore"],a:2},
+{s:"c-2 Production Engineering",q:"Up-milling (conventional milling) has chip thickness that:",o:["Starts maximum and decreases","Starts minimum (zero) and increases to maximum","Is constant","Is random"],a:1},
+{s:"c-2 Production Engineering",q:"In engineering drawing, a hidden line is represented by:",o:["Continuous thick line","Dashed (broken) line","Chain line","Thin continuous line"],a:1},
+{s:"c-2 Production Engineering",q:"Carburizing heat treatment process adds ___ to the surface of steel:",o:["Nitrogen","Carbon (increases surface hardness)","Chromium","Manganese"],a:1},
+
+// ── c-3 AUTOMOBILE ENGINEERING (6) ───────────────────────────────
+{s:"c-3 Automobile Engineering",q:"The firing order of a 4-cylinder inline engine (most common) is:",o:["1-2-3-4","1-3-4-2","1-2-4-3","1-4-3-2"],a:1},
+{s:"c-3 Automobile Engineering",q:"In a synchromesh gearbox, the synchronizer ring ensures:",o:["Hydraulic pressure","Speed equalisation of gear and shaft before engagement","Torque amplification","Engine braking"],a:1},
+{s:"c-3 Automobile Engineering",q:"ABS (Anti-lock Braking System) prevents:",o:["Engine overheating","Wheel lock-up during braking (maintains steering control)","Gear slipping","Differential failure"],a:1},
+{s:"c-3 Automobile Engineering",q:"Castor angle in steering geometry provides:",o:["Lateral stability","Self-centring tendency of the steering wheel","Camber correction","Toe-in adjustment"],a:1},
+{s:"c-3 Automobile Engineering",q:"In a series hybrid vehicle:",o:["ICE drives wheels directly","ICE only generates electricity; electric motor drives wheels","Both ICE and motor drive wheels simultaneously","Only battery powers the vehicle"],a:1},
+{s:"c-3 Automobile Engineering",q:"Maruti Suzuki's main manufacturing plant in Haryana is located at:",o:["Faridabad and Panipat","Gurugram (Gurgaon) and Manesar","Sonipat and Rohtak","Ambala and Karnal"],a:1},
+
+// ── d-1 CIVIL ENGINEERING (5) ────────────────────────────────────
+{s:"d-1 Civil Engineering",q:"The safe bearing capacity of soil is obtained by dividing ultimate bearing capacity by a factor of safety of:",o:["1.5","2","3","5"],a:2},
+{s:"d-1 Civil Engineering",q:"Prismatic compass measures whole circle bearing (WCB). WCB of South direction is:",o:["90°","180°","270°","0°"],a:1},
+{s:"d-1 Civil Engineering",q:"In water treatment, chlorination is done ___ filtration:",o:["Before","After (post-chlorination for disinfection)","Instead of","Simultaneously with sedimentation"],a:1},
+{s:"d-1 Civil Engineering",q:"Rapid Hardening Cement (RHC) gains strength faster because it has more:",o:["C₂S and gypsum","C₃S and is more finely ground","Flyash","Silica fume"],a:1},
+{s:"d-1 Civil Engineering",q:"The purpose of providing weep holes in a retaining wall is to:",o:["Increase aesthetic appeal","Relieve hydrostatic pressure from retained earth","Add reinforcement points","Allow drainage of rainwater from top"],a:1},
+
+// ── d-2 TEXTILE ENGINEERING (5) ──────────────────────────────────
+{s:"d-2 Textile Engineering",q:"The count-strength product (CSP) is used to compare yarn quality. It is the product of:",o:["Count and elongation","English count (Ne) and lea strength (lbs)","Twist and count","Fineness and length"],a:1},
+{s:"d-2 Textile Engineering",q:"Warp beam in a weaving loom holds the:",o:["Weft (filling) yarn","Warp yarn supply wound on a beam","Shuttle","Shuttle box"],a:1},
+{s:"d-2 Textile Engineering",q:"Which fibre has the highest moisture regain (~11%) among common textile fibres?",o:["Cotton (8.5%)","Polyester (0.4%)","Wool (~11-17%)","Nylon (4%)"],a:2},
+{s:"d-2 Textile Engineering",q:"Singeing of grey fabric removes protruding fibres by:",o:["Chemical dissolution","Passing fabric rapidly over a gas flame or heated plates","Mechanical scraping","Enzymatic treatment"],a:1},
+{s:"d-2 Textile Engineering",q:"The Uster evenness tester measures yarn:",o:["Tensile strength","Mass variation/unevenness (CV%) along yarn length","Twist per inch","Fibre length"],a:1},
+
+// ── d-3 CHEMICAL/PRINTING (2) ────────────────────────────────────
+{s:"d-3 Chemical/Printing Engineering",q:"In distillation, the component with ___ boiling point concentrates in the distillate:",o:["Higher","Lower (more volatile component)","Equal","Neither"],a:1},
+{s:"d-3 Chemical/Printing Engineering",q:"In screen printing, the printing area on the screen mesh is:",o:["Blocked by emulsion","Open (ink passes through open mesh cells)","Coated with metal","Recessed below surface"],a:1},
+
+// ── d-4 CERAMIC ENGINEERING (2) ──────────────────────────────────
+{s:"d-4 Ceramic Engineering",q:"The raw material trio for traditional whiteware ceramics is: clay, quartz and:",o:["Limestone","Feldspar (flux)","Iron oxide","Gypsum"],a:1},
+{s:"d-4 Ceramic Engineering",q:"Alumina (Al₂O₃) ceramics are preferred for spark plug insulators due to their:",o:["High electrical conductivity","High thermal conductivity","High electrical resistivity and heat resistance","Magnetic properties"],a:2},
+
+// ── d-5 FOOD TECHNOLOGY (2) ──────────────────────────────────────
+{s:"d-5 Food Technology",q:"Nixtamalization is a traditional process applied to:",o:["Rice","Wheat","Maize/corn (alkali treatment with lime)","Soybean"],a:2},
+{s:"d-5 Food Technology",q:"In food preservation, water activity (aₓ) below ___ inhibits most bacterial growth:",o:["0.95","0.91","0.85","0.60"],a:1},
+
+// ── d-6 OTHERS (4) ───────────────────────────────────────────────
+{s:"d-6 Others",q:"The implement used for primary tillage (deep turning of soil) is:",o:["Disc harrow","Mould board plough","Rotavator","Seed drill"],a:1},
+{s:"d-6 Others",q:"Sthapatya Veda is the ancient Indian text dealing with:",o:["Agriculture","Architecture and town planning","Metallurgy","Medicine"],a:1},
+{s:"d-6 Others",q:"In fashion, 'welt pocket' refers to a pocket:",o:["Sewn on top of fabric (patch)","Cut into the garment with a narrow fabric strip (welt) finishing the opening","Invisible zip pocket","Side seam pocket"],a:1},
+{s:"d-6 Others",q:"A seed drill in agriculture is used for:",o:["Ploughing","Sowing seeds at uniform depth and spacing","Harvesting crops","Spraying pesticides"],a:1}
+];
+
+/* ── QUIZ BUILD ── */
+var timerInterval, timeLeft = TIMER_SEC;
+
+function buildQuiz(){
+  var list = document.getElementById('questions-list');
+  var html = '';
+  var curSection = '';
+  var LETTERS = ['A','B','C','D','E'];
+  questions.forEach(function(q,i){
+    if(q.s !== curSection){
+      curSection = q.s;
+      html += '<div class="sec-div"><span class="sec-icon">📚</span>' + q.s + '</div>';
+    }
+    html += '<div class="q-card" id="qc-'+i+'">';
+    html +=   '<div class="q-num"><span class="q-badge">Q.'+(i+1)+'</span></div>';
+    html +=   '<div class="q-text">'+q.q+'</div>';
+    html +=   '<div class="opts">';
+    q.o.forEach(function(opt,j){
+      html += '<label class="opt" id="lbl-'+i+'-'+j+'" onclick="selectOpt('+i+','+j+',this)">';
+      html +=   '<input type="radio" name="q'+i+'" value="'+j+'">';
+      html +=   '<span class="opt-letter">'+LETTERS[j]+'</span>';
+      html +=   '<span>'+opt+'</span>';
+      html += '</label>';
+    });
+    html += '</div></div>';
+  });
+  list.innerHTML = html;
+  updateProgress();
+}
+
+function selectOpt(qi,oi,el){
+  document.querySelectorAll('[id^="lbl-'+qi+'-"]').forEach(function(l){l.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('qc-'+qi).classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress(){
+  var answered = 0;
+  questions.forEach(function(_,i){if(document.querySelector('input[name="q'+i+'"]:checked'))answered++;});
+  var pct = Math.round((answered/questions.length)*100);
+  document.getElementById('progress-bar').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = answered+' of '+questions.length+' answered';
+}
+
+function startTimer(){
+  var el = document.getElementById('timer');
+  timerInterval = setInterval(function(){
+    timeLeft--;
+    var m=Math.floor(timeLeft/60), s=timeLeft%60;
+    el.textContent = m+':'+(s<10?'0':'')+s;
+    if(timeLeft<=300) el.classList.add('danger');
+    if(timeLeft<=0){clearInterval(timerInterval);submitExam();}
+  },1000);
+}
+
+function submitExam(){
+  clearInterval(timerInterval);
+  var cor=0,wro=0,skp=0;
+  var reviewHTML = '';
+  var LETTERS=['A','B','C','D','E'];
+
+  questions.forEach(function(q,i){
+    var sel = document.querySelector('input[name="q'+i+'"]:checked');
+    var ans = sel ? parseInt(sel.value) : -1;
+    if(ans===-1) skp++;
+    else if(ans===q.a) cor++;
+    else wro++;
+
+    var cls = ans===-1?'r-skip':ans===q.a?'r-correct':'r-wrong';
+    var badge = ans===-1?'<span class="r-badge b-s">⏭ Skipped</span>':
+                ans===q.a?'<span class="r-badge b-c">✅ Correct</span>':
+                          '<span class="r-badge b-w">❌ Wrong</span>';
+    reviewHTML += '<div class="r-card '+cls+'">';
+    reviewHTML += badge;
+    reviewHTML += '<div class="r-qnum">Q.'+(i+1)+' · '+q.s+'</div>';
+    reviewHTML += '<div class="r-q">'+q.q+'</div>';
+    if(ans!==-1&&ans!==q.a){
+      reviewHTML += '<div class="r-ans-wrong">✗ Your answer: '+LETTERS[ans]+'. '+q.o[ans]+'</div>';
+    }
+    reviewHTML += '<div class="r-ans-correct">✓ Correct: '+LETTERS[q.a]+'. '+q.o[q.a]+'</div>';
+    reviewHTML += '</div>';
+  });
+
+  var att = cor+wro;
+  var scr = cor*4 - wro;
+  document.getElementById('res-cor').textContent = cor;
+  document.getElementById('res-wro').textContent = wro;
+  document.getElementById('res-skp').textContent = skp;
+  document.getElementById('res-att').textContent = att;
+  document.getElementById('res-scr').textContent = scr;
+
+  var pct = questions.length>0?Math.round((cor/questions.length)*100):0;
+  document.getElementById('score-subtitle').textContent =
+    'Score: '+scr+' | Accuracy: '+pct+'% | hsbteleet.com';
+
+  document.getElementById('review-area').innerHTML = reviewHTML;
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('results').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── INIT ── */
+verifyAccess();
+</script>
+</body>
+</html>
+

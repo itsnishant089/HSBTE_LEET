@@ -136,7 +136,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="sb-section">Overview</div>
       <button class="sb-link active" onclick="gotoPage('dashboard',this)"><i class="fas fa-chart-pie"></i> Dashboard</button>
       <button class="sb-link" onclick="gotoPage('users',this)"><i class="fas fa-users"></i> All Users <span class="sb-badge" id="bdg-u">0</span></button>
-      <button class="sb-link" onclick="gotoPage('leetleads',this)"><i class="fas fa-graduation-cap"></i> LEET Leads <span class="sb-badge" id="bdg-leads">0</span></button>
+
       <div class="sb-section">Finance</div>
       <button class="sb-link" onclick="gotoPage('payments',this)"><i class="fas fa-rupee-sign"></i> Payments</button>
       <button class="sb-link" onclick="gotoPage('referrals',this)"><i class="fas fa-share-alt"></i> Referrals <span class="sb-badge" id="bdg-r" style="background:#f59e0b;color:#0f172a">0</span></button>
@@ -165,8 +165,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="page active" id="page-dashboard">
       <div class="stats-grid">
         <div class="stat-card sc-blue"><div class="stat-icon">👥</div><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Total Users</div><div class="stat-sub" id="s-today">+0 today</div></div>
-        <div class="stat-card sc-gold"><div class="stat-icon">👑</div><div class="stat-val" id="s-prem">—</div><div class="stat-lbl">Premium (₹49)</div></div>
-        <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="s-ultra">—</div><div class="stat-lbl">Ultra Premium (₹79)</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">👑</div><div class="stat-val" id="s-prem">—</div><div class="stat-lbl">Premium (₹99)</div></div>
+        <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="s-ultra">—</div><div class="stat-lbl">Ultra Premium (₹149)</div></div>
         <div class="stat-card sc-green"><div class="stat-icon">💰</div><div class="stat-val" id="s-rev">—</div><div class="stat-lbl">Total Revenue</div></div>
         <div class="stat-card sc-red"><div class="stat-icon">⭐</div><div class="stat-val" id="s-pend-rev">—</div><div class="stat-lbl">Pending Reviews</div></div>
         <div class="stat-card sc-gold"><div class="stat-icon">🔄</div><div class="stat-val" id="s-pend-ref">—</div><div class="stat-lbl">Pending Refunds</div></div>
@@ -220,7 +220,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="ref-box">
         <strong>Refund Rules:</strong>&nbsp;
         <span style="background:var(--gl);color:#92400e;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">1 Referral = ₹25 Refund</span>
-        <span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">2+ Referrals = ₹49 Refund</span>
+        <span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">2+ Referrals = ₹99 Refund</span>
         &nbsp;— Transfer via UPI then mark as claimed.
       </div>
       <div class="filter-bar">
@@ -327,8 +327,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             <div>
               <label class="fl">Tier Access</label>
               <select class="form-select" id="au-tier">
-                <option value="premium">Normal Premium (₹49)</option>
-                <option value="ultra">Ultra Premium (₹79)</option>
+                <option value="premium">Normal Premium (₹99)</option>
+                <option value="ultra">Ultra Premium (₹149)</option>
               </select>
             </div>
           </div>
@@ -376,19 +376,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </div>
 </div>
 
-<!-- LEET LEADS -->
-<div class="page" id="page-leetleads" style="display:none; padding:24px;">
-  <div class="card">
-    <div class="card-hdr">
-      <div class="card-title"><i class="fas fa-graduation-cap"></i> LEET Popup Leads</div>
-    </div>
-    <div class="card-body np">
-      <div class="tbl-wrap">
-      <table class="tbl"><thead><tr><th>Name</th><th>Mobile</th><th>Email</th><th>College</th><th>Branch</th><th>Date</th><th>Shift</th><th>Submitted</th></tr></thead><tbody id="tb-leads"><tr class="lr"><td colspan="8">Loading leads...</td></tr></tbody></table>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div class="modal-overlay" id="conf-modal">
   <div class="modal-box">

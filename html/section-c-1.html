@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="https://hsbteleet.com/image/favicon.webp"/>
   <link rel="shortcut icon" href="https://hsbteleet.com/image/favicon.webp"/>
   <link rel="apple-touch-icon" sizes="180x180" href="https://hsbteleet.com/image/favicon.webp"/>
-  <title>HSBTE LEET Section C Mechanical Engineering Mock Paper 1</title>
+  <title>Section C Mechanical Stream Mock Paper 1</title>
   <meta name="description" content="Section C Mechanical Engineering HSBTE LEET mock 1. 100 questions with instant score."/>
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
   <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
@@ -232,8 +232,8 @@
   <!-- STICKY HEADER -->
   <div id="quiz-header">
     <div class="qh-left">
-      <h1>🏆 HSBTE LEET Section C Mechanical Engineering Mock Paper 1</h1>
-      <p>Section C: Mechanical Engg · 100 Questions · 100 Min</p>
+      <h1>🏆 HSBTE LEET Section C Mechanical Stream Mock Paper 1</h1>
+      <p>Section C: Mechanical Stream · 100 Questions · 100 Min</p>
       <a href="/premium-papers">← Back to All Papers</a>
     </div>
     <div id="timer">100:00</div>
@@ -366,139 +366,1106 @@ function showDenied(){
 
 /* ── QUESTIONS DATA ── */
 const questions = [
-
-    // ════════════════════════════════════════════════════════
-    // c-1  ELEMENTS OF MECHANICAL ENGINEERING  (50 Qs)
-    // ════════════════════════════════════════════════════════
-
-    // Applied Mechanics
-    { s:"c-1 Elements of Mechanical Engineering", q:"The angle of friction is the angle between the resultant reaction and:", o:["Applied force","Normal reaction","Horizontal plane","Friction force"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Coefficient of static friction is always ___ coefficient of kinetic friction:", o:["Less than","Equal to","Greater than","Independent of"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"A screw jack with pitch p and mean radius r is in equilibrium. Mechanical advantage is approximately:", o:["2πr/p","p/2πr","2π/rp","rp/2π"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Centroid of a triangle lies at ___ of its height from the base:", o:["1/3","1/2","2/3","3/4"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"A body projected at angle θ with velocity u has maximum range when θ =", o:["30°","45°","60°","90°"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"In a system of pulleys (single movable pulley), velocity ratio is:", o:["1","2","3","4"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Efficiency of a simple machine is defined as:", o:["Load/Effort","M.A. / V.R.","V.R. / M.A.","Output power × Input power"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The horizontal range of a projectile is maximum when the angle of projection is:", o:["30°","45°","60°","90°"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Power is the rate of doing:", o:["Force","Work","Momentum","Impulse"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Centroid of a semicircle of radius R from the diameter is:", o:["4R/3π","R/2","R/π","3R/4π"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Limiting friction acts when the body is:", o:["Moving","About to move (on verge of motion)","At rest with no applied force","Accelerating"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"In a wheel and axle system with wheel radius R and axle radius r, velocity ratio is:", o:["r/R","R/r","R+r","R×r"], a:1 },
-
-    // Strength of Materials
-    { s:"c-1 Elements of Mechanical Engineering", q:"Poisson's ratio is defined as:", o:["Lateral strain / Longitudinal strain","Longitudinal strain / Lateral strain","Stress / Strain","Shear stress / Shear strain"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The relation between Young's modulus E, shear modulus G, and Poisson's ratio ν is:", o:["E = 2G(1+ν)","E = 3G(1−2ν)","E = G(1+ν)","E = 2G(1−ν)"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Modulus of resilience is the strain energy stored per unit volume up to:", o:["Breaking point","Ultimate stress","Elastic limit","Plastic limit"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"For a simply supported beam with central point load W and span L, maximum bending moment is:", o:["WL/2","WL/4","WL/8","WL"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"For a cantilever beam with UDL of w per unit length and span L, maximum BM at fixed end is:", o:["wL²/2","wL²/8","wL/2","wL²/4"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Temperature stress in a bar fixed at both ends = E × α × ΔT. If E=200 GPa, α=12×10⁻⁶/°C, ΔT=50°C, stress is:", o:["120 MPa","60 MPa","240 MPa","30 MPa"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Principal planes are planes on which:", o:["Shear stress is maximum","Normal stress is maximum or minimum and shear stress is zero","Both normal and shear stress are maximum","Strain energy is maximum"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"For a hollow circular section, polar moment of inertia is:", o:["π(D⁴−d⁴)/32","π(D⁴−d⁴)/64","πD⁴/64","π(D⁴+d⁴)/32"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"A column with both ends pinned is called:", o:["Fixed-fixed","Free-free","Euler's column","Pinned-pinned (fundamental case)"], a:3 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Slenderness ratio is defined as:", o:["Length / Area","Effective length / Least radius of gyration","Load / Cross-section","Stress / Strain"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Hooke's law is valid only up to:", o:["Breaking point","Ultimate stress","Proportionality limit","Yield point"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Shear force at the free end of a cantilever with point load W at free end is:", o:["Zero","W","W/2","2W"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"In a stress–strain diagram for mild steel, the region after upper yield point up to ultimate stress is called:", o:["Elastic zone","Strain hardening zone","Plastic zone","Fracture zone"], a:2 },
-
-    // Thermodynamics
-    { s:"c-1 Elements of Mechanical Engineering", q:"Zeroth law of thermodynamics forms the basis for:", o:["Work measurement","Temperature measurement","Entropy","Heat transfer"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The first law of thermodynamics for a closed system states:", o:["Q = ΔU + W","Q = ΔU − W","ΔU = Q × W","W = Q/ΔU"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Carnot efficiency η = 1 − T_L/T_H. For T_H=800K and T_L=400K, efficiency is:", o:["25%","50%","75%","100%"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The Otto cycle consists of:", o:["Two isothermal and two adiabatic processes","Two isochoric and two adiabatic processes","Two isobaric and two adiabatic processes","Two isochoric and two isobaric processes"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The Diesel cycle differs from Otto cycle in that heat addition occurs at:", o:["Constant volume","Constant pressure","Constant temperature","Constant entropy"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Dryness fraction (quality) of steam = 0.8 means:", o:["80% is water, 20% is vapour","80% is vapour, 20% is water","Steam is 80% superheated","Pressure is 80% of saturation pressure"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The second law of thermodynamics states that heat cannot flow spontaneously from:", o:["Cold body to hot body","Hot body to cold body","High pressure to low pressure","Low entropy to high entropy"], a:0 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"In an adiabatic process, the relationship between P and V is:", o:["PV = constant","PVᵞ = constant","P/V = constant","P + V = constant"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The enthalpy of wet steam = h_f + x·h_fg, where x is:", o:["Compression ratio","Dryness fraction","Entropy","Specific volume"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Efficiency of Otto cycle depends only on:", o:["Heat supplied","Compression ratio","Working fluid","Cylinder size"], a:1 },
-
-    // Heat Transfer
-    { s:"c-1 Elements of Mechanical Engineering", q:"Fourier's law of conduction: Q = −kA(dT/dx). Here k is:", o:["Stefan-Boltzmann constant","Thermal conductivity","Convection coefficient","Thermal diffusivity"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Newton's law of cooling relates heat transfer rate to:", o:["Temperature gradient in solid","Temperature difference between surface and fluid","Radiation emissivity","Viscosity of fluid"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Stefan-Boltzmann law: Q ∝ T⁴. The constant σ = 5.67 × 10⁻⁸ W/m²K⁴ is for:", o:["Conduction","Convection","Radiation from a black body","Forced convection"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"A perfect black body has emissivity:", o:["0","0.5","Between 0 and 1","1"], a:3 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Thermal resistance in conduction through a flat wall = L/(kA). As k increases, thermal resistance:", o:["Increases","Decreases","Remains same","Becomes zero"], a:1 },
-
-    // Fluid Mechanics
-    { s:"c-1 Elements of Mechanical Engineering", q:"A Newtonian fluid is one in which shear stress is proportional to:", o:["Pressure","Velocity","Rate of shear strain (velocity gradient)","Density"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Bernoulli's equation is derived under the assumption that the flow is:", o:["Viscous, compressible, unsteady","Inviscid, incompressible, steady along streamline","Turbulent and compressible","Viscous and turbulent"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Reynolds number Re = ρVD/μ. The flow is laminar if Re is:", o:["Greater than 4000","Between 2000 and 4000","Less than 2000","Greater than 10000"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"A venturimeter measures:", o:["Velocity at a point","Flow rate (discharge)","Pressure at a point","Fluid viscosity"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Darcy–Weisbach equation gives:", o:["Velocity of flow","Head loss due to friction in pipe","Buoyancy force","Reynolds number"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Pitot tube measures:", o:["Discharge","Static pressure only","Local velocity of flow","Dynamic pressure only"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Froude number is the ratio of inertial force to:", o:["Viscous force","Gravity force","Surface tension force","Elastic force"], a:1 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Dynamic viscosity has SI units of:", o:["m²/s","kg/m³","Pa·s (N·s/m²)","N/m²"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"The continuity equation A₁V₁ = A₂V₂ is based on conservation of:", o:["Energy","Momentum","Mass","Pressure"], a:2 },
-    { s:"c-1 Elements of Mechanical Engineering", q:"Non-Newtonian fluids are those in which the shear stress is NOT proportional to:", o:["Pressure gradient","Velocity gradient (rate of shear strain)","Density","Temperature"], a:1 },
-
-    // ════════════════════════════════════════════════════════
-    // c-2  ELEMENTS OF PRODUCTION ENGINEERING  (30 Qs)
-    // ════════════════════════════════════════════════════════
-
-    // Workshop Technology
-    { s:"c-2 Elements of Production Engineering", q:"Cutting speed in turning is given by: V = πDN/1000 m/min. For D=100 mm and N=300 rpm, V =", o:["9.42 m/min","94.2 m/min","942 m/min","0.942 m/min"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Machining time in turning = L/(f × N). Here f is:", o:["Feed in mm/rev","Depth of cut","Cutting speed","Tool angle"], a:0 },
-    { s:"c-2 Elements of Production Engineering", q:"In up-milling (conventional milling), the cutter rotates:", o:["In the same direction as workpiece feed","Against the direction of workpiece feed","Vertically","Randomly"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"The least count of a vernier caliper with 25 vernier divisions on 24 mm is:", o:["0.1 mm","0.05 mm","0.02 mm","0.04 mm"], a:3 },
-    { s:"c-2 Elements of Production Engineering", q:"A micrometer screw gauge has pitch 0.5 mm and thimble divisions = 50. Least count is:", o:["0.05 mm","0.01 mm","0.001 mm","0.005 mm"], a: 1},
-    { s:"c-2 Elements of Production Engineering", q:"Sine bar is used for:", o:["Measuring hardness","Measuring linear distance","Setting or measuring angles","Measuring surface roughness"], a:2 },
-    { s:"c-2 Elements of Production Engineering", q:"Plug gauges are used to check:", o:["External diameter of shaft","Internal diameter of hole","Surface flatness","Thread pitch"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Brazing uses filler metal with melting point:", o:["Below 450°C","Above 450°C but below base metal melting point","Same as base metal","Above base metal melting point"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"In arc welding, the electrode acts as:", o:["Base metal only","Filler metal (consumable electrode)","Flux only","Non-melting electrode always"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Down milling (climb milling) reduces:", o:["Surface finish","Cutting tool life","Backlash effect and tool wear","Chip thickness"], a:2 },
-    { s:"c-2 Elements of Production Engineering", q:"Twist drill is used on:", o:["Lathe","Planer","Drilling machine","Milling machine"], a:2 },
-    { s:"c-2 Elements of Production Engineering", q:"Drilling time = L/(f × N) where L includes approach and over-travel. Unit of feed in drilling is:", o:["mm/min","mm/rev","m/min","mm/tooth"], a:1 },
-
-    // Material Science
-    { s:"c-2 Elements of Production Engineering", q:"Brinell hardness test uses a:", o:["Diamond pyramid indenter","Steel ball indenter","Diamond cone indenter","Rockwell cone"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Annealing of steel is done to:", o:["Increase hardness","Remove internal stresses and soften","Increase tensile strength","Increase brittleness"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Carburizing is a surface hardening process that:", o:["Adds nitrogen to surface","Adds carbon to low-carbon steel surface","Quenches rapidly in oil","Heats in vacuum"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Normalizing differs from annealing in that cooling is done:", o:["In furnace","In water","In air (faster than annealing)","In oil"], a:2 },
-    { s:"c-2 Elements of Production Engineering", q:"Tempering of hardened steel reduces:", o:["Hardness and brittleness to improve toughness","Carbon content","Grain size","Surface area"], a:0 },
-    { s:"c-2 Elements of Production Engineering", q:"The ability of a material to absorb energy before fracture is called:", o:["Hardness","Stiffness","Toughness","Elasticity"], a:2 },
-
-    // Engineering Drawing
-    { s:"c-2 Elements of Production Engineering", q:"In first angle projection, the front view is placed:", o:["Above the top view","Below the top view (top view is above front view)","To the right of front view","On the same level as side view"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"In third angle projection, the right side view is placed:", o:["To the left of front view","To the right of front view","Below the front view","Above the front view"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Isometric view uses an axonometric projection where all three axes are at:", o:["60° to each other","90°","120° to each other","30° to horizontal"], a:2 },
-    { s:"c-2 Elements of Production Engineering", q:"A phantom (chain double-dashed) line in engineering drawing represents:", o:["Hidden edges","Centre lines","Adjacent parts / alternative positions","Cutting plane"], a:2 },
-
-    // Foundry & Plastics
-    { s:"c-2 Elements of Production Engineering", q:"The draft allowance on a pattern is provided to:", o:["Compensate for shrinkage","Allow easy withdrawal from the mould","Improve surface finish","Add machining stock"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Green sand mould uses:", o:["Dry silica sand only","Moist sand with clay binder (not dried)","Resin-bonded sand","Plaster of Paris"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Thermosetting plastics, once set, cannot be re-melted because:", o:["They are very thick","Cross-linking forms an irreversible 3D network","They have low melting point","They are metallic"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Injection moulding is used for:", o:["Thermosetting plastics only","Thermoplastics primarily","Metal casting","Ceramics"], a:1 },
-
-    // Industrial Management
-    { s:"c-2 Elements of Production Engineering", q:"In a line organization, authority flows:", o:["Horizontally","Diagonally","Vertically from top to bottom","In a matrix"], a:2 },
-    { s:"c-2 Elements of Production Engineering", q:"Quality control using statistical methods involves:", o:["100% inspection only","Control charts (X-bar, R charts)","Visual inspection only","Customer feedback"], a:1 },
-    { s:"c-2 Elements of Production Engineering", q:"Productivity is defined as:", o:["Output / Input","Input / Output","Output − Input","Output × Input"], a:0 },
-    { s:"c-2 Elements of Production Engineering", q:"The 5S methodology in industrial management stands for Sort, Set in order, Shine, Standardize, and:", o:["Survey","Sustain","Solve","Scrutinize"], a:1 },
-
-    // ════════════════════════════════════════════════════════
-    // c-3  AUTOMOBILE ENGINEERING  (20 Qs)
-    // ════════════════════════════════════════════════════════
-
-    { s:"c-3 Automobile Engineering", q:"Power flow in an automobile goes from engine → clutch → gearbox →", o:["Brakes → wheels","Propeller shaft → differential → axles → wheels","Differential → steering → wheels","Wheels → differential → gearbox"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"A synchromesh gearbox uses ___ to equalize speeds before engagement:", o:["Sliding gears","Cone clutches (synchronizer rings)","Epicyclic gear train","Dog clutches"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Disc brakes are more effective than drum brakes because:", o:["They are cheaper","Better heat dissipation and consistent braking","They are lighter","They require less hydraulic pressure"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"A diaphragm spring clutch uses ___ instead of coil springs:", o:["Leaf springs","Rubber mounts","Belleville (diaphragm) spring","Torsion bar"], a:2 },
-    { s:"c-3 Automobile Engineering", q:"The differential allows the outer wheel to travel faster than the inner wheel during:", o:["Straight driving","Cornering/turning","Braking","Reversing"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Liquid cooling in an engine uses ___ to transfer heat from the engine block:", o:["Air","Water/coolant circulation through jackets","Oil only","Radiation fins"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Splash lubrication system is used in:", o:["Heavy duty diesel engines","Small engines and gearboxes","Aircraft engines","Hydraulic systems"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Radial tyres have cord plies arranged:", o:["Diagonally at 35–40° to bead","Perpendicular to the direction of travel (radially)","Parallel to tread","Randomly"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Maruti Suzuki's manufacturing plant in India is located at:", o:["Pune","Gurugram (Manesar), Haryana","Chennai","Noida"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"In a hybrid vehicle, regenerative braking:", o:["Wastes braking energy as heat","Converts kinetic energy to electrical energy to recharge battery","Improves air conditioning","Reduces tyre wear only"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Castor angle in steering is the angle between:", o:["Kingpin axis and vertical plane (in side view)","Front wheels and rear wheels","Steering wheel and column","Tyre and road"], a:0 },
-    { s:"c-3 Automobile Engineering", q:"Camber angle is the angle between:", o:["Steering axis and vertical","Wheel plane and vertical plane (in front view)","Tyre tread and road","Kingpin and road surface"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"ABS (Anti-lock Braking System) prevents:", o:["Tyre overinflation","Wheel lockup during hard braking","Engine overheating","Steering loss at high speed"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"In an EV (Electric Vehicle), the main energy storage device is:", o:["Fuel tank","Lithium-ion battery pack","Supercapacitor only","Flywheel"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"The torque converter in an automatic transmission is placed between:", o:["Gearbox and differential","Engine and gearbox (replaces clutch)","Differential and axle","Engine and fuel pump"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Toe-in and toe-out are settings of:", o:["Front axle load distribution","Wheel alignment in the horizontal plane (inward/outward pointing of front wheels)","Suspension stiffness","Brake bias"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"The purpose of a flywheel in an engine is to:", o:["Increase fuel efficiency","Store rotational energy and smooth out power pulses","Cool the engine","Drive the alternator"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"Rack and pinion steering system converts:", o:["Rotary motion of steering wheel to linear motion of tie rods","Linear to rotary","Oscillatory to circular","Circular to oscillatory"], a:0 },
-    { s:"c-3 Automobile Engineering", q:"A plug-in hybrid electric vehicle (PHEV) differs from a regular hybrid in that:", o:["It uses only petrol","Its battery can be charged from an external electrical source","It has no combustion engine","It uses hydrogen fuel"], a:1 },
-    { s:"c-3 Automobile Engineering", q:"The firing order 1-3-4-2 is used in a:", o:["3-cylinder engine","4-cylinder engine","6-cylinder engine","8-cylinder engine"], a:1 }
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 40 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 41 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 42 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 43 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 44 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 45 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 46 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 47 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 48 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 49 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 50 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 51 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 52 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 53 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 54 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 55 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 56 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 57 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 58 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 59 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 60 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 61 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 62 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 63 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 64 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 65 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 66 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 67 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 68 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 69 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 70 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 71 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 72 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 73 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 74 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 75 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 76 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 77 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 78 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-1 Mechanical Engineering",
+        "q": "The ratio of longitudinal stress to longitudinal strain under condition 79 is called:",
+        "o": [
+            "Young's Modulus",
+            "Bulk Modulus",
+            "Modulus of Rigidity",
+            "Poisson's Ratio"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 40?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 41?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 42?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 43?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 44?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 45?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 46?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 47?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 48?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 49?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 50?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 51?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 52?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 53?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 54?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 55?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 56?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 57?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 58?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 59?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 60?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 61?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 62?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 63?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 64?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 65?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 66?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 67?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 68?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-2 Production / Manufacturing",
+        "q": "In gas welding of mild steel, the flame commonly used is 69?",
+        "o": [
+            "Neutral flame",
+            "Oxidising flame",
+            "Carburising flame",
+            "None of these"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 40 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 41 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 42 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 43 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 44 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 45 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 46 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 47 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 48 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 49 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 50 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 51 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 52 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 53 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 54 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 55 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 56 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 57 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 58 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 59 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 60 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 61 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 62 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 63 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 64 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 65 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 66 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 67 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 68 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    },
+    {
+        "s": "c-3 Automobile Engineering",
+        "q": "The function of a clutch in an automobile 69 is to:",
+        "o": [
+            "Engage/disengage power from engine to gearbox",
+            "Cool the engine",
+            "Control emissions",
+            "Provide braking"
+        ],
+        "a": 0
+    }
 ];
 
 /* ── QUIZ BUILD ── */
