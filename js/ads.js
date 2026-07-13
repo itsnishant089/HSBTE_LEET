@@ -294,7 +294,9 @@
     if (href.indexOf('/paper/') !== -1 || href.toLowerCase().endsWith('.pdf')) {
       e.preventDefault();
       // Redirect to the interstitial page
-      window.location.href = '/html/download.html?file=' + encodeURIComponent(href);
+      const isHtmlDir = window.location.pathname.indexOf('/html/') !== -1;
+      const downloadPath = isHtmlDir ? 'download.html' : '/html/download.html';
+      window.location.href = downloadPath + '?file=' + encodeURIComponent(href);
     }
   });
 

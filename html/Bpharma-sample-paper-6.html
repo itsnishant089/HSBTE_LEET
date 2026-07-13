@@ -123,7 +123,7 @@
 <div class="container">
     <header>
         <div>
-            <h2 style="margin:0">OCET 2025: ELITE MOCK</h2>
+            <h2 style="margin:0">OCET 2026: ELITE MOCK</h2>
             <small>Phase: Extreme Difficulty | 90 Minutes</small>
         </div>
         <div class="timer-display" id="clock">90:00</div>
@@ -343,7 +343,7 @@ async function downloadQAPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     let y = 20;
-    doc.setFontSize(16); doc.text("OCET 2025 ELITE MOCK REPORT", 15, y);
+    doc.setFontSize(16); doc.text("OCET 2026 ELITE MOCK REPORT", 15, y);
     y += 15;
     doc.setFontSize(12); doc.text(`Final Score: ${document.getElementById('final-score').innerText}`, 15, y);
     y += 15;
