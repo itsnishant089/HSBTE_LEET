@@ -1244,7 +1244,14 @@
     function selectTier(t) {
       curTier = t;
       updateUI();
-      if (applied) { applied = null; resetCouponUI(); }
+      // Re-apply coupon for the newly selected tier (Premium ↔ Ultra)
+      var codeLeft = (document.getElementById('c-input') && document.getElementById('c-input').value || '').trim();
+      if (codeLeft) {
+        applyCoupon();
+      } else if (applied) {
+        applied = null;
+        resetCouponUI();
+      }
     }
 
     function updateUI() {
@@ -1414,7 +1421,8 @@
 
     // ── COUPON ──
     function applyCoupon() {
-      var code = (document.getElementById('c-input').value || '').trim().toUpperCase();
+      var code = (document.getElementById('c-input').value || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+      document.getElementById('c-input').value = code;
       var msgEl = document.getElementById('c-msg');
       var input = document.getElementById('c-input');
       var T = TIERS[curTier];
@@ -1434,7 +1442,7 @@
       var orig = T.price, disc, final;
       if (c.type === 'free') { disc = orig; final = 0; }
       else { disc = Math.round(orig * c.percent / 100); final = orig - disc; }
-      applied = Object.assign({}, c, { discount: disc, finalRs: final, finalPaise: final * 100 });
+      applied = Object.assign({}, c, { code: code, discount: disc, finalRs: final, finalPaise: final * 100 });
 
       document.getElementById('disc-row').style.display = 'flex';
       document.getElementById('disc-lbl').textContent = '🏷 ' + c.label;
@@ -1446,7 +1454,7 @@
         document.getElementById('s2price').textContent = 'FREE 🎉';
         document.getElementById('pay-wrap').style.display = 'none';
         document.getElementById('free-wrap').style.display = 'block';
-        showCMsg('🎉 COUPON APPLIED! 100% FREE LIFETIME ACCESS!', '#f0fdf4', '#86efac', '#15803d');
+        showCMsg('🎉 COUPON APPLIED! 100% FREE ' + T.label.toUpperCase() + ' ACCESS!', '#f0fdf4', '#86efac', '#15803d');
       } else {
         document.getElementById('total-p').textContent = '₹' + final;
         document.getElementById('total-p').style.color = T.color;
@@ -1454,7 +1462,7 @@
         document.getElementById('pay-txt').textContent = 'Pay ₹' + final + ' and Unlock Access';
         document.getElementById('pay-wrap').style.display = 'block';
         document.getElementById('free-wrap').style.display = 'none';
-        showCMsg('✅ COUPON APPLIED! 50% OFF — SAVE ₹' + disc + ' — PAY ONLY ₹' + final + '.', '#f0fdf4', '#86efac', '#15803d');
+        showCMsg('✅ COUPON APPLIED! ' + c.percent + '% OFF — SAVE ₹' + disc + ' — PAY ONLY ₹' + final + '.', '#f0fdf4', '#86efac', '#15803d');
       }
       input.style.borderColor = '#86efac';
     }
@@ -1469,42 +1477,101 @@
       document.getElementById('pay-wrap').style.display = 'block';
       document.getElementById('free-wrap').style.display = 'none';
       payPaise = T.paise;
+      var msgEl = document.getElementById('c-msg');
+      if (msgEl) msgEl.style.display = 'none';
     }
 
-    // ── FREE ACCESS ──
+    // ── FREE ACCESS (NISHANT2007 — works for Premium + Ultra) ──
     async function doFreeAccess() {
       if (!pending) { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.', 'err'); return; }
-      if (!applied || applied.type !== 'free') { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> No free coupon applied.', 'err'); return; }
+      if (!applied || applied.type !== 'free') { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> No free coupon applied. Enter <strong>NISHANT2007</strong> and click Apply.', 'err'); return; }
+
+      // Keep selected tier in sync (Premium or Ultra)
+      pending.tier = curTier;
+
       var btn = document.getElementById('btn-free');
       btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Activating free access…';
       clearAlert('rerr');
+
+      var couponCode = (applied.code || document.getElementById('c-input').value || 'NISHANT2007').trim().toUpperCase();
+      var uniq = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+
       try {
         var { data: nu, error: uE } = await sb.from('premium_users').insert([{
-          mobile: pending.mobile, email: pending.email, password_hash: pending.password_hash,
+          mobile: pending.mobile,
+          email: pending.email,
+          password_hash: pending.password_hash,
           full_name: pending.full_name
         }]).select('id').single();
-        if (uE) throw new Error(uE.message);
 
-        var { data: pay, error: pE } = await sb.from('premium_payments').insert([{
-          user_id: nu.id, razorpay_payment_id: 'COUPON_NISHANT2007_FREE',
-          amount: 0, status: 'free_coupon', receipt: 'NISHANT2007-FREE-' + nu.id
-        }]).select('id').single();
-        if (pE) throw new Error(pE.message);
-
-        await sb.from('premium_access').insert([{ user_id: nu.id, payment_id: pay.id, is_active: true }]);
-
-        // If ultra tier, also insert into ultra_premium_users
-        if (pending.tier === 'ultra') {
-          await sb.from('ultra_premium_users').insert([{ user_id: nu.id, mobile: pending.mobile, full_name: pending.full_name, email: pending.email }]);
+        if (uE) {
+          // Mobile already exists — reuse that user if possible
+          if ((uE.message || '').toLowerCase().includes('duplicate') || uE.code === '23505') {
+            var { data: eu } = await sb.from('premium_users').select('id').eq('mobile', pending.mobile).maybeSingle();
+            if (!eu) throw new Error(uE.message || 'Mobile already registered');
+            nu = eu;
+          } else {
+            throw new Error(uE.message || 'Could not create account');
+          }
         }
 
-        // Registration emails: welcome to user + alert to admin
-        sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: 'FREE via NISHANT2007', tier: pending.tier, amount: 0 });
+        var payId = 'COUPON_' + couponCode + '_FREE_' + nu.id + '_' + uniq;
+        var { data: pay, error: pE } = await sb.from('premium_payments').insert([{
+          user_id: nu.id,
+          razorpay_payment_id: payId,
+          amount: 0,
+          status: 'free_coupon',
+          coupon_used: couponCode,
+          receipt: couponCode + '-FREE-' + nu.id + '-' + uniq
+        }]).select('id').single();
+        if (pE) throw new Error(pE.message || 'Payment record failed');
+
+        var { error: aE } = await sb.from('premium_access').insert([{
+          user_id: nu.id,
+          payment_id: pay.id,
+          is_active: true
+        }]);
+        // Ignore duplicate access rows; otherwise throw
+        if (aE && !(aE.message || '').toLowerCase().includes('duplicate')) {
+          // Try activate existing access
+          var { error: upE } = await sb.from('premium_access').update({ is_active: true, payment_id: pay.id }).eq('user_id', nu.id);
+          if (upE) throw new Error(aE.message || 'Access grant failed');
+        }
+
+        if (pending.tier === 'ultra') {
+          var { data: existingUltra } = await sb.from('ultra_premium_users').select('id').eq('user_id', nu.id).maybeSingle();
+          if (!existingUltra) {
+            var { error: ultraE } = await sb.from('ultra_premium_users').insert([{
+              user_id: nu.id,
+              mobile: pending.mobile,
+              full_name: pending.full_name,
+              email: pending.email
+            }]);
+            if (ultraE && !(ultraE.message || '').toLowerCase().includes('duplicate')) {
+              throw new Error('Premium created but Ultra upgrade failed: ' + ultraE.message);
+            }
+          }
+        }
+
+        sendRegistrationEmails({
+          name: pending.full_name,
+          email: pending.email,
+          mobile: pending.mobile,
+          payId: 'FREE via ' + couponCode,
+          tier: pending.tier,
+          amount: 0,
+          coupon: couponCode
+        });
 
         setSession(nu.id);
-        showSuccess(pending.full_name, 'FREE access via NISHANT2007! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
+        showSuccess(
+          pending.full_name,
+          'FREE ' + TIERS[pending.tier].label + ' access via ' + couponCode + '! Welcome email sent to ' + pending.email + '. Account is now active.',
+          pending.tier
+        );
       } catch (e) {
-        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Email nishant@hsbteleet.com if issue persists.', 'err');
+        console.error('doFreeAccess error:', e);
+        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed: ' + (e.message || 'unknown error') + '. If mobile is already registered, login instead. Or email <strong>nishant@hsbteleet.com</strong>.', 'err');
         btn.disabled = false; btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
       }
     }
