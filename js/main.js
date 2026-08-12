@@ -235,7 +235,7 @@ runWhenReady(() => {
       <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 15px; max-width: 1200px; margin: 0 auto;">
         <span style="color: #fff; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 6px;">
           <i class="fas fa-bell" style="color: #fcd34d; animation: swing 2s infinite;"></i> 
-          Haryana LEET 2026 Updates:
+          Haryana LEET 2027 Updates:
         </span>
         <a href="/haryana-leet-admit-card" style="background: #fff; color: #1e3a8a; padding: 6px 14px; border-radius: 50px; font-weight: 800; font-size: 13px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
           <i class="fas fa-id-badge"></i> Download Admit Card

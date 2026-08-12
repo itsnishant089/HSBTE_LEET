@@ -13,7 +13,7 @@
   <meta name="author" content="Nishant"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
   <meta name="description" content="Detailed Haryana LEET college comparison for lateral entry students. Compare YMCA Faridabad, DCRUST Murthal, GJU Hisar, KUK, MDU, Nilokheri, Gurugram University and more by fees, placements and cutoff trends." />
-  <meta name="keywords" content="Haryana LEET college comparison, YMCA vs DCRUST, GJU vs KUK LEET, Nilokheri LEET cutoff, Gurugram University LEET, best college for leet in haryana, top engineering colleges haryana lateral entry, YMCA Faridabad LEET, DCRUST Murthal LEET, GJU Hisar LEET, haryana leet, btech leet, bhparmacy leet, HSBTE 2026, Haryana LEET 2026, BTech LEET 2026, BPharmacy LEET 2026, HSBTE result 2026, LEET PYQ 2026, Haryana Polytechnic 2026, LEET admission 2026, LEET counselling 2026, exam syllabus 2026, haryana leet 2026, hsbte leet 2026, haryana polytechnic 2026, leet 2026 syllabus, haryana leet 2026 application, haryana leet 2026 registration, leet 2026 exam date, haryana leet 2026 admit card, haryana leet 2026 cut off, btech leet 2026, bpharmacy leet 2026, haryana leet 2026 counseling, leet rank predictor 2026, haryana leet 2026 online mock test, leet preparation 2026, hstes leet 2026, haryana lateral entry 2026, haryana leet 2026 question paper, leet 2026 admit card download, haryana leet 2026 merit list" />
+  <meta name="keywords" content="Haryana LEET college comparison, YMCA vs DCRUST, GJU vs KUK LEET, Nilokheri LEET cutoff, Gurugram University LEET, best college for leet in haryana, top engineering colleges haryana lateral entry, YMCA Faridabad LEET, DCRUST Murthal LEET, GJU Hisar LEET, haryana leet, btech leet, bhparmacy leet, HSBTE 2027, Haryana LEET 2027, BTech LEET 2027, BPharmacy LEET 2027, HSBTE result 2027, LEET PYQ 2027, Haryana Polytechnic 2027, LEET admission 2027, LEET counselling 2027, exam syllabus 2027, haryana leet 2027, hsbte leet 2027, haryana polytechnic 2027, leet 2027 syllabus, haryana leet 2027 application, haryana leet 2027 registration, leet 2027 exam date, haryana leet 2027 admit card, haryana leet 2027 cut off, btech leet 2027, bpharmacy leet 2027, haryana leet 2027 counseling, leet rank predictor 2027, haryana leet 2027 online mock test, leet preparation 2027, hstes leet 2027, haryana lateral entry 2027, haryana leet 2027 question paper, leet 2027 admit card download, haryana leet 2027 merit list" />
 
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://hsbteleet.com/college-comparison"/>
@@ -24,8 +24,20 @@
 
   <link rel="canonical" href="https://hsbteleet.com/college-comparison"/>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+  <style>
+    #ultra-gate{display:none;position:fixed;inset:0;z-index:99999;background:rgba(2,6,23,.92);
+      align-items:center;justify-content:center;padding:24px;text-align:center;color:#fff;font-family:system-ui,sans-serif;}
+    #ultra-gate.show{display:flex;}
+    #ultra-gate .ug-box{max-width:420px;background:#0f172a;border:1px solid #334155;border-radius:20px;padding:32px 26px;box-shadow:0 20px 50px rgba(0,0,0,.45);}
+    #ultra-gate h2{margin:0 0 10px;font-size:1.45rem;font-weight:800;}
+    #ultra-gate p{margin:0 0 22px;color:#94a3b8;line-height:1.65;font-size:14px;}
+    #ultra-gate a{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:800;font-size:14px;margin:4px;}
+    #ultra-gate .ug-primary{background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff;}
+    #ultra-gate .ug-ghost{background:#1e293b;color:#e2e8f0;border:1px solid #334155;}
+  </style>
   <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/main.css"></noscript>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
   
   <style>
     /* Premium Styling for Comparison */
@@ -315,6 +327,14 @@
 </head>
 
 <body class="light-mode">
+<div id="ultra-gate" class="show">
+  <div class="ug-box">
+    <h2><i class="fas fa-lock"></i> Ultra Premium Required</h2>
+    <p>College Comparison Tool is available only for <strong>Ultra Premium (₹149)</strong> members. Regular Premium and free users cannot access this tool.</p>
+    <a class="ug-primary" href="./premium-login.html?tier=ultra"><i class="fas fa-rocket"></i> Get Ultra Premium</a>
+    <a class="ug-ghost" href="/premium-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+  </div>
+</div>
 <!-- HEADER -->
 <div data-include="/partials/header.html"></div>
 <!-- CHATBOT -->
@@ -907,6 +927,35 @@
   window.addEventListener('load', function() {
     setTimeout(runComparison, 500);
   });
+</script>
+<script>
+(async function(){
+  var gate = document.getElementById('ultra-gate');
+  var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+  function deny(){ gate.classList.add('show'); document.body.style.overflow='hidden'; }
+  try{
+    var uid = sessionStorage.getItem('prem_uid');
+    var mob = sessionStorage.getItem('prem_mob') || '';
+    var ts = parseInt(sessionStorage.getItem('prem_ts') || '0');
+    if(!uid || (Date.now()-ts) > 8*60*60*1000){ deny(); return; }
+    var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+    var {data: access} = await sb.from('premium_access').select('is_active').eq('user_id', uid).maybeSingle();
+    if(!access || !access.is_active){ deny(); return; }
+    var ultra = null;
+    if(mob){
+      var u1 = await sb.from('ultra_premium_users').select('id').eq('mobile', mob).maybeSingle();
+      ultra = u1.data;
+    }
+    if(!ultra){
+      var u2 = await sb.from('ultra_premium_users').select('id').eq('user_id', uid).maybeSingle();
+      ultra = u2.data;
+    }
+    if(!ultra){ deny(); return; }
+    sessionStorage.setItem('prem_tier','ultra');
+    gate.classList.remove('show');
+  }catch(e){ deny(); }
+})();
 </script>
 </body>
 </html>

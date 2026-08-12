@@ -98,7 +98,7 @@ async function buildSearchIndex() {
 if (isIndexLoaded) return;
 
 // Try to load from localStorage first
-const CACHE_KEY = 'hsbte_search_index_v4';
+const CACHE_KEY = 'hsbte_search_index_v5';
 const cached = localStorage.getItem(CACHE_KEY);
 if (cached) {
     try {
@@ -171,7 +171,12 @@ keywords: [
 branch.name.toLowerCase(),
 `${semNum} semester`.toLowerCase(),
 `semester ${sem}`.toLowerCase(),
-...branch.name.split(' ').map(w => w.toLowerCase())
+...branch.name.split(' ').map(w => w.toLowerCase()),
+'may june 2026',
+'june 2026',
+'qp-june-2026',
+'pyq 2026',
+'previous year 2026'
 ]
 });
 });
@@ -201,7 +206,10 @@ const startBackgroundIndexing = () => {
                                 subject.name.toLowerCase(),
                                 ...subjectWords.map(w => w.toLowerCase()),
                                 branch.name.toLowerCase(),
-                                `${semNum} semester`.toLowerCase()
+                                `${semNum} semester`.toLowerCase(),
+                                'may june 2026',
+                                'june 2026',
+                                'pyq 2026'
                             ];
                             searchIndex.push({
                                 type: 'subject',
@@ -234,9 +242,9 @@ if (window.requestIdleCallback) {
     setTimeout(startBackgroundIndexing, 4000);
 }
 searchIndex.push(
-{ type: 'page', title: 'HSBTE PYQ', url: `${basePath}hsbte-pyq`, keywords: ['hsbte', 'pyq', 'previous year', 'question papers', 'question paper'] },
+{ type: 'page', title: 'HSBTE PYQ', url: `${basePath}hsbte-pyq`, keywords: ['hsbte', 'pyq', 'previous year', 'question papers', 'question paper', 'may june 2026', 'june 2026', 'qp june 2026', 'diploma pyq 2026', 'hsbte paper 2026'] },
 { type: 'page', title: 'Home', url: `${basePath}`, keywords: ['home', 'main', 'index', 'homepage'] },
-{ type: 'page', title: 'Syllabus', url: `${basePath}syllabus`, keywords: ['syllabus', 'hsbte syllabus', 'diploma syllabus', 'polytechnic syllabus', 'haryana syllabus', 'syllabus pdf', 'curriculum'] },
+{ type: 'page', title: 'HSBTE Diploma Syllabus', url: `${basePath}hsbte-syllabus`, keywords: ['syllabus', 'hsbte syllabus', 'diploma syllabus', 'polytechnic syllabus', 'haryana syllabus', 'syllabus pdf', 'curriculum'] },
 {
 type: 'page',
 title: 'Haryana LEET',
@@ -247,31 +255,31 @@ keywords: ['leet', 'haryana leet', 'lateral entry', 'haryana', 'lateral entry en
 type: 'page',
 title: 'BTech LEET Information',
 url: `${basePath}btech-leet`,
-keywords: ['btech leet', 'btech', 'b.tech leet', 'b tech leet', 'btech lateral entry', 'engineering leet', 'leet btech', 'btech lateral', 'btech information', 'btech syllabus', 'btech exam pattern', 'btech cutoff', 'btech key dates', 'btech leet 2025', 'btech leet 2026', 'btech leet 2027']
+keywords: ['btech leet', 'btech', 'b.tech leet', 'b tech leet', 'btech lateral entry', 'engineering leet', 'leet btech', 'btech lateral', 'btech information', 'btech syllabus', 'btech exam pattern', 'btech cutoff', 'btech key dates', 'btech leet 2025', 'btech leet 2026', 'btech leet 2027', 'b.tech leet syllabus pdf']
 },
 {
 type: 'page',
-title: 'BTech LEET Key Dates 2026-27',
+title: 'BTech LEET Key Dates 2027',
 url: `${basePath}btech-leet-key-dates`,
-keywords: ['btech leet key dates', 'btech leet dates', 'btech important dates', 'btech leet counselling dates', 'btech leet exam date 2026', 'haryana btech leet key dates', 'ocet btech dates']
+keywords: ['btech leet key dates', 'btech leet dates', 'btech important dates', 'btech leet counselling dates', 'btech leet exam date 2027', 'haryana btech leet key dates', 'ocet btech dates']
 },
 {
 type: 'page',
 title: 'BTech LEET Sample Papers',
 url: `${basePath}btech-leet-sample-paper`,
-keywords: ['btech leet sample paper', 'btech sample paper', 'btech leet sample', 'btech mock paper', 'btech practice paper', 'btech leet practice', 'sample paper btech', 'btech leet mock', 'btech leet papers', 'btech sample', 'btech practice', 'btech mock', 'btech leet pyq', 'btech leet previous year']
+keywords: ['btech leet sample paper', 'btech sample paper', 'btech leet sample', 'btech mock paper', 'btech practice paper', 'btech leet practice', 'sample paper btech', 'btech leet mock', 'btech leet papers', 'btech sample', 'btech practice', 'btech mock', 'btech leet pyq', 'btech leet previous year', 'special sample paper', 'special mock paper']
 },
 {
 type: 'page',
 title: 'B. Pharmacy LEET Information',
 url: `${basePath}B-Pharmacy-leet`,
-keywords: ['b pharmacy leet', 'bpharmacy leet', 'b.pharmacy leet', 'b pharmacy lateral entry', 'pharmacy leet', 'bpharm leet', 'b pharm leet', 'bpharmacy', 'b pharmacy', 'pharmacy lateral entry', 'b pharmacy information', 'b pharmacy syllabus', 'b pharmacy exam pattern', 'b pharmacy cutoff', 'b pharmacy key dates', 'b pharmacy leet 2025', 'b pharmacy leet 2026', 'b pharmacy leet 2027']
+keywords: ['b pharmacy leet', 'bpharmacy leet', 'b.pharmacy leet', 'b pharmacy lateral entry', 'pharmacy leet', 'bpharm leet', 'b pharm leet', 'bpharmacy', 'b pharmacy', 'pharmacy lateral entry', 'b pharmacy information', 'b pharmacy syllabus', 'b pharmacy exam pattern', 'b pharmacy cutoff', 'b pharmacy key dates', 'b pharmacy leet 2025', 'b pharmacy leet 2027']
 },
 {
 type: 'page',
-title: 'B. Pharmacy LEET Key Dates 2026-27',
+title: 'B. Pharmacy LEET Key Dates 2027',
 url: `${basePath}b-pharmacy-leet-key-dates`,
-keywords: ['b pharmacy leet key dates', 'b pharmacy dates', 'bpharmacy key dates', 'b pharmacy important dates', 'b pharmacy leet exam date 2026', 'haryana b pharmacy leet schedule', 'd pharmacy lateral entry dates']
+keywords: ['b pharmacy leet key dates', 'b pharmacy dates', 'bpharmacy key dates', 'b pharmacy important dates', 'b pharmacy leet exam date 2027', 'haryana b pharmacy leet schedule', 'd pharmacy lateral entry dates']
 },
 {
 type: 'page',
@@ -283,13 +291,13 @@ keywords: ['b pharmacy leet sample paper', 'bpharmacy leet sample paper', 'b pha
 type: 'page',
 title: 'LEET Preparation Guide',
 url: `${basePath}leet-preparation-guide`,
-keywords: ['leet preparation guide', 'leet preparation', 'hsbte leet preparation', 'haryana leet preparation', 'leet exam preparation', 'leet study plan', 'leet preparation tips', 'leet preparation strategy', 'leet preparation material', 'leet exam tips', 'leet study guide', 'btech leet preparation', 'b pharmacy leet preparation', 'leet preparation 2025', 'leet preparation 2026', 'leet preparation books', 'leet mock test', 'leet practice papers']
+keywords: ['leet preparation guide', 'leet preparation', 'hsbte leet preparation', 'haryana leet preparation', 'leet exam preparation', 'leet study plan', 'leet preparation tips', 'leet preparation strategy', 'leet preparation material', 'leet exam tips', 'leet study guide', 'btech leet preparation', 'b pharmacy leet preparation', 'leet preparation 2025', 'leet preparation 2027', 'leet preparation books', 'leet mock test', 'leet practice papers']
 },
 {
 type: 'page',
 title: 'LEET Counselling Information',
 url: `${basePath}leet-counselling`,
-keywords: ['leet counselling', 'hsbte leet counselling', 'haryana leet counselling', 'leet counselling process', 'leet seat allotment', 'leet counselling dates', 'leet counselling registration', 'leet counselling fee', 'leet document verification', 'leet counselling rounds', 'leet choice filling', 'leet counselling guidelines', 'btech leet counselling', 'b pharmacy leet counselling', 'leet counselling 2025', 'leet counselling 2026']
+keywords: ['leet counselling', 'hsbte leet counselling', 'haryana leet counselling', 'leet counselling process', 'leet seat allotment', 'leet counselling dates', 'leet counselling registration', 'leet counselling fee', 'leet document verification', 'leet counselling rounds', 'leet choice filling', 'leet counselling guidelines', 'btech leet counselling', 'b pharmacy leet counselling', 'leet counselling 2025', 'leet counselling 2027']
 },
 {
 type: 'page',
@@ -313,7 +321,7 @@ keywords: ['leet sample papers', 'haryana leet sample papers', 'leet papers', 'l
 type: 'page',
 title: 'LEET Key Dates Hub',
 url: `${basePath}leet-tentative-dates`,
-keywords: ['leet tentative dates', 'leet key dates', 'haryana leet schedule', 'leet exam dates', 'leet counselling dates', 'haryana leet 2026 dates', 'btech leet key dates', 'b pharmacy leet key dates']
+keywords: ['leet tentative dates', 'leet key dates', 'haryana leet schedule', 'leet exam dates', 'leet counselling dates', 'haryana leet 2027 dates', 'btech leet key dates', 'b pharmacy leet key dates']
 },
 {
 type: 'page',
@@ -323,9 +331,9 @@ keywords: ['cutoff analytics', 'haryana leet cutoff analytics', 'btech cutoff an
 },
 {
 type: 'page',
-title: 'Haryana LEET College Comparison',
+title: 'Haryana LEET College Comparison (Ultra)',
 url: `${basePath}college-comparison`,
-keywords: ['college comparison', 'haryana leet college comparison', 'ymca vs dcrust', 'best college for leet', 'compare leet colleges']
+keywords: ['college comparison', 'haryana leet college comparison', 'ymca vs dcrust', 'best college for leet', 'compare leet colleges', 'ultra premium college comparison']
 },
 {
 type: 'page',
@@ -335,39 +343,51 @@ keywords: ['last year leet cutoff', 'hsbte leet last year cutoff', 'leet previou
 },
 {
 type: 'page',
-title: 'Haryana LEET 2026 – Complete Guide',
+title: 'Haryana LEET 2027 – Complete Guide',
 url: `${basePath}haryana-leet-2026`,
-keywords: ['haryana leet 2026', 'leet 2026', 'haryana leet 2026 guide', 'haryana leet 2026 exam', 'haryana leet 2026 syllabus', 'haryana leet 2026 pyq', 'haryana leet 2026 sample papers', 'haryana leet 2026 counselling']
+keywords: ['haryana leet 2027', 'leet 2027', 'haryana leet 2026', 'leet 2026', 'haryana leet 2027 guide', 'haryana leet 2027 exam', 'haryana leet 2027 syllabus', 'haryana leet 2027 pyq', 'haryana leet 2027 sample papers', 'haryana leet 2027 counselling']
 },
 {
 type: 'page',
-title: 'Haryana LEET 2026 Syllabus',
+title: 'Haryana LEET Syllabus (Official)',
 url: `${basePath}haryana-leet-syllabus`,
-keywords: ['haryana leet 2026 syllabus', 'leet 2026 syllabus', 'btech leet syllabus 2026', 'b pharmacy leet syllabus 2026', 'haryana leet syllabus pdf']
+keywords: ['haryana leet 2027 syllabus', 'leet 2027 syllabus', 'btech leet syllabus 2027', 'b pharmacy leet syllabus 2027', 'haryana leet syllabus pdf', 'hstes chapter 4', 'common syllabus all branches', 'leet syllabus same for all branches']
 },
 {
 type: 'page',
-title: 'Haryana LEET 2026 Exam Pattern',
+title: 'LEET Syllabus PDF Download',
+url: `${basePath}leet-syllabus`,
+keywords: ['leet syllabus', 'btech leet syllabus', 'b.tech leet syllabus pdf', 'download leet syllabus', 'hstes syllabus pdf', 'b.tech-leet-syllabus-2026', 'official leet syllabus', 'chapter 4 syllabus', '90 mcq syllabus', 'no negative marking leet']
+},
+{
+type: 'page',
+title: 'Official B.Tech LEET Syllabus PDF',
+url: `${basePath}pdf/B.Tech-LEET-Syllabus-2026.pdf`,
+keywords: ['b.tech leet syllabus pdf', 'official syllabus pdf', 'hstes syllabus brochure', 'chapter 4 scheme syllabus', 'download syllabus pdf', 'leet syllabus 2026 pdf']
+},
+{
+type: 'page',
+title: 'Haryana LEET 2027 Exam Pattern',
 url: `${basePath}haryana-leet-exam-pattern`,
-keywords: ['haryana leet 2026 exam pattern', 'leet 2026 exam pattern', 'haryana leet paper pattern', 'btech leet exam pattern', 'b pharmacy leet exam pattern']
+keywords: ['haryana leet 2027 exam pattern', 'leet 2027 exam pattern', 'haryana leet paper pattern', 'btech leet exam pattern', 'b pharmacy leet exam pattern', '90 questions 90 minutes']
 },
 {
 type: 'page',
-title: 'Haryana LEET 2026 Eligibility',
+title: 'Haryana LEET 2027 Eligibility',
 url: `${basePath}haryana-leet-eligibility`,
-keywords: ['haryana leet 2026 eligibility', 'leet eligibility', 'btech leet eligibility', 'b pharmacy leet eligibility', 'haryana leet qualification']
+keywords: ['haryana leet 2027 eligibility', 'leet eligibility', 'btech leet eligibility', 'b pharmacy leet eligibility', 'haryana leet qualification']
 },
 {
 type: 'page',
-title: 'Haryana LEET 2026 Counselling',
+title: 'Haryana LEET 2027 Counselling',
 url: `${basePath}haryana-leet-counselling`,
-keywords: ['haryana leet 2026 counselling', 'leet counselling haryana', 'hstes leet counselling', 'leet 2026 choice filling', 'leet 2026 seat allotment']
+keywords: ['haryana leet 2027 counselling', 'leet counselling haryana', 'hstes leet counselling', 'leet 2027 choice filling', 'leet 2027 seat allotment']
 },
 {
 type: 'page',
 title: 'Haryana LEET Cutoff – Rank vs College',
 url: `${basePath}haryana-leet-cutoff`,
-keywords: ['haryana leet cutoff', 'leet rank vs college', 'leet previous year cutoff', 'haryana leet 2026 cutoff insight']
+keywords: ['haryana leet cutoff', 'leet rank vs college', 'leet previous year cutoff', 'haryana leet 2027 cutoff insight']
 },
 {
 type: 'page',
@@ -383,21 +403,57 @@ keywords: ['result', 'hsbte result', 'diploma result', 'check result', 'haryana 
 },
 {
 type: 'page',
-title: 'College Predictor',
+title: 'College Predictor (Ultra Premium)',
 url: `${basePath}college-predictor`,
-keywords: ['predictor', 'college predictor', 'leet predictor', 'rank vs college', 'admission predictor']
+keywords: ['predictor', 'college predictor', 'leet predictor', 'rank vs college', 'admission predictor', 'ai college predictor', 'ultra premium college predictor']
 },
 {
 type: 'page',
 title: 'Rank Analysis',
 url: `${basePath}rank-analysis`,
-keywords: ['rank', 'rank analysis', 'leet rank', 'cutoff analysis', 'rank vs marks']
+keywords: ['rank', 'rank analysis', 'leet rank', 'cutoff analysis', 'rank vs marks', 'rank predictor by marks']
 },
 {
 type: 'page',
-title: 'LEET Study Plan',
+title: 'LEET Study Plan (Ultra Premium)',
 url: `${basePath}study-plan`,
-keywords: ['study plan', 'preparation strategy', 'leet study plan', 'exam schedule']
+keywords: ['study plan', 'preparation strategy', 'leet study plan', 'exam schedule', 'ai study planner', 'ultra study plan', 'common syllabus study plan']
+},
+{
+type: 'page',
+title: 'Ultra Premium Tools',
+url: `${basePath}ultra-premium`,
+keywords: ['ultra premium', 'ultra tools', 'ai college predictor', 'rank predictor', 'cutoff analyzer', 'smart counselling', 'choice filling generator', 'choice mistake detector', 'upgrade chance calculator', 'mock counselling', 'ai study planner', 'ultra premium 149', 'leet ai assistant']
+},
+{
+type: 'page',
+title: 'Premium Sample Papers',
+url: `${basePath}premium-papers`,
+keywords: ['premium papers', 'premium sample papers', 'leet premium', '24 sample papers', 'special sample paper', 'special mock paper', 'high difficulty mock', 'premium login papers']
+},
+{
+type: 'page',
+title: 'BTech LEET Premium Plans',
+url: `${basePath}btech-leet-premium`,
+keywords: ['premium', 'ultra premium', 'btech leet premium', 'premium 99', 'ultra 149', 'buy premium', 'premium login', 'hsbteleet premium']
+},
+{
+type: 'page',
+title: 'Premium Login',
+url: `${basePath}premium-login`,
+keywords: ['premium login', 'ultra login', 'login premium', 'register premium', 'razorpay premium']
+},
+{
+type: 'page',
+title: 'Special Sample Paper (LEET UI Mock)',
+url: `${basePath}btech-sample-paper-11`,
+keywords: ['special sample paper', 'special mock paper', 'high difficulty', 'leet ui mock', 'mock exam interface', 'special paper 11']
+},
+{
+type: 'page',
+title: 'FAQ',
+url: `${basePath}faq`,
+keywords: ['faq', 'frequently asked questions', 'leet syllabus same for all branches', 'negative marking leet', 'common syllabus']
 },
 {
 type: 'page',
@@ -409,21 +465,21 @@ keywords: ['contact', 'support', 'help', 'email', 'about us']
 searchIndex.push(
 {
 type: 'page',
-title: 'Haryana LEET OCET Documents 2026',
+title: 'Haryana LEET OCET Documents 2027',
 url: `${basePath}haryana-leet-ocet-documents`,
-keywords: ['haryana leet ocet documents', 'ocet documents 2026', 'haryana leet admit card documents', 'leet registration documents', 'ocet exam day checklist']
+keywords: ['haryana leet ocet documents', 'ocet documents 2027', 'haryana leet admit card documents', 'leet registration documents', 'ocet exam day checklist']
 },
 {
 type: 'page',
-title: 'Haryana LEET Admission Documents 2026',
+title: 'Haryana LEET Admission Documents 2027',
 url: `${basePath}haryana-leet-admission-documents`,
 keywords: ['haryana leet admission documents', 'leet reporting documents', 'haryana leet joining documents', 'btech lateral entry admission checklist', 'hstes admission document list']
 },
 {
 type: 'page',
-title: 'Haryana LEET Seat Intake 2026',
+title: 'Haryana LEET Seat Intake 2027',
 url: `${basePath}haryana-leet-seat-intake`,
-keywords: ['haryana leet seat intake', 'btech lateral entry seat matrix haryana', 'branch wise seat intake 2026', 'haryana leet colleges seat intake', 'appendix f haryana leet']
+keywords: ['haryana leet seat intake', 'btech lateral entry seat matrix haryana', 'branch wise seat intake 2027', 'haryana leet colleges seat intake', 'appendix f haryana leet']
 }
 );
 for (let i = 1; i <= 11; i++) {
@@ -440,7 +496,22 @@ keywords: [
 'btech sample',
 'btech leet sample',
 'btech leet pyq',
-'btech previous year'
+'btech previous year',
+...(i === 11 ? ['special sample paper', 'special mock paper', 'high difficulty mock'] : [])
+]
+});
+}
+for (let i = 1; i <= 16; i++) {
+searchIndex.push({
+type: 'page',
+title: `Premium Sample Paper ${i}`,
+url: `${basePath}premium-sample-paper-${i}`,
+keywords: [
+`premium sample paper ${i}`,
+`premium paper ${i}`,
+'premium papers',
+'leet premium mock',
+'premium sample'
 ]
 });
 }
@@ -531,7 +602,15 @@ const synonymReplacements = [
 { pattern: /\bme\b/g, replacement: 'mechanical' },
 { pattern: /\bece\b/g, replacement: 'ece' },
 { pattern: /\bec\b/g, replacement: 'electrical' },
-{ pattern: /\bmlt\b/g, replacement: 'medical laboratory technology' }
+{ pattern: /\bmlt\b/g, replacement: 'medical laboratory technology' },
+{ pattern: /\bmay[\s\-–]*june\s*2026\b/g, replacement: 'may june 2026' },
+{ pattern: /\bjune\s*2026\b/g, replacement: 'june 2026' },
+{ pattern: /\bqp[\s\-]*june[\s\-]*2026\b/g, replacement: 'june 2026' },
+{ pattern: /\bultra\s*premium\b/g, replacement: 'ultra premium' },
+{ pattern: /\bleet\s*syllabus\b/g, replacement: 'leet syllabus' },
+{ pattern: /\bspecial\s*(sample|mock)\s*paper\b/g, replacement: 'special sample paper' },
+{ pattern: /\bcollege\s*predictor\b/g, replacement: 'college predictor' },
+{ pattern: /\bstudy\s*plan(ner)?\b/g, replacement: 'study plan' }
 ];
 synonymReplacements.forEach(rule => {
 queryLower = queryLower.replace(rule.pattern, rule.replacement);
@@ -555,7 +634,7 @@ performSearch(query);
 return;
 }
 const isSemesterSearch = /^\d+(st|nd|rd|th)?\s*(semester|sem)?$|semester\s*\d+|sem\s*\d+/i.test(query);
-const isLeetSearch = /leet|sample\s*paper|mock\s*paper|practice\s*paper/i.test(queryLower);
+const isLeetSearch = /leet|sample\s*paper|mock\s*paper|practice\s*paper|syllabus|ultra|premium|predictor|study\s*plan|june\s*2026|may\s*june/i.test(queryLower);
 const isBranchSearch = !isSemesterSearch && !isLeetSearch && queryWords.length <= 2;
 const isSubjectSearch = queryWords.length >= 2 || (!isSemesterSearch && !isBranchSearch && !isLeetSearch);
 searchIndex.forEach(item => {

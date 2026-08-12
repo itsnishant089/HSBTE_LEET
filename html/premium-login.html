@@ -7,9 +7,9 @@
   <meta http-equiv="Cache-Control" content="no-store, max-age=0">
   <meta http-equiv="Pragma" content="no-cache">
   <link rel="icon" href="https://hsbteleet.com/image/favicon.webp" />
-  <title>Premium Login | Haryana LEET 2026 | hsbteleet.com</title>
+  <title>Premium Login | Haryana LEET 2027 | hsbteleet.com</title>
   <meta name="description"
-    content="Login or register for Premium (₹99) or Ultra Premium (₹149) Haryana LEET 2026 access. 24 exclusive LEET sample papers, College Predictor, Rank Predictor and more. 100% ad-free." />
+    content="Login or register for Premium (₹99) or Ultra Premium (₹149) Haryana LEET 2027 access. 24 exclusive LEET sample papers, College Predictor, Rank Predictor and more. 100% ad-free." />
   <meta name="robots" content="index, follow" />
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
@@ -992,7 +992,7 @@
         <div class="tier-icon">👑</div>
         <div class="tier-name">Premium</div>
         <div class="tier-price">₹99</div>
-        <div class="tier-desc">24 Papers + Rank Analysis</div>
+        <div class="tier-desc">24 Papers + Syllabus + Prospectus</div>
         <div class="tier-save">Launch Price</div>
       </div>
       <div class="tier-card" id="opt-ultra" onclick="selectTier('ultra')">
@@ -1013,7 +1013,7 @@
         <div class="hdr-in">
           <div class="hdr-icon" id="hdrIcon">👑</div>
           <h1 class="hdr-title" id="hdrTitle">Premium LEET Access</h1>
-          <p class="hdr-sub" id="hdrSub">Login or register — unlock 24 exclusive papers and Rank Analysis</p>
+          <p class="hdr-sub" id="hdrSub">Login or register — unlock 24 exclusive papers, syllabus, prospectus and Rank Analysis</p>
           <div class="hdr-badges">
             <span class="hbadge"><span class="dot"></span>Secure</span>
             <span class="hbadge" id="hdrPrice">₹99 One-Time</span>
@@ -1168,8 +1168,8 @@
             <div id="free-wrap" style="display:none">
               <button class="btn btn-g" id="btn-free" onclick="doFreeAccess()"><i class="fas fa-gift"></i> Claim FREE
                 Access — ₹0</button>
-              <p style="text-align:center;font-size:12px;color:var(--mu);margin-top:8px">🎉 LEET2026 applied — lifetime
-                access completely free!</p>
+              <p style="text-align:center;font-size:12px;color:var(--mu);margin-top:8px">🎉 NISHANT@123 APPLIED — LIFETIME
+                ACCESS COMPLETELY FREE!</p>
             </div>
           </div>
 
@@ -1224,8 +1224,8 @@
       ultra: { label: 'Ultra Premium', price: 149, paise: 14900, icon: '🚀', color: '#7c3aed', hdr: 'hdr-ultra' }
     };
     var COUPONS = {
-      'NISHANT': { label: 'NISHANT — 50% off!', type: 'percent', percent: 50 },
-      <!-- 'LEET2026': { label: 'LEET2026 — 100% FREE!', type: 'free' } -->
+      'NISHANT@123': { label: 'NISHANT@123 — 100% FREE!', type: 'free' },
+      'LEET123': { label: 'LEET123 — 50% OFF!', type: 'percent', percent: 50 }
     };
 
     var curTier = 'premium';
@@ -1273,7 +1273,7 @@
         ? 'Pay once — unlock 24 papers + College Predictor + all counselling tools, lifetime access, 100% ad-free.'
         : 'Pay once — unlock 24 premium papers plus Rank Analysis, lifetime access, 100% ad-free.';
       document.getElementById('s2feats').innerHTML = curTier === 'ultra'
-        ? '<li><i class="fas fa-check-circle"></i> 24 exclusive LEET sample papers</li><li><i class="fas fa-star"></i> AI College Predictor (2026 data)</li><li><i class="fas fa-star"></i> Rank Predictor + Counselling Tools</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free · Secure Razorpay</li>'
+        ? '<li><i class="fas fa-check-circle"></i> 24 exclusive LEET sample papers</li><li><i class="fas fa-star"></i> AI College Predictor (2027 data)</li><li><i class="fas fa-star"></i> Rank Predictor + Counselling Tools</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free · Secure Razorpay</li>'
         : '<li><i class="fas fa-check-circle"></i> 24 exclusive papers (section-wise + full)</li><li><i class="fas fa-check-circle"></i> Rank Analysis Tool</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free experience</li><li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>';
       payPaise = T.paise;
     }
@@ -1445,7 +1445,7 @@
         document.getElementById('s2price').textContent = 'FREE 🎉';
         document.getElementById('pay-wrap').style.display = 'none';
         document.getElementById('free-wrap').style.display = 'block';
-        showCMsg('🎉 Coupon applied! FREE lifetime access!', '#f0fdf4', '#86efac', '#15803d');
+        showCMsg('🎉 COUPON APPLIED! 100% FREE LIFETIME ACCESS!', '#f0fdf4', '#86efac', '#15803d');
       } else {
         document.getElementById('total-p').textContent = '₹' + final;
         document.getElementById('total-p').style.color = T.color;
@@ -1453,7 +1453,7 @@
         document.getElementById('pay-txt').textContent = 'Pay ₹' + final + ' and Unlock Access';
         document.getElementById('pay-wrap').style.display = 'block';
         document.getElementById('free-wrap').style.display = 'none';
-        showCMsg('✅ Coupon applied! Save ₹' + disc + ' — pay only ₹' + final + '.', '#f0fdf4', '#86efac', '#15803d');
+        showCMsg('✅ COUPON APPLIED! 50% OFF — SAVE ₹' + disc + ' — PAY ONLY ₹' + final + '.', '#f0fdf4', '#86efac', '#15803d');
       }
       input.style.borderColor = '#86efac';
     }
@@ -1485,8 +1485,8 @@
         if (uE) throw new Error(uE.message);
 
         var { data: pay, error: pE } = await sb.from('premium_payments').insert([{
-          user_id: nu.id, razorpay_payment_id: 'COUPON_LEET2026_FREE',
-          amount: 0, status: 'free_coupon', receipt: 'LEET2026-FREE-' + nu.id
+          user_id: nu.id, razorpay_payment_id: 'COUPON_NISHANT@123_FREE',
+          amount: 0, status: 'free_coupon', receipt: 'NISHANT@123-FREE-' + nu.id
         }]).select('id').single();
         if (pE) throw new Error(pE.message);
 
@@ -1498,10 +1498,10 @@
         }
 
         // Registration emails: welcome to user + alert to admin
-        sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: 'FREE via LEET2026', tier: pending.tier, amount: 0 });
+        sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: 'FREE via NISHANT@123', tier: pending.tier, amount: 0 });
 
         setSession(nu.id);
-        showSuccess(pending.full_name, 'FREE access via LEET2026! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
+        showSuccess(pending.full_name, 'FREE access via NISHANT@123! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
       } catch (e) {
         setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Email nishant@hsbteleet.com if issue persists.', 'err');
         btn.disabled = false; btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
@@ -1711,6 +1711,20 @@
       }
     }, 2000);
   </script>
+<section class="seo-related-links" data-seo-related-links="1" aria-label="Related Haryana LEET resources" style="margin:28px auto;max-width:1100px;padding:0 16px;">
+  <h2 style="font-size:1.15rem;margin:0 0 10px;">Related Haryana LEET 2027 Resources</h2>
+  <p style="margin:0 0 12px;color:#475569;font-size:0.95rem;">Useful links for diploma students preparing for B.Tech lateral entry in Haryana.</p>
+  <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 16px;padding-left:18px;margin:0;line-height:1.5;">
+    <li><a href="/haryana-leet-2026">Haryana LEET 2027 guide</a></li>
+    <li><a href="/leet-syllabus">Haryana LEET syllabus</a></li>
+    <li><a href="/leet-sample-paper">LEET sample papers</a></li>
+    <li><a href="/haryana-leet-exam-pattern">LEET exam pattern</a></li>
+    <li><a href="/last-year-cutoff">Haryana LEET cutoff</a></li>
+    <li><a href="/haryana-leet-counselling">LEET counselling process</a></li>
+    <li><a href="/btech-leet-premium">Premium LEET papers</a></li>
+    <li><a href="/counseling">Personalized counselling help</a></li>
+  </ul>
+</section>
 </body>
 
 </html>

@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
-  <title>Study Plan Generator — LEET 2026 | hsbteleet.com</title>
+  <title>Study Plan Generator — LEET 2027 | hsbteleet.com</title>
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -206,9 +206,10 @@
 
 <div id="access-denied">
   <div class="lock">🔒</div>
-  <h2>Premium Access Required</h2>
-  <p>This page is only accessible to premium members. Please login to continue.</p>
-  <a href="/premium-login" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login to Premium</a>
+  <h2>Ultra Premium Required</h2>
+  <p>AI Study Planner is only for <strong>Ultra Premium (₹149)</strong> members. Regular Premium cannot access this page.</p>
+  <a href="./premium-login.html?tier=ultra" class="btn-login"><i class="fas fa-rocket"></i> Get Ultra Premium</a>
+  <a href="/premium-login" class="btn-login" style="margin-top:10px;background:#334155;"><i class="fas fa-sign-in-alt"></i> Already Ultra? Login</a>
 </div>
 <div id="page-loader"><div class="spin"></div><p>Verifying access…</p></div>
 <div id="wm-layer"></div>
@@ -219,7 +220,7 @@
     <a href="/premium-papers" class="nav-brand">👑 hsbteleet Premium</a>
     <a href="/premium-papers" class="nav-item">📄 Papers</a>
     <a href="/rank-analysis" class="nav-item">📊 Rank Analysis</a>
-    <a href="/college-predictor" class="nav-item">🏫 College Predictor</a>
+    <a href="/ultra-premium" class="nav-item">🚀 Ultra Tools</a>
     <button class="nav-item active">📅 Study Plan</button>
     <div class="nav-right">
       <button class="nav-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -231,14 +232,15 @@
     <div class="hero">
       <div class="hero-icon">📅</div>
       <div style="flex:1;min-width:200px;">
-        <h1>Personalized Study Plan — LEET 2026</h1>
-        <p>Tell us how many days you have, your target branch, and rate your topic strength. We'll generate a smart, prioritized day-by-day study plan from the official LEET 2026 syllabus.</p>
+        <h1>Personalized Study Plan — LEET 2027</h1>
+        <p>Tell us how many days you have, your target branch, and rate your topic strength. We'll generate a smart, prioritized day-by-day study plan from the <strong>official HSTES B.E./B.Tech (LEET) Chapter 4 syllabus</strong> (AICTE/HSBTE diploma-aligned).</p>
         <div class="hero-badges">
-          <span class="hero-badge">📚 Official Syllabus</span>
+          <span class="hero-badge">📚 Official HSTES Syllabus</span>
           <span class="hero-badge">🎯 Prioritized Topics</span>
           <span class="hero-badge">⏱️ Time-Based</span>
           <span class="hero-badge">🧠 Smart Scheduling</span>
         </div>
+        <p style="margin-top:12px;font-size:13px;"><a href="/pdf/B.Tech-LEET-Syllabus-2026.pdf" target="_blank" rel="noopener" style="font-weight:800;color:#4f46e5;text-decoration:underline;">Download Official B.Tech LEET Syllabus PDF</a> · Source: Haryana State Technical Education Society (HSTES) / Directorate of Technical Education, Haryana</p>
       </div>
     </div>
 
@@ -429,11 +431,27 @@ document.addEventListener('DOMContentLoaded',function(){initTopics();injectWater
 
 async function verifyAccess(){
   var uid=sessionStorage.getItem('prem_uid');
+  var mob=sessionStorage.getItem('prem_mob')||'';
   var ts=parseInt(sessionStorage.getItem('prem_ts')||'0');
   if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
   try{
     var {data,error}=await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
     if(error||!data||!data.is_active){showDenied();return;}
+    var ultra=null;
+    if(mob){
+      var uRes=await sb.from('ultra_premium_users').select('id').eq('mobile',mob).maybeSingle();
+      ultra=uRes.data;
+    }
+    if(!ultra){
+      var u2=await sb.from('ultra_premium_users').select('id').eq('user_id',uid).maybeSingle();
+      ultra=u2.data;
+    }
+    if(!ultra){
+      sessionStorage.setItem('prem_tier','premium');
+      showDenied();
+      return;
+    }
+    sessionStorage.setItem('prem_tier','ultra');
     sessionStorage.setItem('prem_ts',Date.now().toString());
     document.getElementById('page-loader').style.display='none';
     document.getElementById('main-page').style.display='block';
@@ -441,34 +459,34 @@ async function verifyAccess(){
   }catch(e){showDenied();}
 }
 function showDenied(){document.getElementById('page-loader').style.display='none';document.getElementById('access-denied').classList.add('show');}
-function doLogout(){['prem_uid','prem_mob','prem_name','prem_ts'].forEach(function(k){sessionStorage.removeItem(k);});window.location.href='./premium-login.html';}
+function doLogout(){['prem_uid','prem_mob','prem_name','prem_ts','prem_tier'].forEach(function(k){sessionStorage.removeItem(k);});window.location.href='./premium-login.html';}
 
-// ── SYLLABUS DATA ──
+// ── SYLLABUS DATA (Official HSTES B.E./B.Tech LEET Chapter 4 — aligned with AICTE/HSBTE diploma curriculum) ──
 var SYLLABUS={
   a:[
-    {id:'math',name:'Mathematics (a-1 to a-3)',marks:8,subtopics:'AP, Complex Numbers, Logs, Permutations, Binomial, Probability, Matrices, Trigonometry, Lines, Circles, Differentiation, Integration, DE, Statistics',section:'A'},
-    {id:'physics',name:'Physics (a-2)',marks:8,subtopics:'Units/Dimensions, Newton\'s Laws, Work/Energy, Properties of Matter, Waves, Rotational Motion, Geometric Optics',section:'A'},
-    {id:'chemistry',name:'Chemistry (a-3)',marks:3,subtopics:'Heat Transfer, Electrostatics, Laser/Superconductivity, Water Hardness, Acidity/Basicity, pH, Valency, Electronic Configuration',section:'A'},
-    {id:'comm',name:'Communication Skills (a-4)',marks:3,subtopics:'Antonyms/Synonyms, Prepositions, Voice, Narration, Tenses, Error Correction, Punctuation',section:'A'},
-    {id:'ga',name:'General Awareness (a-5)',marks:3,subtopics:'Haryana Polytechnics, LEET Eligibility, Districts/Tehsils, Population, Area, History of Haryana',section:'A'},
+    {id:'math',name:'Mathematics (a-1)',marks:8,subtopics:'Arithmetic Progressions, Complex Numbers, Logarithm, Permutation & Combination, Binomial Expansion, Probability, Matrices, Trigonometry, Straight Line, Circle, Differentiation, Successive Differentiation, Maxima & Minima, Definite & Indefinite Integration, Applications of Integration, First-order ODE, Mean/Mode/Median, Mean Deviation, Standard Deviation',section:'A'},
+    {id:'physics',name:'Physics (a-2)',marks:8,subtopics:'Units & Dimensions, Motion in 1D, Newton\'s Laws, Work & Energy, Conservation of Energy, Elasticity/Surface Tension/Viscosity, Waves & SHM, Rotational Motion & Angular Momentum, Heat & Temperature, Heat Transfer Laws, Geometric Optics & Optical Instruments, Electrostatics (E & Potential), Capacitors & Dielectric, Laser & Superconductivity, Conventional & Non-conventional Energy',section:'A'},
+    {id:'chemistry',name:'Chemistry (a-3)',marks:3,subtopics:'Hard & Soft Water, Types of Hardness, Disadvantages/Causes/Remedies, Acidity, Basicity, Ion Exchange Method, Electronic Configuration (upto Z=30), Equivalent Weight, pH Value, Symbol, Formula, Valency & Chemical Equation',section:'A'},
+    {id:'comm',name:'Communication Skills (a-4)',marks:3,subtopics:'Words, Antonyms & Synonyms, Communication Technique, Preposition, Correction, Voice, Narration, Punctuation, Tenses, Correction of Incorrect Sentences',section:'A'},
+    {id:'ga',name:'General Awareness (a-5)',marks:3,subtopics:'Haryana Technical Education (Polytechnics, Intake, LEET Eligibility, BE/B.Tech & B.Pharmacy Institutions), Online Off-Campus Counselling Processes, Haryana Districts/Tehsils/Blocks/Villages, Population/Area/Boundary States, History of Haryana, General Awareness about Country & Polytechnics',section:'A'},
   ],
   b:[
-    {id:'electrical',name:'Elements of Electrical Engg. (b-1)',marks:9,subtopics:'EMF, KVL/KCL, Faraday\'s Law, Network Theorems, AC Circuits, RLC, Resonance, Transformers, DC Machines, Induction Motor, T&D',section:'B'},
-    {id:'electronics',name:'Elements of Electronics Engg. (b-2)',marks:8,subtopics:'Measurements, Analog Electronics (Diode/BJT/FET/OPAMP), Digital Electronics (Logic Gates, FlipFlop), Communication Systems, Industrial Electronics (SCR/TRIAC)',section:'B'},
-    {id:'computer',name:'Elements of Computer Engg. (b-3)',marks:8,subtopics:'Computer Organization, Memory, OS Concepts, C Programming (Data Types, Arrays, Pointers, Functions, File Handling), Computer Networking (LAN/WAN/Internet)',section:'B'},
+    {id:'electrical',name:'Elements of Electrical Engg. (b-1)',marks:9,subtopics:'EMF, Kirchhoff\'s Laws, Faraday\'s Laws, Network Theorems, AC Circuits (RMS, RLC, Series/Parallel, Resonance), Transformers (1-ph & 3-ph), DC Machines (Generator & Motor), Induction Motor (3-ph), Transmission & Distribution (High Voltage Advantages, 3-ph/1-ph/2-ph/3-wire DC Comparison)',section:'B'},
+    {id:'electronics',name:'Elements of Electronics Engg. (b-2)',marks:8,subtopics:'Measurements & Instrumentation (Errors, Standards, Ammeters/Voltmeters/Wattmeters/Energy Meters, CRO, Bridges, Transducers), Communication (Modulation/Demodulation), Analog Electronics (Diode, Zener, LED, Photo Diode, BJT, FET, Biasing, Amplifiers, OPAMP, Oscillators, Regulated PSU), Digital Electronics (Number Systems, Codes, Logic Gates, Boolean Algebra, Flip-Flop), Industrial Electronics (SCR, DIAC, TRIAC)',section:'B'},
+    {id:'computer',name:'Elements of Computer Engg. (b-3)',marks:8,subtopics:'Computer Fundamentals (Organization, Languages, Compilers/Interpreters, Algorithms, Flowcharts), Computer Organization (Registers, Buses, Instruction Set, Control Units, Memory, Cache/Virtual Memory, I/O), Operating Systems (Process, Scheduling, Memory Management, Synchronization), Programming in C (Data Types, Control, Arrays, Structures, Unions, Functions, Pointers, File Handling), Computer Networking (LAN, WAN, Internet & Applications)',section:'B'},
   ],
   c:[
-    {id:'mech',name:'Elements of Mechanical Engg. (c-1)',marks:8,subtopics:'Applied Mechanics (Friction, Centroid, Machines), Strength of Materials (Stress/Strain, Beams, Columns), Thermodynamics (Laws, Steam, Cycles), Fluid Mechanics',section:'C'},
-    {id:'production',name:'Elements of Production Engg. (c-2)',marks:6,subtopics:'Lathe/Drilling/Milling/Shaper, Measuring Instruments, Material Science, Engineering Drawing, Foundry, Plastics, Industrial Management',section:'C'},
-    {id:'auto',name:'Automobile Engineering (c-3)',marks:6,subtopics:'Gear Box, Brakes, Clutches, Differential, Engine Cooling/Lubrication, Wheels/Tyres, EV/Hybrid, Steering System',section:'C'},
+    {id:'mech',name:'Elements of Mechanical Engg. (c-1)',marks:8,subtopics:'Applied Mechanics (Friction, Centroid, Simple Machines, Screw Jack, Pulleys, Projectile, Work/Power/Energy), Strength of Materials (Stress/Strain, Hooke\'s Law, Temperature Stresses, Elastic Constants, Resilience, Principal Stresses, BM & SF Diagrams, Columns & Struts), Thermodynamics (Zeroth/1st/2nd Law, Steam Properties, Otto/Diesel Cycles, Ideal Cycles), Heat Transfer Modes, Fluid Mechanics (Properties, Viscosity, Bernoulli, Flow Types, Dimensionless Numbers, Pitot/Venturimeter, Darcy)',section:'C'},
+    {id:'production',name:'Elements of Production Engg. / Manufacturing (c-2)',marks:6,subtopics:'Workshop Technology (Lathe, Drilling, Milling, Shaper & Planer, Measuring Instruments & Gauges, Welding/Soldering/Brazing), Material Science (Properties, Hardness Testing, Heat Treatment), Engineering Graphics (1st/3rd Angle, Orthographic/Isometric, Lines & Solids), Foundry (Patterns, Molds), Plastics & Molding, Industrial Management (Organization, Leadership, Quality Control, Productivity)',section:'C'},
+    {id:'auto',name:'Automobile Engineering (c-3)',marks:6,subtopics:'Power Flow in Automobile, Gear Box Types, Brakes, Clutches, Differential, Engine Cooling & Lubrication, Wheels & Tyres, Major Automobile Industries, E-Vehicles & Hybrid Vehicles, Steering System & Angles',section:'C'},
   ],
   d:[
-    {id:'civil',name:'Civil Engg. Courses (d-1)',marks:5,subtopics:'Bricks, Soil Properties, Water Demand, Foundation Types, Surveying, RCC Basics, Roads/Bridges, Irrigation, Dams, Cement Types, Ecology',section:'D'},
-    {id:'textile',name:'Textile Engg. Courses (d-2)',marks:5,subtopics:'Fiber Types, Fabric/Yarn Manufacturing, Weaving Technology, Textile Testing, Bleaching/Dyeing/Printing',section:'D'},
-    {id:'chemical',name:'Chemical/Printing Engg. (d-3)',marks:2,subtopics:'Fluid Flow, Chemical Process Industry, Agro-Based Industries, Printing Machines, Types of Printing',section:'D'},
-    {id:'ceramic',name:'Ceramic Engg. (d-4)',marks:2,subtopics:'Pottery Types, Ceramic Materials & Properties',section:'D'},
-    {id:'food',name:'Food Technology (d-5)',marks:2,subtopics:'Vitamins, Cereals & Pulses, Milk & Milk Powder, Food Preservation',section:'D'},
-    {id:'others',name:'Other Streams (d-6)',marks:4,subtopics:'Agriculture (Farm Equipment), Architecture (Indian History, Building Types), Fashion Design (Garment Machines/Tools)',section:'D'},
+    {id:'civil',name:'Civil Engg. Courses (d-1)',marks:5,subtopics:'Bricks (Raw Materials, Manufacturing, Foundation Brick Work), Soil Index Properties & Seepage, Water Demand/Sources/Treatment/Sludge Disposal, Foundation Types, Building Repair & Maintenance, Surveying (Chain, Compass, Benchmark), RCC Basics (Grades, Workability, Mixing, Compaction), Doors & Roofs, Earth Moving Machinery, Road Materials, Flexible & Rigid Pavements, Bridges, Irrigation & Crop Water Requirement, Dams & Reservoir Site Selection, Rocks Classification, Cement Types, Ecology & Water Pollution, Non-conventional Energy, Entrepreneurship Basics',section:'D'},
+    {id:'textile',name:'Textile Engg. Courses (d-2)',marks:5,subtopics:'Fibers, Fabrics & Yarn Manufacturing & Performance, Weaving Technology, Textile Testing & Quality Control, Modern Yarn Methods, Bleaching, Dyeing & Printing',section:'D'},
+    {id:'chemical',name:'Chemical / Printing Technology (d-3)',marks:2,subtopics:'Fluid Flow Basics, Chemical Process Industry, Agro-based Industries, Petro Chemicals, Printing Machines/Presses, Types of Printing',section:'D'},
+    {id:'ceramic',name:'Ceramic Engg. (d-4)',marks:2,subtopics:'Classification of Pottery Products, Ceramic Materials & Their Properties',section:'D'},
+    {id:'food',name:'Food Technology (d-5)',marks:2,subtopics:'Vitamins, Cereals & Pulses, Milk & Milk Powder, Preservation of Food Process',section:'D'},
+    {id:'others',name:'Other Engg. Courses (d-6)',marks:4,subtopics:'Agriculture — Farm Equipment; Architecture — History of Indian Architecture & Building Typologies; Fashion Design & Technology — Fashion Technology, History & Culture, Garment Manufacturing Machines & Tools',section:'D'},
   ]
 };
 
@@ -621,7 +639,7 @@ function generatePlan(){
   var sectionStrategyText={
     electronics:'<div style="display:flex;flex-direction:column;gap:10px;">'
       +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#a5b4fc;">Section B (25 marks) — Your Core:</strong><br><span style="font-size:13px;color:var(--muted);">Focus heavily on Electrical (b-1, 9 marks). Master KVL/KCL, Transformers, DC Machines. Electronics (b-2) — cover BJT, OPAMP, Digital Logic. Computer (b-3) — C programming basics, OS concepts, networking.</span></div>'
-      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#7dd3fc;">Section A (25 marks) — Don\'t Ignore:</strong><br><span style="font-size:13px;color:var(--muted);">Math 8 marks is easiest to score. Focus on AP, Probability, Matrices, Integration. Physics 8 marks — Newton\'s Laws, Work/Energy, Optics are common. Chemistry 3 marks — pH, water hardness, laser.</span></div>'
+      +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#7dd3fc;">Section a (25 marks) — Don\'t Ignore:</strong><br><span style="font-size:13px;color:var(--muted);">Official HSTES: Math 8, Physics 8, Chemistry 3, Communication 3, GA 3. Focus Math (AP, Probability, Matrices, Integration) and Physics (Newton Laws, Work/Energy, Optics). Chemistry is water hardness, pH, electronic config — not organic chemistry.</span></div>'
       +'<div style="background:var(--card2);border-radius:10px;padding:14px;"><strong style="color:#6ee7b7;">Sections C & D (20 marks each):</strong><br><span style="font-size:13px;color:var(--muted);">You can still score in Section C (Mechanical) and D (Civil/Others). Focus on high-yield easy topics like thermodynamics basics, fluid mechanics, civil materials. Even 8–10 marks from these sections is valuable.</span></div>'
       +'</div>',
     cs:'<div style="display:flex;flex-direction:column;gap:10px;">'

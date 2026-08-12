@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="https://hsbteleet.com/image/favicon.webp"/>
-  <title>College Predictor - Haryana LEET 2026 | hsbteleet.com</title>
+  <title>College Predictor - Haryana LEET 2027 | hsbteleet.com</title>
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -172,10 +172,11 @@
 <body>
 
 <div id="access-denied">
-  <div class="lock"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
-  <h2>Premium Access Required</h2>
-  <p>This page is only accessible to premium members. Please login to continue.</p>
-  <a href="/premium-login" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login to Premium</a>
+  <div class="lock"><i class="fas fa-lock" aria-hidden="true"></i></div>
+  <h2>Ultra Premium Required</h2>
+  <p>College Predictor and counselling analytics tools are only for <strong>Ultra Premium (₹149)</strong> members. Regular Premium cannot access this page.</p>
+  <a href="./premium-login.html?tier=ultra" class="btn-login"><i class="fas fa-rocket"></i> Get Ultra Premium</a>
+  <a href="/premium-login" class="btn-login" style="margin-top:10px;background:#334155;"><i class="fas fa-sign-in-alt"></i> Already Ultra? Login</a>
 </div>
 
 <div id="page-loader">
@@ -192,7 +193,7 @@
     <a href="/premium-papers" class="nav-item"><i class="fas fa-circle-info" aria-hidden="true"></i> Papers</a>
     <a href="/rank-analysis" class="nav-item"><i class="fas fa-circle-info" aria-hidden="true"></i> Rank Analysis</a>
     <button class="nav-item active"><i class="fas fa-circle-info" aria-hidden="true"></i> College Predictor</button>
-    <a href="/study-plan" class="nav-item"><i class="fas fa-circle-info" aria-hidden="true"></i> Study Plan</a>
+    <a href="/ultra-premium" class="nav-item"><i class="fas fa-rocket" aria-hidden="true"></i> Ultra Tools</a>
     <div class="nav-right">
       <button class="nav-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
@@ -203,7 +204,7 @@
     <div class="hero">
       <div class="hero-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
       <div style="flex:1;min-width:200px;">
-        <h1>College Predictor - LEET 2026</h1>
+        <h1>College Predictor - LEET 2027</h1>
         <p>Tell us your score, category, preferred branch and college - we'll show you which colleges you're likely to get, possible options, and difficult ones.</p>
         <div class="hero-badges">
           <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> Personalized</span>
@@ -216,7 +217,7 @@
     <!-- PREDICTOR FORM -->
     <div class="form-card">
       <div class="form-title"><i class="fas fa-circle-info" aria-hidden="true"></i> Enter Your Details</div>
-      <div class="form-sub">Fill in your details to get personalized college predictions based on LEET 2026 cutoff data.</div>
+      <div class="form-sub">Fill in your details to get personalized college predictions based on LEET 2027 cutoff data.</div>
 
       <div class="form-grid">
         <div class="form-group">
@@ -343,11 +344,27 @@ document.addEventListener('DOMContentLoaded',function(){injectWatermark();window
 
 async function verifyAccess(){
   var uid=sessionStorage.getItem('prem_uid');
+  var mob=sessionStorage.getItem('prem_mob')||'';
   var ts=parseInt(sessionStorage.getItem('prem_ts')||'0');
   if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
   try{
     var {data,error}=await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
     if(error||!data||!data.is_active){showDenied();return;}
+    var ultra=null;
+    if(mob){
+      var uRes=await sb.from('ultra_premium_users').select('id').eq('mobile',mob).maybeSingle();
+      ultra=uRes.data;
+    }
+    if(!ultra){
+      var u2=await sb.from('ultra_premium_users').select('id').eq('user_id',uid).maybeSingle();
+      ultra=u2.data;
+    }
+    if(!ultra){
+      sessionStorage.setItem('prem_tier','premium');
+      showDenied();
+      return;
+    }
+    sessionStorage.setItem('prem_tier','ultra');
     sessionStorage.setItem('prem_ts',Date.now().toString());
     document.getElementById('page-loader').style.display='none';
     document.getElementById('main-page').style.display='block';
@@ -355,7 +372,7 @@ async function verifyAccess(){
   }catch(e){showDenied();}
 }
 function showDenied(){document.getElementById('page-loader').style.display='none';document.getElementById('access-denied').classList.add('show');}
-function doLogout(){['prem_uid','prem_mob','prem_name','prem_ts'].forEach(function(k){sessionStorage.removeItem(k);});window.location.href='./premium-login.html';}
+function doLogout(){['prem_uid','prem_mob','prem_name','prem_ts','prem_tier'].forEach(function(k){sessionStorage.removeItem(k);});window.location.href='./premium-login.html';}
 
 // branch toggle
 function toggleBranch(btn){btn.classList.toggle('sel');}
@@ -394,7 +411,7 @@ var colleges=[
    tier:2,note:'State university with decent ECE and Civil branches.'},
   {id:'cdlu',name:'Chaudhary Devi Lal University',loc:'Sirsa',region:'west',
    branches:{cse:{aic:null,hogc:null},any:{aic:346,hogc:null}},
-   tier:2,note:'Student confirmed rank ~346 allotment in 2026. Good option for west Haryana.'},
+   tier:2,note:'Student confirmed rank ~346 allotment in 2027. Good option for west Haryana.'},
   {id:'igu',name:'Indira Gandhi University',loc:'Meerpur, Rewari',region:'south',
    branches:{cse:{aic:null,hogc:159},civil:{aic:36,hogc:105},ee:{aic:null,hogc:419},ece:{aic:null,hogc:81}},
    tier:2,note:'Growing university with reasonable cutoffs.'},
@@ -515,6 +532,25 @@ function runPredictor(){
 verifyAccess();
 </script>
 <script defer src="/js/ads.js"></script>
+<section class="seo-related-links" data-seo-related-links="1" aria-label="Related Haryana LEET resources">
+  <div class="seo-related-inner">
+    <div class="seo-related-head">
+      <span class="seo-related-badge"><i class="fas fa-compass" aria-hidden="true"></i> Explore</span>
+      <h2>Related Haryana LEET 2027 Resources</h2>
+      <p>Useful links for diploma students preparing for B.Tech lateral entry in Haryana.</p>
+    </div>
+    <div class="seo-related-grid">
+      <a class="seo-related-card" href="/haryana-leet-2026"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
+      <a class="seo-related-card" href="/leet-syllabus"><i class="fas fa-book-open" aria-hidden="true"></i><span>Haryana LEET syllabus</span></a>
+      <a class="seo-related-card" href="/leet-sample-paper"><i class="fas fa-file-lines" aria-hidden="true"></i><span>LEET sample papers</span></a>
+      <a class="seo-related-card" href="/haryana-leet-exam-pattern"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span>LEET exam pattern</span></a>
+      <a class="seo-related-card" href="/last-year-cutoff"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Haryana LEET cutoff</span></a>
+      <a class="seo-related-card" href="/haryana-leet-counselling"><i class="fas fa-users" aria-hidden="true"></i><span>LEET counselling process</span></a>
+      <a class="seo-related-card" href="/btech-leet-premium"><i class="fas fa-crown" aria-hidden="true"></i><span>Premium LEET papers</span></a>
+      <a class="seo-related-card" href="/counseling"><i class="fas fa-headset" aria-hidden="true"></i><span>Personalized counselling help</span></a>
+    </div>
+  </div>
+</section>
 </body>
 </html>
 

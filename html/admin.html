@@ -365,7 +365,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:.79rem;min-width:960px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 </head>
 <body>
 <div class="page">
@@ -653,10 +653,10 @@ var currentLead=null;
 
 // WA message templates
 var WA_TEMPLATES={
-  welcome: function(r){return 'Hi '+r.name+'!\n\nYour hsbteleet.com account is now active. Login at: https://hsbteleet.com/premium-login.html\n\nBest of luck for LEET 2026!\n- Admin, hsbteleet.com';},
-  follow:  function(r){return 'Hi '+r.name+'!\n\nWe noticed you filled our LEET prep form. Did you get a chance to explore hsbteleet.com?\n\nWe have 24 exclusive sample papers + Rank Analysis for LEET 2026. Check it out: https://hsbteleet.com\n- Admin';},
+  welcome: function(r){return 'Hi '+r.name+'!\n\nYour hsbteleet.com account is now active. Login at: https://hsbteleet.com/premium-login.html\n\nBest of luck for LEET 2027!\n- Admin, hsbteleet.com';},
+  follow:  function(r){return 'Hi '+r.name+'!\n\nWe noticed you filled our LEET prep form. Did you get a chance to explore hsbteleet.com?\n\nWe have 24 exclusive sample papers + Rank Analysis for LEET 2027. Check it out: https://hsbteleet.com\n- Admin';},
   offer:   function(r){return 'Hi '+r.name+'!\n\nSpecial offer for you - get Premium LEET access at just Rs 99 (one-time)!\n\n- 24 exclusive papers\n- Rank Analysis\n- 100% Ad-free\n\nhttps://hsbteleet.com/premium-login.html\n- Admin, hsbteleet.com';},
-  reminder:function(r){return 'Hi '+r.name+'! ?\n\nHSBTE LEET 2026 is approaching fast. Are you prepared?\n\nStart practicing with our exclusive sample papers: https://hsbteleet.com\n\nDon\'t miss out!\n- Admin, hsbteleet.com';},
+  reminder:function(r){return 'Hi '+r.name+'! ?\n\nHSBTE LEET 2027 is approaching fast. Are you prepared?\n\nStart practicing with our exclusive sample papers: https://hsbteleet.com\n\nDon\'t miss out!\n- Admin, hsbteleet.com';},
   custom:  function(){return document.getElementById('wa-custom-txt').value||'';}
 };
 
@@ -1020,7 +1020,7 @@ $id('btn-wa-bulk').addEventListener('click',function(){
   if(!selected.size){toast('Nothing selected.','error');return;}
   var nums=filtered.filter(function(r,i){return selected.has(r.id||i+'');}).map(function(r){return r.mobile||'';}).filter(Boolean);
   if(!nums.length){toast('No mobiles in selection.','error');return;}
-  var msg=encodeURIComponent('Hi! This is Admin from hsbteleet.com. We have a special message for you regarding LEET 2026 preparation. Please check https://hsbteleet.com');
+  var msg=encodeURIComponent('Hi! This is Admin from hsbteleet.com. We have a special message for you regarding LEET 2027 preparation. Please check https://hsbteleet.com');
   window.open('https://wa.me/91'+nums[0]+'?text='+msg,'_blank');
   toast('Opened WhatsApp for first number. Bulk WA not supported natively - copy mobiles instead.','info',5000);
 });

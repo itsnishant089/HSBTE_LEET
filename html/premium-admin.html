@@ -139,7 +139,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
       <div class="sb-section">Finance</div>
       <button class="sb-link" onclick="gotoPage('payments',this)"><i class="fas fa-rupee-sign"></i> Payments</button>
-      <button class="sb-link" onclick="gotoPage('referrals',this)"><i class="fas fa-share-alt"></i> Referrals <span class="sb-badge" id="bdg-r" style="background:#f59e0b;color:#0f172a">0</span></button>
       <div class="sb-section">Content</div>
       <button class="sb-link" onclick="gotoPage('reviews',this)"><i class="fas fa-star"></i> Reviews <span class="sb-badge" id="bdg-rev">0</span></button>
       <div class="sb-section">Tools</div>
@@ -169,7 +168,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
         <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="s-ultra">—</div><div class="stat-lbl">Ultra Premium (₹149)</div></div>
         <div class="stat-card sc-green"><div class="stat-icon">💰</div><div class="stat-val" id="s-rev">—</div><div class="stat-lbl">Total Revenue</div></div>
         <div class="stat-card sc-red"><div class="stat-icon">⭐</div><div class="stat-val" id="s-pend-rev">—</div><div class="stat-lbl">Pending Reviews</div></div>
-        <div class="stat-card sc-gold"><div class="stat-icon">🔄</div><div class="stat-val" id="s-pend-ref">—</div><div class="stat-lbl">Pending Refunds</div></div>
       </div>
       <div class="card">
         <div class="card-hdr"><div class="card-title"><i class="fas fa-user-plus" style="color:var(--gr)"></i> Recent Signups</div></div>
@@ -192,7 +190,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="card">
         <div class="card-hdr"><div class="card-title"><i class="fas fa-users" style="color:var(--bl)"></i> All Users</div><span id="u-count" style="font-size:12px;color:var(--mu)">—</span></div>
         <div class="card-body np"><div class="tbl-wrap">
-          <table class="tbl"><thead><tr><th>Name</th><th>Mobile / Email</th><th>Password</th><th>Tier</th><th>Paid ₹</th><th>Coupon</th><th>Refer By</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
+          <table class="tbl"><thead><tr><th>Name</th><th>Mobile / Email</th><th>Password</th><th>Tier</th><th>Paid ₹</th><th>Coupon</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
           <tbody id="tb-users"><tr class="lr"><td colspan="10">Loading…</td></tr></tbody></table>
         </div></div>
       </div>
@@ -215,31 +213,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       </div>
     </div>
 
-    <!-- REFERRALS -->
-    <div class="page" id="page-referrals">
-      <div class="ref-box">
-        <strong>Refund Rules:</strong>&nbsp;
-        <span style="background:var(--gl);color:#92400e;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">1 Referral = ₹25 Refund</span>
-        <span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;margin:0 4px">2+ Referrals = ₹99 Refund</span>
-        &nbsp;— Transfer via UPI then mark as claimed.
-      </div>
-      <div class="filter-bar">
-        <select class="fs" id="ref-f" onchange="loadRefs()"><option value="all">All Referrers</option><option value="pending">Pending Refunds</option><option value="full">Full Refund Due</option><option value="half">50% Refund Due</option><option value="claimed">Claimed</option></select>
-      </div>
-      <div class="card">
-        <div class="card-hdr"><div class="card-title"><i class="fas fa-share-alt" style="color:var(--go)"></i> Referral Tracker</div><span id="ref-cnt" style="font-size:12px;color:var(--mu)">—</span></div>
-        <div class="card-body np"><div class="tbl-wrap">
-          <table class="tbl"><thead><tr><th>Name</th><th>Mobile</th><th>Tier</th><th>Referrals</th><th>Status</th><th>Refund Due ₹</th><th>Claimed</th><th>Actions</th></tr></thead>
-          <tbody id="tb-ref"><tr class="lr"><td colspan="8">Loading…</td></tr></tbody></table>
-        </div></div>
-      </div>
-      <div class="card" id="ref-uses-card" style="display:none">
-        <div class="card-hdr"><div class="card-title"><i class="fas fa-list" style="color:var(--bl)"></i> Uses for: <span id="ref-uses-ttl">—</span></div><button class="btn btn-ghost btn-sm" onclick="document.getElementById('ref-uses-card').style.display='none'">Close</button></div>
-        <div class="card-body np"><div class="tbl-wrap">
-          <table class="tbl"><thead><tr><th>Referee Name</th><th>Mobile</th><th>Tier</th><th>Amount Paid</th><th>Date</th></tr></thead>
-          <tbody id="tb-ruses"></tbody></table>
-        </div></div>
-      </div>
+    <!-- REFERRALS (disabled — referral refund program removed) -->
+    <div class="page" id="page-referrals" style="display:none!important" aria-hidden="true">
+      <div class="card"><div class="card-body"><p style="color:var(--mu)">Referral / refund program has been removed.</p></div></div>
     </div>
 
     <!-- REVIEWS -->
@@ -265,8 +241,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <input type="tel" class="form-input" id="wm-mob" placeholder="10-digit mobile" maxlength="10"/>
           <label class="fl">Message Type</label>
           <select class="form-select" id="wm-type" onchange="toggleCustom()">
-            <option value="refund-full">Full Refund Notification</option>
-            <option value="refund-half">50% Refund Notification</option>
+            <option value="welcome">Welcome Message</option>
+            <option value="support">Support Reply</option>
+            <option value="custom">Custom Message</option>
             <option value="welcome">Welcome Message</option>
             <option value="support">Support Reply</option>
             <option value="custom">Custom Message</option>
@@ -290,7 +267,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
                 <option value="deactivate">Block Account (Prevent Login)</option>
                 <option value="activate">Restore Account Access</option>
                 <option value="upgrade">Upgrade to Ultra Premium</option>
-                <option value="mark-refund">Mark Refund as Claimed</option>
               </select>
             </div>
           </div>
@@ -346,10 +322,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             <div>
               <label class="fl">Password (Optional - default is Mobile)</label>
               <input type="text" class="form-input" id="au-pass" placeholder="Leave blank to use Mobile as password"/>
-            </div>
-            <div>
-              <label class="fl">Refer By (Mobile)</label>
-              <input type="tel" class="form-input" id="au-refer" placeholder="Optional" maxlength="10"/>
             </div>
           </div>
           <button class="btn btn-green" style="margin-top:20px; width: auto; padding: 12px 24px;" onclick="doAddUser()" id="au-btn">
@@ -423,7 +395,7 @@ function gotoPage(name,btn){
   document.querySelectorAll('.sb-link').forEach(function(b){b.classList.remove('active');});
   document.getElementById('page-'+name).classList.add('active');
   if(btn)btn.classList.add('active');
-  var ttls={dashboard:'Dashboard',users:'All Users',payments:'Payments',referrals:'Referrals and Refunds',reviews:'Student Reviews',send:'Send Message',adduser:'Add User Manually',lookup:'User Lookup',leetleads:'LEET Popup Leads'};
+  var ttls={dashboard:'Dashboard',users:'All Users',payments:'Payments',referrals:'Referrals (removed)',reviews:'Student Reviews',send:'Send Message',adduser:'Add User Manually',lookup:'User Lookup',leetleads:'LEET Popup Leads'};
   document.getElementById('page-ttl').textContent=ttls[name]||name;
   curPage=name;loadPage(name);
 }
@@ -450,7 +422,6 @@ async function loadDash(){
     var rev=py.filter(function(p){return p.status==='paid';}).reduce(function(s,p){return s+Math.round((p.amount||0)/100);},0);
     document.getElementById('s-rev').textContent='₹'+rev;
     var pc=(prRes.data||[]).length;document.getElementById('s-pend-rev').textContent=pc;if(pc)document.getElementById('bdg-rev').textContent=pc;
-    var rc=(rfRes.data||[]).length;document.getElementById('s-pend-ref').textContent=rc;if(rc)document.getElementById('bdg-r').textContent=rc;
     var payMap={};py.forEach(function(p){if(!payMap[p.user_id])payMap[p.user_id]=p;});
     var recent=u.slice(0,10);
     var tb=document.getElementById('tb-recent');
@@ -526,7 +497,7 @@ function renderU(users){
     '<td>'+(u.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+'</td>' +
     '<td>₹'+(u.paid_rs||'—')+'</td>' +
     '<td>'+(u.coupon_used?'<span class="badge b-blue">'+e(u.coupon_used)+'</span>':'—')+'</td>' +
-    '<td>'+(u.refer_by?'<code style="font-size:11px">'+e(u.refer_by)+'</code>':'—')+'</td>' +
+    
     '<td>'+(u.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+'</td>' +
     '<td style="color:var(--mu);font-size:12px">'+fd(u.created_at)+'</td>' +
     '<td><div style="display:flex;gap:4px;flex-wrap:wrap">' +
@@ -582,8 +553,8 @@ async function removeUser(uid,name){
   openConf('⚠️ Remove User','Permanently delete '+name+' and all their data? This cannot be undone.');
 }
 function exportCSV(){
-  var rows=[['Name','Mobile','Email','Tier','Paid Rs','Coupon','Refer By','Status','Joined']];
-  usersCache.forEach(function(u){rows.push([u.full_name||'',u.mobile||'',u.email||'',u.tier||'',u.paid_rs||0,u.coupon_used||'',u.refer_by||'',u.is_active!==false?'Active':'Blocked',fd(u.created_at)]);});
+  var rows=[['Name','Mobile','Email','Tier','Paid Rs','Coupon','Status','Joined']];
+  usersCache.forEach(function(u){rows.push([u.full_name||'',u.mobile||'',u.email||'',u.tier||'',u.paid_rs||0,u.coupon_used||'',u.is_active!==false?'Active':'Blocked',fd(u.created_at)]);});
   var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   a.download='users_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
@@ -717,7 +688,7 @@ function openWA(){
   var mob=(document.getElementById('wm-mob').value||'').trim();
   var type=document.getElementById('wm-type').value;
   if(!/^\d{10}$/.test(mob)){alert('Enter valid 10-digit mobile');return;}
-  var msgs={'refund-full':'Hi! Your LEET referral refund is being processed. Since 2+ friends purchased using your code, you get a FULL REFUND. Sending via UPI shortly. Thank you! — hsbteleet.com','refund-half':'Hi! Your LEET referral reward is ready. 1 friend purchased using your code, so you get a 50% REFUND. Sending via UPI shortly. Refer 1 more for full refund! — hsbteleet.com','welcome':'Hi! Welcome to hsbteleet.com Premium. Your account is active. Login at https://hsbteleet.com/premium-login.html — Best of luck for LEET 2026! — Admin','support':'Hi! Thank you for contacting hsbteleet.com. We will help you shortly. — Admin','custom':document.getElementById('wm-ctxt').value};
+  var msgs={'welcome':'Hi! Welcome to hsbteleet.com Premium. Your account is active. Login at https://hsbteleet.com/premium-login.html — Best of luck for LEET 2027! — Admin','support':'Hi! Thank you for contacting hsbteleet.com. We will help you shortly. — Admin','custom':document.getElementById('wm-ctxt').value};
   window.open('https://wa.me/91'+mob+'?text='+encodeURIComponent(msgs[type]||''),'_blank');
 }
 
@@ -768,7 +739,6 @@ async function doAddUser(){
   var paid=parseInt(document.getElementById('au-paid').value)||0;
   var payid=document.getElementById('au-payid').value.trim()||'MANUAL_ADMIN_ADD';
   var pass=document.getElementById('au-pass').value.trim()||mob;
-  var refer=document.getElementById('au-refer').value.trim();
   var alrt=document.getElementById('au-alrt'),btn=document.getElementById('au-btn');
   
   if(!name||!/^\d{10}$/.test(mob)||!email){
@@ -809,7 +779,6 @@ async function doAddUser(){
     document.getElementById('au-name').value='';document.getElementById('au-mob').value='';
     document.getElementById('au-email').value='';document.getElementById('au-paid').value='';
     document.getElementById('au-payid').value='';document.getElementById('au-pass').value='';
-    document.getElementById('au-refer').value='';
     loadDash();
   }catch(err){
     alrt.className='alert alert-danger show';
@@ -840,15 +809,10 @@ async function doLookup(){
       tier:'premium',
       is_active:acLRes.data?acLRes.data.is_active:false
     });
-    var rfdRes=await sb.from('referrals').select('*').eq('referrer_mobile',mob).maybeSingle();
-    var rfd=rfdRes.data||null;
-    var rusRes=await sb.from('referral_uses').select('*').eq('referrer_mobile',mob).order('used_at',{ascending:false});
-    var rus=rusRes.data||[];
     var isuRes=await sb.from('ultra_premium_users').select('id').eq('mobile',mob).maybeSingle();
     var isu=isuRes.data||null;
-    var refStatus=rfd?(rfd.count>=2?'Full Refund Due (₹'+(usr.paid_rs||0)+')':rfd.count===1?'50% Refund Due (₹'+Math.floor((usr.paid_rs||0)/2)+')':'No Refund'):'No referrals made';
     var ib=function(l,v){return'<div class="info-block"><div class="info-block-lbl">'+l+'</div><div class="info-block-val">'+e(String(v||'—'))+'</div></div>';};
-    cont.innerHTML='<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-user" style="color:var(--bl)"></i> '+e(usr.full_name||'—')+'</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(usr.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+(usr.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+(isu?'<span class="badge b-purple"><i class="fas fa-check"></i> Ultra Table</span>':'<span class="badge b-red">Not in Ultra Table</span>')+'</div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px">'+ib('Mobile',usr.mobile)+ib('Email',usr.email)+ib('Paid',usr.paid_rs?'₹'+usr.paid_rs:'—')+ib('Payment ID',usr.razorpay_payment_id||'—')+ib('Coupon',usr.coupon_used||'None')+ib('Referred By',usr.refer_by||'None')+ib('Referrals Made',(rfd?rfd.count:0)+' person(s)')+ib('Refund Status',refStatus)+ib('Joined',fd(usr.created_at))+ib('Payment Status',usr.payment_status||'—')+'</div>'+(rus&&rus.length?'<div style="margin-top:12px"><strong style="font-size:11px;font-family:Syne,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)">People They Referred:</strong><div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">'+rus.map(function(u){return'<div style="font-size:13px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid var(--bo)"><strong>'+e(u.referee_name||'—')+'</strong> · '+e(u.referee_mobile)+' · '+u.referee_tier+' · ₹'+u.amount_paid_rs+' · '+fd(u.used_at)+'</div>';}).join('')+'</div></div>':'')+'<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><a class="btn btn-green" href="https://wa.me/91'+e(usr.mobile)+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+(usr.tier!=='ultra'?'<button class="btn btn-ultra" onclick="upgradeToUltra(\''+escInline(usr.id)+'\',\''+escInline(usr.mobile)+'\',\''+escInline(usr.full_name||'')+'\',\''+escInline(usr.email||'')+'\')"><i class="fas fa-rocket"></i> Upgrade to Ultra</button>':'<span class="badge b-purple" style="padding:8px 14px;font-size:11px"><i class="fas fa-rocket"></i> Already Ultra Premium</span>')+'<button class="btn btn-danger" onclick="removeUser(\''+escInline(usr.id)+'\',\''+escInline(usr.full_name||'')+'\')"><i class="fas fa-trash"></i> Remove User</button>'+(usr.is_active!==false?'<button class="btn btn-red" onclick="toggleActive(\''+escInline(usr.id)+'\',false,\''+escInline(usr.full_name)+'\')"><i class="fas fa-ban"></i> Block</button>':'<button class="btn btn-green" onclick="toggleActive(\''+escInline(usr.id)+'\',true,\''+escInline(usr.full_name)+'\')"><i class="fas fa-check"></i> Activate</button>')+'</div></div></div>';
+    cont.innerHTML='<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-user" style="color:var(--bl)"></i> '+e(usr.full_name||'—')+'</div><div style="display:flex;gap:6px;flex-wrap:wrap">'+(usr.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+(usr.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+(isu?'<span class="badge b-purple"><i class="fas fa-check"></i> Ultra Table</span>':'<span class="badge b-red">Not in Ultra Table</span>')+'</div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px">'+ib('Mobile',usr.mobile)+ib('Email',usr.email)+ib('Paid',usr.paid_rs?'₹'+usr.paid_rs:'—')+ib('Payment ID',usr.razorpay_payment_id||'—')+ib('Coupon',usr.coupon_used||'None')+ib('Joined',fd(usr.created_at))+ib('Payment Status',usr.payment_status||'—')+'</div><div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><a class="btn btn-green" href="https://wa.me/91'+e(usr.mobile)+'" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>'+(usr.tier!=='ultra'?'<button class="btn btn-ultra" onclick="upgradeToUltra(\''+escInline(usr.id)+'\',\''+escInline(usr.mobile)+'\',\''+escInline(usr.full_name||'')+'\',\''+escInline(usr.email||'')+'\')"><i class="fas fa-rocket"></i> Upgrade to Ultra</button>':'<span class="badge b-purple" style="padding:8px 14px;font-size:11px"><i class="fas fa-rocket"></i> Already Ultra Premium</span>')+'<button class="btn btn-danger" onclick="removeUser(\''+escInline(usr.id)+'\',\''+escInline(usr.full_name||'')+'\')"><i class="fas fa-trash"></i> Remove User</button>'+(usr.is_active!==false?'<button class="btn btn-red" onclick="toggleActive(\''+escInline(usr.id)+'\',false,\''+escInline(usr.full_name)+'\')"><i class="fas fa-ban"></i> Block</button>':'<button class="btn btn-green" onclick="toggleActive(\''+escInline(usr.id)+'\',true,\''+escInline(usr.full_name)+'\')"><i class="fas fa-check"></i> Activate</button>')+'</div></div></div>';
   }catch(err){cont.innerHTML='<div class="alert alert-danger show">Search failed. Please try again.</div>';}
 }
 
@@ -939,6 +903,25 @@ setInterval(function(){
   }
 }, 2000);
 </script>
+<section class="seo-related-links" data-seo-related-links="1" aria-label="Related Haryana LEET resources">
+  <div class="seo-related-inner">
+    <div class="seo-related-head">
+      <span class="seo-related-badge"><i class="fas fa-compass" aria-hidden="true"></i> Explore</span>
+      <h2>Related Haryana LEET 2027 Resources</h2>
+      <p>Useful links for diploma students preparing for B.Tech lateral entry in Haryana.</p>
+    </div>
+    <div class="seo-related-grid">
+      <a class="seo-related-card" href="/haryana-leet-2026"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
+      <a class="seo-related-card" href="/leet-syllabus"><i class="fas fa-book-open" aria-hidden="true"></i><span>Haryana LEET syllabus</span></a>
+      <a class="seo-related-card" href="/leet-sample-paper"><i class="fas fa-file-lines" aria-hidden="true"></i><span>LEET sample papers</span></a>
+      <a class="seo-related-card" href="/haryana-leet-exam-pattern"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span>LEET exam pattern</span></a>
+      <a class="seo-related-card" href="/last-year-cutoff"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Haryana LEET cutoff</span></a>
+      <a class="seo-related-card" href="/haryana-leet-counselling"><i class="fas fa-users" aria-hidden="true"></i><span>LEET counselling process</span></a>
+      <a class="seo-related-card" href="/btech-leet-premium"><i class="fas fa-crown" aria-hidden="true"></i><span>Premium LEET papers</span></a>
+      <a class="seo-related-card" href="/counseling"><i class="fas fa-headset" aria-hidden="true"></i><span>Personalized counselling help</span></a>
+    </div>
+  </div>
+</section>
 </body>
 </html>
 

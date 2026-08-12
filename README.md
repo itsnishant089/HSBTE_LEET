@@ -18,7 +18,7 @@ It is built as a highly optimized, SEO-focused, statically generated web applica
 - **Branch-Wise & Semester-Wise PYQs**: Curated question papers for 10+ diploma branches (Computer, Civil, Mechanical, Electrical, Electronics, AI-ML, Food Tech, Architecture, etc.) covering Semesters 1 through 6.
 - **Haryana LEET 2027 Preparation**: Dedicated hubs for B.Tech and B.Pharmacy LEET, featuring official sample papers, syllabus PDFs, exam blueprints, and registration timelines.
 - **Data-Driven Tools**: Interactive `College Comparison` and `Cutoff Analytics` tools to help students make informed admission decisions for top universities (YMCA, DCRUST, GJU, etc.).
-- **Premium Services**: Affordable tiered access (Premium ₹49, Ultra Premium ₹79, Counseling Help ₹49) for exclusive study plans, advanced mock tests, and personalized guidance.
+- **Premium Services**: Affordable tiered access (Premium ₹99, Ultra Premium ₹149, Counseling Help ₹99) for exclusive study plans, advanced mock tests, and personalized guidance.
 
 ---
 
