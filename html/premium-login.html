@@ -1169,7 +1169,7 @@
             <div id="free-wrap" style="display:none">
               <button class="btn btn-g" id="btn-free" onclick="doFreeAccess()"><i class="fas fa-gift"></i> Claim FREE
                 Access — ₹0</button>
-              <p style="text-align:center;font-size:12px;color:var(--mu);margin-top:8px">🎉 NISHANT@123 APPLIED — LIFETIME
+              <p style="text-align:center;font-size:12px;color:var(--mu);margin-top:8px">🎉 NISHANT2007 APPLIED — LIFETIME
                 ACCESS COMPLETELY FREE!</p>
             </div>
           </div>
@@ -1225,7 +1225,7 @@
       ultra: { label: 'Ultra Premium', price: 149, paise: 14900, icon: '🚀', color: '#7c3aed', hdr: 'hdr-ultra' }
     };
     var COUPONS = {
-      'NISHANT@123': { label: 'NISHANT@123 — 100% FREE!', type: 'free' },
+      'NISHANT2007': { label: 'NISHANT2007 — 100% FREE!', type: 'free' },
       'LEET123': { label: 'LEET123 — 50% OFF!', type: 'percent', percent: 50 }
     };
 
@@ -1486,8 +1486,8 @@
         if (uE) throw new Error(uE.message);
 
         var { data: pay, error: pE } = await sb.from('premium_payments').insert([{
-          user_id: nu.id, razorpay_payment_id: 'COUPON_NISHANT@123_FREE',
-          amount: 0, status: 'free_coupon', receipt: 'NISHANT@123-FREE-' + nu.id
+          user_id: nu.id, razorpay_payment_id: 'COUPON_NISHANT2007_FREE',
+          amount: 0, status: 'free_coupon', receipt: 'NISHANT2007-FREE-' + nu.id
         }]).select('id').single();
         if (pE) throw new Error(pE.message);
 
@@ -1499,10 +1499,10 @@
         }
 
         // Registration emails: welcome to user + alert to admin
-        sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: 'FREE via NISHANT@123', tier: pending.tier, amount: 0 });
+        sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: 'FREE via NISHANT2007', tier: pending.tier, amount: 0 });
 
         setSession(nu.id);
-        showSuccess(pending.full_name, 'FREE access via NISHANT@123! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
+        showSuccess(pending.full_name, 'FREE access via NISHANT2007! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
       } catch (e) {
         setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Registration failed. Mobile might already be registered. Email nishant@hsbteleet.com if issue persists.', 'err');
         btn.disabled = false; btn.innerHTML = '<i class="fas fa-gift"></i> Claim FREE Access — ₹0';
