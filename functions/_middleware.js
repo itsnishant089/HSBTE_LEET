@@ -19,12 +19,19 @@ export async function onRequest(context) {
   }
 
   // 3. Handle legacy /html/ path access by redirecting to clean URLs
+  // IMPORTANT: preserve ?query and #hash (e.g. /html/download.html?file=/paper/x.pdf)
   if (path.startsWith('/html/')) {
     const cleanPath = path.replace(/^\/html/, '').replace(/\.html$/, '');
     if (!cleanPath || cleanPath === '/') {
-      return Response.redirect(new URL('/', url.origin), 301);
+      const home = new URL('/', url.origin);
+      home.search = url.search;
+      home.hash = url.hash;
+      return Response.redirect(home, 301);
     }
-    return Response.redirect(new URL(cleanPath, url.origin), 301);
+    const dest = new URL(cleanPath, url.origin);
+    dest.search = url.search;
+    dest.hash = url.hash;
+    return Response.redirect(dest, 301);
   }
 
   // 4. Root index and 404 bypass

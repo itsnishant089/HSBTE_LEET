@@ -23,6 +23,24 @@
       ]
     },
     {
+      "source": "/js/ads.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/js/include.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/js/main.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
       "source": "/image/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, s-maxage=31536000, immutable" }

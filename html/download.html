@@ -4,27 +4,36 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>Opening file…</title>
+  <title>Opening PDF…</title>
   <script>
     (function () {
-      try {
-        var fileUrl = new URLSearchParams(window.location.search).get('file');
-        if (!fileUrl) {
-          window.location.replace('/');
-          return;
+      function openPdf(raw) {
+        if (!raw) return false;
+        try {
+          var u = new URL(raw, window.location.origin);
+          var host = (u.hostname || '').replace(/^www\./, '');
+          var here = window.location.hostname.replace(/^www\./, '');
+          var sameSite = host === here || host === 'hsbteleet.com' || host === 'localhost' || host === '127.0.0.1';
+          var path = u.pathname || '';
+          var isPdf = /\.pdf$/i.test(path) || path.indexOf('/paper/') !== -1 || path.indexOf('/pdf/') !== -1;
+          if (!sameSite || !isPdf) return false;
+          // Open PDF directly — no ads / countdown / overlay
+          window.location.replace(u.pathname + u.search + u.hash);
+          return true;
+        } catch (e) {
+          return false;
         }
-        var u = new URL(fileUrl, window.location.origin);
-        var ok =
-          u.origin === window.location.origin &&
-          (u.pathname.toLowerCase().endsWith('.pdf') || u.pathname.indexOf('/paper/') !== -1);
-        window.location.replace(ok ? (u.pathname + u.search + u.hash) : '/');
-      } catch (e) {
-        window.location.replace('/');
       }
+
+      var fileUrl = new URLSearchParams(window.location.search).get('file');
+      if (openPdf(fileUrl)) return;
+
+      // No valid file param — go to PYQ list (not a silent home bounce)
+      window.location.replace('/hsbte-pyq');
     })();
   </script>
 </head>
 <body>
-  <p>Opening file…</p>
+  <p style="font-family:sans-serif;text-align:center;margin-top:2rem;">Opening PDF…</p>
 </body>
 </html>

@@ -2,6 +2,26 @@
  * main.js — core site logic with robust error handling and performance optimizations.
  */
 
+// Allow PYQ/PDF links to open directly (blocks legacy download.html hijack).
+document.addEventListener(
+  'click',
+  function (e) {
+    var a = e.target && e.target.closest && e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (!href || href.charAt(0) === '#') return;
+    var lower = href.toLowerCase();
+    if (
+      href.indexOf('/paper/') !== -1 ||
+      lower.indexOf('/pdf/') !== -1 ||
+      lower.endsWith('.pdf')
+    ) {
+      e.stopImmediatePropagation();
+    }
+  },
+  true
+);
+
 // ─── Global Error Handler ───────────────────────────────────────────────
 window.addEventListener('error', function (e) {
   console.warn('Caught JS error:', e.message, 'at', e.filename, ':', e.lineno);

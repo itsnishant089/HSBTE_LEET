@@ -7,6 +7,27 @@
 (function () {
   "use strict";
 
+  // Allow PYQ/PDF links to open directly.
+  // Blocks legacy ads.js download.html hijack (even if an old ads.js is cached).
+  document.addEventListener(
+    "click",
+    function (e) {
+      var a = e.target && e.target.closest && e.target.closest("a");
+      if (!a) return;
+      var href = a.getAttribute("href") || "";
+      if (!href || href.charAt(0) === "#") return;
+      var lower = href.toLowerCase();
+      if (
+        href.indexOf("/paper/") !== -1 ||
+        lower.indexOf("/pdf/") !== -1 ||
+        lower.endsWith(".pdf")
+      ) {
+        e.stopImmediatePropagation();
+      }
+    },
+    true
+  );
+
   // Cache for already fetched partials
   const partialCache = new Map();
 
