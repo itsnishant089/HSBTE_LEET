@@ -129,41 +129,32 @@
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const fileUrl = urlParams.get('file');
+
+            // Interstitial removed: send users straight to the PDF when ?file= is present
+            if (fileUrl) {
+                try {
+                    const u = new URL(fileUrl, window.location.origin);
+                    const sameOrigin = u.origin === window.location.origin;
+                    const isPdfOrPaper =
+                        u.pathname.toLowerCase().endsWith('.pdf') ||
+                        u.pathname.indexOf('/paper/') !== -1;
+                    if (sameOrigin && isPdfOrPaper) {
+                        window.location.replace(u.pathname + u.search + u.hash);
+                        return;
+                    }
+                } catch (e) { /* fall through to invalid */ }
+            }
+
             const timerEl = document.getElementById('timer');
             const btn = document.getElementById('download-btn');
             const fileNameDisplay = document.getElementById('file-name-display');
-            
-            if (!fileUrl) {
-                timerEl.style.display = 'none';
+            if (timerEl) timerEl.style.display = 'none';
+            if (btn) {
+                btn.classList.remove('active');
                 btn.innerHTML = 'Invalid File Link';
-                fileNameDisplay.style.display = 'none';
-                return;
+                btn.removeAttribute('href');
             }
-
-            // Extract filename for display
-            try {
-                const parts = fileUrl.split('/');
-                const filename = decodeURIComponent(parts[parts.length - 1]);
-                fileNameDisplay.innerHTML = '<i class="fas fa-file-pdf" style="color:#d32f2f; margin-right:5px;"></i> ' + filename;
-            } catch(e) {
-                fileNameDisplay.style.display = 'none';
-            }
-
-            btn.href = fileUrl;
-            
-            let timeLeft = 5;
-            
-            const countdown = setInterval(() => {
-                timeLeft--;
-                timerEl.textContent = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    timerEl.style.display = 'none';
-                    btn.classList.add('active');
-                    btn.innerHTML = '<i class="fas fa-download"></i> Download PDF Now';
-                }
-            }, 1000);
+            if (fileNameDisplay) fileNameDisplay.style.display = 'none';
         });
     </script>
 </body>
