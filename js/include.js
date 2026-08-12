@@ -107,10 +107,22 @@
   }
 
   /**
+   * Ensure Related LEET Resources CSS is always loaded
+   */
+  function ensureSeoRelatedCss() {
+    if (document.querySelector('link[href*="seo-related.css"]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/seo-related.css";
+    document.head.appendChild(link);
+  }
+
+  /**
    * Load all partials
    */
   async function loadPartials() {
     ensureFontAwesome();
+    ensureSeoRelatedCss();
     autoInjectBottomNav();
 
     // Get ALL includes AFTER nav injection
