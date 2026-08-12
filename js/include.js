@@ -19,7 +19,8 @@
       var lower = href.toLowerCase();
       if (
         href.indexOf("/paper/") !== -1 ||
-        lower.indexOf("/pdf/") !== -1 ||
+        href.indexOf("/pdf/") !== -1 ||
+        href.indexOf("/syllabus/") !== -1 ||
         lower.endsWith(".pdf")
       ) {
         e.stopImmediatePropagation();

@@ -90,7 +90,7 @@
   ],
   "rewrites": [
     {
-      "source": "/(?!html/|css/|js/|image/|partials/|api/|paper/|pdf/|404)([^.]+)",
+      "source": "/(?!html/|css/|js/|image/|partials/|api/|paper/|pdf/|syllabus/|404)([^.]+)",
       "destination": "/html/$1.html"
     }
   ]

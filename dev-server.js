@@ -44,7 +44,7 @@ const MIME = {
 
 const BYPASS_PREFIXES = [
   '/css/', '/js/', '/image/', '/partials/', '/api/',
-  '/paper/', '/pdf/', '/html/', '/functions/'
+  '/paper/', '/pdf/', '/syllabus/', '/html/', '/functions/'
 ];
 
 function sendFile(res, filePath, status) {

@@ -8,7 +8,7 @@ export async function onRequest(context) {
   }
 
   // 1. Bypass assets, APIs, and known root files
-  const bypassPrefixes = ['/css/', '/js/', '/image/', '/partials/', '/api/', '/paper/', '/pdf/'];
+  const bypassPrefixes = ['/css/', '/js/', '/image/', '/partials/', '/api/', '/paper/', '/pdf/', '/syllabus/'];
   if (bypassPrefixes.some(p => path.startsWith(p))) {
     return context.next();
   }

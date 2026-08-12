@@ -16,7 +16,7 @@ const fs = require('fs');
 
 const BYPASS_PREFIXES = [
   '/css/', '/js/', '/image/', '/partials/', '/api/',
-  '/paper/', '/pdf/', '/html/', '/functions/', '/.well-known/'
+  '/paper/', '/pdf/', '/syllabus/', '/html/', '/functions/', '/.well-known/'
 ];
 
 function shouldBypass(urlPath) {
