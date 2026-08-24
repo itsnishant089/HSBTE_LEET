@@ -31,7 +31,7 @@ export default async function handler(req) {
         "X-Title": "HSBTE LEET AI Assistant"
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3.3-70b-instruct:free",
+        model: "openrouter/free",
         messages: [
           { role: "system", content: "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Concise only." },
           { role: "user", content: message }
@@ -45,10 +45,10 @@ export default async function handler(req) {
     console.log("OpenRouter Raw Response:", JSON.stringify(data));
 
     if (!response.ok) {
-        return new Response(
-            JSON.stringify({ reply: "🤖 AI Error: " + (data.error?.message || "Unknown error") }),
-            { status: 200, headers: { "Content-Type": "application/json" } }
-        );
+      return new Response(
+        JSON.stringify({ reply: "🤖 AI Error: " + (data.error?.message || "Unknown error") }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
     }
 
     const reply = data.choices?.[0]?.message?.content || "🤖 AI returned no answer.";
