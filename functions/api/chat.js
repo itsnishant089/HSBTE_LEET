@@ -1,18 +1,18 @@
 /**
  * Cloudflare Pages Function: functions/api/chat.js
- * Handles AI chatbot requests using Google Gemini Pro.
+ * Handles AI chatbot requests using OpenRouter API.
  */
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  // 1. API Key Selection
-  const API_KEY = env.GROQ_API_KEY || env.GEMINI_API_KEY || "YOUR_HARDCODED_API_KEY_HERE"; 
+  // 1. API Key Selection — supports OpenRouter key stored in GEMINI_API_KEY or GROQ_API_KEY
+  const API_KEY = env.GEMINI_API_KEY || env.GROQ_API_KEY || "YOUR_HARDCODED_API_KEY_HERE"; 
 
   if (!API_KEY || API_KEY === "YOUR_HARDCODED_API_KEY_HERE") {
     return new Response(
       JSON.stringify({ 
-        reply: "🤖 API Key is missing. Please set GEMINI_API_KEY in Cloudflare settings or the code." 
+        reply: "🤖 API Key is missing. Please set GEMINI_API_KEY in Cloudflare settings." 
       }), 
       {
         status: 200, 
@@ -31,15 +31,17 @@ export async function onRequestPost(context) {
       });
     }
 
-    // 3. Call Groq AI API
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    // 3. Call OpenRouter API (OpenAI-compatible endpoint)
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${API_KEY}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://hsbteleet.com",
+        "X-Title": "HSBTE LEET AI Assistant"
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "meta-llama/llama-3.3-70b-instruct:free",
         messages: [
           { role: "system", content: "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Be concise." },
           { role: "user", content: message }
@@ -50,16 +52,16 @@ export async function onRequestPost(context) {
     });
 
     const data = await response.json();
-    console.log("Groq Raw Response:", JSON.stringify(data));
+    console.log("OpenRouter Raw Response:", JSON.stringify(data));
 
     if (!response.ok) {
         return new Response(
-            JSON.stringify({ reply: "🤖 Groq Error: " + (data.error?.message || "Unknown error") }),
+            JSON.stringify({ reply: "🤖 AI Error: " + (data.error?.message || "Unknown error") }),
             { status: 200, headers: { "Content-Type": "application/json" } }
         );
     }
 
-    const text = data.choices?.[0]?.message?.content || "🤖 Groq returned no answer.";
+    const text = data.choices?.[0]?.message?.content || "🤖 AI returned no answer.";
 
     // 5. Return Clean Response
     return new Response(JSON.stringify({ reply: text }), {

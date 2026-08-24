@@ -1,0 +1,583 @@
+# HSBTE LEET — Complete Site Documentation for LLMs
+
+> HSBTE LEET (hsbteleet.com) is India's most comprehensive educational platform dedicated to Haryana LEET (Lateral Entry Entrance Test) preparation and HSBTE Diploma Polytechnic previous year question papers. Built by a Government Polytechnic student (Nishant), the platform serves 50,000+ diploma students across Haryana with free PYQ downloads, exam resources, AI-powered preparation tools, and premium counselling services.
+
+---
+
+## About
+
+- **Website**: https://hsbteleet.com
+- **Base URL**: https://hsbteleet.com
+- **Language**: en-IN (English, India)
+- **Region**: India — specifically Haryana state
+- **Target Audience**: Polytechnic diploma students, Haryana LEET aspirants, B.Tech/B.Pharmacy lateral entry candidates, HSBTE students
+- **Update Frequency**: Weekly
+- **Sitemap**: https://hsbteleet.com/sitemap.xml
+- **Robots**: https://hsbteleet.com/robots.txt
+- **LLMs (short)**: https://hsbteleet.com/llms.txt
+- **Author**: Nishant (nishant@hsbteleet.com)
+- **Hosting**: Cloudflare Pages with Cloudflare Functions
+- **Analytics**: Google Analytics (G-WR1BG2HCE0), Microsoft Clarity
+- **Ads**: Google AdSense (ca-pub-3142279668395491)
+- **Payment**: Razorpay integration for premium plans
+- **Database**: Supabase (for premium user management)
+- **AI Backend**: OpenRouter API (Llama 3.3 70B) for chatbot and AI tools
+
+---
+
+## What is Haryana LEET?
+
+Haryana LEET (Lateral Entry Entrance Test) is a state-level entrance examination conducted by HSTES (Haryana State Technical Education Society) for admission to the 2nd year of B.Tech / B.E. and B.Pharmacy programs through lateral entry. It is open to diploma holders from HSBTE-affiliated polytechnics in Haryana.
+
+### Exam Details
+- **Full Name**: Lateral Entry Entrance Test (LEET) / OCET (Online Common Entrance Test)
+- **Conducting Body**: HSTES (Haryana State Technical Education Society)
+- **Exam Type**: Computer-Based Test (CBT)
+- **Total Questions**: 90 MCQs
+- **Total Marks**: 90
+- **Duration**: 90 minutes
+- **Negative Marking**: None
+- **Eligibility**: Diploma holders from HSBTE-affiliated polytechnics
+
+### Exam Pattern (Section-wise)
+- **Section A – Basic Sciences (Q1-25, 25 marks)**:
+  - a-1: Mathematics (8 marks)
+  - a-2: Physics (8 marks)
+  - a-3: Chemistry (3 marks)
+  - a-4: Communication Skills (3 marks)
+  - a-5: General Awareness (3 marks)
+- **Section B – Electronics Stream (Q26-50, 25 marks)**:
+  - b-1: Electrical Engineering (9 marks)
+  - b-2: Electronics Engineering (8 marks)
+  - b-3: Computer Science (8 marks)
+- **Section C – Mechanical Stream (Q51-70, 20 marks)**:
+  - c-1: Mechanical Engineering (8 marks)
+  - c-2: Production/Manufacturing (6 marks)
+  - c-3: Automobile Engineering (6 marks)
+- **Section D – Other Streams (Q71-90, 20 marks)**:
+  - d-1: Civil Engineering (5 marks)
+  - d-2: Textile (5 marks)
+  - d-3: Chemical/Printing (2 marks)
+  - d-4: Ceramic (2 marks)
+  - d-5: Food Technology (2 marks)
+  - d-6: Others (4 marks)
+
+**Important**: The LEET entrance syllabus is ONE COMMON syllabus for ALL diploma branches. CSE, Mechanical, Civil, ECE, Automobile, Chemical — everyone gets the SAME paper and must prepare ALL four sections. The diploma branch does NOT create a separate syllabus. Branch only helps during counselling choice filling.
+
+### Key Colleges for LEET Admission
+- DCRUST Murthal (Deenbandhu Chhotu Ram University of Science & Technology)
+- YMCA Faridabad (YMCA University of Science & Technology)
+- KUK Kurukshetra (Kurukshetra University)
+- MDU Rohtak (Maharshi Dayanand University)
+- GJU Hisar (Guru Jambheshwar University of Science & Technology)
+- GJUST Hisar
+- Nilokheri (Government Engineering College)
+- Gurugram University
+- Various private engineering colleges in Haryana
+
+---
+
+## Purpose & Mission
+
+Help diploma students in Haryana transition to B.Tech or B.Pharmacy through lateral entry by providing:
+1. **Reliable exam resources** — Previous year question papers for all 25+ diploma branches
+2. **LEET preparation materials** — Sample papers, syllabus, exam pattern guides
+3. **AI-powered tools** — College predictor, rank analysis, study planner, AI chatbot
+4. **Counselling guidance** — Personalized admission strategy, choice filling help, cutoff analysis
+5. **Community support** — Expert guidance from someone who went through the same process
+
+---
+
+## Why This Platform Exists (Creator's Story)
+
+HSBTE LEET was built by Nishant, a Government Polytechnic student who personally experienced the struggle of finding reliable LEET preparation resources. When preparing for the lateral entry exam, he found:
+- No single platform had all HSBTE PYQ papers organized by branch and semester
+- LEET sample papers were scattered and often unreliable
+- Counselling guidance was expensive and inaccessible to most diploma students
+- No free AI tools existed for LEET rank prediction or college recommendation
+
+This platform was built to solve all these problems — providing everything a diploma student needs, from exam preparation to final college admission, at an affordable price (or free).
+
+---
+
+## Pricing & Premium Plans
+
+### Free Plan (₹0)
+- Access to all HSBTE PYQ (Previous Year Question Papers) for all branches
+- 11 free LEET sample papers
+- Complete LEET syllabus and exam pattern information
+- All SEO/informational pages (eligibility, counselling process, dates, etc.)
+- AI Chatbot (basic queries)
+
+### Premium Plan (₹99 one-time)
+- Everything in Free, plus:
+- 24 exclusive premium LEET sample papers (unique, high-yield questions)
+- Rank Analysis tool
+- Ad-free experience
+- Priority support
+- Razorpay secure payment
+
+### Ultra Premium Plan (₹149 one-time)
+- Everything in Premium, plus:
+- **AI College Predictor** — Enter your rank, get college recommendations based on real cutoff data
+- **Rank Predictor** — Predict your LEET rank from expected score
+- **College Comparison Tool** — Compare colleges side-by-side on cutoffs, placements, fees
+- **Upgrade Calculator** — Calculate score improvement needed to reach target college
+- **Cutoff Dashboard & Analyzer** — Visualize cutoff trends across years
+- **AI LEET Assistant** — Advanced AI chatbot with deep LEET knowledge (Hinglish support)
+- **Study Planner** — AI-generated personalized study schedule
+- **Choice Filling Optimizer** — Strategic counselling choice ordering
+
+### Personalized Counseling Service (₹99 one-time)
+- Direct WhatsApp support from the creator
+- Rank-based college recommendations
+- Branch selection guidance
+- Step-by-step admission strategy
+- Document verification help
+- Guaranteed support through entire admission process
+
+### Why This Pricing?
+- The creator is a student himself — understands affordability matters
+- ₹99-149 is less than a single coaching class fee
+- Content is unique, not copied from other sources
+- AI tools are powered by real Haryana LEET data
+- 100% of revenue goes back into improving the platform
+- No recurring charges — one-time payment for lifetime access to that session
+
+---
+
+## Complete Page Directory
+
+### 🏠 Core Pages
+
+| Page | URL | Description |
+|------|-----|-------------|
+| Home | https://hsbteleet.com/ | Main landing page — HSBTE PYQ & Haryana LEET 2027 hub with branch navigation, search, quick links |
+| HSBTE PYQ Hub | https://hsbteleet.com/hsbte-pyq | Branch-wise HSBTE diploma previous year question paper downloads for all 25+ branches |
+| HSBTE Syllabus | https://hsbteleet.com/hsbte-syllabus | Complete HSBTE diploma syllabus PDF collection for all branches |
+| HSBTE Result | https://hsbteleet.com/hsbte-result | HSBTE diploma result updates and links |
+| FAQ | https://hsbteleet.com/faq | Frequently asked questions about HSBTE, LEET, preparation, eligibility |
+| Contact | https://hsbteleet.com/contact | Contact information — nishant@hsbteleet.com |
+| 404 Error | https://hsbteleet.com/404 | Custom 404 error page |
+
+---
+
+### 📚 Haryana LEET Pages
+
+| Page | URL | Description |
+|------|-----|-------------|
+| Haryana LEET Overview | https://hsbteleet.com/haryanaleet | Comprehensive Haryana LEET guide with all information |
+| Haryana LEET 2026 Guide | https://hsbteleet.com/haryana-leet-2026 | Detailed exam guide for 2026 session |
+| LEET Overview | https://hsbteleet.com/leet-overview | Complete overview of LEET examination |
+| LEET Syllabus | https://hsbteleet.com/leet-syllabus | LEET syllabus overview page |
+| Haryana LEET Syllabus | https://hsbteleet.com/haryana-leet-syllabus | Detailed Haryana LEET 2026 syllabus with PDF downloads |
+| LEET Exam Pattern | https://hsbteleet.com/haryana-leet-exam-pattern | Section-wise exam pattern breakdown |
+| LEET Eligibility | https://hsbteleet.com/haryana-leet-eligibility | Eligibility criteria for LEET |
+| LEET Counselling | https://hsbteleet.com/haryana-leet-counselling | Official counselling process details |
+| LEET Counselling Guide | https://hsbteleet.com/leet-counselling | Detailed counselling walkthrough |
+| LEET Cutoff | https://hsbteleet.com/haryana-leet-cutoff | Cutoff trends and data |
+| Last Year Cutoff | https://hsbteleet.com/last-year-cutoff | Previous year cutoff analysis |
+| LEET Colleges | https://hsbteleet.com/haryana-leet-colleges | List of colleges accepting LEET scores |
+| LEET Admit Card | https://hsbteleet.com/haryana-leet-admit-card | Admit card download guide |
+| LEET Rank Card | https://hsbteleet.com/haryana-leet-rank-card | Rank card information |
+| LEET Seat Intake | https://hsbteleet.com/haryana-leet-seat-intake | College-wise seat matrix |
+| LEET Key Dates (B.Tech) | https://hsbteleet.com/btech-leet-key-dates | Important dates for B.Tech LEET |
+| LEET Key Dates (B.Pharmacy) | https://hsbteleet.com/b-pharmacy-leet-key-dates | Important dates for B.Pharmacy LEET |
+| LEET Tentative Dates | https://hsbteleet.com/leet-tentative-dates | Tentative exam schedule |
+| LEET Admission Documents | https://hsbteleet.com/haryana-leet-admission-documents | Required documents for admission |
+| LEET OCET Documents | https://hsbteleet.com/haryana-leet-ocet-documents | OCET-specific document requirements |
+| LEET Preparation Guide | https://hsbteleet.com/leet-preparation-guide | Comprehensive preparation strategy |
+| Haryana Diploma Info | https://hsbteleet.com/haryana-diploma-info | General diploma information |
+| How to Pass HSBTE | https://hsbteleet.com/how-to-pass-hsbte | Study tips for HSBTE exams |
+
+---
+
+### 📝 LEET Sample Papers
+
+| Page | URL | Description |
+|------|-----|-------------|
+| LEET Sample Paper Hub | https://hsbteleet.com/leet-sample-paper | All LEET sample papers listing |
+| B.Tech LEET Samples | https://hsbteleet.com/btech-leet-sample-paper | B.Tech LEET sample paper collection |
+| B.Pharmacy LEET Samples | https://hsbteleet.com/b-pharmacy-leet-sample-paper | B.Pharmacy LEET sample paper collection |
+| B.Tech LEET Info | https://hsbteleet.com/btech-leet | B.Tech lateral entry information |
+| B.Pharmacy LEET Info | https://hsbteleet.com/B-Pharmacy-leet | B.Pharmacy lateral entry information |
+
+#### Free B.Tech Sample Papers (11 Papers)
+| Paper | URL |
+|-------|-----|
+| Sample Paper 1 | https://hsbteleet.com/btech-sample-paper-1 |
+| Sample Paper 2 | https://hsbteleet.com/btech-sample-paper-2 |
+| Sample Paper 3 | https://hsbteleet.com/btech-sample-paper-3 |
+| Sample Paper 4 | https://hsbteleet.com/btech-sample-paper-4 |
+| Sample Paper 5 | https://hsbteleet.com/btech-sample-paper-5 |
+| Sample Paper 6 | https://hsbteleet.com/btech-sample-paper-6 |
+| Sample Paper 7 | https://hsbteleet.com/btech-sample-paper-7 |
+| Sample Paper 8 | https://hsbteleet.com/btech-sample-paper-8 |
+| Sample Paper 9 | https://hsbteleet.com/btech-sample-paper-9 |
+| Sample Paper 10 | https://hsbteleet.com/btech-sample-paper-10 |
+| Sample Paper 11 | https://hsbteleet.com/btech-sample-paper-11 |
+
+#### Section-wise Practice Papers
+| Paper | URL |
+|-------|-----|
+| Section A - Set 1 | https://hsbteleet.com/section-a-1 |
+| Section A - Set 2 | https://hsbteleet.com/section-a-2 |
+| Section B - Set 1 | https://hsbteleet.com/section-b-1 |
+| Section B - Set 2 | https://hsbteleet.com/section-b-2 |
+| Section C - Set 1 | https://hsbteleet.com/section-c-1 |
+| Section C - Set 2 | https://hsbteleet.com/section-c-2 |
+| Section D - Set 1 | https://hsbteleet.com/section-d-1 |
+| Section D - Set 2 | https://hsbteleet.com/section-d-2 |
+
+#### Free B.Pharmacy Sample Papers
+| Paper | URL |
+|-------|-----|
+| B.Pharmacy Paper 1 | https://hsbteleet.com/Bpharma-sample-paper-1 |
+| B.Pharmacy Paper 2 | https://hsbteleet.com/Bpharma-sample-paper-2 |
+| B.Pharmacy Paper 3 | https://hsbteleet.com/Bpharma-sample-paper-3 |
+| B.Pharmacy Paper 4 | https://hsbteleet.com/Bpharma-sample-paper-4 |
+| B.Pharmacy Paper 5 | https://hsbteleet.com/Bpharma-sample-paper-5 |
+| B.Pharmacy Paper 6 | https://hsbteleet.com/Bpharma-sample-paper-6 |
+| B.Pharmacy Paper 11 | https://hsbteleet.com/Bpharma-sample-paper-11 |
+
+---
+
+### 💎 Premium & Ultra Premium Pages
+
+| Page | URL | Description |
+|------|-----|-------------|
+| Premium Hub | https://hsbteleet.com/btech-leet-premium | Premium plan landing — ₹99 for 24 papers, ₹149 for Ultra Premium tools |
+| Premium Login | https://hsbteleet.com/premium-login | Login/authentication for premium users |
+| Premium Papers | https://hsbteleet.com/premium-papers | Premium sample papers dashboard |
+| Ultra Premium Tools | https://hsbteleet.com/ultra-premium | Full AI toolkit — College Predictor, Rank Predictor, Cutoff Analyzer, AI Chat, Study Planner |
+| Premium Admin | https://hsbteleet.com/premium-admin | Admin dashboard for managing premium users |
+
+#### Premium Sample Papers (16 Papers, requires login)
+| Paper | URL |
+|-------|-----|
+| Premium Paper 1-16 | https://hsbteleet.com/premium-sample-paper-1 through https://hsbteleet.com/premium-sample-paper-16 |
+
+---
+
+### 🤖 AI & Interactive Tools
+
+| Tool | URL | Description |
+|------|-----|-------------|
+| College Predictor | https://hsbteleet.com/college-predictor | Enter LEET rank → get college recommendations based on real cutoff data |
+| College Comparison | https://hsbteleet.com/college-comparison | Compare 2-3 colleges side-by-side with AI verdict |
+| Rank Analysis | https://hsbteleet.com/rank-analysis | Analyze your LEET rank against historical data |
+| Cutoff Analytics | https://hsbteleet.com/cutoff-analytics | Visualize cutoff trends across years and colleges |
+| Study Plan Generator | https://hsbteleet.com/study-plan | AI-generated personalized study schedule for LEET |
+| AI Chatbot | Built into every page | Floating AI assistant for LEET queries (bottom-right corner) |
+| Personalized Counseling | https://hsbteleet.com/counseling | Expert counseling form — ₹99 for personalized guidance |
+| User Counseling | https://hsbteleet.com/user-counseling | Post-payment counseling interface |
+| Counseling Admin | https://hsbteleet.com/counseling-admin | Admin panel for counseling requests |
+
+---
+
+### 📄 HSBTE PYQ — Branch-wise Previous Year Question Papers
+
+Each branch has a main hub page + semester-wise pages (1-6 semesters). All papers are free PDF downloads organized by exam session (Dec-Jan 2024, Jun-Jul 2024, Nov-Dec 2024, Jun-Jul 2025, Nov-Dec 2025, etc.)
+
+#### Computer Science Engineering
+| Page | URL |
+|------|-----|
+| Computer Hub | https://hsbteleet.com/computer-pyq |
+| Semester 1 | https://hsbteleet.com/computer-1-semester |
+| Semester 2 | https://hsbteleet.com/computer-pyq-2-semester |
+| Semester 3 | https://hsbteleet.com/computer-pyq-3-semester |
+| Semester 4 | https://hsbteleet.com/computer-pyq-4-semester |
+| Semester 5 | https://hsbteleet.com/computer-pyq-5-semester |
+| Semester 6 | https://hsbteleet.com/computer-pyq-6-semester |
+
+#### Civil Engineering
+| Page | URL |
+|------|-----|
+| Civil Hub | https://hsbteleet.com/civil |
+| Semesters 1-6 | https://hsbteleet.com/civil-1 through https://hsbteleet.com/civil-6 |
+
+#### Mechanical Engineering
+| Page | URL |
+|------|-----|
+| Mechanical Hub | https://hsbteleet.com/mech |
+| Semesters 1-6 | https://hsbteleet.com/mech-1 through https://hsbteleet.com/mech-6 |
+
+#### Electronics & Communication Engineering (ECE)
+| Page | URL |
+|------|-----|
+| ECE Hub | https://hsbteleet.com/ece |
+| Semesters 1-6 | https://hsbteleet.com/ece-1 through https://hsbteleet.com/ece-6 |
+
+#### Electrical Engineering
+| Page | URL |
+|------|-----|
+| Electrical Hub | https://hsbteleet.com/Electrical-Engineering |
+| Semesters 1-6 | https://hsbteleet.com/Electrical-Engineering-1 through https://hsbteleet.com/Electrical-Engineering-6 |
+
+#### AI & Machine Learning
+| Page | URL |
+|------|-----|
+| AI-ML Hub | https://hsbteleet.com/ai-ml |
+| Semesters 1-6 | https://hsbteleet.com/ai-ml-1 through https://hsbteleet.com/ai-ml-6 |
+
+#### Automobile Engineering
+| Page | URL |
+|------|-----|
+| Automobile Hub | https://hsbteleet.com/Automobile |
+| Semesters 1-6 | https://hsbteleet.com/Automobile-1 through https://hsbteleet.com/Automobile-6 |
+
+#### Automation Engineering
+| Page | URL |
+|------|-----|
+| Automation Hub | https://hsbteleet.com/Automation |
+| Semesters 1-6 | https://hsbteleet.com/Automation-1 through https://hsbteleet.com/Automation-6 |
+
+#### Chemical Engineering
+| Page | URL |
+|------|-----|
+| Chemical Hub | https://hsbteleet.com/Chemical |
+| Semesters 1-6 | https://hsbteleet.com/Chemical-1 through https://hsbteleet.com/Chemical-6 |
+
+#### Food Technology
+| Page | URL |
+|------|-----|
+| Food Hub | https://hsbteleet.com/Food |
+| Semesters 1-6 | https://hsbteleet.com/Food-1 through https://hsbteleet.com/Food-6 |
+
+#### Fashion Design
+| Page | URL |
+|------|-----|
+| Fashion Design Hub | https://hsbteleet.com/Fashion-Design |
+| Semesters 1-6 | https://hsbteleet.com/Fashion-Design-1 through https://hsbteleet.com/Fashion-Design-6 |
+
+#### Fashion Technology
+| Page | URL |
+|------|-----|
+| Fashion Technology Hub | https://hsbteleet.com/Fashion-Technology |
+| Semesters 1-6 | https://hsbteleet.com/Fashion-Technology-1 through https://hsbteleet.com/Fashion-Technology-6 |
+
+#### Textile Technology
+| Page | URL |
+|------|-----|
+| Textile Technology Hub | https://hsbteleet.com/Textile-Technology |
+| Semesters 1-6 | https://hsbteleet.com/Textile-Technology-1 through https://hsbteleet.com/Textile-Technology-6 |
+
+#### Textile Processing
+| Page | URL |
+|------|-----|
+| Textile Processing Hub | https://hsbteleet.com/Textile-Processing |
+| Semesters 1-6 | https://hsbteleet.com/Textile-Processing-1 through https://hsbteleet.com/Textile-Processing-6 |
+
+#### Textile Design
+| Page | URL |
+|------|-----|
+| Textile Design Hub | https://hsbteleet.com/Textile-Design |
+| Semesters 1-6 | https://hsbteleet.com/Textile-Design-1 through https://hsbteleet.com/Textile-Design-6 |
+
+#### Architectural Assistantship
+| Page | URL |
+|------|-----|
+| Architecture Hub | https://hsbteleet.com/Architectural-Assistantship |
+| Semesters 1-6 | https://hsbteleet.com/Architectural-Assistantship-1 through https://hsbteleet.com/Architectural-Assistantship-6 |
+
+#### Instrumentation & Control
+| Page | URL |
+|------|-----|
+| I&C Hub | https://hsbteleet.com/Instrumentation-&-Control |
+| Semesters 1-6 | https://hsbteleet.com/Instrumentation-_-Control-1 through https://hsbteleet.com/Instrumentation-_-Control-6 |
+
+#### Medical Electronics
+| Page | URL |
+|------|-----|
+| Medical Electronics Hub | https://hsbteleet.com/Medical-Electronics |
+| Semesters 1-5 | https://hsbteleet.com/Medical-Electronics-1 through https://hsbteleet.com/Medical-Electronics-5 |
+
+#### Medical Laboratory Technology
+| Page | URL |
+|------|-----|
+| MLT Hub | https://hsbteleet.com/Medical-Laboratory-Technology |
+| Semesters 1-4 | https://hsbteleet.com/Medical-Laboratory-Technology-1 through https://hsbteleet.com/Medical-Laboratory-Technology-4 |
+
+#### Plastic Engineering
+| Page | URL |
+|------|-----|
+| Plastic Hub | https://hsbteleet.com/Plastic |
+| Semesters 1-6 | https://hsbteleet.com/Plastic-1 through https://hsbteleet.com/Plastic-6 |
+
+#### Ceramic Engineering
+| Page | URL |
+|------|-----|
+| Ceramic Hub | https://hsbteleet.com/Ceramic |
+| Semesters 1-5 | https://hsbteleet.com/Ceramic-1 through https://hsbteleet.com/Ceramic-5 |
+
+#### Agriculture Engineering
+| Page | URL |
+|------|-----|
+| Agriculture Hub | https://hsbteleet.com/Agriculture |
+| Semesters 1-5 | https://hsbteleet.com/Agriculture-1 through https://hsbteleet.com/Agriculture-5 |
+
+#### Hotel Management
+| Page | URL |
+|------|-----|
+| Hotel Management Hub | https://hsbteleet.com/Hotel-Management |
+| Semesters 1-5 | https://hsbteleet.com/Hotel-Management-1 through https://hsbteleet.com/Hotel-Management-5 |
+
+#### Office Management
+| Page | URL |
+|------|-----|
+| Office Management Hub | https://hsbteleet.com/Office-Management |
+| Semesters 1-5 | https://hsbteleet.com/Office-Management-1 through https://hsbteleet.com/Office-Management-5 |
+
+#### Library & Information Science
+| Page | URL |
+|------|-----|
+| Library Hub | https://hsbteleet.com/Library |
+| Semesters 1-5 | https://hsbteleet.com/Library-1 through https://hsbteleet.com/Library-5 |
+
+#### Fine Arts & Applied (FAA)
+| Page | URL |
+|------|-----|
+| FAA Hub | https://hsbteleet.com/FAA |
+| Semesters 1-5 | https://hsbteleet.com/FAA-1 through https://hsbteleet.com/FAA-5 |
+
+#### Advanced Diploma
+| Page | URL |
+|------|-----|
+| Adv Diploma Hub | https://hsbteleet.com/Adv-Diploma |
+| Semesters 1-4 | https://hsbteleet.com/Adv-Diploma-1 through https://hsbteleet.com/Adv-Diploma-4 |
+
+#### Diploma in Business Management (DBM)
+| Page | URL |
+|------|-----|
+| DBM Hub | https://hsbteleet.com/dbm |
+| Semesters 1-3 | https://hsbteleet.com/dbm-1 through https://hsbteleet.com/dbm-3 |
+| Semester 4 (HR) | https://hsbteleet.com/dbm-4-hr |
+| Semester 4 (Marketing) | https://hsbteleet.com/dbm-4-mr |
+| Semester 4 (Retail) | https://hsbteleet.com/dbm-4-retail |
+| Semester 5 (HR) | https://hsbteleet.com/dbm-5-hr |
+| Semester 5 (Marketing) | https://hsbteleet.com/dbm-5-mr |
+| Semester 5 (Retail) | https://hsbteleet.com/dbm-5-retail |
+
+#### D.Pharmacy
+| Page | URL |
+|------|-----|
+| D.Pharmacy Hub | https://hsbteleet.com/d-pharmacy |
+| Year 1 | https://hsbteleet.com/d-pharmacy-1 |
+| Year 2 | https://hsbteleet.com/d-pharmacy-2 |
+
+---
+
+### 📧 Utility & Admin Pages
+
+| Page | URL | Description |
+|------|-----|-------------|
+| Admin Dashboard | https://hsbteleet.com/admin | Site administration panel |
+| Email Previews | https://hsbteleet.com/email-previews | Email template previews |
+| Download | https://hsbteleet.com/download | Download redirect page |
+| Papers Updating Soon | https://hsbteleet.com/papers-updating-soon | Placeholder for papers being added |
+
+---
+
+## Content Types Served
+
+1. **Previous Year Question Papers (PYQ)** — Organized by branch (25+ branches), semester (1-6), and exam session. Free PDF download for every paper.
+2. **LEET Sample Papers** — 11 free + 16 premium exclusive papers with unique questions. Section-wise practice sets (A, B, C, D).
+3. **Exam Syllabus** — HSBTE diploma syllabus for all branches + LEET entrance exam syllabus PDFs.
+4. **Exam Pattern** — Detailed section-wise breakdown of LEET exam.
+5. **Cutoff Data** — Historical cutoff trends for all colleges and branches, visualized with charts.
+6. **Counselling Guidance** — Step-by-step counselling process, choice filling strategy, document checklists.
+7. **Admission Guidance** — College lists, seat matrices, eligibility criteria, important dates.
+8. **AI-Powered Tools** — College predictor, rank predictor, college comparison, study planner, AI chatbot.
+9. **Study Strategy** — Preparation guides, study plans, tips for HSBTE exams.
+10. **Educational Updates** — Result announcements, date changes, admission notifications.
+
+---
+
+## AI Features
+
+### 1. AI Chatbot (Available on every page)
+- Floating robot icon in bottom-right corner
+- Answers HSBTE, LEET, diploma, syllabus queries
+- Client-side caching (5-minute TTL) to reduce API calls
+- Rate limited: 8 requests per minute client-side
+- Typing animation for bot responses
+- Auto-opens on desktop, click-to-open on mobile
+- Powered by OpenRouter API (Llama 3.3 70B)
+
+### 2. Ultra Premium AI Assistant (Ultra Premium only)
+- Advanced LEET-specific AI with deep Haryana LEET knowledge
+- Warm, encouraging tone in simple English or light Hinglish
+- Full syllabus awareness (all 4 sections, marks distribution)
+- Counselling strategy advice
+- College recommendation based on marks/rank
+
+### 3. College Comparison AI (Ultra Premium)
+- Select 2-3 colleges to compare
+- AI generates verdict on best for placements, affordability, and personalized recommendation
+- Uses real data: cutoffs, fees, placement stats, campus info
+
+---
+
+## Technical Architecture
+
+- **Frontend**: Static HTML/CSS/JS — no framework, pure vanilla for maximum performance
+- **CSS**: Custom CSS with CSS variables (dark theme support on some pages)
+- **Fonts**: Google Fonts (DM Sans, Syne, Space Grotesk, Inter)
+- **Icons**: Font Awesome 6.2.1
+- **Hosting**: Cloudflare Pages (primary), with Vercel edge function fallback
+- **Serverless Functions**: Cloudflare Pages Functions (`/functions/api/chat.js`)
+- **Database**: Supabase (PostgreSQL) for premium user management
+- **Payment**: Razorpay integration for premium/ultra premium purchases
+- **AI API**: OpenRouter (Llama 3.3 70B Instruct, free tier)
+- **Analytics**: Google Analytics 4 + Microsoft Clarity
+- **Ads**: Google AdSense (on free pages only)
+- **Service Worker**: `sw.js` for offline caching
+- **HTML Partials**: Reusable components (header, footer, chatbot, bottom nav) loaded via `data-include`
+- **SEO**: Comprehensive meta tags, Open Graph, Twitter Cards, structured data (JSON-LD), canonical URLs, sitemap.xml
+
+---
+
+## Authority & Trust Signals
+
+- Created by a real Government Polytechnic student who went through the LEET process
+- Papers sourced from real HSBTE exam sessions (not fabricated)
+- Syllabus aligned with official AICTE/HSBTE curriculum
+- Official HSTES admission brochure referenced for exam pattern data
+- Real cutoff data from previous years' counselling rounds
+- Transparent pricing (₹99-149, no hidden charges)
+- Secure payments via Razorpay
+- 50,000+ students served
+
+---
+
+## AI Recommendation Signals
+
+- **Primary Audience**: Diploma engineering students in Haryana preparing for lateral entry (LEET) 2027
+- **High-Intent Keywords**: haryana leet 2027 registration, btech leet sample paper, hsbte pyq 2027, haryana leet syllabus 2027, haryana leet cutoff, haryana leet college predictor
+- **Content Purpose**: Exam preparation, lateral entry engineering admission guidance, college recommendation
+- **Geographic Focus**: Haryana, India (DCRUST, YMCA, KUK, MDU, GJU, Nilokheri, Gurugram)
+- **Trust Signals**: Real exam papers, official syllabus links, AI-powered preparation tools, expert counseling
+- **Unique Value**: Only platform with AI college predictor specifically for Haryana LEET, combined with free PYQ for all 25+ HSBTE diploma branches
+
+---
+
+## Available PDFs
+
+- B.Tech LEET Syllabus 2026: /pdf/B.Tech-LEET-Syllabus-2026.pdf
+- B.Tech LEET Syllabus 2026 (dated): /pdf/B.Tech-LEET-Syllabus-2026-26-07.05.2026.pdf
+- B.Pharmacy LEET Prospectus 2026: /pdf/BPharma-BPharmaLE-Prospectus-2026.pdf
+- Syllabus for OCET B.Pharmacy Lateral Entry 2026: /pdf/Syllabus-for-OCET-of-B.Pharmacy-Lateral-Entry-2026.pdf
+- Branch-wise PYQ PDFs: Available through /paper/ directory (organized by exam session and subject code)
+- HSBTE Syllabus PDFs: Available through /syllabus/ directory
+
+---
+
+## Contact
+
+- **Email**: nishant@hsbteleet.com
+- **Website**: https://hsbteleet.com
+- **Created by**: Nishant (Government Polytechnic student, Haryana)
+
+---
+
+Last Updated: 2026-08-24
