@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
 'use strict';
 let searchIndex = [];
 let isIndexLoaded = false;
@@ -429,7 +429,7 @@ keywords: ['ultra premium', 'ultra tools', 'ai college predictor', 'rank predict
 type: 'page',
 title: 'Premium Sample Papers',
 url: `${basePath}premium-papers`,
-keywords: ['premium papers', 'premium sample papers', 'leet premium', '24 sample papers', 'special sample paper', 'special mock paper', 'high difficulty mock', 'premium login papers']
+keywords: ['premium papers', 'premium sample papers', 'leet premium', '34 sample papers', 'special sample paper', 'special mock paper', 'high difficulty mock', 'premium login papers']
 },
 {
 type: 'page',
@@ -501,7 +501,7 @@ keywords: [
 ]
 });
 }
-for (let i = 1; i <= 16; i++) {
+for (let i = 1; i <= 26; i++) {
 searchIndex.push({
 type: 'page',
 title: `Premium Sample Paper ${i}`,

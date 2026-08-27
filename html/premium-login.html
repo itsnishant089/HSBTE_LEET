@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +9,7 @@
   <link rel="icon" href="https://hsbteleet.com/image/favicon.webp" />
   <title>Premium Login | Haryana LEET 2027 | hsbteleet.com</title>
   <meta name="description"
-    content="Login or register for Premium (₹99) or Ultra Premium (₹149) Haryana LEET 2027 access. 24 exclusive LEET sample papers, College Predictor, Rank Predictor and more. 100% ad-free." />
+    content="Login or register for Premium (₹99) or Ultra Premium (₹149) Haryana LEET 2027 access. 34 exclusive LEET sample papers, College Predictor, Rank Predictor and more. 100% ad-free." />
   <meta name="robots" content="index, follow" />
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
@@ -993,7 +993,7 @@
         <div class="tier-icon">👑</div>
         <div class="tier-name">Premium</div>
         <div class="tier-price">₹99</div>
-        <div class="tier-desc">24 Papers + Syllabus + Prospectus</div>
+        <div class="tier-desc">34 Papers + Syllabus + Prospectus</div>
         <div class="tier-save">Launch Price</div>
       </div>
       <div class="tier-card" id="opt-ultra" onclick="selectTier('ultra')">
@@ -1014,7 +1014,7 @@
         <div class="hdr-in">
           <div class="hdr-icon" id="hdrIcon">👑</div>
           <h1 class="hdr-title" id="hdrTitle">Premium LEET Access</h1>
-          <p class="hdr-sub" id="hdrSub">Login or register — unlock 24 exclusive papers, syllabus, prospectus and Rank Analysis</p>
+          <p class="hdr-sub" id="hdrSub">Login or register — unlock 34 exclusive papers, syllabus, prospectus and Rank Analysis</p>
           <div class="hdr-badges">
             <span class="hbadge"><span class="dot"></span>Secure</span>
             <span class="hbadge" id="hdrPrice">₹99 One-Time</span>
@@ -1130,9 +1130,9 @@
               <div class="ppill ppill-a" id="s2pill"><i class="fas fa-crown"></i> One-time — <span id="s2price"
                   style="font-weight:900">₹99</span></div>
               <p style="font-size:13px;color:var(--mu);line-height:1.65;margin-bottom:12px" id="s2desc">Pay once —
-                unlock 24 premium papers plus Rank Analysis, lifetime access, 100% ad-free.</p>
+                unlock 34 premium papers plus Rank Analysis, lifetime access, 100% ad-free.</p>
               <ul class="feat-list" style="text-align:left;max-width:260px;margin:0 auto" id="s2feats">
-                <li><i class="fas fa-check-circle"></i> 24 exclusive papers (section-wise + full)</li>
+                <li><i class="fas fa-check-circle"></i> 34 exclusive papers (section-wise + full)</li>
                 <li><i class="fas fa-check-circle"></i> Rank Analysis Tool</li>
                 <li><i class="fas fa-check-circle"></i> 100% Ad-Free experience</li>
                 <li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>
@@ -1267,7 +1267,7 @@
       document.getElementById('hdrPrice').textContent = '₹' + T.price + ' One-Time';
       document.getElementById('hdrSub').textContent = curTier === 'ultra'
         ? 'Register to unlock papers + College Predictor + Counselling tools'
-        : 'Login or register — unlock 24 exclusive papers and Rank Analysis';
+        : 'Login or register — unlock 34 exclusive papers and Rank Analysis';
       // Step 2
       var pill = document.getElementById('s2pill');
       pill.className = 'ppill ' + (curTier === 'ultra' ? 'ppill-pu' : 'ppill-a');
@@ -1278,11 +1278,11 @@
       document.getElementById('total-p').style.color = T.color;
       document.getElementById('pay-txt').textContent = 'Pay ₹' + T.price + ' and Unlock Access';
       document.getElementById('s2desc').textContent = curTier === 'ultra'
-        ? 'Pay once — unlock 24 papers + College Predictor + all counselling tools, lifetime access, 100% ad-free.'
-        : 'Pay once — unlock 24 premium papers plus Rank Analysis, lifetime access, 100% ad-free.';
+        ? 'Pay once — unlock 34 Papers + College Predictor + all counselling tools, lifetime access, 100% ad-free.'
+        : 'Pay once — unlock 34 premium papers plus Rank Analysis, lifetime access, 100% ad-free.';
       document.getElementById('s2feats').innerHTML = curTier === 'ultra'
-        ? '<li><i class="fas fa-check-circle"></i> 24 exclusive LEET sample papers</li><li><i class="fas fa-star"></i> AI College Predictor (2027 data)</li><li><i class="fas fa-star"></i> Rank Predictor + Counselling Tools</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free · Secure Razorpay</li>'
-        : '<li><i class="fas fa-check-circle"></i> 24 exclusive papers (section-wise + full)</li><li><i class="fas fa-check-circle"></i> Rank Analysis Tool</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free experience</li><li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>';
+        ? '<li><i class="fas fa-check-circle"></i> 34 exclusive LEET sample papers</li><li><i class="fas fa-star"></i> AI College Predictor (2027 data)</li><li><i class="fas fa-star"></i> Rank Predictor + Counselling Tools</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free · Secure Razorpay</li>'
+        : '<li><i class="fas fa-check-circle"></i> 34 exclusive papers (section-wise + full)</li><li><i class="fas fa-check-circle"></i> Rank Analysis Tool</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free experience</li><li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>';
       payPaise = T.paise;
     }
 

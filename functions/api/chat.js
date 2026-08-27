@@ -41,7 +41,7 @@ export async function onRequestPost(context) {
         "X-Title": "HSBTE LEET AI Assistant"
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3.3-70b-instruct:free",
+        model: "meta-llama/llama-3.1-8b-instruct:free",
         messages: [
           { role: "system", content: "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Be concise." },
           { role: "user", content: message }

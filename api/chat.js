@@ -31,7 +31,7 @@ export default async function handler(req) {
         "X-Title": "HSBTE LEET AI Assistant"
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3.3-70b-instruct",
+        model: "meta-llama/llama-3.1-8b-instruct:free",
         messages: [
           { role: "system", content: "Assistant for HSBTE LEET. Answer about HSBTE, LEET, Diploma, Syllabus. Concise only." },
           { role: "user", content: message }
