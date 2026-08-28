@@ -11,7 +11,7 @@ function initChatbot() {
   if (!chatBox || !messages || !input) return;
 
   // ── Client-side cache (sessionStorage) ──────────────────────────────────
-  const CHAT_CACHE_KEY = "chatbot_cache_v1";
+  const CHAT_CACHE_KEY = "chatbot_cache_v2_gemini";
   const CHAT_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   function getCachedReply(text) {
@@ -85,10 +85,13 @@ function initChatbot() {
     typeEffect();
   }
 
+  // Short conversation memory for Gemini (last few turns)
+  const chatHistory = [];
+
   function greetUser() {
     if (sessionStorage.getItem("chatGreetingShown")) return;
     const greetingText =
-      `👋 Hey! I'm your HSBTE AI Assistant.\nWhat can I help you with today?\n• PYQ & syllabus\n• LEET guidance\n• Results & exams`;
+      `Namaste! 🙏 Main hsbteleet.com chatbot hoon.\n\nMain help kar sakta hoon:\n1️⃣ Diploma PYQ (branch + semester)\n2️⃣ Diploma Syllabus PDF\n3️⃣ LEET Syllabus / Exam Pattern\n4️⃣ Free + Premium LEET papers\n5️⃣ Premium ₹99 / Ultra ₹149\n\nExample: "CSE 1st semester" · "LEET syllabus" · "Buy Premium"`;
     addMessage(greetingText, "bot", true);
     sessionStorage.setItem("chatGreetingShown", "true");
   }
@@ -159,7 +162,7 @@ function initChatbot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({ message: text, history: chatHistory.slice(-8) })
       });
 
       if (messages.contains(thinkingDiv)) messages.removeChild(thinkingDiv);
@@ -170,17 +173,20 @@ function initChatbot() {
       }
 
       const data = await res.json();
-      console.log("Chatbot Response:", data); // Helpful for debugging
+      console.log("Chatbot Response:", data);
 
       if (!res.ok) {
         addMessage(data.reply || "🤖 Assistant is in beta version. Please try again later!", "bot");
         return;
       }
 
-      // Final check for the reply property
       const reply = data.reply || (data.candidates && data.candidates[0]?.content?.parts[0]?.text) || "No reply received.";
-      
-      setCachedReply(text, reply);      // store in client cache
+
+      chatHistory.push({ role: "user", text: text });
+      chatHistory.push({ role: "model", text: reply });
+      if (chatHistory.length > 16) chatHistory.splice(0, chatHistory.length - 16);
+
+      setCachedReply(text, reply);
       addMessage(reply, "bot", true);
 
     } catch (error) {
