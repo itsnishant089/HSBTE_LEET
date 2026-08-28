@@ -159,7 +159,7 @@ export async function callGemini({ apiKey, message, history = [] }) {
     ]
   };
 
-  const modelCandidates = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-flash-latest'];
+  const modelCandidates = ['gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
   let lastErr;
   for (const model of modelCandidates) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
