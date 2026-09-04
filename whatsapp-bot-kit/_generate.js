@@ -52,7 +52,7 @@ const faqRows = [
     Category: 'Why Buy Premium',
     Trigger_Keywords: 'why premium, why buy, kyun buy, premium kyu, worth, free vs premium, difference free',
     Full_Answer:
-      '*Why buy Premium on hsbteleet.com?*\n\nFree site pe HSBTE diploma PYQ + basic LEET info milti hai.\n\n*Premium (₹99 one-time)* unlock karta hai:\n✅ *34 exclusive* full-syllabus LEET sample papers (free papers se alag unique questions)\n✅ Official Haryana LEET Syllabus PDF + B.Tech LEET Prospectus\n✅ Formula sheets + important topics + cheat sheets (Section A–D)\n✅ Rank Analysis tool\n✅ 100% Ad-free + *Lifetime access*\n\nLEET 90 Q / 90 min pattern pe practice karne ke liye ye papers real exam jaisi difficulty pe banaye gaye hain.\n\n👉 Buy / Login: ' +
+      '*Why buy Premium on hsbteleet.com?*\n\nFree site pe HSBTE diploma PYQ + basic LEET info milti hai.\n\n*Premium (₹99 one-time)* unlock karta hai:\n✅ *34 exclusive* full-syllabus LEET sample papers (free papers se alag unique questions)\n✅ Official Haryana LEET Syllabus PDF + B.Tech LEET Prospectus\n✅ Formula sheets + important topics + cheat sheets (Section A–D)\n✅ Rank Analysis tool\n✅ 100% Ad-free + *Access Until LEET 2027*\n\nLEET 90 Q / 90 min pattern pe practice karne ke liye ye papers real exam jaisi difficulty pe banaye gaye hain.\n\n👉 Buy / Login: ' +
       BASE +
       '/premium-login?tier=premium\n👉 Plans detail: ' +
       BASE +
@@ -66,7 +66,7 @@ const faqRows = [
     Category: 'Premium Plan',
     Trigger_Keywords: 'premium, buy premium, premium 99, get premium, premium price, premium kya hai',
     Full_Answer:
-      '*HSBTE LEET Premium — ₹99 (one-time, lifetime)*\n\n*Includes:*\n• 34 exclusive LEET sample papers (section-wise + full syllabus)\n• Official LEET Syllabus PDF\n• Official B.Tech LEET Prospectus 2027\n• Formula sheets (A/B/C/D)\n• Important topics PDFs\n• Cheat sheets\n• Rank Analysis tool\n• Zero ads\n• Lifetime access (pay once)\n\n*Does NOT include:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling tools (wo Ultra Premium mein hain).\n\n🛒 Buy now: ' +
+      '*HSBTE LEET Premium — ₹99 (one-time, Access Until LEET 2027)*\n\n*Includes:*\n• 34 exclusive LEET sample papers (section-wise + full syllabus)\n• Official LEET Syllabus PDF\n• Official B.Tech LEET Prospectus 2027\n• Formula sheets (A/B/C/D)\n• Important topics PDFs\n• Cheat sheets\n• Rank Analysis tool\n• Zero ads\n• Access Until LEET 2027 (pay once)\n\n*Does NOT include:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling tools (wo Ultra Premium mein hain).\n\n🛒 Buy now: ' +
       BASE +
       '/premium-login?tier=premium\n📄 See all features: ' +
       BASE +
@@ -78,7 +78,7 @@ const faqRows = [
     Category: 'Ultra Premium Plan',
     Trigger_Keywords: 'ultra, ultra premium, 149, college predictor, rank predictor, counselling tool, cutoff analyzer',
     Full_Answer:
-      '*Ultra Premium — ₹149 (one-time, lifetime)* 🔥 Best Value\n\n*Everything in Premium ₹99* PLUS:\n⭐ AI College Predictor (2027 analytics)\n⭐ Rank Predictor by marks\n⭐ Smart Counselling Advisor (AI)\n⭐ AI Choice Filling Generator\n⭐ Cutoff Analyzer (all colleges)\n⭐ Choice Mistake Detector\n⭐ College Comparison Tool\n⭐ Upgrade Chance Calculator\n⭐ Mock Counselling Simulator\n⭐ AI Study Planner (LEET syllabus)\n⭐ Zero ads + Lifetime access\n\nNote: Predictions approximate (±15%). Always verify with official HSTES.\n\n🛒 Buy Ultra: ' +
+      '*Ultra Premium — ₹149 (one-time, Access Until LEET 2027)* 🔥 Best Value\n\n*Everything in Premium ₹99* PLUS:\n⭐ AI College Predictor (2027 analytics)\n⭐ Rank Predictor by marks\n⭐ Smart Counselling Advisor (AI)\n⭐ AI Choice Filling Generator\n⭐ Cutoff Analyzer (all colleges)\n⭐ Choice Mistake Detector\n⭐ College Comparison Tool\n⭐ Upgrade Chance Calculator\n⭐ Mock Counselling Simulator\n⭐ AI Study Planner (LEET syllabus)\n⭐ Zero ads + Access Until LEET 2027\n\nNote: Predictions approximate (±15%). Always verify with official HSTES.\n\n🛒 Buy Ultra: ' +
       BASE +
       '/premium-login?tier=ultra\n🛠 Ultra tools page: ' +
       BASE +
@@ -92,7 +92,7 @@ const faqRows = [
     Category: 'Premium vs Ultra',
     Trigger_Keywords: 'premium vs ultra, difference premium ultra, which plan, konsa plan, compare plans',
     Full_Answer:
-      '*Premium ₹99 vs Ultra Premium ₹149*\n\n*Both get:* 34 exclusive papers, syllabus PDF, prospectus, formula/topic sheets, Rank Analysis, ad-free, lifetime.\n\n*Only Ultra ₹149 gets:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling Advisor, Choice Filling tools, Study Planner, Mock Counselling, College Comparison.\n\n*Recommendation:*\n• Sirf papers practice chahiye → *Premium ₹99*\n• College/rank/counselling strategy bhi chahiye → *Ultra ₹149*\n\nBuy Premium: ' +
+      '*Premium ₹99 vs Ultra Premium ₹149*\n\n*Both get:* 34 exclusive papers, syllabus PDF, prospectus, formula/topic sheets, Rank Analysis, ad-free, Access Until LEET 2027.\n\n*Only Ultra ₹149 gets:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling Advisor, Choice Filling tools, Study Planner, Mock Counselling, College Comparison.\n\n*Recommendation:*\n• Sirf papers practice chahiye → *Premium ₹99*\n• College/rank/counselling strategy bhi chahiye → *Ultra ₹149*\n\nBuy Premium: ' +
       BASE +
       '/premium-login?tier=premium\nBuy Ultra: ' +
       BASE +
@@ -106,7 +106,7 @@ const faqRows = [
     Full_Answer:
       '*How to buy Premium / Ultra*\n\n1. Open: ' +
       BASE +
-      '/premium-login\n2. Choose *Premium ₹99* or *Ultra ₹149*\n3. Register with Name, Email, Mobile\n4. Pay securely via Razorpay\n5. Lifetime access unlock instantly\n\nAfter payment:\n• Papers → ' +
+      '/premium-login\n2. Choose *Premium ₹99* or *Ultra ₹149*\n3. Register with Name, Email, Mobile\n4. Pay securely via Razorpay\n5. Access Until LEET 2027 unlock instantly\n\nAfter payment:\n• Papers → ' +
       BASE +
       '/premium-papers\n• Ultra tools → ' +
       BASE +
@@ -373,10 +373,10 @@ const faqRows = [
     Priority: 'Normal'
   },
   {
-    Category: 'Refund / Lifetime',
-    Trigger_Keywords: 'refund, lifetime, expiry, expire, one time',
+    Category: 'Refund / Access Until LEET 2027',
+    Trigger_Keywords: 'refund, Access Until LEET 2027, expiry, expire, one time',
     Full_Answer:
-      'Premium & Ultra Premium are *one-time payment* with *lifetime access* (as long as the service runs). No monthly fee.\n\nPayment/access issue? Send your registered email + payment ID — reply marked HIGH PRIORITY, admin will contact soon.\n\n' +
+      'Premium & Ultra Premium are *one-time payment* with *Access Until LEET 2027* (as long as the service runs). No monthly fee.\n\nPayment/access issue? Send your registered email + payment ID — reply marked HIGH PRIORITY, admin will contact soon.\n\n' +
       DOUBT_REPLY,
     Links_To_Send: BASE + '/contact',
     Priority: 'HIGH'
@@ -654,7 +654,7 @@ const html = `<!DOCTYPE html>
     <p><strong>hsbteleet.com</strong> helps Haryana diploma students with:</p>
     <ul>
       <li><strong>FREE:</strong> HSBTE previous year question papers (all major branches, semester-wise), diploma syllabus PDFs, LEET information pages, some free sample papers.</li>
-      <li><strong>Premium ₹99:</strong> 34 exclusive LEET full-syllabus mock papers + official syllabus/prospectus PDFs + formula/topic sheets + Rank Analysis + ad-free + lifetime.</li>
+      <li><strong>Premium ₹99:</strong> 34 exclusive LEET full-syllabus mock papers + official syllabus/prospectus PDFs + formula/topic sheets + Rank Analysis + ad-free + Access Until LEET 2027.</li>
       <li><strong>Ultra Premium ₹149:</strong> Everything in Premium + AI College Predictor, Rank Predictor, Cutoff tools, AI counselling/choice-filling tools, Study Planner.</li>
       <li><strong>Counseling Help ₹99:</strong> Human expert recommendations on dashboard (separate from Premium).</li>
     </ul>
@@ -663,7 +663,7 @@ const html = `<!DOCTYPE html>
   <h2>2. Paid plans — what is included</h2>
   <div class="grid">
     <div class="box gold">
-      <h3>Premium — ₹99 (one-time, lifetime)</h3>
+      <h3>Premium — ₹99 (one-time, Access Until LEET 2027)</h3>
       <ul>
         <li>34 exclusive LEET sample papers</li>
         <li>Official Haryana LEET Syllabus PDF</li>
@@ -676,7 +676,7 @@ const html = `<!DOCTYPE html>
       <p><strong>Buy:</strong> <a href="${BASE}/premium-login?tier=premium">${BASE}/premium-login?tier=premium</a></p>
     </div>
     <div class="box ultra">
-      <h3>Ultra Premium — ₹149 (one-time, lifetime)</h3>
+      <h3>Ultra Premium — ₹149 (one-time, Access Until LEET 2027)</h3>
       <ul>
         <li><strong>Everything in Premium</strong></li>
         <li>AI College Predictor (2027 analytics)</li>

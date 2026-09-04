@@ -419,7 +419,7 @@
 <div id="access-denied">
   <div class="ad-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
   <h2>Access Restricted</h2>
-  <p>Login with your premium account to access these sample papers. Get lifetime access for Just 99.</p>
+  <p>Login with your premium account to access these sample papers. Get Access Until LEET 2027 for Just 99.</p>
   <a href="/premium-login" class="btn-back"><i class="fas fa-sign-in-alt"></i> Login / Get Access</a>
 </div>
 
@@ -445,12 +445,12 @@
       <div class="hero-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
       <div style="flex:1;min-width:200px;">
         <h1>Premium Sample Papers</h1>
-        <p id="welcome-msg">Welcome! You have lifetime access to all 34 premium HSBTE LEET papers.</p>
+        <p id="welcome-msg">Welcome! You have Access Until LEET 2027 to all 34 premium HSBTE LEET papers.</p>
         <div class="hero-meta">
           <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> 34 Papers</span>
           <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> 13 PDFs</span>
           <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> Instant Score</span>
-          <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> Lifetime Access</span>
+          <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> Access Until LEET 2027</span>
         </div>
       </div>
       <button class="logout-btn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -1106,7 +1106,7 @@ async function verifyAccess(){
     var name = sessionStorage.getItem('prem_name') || '';
     if(name){
       document.getElementById('welcome-msg').textContent =
-        'Welcome back, '+name+'! You have lifetime access to all 34 premium HSBTE LEET papers.';
+        'Welcome back, '+name+'! You have Access Until LEET 2027 to all 34 premium HSBTE LEET papers.';
     }
 
     var ultra = null;
