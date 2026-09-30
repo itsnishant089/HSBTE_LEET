@@ -8,6 +8,7 @@ Disallow:
 # Main site entry
 Allow: /$
 Allow: /index.html
+Allow: /ads.txt
 
 # Main branch / exam pages (pretty URLs)
 Allow: /Adv-Diploma
