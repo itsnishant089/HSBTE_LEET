@@ -1,87 +1,14 @@
-Sitemap: https://hsbteleet.com/sitemap.xml
-
 User-agent: *
-
-# Allow all important pages
-Disallow:
-
-# Main site entry
-Allow: /$
-Allow: /index.html
+Allow: /
 Allow: /ads.txt
 
-# Main branch / exam pages (pretty URLs)
-Allow: /Adv-Diploma
-Allow: /Agriculture
-Allow: /ai-ml
-Allow: /Architectural-Assistantship
-Allow: /Automation
-Allow: /Automobile
-Allow: /B-Pharmacy-leet
-Allow: /b-pharmacy-leet-key-dates
-Allow: /btech-leet-sample-paper
-Allow: /btech-leet
-Allow: /btech-leet-key-dates
-Allow: /Ceramic
-Allow: /Chemical
-Allow: /college-comparison
-Allow: /civil
-Allow: /computer-pyq
-Allow: /d-pharmacy
-Allow: /dbm
-Allow: /ece
-Allow: /Electrical-Engineering
-Allow: /FAA
-Allow: /Fashion-Design
-Allow: /Fashion-Technology
-Allow: /Food
-Allow: /haryanaleet
-Allow: /Hotel-Management
-Allow: /hsbte-pyq
-Allow: /Instrumentation-&-Control
-Allow: /Library
-Allow: /mech
-Allow: /Medical-Electronics
-Allow: /Medical-Laboratory-Technology
-Allow: /Office-Management
-Allow: /Plastic
-Allow: /Textile-Design
-Allow: /Textile-Processing
-Allow: /Textile-Technology
-Allow: /hsbte-syllabus
-Allow: /leet-sample-paper
-Allow: /hsbte-result
-Allow: /contact
-Allow: /faq
-Allow: /notices
-Allow: /leet-syllabus
-Allow: /leet-tentative-dates
-Allow: /leet-overview
-Allow: /last-year-cutoff
-Allow: /cutoff-analytics
-Allow: /leet-preparation-guide
-Allow: /leet-counselling
-Allow: /haryana-diploma-info
-
-# Haryana LEET 2026 hub
-Allow: /haryana-leet-2026
-
-# Also allow asset folders so main pages render correctly
-Allow: /css/
-Allow: /js/
-Allow: /image/
-Allow: /partials/
-
-# Premium section
-Allow: /btech-leet-premium
-Allow: /premium-login
-Allow: /premium-papers
-
-# Block protected admin pages from indexing
-Disallow: /html/premium-admin.html
+# Admin and protected pages
 Disallow: /html/admin.html
+Disallow: /html/premium-admin.html
 Disallow: /html/counseling-admin.html
 
-# Block all PDFs from being indexed (protect premium content)
+# Block PDFs from being indexed
 Disallow: /pdf/
 Disallow: /syllabus/*.pdf
+
+Sitemap: https://hsbteleet.com/sitemap.xml
