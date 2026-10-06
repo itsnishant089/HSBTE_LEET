@@ -18,7 +18,7 @@ GEMINI_API_KEY=your_google_ai_studio_key
 Models tried in order: `gemini-2.0-flash` → `gemini-1.5-flash` → `gemini-1.5-flash-latest`
 
 ## Behaviour
-1. Normal questions → Gemini + full HSBTE/LEET knowledge (PYQ URLs, syllabus PDFs, Premium ₹99 / Ultra ₹149)
+1. Normal questions → Gemini + full HSBTE/LEET knowledge (PYQ URLs, syllabus PDFs, Premium ₹69 / Ultra ₹99)
 2. User gaali/abuse → bot replies with matching roast energy (local, reliable)
 3. Unknown / payment doubt → HIGH PRIORITY admin contact template
 

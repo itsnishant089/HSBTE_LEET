@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * Local static server that mirrors production clean-URL routing.
- * Use when Five Server rewrite is unavailable:
- *   node dev-server.js
- *   node dev-server.js 5500
+ * Usage:
+ *   npm run dev
+ *   node scripts/dev-server.js 5500
  *
  * Production routing sources (preserved, not replaced):
  *   - functions/_middleware.js  → Cloudflare Pages
@@ -18,8 +18,11 @@ const fs = require('fs');
 const path = require('path');
 const { URL } = require('url');
 
-const ROOT = __dirname;
-const PORT = parseInt(process.argv[2] || process.env.PORT || '5500', 10);
+// Root of workspace (parent of scripts/)
+const ROOT = path.resolve(__dirname, '..');
+const rawPort = process.argv[2];
+const parsedPort = parseInt(rawPort, 10);
+const PORT = (!isNaN(parsedPort) && parsedPort > 0) ? parsedPort : (parseInt(process.env.PORT || '5500', 10) || 5500);
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -86,7 +89,22 @@ function resolveLocalPath(pathname) {
     return path.join(ROOT, 'index.html');
   }
 
-  // Legacy /html/... path — serve file directly (no redirect needed for local)
+  // Author profile clean URL mapping
+  if (pathname === '/author/nishant') {
+    return path.join(ROOT, 'html', 'author-nishant.html');
+  }
+
+  // Canonical migration: /haryana-leet-2026 -> /haryanaleet
+  if (pathname === '/haryana-leet-2026') {
+    return path.join(ROOT, 'html', 'haryanaleet.html');
+  }
+
+  // Alias /notes -> /leet-notes
+  if (pathname === '/notes') {
+    return path.join(ROOT, 'html', 'leet-notes.html');
+  }
+
+  // Legacy /html/... path — serve file directly
   if (pathname.startsWith('/html/')) {
     let p = pathname;
     if (!p.endsWith('.html') && !path.extname(p)) p += '.html';
@@ -113,13 +131,6 @@ const server = http.createServer((req, res) => {
     const url = new URL(req.url || '/', `http://localhost:${PORT}`);
     let pathname = url.pathname;
 
-    // Match production: redirect /html/... to clean URL (optional, for parity)
-    if (pathname.startsWith('/html/') && req.method === 'GET') {
-      const clean = pathname.replace(/^\/html/, '').replace(/\.html$/, '') || '/';
-      // Serve directly instead of redirect to keep asset-relative paths simple on local
-      // (Live Server users often open /html/... already)
-    }
-
     const filePath = resolveLocalPath(pathname);
     if (!filePath || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
       send404(res);
@@ -134,9 +145,8 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   const origin = `http://localhost:${PORT}`;
-  console.log(`HSBTE local server (production-compatible clean URLs)`);
-  console.log(`  ${origin}/`);
-  console.log(`  ${origin}/btech-leet`);
-  console.log(`  ${origin}/Automobile-2`);
-  console.log(`Uses same mapping as functions/_middleware.js and vercel.json`);
+  console.log(`HSBTE local server running on ${origin}`);
+  console.log(`  Homepage: ${origin}/`);
+  console.log(`  Clean URL: ${origin}/haryanaleet`);
+  console.log(`  Book: ${origin}/haryana-leet-book`);
 });

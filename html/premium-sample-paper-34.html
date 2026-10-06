@@ -1,0 +1,604 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon & Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <title>HSBTE LEET Premium Sample Paper 34 | Full Syllabus Mock Test</title>
+  <meta name="description" content="HSBTE LEET premium sample paper 34 — 90 questions, full syllabus. Submit & check your score instantly."/>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://hsbteleet.com/"},
+    {"@type":"ListItem","position":2,"name":"Haryana LEET","item":"https://hsbteleet.com/haryanaleet"},
+    {"@type":"ListItem","position":3,"name":"Premium Papers","item":"https://hsbteleet.com/premium-papers"}
+  ]}
+  </script>
+  <style>
+    :root{
+      --pri:#1a56db;--gold:#f59e0b;--success:#16a34a;--danger:#ef4444;
+      --warn:#f59e0b;--bg:#f0f4ff;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* ── ACCESS DENIED ── */
+    #access-denied{display:none;position:fixed;inset:0;background:#0f172a;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied h2{font-size:1.6rem;font-weight:800;margin:18px 0 12px;}
+    #access-denied p{opacity:.8;max-width:400px;line-height:1.7;margin-bottom:22px;}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:50px;
+      background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-size:.95rem;font-weight:800;text-decoration:none;}
+
+    /* ── LOADER ── */
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
+    .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:var(--pri);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:15px;color:var(--muted);}
+
+    /* ── WATERMARK ── */
+    #wm-layer{
+      position:fixed;inset:0;pointer-events:none;z-index:8888;
+      overflow:hidden;user-select:none;
+    }
+    .wm-row{
+      position:absolute;
+      white-space:nowrap;
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:3px;
+      color:rgba(26,86,219,0.13);
+      transform:rotate(-30deg);
+      transform-origin:left center;
+    }
+
+    /* ── STICKY HEADER BAR ── */
+    #quiz-header{
+      position:sticky;top:0;z-index:500;
+      background:linear-gradient(135deg,#0f172a 0%,#1a3a6e 60%,#1a56db 100%);
+      color:#fff;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+      border-bottom:3px solid var(--gold);
+      box-shadow:0 4px 20px rgba(26,86,219,.25);
+    }
+    .qh-left h1{font-size:1.1rem;font-weight:800;margin-bottom:2px;}
+    .qh-left p{font-size:11.5px;opacity:.78;}
+    .qh-left a{font-size:11px;color:#fcd34d;text-decoration:none;opacity:.9;}
+    .qh-left a:hover{opacity:1;text-decoration:underline;}
+    #timer{font-size:1.4rem;font-weight:900;color:#fef08a;
+      background:rgba(0,0,0,.3);padding:7px 16px;border-radius:10px;
+      border:1.5px solid rgba(254,240,138,.3);letter-spacing:1px;font-variant-numeric:tabular-nums;}
+    #timer.danger{color:#fca5a5;border-color:rgba(252,165,165,.4);animation:pulse .7s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+    /* ── SECURITY BAR ── */
+    .sec-bar{
+      background:#fef3c7;border-left:4px solid #f59e0b;
+      padding:10px 18px;font-size:12.5px;color:#92400e;
+      display:flex;align-items:center;gap:10px;
+    }
+
+    /* ── MAIN WRAP ── */
+    .quiz-wrap{max-width:900px;margin:0 auto;padding:22px 16px 60px;}
+
+    /* ── SECTION DIVIDER ── */
+    .sec-div{
+      display:flex;align-items:center;gap:12px;
+      background:linear-gradient(135deg,#1a56db,#7c3aed);
+      color:#fff;padding:11px 20px;border-radius:10px;
+      margin:28px 0 16px;font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    }
+    .sec-div .sec-icon{font-size:1.2rem;}
+
+    /* ── QUESTION CARD ── */
+    .q-card{
+      background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+      padding:22px 20px;margin-bottom:18px;
+      transition:border-color .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
+    }
+    .q-card::before{
+      content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+      background:linear-gradient(180deg,var(--pri),#7c3aed);border-radius:4px 0 0 4px;
+    }
+    .q-card:hover{border-color:#bfdbfe;box-shadow:0 4px 18px rgba(26,86,219,.1);}
+    .q-card.answered{border-color:#bbf7d0;background:#f0fdf4;}
+    .q-card.answered::before{background:linear-gradient(180deg,#16a34a,#22c55e);}
+    .q-num{font-size:11px;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+    .q-num .q-badge{background:#eff6ff;border:1px solid #bfdbfe;padding:2px 8px;border-radius:20px;font-size:10px;}
+    .q-text{font-size:1rem;font-weight:600;line-height:1.6;color:var(--text);margin-bottom:16px;}
+    .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+    @media(max-width:520px){.opts{grid-template-columns:1fr;}}
+    .opt{
+      display:flex;align-items:center;gap:10px;
+      padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+      cursor:pointer;transition:all .18s;font-size:.92rem;color:var(--text);
+    }
+    .opt:hover{background:#eff6ff;border-color:#93c5fd;transform:translateX(2px);}
+    .opt input{accent-color:var(--pri);width:15px;height:15px;flex-shrink:0;cursor:pointer;}
+    .opt.sel{background:#eff6ff;border-color:var(--pri);font-weight:600;}
+    .opt-letter{
+      width:24px;height:24px;border-radius:50%;background:var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:800;color:var(--muted);flex-shrink:0;transition:.18s;
+    }
+    .opt.sel .opt-letter{background:var(--pri);color:#fff;}
+
+    /* ── SUBMIT AREA ── */
+    .submit-wrap{text-align:center;padding:28px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-top:10px;}
+    .submit-wrap p{font-size:14px;color:var(--muted);margin-bottom:16px;}
+    #progress-bar-wrap{background:#e2e8f0;border-radius:20px;height:8px;margin-bottom:16px;overflow:hidden;}
+    #progress-bar{height:100%;background:linear-gradient(90deg,var(--pri),#7c3aed);border-radius:20px;transition:width .3s;}
+    #progress-text{font-size:13px;font-weight:700;color:var(--pri);margin-bottom:16px;}
+    .btn-submit{
+      display:inline-flex;align-items:center;gap:9px;
+      padding:15px 40px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+      font-size:1.05rem;font-weight:800;transition:all .2s;
+      box-shadow:0 6px 20px rgba(22,163,74,.3);
+    }
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(22,163,74,.4);}
+    .btn-submit:active{transform:translateY(0);}
+
+    /* ── RESULTS ── */
+    #results{display:none;}
+    .results-hero{
+      background:linear-gradient(135deg,#0f172a,#1a3a6e,#1a56db);
+      color:#fff;border-radius:20px;padding:30px;text-align:center;margin-bottom:24px;
+    }
+    .results-hero h2{font-size:1.6rem;font-weight:900;margin-bottom:6px;}
+    .results-hero p{opacity:.8;font-size:14px;}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;}
+    .score-card{background:var(--card);border-radius:16px;padding:20px 16px;text-align:center;border:2px solid var(--border);transition:.2s;}
+    .score-card:hover{transform:translateY(-3px);}
+    .score-card .s-val{font-size:2.2rem;font-weight:900;display:block;margin-bottom:4px;}
+    .score-card .s-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+    .s-correct{border-color:#86efac;} .s-correct .s-val{color:#16a34a;}
+    .s-wrong{border-color:#fca5a5;}   .s-wrong .s-val{color:#ef4444;}
+    .s-skip{border-color:#fde68a;}    .s-skip .s-val{color:#d97706;}
+    .s-att{border-color:#bfdbfe;}     .s-att .s-val{color:var(--pri);}
+    .s-score{border-color:#ddd6fe;}   .s-score .s-val{color:#7c3aed;}
+    .s-total{border-color:#e2e8f0;}   .s-total .s-val{color:var(--text);}
+
+    /* result action buttons */
+    .result-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:20px 0;}
+    .btn-retake{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 32px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--pri),#1d4ed8);color:#fff;
+      font-size:.95rem;font-weight:800;transition:all .2s;
+    }
+    .btn-retake:hover{transform:translateY(-2px);}
+    .btn-back-papers{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 28px;border-radius:50px;
+      background:#f1f5f9;color:var(--text);font-size:.95rem;font-weight:700;
+      text-decoration:none;border:2px solid var(--border);transition:.2s;
+    }
+    .btn-back-papers:hover{border-color:var(--pri);background:#eff6ff;}
+
+    /* ── REVIEW SECTION ── */
+    .review-header{font-size:1.1rem;font-weight:800;margin:24px 0 14px;color:var(--text);display:flex;align-items:center;gap:8px;}
+    .r-card{border-radius:12px;padding:18px 20px;margin-bottom:14px;border:2px solid;}
+    .r-correct{background:#f0fdf4;border-color:#86efac;}
+    .r-wrong{background:#fff5f5;border-color:#fca5a5;}
+    .r-skip{background:#fffbeb;border-color:#fde68a;}
+    .r-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:8px;}
+    .r-badge.b-c{background:#dcfce7;color:#15803d;}
+    .r-badge.b-w{background:#fee2e2;color:#991b1b;}
+    .r-badge.b-s{background:#fef3c7;color:#92400e;}
+    .r-qnum{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:5px;}
+    .r-q{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:10px;}
+    .r-ans-correct{font-size:.88rem;font-weight:700;color:#15803d;display:flex;align-items:center;gap:6px;}
+    .r-ans-wrong{font-size:.88rem;font-weight:700;color:#991b1b;display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+
+    @media(max-width:600px){
+      .qh-left h1{font-size:.95rem;}
+      #timer{font-size:1.2rem;padding:6px 12px;}
+      .q-card{padding:16px 14px;}
+    }
+  </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/seo-related.css"/>
+</head>
+<body>
+
+<!-- ACCESS DENIED -->
+<div id="access-denied">
+  <div style="font-size:3.5rem">🔒</div>
+  <h2>Premium Access Only</h2>
+  <p>Login with your premium account to access this paper.</p>
+  <a href="/premium-login" class="btn-back">🔑 Login / Get Access</a>
+</div>
+
+<!-- LOADER -->
+<div id="page-loader">
+  <div class="spinner"></div>
+  <p>Verifying premium access…</p>
+</div>
+
+<!-- WATERMARK LAYER (filled by JS) -->
+<div id="wm-layer" aria-hidden="true"></div>
+
+<!-- MAIN PAGE -->
+<div id="main-page" style="display:none;">
+
+  <!-- STICKY HEADER -->
+  <div id="quiz-header">
+    <div class="qh-left">
+      <h1>🏆 HSBTE LEET Premium Sample Paper 34</h1>
+      <p>Full Syllabus · 90 Questions · 90 Min</p>
+      <a href="/premium-papers">← Back to All Papers</a>
+    </div>
+    <div id="timer">90:00</div>
+  </div>
+
+  <!-- SECURITY BAR -->
+  <div class="sec-bar">
+    🛡️ <strong>Premium Content:</strong> Sharing, screenshotting or printing is strictly prohibited. This paper is watermarked to your account. Contact: <strong>nishant@hsbteleet.com</strong>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+      <div id="questions-list"></div>
+
+      <!-- SUBMIT AREA -->
+      <div class="submit-wrap">
+        <div id="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+        <div id="progress-text">0 of 90 answered</div>
+        <p>Submit when done — you'll see Correct, Wrong & Skipped instantly.</p>
+        <button class="btn-submit" onclick="submitExam()">✅ Submit Exam & See Score</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+      <div class="results-hero">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🎯</div>
+        <h2>Your Score Report</h2>
+        <p id="score-subtitle">hsbteleet.com · Premium Mock Test</p>
+      </div>
+
+      <div class="score-grid">
+        <div class="score-card s-correct"><span class="s-val" id="res-cor">0</span><span class="s-lbl">✅ Correct</span></div>
+        <div class="score-card s-wrong"><span class="s-val" id="res-wro">0</span><span class="s-lbl">❌ Wrong</span></div>
+        <div class="score-card s-skip"><span class="s-val" id="res-skp">0</span><span class="s-lbl">⏭ Skipped</span></div>
+        <div class="score-card s-att"><span class="s-val" id="res-att">0</span><span class="s-lbl">📝 Attempted</span></div>
+        <div class="score-card s-score"><span class="s-val" id="res-scr">0</span><span class="s-lbl">🏅 Score (4,−1)</span></div>
+        <div class="score-card s-total"><span class="s-val" id="res-tot">90</span><span class="s-lbl">📋 Total Qs</span></div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-retake" onclick="location.reload()">🔄 Retake Test</button>
+        <a href="/premium-papers" class="btn-back-papers">📚 All Papers</a>
+      </div>
+
+      <div class="review-header">📋 Detailed Question Review</div>
+      <div id="review-area"></div>
+    </div>
+
+  </div>
+</div><!-- /main-page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+/* EmailJS for security violation alerts */
+var EJS_SVC = 'service_zlxv3q4', EJS_PUB = 'byFleJ2hV770O_Mni', EJS_TPL = 'template_w2fdh1s';
+/* Expose Supabase client on window for premium-security.js */
+window.sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+/* Init EmailJS */
+if (typeof emailjs !== 'undefined') { emailjs.init(EJS_PUB); }
+var TIMER_SEC = 5400;
+var PAPER_TITLE = 'HSBTE LEET Premium Sample Paper 34';
+
+
+/* ── WATERMARK ── */
+function injectWatermark(){
+  var mob  = sessionStorage.getItem('prem_mob')  || '';
+  var name = sessionStorage.getItem('prem_name') || 'Premium';
+  var masked = mob ? mob.slice(0,3)+'****'+mob.slice(-2) : name;
+  var txt = '© hsbteleet.com  ' + masked + '  PREMIUM  ';
+
+  var layer = document.getElementById('wm-layer');
+  layer.innerHTML = '';
+
+  var vw = Math.max(document.documentElement.clientWidth,1400);
+  var vh = Math.max(document.documentElement.clientHeight,900);
+
+  var totalH = vh * 3;
+  var rowGap  = 90;
+  var rows    = Math.ceil(totalH / rowGap) + 4;
+
+  for(var r = 0; r < rows; r++){
+    var div = document.createElement('div');
+    div.className = 'wm-row';
+    var topVal  = (r * rowGap) - rowGap;
+    var leftVal = (r % 2 === 0) ? -120 : -60;
+    div.style.top  = topVal + 'px';
+    div.style.left = leftVal + 'px';
+    div.style.width = (vw * 2.5) + 'px';
+    var repeats = Math.ceil((vw * 2.5) / (txt.length * 9)) + 3;
+    div.textContent = Array(repeats).fill(txt).join('   ');
+    layer.appendChild(div);
+  }
+}
+
+/* ── ACCESS VERIFICATION ── */
+async function verifyAccess(){
+  var uid = sessionStorage.getItem('prem_uid');
+  var ts  = parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
+  try{
+    var sb = window.supabase.createClient(SUPA_URL,SUPA_KEY);
+    var {data,error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){showDenied();return;}
+    sessionStorage.setItem('prem_ts',Date.now().toString());
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+    buildQuiz();
+    startTimer();
+  }catch(e){showDenied();}
+}
+
+function showDenied(){
+  document.getElementById('page-loader').style.display='none';
+  document.getElementById('access-denied').classList.add('show');
+}
+
+/* ── QUESTIONS DATA ── */
+const questions = [
+// ── a-1 Mathematics ──
+{s:"a-1 Mathematics",q:"The derivative of f(x) = 3x² + 4x + 7 at x = 4 is:",o:["38","18","30","28"],a:3},
+{s:"a-1 Mathematics",q:"The radius of the circle (x − 4)² + (y − 3)² = 4 is:",o:["6","3","1","2"],a:3},
+{s:"a-1 Mathematics",q:"The derivative of sin x with respect to x is:",o:["−sin x","−cos x","tan x","cos x"],a:3},
+{s:"a-1 Mathematics",q:"The modulus of the complex number 5 + 12i is:",o:["3","23","13","12"],a:2},
+{s:"a-1 Mathematics",q:"The equation of the line through (3, 4) with slope 5 is:",o:["y = 5x + 11","y = 6x - 11","y = 5x - 11","y = 5x - 10"],a:2},
+{s:"a-1 Mathematics",q:"For mutually exclusive events A and B, P(A ∩ B) equals:",o:["P(A)P(B)","0","P(A) + P(B)","1"],a:1},
+{s:"a-1 Mathematics",q:"If A = [4 4] (row) and B = [3, 4] (column), then the product AB is:",o:["28","27","32","14"],a:0},
+{s:"a-1 Mathematics",q:"The value of 8C3 is:",o:["40","80","84","56"],a:3},
+// ── a-2 Physics ──
+{s:"a-2 Physics",q:"A force of 500 N acts normally on an area of 2 m². The pressure is:",o:["250 Pa","150 Pa","375 Pa","225 Pa"],a:0},
+{s:"a-2 Physics",q:"Energy of a photon of wavelength 620 nm (hc = 1240 eV·nm) is:",o:["2 eV","5 eV","6 eV","3 eV"],a:0},
+{s:"a-2 Physics",q:"If the distance between two point charges is multiplied by 5, the force between them becomes:",o:["1/5 of the original","1/25 of the original","25 times the original","5 times the original"],a:1},
+{s:"a-2 Physics",q:"Power dissipated in a 30 Ω heater connected to 230 V supply is:",o:["440.8 W","7053.3 W","1763.3 W","3526.7 W"],a:2},
+{s:"a-2 Physics",q:"Efficiency of a Carnot engine working between 500 K and 300 K is:",o:["50%","60%","40%","66.7%"],a:2},
+{s:"a-2 Physics",q:"Dimensional formula of work is:",o:["[MLT⁻²]","[MLT⁻¹]","[ML²T⁻³]","[ML²T⁻²]"],a:3},
+{s:"a-2 Physics",q:"The Doppler effect describes change in:",o:["Amplitude only","Observed frequency due to relative motion","Phase only","Wave speed only"],a:1},
+{s:"a-2 Physics",q:"The unit of luminous intensity is:",o:["Watt","Candela","Lux","Lumen"],a:1},
+// ── a-3 Chemistry ──
+{s:"a-3 Chemistry",q:"The bleaching powder is chemically:",o:["Calcium carbonate","Calcium oxychloride","Sodium chloride","Calcium sulphate"],a:1},
+{s:"a-3 Chemistry",q:"An alloy of copper and tin is:",o:["Amalgam","Brass","Bronze","Duralumin"],a:2},
+{s:"a-3 Chemistry",q:"A neutral atom has atomic number 8. Number of electrons in the atom is:",o:["8","11","16","9"],a:0},
+// ── a-4 Communication Skills ──
+{s:"a-4 Communication Skills",q:"Fill in the blank: They ___ playing football when it started raining.",o:["are","is","was","were"],a:3},
+{s:"a-4 Communication Skills",q:"Synonym of 'candid':",o:["Frank","Secretive","Careless","Hidden"],a:0},
+{s:"a-4 Communication Skills",q:"The correct order of the communication cycle starts with:",o:["Noise","Sender","Feedback","Receiver"],a:1},
+// ── a-5 General Awareness ──
+{s:"a-5 General Awareness",q:"Football World Cup is organised by:",o:["IOC","FIFA","ICC","BCCI"],a:1},
+{s:"a-5 General Awareness",q:"The Digital India programme was launched in:",o:["2015","2019","2005","2010"],a:0},
+{s:"a-5 General Awareness",q:"The Red Fort is located in:",o:["Delhi","Mumbai","Agra","Chandigarh"],a:0},
+// ── b-1 Electrical Engineering ──
+{s:"b-1 Electrical Engineering",q:"A DC motor on 110 V draws armature current 7 A with armature resistance 2 Ω. Back EMF is:",o:["144 V","96 V","106 V","48 V"],a:1},
+{s:"b-1 Electrical Engineering",q:"Resistivity of a conductor generally with temperature rise:",o:["Remains constant","Becomes zero","Decreases","Increases"],a:3},
+{s:"b-1 Electrical Engineering",q:"Energy stored in a 0.5 H inductor carrying 8 A is:",o:["6 J","48 J","16 J","19 J"],a:2},
+{s:"b-1 Electrical Engineering",q:"Power drawn by a load at 24 V taking 8 A (unity power factor, DC) is:",o:["576 W","96 W","192 W","216 W"],a:2},
+{s:"b-1 Electrical Engineering",q:"A choke in a tube light is used to:",o:["Limit current and provide starting surge","Reduce wattage permanently","Convert AC to DC","Increase brightness"],a:0},
+{s:"b-1 Electrical Engineering",q:"Two series resistors R1 = 10 Ω and R2 = 10 Ω are connected across 10 V. Voltage across R2 is:",o:["7 V","3 V","5 V","4 V"],a:2},
+{s:"b-1 Electrical Engineering",q:"A machine delivers 200 W with an efficiency of 50%. Input power is:",o:["360 W","200 W","400 W","1200 W"],a:2},
+{s:"b-1 Electrical Engineering",q:"An alternator converts:",o:["DC to AC","AC to DC","Mechanical energy into AC electrical energy","Electrical energy into heat"],a:2},
+{s:"b-1 Electrical Engineering",q:"A wattmeter measures:",o:["Frequency","Reactive power","Active power","Energy only"],a:2},
+// ── b-2 Electronics Engineering ──
+{s:"b-2 Electronics Engineering",q:"An SCR is turned ON by:",o:["Negative anode","A gate pulse when forward biased","Open anode","Reverse voltage"],a:1},
+{s:"b-2 Electronics Engineering",q:"The hexadecimal equivalent of decimal 175 is:",o:["AE","AF","B0","BF"],a:1},
+{s:"b-2 Electronics Engineering",q:"Carrier amplitude is 100 V and modulating signal amplitude is 60 V. The modulation index is:",o:["2.4","0.8","0.1","0.6"],a:3},
+{s:"b-2 Electronics Engineering",q:"A solar cell is basically a:",o:["Capacitor","Large-area p–n junction","Transformer","Resistor"],a:1},
+{s:"b-2 Electronics Engineering",q:"A signal sampled at 10 kHz with 12 bits per sample has a bit rate of:",o:["120 kbps","360 kbps","130 kbps","110 kbps"],a:0},
+{s:"b-2 Electronics Engineering",q:"A counter that counts from 0 to 9 is a:",o:["Decade counter","Shift counter of 8","Binary ripple counter of 16","Johnson counter only"],a:0},
+{s:"b-2 Electronics Engineering",q:"The Wien bridge oscillator produces:",o:["DC","Square waves only","Triangular waves only","Sine waves"],a:3},
+{s:"b-2 Electronics Engineering",q:"The minimum Nyquist sampling rate for a signal with highest frequency 4 kHz is:",o:["7 kHz","14 kHz","8 kHz","24 kHz"],a:2},
+// ── b-3 Computer Engineering ──
+{s:"b-3 Computer Engineering",q:"A bug in software is:",o:["A hardware part","An error or flaw in a program","A network cable","A virus type only"],a:1},
+{s:"b-3 Computer Engineering",q:"A nibble is:",o:["8 bits","2 bits","16 bits","4 bits"],a:3},
+{s:"b-3 Computer Engineering",q:"Bits per pixel needed to represent 256 colours are:",o:["18","14","8","16"],a:2},
+{s:"b-3 Computer Engineering",q:"In a computer, a scanner is an:",o:["Output device","Input device","Processing unit","Storage only"],a:1},
+{s:"b-3 Computer Engineering",q:"In C, the operator % gives:",o:["Percentage","Quotient","Power","Remainder"],a:3},
+{s:"b-3 Computer Engineering",q:"DNS translates:",o:["Packets to bits","IP addresses to MAC only","Domain names to IP addresses","Text to speech"],a:2},
+{s:"b-3 Computer Engineering",q:"If x = 9; x = x + 8; x = x * 2; then x equals:",o:["34","35","36","38"],a:0},
+{s:"b-3 Computer Engineering",q:"The full form of DBMS is:",o:["Direct Backup Management Service","Database Management System","Digital Base Memory System","Data Binary Management System"],a:1},
+// ── c-1 Mechanical Engineering ──
+{s:"c-1 Mechanical Engineering",q:"Tempering is done after hardening to:",o:["Melt the surface","Increase hardness","Add carbon","Reduce brittleness"],a:3},
+{s:"c-1 Mechanical Engineering",q:"Which of these is a thermodynamic property?",o:["Entropy","Work","Heat","Friction"],a:0},
+{s:"c-1 Mechanical Engineering",q:"The ideal cycle for steam power plants is:",o:["Diesel cycle","Otto cycle","Brayton cycle","Rankine cycle"],a:3},
+{s:"c-1 Mechanical Engineering",q:"A liquid has specific gravity 13.6. Its density is:",o:["12240 kg/m³","40800 kg/m³","6800 kg/m³","13600 kg/m³"],a:3},
+{s:"c-1 Mechanical Engineering",q:"A four-bar chain consists of:",o:["Four links and four turning pairs","Four sliding pairs","Three links","Two links"],a:0},
+{s:"c-1 Mechanical Engineering",q:"A driver gear of 15 teeth at 600 rpm drives a gear of 45 teeth. Driven gear speed is:",o:["200 rpm","300 rpm","160 rpm","220 rpm"],a:0},
+{s:"c-1 Mechanical Engineering",q:"A simply supported beam carries a central load of 16 kN. Each support reaction is:",o:["10 kN","8 kN","4 kN","14 kN"],a:1},
+{s:"c-1 Mechanical Engineering",q:"Which instrument measures wet-bulb and dry-bulb temperature?",o:["Psychrometer","Hydrometer","Barometer","Anemometer"],a:0},
+// ── c-2 Production Engineering ──
+{s:"c-2 Production Engineering",q:"Electrochemical machining (ECM) removes material by:",o:["Abrasion","Cutting","Sparks","Anodic dissolution"],a:3},
+{s:"c-2 Production Engineering",q:"A limit gauge checks:",o:["Temperature","Whether size lies between upper and lower limits","Surface finish","Exact value"],a:1},
+{s:"c-2 Production Engineering",q:"Honing is used to:",o:["Forge","Finish internal cylindrical surfaces","Weld","Cut gears"],a:1},
+{s:"c-2 Production Engineering",q:"In G-code, G01 represents:",o:["Linear interpolation (cutting feed)","Rapid positioning","Tool change","Circular interpolation CW"],a:0},
+{s:"c-2 Production Engineering",q:"Deep drawing is used to make:",o:["Threads","Castings","Cup-shaped parts from sheet metal","Gears"],a:2},
+{s:"c-2 Production Engineering",q:"A reamer is used to:",o:["Finish and size a drilled hole accurately","Make a hole in solid","Grind a surface","Cut external threads"],a:0},
+// ── c-3 Automobile Engineering ──
+{s:"c-3 Automobile Engineering",q:"Battery management system (BMS) in EVs monitors:",o:["Oil level","Cell voltage, temperature and state of charge","Tyre wear","Wiper speed"],a:1},
+{s:"c-3 Automobile Engineering",q:"The gearbox is used to:",o:["Charge the battery","Store fuel","Vary torque and speed at the wheels","Cool the engine"],a:2},
+{s:"c-3 Automobile Engineering",q:"EBD (electronic brake-force distribution) works with:",o:["Horn","Fuel injectors","Wipers","ABS to balance brake force on wheels"],a:3},
+{s:"c-3 Automobile Engineering",q:"A fuel filter prevents:",o:["Oil leakage","Heat loss","Dirt from entering the injectors/carburettor","Noise"],a:2},
+{s:"c-3 Automobile Engineering",q:"Mechanical efficiency equals:",o:["Indicated / Brake power","Brake power × 2","Fuel / air","Brake power / Indicated power"],a:3},
+{s:"c-3 Automobile Engineering",q:"The torque converter is used in:",o:["Brake systems","Automatic transmissions","Cooling systems","Manual clutches"],a:1},
+// ── d-1 Civil Engineering ──
+{s:"d-1 Civil Engineering",q:"A higher water–cement ratio generally gives:",o:["Higher strength","Greater fire resistance only","Lower strength","No change in strength"],a:2},
+{s:"d-1 Civil Engineering",q:"Discharge through a pipe of area 2 m² with velocity 1.5 m/s is:",o:["3 m³/s","4 m³/s","13 m³/s","5 m³/s"],a:0},
+{s:"d-1 Civil Engineering",q:"The standard size of a modular brick (without mortar) is:",o:["250 × 120 × 80 mm","200 × 100 × 100 mm","230 × 110 × 70 mm","190 × 90 × 90 mm"],a:3},
+{s:"d-1 Civil Engineering",q:"The back bearing of a line whose fore bearing is 120° is:",o:["300 °","900 °","375 °","150 °"],a:0},
+{s:"d-1 Civil Engineering",q:"Site safety requires workers to wear:",o:["Casual slippers","Helmets and safety shoes","Only gloves","Only caps"],a:1},
+// ── d-2 Textile Engineering ──
+{s:"d-2 Textile Engineering",q:"Weft insertion in a projectile loom is by:",o:["A small gripper projectile","Water jet","A shuttle","A rapier"],a:0},
+{s:"d-2 Textile Engineering",q:"Handloom Mark in India indicates:",o:["Machine made goods","Used clothing","Genuine handloom products","Imported goods"],a:2},
+{s:"d-2 Textile Engineering",q:"The Charkha is a:",o:["Knitting machine","Hand spinning wheel","Dye vat","Loom"],a:1},
+{s:"d-2 Textile Engineering",q:"Fabric inspection systems commonly use the:",o:["Nine-point system only","Two-point system only","Four-point system","Zero-point system"],a:2},
+{s:"d-2 Textile Engineering",q:"Merino is a breed of:",o:["Camel","Silkworm","Goat","Sheep (wool)"],a:3},
+// ── d-3 Chemical/Printing Engineering ──
+{s:"d-3 Chemical/Printing Engineering",q:"Fractional distillation of crude oil separates:",o:["Fractions based on colour","Fractions based on boiling ranges","Only solids","Only gases"],a:1},
+{s:"d-3 Chemical/Printing Engineering",q:"The residue left after refining crude oil, used for road surfacing, is:",o:["Petrol","Bitumen","Kerosene","Naphtha"],a:1},
+// ── d-4 Ceramic Engineering ──
+{s:"d-4 Ceramic Engineering",q:"Technical ceramics are used in:",o:["Only toys","Only pots","Only bricks","Electronics, aerospace and medical applications"],a:3},
+{s:"d-4 Ceramic Engineering",q:"Kaolin is chemically a hydrated:",o:["Calcium sulphate","Sodium chloride","Aluminium silicate","Magnesium oxide"],a:2},
+// ── d-5 Food Technology ──
+{s:"d-5 Food Technology",q:"HACCP is a system for:",o:["Food safety hazard control","Food pricing","Food packaging design","Food colouring"],a:0},
+{s:"d-5 Food Technology",q:"Curd is produced by fermentation of milk by:",o:["Yeast","Virus","Mould","Lactic acid bacteria"],a:3},
+// ── d-6 Others ──
+{s:"d-6 Others",q:"In a restaurant, a 'cover' refers to:",o:["A table cloth only","A bill","A reservation","A place setting for one guest"],a:3},
+{s:"d-6 Others",q:"Alphabetical filing arranges documents by:",o:["Colour","Date only","Name in A–Z order","Size"],a:2},
+{s:"d-6 Others",q:"Ranganathan's Colon Classification is a:",o:["Faceted classification scheme","Price list","Alphabetical order list","Staff roster"],a:0},
+{s:"d-6 Others",q:"A 'buffet' service is where guests:",o:["Serve themselves from a food display","Are served by waiters only","Order from a menu","Eat in rooms"],a:0},
+];
+
+/* ── QUIZ BUILD ── */
+var timerInterval, timeLeft = TIMER_SEC;
+
+function buildQuiz(){
+  var list = document.getElementById('questions-list');
+  var html = '';
+  var curSection = '';
+  var LETTERS = ['A','B','C','D','E'];
+  questions.forEach(function(q,i){
+    if(q.s !== curSection){
+      curSection = q.s;
+      html += '<div class="sec-div"><span class="sec-icon">📚</span>' + q.s + '</div>';
+    }
+    html += '<div class="q-card" id="qc-'+i+'">';
+    html +=   '<div class="q-num"><span class="q-badge">Q.'+(i+1)+'</span></div>';
+    html +=   '<div class="q-text">'+q.q+'</div>';
+    html +=   '<div class="opts">';
+    q.o.forEach(function(opt,j){
+      html += '<label class="opt" id="lbl-'+i+'-'+j+'" onclick="selectOpt('+i+','+j+',this)">';
+      html +=   '<input type="radio" name="q'+i+'" value="'+j+'">';
+      html +=   '<span class="opt-letter">'+LETTERS[j]+'</span>';
+      html +=   '<span>'+opt+'</span>';
+      html += '</label>';
+    });
+    html += '</div></div>';
+  });
+  list.innerHTML = html;
+  updateProgress();
+}
+
+function selectOpt(qi,oi,el){
+  document.querySelectorAll('[id^="lbl-'+qi+'-"]').forEach(function(l){l.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('qc-'+qi).classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress(){
+  var answered = 0;
+  questions.forEach(function(_,i){if(document.querySelector('input[name="q'+i+'"]:checked'))answered++;});
+  var pct = Math.round((answered/questions.length)*100);
+  document.getElementById('progress-bar').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = answered+' of '+questions.length+' answered';
+}
+
+function startTimer(){
+  var el = document.getElementById('timer');
+  timerInterval = setInterval(function(){
+    timeLeft--;
+    var m=Math.floor(timeLeft/60), s=timeLeft%60;
+    el.textContent = m+':'+(s<10?'0':'')+s;
+    if(timeLeft<=300) el.classList.add('danger');
+    if(timeLeft<=0){clearInterval(timerInterval);submitExam();}
+  },1000);
+}
+
+function submitExam(){
+  clearInterval(timerInterval);
+  var cor=0,wro=0,skp=0;
+  var reviewHTML = '';
+  var LETTERS=['A','B','C','D','E'];
+
+  questions.forEach(function(q,i){
+    var sel = document.querySelector('input[name="q'+i+'"]:checked');
+    var ans = sel ? parseInt(sel.value) : -1;
+    if(ans===-1) skp++;
+    else if(ans===q.a) cor++;
+    else wro++;
+
+    var cls = ans===-1?'r-skip':ans===q.a?'r-correct':'r-wrong';
+    var badge = ans===-1?'<span class="r-badge b-s">⏭ Skipped</span>':
+                ans===q.a?'<span class="r-badge b-c">✅ Correct</span>':
+                          '<span class="r-badge b-w">❌ Wrong</span>';
+    reviewHTML += '<div class="r-card '+cls+'">';
+    reviewHTML += badge;
+    reviewHTML += '<div class="r-qnum">Q.'+(i+1)+' · '+q.s+'</div>';
+    reviewHTML += '<div class="r-q">'+q.q+'</div>';
+    if(ans!==-1&&ans!==q.a){
+      reviewHTML += '<div class="r-ans-wrong">✗ Your answer: '+LETTERS[ans]+'. '+q.o[ans]+'</div>';
+    }
+    reviewHTML += '<div class="r-ans-correct">✓ Correct: '+LETTERS[q.a]+'. '+q.o[q.a]+'</div>';
+    reviewHTML += '</div>';
+  });
+
+  var att = cor+wro;
+  var scr = cor*4 - wro;
+  document.getElementById('res-cor').textContent = cor;
+  document.getElementById('res-wro').textContent = wro;
+  document.getElementById('res-skp').textContent = skp;
+  document.getElementById('res-att').textContent = att;
+  document.getElementById('res-scr').textContent = scr;
+
+  var pct = questions.length>0?Math.round((cor/questions.length)*100):0;
+  document.getElementById('score-subtitle').textContent =
+    'Score: '+scr+' | Accuracy: '+pct+'% | hsbteleet.com';
+
+  document.getElementById('review-area').innerHTML = reviewHTML;
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('results').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── INIT ── */
+verifyAccess();
+</script>
+<section class="seo-related-links" data-seo-related-links="1" aria-label="Related Haryana LEET resources">
+  <div class="seo-related-inner">
+    <div class="seo-related-head">
+      <span class="seo-related-badge"><i class="fas fa-compass" aria-hidden="true"></i> Explore</span>
+      <h2>Related Haryana LEET 2027 Resources</h2>
+      <p>Useful links for diploma students preparing for B.Tech lateral entry in Haryana.</p>
+    </div>
+    <div class="seo-related-grid">
+      <a class="seo-related-card" href="/haryanaleet"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
+      <a class="seo-related-card" href="/leet-syllabus"><i class="fas fa-book-open" aria-hidden="true"></i><span>Haryana LEET syllabus</span></a>
+      <a class="seo-related-card" href="/leet-sample-paper"><i class="fas fa-file-lines" aria-hidden="true"></i><span>LEET sample papers</span></a>
+      <a class="seo-related-card" href="/haryana-leet-exam-pattern"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span>LEET exam pattern</span></a>
+      <a class="seo-related-card" href="/last-year-cutoff"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Haryana LEET cutoff</span></a>
+      <a class="seo-related-card" href="/haryana-leet-counselling"><i class="fas fa-users" aria-hidden="true"></i><span>LEET counselling process</span></a>
+      <a class="seo-related-card" href="/btech-leet-premium"><i class="fas fa-crown" aria-hidden="true"></i><span>Premium LEET papers</span></a>
+      <a class="seo-related-card" href="/counseling"><i class="fas fa-headset" aria-hidden="true"></i><span>Personalized counselling help</span></a>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="/js/premium-security.js"></script>
+</body>
+</html>

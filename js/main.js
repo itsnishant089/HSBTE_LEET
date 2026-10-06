@@ -243,6 +243,22 @@ document.addEventListener("partialsLoaded", () => {
   document.body.classList.add("partials-ready");
 });
 
+// ─── runWhenReady helper ────────────────────────────────────────────────
+// Runs callback after partials (header/footer) are loaded, or after 2s timeout
+function runWhenReady(cb) {
+  if (document.body.classList.contains("partials-ready")) {
+    cb();
+  } else {
+    document.addEventListener("partialsLoaded", cb, { once: true });
+    // Safety timeout — fire regardless after 2.5s if partials never emit
+    setTimeout(function () {
+      if (!document.body.classList.contains("partials-ready")) {
+        try { cb(); } catch (e) { /* silent */ }
+      }
+    }, 2500);
+  }
+}
+
 
 // --- BTech LEET Quick Links Injector ---
 runWhenReady(() => {

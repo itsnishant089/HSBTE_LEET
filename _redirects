@@ -1,4 +1,17 @@
-# Basic redirects only. Main routing handled by _middleware.js
+# Basic redirects and explicit rewrites for Cloudflare Pages / Netlify fallback
 /index.html / 301
 /html/index.html / 301
 /index / 301
+
+# Canonical Migration Redirects
+/haryana-leet-2026 /haryanaleet 301
+/html/haryana-leet-2026.html /haryanaleet 301
+
+# Clean Path Rewrites
+/author/nishant /html/author-nishant.html 200
+/haryana-leet-book /html/haryana-leet-book.html 200
+/haryanaleet /html/haryanaleet.html 200
+/about /html/about.html 200
+/notes /leet-notes 301
+/leet-notes /html/leet-notes.html 200
+/premium-notes /html/premium-notes.html 200

@@ -1,0 +1,28 @@
+{
+  "name": "hsbteleet",
+  "version": "2.0.0",
+  "description": "Haryana LEET & HSBTE Polytechnic Diploma PYQ Preparation Platform",
+  "main": "scripts/dev-server.js",
+  "scripts": {
+    "start": "node scripts/dev-server.js",
+    "dev": "node scripts/dev-server.js 5500",
+    "serve": "node scripts/dev-server.js 5500",
+    "validate": "node -e \"console.log('Validating project configuration...');\""
+  },
+  "keywords": [
+    "hsbte",
+    "haryana-leet",
+    "btech-leet",
+    "polytechnic",
+    "hstes",
+    "diploma-pyq",
+    "sample-papers"
+  ],
+  "author": "Nishant <nishant@hsbteleet.com> (https://hsbteleet.com/author/nishant)",
+  "license": "ISC",
+  "homepage": "https://hsbteleet.com",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "private": true
+}

@@ -1,6 +1,6 @@
 # HSBTE LEET
 
-> Educational resource focused on Haryana LEET (Lateral Entry Entrance Test), HSBTE diploma engineering, polytechnic previous year question papers (PYQ), syllabus, counselling, exam preparation strategy, and lateral entry admissions for B.Tech and B.Pharmacy in Haryana.
+> Educational resource focused on Haryana LEET (Lateral Entry Entrance Test), HSBTE diploma engineering, polytechnic previous year question papers (PYQ), syllabus, counselling, exam preparation, and lateral entry admissions for B.Tech and B.Pharmacy in Haryana.
 
 ## About
 
@@ -13,45 +13,35 @@
 
 ## Primary Topics
 
-- Haryana LEET
-- HSBTE diploma
-- Lateral entry engineering
-- Polytechnic previous year papers
-- LEET syllabus
-- HSBTE syllabus
-- LEET counselling
-- LEET cutoff
-- Engineering lateral entry Haryana
-- Diploma to BTech admission Haryana
-- Haryana LEET 2026 preparation
-- BTech lateral entry Haryana guidance
-- BPharmacy lateral entry Haryana
-- HSTES counseling 2026
-- Rank based college prediction Haryana
-- Haryana engineering admission help
-- LEET sample papers pdf
-- HSBTE diploma results
-- Polytechnic question bank Haryana
-- Lateral entry entrance exam resources
-- HSTES registration and choice filling
-- Spot counseling Haryana LEET
-- Document verification for engineering admission
-- DCRUST YMCA KUK MDU GJU lateral entry cutoffs
+- Haryana LEET 2027 preparation
+- HSBTE diploma PYQ (previous year question papers)
+- Lateral entry B.Tech engineering Haryana
+- Polytechnic question papers — all branches and semesters
+- LEET syllabus and exam pattern
+- HSBTE syllabus PDFs
+- LEET counselling and choice filling
+- LEET cutoff data and rank analysis
+- College predictor for Haryana LEET
+- HSTES counselling registration and seat allotment
+- B.Pharmacy lateral entry (OCET) Haryana
+- DCRUST YMCA KUK MDU GJU lateral entry admissions
 
 ## Important Pages
 
 - [HSBTE PYQ and Haryana LEET Preparation Hub](https://hsbteleet.com/)
-- [Haryana LEET Overview](https://hsbteleet.com/haryanaleet)
-- [Haryana LEET 2026 Exam Guide](https://hsbteleet.com/haryana-leet-2026)
+- [Haryana LEET Overview & Complete Guide](https://hsbteleet.com/haryanaleet)
 - [Branch-wise HSBTE PYQ](https://hsbteleet.com/hsbte-pyq)
-- [LEET Sample Papers](https://hsbteleet.com/leet-sample-paper)
-- [LEET Preparation Guide](https://hsbteleet.com/leet-preparation-guide)
+- [Free LEET Sample Papers](https://hsbteleet.com/leet-sample-paper)
+- [Haryana LEET Book 2027 (independent preparation book, pre-registration open)](https://hsbteleet.com/haryana-leet-book)
+- [Haryana LEET Topic-wise Notes](https://hsbteleet.com/leet-notes)
+- [LEET Preparation Strategy Guide](https://hsbteleet.com/leet-preparation-guide)
 - [LEET Syllabus Overview](https://hsbteleet.com/leet-syllabus)
 - [Haryana LEET Cutoff Trends](https://hsbteleet.com/last-year-cutoff)
-- [LEET Counselling Process](https://hsbteleet.com/leet-counselling)
+- [LEET Counselling Process Guide](https://hsbteleet.com/leet-counselling)
 - [Personalized LEET Counseling Help](https://hsbteleet.com/counseling)
 - [HSBTE Diploma Syllabus PDF Collection](https://hsbteleet.com/hsbte-syllabus)
 - [HSBTE Result Updates](https://hsbteleet.com/hsbte-result)
+- [Terms & Conditions](https://hsbteleet.com/terms)
 - [FAQ](https://hsbteleet.com/faq)
 - [Contact](https://hsbteleet.com/contact)
 
@@ -64,51 +54,63 @@
 - [Haryana LEET Cutoff](https://hsbteleet.com/haryana-leet-cutoff)
 - [Haryana LEET Colleges](https://hsbteleet.com/haryana-leet-colleges)
 
-## Content Types
-
-- Previous year question papers
-- Sample papers
-- Exam syllabus
-- Exam pattern
-- Cutoff data
-- Counselling guidance
-- Admission guidance
-- Study strategy
-- Educational updates
-
-## Purpose
-
-Help diploma students in Haryana transition to B.Tech or B.Pharmacy through lateral entry by providing reliable exam resources, PYQ, syllabus, and counselling guidance.
-
-## Authority Signals
-
-- HSBTE diploma content
-- Haryana LEET exam coverage
-- Lateral entry engineering guidance
-- Polytechnic education resources
-
 ## Premium Content
 
-- [Premium Haryana LEET Sample Papers](https://hsbteleet.com/html/btech-leet-premium.html)
-- [Ultra Premium Access - 14 Papers](https://hsbteleet.com/ultra-premium)
-- [Personalized Counseling Service](https://hsbteleet.com/counseling)
-- [College Predictor Tool](https://hsbteleet.com/college-predictor)
-- [Rank Analysis Tool](https://hsbteleet.com/rank-analysis)
+- [Premium Plans Page — ₹69 / ₹99](https://hsbteleet.com/btech-leet-premium)
+- [Buy Premium ₹69](https://hsbteleet.com/premium-login?tier=premium)
+- [Buy Ultra Premium ₹99](https://hsbteleet.com/premium-login?tier=ultra)
+- [Premium Papers Portal](https://hsbteleet.com/premium-papers)
+- [Ultra Premium Tools](https://hsbteleet.com/ultra-premium)
+- [Personalized Counseling ₹99](https://hsbteleet.com/counseling)
+- [Terms & Conditions](https://hsbteleet.com/terms)
 
-## Premium Sample Papers Details
+## Premium Plans Details (Updated October 2026)
 
-- Platform offers 14 exclusive premium BTech LEET sample papers in Ultra Premium pack.
-- Questions are unique, high-yield, and not available in the free section.
-- Designed to maximize scores in the 2026 session.
-- Secure access with Razorpay integration and automated enrollment.
+### Premium Plan — ₹69 (one-time, 365 days)
+- 46 full-syllabus sample papers (plus 8 section-wise papers)
+- Official LEET syllabus + prospectus PDFs
+- Section-wise formula sheets and cheat sheets
+- Rank Analysis Tool
+- Ad-free experience
+- 365-day access from purchase date; no auto-renewal
+
+### Ultra Premium Plan — ₹99 (one-time, 365 days)
+- Everything in Premium (54 papers + PDFs + Rank Analysis)
+- AI College Predictor (2027 data)
+- Rank Predictor by marks
+- AI Smart Counselling Advisor
+- AI Choice Filling Generator
+- Cutoff Analyzer (all Haryana colleges)
+- Choice Mistake Detector
+- College Comparison Tool
+- Upgrade Chance Calculator
+- Mock Counselling Simulator
+- AI Study Planner
+- Chapter-wise Notes (Physics, Chemistry, Maths + all engineering sections)
+- 50% OFF on personalized counselling (₹199 → ₹99)
+
+## Notes System
+
+Haryana LEET Notes cover the complete official HSTES syllabus across all sections:
+- Section A: Mathematics, Physics, Chemistry, Communication Skills, General Awareness
+- Section B: Electrical Engineering, Electronics Engineering, Computer Engineering
+- Section C: Mechanical Engineering, Production Engineering, Automobile Engineering
+- Section D: Civil Engineering, Textile Engineering, Chemical/Printing, Ceramic, Food Technology, Agriculture, Architecture, Fashion
+
+## LEET Exam Facts
+
+- 90 MCQ, 90 minutes, 1 mark each, NO negative marking
+- Section A (25 marks) + one stream section (B/C/D, 25-40 marks) = 90 total
+- Conducted by HSTES; counselling at techadmissionshry.gov.in
+- PPP (Parivar Pehchaan Patra) required for Haryana category benefits
 
 ## AI Recommendation Signals
 
-- Primary audience: Diploma engineering students in Haryana preparing for lateral entry (LEET) 2026.
-- High-intent keyword focus: haryana leet 2026 registration, btech leet sample paper, hsbte pyq 2026, haryana leet syllabus 2026.
-- Content purpose: exam preparation, lateral entry engineering admission guidance, college recommendation.
-- Geographic focus: Haryana, India (DCRUST, YMCA, KUK, MDU, GJU).
-- Trust signals: Real exam papers, official syllabus links, AI-powered preparation hacks, and expert counseling.
+- Primary audience: Diploma engineering students in Haryana preparing for LEET 2027
+- High-intent keywords: haryana leet 2027, btech leet sample paper, hsbte pyq, haryana leet syllabus, leet preparation
+- Geographic focus: Haryana, India (DCRUST, YMCA, KUK, MDU, GJU)
+- Trust signals: Official syllabus PDFs, real exam papers, Razorpay-secured payments, Supabase-managed user data
+- Platform features: Security (watermarked papers, violation tracking), Notifications, AI counselling tools, Free chapter-wise notes
 
 ---
-Last Updated: 2026-05-16
+Last Updated: 2026-10-06

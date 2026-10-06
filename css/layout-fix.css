@@ -1,0 +1,60 @@
+/* Site-wide layout fixes: full-width content on pages without a sidebar, and no overlap
+   between the chatbot robot and the go-to-top button. */
+
+/* 1) Pages without a sidebar use the full screen width (with a comfortable gutter) */
+.content-section.page-content,
+.syllabus-page-container,
+.adm-shell,
+.guide-shell,
+.seat-shell,
+.seo-related-links {
+  max-width: none !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  padding-left: clamp(16px, 3vw, 48px) !important;
+  padding-right: clamp(16px, 3vw, 48px) !important;
+}
+.seo-related-links .seo-related-inner { max-width: 1500px; margin-left: auto; margin-right: auto; }
+
+/* 2) Go-to-top button never sits under the chatbot robot */
+html body #goTopBtn,
+html body .go-top-btn {
+  bottom: 200px !important;
+  right: 40px !important;
+  left: auto !important;
+  z-index: 10001;
+}
+@media (max-width: 768px) {
+  html body #goTopBtn,
+  html body .go-top-btn {
+    left: 14px !important;
+    right: auto !important;
+    bottom: 92px !important;
+  }
+}
+
+/* 3) Sticky sidebars: html/body overflow-x:hidden turns body into a scroll container and
+      breaks position:sticky. `clip` hides horizontal overflow without doing that. */
+html, body { overflow-x: clip !important; }
+
+/* Sidebars follow the reader and scroll inside themselves when taller than the screen,
+   so the right side never turns into blank space. */
+@media (min-width: 901px) {
+  html body .lp-sidebar,
+  html body aside.lp-side,
+  html body aside.dh-side {
+    position: sticky !important;
+    top: 64px !important;
+    align-self: start;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+}
+
+/* The LEET sub-nav lives inside an include wrapper, so the wrapper itself must be the sticky element */
+[data-leet-nav] { position: sticky; top: 0; z-index: 900; }
+[data-leet-nav] .leet-subnav { position: static; }
+
+/* Sidebar is a flex column with a max-height: stop the cards from being squashed/clipped */
+.lp-sidebar > *, aside.lp-side > *, aside.dh-side > * { flex-shrink: 0 !important; }

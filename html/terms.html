@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <title>Terms & Conditions | HSBTE LEET Premium — hsbteleet.com</title>
+  <meta name="description" content="Terms and Conditions for HSBTE LEET Premium. Read our rules on content protection, subscription policy, refund terms, and counselling discount eligibility.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hsbteleet.com/terms">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    :root {
+      --pri: #1a56db;
+      --gold: #f59e0b;
+      --green: #10b981;
+      --red: #ef4444;
+      --purple: #7c3aed;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
+    }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    body.dark-mode { --bg: #0b0f19; --card: #111827; --text: #f1f5f9; --muted: #94a3b8; --border: #1f2937; }
+
+    /* ── PAGE HERO ── */
+    .terms-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1a2f5e 60%, #1a56db 100%);
+      color: #fff;
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    .terms-hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px; padding: 6px 16px; font-size: 12px; font-weight: 700;
+      color: #fcd34d; margin-bottom: 18px; font-family: 'Syne', sans-serif;
+    }
+    .terms-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem,4vw,2.4rem); font-weight: 900; margin-bottom: 10px; }
+    .terms-hero p { font-size: 15px; opacity: .8; max-width: 560px; margin: 0 auto 16px; line-height: 1.7; }
+    .terms-meta { font-size: 12px; opacity: .55; }
+
+    /* ── LAYOUT ── */
+    .terms-wrapper {
+      max-width: 860px; margin: 0 auto; padding: 32px 20px 60px;
+    }
+
+    /* ── ALERT BOX ── */
+    .terms-alert {
+      background: linear-gradient(135deg, #fef3c7, #fffbeb);
+      border: 1.5px solid #fbbf24; border-radius: 12px;
+      padding: 16px 20px; margin-bottom: 28px;
+      display: flex; gap: 14px; align-items: flex-start;
+      font-size: 14px; line-height: 1.65; color: #78350f;
+    }
+    .terms-alert i { font-size: 1.3rem; color: #d97706; flex-shrink: 0; margin-top: 2px; }
+
+    /* ── TOC ── */
+    .terms-toc {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 24px; margin-bottom: 28px;
+    }
+    .terms-toc h3 { font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 800; margin-bottom: 14px; color: var(--text); }
+    .terms-toc ol { padding-left: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+    @media(max-width:600px){ .terms-toc ol { grid-template-columns: 1fr; } }
+    .terms-toc li a { font-size: 13.5px; color: var(--pri); text-decoration: none; font-weight: 500; }
+    .terms-toc li a:hover { text-decoration: underline; }
+
+    /* ── SECTION ── */
+    .terms-section {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px 28px 24px; margin-bottom: 20px;
+      scroll-margin-top: 80px;
+    }
+    .terms-section-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+      padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    }
+    .terms-section-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .ts-red   { background: #fee2e2; color: #dc2626; }
+    .ts-gold  { background: #fef3c7; color: #d97706; }
+    .ts-blue  { background: #dbeafe; color: #1d4ed8; }
+    .ts-green { background: #d1fae5; color: #059669; }
+    .ts-purple{ background: #ede9fe; color: #7c3aed; }
+    .ts-gray  { background: #f1f5f9; color: #475569; }
+    .ts-teal  { background: #ccfbf1; color: #0d9488; }
+    .ts-orange{ background: #ffedd5; color: #c2410c; }
+
+    .terms-section-header h2 {
+      font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 800;
+      color: var(--text); margin: 0;
+    }
+    .terms-section-header .sec-num {
+      font-size: 11px; color: var(--muted); font-weight: 600; display: block; margin-top: 2px;
+    }
+
+    .terms-section p { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
+    .terms-section p:last-child { margin-bottom: 0; }
+    .terms-section ul, .terms-section ol { padding-left: 20px; margin-bottom: 12px; }
+    .terms-section li { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 6px; }
+    .terms-section strong { color: var(--text); }
+
+    /* inline highlight box */
+    .terms-highlight {
+      background: #f0f4ff; border-left: 4px solid var(--pri);
+      border-radius: 0 8px 8px 0; padding: 12px 16px;
+      font-size: 13.5px; line-height: 1.7; margin: 14px 0;
+      color: #1e3a8a;
+    }
+    body.dark-mode .terms-highlight { background: rgba(26,86,219,.12); color: #bfdbfe; }
+    .terms-highlight.warn { border-color: #f59e0b; background: #fffbeb; color: #78350f; }
+    body.dark-mode .terms-highlight.warn { background: rgba(245,158,11,.1); color: #fde68a; }
+    .terms-highlight.danger { border-color: #ef4444; background: #fff1f2; color: #991b1b; }
+    body.dark-mode .terms-highlight.danger { background: rgba(239,68,68,.1); color: #fca5a5; }
+    .terms-highlight.success { border-color: #10b981; background: #ecfdf5; color: #065f46; }
+    body.dark-mode .terms-highlight.success { background: rgba(16,185,129,.1); color: #6ee7b7; }
+
+    /* violation table */
+    .viol-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0; }
+    .viol-table th { background: #f8fafc; padding: 9px 12px; font-family: 'Syne', sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); text-align: left; border-bottom: 1px solid var(--border); }
+    .viol-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+    .viol-table tr:last-child td { border-bottom: none; }
+    .viol-table tr:hover td { background: #f8fafc; }
+    body.dark-mode .viol-table th { background: rgba(255,255,255,.04); }
+    body.dark-mode .viol-table tr:hover td { background: rgba(255,255,255,.03); }
+    .vbadge { display: inline-block; font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 999px; }
+    .vb-warn { background: #fef3c7; color: #92400e; }
+    .vb-danger { background: #fee2e2; color: #991b1b; }
+    .vb-suspend { background: #ede9fe; color: #5b21b6; }
+
+    /* pricing callout */
+    .plan-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+    @media(max-width:560px){ .plan-cards { grid-template-columns: 1fr; } }
+    .plan-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .plan-card.featured { border-color: var(--gold); background: linear-gradient(135deg, #fffbeb, #fef9ec); }
+    body.dark-mode .plan-card.featured { background: rgba(245,158,11,.06); }
+    .plan-card h4 { font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 800; margin-bottom: 4px; }
+    .plan-card .plan-price { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--pri); margin-bottom: 8px; }
+    .plan-card ul { padding-left: 16px; }
+    .plan-card li { font-size: 13px; margin-bottom: 4px; }
+
+    /* contact box */
+    .terms-contact {
+      background: linear-gradient(135deg, #1a56db, #1240a8);
+      border-radius: var(--radius); padding: 24px 28px;
+      color: #fff; text-align: center; margin-top: 32px;
+    }
+    .terms-contact h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .terms-contact p { font-size: 13.5px; opacity: .85; margin-bottom: 14px; }
+    .terms-contact a { color: #fcd34d; text-decoration: none; font-weight: 700; }
+    .terms-contact a:hover { text-decoration: underline; }
+
+    /* last updated bar */
+    .last-updated-bar {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 20px; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- INCLUDE: header -->
+<script src="/js/include.js"></script>
+
+<!-- HERO -->
+<div class="terms-hero">
+  <div class="terms-hero-badge"><i class="fas fa-shield-halved"></i> Legal & Policy</div>
+  <h1>Terms &amp; Conditions</h1>
+  <p>Please read these terms carefully before using any premium features of hsbteleet.com. By purchasing or using our premium content, you agree to all terms listed below.</p>
+  <div class="terms-meta">Last Updated: October 2026 &nbsp;·&nbsp; Effective immediately on purchase</div>
+</div>
+
+<div class="terms-wrapper">
+
+  <!-- IMPORTANT ALERT -->
+  <div class="terms-alert">
+    <i class="fas fa-triangle-exclamation"></i>
+    <div>
+      <strong>Important Notice:</strong> All content on hsbteleet.com — including sample papers, questions, notes, answers, and study material — is protected under Indian Copyright Law. Any attempt to copy, screenshot, print, share, or reproduce this content will result in immediate account suspension and may invite legal action. Our systems automatically detect and log all violation attempts.
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="terms-toc">
+    <h3><i class="fas fa-list-ul" style="margin-right:8px;color:var(--pri)"></i>Table of Contents</h3>
+    <ol>
+      <li><a href="#s1">Acceptance of Terms</a></li>
+      <li><a href="#s2">Content Protection &amp; Copyright</a></li>
+      <li><a href="#s3">Prohibited Actions &amp; Penalties</a></li>
+      <li><a href="#s4">Premium Subscription — Plans &amp; Pricing</a></li>
+      <li><a href="#s5">Subscription Validity &amp; Expiry</a></li>
+      <li><a href="#s6">Refund Policy</a></li>
+      <li><a href="#s7">Counselling Discount — 50% Off</a></li>
+      <li><a href="#s8">Account &amp; Login Rules</a></li>
+      <li><a href="#s9">Device &amp; Session Policy</a></li>
+      <li><a href="#s10">Disclaimer &amp; Limitation of Liability</a></li>
+      <li><a href="#s11">Privacy &amp; Data</a></li>
+      <li><a href="#s12">Changes to Terms</a></li>
+    </ol>
+  </div>
+
+  <!-- LAST UPDATED BAR -->
+  <div class="last-updated-bar">
+    <i class="fas fa-clock" style="color:var(--pri)"></i>
+    <span>These terms were last updated on <strong>October 2026</strong>. They apply to all users who purchased or accessed any premium feature from hsbteleet.com.</span>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="terms-section" id="s1">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-blue"><i class="fas fa-handshake"></i></div>
+      <div>
+        <h2>1. Acceptance of Terms</h2>
+        <span class="sec-num">Agreement between you and hsbteleet.com</span>
+      </div>
+    </div>
+    <p>By accessing, registering for, or purchasing any premium content or service on <strong>hsbteleet.com</strong>, you confirm that you have read, understood, and agree to be bound by these Terms &amp; Conditions.</p>
+    <p>If you do not agree with any part of these terms, you must immediately stop using the platform and contact us for a refund within 24 hours of purchase.</p>
+    <p>These terms apply to all users regardless of how they accessed the platform — direct purchase, referral, coupon code, or promotional access.</p>
+    <div class="terms-highlight">
+      <strong>By clicking "Buy Now," completing payment, or logging into any premium section, you explicitly agree to all terms on this page.</strong>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="terms-section" id="s2">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-red"><i class="fas fa-copyright"></i></div>
+      <div>
+        <h2>2. Content Protection &amp; Copyright</h2>
+        <span class="sec-num">All content is exclusively owned by hsbteleet.com</span>
+      </div>
+    </div>
+    <p>All content available on hsbteleet.com — including but not limited to:</p>
+    <ul>
+      <li>Sample papers and mock test questions</li>
+      <li>Answer keys and detailed explanations</li>
+      <li>Chapter-wise notes and formula sheets</li>
+      <li>Previous year question (PYQ) compilations</li>
+      <li>College predictor data, cutoff analysis</li>
+      <li>Counselling guides and rank analysis tools</li>
+    </ul>
+    <p>— is the exclusive intellectual property of hsbteleet.com and its content team. This content is protected under the <strong>Indian Copyright Act, 1957</strong> and international intellectual property treaties.</p>
+    <div class="terms-highlight danger">
+      <strong>You are granted a personal, non-transferable, non-exclusive licence to access this content for your own exam preparation only.</strong> You do NOT own any content on this platform — purchasing a subscription gives you access, not ownership.
+    </div>
+    <p>You may NOT:</p>
+    <ul>
+      <li>Copy, reproduce, or extract any questions or content in any form</li>
+      <li>Share, forward, or distribute content to other individuals</li>
+      <li>Post content on social media, WhatsApp groups, Telegram, YouTube, or any other platform</li>
+      <li>Use content to create derivative study materials, books, PDFs, or courses</li>
+      <li>Sell, sublicense, or commercially exploit any content from this platform</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="terms-section" id="s3">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-red"><i class="fas fa-ban"></i></div>
+      <div>
+        <h2>3. Prohibited Actions &amp; Penalties</h2>
+        <span class="sec-num">Security violations and consequences</span>
+      </div>
+    </div>
+    <p>Our platform uses automated security systems to detect the following actions in real time. Any detected violation is logged with a timestamp, user identity, and device fingerprint.</p>
+
+    <div style="overflow-x:auto;margin:8px 0;">
+      <table class="viol-table">
+        <thead>
+          <tr><th>Prohibited Action</th><th>Detection Method</th><th>Consequence</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Screenshot / Screen Recording</strong> (PrintScreen, Win+Shift+S, third-party apps)</td>
+            <td>PrintScreen key detection, clipboard monitoring</td>
+            <td><span class="vbadge vb-warn">1st: Warning</span> <span class="vbadge vb-suspend">2nd+: Suspend</span></td>
+          </tr>
+          <tr>
+            <td><strong>Copy / Paste</strong> (Ctrl+C, Ctrl+A, right-click copy)</td>
+            <td>Keyboard event monitoring, context menu block</td>
+            <td><span class="vbadge vb-warn">Warning logged</span></td>
+          </tr>
+          <tr>
+            <td><strong>Print / Save as PDF</strong> (Ctrl+P, browser print)</td>
+            <td>Keyboard + beforeprint event</td>
+            <td><span class="vbadge vb-warn">1st: Warning</span> <span class="vbadge vb-suspend">2nd+: Suspend</span></td>
+          </tr>
+          <tr>
+            <td><strong>Opening Developer Tools</strong> (F12, Ctrl+Shift+I, Inspect Element)</td>
+            <td>Window size change detection, debugger timing</td>
+            <td><span class="vbadge vb-danger">Immediate block</span></td>
+          </tr>
+          <tr>
+            <td><strong>View Page Source</strong> (Ctrl+U)</td>
+            <td>Keyboard event</td>
+            <td><span class="vbadge vb-warn">Warning logged</span></td>
+          </tr>
+          <tr>
+            <td><strong>Account Sharing</strong> (sharing login credentials)</td>
+            <td>Multiple concurrent sessions / device fingerprinting</td>
+            <td><span class="vbadge vb-danger">Permanent ban</span></td>
+          </tr>
+          <tr>
+            <td><strong>Content Distribution</strong> (uploading questions online)</td>
+            <td>Watermark tracing + DMCA reports</td>
+            <td><span class="vbadge vb-danger">Legal action</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="terms-highlight warn">
+      <i class="fas fa-eye" style="margin-right:6px"></i>
+      <strong>Every premium session is watermarked with your mobile number and account details.</strong> Even if you manage to take a screenshot, the watermark identifies your account. We can and will take action based on leaked content traced back to your account.
+    </div>
+    <p>hsbteleet.com reserves the right to suspend or permanently ban any account found violating these terms, with no refund.</p>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="terms-section" id="s4">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-gold"><i class="fas fa-crown"></i></div>
+      <div>
+        <h2>4. Premium Subscription — Plans &amp; Pricing</h2>
+        <span class="sec-num">What you get with each plan</span>
+      </div>
+    </div>
+    <p>hsbteleet.com currently offers the following premium plans for Haryana LEET preparation:</p>
+
+    <div class="plan-cards">
+      <div class="plan-card">
+        <h4>👑 Premium Plan</h4>
+        <div class="plan-price">₹69</div>
+        <ul>
+          <li>46 full-syllabus sample papers (plus 8 section-wise papers)</li>
+          <li>Auto-scored with explanations</li>
+          <li>Section-wise performance tracking</li>
+          <li>Ad-free experience</li>
+          <li>Valid for 1 year from purchase</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <h4>🚀 Ultra Premium Plan</h4>
+        <div class="plan-price">₹99</div>
+        <ul>
+          <li>Everything in Premium (54 papers)</li>
+          <li>College Predictor tool</li>
+          <li>Rank Predictor &amp; Cutoff Analysis</li>
+          <li>AI Counselling Guidance</li>
+          <li>Choice Optimizer for counselling</li>
+          <li><strong>50% off on personalized counselling</strong></li>
+          <li>Valid for 1 year from purchase</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Prices are subject to change for new purchases. Existing subscribers retain their plan price for the duration of their subscription period.</p>
+    <div class="terms-highlight">
+      One free sample paper is always available to all users — no login required — so you can evaluate the quality before purchasing.
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="terms-section" id="s5">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-orange"><i class="fas fa-calendar-xmark"></i></div>
+      <div>
+        <h2>5. Subscription Validity &amp; Expiry</h2>
+        <span class="sec-num">What happens after the LEET exam and after 1 year</span>
+      </div>
+    </div>
+    <p>Your premium subscription is valid for <strong>365 days (1 year) from the date of purchase</strong>.</p>
+    <ul>
+      <li>Access automatically expires after 365 days — no manual cancellation needed.</li>
+      <li>You will not be charged again automatically. There is no auto-renewal.</li>
+      <li>After expiry, all premium content becomes inaccessible. Your account remains but without premium features.</li>
+    </ul>
+    <div class="terms-highlight warn">
+      <strong>After the Haryana LEET exam concludes</strong> for the relevant academic year, the subscription continues to remain active until its 365-day expiry date. <strong>No refund or extension is provided because the exam has ended.</strong> We recommend purchasing close to your exam date for maximum benefit.
+    </div>
+    <p>If Haryana LEET 2027 is postponed or cancelled by HSTES/government authorities, hsbteleet.com is not responsible for exam schedule changes. Subscription validity remains 365 days from purchase regardless of exam dates.</p>
+    <div class="terms-highlight success">
+      <strong>Good news:</strong> If you purchased premium for LEET 2026 and LEET 2027 happens within your 365-day window, your access remains valid — you can use all papers for your 2027 attempt too.
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="terms-section" id="s6">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-green"><i class="fas fa-rotate-left"></i></div>
+      <div>
+        <h2>6. Refund Policy</h2>
+        <span class="sec-num">When refunds are and are not available</span>
+      </div>
+    </div>
+    <p>We want you to be satisfied with your purchase. Our refund policy is as follows:</p>
+    <ul>
+      <li><strong>Within 24 hours of purchase</strong> — Full refund available if you have not accessed more than 2 sample papers. Contact us via WhatsApp or email with your registered mobile number.</li>
+      <li><strong>After 24 hours</strong> — No refund once premium content has been accessed, as the intellectual property has been consumed.</li>
+      <li><strong>Technical issues</strong> — If you are unable to access content due to a technical error on our platform, we will provide a full refund or extend your subscription by 30 days.</li>
+      <li><strong>Duplicate payment</strong> — If you were accidentally charged twice, we will refund the extra amount within 5 business days.</li>
+    </ul>
+    <div class="terms-highlight danger">
+      <strong>No refund is provided for:</strong> Change of mind after accessing content, exam cancellation/postponement, account suspension due to terms violation, or requests made after 24 hours of purchase.
+    </div>
+    <p>To request a refund, contact us at <strong>hsbteleet@gmail.com</strong> or WhatsApp <strong>+91-XXXXXXXXXX</strong> with your registered mobile number and payment transaction ID.</p>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="terms-section" id="s7">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-purple"><i class="fas fa-percent"></i></div>
+      <div>
+        <h2>7. Counselling Discount — 50% Off</h2>
+        <span class="sec-num">How Ultra Premium subscribers get 50% off on counselling</span>
+      </div>
+    </div>
+    <p>Ultra Premium subscribers (₹99 plan) are eligible for a <strong>50% discount on hsbteleet.com's personalized LEET counselling service</strong>.</p>
+
+    <div class="terms-highlight success">
+      <i class="fas fa-gift" style="margin-right:6px"></i>
+      <strong>Counselling Normal Price: ₹199 &nbsp;→&nbsp; Ultra Premium Subscriber Price: ₹99</strong><br>
+      The discount is applied automatically when you visit the counselling page while logged into your Ultra Premium account.
+    </div>
+
+    <p><strong>Eligibility conditions for the counselling discount:</strong></p>
+    <ul>
+      <li>Your Ultra Premium subscription must be <strong>active at the time of booking</strong> the counselling session.</li>
+      <li>Discount applies to one counselling session per subscription period.</li>
+      <li>The counselling service includes: personalized college selection strategy, choice filling guidance, branch preference optimization, and rank-based college prediction for your specific score.</li>
+      <li>Counselling is conducted via phone/WhatsApp call by a trained team member.</li>
+      <li>Counselling sessions must be booked at least 48 hours in advance.</li>
+      <li>If your subscription expires before the session date, the discount becomes void and full price applies.</li>
+    </ul>
+    <div class="terms-highlight warn">
+      This discount is a perk — not a guaranteed service. hsbteleet.com reserves the right to modify or discontinue the counselling service at any time. Existing booked sessions will be honoured.
+    </div>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="terms-section" id="s8">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-blue"><i class="fas fa-user-lock"></i></div>
+      <div>
+        <h2>8. Account &amp; Login Rules</h2>
+        <span class="sec-num">Your account is personal and non-transferable</span>
+      </div>
+    </div>
+    <ul>
+      <li>Your account is for your personal use only. It cannot be shared, transferred, or gifted to another person.</li>
+      <li>You are responsible for keeping your login credentials confidential. Do not share your mobile number and password with anyone.</li>
+      <li>If we detect multiple users accessing the same account simultaneously from different devices, the account will be suspended without refund.</li>
+      <li>You must register with your own valid Indian mobile number. Accounts registered with fake or unverifiable numbers may be deleted.</li>
+      <li>One mobile number can be used for one premium account only. If you need access on a new device, simply log in — your account follows you.</li>
+    </ul>
+    <div class="terms-highlight danger">
+      <strong>Account sharing is a serious violation.</strong> If you share your account credentials and another person uses the platform under your account, you bear full responsibility for their actions, including any violations they commit.
+    </div>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="terms-section" id="s9">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-teal"><i class="fas fa-mobile-screen"></i></div>
+      <div>
+        <h2>9. Device &amp; Session Policy</h2>
+        <span class="sec-num">How many devices and sessions are allowed</span>
+      </div>
+    </div>
+    <ul>
+      <li>You may access your account from up to <strong>3 different devices</strong> (e.g., mobile phone, laptop, tablet) per subscription period.</li>
+      <li>Only <strong>one active session</strong> is permitted at any given time. Logging in from a new device while another session is active will automatically terminate the older session.</li>
+      <li>Our system tracks device fingerprints. If an unusually high number of different devices are detected accessing the same account, it will be flagged for review.</li>
+      <li>Using VPNs, proxy servers, or browser extensions to disguise device identity is prohibited and will result in account suspension.</li>
+    </ul>
+    <div class="terms-highlight">
+      <strong>Why we track devices:</strong> Device tracking helps us protect your account from unauthorized access and detect credential sharing. This data is not shared with third parties.
+    </div>
+  </div>
+
+  <!-- SECTION 10 -->
+  <div class="terms-section" id="s10">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-gray"><i class="fas fa-circle-info"></i></div>
+      <div>
+        <h2>10. Disclaimer &amp; Limitation of Liability</h2>
+        <span class="sec-num">What we are and are not responsible for</span>
+      </div>
+    </div>
+    <ul>
+      <li>hsbteleet.com is an <strong>independent educational platform</strong>. It is not affiliated with, endorsed by, or officially connected to HSTES (Haryana State Technical Education Society) or HSBTE.</li>
+      <li>Our sample papers are created for practice purposes based on the official HSTES syllabus. They are not actual LEET exam papers.</li>
+      <li>We do not guarantee any specific score improvement, rank, or college admission result from using our platform.</li>
+      <li>Content accuracy is maintained to the best of our ability, but we are not liable for typographical errors or content updates made after your access.</li>
+      <li>We are not liable for internet connectivity issues, device failures, or third-party payment gateway failures during purchase.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 11 -->
+  <div class="terms-section" id="s11">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-blue"><i class="fas fa-shield"></i></div>
+      <div>
+        <h2>11. Privacy &amp; Data</h2>
+        <span class="sec-num">What data we collect and how we use it</span>
+      </div>
+    </div>
+    <ul>
+      <li>We collect your name, mobile number, and payment transaction ID for account creation and support purposes.</li>
+      <li>We log security events (violation attempts, device info, session activity) to enforce these terms and protect platform integrity.</li>
+      <li>We do NOT share your personal data with third parties for marketing purposes.</li>
+      <li>Payment processing is handled by Razorpay. We do not store your card or UPI details.</li>
+      <li>Session and activity data (papers attempted, time spent, performance) is stored to power performance analytics visible to you and the admin.</li>
+      <li>You may request deletion of your account and associated data by contacting us at hsbteleet@gmail.com. Deletion takes up to 7 business days.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 12 -->
+  <div class="terms-section" id="s12">
+    <div class="terms-section-header">
+      <div class="terms-section-icon ts-gray"><i class="fas fa-pen-to-square"></i></div>
+      <div>
+        <h2>12. Changes to These Terms</h2>
+        <span class="sec-num">How and when terms may be updated</span>
+      </div>
+    </div>
+    <p>hsbteleet.com reserves the right to update or modify these Terms &amp; Conditions at any time. Changes become effective immediately upon posting on this page.</p>
+    <p>For significant changes (pricing, refund policy, new restrictions), we will notify active subscribers via WhatsApp or the registered mobile number at least <strong>7 days in advance</strong>.</p>
+    <p>Continued use of the platform after a terms update constitutes acceptance of the new terms. If you do not agree, you may request a prorated refund within 7 days of the change notice.</p>
+    <div class="terms-highlight">
+      <strong>Governing Law:</strong> These terms are governed by and construed in accordance with the laws of India. Any disputes shall be subject to the jurisdiction of courts in Haryana, India.
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="terms-contact">
+    <h3><i class="fas fa-headset" style="margin-right:8px"></i>Questions About These Terms?</h3>
+    <p>If you have any questions about these Terms &amp; Conditions, our policies, or your subscription, we're here to help.</p>
+    <p>
+      <i class="fas fa-envelope" style="margin-right:6px"></i> <a href="mailto:hsbteleet@gmail.com">hsbteleet@gmail.com</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <i class="fab fa-whatsapp" style="margin-right:6px"></i> <a href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp Support</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <i class="fas fa-clock" style="margin-right:6px"></i> Response within 24 hours
+    </p>
+  </div>
+
+</div>
+
+<!-- INCLUDE: footer -->
+<script src="/js/main.js"></script>
+</body>
+</html>

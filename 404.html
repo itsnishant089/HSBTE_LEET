@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>404 - Page Not Found | HSBTE PYQ & Haryana LEET</title>
-    <meta name="description" content="The page you are looking for does not exist. Return to HSBTE PYQ to download Haryana Polytechnic previous year question papers and LEET sample papers."/>
-    <link rel="stylesheet" href="/css/main.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404: Page Not Found | HSBTE PYQ & Haryana LEET</title>
+  <meta name="description" content="The page you are looking for does not exist. Browse HSBTE diploma question papers, Haryana LEET 2027 preparation guides, and sample papers." />
+  <meta name="robots" content="noindex, follow" />
+
   <!-- Favicon & Icons -->
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
@@ -13,62 +14,162 @@
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
   <link rel="manifest" href="/site.webmanifest" />
-    <style>
-        .error-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 70vh;
-            text-align: center;
-            padding: 40px 20px;
-            background: #fff;
-        }
-        .error-code {
-            font-size: 8rem;
-            font-weight: 800;
-            color: #1565c0;
-            margin: 0;
-            line-height: 1;
-        }
-        .error-text {
-            font-size: 1.5rem;
-            color: #333;
-            margin: 20px 0 30px;
-        }
-        .back-btn {
-            background: #1565c0;
-            color: #fff;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .back-btn:hover {
-            background: #0d47a1;
-            transform: translateY(-2px);
-        }
-    </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+  <style>
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 65vh;
+      text-align: center;
+      padding: 60px 20px;
+      background: #f8fafc;
+    }
+    .error-code {
+      font-size: clamp(5rem, 12vw, 8.5rem);
+      font-weight: 900;
+      color: #1a56db;
+      margin: 0;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .error-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 800;
+      color: #0f172a;
+      margin: 16px 0 8px;
+    }
+    .error-text {
+      font-size: 15px;
+      color: #64748b;
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .error-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .back-btn {
+      background: #1a56db;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.25s;
+      box-shadow: 0 4px 14px rgba(26, 86, 219, 0.3);
+    }
+    .back-btn:hover {
+      background: #1e40af;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26, 86, 219, 0.45);
+      color: #fff;
+    }
+    .back-btn-outline {
+      background: #fff;
+      color: #1a56db;
+      border: 1.5px solid #1a56db;
+      padding: 12px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.25s;
+    }
+    .back-btn-outline:hover {
+      background: #f0f6ff;
+      transform: translateY(-2px);
+    }
+    .quick-links-box {
+      max-width: 600px;
+      width: 100%;
+      background: #fff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 22px 26px;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .quick-links-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .quick-card {
+      display: block;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #1e293b;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .quick-card:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1a56db;
+      transform: translateY(-1px);
+    }
+  </style>
 </head>
 <body>
 
-<div data-include="/partials/header.html"></div>
+  <!-- HEADER -->
+  <div data-include="/partials/header.html"></div>
 
-<main class="error-container">
-    <h1 class="error-code">404</h1>
-    <p class="error-text">Oops! The page you're looking for has moved or doesn't exist.</p>
-    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-        <a href="javascript:history.back()" class="back-btn">Go Back Previous</a>
-        <a href="/" class="back-btn" style="background: #fff; color: #1565c0; border: 2px solid #1565c0;">Go Back Home</a>
+  <main class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-text">
+      The page you requested may have been moved, renamed, or is temporarily unavailable. Use the links below to find what you're looking for.
+    </p>
+
+    <div class="error-actions">
+      <a href="/" class="back-btn"><i class="fas fa-home"></i> Go To Homepage</a>
+      <a href="javascript:history.back()" class="back-btn-outline"><i class="fas fa-arrow-left"></i> Go Back</a>
     </div>
-</main>
 
-<div data-include="/partials/footer.html"></div>
+    <div class="quick-links-box">
+      <div class="quick-links-title"><i class="fas fa-compass" style="color:#1a56db;"></i> Popular Resources</div>
+      <div class="quick-grid">
+        <a href="/hsbte-pyq" class="quick-card">📄 HSBTE PYQ</a>
+        <a href="/haryanaleet" class="quick-card">🎓 Haryana LEET Hub</a>
+        <a href="/btech-leet" class="quick-card">🔧 B.Tech LEET</a>
+        <a href="/haryana-leet-book" class="quick-card">📚 LEET Book</a>
+        <a href="/btech-leet-premium" class="quick-card">👑 Premium (₹69)</a>
+        <a href="/counseling" class="quick-card">🎯 Counseling Help</a>
+      </div>
+    </div>
+  </main>
 
-<script defer src="/js/include.js"></script>
-<script defer src="/js/main.js"></script>
+  <!-- FOOTER -->
+  <div data-include="/partials/footer.html"></div>
 
+  <script defer src="/js/include.js"></script>
+  <script defer src="/js/main.js"></script>
 </body>
 </html>

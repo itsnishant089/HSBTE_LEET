@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <title>Haryana LEET Study Notes 2027: Official Chapter-wise Syllabus & Formulas | HSBTE LEET</title>
+  <meta name="description" content="Complete Haryana LEET 2027 chapter-wise study notes based on official HSTES brochure. All 4 sections: Basic Sciences, Electronics, Mechanical, and Civil.">
+  <meta name="keywords" content="haryana leet notes, hstes leet syllabus notes, btech lateral entry study notes, hsbte leet 2027 formulas, civil leet notes, electrical leet notes">
+  <meta name="author" content="Nishant">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://hsbteleet.com/leet-notes">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Haryana LEET Study Notes 2027: Chapter-wise Theory & Formulas">
+  <meta property="og:description" content="Official HSTES syllabus topic-wise study notes for Haryana LEET 2027. Free access.">
+  <meta property="og:url" content="https://hsbteleet.com/leet-notes">
+  <meta property="og:site_name" content="HSBTE LEET">
+  <meta property="og:image" content="https://hsbteleet.com/image/hsbte-pyq.webp">
+
+  <!-- Google AdSense Official Tag -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3142279668395491" crossorigin="anonymous"></script>
+
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <style>
+
+:root {
+  --v: #4f46e5;
+  --vd: #3730a3;
+  --vl: #eef2ff;
+  --vm: #c7d2fe;
+  --a: #f59e0b;
+  --g: #10b981;
+  --gl: #ecfdf5;
+  --r: #ef4444;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --faint: #94a3b8;
+  --card-bg: #ffffff;
+  --bg-page: #f8fafc;
+  --border-c: #e2e8f0;
+  --border-light: #f1f5f9;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 14px rgba(15,23,42,0.06);
+}
+
+body.dark-mode {
+  --text: #f1f5f9;
+  --text-muted: #cbd5e1;
+  --faint: #64748b;
+  --card-bg: #111827;
+  --bg-page: #0b0f19;
+  --border-c: #1f2937;
+  --border-light: #1e293b;
+  --vl: rgba(79,70,229,0.15);
+  --vm: #4338ca;
+}
+
+.notes-page-wrapper {
+  background: var(--bg-page);
+  min-height: calc(100vh - 120px);
+  padding: 16px 20px 40px;
+}
+
+@media (max-width: 768px) {
+  .notes-page-wrapper {
+    padding: 10px 10px 30px;
+  }
+}
+
+.notes-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  position: relative;
+  align-items: flex-start;
+}
+
+/* Mobile Toggle Bar */
+.mobile-topics-bar {
+  display: none;
+  background: var(--card-bg);
+  border: 1px solid var(--border-c);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 14px;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-topics-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--v);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.mobile-topics-btn:hover { background: var(--vd); }
+
+.mobile-cur-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+@media (max-width: 1024px) {
+  .mobile-topics-bar { display: flex; }
+}
+
+/* Left Sidebar */
+.lsb {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-c);
+  border-radius: var(--radius-lg);
+  padding: 16px 14px;
+  position: sticky;
+  top: 70px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-c) transparent;
+  box-shadow: var(--shadow-sm);
+  transition: all .25s ease;
+  z-index: 100;
+}
+
+.lsb::-webkit-scrollbar { width: 5px; }
+.lsb::-webkit-scrollbar-thumb { background: var(--border-c); border-radius: 999px; }
+
+.lsb-header-card {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-c);
+}
+
+.lsb-title {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 14.5px;
+  color: var(--v);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.lsb-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.lsb-search-box {
+  position: relative;
+  width: 100%;
+}
+
+.lsb-search-box i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.lsb-search-box input {
+  width: 100%;
+  padding: 7px 10px 7px 30px;
+  font-size: 12.5px;
+  border: 1.5px solid var(--border-c);
+  border-radius: var(--radius-sm);
+  background: var(--bg-page);
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s;
+}
+
+.lsb-search-box input:focus { border-color: var(--v); }
+
+/* Stream Blocks */
+.lsb-stream-block {
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
+.lsb-stream-block:first-child { margin-top: 4px; }
+
+.lsb-stream-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-family: "Syne", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.stream-basic { background: #e0e7ff; color: #3730a3; }
+.stream-elec  { background: #e0f2fe; color: #0369a1; }
+.stream-mech  { background: #fef3c7; color: #92400e; }
+.stream-other { background: #dcfce7; color: #166534; }
+
+body.dark-mode .stream-basic { background: rgba(99,102,241,0.2); color: #c7d2fe; }
+body.dark-mode .stream-elec  { background: rgba(14,165,233,0.2); color: #bae6fd; }
+body.dark-mode .stream-mech  { background: rgba(245,158,11,0.2); color: #fde68a; }
+body.dark-mode .stream-other { background: rgba(16,185,129,0.2); color: #a7f3d0; }
+
+.sec-weight {
+  font-size: 10.5px;
+  font-weight: 700;
+  opacity: .75;
+  margin-left: 4px;
+}
+
+/* Groups */
+.lsb-group {
+  margin-bottom: 8px;
+  border: 1px solid var(--border-c);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--card-bg);
+  transition: border-color .2s;
+}
+
+.lsb-group-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  transition: background .15s;
+}
+
+.lsb-group-btn:hover { background: var(--vl); }
+
+.lsb-group-btn.open {
+  background: var(--vl);
+  color: var(--vd);
+  border-bottom: 1px solid var(--border-c);
+}
+
+.grp-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+}
+
+.grp-icon {
+  font-size: 13px;
+  width: 16px;
+  text-align: center;
+}
+
+.math-ico { color: #6366f1; }
+.phy-ico  { color: #0284c7; }
+.chem-ico { color: #ea580c; }
+.comm-ico { color: #2563eb; }
+.ga-ico   { color: #9333ea; }
+.ee-ico   { color: #d97706; }
+.ece-ico  { color: #4f46e5; }
+.cs-ico   { color: #0891b2; }
+.mech-ico { color: #dc2626; }
+.prod-ico { color: #475569; }
+.auto-ico { color: #b45309; }
+.civil-ico{ color: #059669; }
+.tex-ico  { color: #db2777; }
+.chm-ico  { color: #ea580c; }
+.cer-ico  { color: #854d0e; }
+.food-ico { color: #65a30d; }
+.other-ico{ color: #64748b; }
+
+.gi {
+  font-size: 10px;
+  color: var(--faint);
+  transition: transform .2s ease;
+}
+
+.lsb-group-btn.open .gi {
+  transform: rotate(90deg);
+  color: var(--v);
+}
+
+.lsb-items {
+  display: none;
+  padding: 4px 6px 6px;
+  background: var(--bg-page);
+}
+
+.lsb-items.show { display: block; }
+
+.lsb-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 7px 10px;
+  margin-bottom: 3px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all .15s ease;
+  line-height: 1.35;
+}
+
+.lsb-item:hover {
+  background: rgba(79,70,229,0.08);
+  color: var(--text);
+  transform: translateX(2px);
+}
+
+.lsb-item.active {
+  background: var(--v);
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(79,70,229,0.3);
+}
+
+.lsb-item.active .item-ico { color: #fff; }
+
+.item-ico {
+  font-size: 10.5px;
+  margin-right: 6px;
+  color: var(--faint);
+  flex-shrink: 0;
+}
+
+/* Mobile Drawer */
+@media (max-width: 1024px) {
+  .lsb {
+    position: fixed;
+    top: 0;
+    left: -330px;
+    width: 310px;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    z-index: 9999;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.25);
+    background: var(--card-bg);
+  }
+  .lsb.mobile-open { left: 0; }
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+  }
+  .mobile-overlay.show { display: block; }
+}
+
+/* Main Area */
+.notes-main-area {
+  flex: 1;
+  min-width: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-c);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.topic-hero {
+  background: linear-gradient(135deg, #090e17 0%, #151936 60%, #1c1547 100%);
+  padding: 30px 36px;
+  color: #ffffff;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.topic-hero::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%);
+  pointer-events: none;
+}
+
+.th-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+}
+
+.th-bc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.th-bc a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+}
+.th-bc a:hover { color: #ffffff; }
+.th-bc span { color: rgba(255,255,255,0.3); }
+
+.th-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.thpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.thp-sec {
+  background: rgba(99,102,241,0.22);
+  border: 1px solid rgba(165,180,252,0.3);
+  color: #c7d2fe;
+}
+
+.thp-syllabus {
+  background: rgba(16,185,129,0.18);
+  border: 1px solid rgba(16,185,129,0.3);
+  color: #a7f3d0;
+}
+
+.thp-marks {
+  background: rgba(245,158,11,0.2);
+  border: 1px solid rgba(245,158,11,0.35);
+  color: #fde68a;
+}
+
+.topic-hero h1 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(1.45rem, 2.8vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.th-goal {
+  font-size: 14px;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.65;
+  max-width: 680px;
+}
+
+/* Article Body */
+.note-body {
+  padding: 32px 36px;
+  max-width: 900px;
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .topic-hero { padding: 20px 16px; }
+  .note-body { padding: 20px 14px; }
+}
+
+.note-body h2 {
+  font-family: "Syne", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 30px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+.sn {
+  background: var(--vl);
+  color: var(--v);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.note-body h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin: 22px 0 10px;
+  color: var(--text);
+}
+
+.note-body p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.note-body ul, .note-body ol {
+  margin: 10px 0 16px 22px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.note-body li { margin-bottom: 6px; }
+.note-body strong { font-weight: 700; color: var(--text); }
+
+/* Boxes */
+.box {
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin: 20px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.box i { font-size: 18px; margin-top: 2px; flex-shrink: 0; }
+.box-key { background: #fffbeb; border: 1.5px solid #fde68a; color: #78350f; }
+.box-key i { color: #d97706; }
+.box-tip { background: #eef2ff; border: 1.5px solid #c7d2fe; color: #312e81; }
+.box-tip i { color: #4f46e5; }
+.box-warn { background: #fef2f2; border: 1.5px solid #fecaca; color: #991b1b; }
+.box-warn i { color: #dc2626; }
+.box-fact { background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #14532d; }
+.box-fact i { color: #16a34a; }
+
+body.dark-mode .box-key { background: #451a03; border-color: #78350f; color: #fef3c7; }
+body.dark-mode .box-tip { background: #1e1b4b; border-color: #3730a3; color: #e0e7ff; }
+body.dark-mode .box-warn { background: #450a0a; border-color: #7f1d1d; color: #fee2e2; }
+body.dark-mode .box-fact { background: #052e16; border-color: #14532d; color: #dcfce7; }
+
+/* Tables */
+.tbl-wrap {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-c);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  background: var(--bg-page);
+  font-family: "Syne", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-muted);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border-c);
+}
+
+td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-c);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+
+/* Formula Box */
+.formula-box {
+  background: linear-gradient(135deg, #090e17 0%, #151936 100%);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 20px 0;
+  color: #ffffff;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.formula-box::before {
+  content: "Key Formula";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-family: "Syne", sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: rgba(99,102,241,0.25);
+  color: #a5b4fc;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.cv { color: #fde047; font-weight: bold; }
+.cop { color: #4ade80; }
+.cc { color: #94a3b8; font-family: system-ui, sans-serif; font-size: 12.5px; font-style: italic; }
+
+/* Chapter Navigation */
+.chapter-nav {
+  display: flex;
+  gap: 16px;
+  margin: 36px 0 16px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-c);
+}
+
+.cnav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-c);
+  background: var(--card-bg);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  transition: all .2s ease;
+  flex: 1;
+  min-width: 180px;
+  cursor: pointer;
+}
+
+.cnav-btn:hover {
+  border-color: var(--v);
+  background: var(--vl);
+  color: var(--vd);
+  transform: translateY(-2px);
+}
+
+.cnav-btn.nxt {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.cnav-sub {
+  display: block;
+  font-family: "Syne", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--faint);
+  letter-spacing: .06em;
+  margin-bottom: 2px;
+}
+
+
+
+
+
+
+  .notes-premium-cta {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    border: 1.5px solid #4338ca;
+    border-radius: var(--radius-md);
+    padding: 22px 24px;
+    color: #ffffff;
+    margin: 32px 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .npc-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .npc-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(99,102,241,0.25);
+    border: 1px solid rgba(165,180,252,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #f59e0b;
+    flex-shrink: 0;
+  }
+
+  .npc-title {
+    font-family: "Syne", sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+  }
+
+  .npc-desc {
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.5;
+  }
+
+  .npc-btn {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #0f172a;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 13px;
+    text-decoration: none;
+    font-family: "Syne", sans-serif;
+    white-space: nowrap;
+    transition: transform .2s;
+  }
+
+  .npc-btn:hover { transform: translateY(-2px); }
+  </style>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://hsbteleet.com/leet-notes#webpage", "url": "https://hsbteleet.com/leet-notes", "name": "Haryana LEET Study Notes 2027: Official Chapter-wise Syllabus & Formulas | HSBTE LEET", "description": "Complete Haryana LEET 2027 chapter-wise study notes based on official HSTES brochure. All 4 sections: Basic Sciences, Electronics, Mechanical, and Civil.", "inLanguage": "en-IN", "isPartOf": {"@type": "WebSite", "name": "HSBTE PYQ", "url": "https://hsbteleet.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://hsbteleet.com/"}, {"@type": "ListItem", "position": 2, "name": "Haryana LEET Study Notes 2027: Official Chapter-wise Syllabus & Formulas", "item": "https://hsbteleet.com/leet-notes"}]}]}</script>
+</head>
+<body>
+
+  <!-- GLOBAL SITE HEADER -->
+  <div data-include="/partials/header.html"></div>
+
+  <!-- MAIN PAGE WRAPPER -->
+  <div class="notes-page-wrapper">
+
+    <!-- Mobile Topics Toggle Bar -->
+    <div class="mobile-topics-bar">
+      <div class="mobile-cur-label" id="mobile-cur-label">Repair &amp; Maintenance</div>
+      <button class="mobile-topics-btn" onclick="toggleMobileSidebar()">
+        <i class="fas fa-bars-staggered"></i> Browse Syllabus
+      </button>
+    </div>
+
+    <!-- Backdrop for Mobile Drawer -->
+    <div class="mobile-overlay" id="mobile-overlay" onclick="toggleMobileSidebar()"></div>
+
+    <div class="notes-container">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="lsb" id="sidebar-drawer">
+
+<div class="lsb-header-card">
+  <div class="lsb-title"><i class="fas fa-graduation-cap"></i> LEET Official Syllabus</div>
+  <p class="lsb-desc">90 MCQs &bull; 90 Marks &bull; 90 Minutes &bull; No Negative Marking</p>
+  <div class="lsb-search-box">
+    <i class="fas fa-magnifying-glass"></i>
+    <input type="text" id="topic-search" placeholder="Search any topic..." oninput="filterTopics(this.value)" autocomplete="off">
+  </div>
+</div>
+
+<nav class="lsb-nav" id="sidebar-topics">
+
+  <!-- ================= SECTION A: BASIC SCIENCES (25 Marks) ================= -->
+  <div class="lsb-stream-block">
+    <div class="lsb-stream-badge stream-basic">
+      <i class="fas fa-atom"></i>
+      <span>Section A: Basic Sciences (Q1-25 &bull; 25 Marks)</span>
+    </div>
+
+    <!-- a-1: Mathematics (8 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-square-root-variable grp-icon math-ico"></i> a-1 Mathematics <small class="sec-weight">(8 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'math-ap')" data-id="math-ap"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Arithmetic Progressions</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-complex')" data-id="math-complex"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Complex Numbers</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-log')" data-id="math-log"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Logarithm</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-perm')" data-id="math-perm"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Permutation &amp; Combination</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-binom')" data-id="math-binom"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Binomial Expansion</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-prob')" data-id="math-prob"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Probability</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-mat')" data-id="math-mat"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Matrices &amp; Determinants</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-trig')" data-id="math-trig"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Trigonometry</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-line')" data-id="math-line"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Straight Line &amp; Circle</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-diff')" data-id="math-diff"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Differentiation &amp; Maxima/Minima</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-indef')" data-id="math-indef"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Definite &amp; Indefinite Integration</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-de')" data-id="math-de"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> 1st Order Differential Equations</span></button>
+        <button class="lsb-item" onclick="loadT(this,'math-stat')" data-id="math-stat"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Mean, Median, SD &amp; Mean Dev.</span></button>
+      </div>
+    </div>
+
+    <!-- a-2: Physics (8 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-magnet grp-icon phy-ico"></i> a-2 Physics <small class="sec-weight">(8 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'phy-units')" data-id="phy-units"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Units, Dimensions &amp; Analysis</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-newton')" data-id="phy-newton"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> 1D Motion &amp; Newton's Laws</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-work')" data-id="phy-work"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Work, Energy &amp; Conservation</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-matter')" data-id="phy-matter"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Elasticity, Surface Tension &amp; Viscosity</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-waves')" data-id="phy-waves"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Waves, Vibrations &amp; SHM</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-rotational')" data-id="phy-rotational"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Rotational Motion &amp; Angular Mom.</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-heat')" data-id="phy-heat"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Heat, Temp &amp; Modes of Transfer</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-optics')" data-id="phy-optics"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Geometric Optics &amp; Instruments</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-elect')" data-id="phy-elect"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Electrostatics &amp; Capacitors</span></button>
+        <button class="lsb-item" onclick="loadT(this,'phy-laser')" data-id="phy-laser"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Laser, Superconductors &amp; Energy</span></button>
+      </div>
+    </div>
+
+    <!-- a-3: Chemistry (3 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-flask-vial grp-icon chem-ico"></i> a-3 Chemistry <small class="sec-weight">(3 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'chem-water')" data-id="chem-water"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Hard &amp; Soft Water, Remedies</span></button>
+        <button class="lsb-item" onclick="loadT(this,'chem-ph')" data-id="chem-ph"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Acidity, Basicity &amp; pH Value</span></button>
+        <button class="lsb-item" onclick="loadT(this,'chem-ion')" data-id="chem-ion"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Ion Exchange Method</span></button>
+        <button class="lsb-item" onclick="loadT(this,'chem-atomic')" data-id="chem-atomic"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Electronic Config (upto Z=30)</span></button>
+        <button class="lsb-item" onclick="loadT(this,'chem-eqwt')" data-id="chem-eqwt"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Equivalent Weight &amp; Valency</span></button>
+        <button class="lsb-item" onclick="loadT(this,'chem-formula')" data-id="chem-formula"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Symbols, Formulas &amp; Equations</span></button>
+      </div>
+    </div>
+
+    <!-- a-4: Communication Skills (3 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-comments grp-icon comm-ico"></i> a-4 Communication Skills <small class="sec-weight">(3 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'comm-vocab')" data-id="comm-vocab"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Words, Antonyms &amp; Synonyms</span></button>
+        <button class="lsb-item" onclick="loadT(this,'comm-prep')" data-id="comm-prep"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Prepositions &amp; Conjunctions</span></button>
+        <button class="lsb-item" onclick="loadT(this,'comm-voice')" data-id="comm-voice"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Active and Passive Voice</span></button>
+        <button class="lsb-item" onclick="loadT(this,'comm-narr')" data-id="comm-narr"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Direct and Indirect Narration</span></button>
+        <button class="lsb-item" onclick="loadT(this,'comm-tenses')" data-id="comm-tenses"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Tenses &amp; Sentence Correction</span></button>
+        <button class="lsb-item" onclick="loadT(this,'comm-punct')" data-id="comm-punct"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Punctuation Rules</span></button>
+      </div>
+    </div>
+
+    <!-- a-5: General Awareness (3 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-earth-asia grp-icon ga-ico"></i> a-5 General Awareness <small class="sec-weight">(3 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'ga-haryana-tech')" data-id="ga-haryana-tech"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Haryana Polytechnics &amp; Intake</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ga-leet-rules')" data-id="ga-leet-rules"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> LEET Eligibility &amp; Admission</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ga-counseling-proc')" data-id="ga-counseling-proc"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Online Off-Campus Counselling</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ga-haryana-geo')" data-id="ga-haryana-geo"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Haryana Districts, Area &amp; Pop.</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ga-haryana-hist')" data-id="ga-haryana-hist"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> History of Haryana &amp; Country</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SECTION B: ELECTRONICS STREAM (25 Marks) ================= -->
+  <div class="lsb-stream-block">
+    <div class="lsb-stream-badge stream-elec">
+      <i class="fas fa-microchip"></i>
+      <span>Section B: Electronics Stream (Q26-50 &bull; 25 Marks)</span>
+    </div>
+
+    <!-- b-1: Electrical Engineering (9 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-bolt grp-icon ee-ico"></i> b-1 Electrical Engg. <small class="sec-weight">(9 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'ee-circ')" data-id="ee-circ"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> EMF, Kirchhoff's &amp; Faraday's</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ee-network')" data-id="ee-network"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Network Theorems</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ee-ac')" data-id="ee-ac"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> AC Circuits &amp; Resonance</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ee-tfm')" data-id="ee-tfm"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> 1-Phase &amp; 3-Phase Transformers</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ee-dc')" data-id="ee-dc"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> DC Generators &amp; Motors</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ee-motor')" data-id="ee-motor"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> 3-Phase Induction Motors</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ee-transmission')" data-id="ee-transmission"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> High Voltage Transmission</span></button>
+      </div>
+    </div>
+
+    <!-- b-2: Electronics Engineering (8 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-wave-square grp-icon ece-ico"></i> b-2 Electronics Engg. <small class="sec-weight">(8 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'ece-measure')" data-id="ece-measure"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Measurements, Meters &amp; CRO</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-transducers')" data-id="ece-transducers"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Transducers &amp; AC Bridges</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-mod')" data-id="ece-mod"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Modulation &amp; Demodulation</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-diode')" data-id="ece-diode"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Diodes, Zener, LED &amp; Photo Diode</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-bjt')" data-id="ece-bjt"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> BJT, FET &amp; Amplifiers</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-opamp')" data-id="ece-opamp"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> OP-AMPs &amp; Regulated Supply</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-digital')" data-id="ece-digital"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Number Systems &amp; Logic Gates</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-flipflop')" data-id="ece-flipflop"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Boolean Algebra &amp; Flip-Flops</span></button>
+        <button class="lsb-item" onclick="loadT(this,'ece-industrial')" data-id="ece-industrial"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Industrial: SCR, DIAC, TRIAC</span></button>
+      </div>
+    </div>
+
+    <!-- b-3: Computer Engineering (8 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-laptop-code grp-icon cs-ico"></i> b-3 Computer Engg. <small class="sec-weight">(8 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'cs-fund')" data-id="cs-fund"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Digital Computers &amp; Compilers</span></button>
+        <button class="lsb-item" onclick="loadT(this,'cs-arch')" data-id="cs-arch"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> CPU, Bus, Cache &amp; Virtual Memory</span></button>
+        <button class="lsb-item" onclick="loadT(this,'cs-os')" data-id="cs-os"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> OS, Scheduling &amp; Synchronization</span></button>
+        <button class="lsb-item" onclick="loadT(this,'cs-c')" data-id="cs-c"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> C: Types, Control &amp; Arrays</span></button>
+        <button class="lsb-item" onclick="loadT(this,'cs-pointers')" data-id="cs-pointers"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> C: Pointers, Structures &amp; Files</span></button>
+        <button class="lsb-item" onclick="loadT(this,'cs-net')" data-id="cs-net"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Networking: LAN, WAN &amp; Internet</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SECTION C: MECHANICAL STREAM (20 Marks) ================= -->
+  <div class="lsb-stream-block">
+    <div class="lsb-stream-badge stream-mech">
+      <i class="fas fa-gears"></i>
+      <span>Section C: Mechanical Stream (Q51-70 &bull; 20 Marks)</span>
+    </div>
+
+    <!-- c-1: Elements of Mechanical Engineering (8 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-wrench grp-icon mech-ico"></i> c-1 Mechanical Engg. <small class="sec-weight">(8 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'mech-applied')" data-id="mech-applied"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Friction, Centroid &amp; Simple Machines</span></button>
+        <button class="lsb-item" onclick="loadT(this,'mech-som')" data-id="mech-som"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Stress-Strain, Hooke's Law &amp; E/C/G</span></button>
+        <button class="lsb-item" onclick="loadT(this,'mech-sfd-bmd')" data-id="mech-sfd-bmd"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> SFD, BMD &amp; Beams/Columns</span></button>
+        <button class="lsb-item" onclick="loadT(this,'mech-thermo')" data-id="mech-thermo"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Laws of Thermo, Steam &amp; Cycles</span></button>
+        <button class="lsb-item" onclick="loadT(this,'mech-heat')" data-id="mech-heat"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Conduction, Convection &amp; Radiation</span></button>
+        <button class="lsb-item" onclick="loadT(this,'mech-fluid')" data-id="mech-fluid"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Fluid Properties, Viscosity &amp; Flow</span></button>
+        <button class="lsb-item" onclick="loadT(this,'mech-bernoulli')" data-id="mech-bernoulli"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Bernoulli's, Venturi &amp; Darcy</span></button>
+      </div>
+    </div>
+
+    <!-- c-2: Production Engineering / Manufacturing (6 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-industry grp-icon prod-ico"></i> c-2 Production Engg. <small class="sec-weight">(6 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'prod-lathe')" data-id="prod-lathe"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Lathe, Drilling &amp; Machining Time</span></button>
+        <button class="lsb-item" onclick="loadT(this,'prod-milling')" data-id="prod-milling"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Milling, Shaper &amp; Planer Principle</span></button>
+        <button class="lsb-item" onclick="loadT(this,'prod-measuring')" data-id="prod-measuring"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Calipers, Micrometer, Gauges &amp; Sine Bar</span></button>
+        <button class="lsb-item" onclick="loadT(this,'prod-weld')" data-id="prod-weld"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Welding, Soldering &amp; Brazing</span></button>
+        <button class="lsb-item" onclick="loadT(this,'prod-materials')" data-id="prod-materials"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Materials, Hardness &amp; Heat Treatment</span></button>
+        <button class="lsb-item" onclick="loadT(this,'prod-graphics')" data-id="prod-graphics"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> 1st/3rd Angle Projections &amp; Isometric</span></button>
+        <button class="lsb-item" onclick="loadT(this,'prod-foundry')" data-id="prod-foundry"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Patterns, Molds &amp; Plastic Molding</span></button>
+        <button class="lsb-item" onclick="loadT(this,'prod-mgmt')" data-id="prod-mgmt"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Industrial Management &amp; QC</span></button>
+      </div>
+    </div>
+
+    <!-- c-3: Automobile Engineering (6 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-car grp-icon auto-ico"></i> c-3 Automobile Engg. <small class="sec-weight">(6 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'auto-power')" data-id="auto-power"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Power Flow in Automobile</span></button>
+        <button class="lsb-item" onclick="loadT(this,'auto-gear')" data-id="auto-gear"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Gearbox, Clutches &amp; Brakes</span></button>
+        <button class="lsb-item" onclick="loadT(this,'auto-diff')" data-id="auto-diff"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Differential &amp; Steering Angles</span></button>
+        <button class="lsb-item" onclick="loadT(this,'auto-cool')" data-id="auto-cool"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Cooling &amp; Lubrication of Engine</span></button>
+        <button class="lsb-item" onclick="loadT(this,'auto-wheels')" data-id="auto-wheels"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Wheels, Tyres &amp; Auto Industries</span></button>
+        <button class="lsb-item" onclick="loadT(this,'auto-ev')" data-id="auto-ev"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Electric &amp; Hybrid Vehicles</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SECTION D: OTHER STREAMS (20 Marks) ================= -->
+  <div class="lsb-stream-block">
+    <div class="lsb-stream-badge stream-other">
+      <i class="fas fa-compass-drafting"></i>
+      <span>Section D: Other Streams (Q71-90 &bull; 20 Marks)</span>
+    </div>
+
+    <!-- d-1: Civil Engineering (5 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn open" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-building-columns grp-icon civil-ico"></i> d-1 Civil Engineering <small class="sec-weight">(5 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items show">
+        <button class="lsb-item active" onclick="loadT(this,'civil-repair')" data-id="civil-repair"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Repair &amp; Maintenance</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-bricks')" data-id="civil-bricks"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Bricks &amp; Foundation Brickwork</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-soil')" data-id="civil-soil"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Soil Index Properties &amp; Seepage</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-water')" data-id="civil-water"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Water Demand &amp; Sludge Disposal</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-found')" data-id="civil-found"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Types of Foundations</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-survey')" data-id="civil-survey"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Chain, Compass &amp; Bench Mark</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-rcc')" data-id="civil-rcc"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> RCC Basics, Grades &amp; Workability</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-doors')" data-id="civil-doors"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Doors, Roofs &amp; Earthmoving Machines</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-roads')" data-id="civil-roads"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Road Materials &amp; Pavements</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-bridges')" data-id="civil-bridges"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Classification of Bridges</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-irr')" data-id="civil-irr"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Irrigation &amp; Water Requirements</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-dams')" data-id="civil-dams"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Dams, Reservoirs &amp; Rocks</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-cement')" data-id="civil-cement"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Cements &amp; Their Uses</span></button>
+        <button class="lsb-item" onclick="loadT(this,'civil-ecology')" data-id="civil-ecology"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Ecology &amp; Water Pollution</span></button>
+      </div>
+    </div>
+
+    <!-- d-2: Textile Engineering (5 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-shirt grp-icon tex-ico"></i> d-2 Textile Engg. <small class="sec-weight">(5 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'tex-fibres')" data-id="tex-fibres"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Fibres, Fabrics &amp; Yarn Mfg.</span></button>
+        <button class="lsb-item" onclick="loadT(this,'tex-weaving')" data-id="tex-weaving"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Weaving Technology &amp; QC</span></button>
+        <button class="lsb-item" onclick="loadT(this,'tex-dye')" data-id="tex-dye"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Bleaching, Dyeing &amp; Printing</span></button>
+      </div>
+    </div>
+
+    <!-- d-3: Chemical / Printing (2 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-vial-circle-check grp-icon chm-ico"></i> d-3 Chemical / Printing <small class="sec-weight">(2 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'chem-proc')" data-id="chem-proc"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Fluid Flow, Chemical &amp; Agro Industry</span></button>
+        <button class="lsb-item" onclick="loadT(this,'chem-petro')" data-id="chem-petro"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Petrochemicals &amp; Printing Presses</span></button>
+      </div>
+    </div>
+
+    <!-- d-4: Ceramic Engineering (2 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-mug-hot grp-icon cer-ico"></i> d-4 Ceramic Engg. <small class="sec-weight">(2 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'cer-class')" data-id="cer-class"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Classification of Pottery</span></button>
+        <button class="lsb-item" onclick="loadT(this,'cer-mat')" data-id="cer-mat"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Ceramic Materials &amp; Properties</span></button>
+      </div>
+    </div>
+
+    <!-- d-5: Food Technology (2 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-wheat-awn grp-icon food-ico"></i> d-5 Food Technology <small class="sec-weight">(2 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'food-vit')" data-id="food-vit"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Vitamins, Cereals &amp; Pulses</span></button>
+        <button class="lsb-item" onclick="loadT(this,'food-milk')" data-id="food-milk"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Milk &amp; Food Preservation</span></button>
+      </div>
+    </div>
+
+    <!-- d-6: Others (Agriculture, Architecture, Fashion) (4 Marks) -->
+    <div class="lsb-group">
+      <button class="lsb-group-btn" onclick="toggleG(this)">
+        <span class="grp-title"><i class="fas fa-cubes grp-icon other-ico"></i> d-6 Other Engg. Courses <small class="sec-weight">(4 Qs)</small></span>
+        <i class="fas fa-chevron-right gi"></i>
+      </button>
+      <div class="lsb-items">
+        <button class="lsb-item" onclick="loadT(this,'oth-agri')" data-id="oth-agri"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Agriculture: Farm Equipment</span></button>
+        <button class="lsb-item" onclick="loadT(this,'oth-arch')" data-id="oth-arch"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Architecture: Indian History &amp; Typology</span></button>
+        <button class="lsb-item" onclick="loadT(this,'oth-fashion')" data-id="oth-fashion"><span class="lbl"><i class="fas fa-file-lines item-ico"></i> Fashion: Garment Machines &amp; Tools</span></button>
+      </div>
+    </div>
+  </div>
+
+</nav>
+
+      </aside>
+
+      <!-- MAIN CONTENT AREA -->
+      <main class="notes-main-area">
+
+        <!-- TOPIC HERO HEADER -->
+        <header class="topic-hero">
+          <div class="th-inner">
+            <nav class="th-bc" aria-label="Breadcrumb">
+              <a href="/">Home</a><span>/</span>
+              <a href="/leet-notes">LEET Notes</a><span>/</span>
+              <span id="bc-section">Section D: Other Streams</span><span>/</span>
+              <span id="bc-topic">Repair &amp; Maintenance of Buildings</span>
+            </nav>
+            <div class="th-pills">
+              <span class="thpill thp-sec" id="hero-section"><i class="fas fa-building-columns"></i> Section D</span>
+              <span class="thpill thp-syllabus"><i class="fas fa-circle-check"></i> HSTES Official Syllabus</span>
+              <span class="thpill thp-marks"><i class="fas fa-award"></i> 90 Qs / 90 Marks Common Test</span>
+            </div>
+            <h1 id="hero-title">Repair &amp; Maintenance of Buildings</h1>
+            <p class="th-goal" id="hero-goal">HSTES LEET d-1 Civil: Master the causes of building decay (dampness, cracks, efflorescence, spalling) and IS standard repair methodologies.</p>
+          </div>
+        </header>
+
+        <!-- NOTE BODY ARTICLE -->
+        <article class="note-body" id="note-body">
+          <!-- Dynamically loaded content -->
+        </article>
+
+        <div style="padding: 0 40px 30px;">
+          <!-- Premium Upgrade Banner -->
+          <div class="notes-premium-cta">
+            <div class="npc-left">
+              <div class="npc-icon"><i class="fas fa-crown"></i></div>
+              <div>
+                <div class="npc-title">Need 34 Full Mock Tests + Ad-Free Experience?</div>
+                <div class="npc-desc">Unlock 34 timed LEET sample papers with real-time scoring, section-wise question reviews, and ad-free study mode for just ₹69.</div>
+              </div>
+            </div>
+            <a href="/btech-leet-premium" class="npc-btn"><i class="fas fa-crown"></i> Unlock for ₹69</a>
+          </div>
+
+          <!-- Bottom Prev / Next Navigation -->
+          <div class="chapter-nav">
+            <button class="cnav-btn" id="btn-prev" onclick="navTopic(-1)">
+              <i class="fas fa-arrow-left"></i>
+              <div>
+                <span class="cnav-sub">Previous Topic</span>
+                <span id="lbl-prev">Fundamentals</span>
+              </div>
+            </button>
+            <button class="cnav-btn nxt" id="btn-next" onclick="navTopic(1)">
+              <div>
+                <span class="cnav-sub">Next Topic</span>
+                <span id="lbl-next">Bricks &amp; Foundation</span>
+              </div>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- GLOBAL SITE FOOTER -->
+  <div data-include="/partials/footer.html"></div>
+  <div data-include="/partials/bottom-nav.html"></div>
+
+  <!-- SCRIPTS -->
+ <script defer src="/js/main.js"></script>
+<script defer src="/js/include.js"></script>
+<script defer src="/js/translate.js"></script>
+<script defer src="/js/chatbot.js"></script>
+<script defer src="/js/ads.js"></script>
+
+  <script>
+  const TOPICS = window.LEET_NOTES_DATA || {};
+
+
+  function toggleG(btn) {
+    var items = btn.nextElementSibling;
+    var isOpen = items.classList.contains('show');
+    items.classList.toggle('show', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+  }
+
+  function toggleMobileSidebar() {
+    var sb = document.getElementById('sidebar-drawer');
+    var ov = document.getElementById('mobile-overlay');
+    sb.classList.toggle('mobile-open');
+    ov.classList.toggle('show');
+  }
+
+  function filterTopics(query) {
+    query = (query || '').toLowerCase().trim();
+    var items = document.querySelectorAll('.lsb-item');
+    if (!query) {
+      items.forEach(function(i) { i.style.display = 'flex'; });
+      return;
+    }
+    items.forEach(function(item) {
+      var text = item.textContent.toLowerCase();
+      if (text.indexOf(query) !== -1) {
+        item.style.display = 'flex';
+        var parentGroup = item.closest('.lsb-group');
+        if (parentGroup) {
+          parentGroup.querySelector('.lsb-items').classList.add('show');
+          parentGroup.querySelector('.lsb-group-btn').classList.add('open');
+        }
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  var topicOrder = [];
+  document.querySelectorAll('.lsb-item').forEach(function(btn) {
+    topicOrder.push(btn.getAttribute('data-id'));
+  });
+
+  var currentTopicId = 'civil-repair';
+
+  function loadT(el, id) {
+    document.querySelectorAll('.lsb-item').forEach(function(b) { b.classList.remove('active'); });
+    if (el) {
+      el.classList.add('active');
+    } else {
+      var target = document.querySelector('.lsb-item[data-id="' + id + '"]');
+      if (target) target.classList.add('active');
+    }
+
+    currentTopicId = id;
+
+    var sb = document.getElementById('sidebar-drawer');
+    var ov = document.getElementById('mobile-overlay');
+    if (sb) sb.classList.remove('mobile-open');
+    if (ov) ov.classList.remove('show');
+
+    var data = TOPICS[id];
+    var titleEl = document.getElementById('hero-title');
+    var bcTopic = document.getElementById('bc-topic');
+    var bcSec = document.getElementById('bc-section');
+    var heroSec = document.getElementById('hero-section');
+    var goalEl = document.getElementById('hero-goal');
+    var bodyEl = document.getElementById('note-body');
+    var mobLabel = document.getElementById('mobile-cur-label');
+
+    if (data) {
+      titleEl.textContent = data.title;
+      bcTopic.textContent = data.title;
+      bcSec.textContent = data.section;
+      heroSec.innerHTML = '<i class="fas ' + (data.streamIcon || 'fa-book') + '"></i> ' + data.section;
+      goalEl.textContent = data.goal;
+      bodyEl.innerHTML = data.html;
+      if (mobLabel) mobLabel.textContent = data.title;
+    } else {
+      var lblText = el ? el.querySelector('.lbl').textContent.trim() : id;
+      titleEl.textContent = lblText;
+      bcTopic.textContent = lblText;
+      if (mobLabel) mobLabel.textContent = lblText;
+      goalEl.textContent = 'High-yield Haryana LEET official syllabus notes and formulas for ' + lblText + '.';
+      bodyEl.innerHTML = `
+        <h2><span class="sn">1</span> Official Syllabus Topic: ` + lblText + `</h2>
+        <p>This chapter is prescribed under Chapter 4 of the official HSTES Admission Brochure for B.E./B.Tech. (LEET).</p>
+        <div class="box box-tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Exam Focus:</strong> 90 questions total across all 4 streams. Every candidate receives the SAME test regardless of diploma branch. Direct conceptual MCQs are asked.</div>
+        </div>
+        <h2><span class="sn">2</span> Key Concepts &amp; Formulas to Review</h2>
+        <ul>
+          <li>Definitions, standard units, and SI dimensions.</li>
+          <li>Direct formula applications and numerical relationships.</li>
+          <li>Commonly asked conceptual questions from polytechnic curriculum.</li>
+        </ul>
+        <div class="box box-key">
+          <i class="fas fa-key"></i>
+          <div><strong>Pro-Tip:</strong> Solve section-wise previous year questions (PYQs) to check your readiness under time pressure.</div>
+        </div>
+      `;
+    }
+
+    var idx = topicOrder.indexOf(id);
+    var prevBtn = document.getElementById('btn-prev');
+    var nextBtn = document.getElementById('btn-next');
+    var lblPrev = document.getElementById('lbl-prev');
+    var lblNext = document.getElementById('lbl-next');
+
+    if (idx > 0) {
+      prevBtn.style.visibility = 'visible';
+      var prevId = topicOrder[idx - 1];
+      var prevTarget = document.querySelector('.lsb-item[data-id="' + prevId + '"]');
+      lblPrev.textContent = prevTarget ? prevTarget.querySelector('.lbl').textContent.trim() : 'Previous';
+    } else {
+      prevBtn.style.visibility = 'hidden';
+    }
+
+    if (idx < topicOrder.length - 1) {
+      nextBtn.style.visibility = 'visible';
+      var nextId = topicOrder[idx + 1];
+      var nextTarget = document.querySelector('.lsb-item[data-id="' + nextId + '"]');
+      lblNext.textContent = nextTarget ? nextTarget.querySelector('.lbl').textContent.trim() : 'Next';
+    } else {
+      nextBtn.style.visibility = 'hidden';
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function navTopic(direction) {
+    var idx = topicOrder.indexOf(currentTopicId);
+    var nextIdx = idx + direction;
+    if (nextIdx >= 0 && nextIdx < topicOrder.length) {
+      var targetId = topicOrder[nextIdx];
+      var btn = document.querySelector('.lsb-item[data-id="' + targetId + '"]');
+      loadT(btn, targetId);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    loadT(document.querySelector('.lsb-item[data-id="civil-repair"]'), 'civil-repair');
+  });
+  </script>
+</body>
+</html>

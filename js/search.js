@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 'use strict';
 let searchIndex = [];
 let isIndexLoaded = false;
@@ -28,6 +28,18 @@ hideResults();
 }
 });
 searchInput.addEventListener('keydown', handleKeydown);
+
+try {
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get('s') || urlParams.get('q');
+  if (initialQuery) {
+    searchInput.value = initialQuery;
+    buildSearchIndex().then(() => performSearch(initialQuery)).catch(() => {});
+  }
+} catch (e) {
+  console.warn('URL search parameter error:', e);
+}
+
 console.log('Search initialized successfully');
 }
 async function extractSubjectsFromHtml(htmlFilePath) {
@@ -103,7 +115,7 @@ const cached = localStorage.getItem(CACHE_KEY);
 if (cached) {
     try {
         const parsed = JSON.parse(cached);
-        if (parsed && Array.isArray(parsed) && parsed.length > 500) {
+        if (parsed && Array.isArray(parsed) && parsed.length > 200) {
             searchIndex = parsed;
             isIndexLoaded = true;
             console.log(`Search index loaded from cache (${searchIndex.length} items).`);
@@ -236,10 +248,16 @@ const startBackgroundIndexing = () => {
     });
 };
 
-if (window.requestIdleCallback) {
-    window.requestIdleCallback(startBackgroundIndexing, { timeout: 5000 });
-} else {
-    setTimeout(startBackgroundIndexing, 4000);
+// Subject-level crawl downloads ~160 full pages; it is opt-in (localStorage.hsbte_subject_crawl = '1')
+// so normal visitors do not burn mobile data on every page view.
+var crawlOn = false;
+try { crawlOn = localStorage.getItem('hsbte_subject_crawl') === '1' && !(navigator.connection && navigator.connection.saveData); } catch (e) {}
+if (crawlOn) {
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(startBackgroundIndexing, { timeout: 5000 });
+    } else {
+        setTimeout(startBackgroundIndexing, 4000);
+    }
 }
 searchIndex.push(
 { type: 'page', title: 'HSBTE PYQ', url: `${basePath}hsbte-pyq`, keywords: ['hsbte', 'pyq', 'previous year', 'question papers', 'question paper', 'may june 2026', 'june 2026', 'qp june 2026', 'diploma pyq 2026', 'hsbte paper 2026'] },
@@ -344,7 +362,7 @@ keywords: ['last year leet cutoff', 'hsbte leet last year cutoff', 'leet previou
 {
 type: 'page',
 title: 'Haryana LEET 2027 – Complete Guide',
-url: `${basePath}haryana-leet-2026`,
+url: `${basePath}haryanaleet`,
 keywords: ['haryana leet 2027', 'leet 2027', 'haryana leet 2026', 'leet 2026', 'haryana leet 2027 guide', 'haryana leet 2027 exam', 'haryana leet 2027 syllabus', 'haryana leet 2027 pyq', 'haryana leet 2027 sample papers', 'haryana leet 2027 counselling']
 },
 {
@@ -423,19 +441,19 @@ keywords: ['study plan', 'preparation strategy', 'leet study plan', 'exam schedu
 type: 'page',
 title: 'Ultra Premium Tools',
 url: `${basePath}ultra-premium`,
-keywords: ['ultra premium', 'ultra tools', 'ai college predictor', 'rank predictor', 'cutoff analyzer', 'smart counselling', 'choice filling generator', 'choice mistake detector', 'upgrade chance calculator', 'mock counselling', 'ai study planner', 'ultra premium 149', 'leet ai assistant']
+keywords: ['ultra premium', 'ultra tools', 'ai college predictor', 'rank predictor', 'cutoff analyzer', 'smart counselling', 'choice filling generator', 'choice mistake detector', 'upgrade chance calculator', 'mock counselling', 'ai study planner', 'ultra premium 99', 'leet ai assistant']
 },
 {
 type: 'page',
 title: 'Premium Sample Papers',
 url: `${basePath}premium-papers`,
-keywords: ['premium papers', 'premium sample papers', 'leet premium', '34 sample papers', 'special sample paper', 'special mock paper', 'high difficulty mock', 'premium login papers']
+keywords: ['premium papers', 'premium sample papers', 'leet premium', '54 sample papers', 'special sample paper', 'special mock paper', 'high difficulty mock', 'premium login papers']
 },
 {
 type: 'page',
 title: 'BTech LEET Premium Plans',
 url: `${basePath}btech-leet-premium`,
-keywords: ['premium', 'ultra premium', 'btech leet premium', 'premium 99', 'ultra 149', 'buy premium', 'premium login', 'hsbteleet premium']
+keywords: ['premium', 'ultra premium', 'btech leet premium', 'premium 69', 'ultra 99', 'buy premium', 'premium login', 'hsbteleet premium']
 },
 {
 type: 'page',

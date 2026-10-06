@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,11 +11,11 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <title>Premium Sample Papers | 34 HSBTE LEET Mock Tests | hsbteleet.com</title>
-  <meta name="description" content="Access Premium Haryana LEET 2027 resources: 34 exclusive sample papers, official syllabus PDF, prospectus, formula sheets and mock tests. Attempt online and score instantly."/>
+  <title>Premium Sample Papers | 54 HSBTE LEET Mock Tests | hsbteleet.com</title>
+  <meta name="description" content="Access Premium Haryana LEET 2027 resources: 54 exclusive sample papers, official syllabus PDF, prospectus, formula sheets and mock tests."/>
   <meta name="robots" content="index, follow"/>
   <meta property="og:title" content="Premium HSBTE LEET Sample Papers | hsbteleet.com"/>
-  <meta property="og:description" content="34 premium HSBTE LEET mock tests - section-wise + full syllabus. Attempt online, check score instantly."/>
+  <meta property="og:description" content="54 premium HSBTE LEET mock tests - section-wise + full syllabus. Attempt online, check score instantly."/>
   <meta property="og:url" content="https://hsbteleet.com/premium-papers"/>
   <meta property="og:site_name" content="HSBTE LEET | hsbteleet.com"/>
   <meta name="theme-color" content="#1a56db"/>
@@ -415,6 +415,28 @@
       .sec-header{padding:14px 16px;}
     }
   </style>
+  <style>
+    /* ── ADMIN ANNOUNCEMENT BANNERS ── */
+    .ann-banner {
+      display: flex; align-items: flex-start; gap: 14px;
+      border-radius: 14px; padding: 14px 18px; margin-bottom: 14px;
+      font-size: 13.5px; line-height: 1.65; animation: fadeIn .3s ease;
+    }
+    .ann-banner.type-info    { background: #eff6ff; border: 1.5px solid #93c5fd; color: #1e3a8a; }
+    .ann-banner.type-warning { background: #fffbeb; border: 1.5px solid #fcd34d; color: #78350f; }
+    .ann-banner.type-success { background: #ecfdf5; border: 1.5px solid #6ee7b7; color: #065f46; }
+    .ann-banner.type-urgent  { background: #fff1f2; border: 1.5px solid #fca5a5; color: #991b1b; }
+    .ann-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
+    .ann-title { font-weight: 800; margin-bottom: 3px; font-family: 'Syne', sans-serif; }
+    .ann-body  { margin: 0; }
+    .ann-dismiss {
+      margin-left: auto; flex-shrink: 0; background: none; border: none;
+      cursor: pointer; font-size: 1rem; opacity: .45; padding: 2px 6px;
+      border-radius: 6px; transition: opacity .15s;
+    }
+    .ann-dismiss:hover { opacity: 1; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+  </style>
   <link rel="stylesheet" href="/css/seo-related.css"/>
 </head>
 <body>
@@ -449,9 +471,9 @@
       <div class="hero-icon"><i class="fas fa-circle-info" aria-hidden="true"></i></div>
       <div style="flex:1;min-width:200px;">
         <h1>Premium Sample Papers</h1>
-        <p id="welcome-msg">Welcome! You have Access Until LEET 2027 to all 34 premium HSBTE LEET papers.</p>
+        <p id="welcome-msg">Welcome! You have Access Until LEET 2027 to all 54 premium HSBTE LEET papers.</p>
         <div class="hero-meta">
-          <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> 34 Papers</span>
+          <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> 54 Papers</span>
           <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> 13 PDFs</span>
           <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> Instant Score</span>
           <span class="hero-badge"><i class="fas fa-circle-info" aria-hidden="true"></i> Access Until LEET 2027</span>
@@ -467,6 +489,28 @@
         <h3>How to use your papers</h3>
         <p>Click any paper ? attempt the test with live timer ? click <strong>Submit Exam</strong> to instantly see <strong>Correct / Wrong / Skipped</strong> stats and a full question-wise review.</p>
       </div>
+    </div>
+
+    <!-- ADMIN ANNOUNCEMENTS BANNER (auto-loaded from Supabase) -->
+    <div id="admin-announcements"></div>
+
+    <!-- PREMIUM NOTES CARD -->
+    <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);border:1.5px solid #4338ca;border-radius:16px;padding:16px 20px;margin-bottom:26px;color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;border-radius:12px;background:rgba(99,102,241,.2);border:1px solid rgba(165,180,252,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#a5b4fc;flex-shrink:0;">
+          <i class="fas fa-book-open-reader"></i>
+        </div>
+        <div>
+          <div style="font-weight:900;font-size:1rem;margin-bottom:3px;display:flex;align-items:center;gap:8px;">
+            <span>Premium Chapter-Wise Notes &amp; Formulas</span>
+            <span style="font-size:10px;background:#10b981;color:#fff;padding:2px 8px;border-radius:999px;font-weight:800;">INCLUDED</span>
+          </div>
+          <div style="font-size:12.5px;color:#cbd5e1;line-height:1.45;">Interactive theory notes, key formulas, diagrams and concept MCQs across all 4 LEET sections — 100% ad-free.</div>
+        </div>
+      </div>
+      <a href="/premium-notes" style="flex-shrink:0;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-weight:900;font-size:13px;padding:10px 20px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;">
+        <i class="fas fa-arrow-right"></i> Open Premium Notes
+      </a>
     </div>
 
     <!-- SECURITY NOTICE -->
@@ -488,7 +532,7 @@
       <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
         <div>
           <div style="font-weight:900;font-size:.95rem;color:#3730a3;margin-bottom:4px;"><i class="fas fa-lock"></i> Counselling tools are Ultra-only</div>
-          <div style="font-size:13px;color:#4338ca;line-height:1.5;">College Predictor, Cutoff Analyzer, College Comparison, Rank Predictor &amp; AI Study Planner need Ultra Premium (₹149).</div>
+          <div style="font-size:13px;color:#4338ca;line-height:1.5;">College Predictor, Cutoff Analyzer, College Comparison, Rank Predictor &amp; AI Study Planner need Ultra Premium (₹99).</div>
         </div>
         <a href="./premium-login.html?tier=ultra" style="flex-shrink:0;background:#4f46e5;color:#fff;font-weight:900;font-size:13px;padding:10px 18px;border-radius:999px;text-decoration:none;">Upgrade to Ultra →</a>
       </div>
@@ -634,7 +678,7 @@
           <h2>Full Syllabus Complete Papers</h2>
           <p>All subjects combined - Maths, Physics, Chemistry, Engineering</p>
         </div>
-        <span class="sh-badge">26 Papers</span>
+        <span class="sh-badge">46 Papers</span>
       </div>
       <div class="papers-grid">
         <a href="/premium-sample-paper-1" class="paper-card pc-full">
@@ -791,6 +835,126 @@
           <span class="pc-num">26</span>
           <div class="pc-title">Sample Paper 26</div>
           <div class="pc-sub">Full Syllabus - Hard Set 26</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-27" class="paper-card pc-full">
+          <span class="pc-num">27</span>
+          <div class="pc-title">Sample Paper 27</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 27</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-28" class="paper-card pc-full">
+          <span class="pc-num">28</span>
+          <div class="pc-title">Sample Paper 28</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 28</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-29" class="paper-card pc-full">
+          <span class="pc-num">29</span>
+          <div class="pc-title">Sample Paper 29</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 29</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-30" class="paper-card pc-full">
+          <span class="pc-num">30</span>
+          <div class="pc-title">Sample Paper 30</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 30</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-31" class="paper-card pc-full">
+          <span class="pc-num">31</span>
+          <div class="pc-title">Sample Paper 31</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 31</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-32" class="paper-card pc-full">
+          <span class="pc-num">32</span>
+          <div class="pc-title">Sample Paper 32</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 32</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-33" class="paper-card pc-full">
+          <span class="pc-num">33</span>
+          <div class="pc-title">Sample Paper 33</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 33</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-34" class="paper-card pc-full">
+          <span class="pc-num">34</span>
+          <div class="pc-title">Sample Paper 34</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 34</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-35" class="paper-card pc-full">
+          <span class="pc-num">35</span>
+          <div class="pc-title">Sample Paper 35</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 35</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-36" class="paper-card pc-full">
+          <span class="pc-num">36</span>
+          <div class="pc-title">Sample Paper 36</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 36</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-37" class="paper-card pc-full">
+          <span class="pc-num">37</span>
+          <div class="pc-title">Sample Paper 37</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 37</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-38" class="paper-card pc-full">
+          <span class="pc-num">38</span>
+          <div class="pc-title">Sample Paper 38</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 38</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-39" class="paper-card pc-full">
+          <span class="pc-num">39</span>
+          <div class="pc-title">Sample Paper 39</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 39</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-40" class="paper-card pc-full">
+          <span class="pc-num">40</span>
+          <div class="pc-title">Sample Paper 40</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 40</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-41" class="paper-card pc-full">
+          <span class="pc-num">41</span>
+          <div class="pc-title">Sample Paper 41</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 41</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-42" class="paper-card pc-full">
+          <span class="pc-num">42</span>
+          <div class="pc-title">Sample Paper 42</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 42</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-43" class="paper-card pc-full">
+          <span class="pc-num">43</span>
+          <div class="pc-title">Sample Paper 43</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 43</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-44" class="paper-card pc-full">
+          <span class="pc-num">44</span>
+          <div class="pc-title">Sample Paper 44</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 44</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-45" class="paper-card pc-full">
+          <span class="pc-num">45</span>
+          <div class="pc-title">Sample Paper 45</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 45</div>
+          <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
+        </a>
+        <a href="/premium-sample-paper-46" class="paper-card pc-full">
+          <span class="pc-num">46</span>
+          <div class="pc-title">Sample Paper 46</div>
+          <div class="pc-sub">Full Syllabus - Hard Set 46</div>
           <span class="pc-tag"><i class="fas fa-clock"></i> 90 Qs - 90 Min</span>
         </a>
       </div>
@@ -1005,7 +1169,7 @@
       <p>Useful links for diploma students preparing for B.Tech lateral entry in Haryana.</p>
     </div>
     <div class="seo-related-grid">
-      <a class="seo-related-card" href="/haryana-leet-2026"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
+      <a class="seo-related-card" href="/haryanaleet"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
       <a class="seo-related-card" href="/leet-syllabus"><i class="fas fa-book-open" aria-hidden="true"></i><span>Haryana LEET syllabus</span></a>
       <a class="seo-related-card" href="/leet-sample-paper"><i class="fas fa-file-lines" aria-hidden="true"></i><span>LEET sample papers</span></a>
       <a class="seo-related-card" href="/haryana-leet-exam-pattern"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span>LEET exam pattern</span></a>
@@ -1110,7 +1274,7 @@ async function verifyAccess(){
     var name = sessionStorage.getItem('prem_name') || '';
     if(name){
       document.getElementById('welcome-msg').textContent =
-        'Welcome back, '+name+'! You have Access Until LEET 2027 to all 34 premium HSBTE LEET papers.';
+        'Welcome back, '+name+'! You have Access Until LEET 2027 to all 54 premium HSBTE LEET papers.';
     }
 
     var ultra = null;
@@ -1133,6 +1297,7 @@ async function verifyAccess(){
     document.getElementById('page-loader').style.display='none';
     document.getElementById('main-page').style.display='block';
     injectWatermark();
+    loadAnnouncements();  // Load admin announcements after access verified
   }catch(e){ showDenied(); }
 }
 
@@ -1144,6 +1309,54 @@ function showDenied(){
 function doLogout(){
   ['prem_uid','prem_mob','prem_name','prem_ts','prem_tier'].forEach(function(k){sessionStorage.removeItem(k);});
   window.location.href='./premium-login.html';
+}
+
+/* ── ADMIN ANNOUNCEMENTS ── */
+async function loadAnnouncements(){
+  try {
+    var uid = sessionStorage.getItem('prem_uid');
+    // Fetch active announcements: global (target='all') or targeted at this user
+    var res = await sb.from('admin_announcements')
+      .select('*')
+      .eq('is_active', true)
+      .order('created_at', {ascending: false})
+      .limit(5);
+    if (res.error || !res.data || !res.data.length) return;
+
+    var container = document.getElementById('admin-announcements');
+    if (!container) return;
+
+    var typeIcon = {
+      info: '<i class="fas fa-circle-info ann-icon" style="color:#3b82f6"></i>',
+      warning: '<i class="fas fa-triangle-exclamation ann-icon" style="color:#f59e0b"></i>',
+      success: '<i class="fas fa-circle-check ann-icon" style="color:#10b981"></i>',
+      urgent: '<i class="fas fa-bell ann-icon" style="color:#ef4444"></i>'
+    };
+
+    container.innerHTML = res.data.map(function(ann) {
+      // Show if target is 'all', or matches this user's mobile, or uid
+      var mob = sessionStorage.getItem('prem_mob') || '';
+      if (ann.target_mobile && ann.target_mobile !== mob && ann.target_mobile !== 'all') return '';
+      var t = ann.type || 'info';
+      var icon = typeIcon[t] || typeIcon.info;
+      var dismissed = sessionStorage.getItem('ann_dismissed_' + ann.id);
+      if (dismissed) return '';
+      return '<div class="ann-banner type-' + t + '" id="ann-' + ann.id + '">' +
+        icon +
+        '<div style="flex:1">' +
+          (ann.title ? '<div class="ann-title">' + ann.title + '</div>' : '') +
+          '<p class="ann-body">' + (ann.message || '') + '</p>' +
+        '</div>' +
+        '<button class="ann-dismiss" onclick="dismissAnn(\'' + ann.id + '\')" title="Dismiss">&times;</button>' +
+      '</div>';
+    }).join('');
+  } catch(e) { /* silent — table may not exist yet */ }
+}
+
+function dismissAnn(id) {
+  sessionStorage.setItem('ann_dismissed_' + id, '1');
+  var el = document.getElementById('ann-' + id);
+  if (el) el.style.display = 'none';
 }
 
 /* -- PDF TAB SWITCHER -- */

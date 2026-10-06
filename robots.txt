@@ -2,13 +2,17 @@ User-agent: *
 Allow: /
 Allow: /ads.txt
 
-# Admin and protected pages
+# Admin and internal dashboards
+Disallow: /admin
+Disallow: /premium-admin
+Disallow: /counseling-admin
 Disallow: /html/admin.html
 Disallow: /html/premium-admin.html
 Disallow: /html/counseling-admin.html
 
-# Block PDFs from being indexed
+# Prevent PDF indexing bloat (HTML resource landing pages preferred)
 Disallow: /pdf/
 Disallow: /syllabus/*.pdf
 
+# Canonical XML Sitemap
 Sitemap: https://hsbteleet.com/sitemap.xml

@@ -1,0 +1,46 @@
+<style>
+  .leet-subnav{position:sticky;top:0;z-index:900;background:#fff;border-bottom:1px solid #e2e8f0;box-shadow:0 2px 8px rgba(15,23,42,.06)}
+  .leet-subnav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:8px 14px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .leet-subnav-inner::-webkit-scrollbar{display:none}
+  .leet-subnav-label{flex:0 0 auto;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#1565c0;padding-right:6px;border-right:2px solid #e2e8f0;margin-right:2px}
+  .leet-subnav a{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font-size:14px;font-weight:600;color:#334155;text-decoration:none;background:#f1f5f9;border:1px solid transparent;white-space:nowrap;transition:background .15s,color .15s}
+  .leet-subnav a:hover{background:#e0ecff;color:#0d47a1}
+  .leet-subnav a.active{background:#1565c0;color:#fff;box-shadow:0 2px 6px rgba(21,101,192,.35)}
+  .leet-subnav a.hot{background:#fff7e0;color:#92400e;border-color:#fcd34d}
+  .leet-subnav a.hot:hover{background:#fde68a}
+  body.dark-mode .leet-subnav{background:#0f172a;border-color:#1e293b}
+  body.dark-mode .leet-subnav a{background:#1e293b;color:#cbd5e1}
+  body.dark-mode .leet-subnav a:hover{background:#334155;color:#fff}
+  body.dark-mode .leet-subnav a.active{background:#2563eb;color:#fff}
+  body.dark-mode .leet-subnav a.hot{background:#422006;color:#fcd34d;border-color:#78350f}
+  @media(min-width:901px){
+    .leet-subnav-inner{max-width:1600px;flex-wrap:wrap;justify-content:center;overflow:visible;gap:8px 10px;padding:10px 20px}
+    .leet-subnav-label{border-right:2px solid #cbd5e1;padding-right:12px;margin-right:4px}
+    .leet-subnav a{padding:8px 15px;font-size:14.5px}
+  }
+  .leet-next{max-width:1000px;margin:32px auto 0;padding:0 16px}
+  .leet-next-box{background:linear-gradient(135deg,#0f2a5c,#1565c0);color:#fff;border-radius:16px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .leet-next-box h2{margin:0 0 4px;font-size:20px;color:#fff}
+  .leet-next-box p{margin:0;font-size:14px;opacity:.9}
+  .leet-next-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .leet-next-btns a{padding:10px 18px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;background:#fff;color:#0d47a1}
+  .leet-next-btns a.gold{background:#fbbf24;color:#1f2937}
+  @media(max-width:600px){.leet-subnav a{padding:6px 11px;font-size:13px}.leet-next-box{padding:18px}}
+</style>
+<nav class="leet-subnav" aria-label="Haryana LEET 2027 sections">
+  <div class="leet-subnav-inner">
+    <span class="leet-subnav-label">LEET 2027</span>
+    <a href="/haryanaleet">Overview</a>
+    <a href="/haryana-leet-syllabus">Syllabus</a>
+    <a href="/haryana-leet-exam-pattern">Exam Pattern</a>
+    <a href="/leet-sample-paper">Sample Papers</a>
+    <a href="/leet-preparation-guide">Prep Guide</a>
+    <a href="/leet-notes">Notes</a>
+    <a href="/leet-tentative-dates">Dates</a>
+    <a href="/last-year-cutoff">Cutoff</a>
+    <a href="/haryana-leet-colleges">Colleges</a>
+    <a href="/haryana-leet-counselling">Counselling</a>
+    <a class="hot" href="/haryana-leet-book">&#128213; LEET Book</a>
+    <a class="hot" href="/btech-leet-premium">&#11088; Premium</a>
+  </div>
+</nav>

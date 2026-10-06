@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hsbte-leet-v4';
+const CACHE_NAME = 'hsbte-leet-v5';
 const NETWORK_ONLY_PATHS = [
   '/counseling',
   '/counseling-admin',

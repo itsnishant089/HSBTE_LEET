@@ -37,7 +37,10 @@ function cleanUrlRewrite(req, res, next) {
     const clean = raw.replace(/\.html$/, '').replace(/\/$/, '') || '';
     if (!clean || clean === '/index') return next();
 
-    const target = `/html${clean}.html`;
+    let target = `/html${clean}.html`;
+    if (clean === '/author/nishant') {
+      target = '/html/author-nishant.html';
+    }
     const abs = path.join(__dirname, target.replace(/^\//, ''));
     if (fs.existsSync(abs) && fs.statSync(abs).isFile()) {
       req.url = target + qs;

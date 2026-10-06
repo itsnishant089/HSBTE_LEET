@@ -91,7 +91,7 @@ function initChatbot() {
   function greetUser() {
     if (sessionStorage.getItem("chatGreetingShown")) return;
     const greetingText =
-      `Namaste! 🙏 Main hsbteleet.com chatbot hoon.\n\nMain help kar sakta hoon:\n1️⃣ Diploma PYQ (branch + semester)\n2️⃣ Diploma Syllabus PDF\n3️⃣ LEET Syllabus / Exam Pattern\n4️⃣ Free + Premium LEET papers\n5️⃣ Premium ₹99 / Ultra ₹149\n\nExample: "CSE 1st semester" · "LEET syllabus" · "Buy Premium"`;
+      `Namaste! 🙏 Main hsbteleet.com chatbot hoon.\n\nMain help kar sakta hoon:\n1️⃣ Diploma PYQ (branch + semester)\n2️⃣ Diploma Syllabus PDF\n3️⃣ LEET Syllabus / Exam Pattern\n4️⃣ Free + Premium LEET papers\n5️⃣ Premium ₹69 / Ultra ₹99\n\nExample: "CSE 1st semester" · "LEET syllabus" · "Buy Premium"`;
     addMessage(greetingText, "bot", true);
     sessionStorage.setItem("chatGreetingShown", "true");
   }

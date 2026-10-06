@@ -1,0 +1,91 @@
+# ── Node / Package Manager ────────────────────────────────────
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# ── Environment Variables & Secrets ──────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+*.p12
+secrets/
+
+# ── Build / Deploy Caches ─────────────────────────────────────
+.vercel/
+.wrangler/
+.mf/
+dist/
+.output/
+.next/
+.nuxt/
+.cache/
+build/
+out/
+
+# ── Operating System Files ────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ── Editor / IDE ──────────────────────────────────────────────
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+.history/
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Temporary / Build Helper Files ───────────────────────────
+*.tmp
+*.bak
+*.orig
+scratch/
+tmp/
+.tempmediaStorage/
+# PowerShell build scripts (used during dev, not needed in repo)
+js/_notes_builder.ps1
+js/_tmp_*.ps1
+js/_tmp_*.html
+js/_btmp_*.html
+js/_remaining_*.ps1
+js/_batch_*.ps1
+
+# ── Large Binary / Archive Files ─────────────────────────────
+# ZIP files in image folder
+image/converted-images.zip
+*.zip
+
+# ── Kiro IDE ──────────────────────────────────────────────────
+.kiro/settings/mcp.json
+
+# ── Claude / Agent Cache ──────────────────────────────────────
+.claude/
+
+# ── Kiro Agent Skills (installed via npx, not source code) ───
+# NOTE: .agents/skills/ is KEPT in repo so team has same skill context
+# Uncomment below if you don't want skills in repo:
+# .agents/
+

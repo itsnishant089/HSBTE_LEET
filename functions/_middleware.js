@@ -18,6 +18,11 @@ export async function onRequest(context) {
     return Response.redirect(new URL('/', url.origin), 301);
   }
 
+  // 2b. Canonical 301 Migration: /haryana-leet-2026 -> /haryanaleet
+  if (path === '/haryana-leet-2026' || path === '/haryana-leet-2026.html' || path === '/html/haryana-leet-2026.html') {
+    return Response.redirect(new URL('/haryanaleet', url.origin), 301);
+  }
+
   // 3. Handle legacy /html/ path access by redirecting to clean URLs
   // IMPORTANT: preserve ?query and #hash (e.g. /html/download.html?file=/paper/x.pdf)
   if (path.startsWith('/html/')) {
@@ -47,7 +52,13 @@ export async function onRequest(context) {
   // 6. Internal Rewrite: /btech-leet -> /html/btech-leet
   // This is the core logic that supports the /html/ folder structure
   try {
-    const cleanReqPath = path.endsWith('.html') ? path.replace(/\.html$/, '') : path;
+    let cleanReqPath = path.endsWith('.html') ? path.replace(/\.html$/, '') : path;
+    if (cleanReqPath === '/author/nishant') {
+      cleanReqPath = '/author-nishant';
+    }
+    if (cleanReqPath === '/notes') {
+      cleanReqPath = '/leet-notes';
+    }
     
     // Create a new URL object based on the original URL
     const rewriteUrl = new URL(url);

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -83,6 +83,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-ultra:hover{opacity:.9}
 .btn-danger{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff}
 .btn-danger:hover{opacity:.9}
+.btn-amber{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-weight:800}
+.btn-amber:hover{opacity:.9}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
 .fi{padding:8px 13px;border:1.5px solid var(--bo);border-radius:9px;font-size:13px;color:var(--tx);background:#fff;outline:none;transition:border-color .2s;font-family:'Plus Jakarta Sans',sans-serif}
@@ -150,6 +152,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       <div class="sb-section">Content</div>
       <button class="sb-link" onclick="gotoPage('reviews',this)"><i class="fas fa-star"></i> Reviews <span class="sb-badge" id="bdg-rev">0</span></button>
       <div class="sb-section">Tools</div>
+      <button class="sb-link" onclick="gotoPage('security',this)"><i class="fas fa-shield-halved"></i> Security Violations <span class="sb-badge" id="bdg-sec">0</span></button>
+      <button class="sb-link" onclick="gotoPage('activity',this)"><i class="fas fa-chart-line"></i> User Activity</button>
+      <button class="sb-link" onclick="gotoPage('notify',this)"><i class="fas fa-bell"></i> Push Notification</button>
       <button class="sb-link" onclick="gotoPage('send',this)"><i class="fas fa-comment-alt"></i> Send Message</button>
       <button class="sb-link" onclick="gotoPage('adduser',this)"><i class="fas fa-user-plus"></i> Add User Manually</button>
       <button class="sb-link" onclick="gotoPage('lookup',this)"><i class="fas fa-search"></i> User Lookup</button>
@@ -172,8 +177,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="page active" id="page-dashboard">
       <div class="stats-grid">
         <div class="stat-card sc-blue"><div class="stat-icon">👥</div><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Total Users</div><div class="stat-sub" id="s-today">+0 today</div></div>
-        <div class="stat-card sc-gold"><div class="stat-icon">👑</div><div class="stat-val" id="s-prem">—</div><div class="stat-lbl">Premium (₹99)</div></div>
-        <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="s-ultra">—</div><div class="stat-lbl">Ultra Premium (₹149)</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">👑</div><div class="stat-val" id="s-prem">—</div><div class="stat-lbl">Premium (₹69)</div></div>
+        <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="s-ultra">—</div><div class="stat-lbl">Ultra Premium (₹99)</div></div>
         <div class="stat-card sc-green"><div class="stat-icon">💰</div><div class="stat-val" id="s-rev">—</div><div class="stat-lbl">Total Revenue</div></div>
         <div class="stat-card sc-red"><div class="stat-icon">⭐</div><div class="stat-val" id="s-pend-rev">—</div><div class="stat-lbl">Pending Reviews</div></div>
       </div>
@@ -311,8 +316,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             <div>
               <label class="fl">Tier Access</label>
               <select class="form-select" id="au-tier">
-                <option value="premium">Normal Premium (₹99)</option>
-                <option value="ultra">Ultra Premium (₹149)</option>
+                <option value="premium">Normal Premium (₹69)</option>
+                <option value="ultra">Ultra Premium (₹99)</option>
               </select>
             </div>
           </div>
@@ -336,6 +341,135 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
             <i class="fas fa-check-circle"></i> Create Account & Give Access
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- SECURITY VIOLATIONS -->
+    <div class="page" id="page-security">
+      <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+        <div class="stat-card sc-red"><div class="stat-icon">🚨</div><div class="stat-val" id="sec-total">—</div><div class="stat-lbl">Total Violations</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">📸</div><div class="stat-val" id="sec-ss">—</div><div class="stat-lbl">Screenshot Attempts</div></div>
+        <div class="stat-card sc-purple"><div class="stat-icon">🖨️</div><div class="stat-val" id="sec-print">—</div><div class="stat-lbl">Print Attempts</div></div>
+        <div class="stat-card sc-blue"><div class="stat-icon">🔧</div><div class="stat-val" id="sec-dev">—</div><div class="stat-lbl">DevTools Opens</div></div>
+        <div class="stat-card sc-green"><div class="stat-icon">📋</div><div class="stat-val" id="sec-copy">—</div><div class="stat-lbl">Copy Attempts</div></div>
+      </div>
+      <div class="filter-bar">
+        <input class="fi" id="sec-q" placeholder="Search by name, mobile…" oninput="filterSec()" style="flex:1;min-width:180px"/>
+        <select class="fs" id="sec-type" onchange="filterSec()">
+          <option value="">All Violations</option>
+          <option value="screenshot">Screenshot</option>
+          <option value="print">Print</option>
+          <option value="devtools">DevTools</option>
+          <option value="copy">Copy/Paste</option>
+          <option value="contextmenu">Right Click</option>
+        </select>
+        <button class="btn btn-ghost" onclick="exportSecCSV()"><i class="fas fa-download"></i> Export</button>
+        <button class="btn btn-red" onclick="clearSecLogs()"><i class="fas fa-trash"></i> Clear Old Logs</button>
+      </div>
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-title"><i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Security Violation Log</div>
+          <span id="sec-cnt" style="font-size:12px;color:var(--mu)">—</span>
+        </div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>User Name</th><th>Mobile / Email</th><th>Violation Type</th><th>Paper / Page</th><th>Device Info</th><th>Time</th><th>Action</th></tr></thead>
+            <tbody id="tb-sec"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody>
+          </table>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- USER ACTIVITY / PERFORMANCE -->
+    <div class="page" id="page-activity">
+      <div class="filter-bar">
+        <input class="fi" id="act-q" placeholder="Search user name or mobile…" oninput="filterAct()" style="flex:1;min-width:180px"/>
+        <select class="fs" id="act-sort" onchange="loadActivity()">
+          <option value="papers_attempted">Sort: Papers Attempted</option>
+          <option value="violations_count">Sort: Most Violations</option>
+          <option value="last_seen">Sort: Last Active</option>
+          <option value="join_date">Sort: Join Date</option>
+        </select>
+        <button class="btn btn-ghost" onclick="exportActCSV()"><i class="fas fa-download"></i> Export</button>
+      </div>
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-title"><i class="fas fa-chart-line" style="color:var(--bl)"></i> Per-User Activity Tracker</div>
+          <span id="act-cnt" style="font-size:12px;color:var(--mu)">—</span>
+        </div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>User</th><th>Mobile</th><th>Tier</th><th>Papers Attempted</th><th>Last Active</th><th>Devices Used</th><th>Violations</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="tb-act"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody>
+          </table>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- PUSH NOTIFICATION -->
+    <div class="page" id="page-notify">
+      <div class="card">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-bell" style="color:var(--go)"></i> Push Notification to Premium Users</div></div>
+        <div class="card-body">
+          <div class="alert alert-warn show" style="margin-bottom:16px">
+            <i class="fas fa-circle-check" style="color:#10b981"></i> <strong>Table ready.</strong> Announcements are stored in the <code>admin_announcements</code> Supabase table (already created ✓) and automatically shown to all premium users on the Premium Papers page. Use type <strong>urgent</strong> for red alerts, <strong>warning</strong> for yellow, <strong>success</strong> for green, <strong>info</strong> for blue.
+          </div>
+          <div id="nt-alrt" class="alert"></div>
+
+          <div class="form-row">
+            <div>
+              <label class="fl">Notification Title</label>
+              <input type="text" class="form-input" id="nt-title" placeholder="e.g. LEET Exam Date Announced"/>
+            </div>
+            <div>
+              <label class="fl">Type</label>
+              <select class="form-select" id="nt-type">
+                <option value="info">ℹ️ Info (Blue)</option>
+                <option value="success">✅ Success (Green)</option>
+                <option value="warning">⚠️ Warning (Yellow)</option>
+                <option value="urgent">🚨 Urgent (Red)</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="fl">Message</label>
+          <textarea class="form-input" id="nt-msg" rows="4" style="resize:none" placeholder="Write the announcement message here. Supports plain text."></textarea>
+
+          <div class="form-row" style="margin-top:10px">
+            <div>
+              <label class="fl">Target</label>
+              <select class="form-select" id="nt-target-type" onchange="toggleNtTarget()">
+                <option value="all">📢 All Premium Users</option>
+                <option value="single">📱 Specific Mobile Number</option>
+              </select>
+            </div>
+            <div id="nt-target-mob-wrap" style="display:none">
+              <label class="fl">Mobile Number</label>
+              <input type="tel" class="form-input" id="nt-target-mob" placeholder="10-digit mobile" maxlength="10"/>
+            </div>
+          </div>
+
+          <button class="btn btn-gold" style="margin-top:18px" onclick="pushNotification()" id="nt-btn">
+            <i class="fas fa-paper-plane"></i> Push Notification
+          </button>
+          <button class="btn btn-ghost" style="margin-top:18px;margin-left:10px" onclick="loadNotifications()">
+            <i class="fas fa-refresh"></i> Refresh List
+          </button>
+        </div>
+      </div>
+
+      <!-- ACTIVE ANNOUNCEMENTS -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-title"><i class="fas fa-list" style="color:var(--bl)"></i> Active Announcements</div>
+          <span id="nt-cnt" style="font-size:12px;color:var(--mu)">—</span>
+        </div>
+        <div class="card-body np"><div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Title</th><th>Message</th><th>Type</th><th>Target</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+            <tbody id="tb-nt"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody>
+          </table>
+        </div></div>
       </div>
     </div>
 
@@ -374,7 +508,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 'use strict';
 var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
 var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
-var ADMIN_PASS='Nishant@089';
+var ADMIN_PASS='Nishant@2525';
 var EJS_SVC='service_zlxv3q4', EJS_PUB='byFleJ2hV770O_Mni', EJS_TPL='template_w2fdh1s';
 var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
 emailjs.init(EJS_PUB);
@@ -403,12 +537,12 @@ function gotoPage(name,btn){
   document.querySelectorAll('.sb-link').forEach(function(b){b.classList.remove('active');});
   document.getElementById('page-'+name).classList.add('active');
   if(btn)btn.classList.add('active');
-  var ttls={dashboard:'Dashboard',users:'All Users',payments:'Payments',referrals:'Referrals (removed)',reviews:'Student Reviews',send:'Send Message',adduser:'Add User Manually',lookup:'User Lookup',leetleads:'LEET Popup Leads'};
+  var ttls={dashboard:'Dashboard',users:'All Users',payments:'Payments',referrals:'Referrals (removed)',reviews:'Student Reviews',security:'Security Violations',activity:'User Activity & Performance',notify:'Push Notification',send:'Send Message',adduser:'Add User Manually',lookup:'User Lookup',leetleads:'LEET Popup Leads'};
   document.getElementById('page-ttl').textContent=ttls[name]||name;
   curPage=name;loadPage(name);
 }
 function reloadPage(){loadPage(curPage);}
-function loadPage(n){if(n==='dashboard')loadDash();else if(n==='users')loadUsers();else if(n==='payments')loadPay();else if(n==='referrals')loadRefs();else if(n==='reviews')loadRevs();else if(n==='leetleads')loadLeads();}
+function loadPage(n){if(n==='dashboard')loadDash();else if(n==='users')loadUsers();else if(n==='payments')loadPay();else if(n==='referrals')loadRefs();else if(n==='reviews')loadRevs();else if(n==='security')loadSecurity();else if(n==='activity')loadActivity();else if(n==='notify')loadNotifications();else if(n==='leetleads')loadLeads();}
 function safe(q){return q.then(function(r){return r.error?{data:[],error:r.error}:r;}).catch(function(){return{data:[]};});}
 function initAdmin(){loadDash();document.getElementById('wm-type').addEventListener('change',toggleCustom);}
 
@@ -892,8 +1026,476 @@ function toast(msg,err){
 }
 function e(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
 function fd(iso){if(!iso)return'—';try{var d=new Date(iso);return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});}catch(x){return iso;}}
-/* ── SECURITY ── */
-document.addEventListener('contextmenu',function(e){e.preventDefault();});
+/* ── PUSH NOTIFICATION PAGE ── */
+function toggleNtTarget(){
+  var t = document.getElementById('nt-target-type').value;
+  document.getElementById('nt-target-mob-wrap').style.display = t==='single' ? 'block' : 'none';
+}
+
+async function pushNotification(){
+  var title  = (document.getElementById('nt-title').value||'').trim();
+  var msg    = (document.getElementById('nt-msg').value||'').trim();
+  var type   = document.getElementById('nt-type').value;
+  var ttype  = document.getElementById('nt-target-type').value;
+  var tmob   = ttype==='single' ? (document.getElementById('nt-target-mob').value||'').trim() : 'all';
+  var alrt   = document.getElementById('nt-alrt');
+  var btn    = document.getElementById('nt-btn');
+
+  if(!msg){ alrt.className='alert alert-danger show'; alrt.textContent='Message is required.'; return; }
+  if(ttype==='single'&&tmob.length!==10){ alrt.className='alert alert-danger show'; alrt.textContent='Enter valid 10-digit mobile.'; return; }
+
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span> Pushing…';
+  try{
+    var {data, error} = await sb.from('admin_announcements').insert([{
+      title: title || null,
+      message: msg,
+      type: type,
+      target_mobile: tmob,
+      is_active: true,
+      created_at: new Date().toISOString()
+    }]).select();
+    if(error) throw error;
+    alrt.className='alert alert-success show';
+    alrt.textContent='✅ Notification pushed! Users will see it on next page load.';
+    document.getElementById('nt-title').value='';
+    document.getElementById('nt-msg').value='';
+    document.getElementById('nt-target-mob').value='';
+    loadNotifications();
+  }catch(err){
+    alrt.className='alert alert-danger show';
+    alrt.textContent='Failed: '+err.message+'. Make sure admin_announcements table exists in Supabase.';
+  }
+  btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> Push Notification';
+}
+
+async function loadNotifications(){
+  try{
+    var res = await sb.from('admin_announcements').select('*').order('created_at',{ascending:false});
+    var data = res.data||[];
+    document.getElementById('nt-cnt').textContent = data.length+' announcements';
+    var tb = document.getElementById('tb-nt');
+    if(!data.length){ tb.innerHTML='<tr class="lr"><td colspan="7">No announcements yet.</td></tr>'; return; }
+    var typeClr={info:'b-blue',warning:'b-gold',success:'b-green',urgent:'b-red'};
+    tb.innerHTML = data.map(function(n){
+      return '<tr>' +
+        '<td><strong>'+e(n.title||'—')+'</strong></td>' +
+        '<td style="max-width:220px;font-size:12.5px">'+e((n.message||'').substring(0,80))+(n.message&&n.message.length>80?'…':'')+'</td>' +
+        '<td><span class="badge '+(typeClr[n.type]||'b-gray')+'">'+e(n.type||'info')+'</span></td>' +
+        '<td><code style="font-size:11px">'+e(n.target_mobile==='all'?'📢 All Users':n.target_mobile)+'</code></td>' +
+        '<td>'+(n.is_active?'<span class="badge b-green">Active</span>':'<span class="badge b-gray">Inactive</span>')+'</td>' +
+        '<td style="color:var(--mu);font-size:12px">'+fd(n.created_at)+'</td>' +
+        '<td><div style="display:flex;gap:4px">' +
+          (n.is_active
+            ? '<button class="btn btn-sm btn-ghost" onclick="toggleAnn(\''+e(n.id)+'\',false)"><i class="fas fa-eye-slash"></i> Hide</button>'
+            : '<button class="btn btn-sm btn-green" onclick="toggleAnn(\''+e(n.id)+'\',true)"><i class="fas fa-eye"></i> Show</button>') +
+          '<button class="btn btn-sm btn-danger" onclick="deleteAnn(\''+e(n.id)+'\')"><i class="fas fa-trash"></i></button>' +
+        '</div></td>' +
+      '</tr>';
+    }).join('');
+  }catch(err){
+    document.getElementById('tb-nt').innerHTML='<tr class="lr"><td colspan="7" style="color:#ef4444">Table not found. Create <code>admin_announcements</code> in Supabase first.</td></tr>';
+  }
+}
+
+async function toggleAnn(id, active){
+  await sb.from('admin_announcements').update({is_active:active}).eq('id',id);
+  toast((active?'Notification shown':'Notification hidden'));
+  loadNotifications();
+}
+
+async function deleteAnn(id){
+  confCb = async function(){
+    await sb.from('admin_announcements').delete().eq('id',id);
+    toast('Announcement deleted');
+    loadNotifications();
+  };
+  openConf('Delete Announcement','Permanently delete this announcement?');
+}
+
+/* ── SECURITY VIOLATIONS PAGE ── */
+var secCache = [];
+async function loadSecurity(){
+  try{
+    var[uRes, secRes] = await Promise.all([
+      sb.from('premium_users').select('id,full_name,mobile'),
+      safe(sb.from('security_violations').select('*').order('created_at',{ascending:false}))
+    ]);
+    var users = uRes.data||[], viols = secRes.data||[];
+    var uMap = {}; users.forEach(function(u){ uMap[u.id]=u; });
+
+    // Enrich with user info
+    secCache = viols.map(function(v){
+      var u = uMap[v.user_id]||{};
+      return Object.assign({}, v, { user_name: u.full_name||'Unknown', user_mobile: u.mobile||v.user_id||'—' });
+    });
+
+    // Stats
+    var byType = function(t){ return secCache.filter(function(v){ return (v.violation_type||'').toLowerCase().includes(t); }).length; };
+    document.getElementById('sec-total').textContent = secCache.length;
+    document.getElementById('sec-ss').textContent   = byType('screenshot') + byType('printscreen');
+    document.getElementById('sec-print').textContent = byType('print');
+    document.getElementById('sec-dev').textContent  = byType('devtools');
+    document.getElementById('sec-copy').textContent = byType('copy');
+    var bdg = document.getElementById('bdg-sec');
+    if(bdg) bdg.textContent = secCache.length || '';
+
+    renderSec(secCache);
+  } catch(err){
+    document.getElementById('tb-sec').innerHTML='<tr class="lr"><td colspan="7" style="color:#ef4444">Could not load violations. Table may not exist yet.<br><small>Create a <code>security_violations</code> table in Supabase with columns: id, user_id, violation_type, page_context, device_info, ip_address, created_at</small></td></tr>';
+  }
+}
+
+function renderSec(data){
+  document.getElementById('sec-cnt').textContent = data.length + ' violations';
+  var tb = document.getElementById('tb-sec');
+  if(!data.length){ tb.innerHTML='<tr class="lr"><td colspan="7">No violations logged.</td></tr>'; return; }
+  tb.innerHTML = data.map(function(v){
+    var vt = (v.violation_type||'').toLowerCase();
+    var typeClr = vt.includes('screenshot')||vt.includes('print') ? '#ef4444' :
+                  vt.includes('devtools') ? '#8b5cf6' :
+                  vt.includes('copy') ? '#f59e0b' : '#64748b';
+    var typeBadge = '<span style="background:'+typeClr+'1a;color:'+typeClr+';font-family:Syne,sans-serif;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap">'+e(v.violation_type||'Unknown')+'</span>';
+    var mob = e(v.user_mobile||'');
+    var uid = e(v.user_id||'');
+    var uname = e(v.user_name||'Unknown');
+    var paper = e(v.page_context||v.paper_name||'—');
+    var vtype = e(v.violation_type||'Unknown');
+    var vtime = fd(v.created_at);
+    return '<tr>' +
+      '<td><strong>'+uname+'</strong></td>' +
+      '<td><code style="font-size:12px">'+mob+'</code></td>' +
+      '<td>'+typeBadge+'</td>' +
+      '<td style="font-size:12px;color:var(--mu)">'+paper+'</td>' +
+      '<td style="font-size:11px;color:var(--mu);max-width:150px;overflow:hidden;text-overflow:ellipsis" title="'+e(v.device_info||'')+'">'+e((v.device_info||'—').substring(0,55))+'</td>' +
+      '<td style="color:var(--mu);font-size:12px">'+vtime+'</td>' +
+      '<td><div style="display:flex;gap:4px;flex-wrap:wrap">' +
+        /* 1. Send Warning Email */
+        '<button class="btn btn-sm btn-amber" onclick="sendViolationEmail(\''+mob+'\',\''+uname+'\',\''+vtype+'\',\''+paper+'\',\''+vtime+'\')" title="Send Warning Email"><i class="fas fa-envelope"></i> Warn</button>' +
+        /* 2. WhatsApp Warning */
+        '<a class="btn btn-sm btn-ghost" href="https://wa.me/91'+mob+'?text='+encodeURIComponent('⚠️ Security Warning from hsbteleet.com\n\nDear Student,\n\nWe detected a security violation ('+(v.violation_type||'')+ ') on your premium account while you were attempting "'+( v.page_context||'')+'". This is a formal warning.\n\nFurther violations will result in permanent account suspension with no refund.\n\nRegards\nHSBTE LEET Team')+'" target="_blank" title="WhatsApp Warning"><i class="fab fa-whatsapp" style="color:#25d366"></i></a>' +
+        /* 3. Permanent Ban */
+        (uid ? '<button class="btn btn-sm btn-danger" onclick="permanentBan(\''+uid+'\',\''+uname+'\',\''+mob+'\')" title="Permanent Ban"><i class="fas fa-ban"></i> Ban</button>' : '') +
+      '</div></td>' +
+    '</tr>';
+  }).join('');
+}
+
+/* ── SEND VIOLATION WARNING EMAIL (admin-triggered) ── */
+function sendViolationEmail(mob, uname, vtype, paper, vtime) {
+  /* Build email modal */
+  var modal = document.getElementById('email-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'email-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;';
+    document.body.appendChild(modal);
+  }
+
+  var defaultSubject = '⚠️ Security Violation Warning — hsbteleet.com';
+  var defaultBody =
+    'Dear Student,\n\n' +
+    'We are writing on behalf of hsbteleet.com regarding activity detected on your account.\n\n' +
+    'Our system has detected: ' + vtype + '\n' +
+    'While attempting: ' + paper + '\n' +
+    'Time: ' + vtime + '\n\n' +
+    'Such activity is strictly prohibited under our Terms & Conditions (hsbteleet.com/terms).\n\n' +
+    'This is a FORMAL WARNING. Any further violations will result in:\n' +
+    '• Immediate and permanent suspension of your premium account\n' +
+    '• No refund will be provided\n' +
+    '• Legal action if content is found shared publicly\n\n' +
+    'If you believe this is an error, reply to this email with your explanation.\n\n' +
+    'Regards,\n' +
+    'Team HSBTE LEET\n' +
+    'hsbteleet.com';
+
+  modal.innerHTML =
+    '<div style="background:#fff;border-radius:18px;padding:28px 26px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3)">' +
+      '<h3 style="font-family:Syne,sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:6px;color:#0f172a">📧 Send Warning Email</h3>' +
+      '<p style="font-size:12px;color:#64748b;margin-bottom:18px">To: <strong>'+mob+'</strong> &nbsp;|&nbsp; Violation: <strong>'+vtype+'</strong></p>' +
+      '<label style="font-size:10px;font-family:Syne,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#64748b;display:block;margin-bottom:4px">User\'s Email Address</label>' +
+      '<input id="em-to" type="email" style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:14px;margin-bottom:12px;outline:none;font-family:inherit" placeholder="student@example.com (get from Users page)" />' +
+      '<label style="font-size:10px;font-family:Syne,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#64748b;display:block;margin-bottom:4px">Subject</label>' +
+      '<input id="em-subj" type="text" value="'+defaultSubject.replace(/"/g,'&quot;')+'" style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:14px;margin-bottom:12px;outline:none;font-family:inherit" />' +
+      '<label style="font-size:10px;font-family:Syne,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#64748b;display:block;margin-bottom:4px">Email Body</label>' +
+      '<textarea id="em-body" rows="12" style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:13px;margin-bottom:16px;outline:none;resize:vertical;font-family:monospace;line-height:1.6">'+defaultBody+'</textarea>' +
+      '<div id="em-alrt" style="font-size:13px;margin-bottom:10px;display:none;padding:8px 12px;border-radius:8px"></div>' +
+      '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
+        '<button onclick="doSendViolEmail(\''+mob+'\')" id="em-send-btn" style="background:linear-gradient(135deg,#1a56db,#1240a8);color:#fff;border:none;padding:11px 22px;border-radius:8px;font-family:Syne,sans-serif;font-size:13px;font-weight:800;cursor:pointer"><i class="fas fa-paper-plane"></i> Send Email</button>' +
+        '<button onclick="document.getElementById(\'email-modal\').remove()" style="background:#f1f5f9;color:#0f172a;border:1px solid #e2e8f0;padding:11px 18px;border-radius:8px;font-family:Syne,sans-serif;font-size:13px;font-weight:700;cursor:pointer">Cancel</button>' +
+      '</div>' +
+    '</div>';
+}
+
+async function doSendViolEmail(mob) {
+  var toEmail = (document.getElementById('em-to').value||'').trim();
+  var subj    = (document.getElementById('em-subj').value||'').trim();
+  var body    = (document.getElementById('em-body').value||'').trim();
+  var alrt    = document.getElementById('em-alrt');
+  var btn     = document.getElementById('em-send-btn');
+
+  if (!toEmail || !toEmail.includes('@')) {
+    alrt.style.cssText='display:block;background:#fff1f2;color:#991b1b;border:1px solid #fca5a5';
+    alrt.textContent = 'Please enter a valid email address.'; return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span style="display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite"></span> Sending…';
+
+  try {
+    await emailjs.send(EJS_SVC, EJS_TPL, {
+      to_name:    'Student',
+      to_email:   toEmail,
+      from_name:  'HSBTE LEET Team',
+      reply_to:   'nishant@hsbteleet.com',
+      subject:    subj,
+      message:    body,
+      user_mobile: mob
+    });
+    alrt.style.cssText='display:block;background:#f0fdf4;color:#15803d;border:1px solid #86efac';
+    alrt.textContent = '✅ Warning email sent successfully to ' + toEmail;
+    btn.innerHTML = '✅ Sent!';
+    setTimeout(function(){ document.getElementById('email-modal').remove(); }, 2000);
+  } catch(err) {
+    alrt.style.cssText='display:block;background:#fff1f2;color:#991b1b;border:1px solid #fca5a5';
+    alrt.textContent = '❌ Failed: ' + (err.text || err.message || JSON.stringify(err)) + '. Check EmailJS template & service ID.';
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Retry Send';
+  }
+}
+
+/* ── PERMANENT BAN (block + send ban email) ── */
+function permanentBan(uid, uname, mob) {
+  /* Step 1: Show ban confirmation modal with email option */
+  var modal = document.getElementById('ban-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'ban-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:20px;';
+    document.body.appendChild(modal);
+  }
+
+  var banBody =
+    'Dear Student,\n\n' +
+    'Your premium account on hsbteleet.com has been PERMANENTLY SUSPENDED.\n\n' +
+    'Reason: Multiple security violations detected on your account, including attempts to copy, screenshot, or extract premium content.\n\n' +
+    'This action is irreversible. No refund will be provided as per our Terms & Conditions (hsbteleet.com/terms).\n\n' +
+    'If you believe this is an error, you may contact: nishant@hsbteleet.com\n\n' +
+    'Regards,\n' +
+    'Team HSBTE LEET\n' +
+    'hsbteleet.com';
+
+  modal.innerHTML =
+    '<div style="background:#fff;border-radius:18px;padding:28px 26px;max-width:480px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.4)">' +
+      '<h3 style="font-family:Syne,sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:6px;color:#991b1b">🚫 Permanent Ban</h3>' +
+      '<p style="font-size:13px;color:#64748b;margin-bottom:16px">This will <strong>immediately block</strong> <strong>'+uname+'</strong> ('+mob+'). No refund. Irreversible.</p>' +
+      '<label style="font-size:10px;font-family:Syne,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#64748b;display:block;margin-bottom:4px">Send Ban Notice Email To (optional)</label>' +
+      '<input id="ban-email" type="email" style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:14px;margin-bottom:12px;outline:none;font-family:inherit" placeholder="student email (optional — leave blank to skip)" />' +
+      '<label style="font-size:10px;font-family:Syne,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#64748b;display:block;margin-bottom:4px">Ban Notice Email</label>' +
+      '<textarea id="ban-body" rows="8" style="width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:13px;margin-bottom:16px;outline:none;resize:vertical;font-family:monospace;line-height:1.6">'+banBody+'</textarea>' +
+      '<div id="ban-alrt" style="font-size:13px;margin-bottom:10px;display:none;padding:8px 12px;border-radius:8px"></div>' +
+      '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
+        '<button onclick="doPermanentBan(\''+uid+'\',\''+uname+'\',\''+mob+'\')" id="ban-btn" style="background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;border:none;padding:11px 22px;border-radius:8px;font-family:Syne,sans-serif;font-size:13px;font-weight:800;cursor:pointer"><i class="fas fa-ban"></i> Confirm Permanent Ban</button>' +
+        '<button onclick="document.getElementById(\'ban-modal\').remove()" style="background:#f1f5f9;color:#0f172a;border:1px solid #e2e8f0;padding:11px 18px;border-radius:8px;font-family:Syne,sans-serif;font-size:13px;font-weight:700;cursor:pointer">Cancel</button>' +
+      '</div>' +
+    '</div>';
+}
+
+async function doPermanentBan(uid, uname, mob) {
+  var toEmail = (document.getElementById('ban-email').value||'').trim();
+  var body    = (document.getElementById('ban-body').value||'').trim();
+  var alrt    = document.getElementById('ban-alrt');
+  var btn     = document.getElementById('ban-btn');
+
+  btn.disabled = true;
+  btn.innerHTML = '<span style="display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite"></span> Banning…';
+
+  try {
+    /* Step 1: Block account in premium_access */
+    var {data: accData, error: accErr} = await sb.from('premium_access').update({is_active: false}).eq('user_id', uid).select();
+    if (accErr) throw new Error('Block failed: ' + accErr.message);
+
+    /* Step 2: Delete from security_violations (optional clean-up) — keep for now */
+
+    /* Step 3: Send ban email if email provided */
+    if (toEmail && toEmail.includes('@')) {
+      try {
+        await emailjs.send(EJS_SVC, EJS_TPL, {
+          to_name:   uname,
+          to_email:  toEmail,
+          from_name: 'HSBTE LEET Team',
+          reply_to:  'nishant@hsbteleet.com',
+          subject:   '🚫 Account Suspended — hsbteleet.com',
+          message:   body,
+          user_mobile: mob
+        });
+      } catch(ejsErr) {
+        /* Email failed but ban already done — show partial success */
+        alrt.style.cssText='display:block;background:#fffbeb;color:#78350f;border:1px solid #fcd34d';
+        alrt.textContent = '⚠️ Account banned but email send failed: ' + (ejsErr.text||ejsErr.message||'EmailJS error');
+        btn.innerHTML = 'Banned (email failed)';
+        loadUsers(); loadSecurity(); return;
+      }
+    }
+
+    alrt.style.cssText='display:block;background:#f0fdf4;color:#15803d;border:1px solid #86efac';
+    alrt.textContent = '✅ Account permanently banned' + (toEmail ? ' + ban email sent to ' + toEmail : '') + '.';
+    btn.innerHTML = '✅ Done';
+    toast('Permanent ban applied: ' + uname, false);
+    setTimeout(function(){ document.getElementById('ban-modal').remove(); loadUsers(); loadSecurity(); }, 1800);
+  } catch(err) {
+    alrt.style.cssText='display:block;background:#fff1f2;color:#991b1b;border:1px solid #fca5a5';
+    alrt.textContent = '❌ Error: ' + err.message;
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-ban"></i> Retry';
+  }
+}
+
+function filterSec(){
+  var q = (document.getElementById('sec-q').value||'').toLowerCase();
+  var t = document.getElementById('sec-type').value.toLowerCase();
+  var f = secCache.filter(function(v){
+    var ms = !q || [v.user_name,v.user_mobile].some(function(x){ return x&&x.toLowerCase().includes(q); });
+    var ts = !t || (v.violation_type||'').toLowerCase().includes(t);
+    return ms && ts;
+  });
+  renderSec(f);
+}
+
+function exportSecCSV(){
+  var rows=[['Name','Mobile','Violation Type','Page/Paper','Device','Time']];
+  secCache.forEach(function(v){ rows.push([v.user_name,v.user_mobile,v.violation_type||'',v.page_context||'',v.device_info||'',fd(v.created_at)]); });
+  var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='violations_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+
+async function clearSecLogs(){
+  confCb = async function(){
+    // Delete logs older than 30 days
+    var cutoff = new Date(); cutoff.setDate(cutoff.getDate()-30);
+    await safe(sb.from('security_violations').delete().lt('created_at', cutoff.toISOString()));
+    toast('Old violation logs cleared (>30 days)');
+    loadSecurity();
+  };
+  openConf('Clear Old Logs', 'Delete all violation logs older than 30 days?');
+}
+
+/* ── USER ACTIVITY / PERFORMANCE PAGE ── */
+var actCache = [];
+async function loadActivity(){
+  try{
+    var[uRes, pyRes, acRes, ulRes, secRes] = await Promise.all([
+      sb.from('premium_users').select('id,full_name,mobile,email,created_at').order('created_at',{ascending:false}),
+      sb.from('premium_payments').select('user_id,amount,status'),
+      sb.from('premium_access').select('user_id,is_active,last_login,papers_attempted,total_time_mins').order('last_login',{ascending:false}),
+      safe(sb.from('ultra_premium_users').select('user_id')),
+      safe(sb.from('security_violations').select('user_id'))
+    ]);
+    var users=uRes.data||[], pmts=pyRes.data||[], acs=acRes.data||[], uls=ulRes.data||[], secs=secRes.data||[];
+    var pyMap={};pmts.forEach(function(p){if(!pyMap[p.user_id])pyMap[p.user_id]=p;});
+    var acMap={};acs.forEach(function(a){acMap[a.user_id]=a;});
+    var ulSet=new Set(uls.map(function(u){return u.user_id;}));
+    // Count violations per user
+    var secCount={};secs.forEach(function(s){secCount[s.user_id]=(secCount[s.user_id]||0)+1;});
+
+    actCache = users.map(function(u){
+      var ac = acMap[u.id]||{};
+      var pmt = pyMap[u.id]||{};
+      return {
+        id: u.id, name: u.full_name, mobile: u.mobile, email: u.email,
+        tier: ulSet.has(u.id)?'ultra':'premium',
+        is_active: ac.is_active!==undefined ? ac.is_active : true,
+        last_login: ac.last_login||null,
+        papers_attempted: ac.papers_attempted||0,
+        total_time_mins: ac.total_time_mins||0,
+        violations: secCount[u.id]||0,
+        join_date: u.created_at
+      };
+    });
+
+    // Sort
+    var sortKey = document.getElementById('act-sort').value||'papers_attempted';
+    actCache.sort(function(a,b){
+      if(sortKey==='last_seen') return new Date(b.last_login||0)-new Date(a.last_login||0);
+      if(sortKey==='join_date') return new Date(b.join_date||0)-new Date(a.join_date||0);
+      return (b[sortKey]||0)-(a[sortKey]||0);
+    });
+
+    document.getElementById('act-cnt').textContent = actCache.length+' users';
+    renderAct(actCache);
+  }catch(err){
+    document.getElementById('tb-act').innerHTML='<tr class="lr"><td colspan="9" style="color:#ef4444">Could not load activity. Make sure <code>premium_access</code> table has <code>last_login</code>, <code>papers_attempted</code>, <code>total_time_mins</code> columns.</td></tr>';
+  }
+}
+
+function renderAct(data){
+  var tb = document.getElementById('tb-act');
+  if(!data.length){ tb.innerHTML='<tr class="lr"><td colspan="9">No data.</td></tr>'; return; }
+  tb.innerHTML = data.map(function(u){
+    var tier = u.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>';
+    var status = u.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>';
+    var lastSeen = u.last_login ? fd(u.last_login) : '<span style="color:#94a3b8;font-size:12px">Not logged in</span>';
+    var vioBadge = u.violations > 0
+      ? '<span style="background:#fee2e2;color:#991b1b;font-family:Syne,sans-serif;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px">'+u.violations+' ⚠️</span>'
+      : '<span style="color:#94a3b8;font-size:12px">0</span>';
+    var devBadge = u.devices_count > 1
+      ? '<span style="background:#fef3c7;color:#92400e;font-family:Syne,sans-serif;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px">'+u.devices_count+' devices</span>'
+      : '<span style="color:#94a3b8;font-size:12px">'+(u.devices_count||1)+' device</span>';
+    var timeTxt = u.total_time_mins > 60
+      ? Math.round(u.total_time_mins/60)+'h '+((u.total_time_mins%60)||0)+'m'
+      : (u.total_time_mins||0)+'m';
+    return '<tr>' +
+      '<td><strong>'+e(u.name||'—')+'</strong><br><span style="font-size:11px;color:var(--mu)">'+e(u.email||'—')+'</span></td>' +
+      '<td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td>' +
+      '<td>'+tier+'</td>' +
+      '<td style="text-align:center"><strong style="font-family:Syne,sans-serif;font-size:1.1rem;color:var(--bl)">'+u.papers_attempted+'</strong><br><span style="font-size:11px;color:var(--mu)">'+timeTxt+' total</span></td>' +
+      '<td style="font-size:12px;color:var(--mu)">'+lastSeen+'</td>' +
+      '<td>'+devBadge+'</td>' +
+      '<td>'+vioBadge+'</td>' +
+      '<td>'+status+'</td>' +
+      '<td><div style="display:flex;gap:4px"><button class="btn btn-sm btn-ghost" onclick="quickLk(\''+escInline(u.mobile)+'\')" title="Full Lookup"><i class="fas fa-eye"></i></button>' +
+        '<a class="btn btn-sm btn-ghost" href="https://wa.me/91'+e(u.mobile)+'" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i></a>' +
+        (u.violations>0?'<button class="btn btn-sm btn-red" onclick="gotoPage(\'security\',null);setTimeout(function(){document.getElementById(\'sec-q\').value=\''+escInline(u.mobile)+'\';filterSec();},300)" title="View Violations"><i class="fas fa-triangle-exclamation"></i></button>':'') +
+      '</div></td>' +
+    '</tr>';
+  }).join('');
+}
+
+function filterAct(){
+  var q = (document.getElementById('act-q').value||'').toLowerCase();
+  var f = actCache.filter(function(u){
+    return !q||[u.name,u.mobile].some(function(x){return x&&x.toLowerCase().includes(q);});
+  });
+  renderAct(f);
+}
+
+function exportActCSV(){
+  var rows=[['Name','Mobile','Email','Tier','Papers Attempted','Time (mins)','Last Login','Violations','Status']];
+  actCache.forEach(function(u){ rows.push([u.name||'',u.mobile||'',u.email||'',u.tier||'',u.papers_attempted||0,u.total_time_mins||0,fd(u.last_login)||'',u.violations||0,u.is_active?'Active':'Blocked']); });
+  var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='user_activity_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+
+/* ── ALSO: log violations FROM premium-security.js INTO Supabase ──
+   premium-security.js calls window.__logViolation(type, context) if defined.
+   Set it up here once user is authenticated: */
+function setupViolationLogger(){
+  var uid = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('prem_uid') : null;
+  if(!uid) return;
+  window.__logViolation = async function(violationType, pageContext){
+    try{
+      await sb.from('security_violations').insert([{
+        user_id: uid,
+        violation_type: violationType,
+        page_context: pageContext || document.title,
+        device_info: navigator.userAgent.substring(0,200),
+        ip_address: 'client-side',
+        created_at: new Date().toISOString()
+      }]);
+    }catch(e){ /* silent fail — don't alert user */ }
+  };
+}
 document.addEventListener('keydown',function(e){
   if(e.ctrlKey&&(e.key==='p'||e.key==='s'||e.key==='u'))e.preventDefault();
   if(e.key==='F12'||e.keyCode===123)e.preventDefault();
@@ -919,7 +1521,7 @@ setInterval(function(){
       <p>Useful links for diploma students preparing for B.Tech lateral entry in Haryana.</p>
     </div>
     <div class="seo-related-grid">
-      <a class="seo-related-card" href="/haryana-leet-2026"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
+      <a class="seo-related-card" href="/haryanaleet"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
       <a class="seo-related-card" href="/leet-syllabus"><i class="fas fa-book-open" aria-hidden="true"></i><span>Haryana LEET syllabus</span></a>
       <a class="seo-related-card" href="/leet-sample-paper"><i class="fas fa-file-lines" aria-hidden="true"></i><span>LEET sample papers</span></a>
       <a class="seo-related-card" href="/haryana-leet-exam-pattern"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span>LEET exam pattern</span></a>

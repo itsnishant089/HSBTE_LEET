@@ -1,0 +1,604 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon & Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <title>HSBTE LEET Premium Sample Paper 28 | Full Syllabus Mock Test</title>
+  <meta name="description" content="HSBTE LEET premium sample paper 28 — 90 questions, full syllabus. Submit & check your score instantly."/>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet"/>
+  <link rel="canonical" href="https://hsbteleet.com/premium-papers"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://hsbteleet.com/"},
+    {"@type":"ListItem","position":2,"name":"Haryana LEET","item":"https://hsbteleet.com/haryanaleet"},
+    {"@type":"ListItem","position":3,"name":"Premium Papers","item":"https://hsbteleet.com/premium-papers"}
+  ]}
+  </script>
+  <style>
+    :root{
+      --pri:#1a56db;--gold:#f59e0b;--success:#16a34a;--danger:#ef4444;
+      --warn:#f59e0b;--bg:#f0f4ff;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+    /* ── ACCESS DENIED ── */
+    #access-denied{display:none;position:fixed;inset:0;background:#0f172a;z-index:99999;
+      align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px;}
+    #access-denied.show{display:flex;}
+    #access-denied h2{font-size:1.6rem;font-weight:800;margin:18px 0 12px;}
+    #access-denied p{opacity:.8;max-width:400px;line-height:1.7;margin-bottom:22px;}
+    .btn-back{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:50px;
+      background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-size:.95rem;font-weight:800;text-decoration:none;}
+
+    /* ── LOADER ── */
+    #page-loader{position:fixed;inset:0;background:var(--bg);z-index:9000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;}
+    .spinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:var(--pri);
+      border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    #page-loader p{font-size:15px;color:var(--muted);}
+
+    /* ── WATERMARK ── */
+    #wm-layer{
+      position:fixed;inset:0;pointer-events:none;z-index:8888;
+      overflow:hidden;user-select:none;
+    }
+    .wm-row{
+      position:absolute;
+      white-space:nowrap;
+      font-family:'Segoe UI',Arial,sans-serif;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:3px;
+      color:rgba(26,86,219,0.13);
+      transform:rotate(-30deg);
+      transform-origin:left center;
+    }
+
+    /* ── STICKY HEADER BAR ── */
+    #quiz-header{
+      position:sticky;top:0;z-index:500;
+      background:linear-gradient(135deg,#0f172a 0%,#1a3a6e 60%,#1a56db 100%);
+      color:#fff;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+      border-bottom:3px solid var(--gold);
+      box-shadow:0 4px 20px rgba(26,86,219,.25);
+    }
+    .qh-left h1{font-size:1.1rem;font-weight:800;margin-bottom:2px;}
+    .qh-left p{font-size:11.5px;opacity:.78;}
+    .qh-left a{font-size:11px;color:#fcd34d;text-decoration:none;opacity:.9;}
+    .qh-left a:hover{opacity:1;text-decoration:underline;}
+    #timer{font-size:1.4rem;font-weight:900;color:#fef08a;
+      background:rgba(0,0,0,.3);padding:7px 16px;border-radius:10px;
+      border:1.5px solid rgba(254,240,138,.3);letter-spacing:1px;font-variant-numeric:tabular-nums;}
+    #timer.danger{color:#fca5a5;border-color:rgba(252,165,165,.4);animation:pulse .7s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+    /* ── SECURITY BAR ── */
+    .sec-bar{
+      background:#fef3c7;border-left:4px solid #f59e0b;
+      padding:10px 18px;font-size:12.5px;color:#92400e;
+      display:flex;align-items:center;gap:10px;
+    }
+
+    /* ── MAIN WRAP ── */
+    .quiz-wrap{max-width:900px;margin:0 auto;padding:22px 16px 60px;}
+
+    /* ── SECTION DIVIDER ── */
+    .sec-div{
+      display:flex;align-items:center;gap:12px;
+      background:linear-gradient(135deg,#1a56db,#7c3aed);
+      color:#fff;padding:11px 20px;border-radius:10px;
+      margin:28px 0 16px;font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+    }
+    .sec-div .sec-icon{font-size:1.2rem;}
+
+    /* ── QUESTION CARD ── */
+    .q-card{
+      background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+      padding:22px 20px;margin-bottom:18px;
+      transition:border-color .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
+    }
+    .q-card::before{
+      content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+      background:linear-gradient(180deg,var(--pri),#7c3aed);border-radius:4px 0 0 4px;
+    }
+    .q-card:hover{border-color:#bfdbfe;box-shadow:0 4px 18px rgba(26,86,219,.1);}
+    .q-card.answered{border-color:#bbf7d0;background:#f0fdf4;}
+    .q-card.answered::before{background:linear-gradient(180deg,#16a34a,#22c55e);}
+    .q-num{font-size:11px;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+    .q-num .q-badge{background:#eff6ff;border:1px solid #bfdbfe;padding:2px 8px;border-radius:20px;font-size:10px;}
+    .q-text{font-size:1rem;font-weight:600;line-height:1.6;color:var(--text);margin-bottom:16px;}
+    .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+    @media(max-width:520px){.opts{grid-template-columns:1fr;}}
+    .opt{
+      display:flex;align-items:center;gap:10px;
+      padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+      cursor:pointer;transition:all .18s;font-size:.92rem;color:var(--text);
+    }
+    .opt:hover{background:#eff6ff;border-color:#93c5fd;transform:translateX(2px);}
+    .opt input{accent-color:var(--pri);width:15px;height:15px;flex-shrink:0;cursor:pointer;}
+    .opt.sel{background:#eff6ff;border-color:var(--pri);font-weight:600;}
+    .opt-letter{
+      width:24px;height:24px;border-radius:50%;background:var(--border);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:800;color:var(--muted);flex-shrink:0;transition:.18s;
+    }
+    .opt.sel .opt-letter{background:var(--pri);color:#fff;}
+
+    /* ── SUBMIT AREA ── */
+    .submit-wrap{text-align:center;padding:28px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-top:10px;}
+    .submit-wrap p{font-size:14px;color:var(--muted);margin-bottom:16px;}
+    #progress-bar-wrap{background:#e2e8f0;border-radius:20px;height:8px;margin-bottom:16px;overflow:hidden;}
+    #progress-bar{height:100%;background:linear-gradient(90deg,var(--pri),#7c3aed);border-radius:20px;transition:width .3s;}
+    #progress-text{font-size:13px;font-weight:700;color:var(--pri);margin-bottom:16px;}
+    .btn-submit{
+      display:inline-flex;align-items:center;gap:9px;
+      padding:15px 40px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+      font-size:1.05rem;font-weight:800;transition:all .2s;
+      box-shadow:0 6px 20px rgba(22,163,74,.3);
+    }
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(22,163,74,.4);}
+    .btn-submit:active{transform:translateY(0);}
+
+    /* ── RESULTS ── */
+    #results{display:none;}
+    .results-hero{
+      background:linear-gradient(135deg,#0f172a,#1a3a6e,#1a56db);
+      color:#fff;border-radius:20px;padding:30px;text-align:center;margin-bottom:24px;
+    }
+    .results-hero h2{font-size:1.6rem;font-weight:900;margin-bottom:6px;}
+    .results-hero p{opacity:.8;font-size:14px;}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;}
+    .score-card{background:var(--card);border-radius:16px;padding:20px 16px;text-align:center;border:2px solid var(--border);transition:.2s;}
+    .score-card:hover{transform:translateY(-3px);}
+    .score-card .s-val{font-size:2.2rem;font-weight:900;display:block;margin-bottom:4px;}
+    .score-card .s-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+    .s-correct{border-color:#86efac;} .s-correct .s-val{color:#16a34a;}
+    .s-wrong{border-color:#fca5a5;}   .s-wrong .s-val{color:#ef4444;}
+    .s-skip{border-color:#fde68a;}    .s-skip .s-val{color:#d97706;}
+    .s-att{border-color:#bfdbfe;}     .s-att .s-val{color:var(--pri);}
+    .s-score{border-color:#ddd6fe;}   .s-score .s-val{color:#7c3aed;}
+    .s-total{border-color:#e2e8f0;}   .s-total .s-val{color:var(--text);}
+
+    /* result action buttons */
+    .result-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:20px 0;}
+    .btn-retake{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 32px;border-radius:50px;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--pri),#1d4ed8);color:#fff;
+      font-size:.95rem;font-weight:800;transition:all .2s;
+    }
+    .btn-retake:hover{transform:translateY(-2px);}
+    .btn-back-papers{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 28px;border-radius:50px;
+      background:#f1f5f9;color:var(--text);font-size:.95rem;font-weight:700;
+      text-decoration:none;border:2px solid var(--border);transition:.2s;
+    }
+    .btn-back-papers:hover{border-color:var(--pri);background:#eff6ff;}
+
+    /* ── REVIEW SECTION ── */
+    .review-header{font-size:1.1rem;font-weight:800;margin:24px 0 14px;color:var(--text);display:flex;align-items:center;gap:8px;}
+    .r-card{border-radius:12px;padding:18px 20px;margin-bottom:14px;border:2px solid;}
+    .r-correct{background:#f0fdf4;border-color:#86efac;}
+    .r-wrong{background:#fff5f5;border-color:#fca5a5;}
+    .r-skip{background:#fffbeb;border-color:#fde68a;}
+    .r-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:8px;}
+    .r-badge.b-c{background:#dcfce7;color:#15803d;}
+    .r-badge.b-w{background:#fee2e2;color:#991b1b;}
+    .r-badge.b-s{background:#fef3c7;color:#92400e;}
+    .r-qnum{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:5px;}
+    .r-q{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:10px;}
+    .r-ans-correct{font-size:.88rem;font-weight:700;color:#15803d;display:flex;align-items:center;gap:6px;}
+    .r-ans-wrong{font-size:.88rem;font-weight:700;color:#991b1b;display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+
+    @media(max-width:600px){
+      .qh-left h1{font-size:.95rem;}
+      #timer{font-size:1.2rem;padding:6px 12px;}
+      .q-card{padding:16px 14px;}
+    }
+  </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/seo-related.css"/>
+</head>
+<body>
+
+<!-- ACCESS DENIED -->
+<div id="access-denied">
+  <div style="font-size:3.5rem">🔒</div>
+  <h2>Premium Access Only</h2>
+  <p>Login with your premium account to access this paper.</p>
+  <a href="/premium-login" class="btn-back">🔑 Login / Get Access</a>
+</div>
+
+<!-- LOADER -->
+<div id="page-loader">
+  <div class="spinner"></div>
+  <p>Verifying premium access…</p>
+</div>
+
+<!-- WATERMARK LAYER (filled by JS) -->
+<div id="wm-layer" aria-hidden="true"></div>
+
+<!-- MAIN PAGE -->
+<div id="main-page" style="display:none;">
+
+  <!-- STICKY HEADER -->
+  <div id="quiz-header">
+    <div class="qh-left">
+      <h1>🏆 HSBTE LEET Premium Sample Paper 28</h1>
+      <p>Full Syllabus · 90 Questions · 90 Min</p>
+      <a href="/premium-papers">← Back to All Papers</a>
+    </div>
+    <div id="timer">90:00</div>
+  </div>
+
+  <!-- SECURITY BAR -->
+  <div class="sec-bar">
+    🛡️ <strong>Premium Content:</strong> Sharing, screenshotting or printing is strictly prohibited. This paper is watermarked to your account. Contact: <strong>nishant@hsbteleet.com</strong>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+      <div id="questions-list"></div>
+
+      <!-- SUBMIT AREA -->
+      <div class="submit-wrap">
+        <div id="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+        <div id="progress-text">0 of 90 answered</div>
+        <p>Submit when done — you'll see Correct, Wrong & Skipped instantly.</p>
+        <button class="btn-submit" onclick="submitExam()">✅ Submit Exam & See Score</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+      <div class="results-hero">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🎯</div>
+        <h2>Your Score Report</h2>
+        <p id="score-subtitle">hsbteleet.com · Premium Mock Test</p>
+      </div>
+
+      <div class="score-grid">
+        <div class="score-card s-correct"><span class="s-val" id="res-cor">0</span><span class="s-lbl">✅ Correct</span></div>
+        <div class="score-card s-wrong"><span class="s-val" id="res-wro">0</span><span class="s-lbl">❌ Wrong</span></div>
+        <div class="score-card s-skip"><span class="s-val" id="res-skp">0</span><span class="s-lbl">⏭ Skipped</span></div>
+        <div class="score-card s-att"><span class="s-val" id="res-att">0</span><span class="s-lbl">📝 Attempted</span></div>
+        <div class="score-card s-score"><span class="s-val" id="res-scr">0</span><span class="s-lbl">🏅 Score (4,−1)</span></div>
+        <div class="score-card s-total"><span class="s-val" id="res-tot">90</span><span class="s-lbl">📋 Total Qs</span></div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-retake" onclick="location.reload()">🔄 Retake Test</button>
+        <a href="/premium-papers" class="btn-back-papers">📚 All Papers</a>
+      </div>
+
+      <div class="review-header">📋 Detailed Question Review</div>
+      <div id="review-area"></div>
+    </div>
+
+  </div>
+</div><!-- /main-page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script>
+'use strict';
+
+var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
+/* EmailJS for security violation alerts */
+var EJS_SVC = 'service_zlxv3q4', EJS_PUB = 'byFleJ2hV770O_Mni', EJS_TPL = 'template_w2fdh1s';
+/* Expose Supabase client on window for premium-security.js */
+window.sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+/* Init EmailJS */
+if (typeof emailjs !== 'undefined') { emailjs.init(EJS_PUB); }
+var TIMER_SEC = 5400;
+var PAPER_TITLE = 'HSBTE LEET Premium Sample Paper 28';
+
+
+/* ── WATERMARK ── */
+function injectWatermark(){
+  var mob  = sessionStorage.getItem('prem_mob')  || '';
+  var name = sessionStorage.getItem('prem_name') || 'Premium';
+  var masked = mob ? mob.slice(0,3)+'****'+mob.slice(-2) : name;
+  var txt = '© hsbteleet.com  ' + masked + '  PREMIUM  ';
+
+  var layer = document.getElementById('wm-layer');
+  layer.innerHTML = '';
+
+  var vw = Math.max(document.documentElement.clientWidth,1400);
+  var vh = Math.max(document.documentElement.clientHeight,900);
+
+  var totalH = vh * 3;
+  var rowGap  = 90;
+  var rows    = Math.ceil(totalH / rowGap) + 4;
+
+  for(var r = 0; r < rows; r++){
+    var div = document.createElement('div');
+    div.className = 'wm-row';
+    var topVal  = (r * rowGap) - rowGap;
+    var leftVal = (r % 2 === 0) ? -120 : -60;
+    div.style.top  = topVal + 'px';
+    div.style.left = leftVal + 'px';
+    div.style.width = (vw * 2.5) + 'px';
+    var repeats = Math.ceil((vw * 2.5) / (txt.length * 9)) + 3;
+    div.textContent = Array(repeats).fill(txt).join('   ');
+    layer.appendChild(div);
+  }
+}
+
+/* ── ACCESS VERIFICATION ── */
+async function verifyAccess(){
+  var uid = sessionStorage.getItem('prem_uid');
+  var ts  = parseInt(sessionStorage.getItem('prem_ts')||'0');
+  if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
+  try{
+    var sb = window.supabase.createClient(SUPA_URL,SUPA_KEY);
+    var {data,error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
+    if(error||!data||!data.is_active){showDenied();return;}
+    sessionStorage.setItem('prem_ts',Date.now().toString());
+    document.getElementById('page-loader').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    injectWatermark();
+    buildQuiz();
+    startTimer();
+  }catch(e){showDenied();}
+}
+
+function showDenied(){
+  document.getElementById('page-loader').style.display='none';
+  document.getElementById('access-denied').classList.add('show');
+}
+
+/* ── QUESTIONS DATA ── */
+const questions = [
+// ── a-1 Mathematics ──
+{s:"a-1 Mathematics",q:"For the quadratic 3x² - 24x + 48 = 0, the sum of its roots is:",o:["4","6","8","9"],a:2},
+{s:"a-1 Mathematics",q:"Probability of a sure event is:",o:["1","0.5","0","Infinite"],a:0},
+{s:"a-1 Mathematics",q:"The trace of the matrix [[2, 8], [2, 5]] is:",o:["7","21","11","17"],a:0},
+{s:"a-1 Mathematics",q:"Area of a circle of radius 21 cm (π = 22/7) is:",o:["4158 cm²","1386 cm²","1247 cm²","2079 cm²"],a:1},
+{s:"a-1 Mathematics",q:"For the quadratic 2x² - 28x + 90 = 0, the sum of its roots is:",o:["10","20","18","14"],a:3},
+{s:"a-1 Mathematics",q:"If y = sin(6x), then dy/dx at x = 0 is:",o:["9","6","12","4"],a:1},
+{s:"a-1 Mathematics",q:"The inverse of a matrix A exists only if:",o:["A is null","A has equal rows","A is symmetric","det A ≠ 0"],a:3},
+{s:"a-1 Mathematics",q:"If y = sin(4x), then dy/dx at x = 0 is:",o:["12","7","2","4"],a:3},
+// ── a-2 Physics ──
+{s:"a-2 Physics",q:"Elastic potential energy of a spring (k = 400 N/m) stretched by 0.02 m is:",o:["0.12 J","1.08 J","0.08 J","0.04 J"],a:2},
+{s:"a-2 Physics",q:"The phenomenon of splitting of white light into colours is:",o:["Polarisation","Dispersion","Reflection","Interference"],a:1},
+{s:"a-2 Physics",q:"Two resistors of 66 Ω each are connected in parallel. Equivalent resistance is:",o:["17 Ω","33 Ω","23 Ω","1 Ω"],a:1},
+{s:"a-2 Physics",q:"Potential energy of a 2 kg mass at height 17 m (g = 10 m/s²) is:",o:["340 J","306 J","170 J","1020 J"],a:0},
+{s:"a-2 Physics",q:"Capillary rise of liquid in a tube is due to:",o:["Inertia","Surface tension","Magnetism","Gravity only"],a:1},
+{s:"a-2 Physics",q:"Which law relates current and voltage for a metal at constant temperature?",o:["Faraday's law","Ohm's law","Lenz's law","Boyle's law"],a:1},
+{s:"a-2 Physics",q:"At constant temperature a gas at 4 atm and 8 L is compressed to 4 L. New pressure is:",o:["8 atm","7 atm","24 atm","16 atm"],a:0},
+{s:"a-2 Physics",q:"Kinetic energy of a 10 kg body moving at 4 m/s is:",o:["240 J","64 J","100 J","80 J"],a:3},
+// ── a-3 Chemistry ──
+{s:"a-3 Chemistry",q:"The unit of molarity is:",o:["g/L","mol/kg","mol/L","L/mol"],a:2},
+{s:"a-3 Chemistry",q:"An electrolyte is a substance that:",o:["Is always a metal","Is always a gas","Conducts electricity in solution or molten state","Never conducts"],a:2},
+{s:"a-3 Chemistry",q:"Percentage by mass of O in CaO is nearly:",o:["28.6 %","57.1 %","22.9 %","38.6 %"],a:0},
+// ── a-4 Communication Skills ──
+{s:"a-4 Communication Skills",q:"A resume (CV) mainly presents:",o:["Only photographs","Only references' phones","Education, skills and experience","Only hobbies"],a:2},
+{s:"a-4 Communication Skills",q:"The idiom 'a piece of cake' means:",o:["A small gift","A dessert","Something very easy","A difficult task"],a:2},
+{s:"a-4 Communication Skills",q:"Which sentence is in the future tense?",o:["They visited the plant.","They will visit the plant tomorrow.","They have visited the plant.","They visit the plant."],a:1},
+// ── a-5 General Awareness ──
+{s:"a-5 General Awareness",q:"The father of the Green Revolution in India is:",o:["Verghese Kurien","M. S. Swaminathan","Vikram Sarabhai","Homi Bhabha"],a:1},
+{s:"a-5 General Awareness",q:"The national currency of India is:",o:["Dinar","Taka","Dollar","Rupee"],a:3},
+{s:"a-5 General Awareness",q:"The Skill India Mission aims at:",o:["Printing currency","Building roads only","Training youth in employable skills","Space travel"],a:2},
+// ── b-1 Electrical Engineering ──
+{s:"b-1 Electrical Engineering",q:"In a three-phase supply the phase difference between phases is:",o:["90°","60°","120°","180°"],a:2},
+{s:"b-1 Electrical Engineering",q:"Which motor is widely used in ceiling fans?",o:["Synchronous motor","DC series motor","Stepper motor","Single-phase capacitor motor"],a:3},
+{s:"b-1 Electrical Engineering",q:"The time period of an AC supply of frequency 400 Hz is:",o:["1.2 ms","2.5 ms","2 ms","6.5 ms"],a:1},
+{s:"b-1 Electrical Engineering",q:"Three equal resistors of 30 Ω each form a delta. The equivalent star resistance per arm is:",o:["10 Ω","9 Ω","12 Ω","30 Ω"],a:0},
+{s:"b-1 Electrical Engineering",q:"The transmission of electric power at high voltage reduces:",o:["Voltage","I²R losses","Insulation requirement","Frequency"],a:1},
+{s:"b-1 Electrical Engineering",q:"A shaft running at 3000 rpm develops torque 10 N·m. Mechanical power (π = 3.14) is nearly:",o:["3925 W","3140 W","3768 W","4710 W"],a:1},
+{s:"b-1 Electrical Engineering",q:"The direction of rotation of a DC motor can be reversed by reversing:",o:["Armature current or field current (not both)","Supply frequency","Brush material","Both armature and field currents"],a:0},
+{s:"b-1 Electrical Engineering",q:"A series RL circuit has R = 12 Ω and XL = 16 Ω. The impedance is:",o:["20 Ω","21 Ω","18 Ω","19 Ω"],a:0},
+{s:"b-1 Electrical Engineering",q:"Inductive reactance of a 0.2 H coil at 100 Hz (π = 3.14) is:",o:["62.8 Ω","126 Ω","113 Ω","502 Ω"],a:1},
+// ── b-2 Electronics Engineering ──
+{s:"b-2 Electronics Engineering",q:"A stack pointer register holds:",o:["The result of ALU","The clock count","The program name","The address of the top of the stack"],a:3},
+{s:"b-2 Electronics Engineering",q:"The unit of capacitance in electronics circuits commonly used for coupling is:",o:["Tesla","Henry","Microfarad","Ohm"],a:2},
+{s:"b-2 Electronics Engineering",q:"A pulse train has ON time 6 ms in a period of 8 ms. The duty cycle is:",o:["105 %","150 %","68 %","75 %"],a:3},
+{s:"b-2 Electronics Engineering",q:"Frequency of a 555 astable (R1 = 4 kΩ, R2 = 8 kΩ, C = 0.1 μF, f = 1.44/((R1+2R2)C)) is nearly:",o:["576 Hz","864 Hz","360 Hz","720 Hz"],a:3},
+{s:"b-2 Electronics Engineering",q:"A diode conducts when:",o:["Open circuited","Forward biased above its threshold voltage","Reverse biased","Zero biased always"],a:1},
+{s:"b-2 Electronics Engineering",q:"The decimal equivalent of binary 101010 is:",o:["42","84","21","41"],a:0},
+{s:"b-2 Electronics Engineering",q:"Resonant frequency of an LC circuit with L = 1 mH and C = 0.1 μF is:",o:["31.83 kHz","15.92 kHz","7.96 kHz","50.00 kHz"],a:1},
+{s:"b-2 Electronics Engineering",q:"The commercial AM broadcast band is about:",o:["535–1605 kHz","1–10 GHz","300–3000 MHz","88–108 MHz"],a:0},
+// ── b-3 Computer Engineering ──
+{s:"b-3 Computer Engineering",q:"Virtual memory uses part of the ___ as extended RAM.",o:["Monitor","Keyboard","Hard disk","Mouse"],a:2},
+{s:"b-3 Computer Engineering",q:"Version control systems such as Git are used to:",o:["Track changes in source code","Render videos","Edit photos","Browse the web"],a:0},
+{s:"b-3 Computer Engineering",q:"Maximum number of nodes in a binary tree of height 6 (root at height 0) is:",o:["102","159","127","63"],a:2},
+{s:"b-3 Computer Engineering",q:"An algorithm's time complexity of nested loops each running n times is:",o:["O(1)","O(n²)","O(log n)","O(n)"],a:1},
+{s:"b-3 Computer Engineering",q:"In C, malloc() is used for:",o:["Printing","Dynamic memory allocation","Closing a file","Sorting"],a:1},
+{s:"b-3 Computer Engineering",q:"If ASCII of 'A' is 65, then ASCII of 'D' is:",o:["85","102","34","68"],a:3},
+{s:"b-3 Computer Engineering",q:"In C, 'continue' statement:",o:["Skips the rest of the current loop iteration","Ends the program","Exits the loop","Declares a loop"],a:0},
+{s:"b-3 Computer Engineering",q:"In Python, a list is written using:",o:["Curly braces","Square brackets","Backticks","Angle brackets"],a:1},
+// ── c-1 Mechanical Engineering ──
+{s:"c-1 Mechanical Engineering",q:"Which gear gives high speed reduction in a compact space for non-parallel, non-intersecting shafts?",o:["Helical gear","Internal gear","Worm gear","Spur gear"],a:2},
+{s:"c-1 Mechanical Engineering",q:"An intercooler is used in:",o:["Multistage compressors","Boilers","Turbines only","Single-stage pumps"],a:0},
+{s:"c-1 Mechanical Engineering",q:"A driver gear of 20 teeth at 600 rpm drives a gear of 80 teeth. Driven gear speed is:",o:["165 rpm","250 rpm","150 rpm","188 rpm"],a:2},
+{s:"c-1 Mechanical Engineering",q:"The hydraulic press works on:",o:["Boyle's law","Newton's cooling law","Pascal's law","Bernoulli's law"],a:2},
+{s:"c-1 Mechanical Engineering",q:"A heat engine receives 750 kJ and produces 300 kJ of work. Thermal efficiency is:",o:["30 %","38 %","39 %","40 %"],a:3},
+{s:"c-1 Mechanical Engineering",q:"Pascal's law states that pressure applied to a confined fluid is:",o:["Zero","Transmitted upward only","Transmitted equally in all directions","Absorbed by walls"],a:2},
+{s:"c-1 Mechanical Engineering",q:"Ultimate stress 500 MPa and working stress 250 MPa give a factor of safety of:",o:["12","6","2","5"],a:2},
+{s:"c-1 Mechanical Engineering",q:"Clausius statement relates to:",o:["Shock waves","Conservation of mass","Heat flow from cold to hot needing work","Entropy of mixtures"],a:2},
+// ── c-2 Production Engineering ──
+{s:"c-2 Production Engineering",q:"A pressure relief valve protects against:",o:["Noise","Excess pressure","Low flow","Leaks only"],a:1},
+{s:"c-2 Production Engineering",q:"Plasma arc cutting uses:",o:["A water jet only","A cold chisel","An ionised gas arc at very high temperature","A saw blade"],a:2},
+{s:"c-2 Production Engineering",q:"Tolerance is:",o:["Surface roughness","A type of fit only","The permissible variation in a dimension","The exact size"],a:2},
+{s:"c-2 Production Engineering",q:"The horizontal milling machine's arbor is used to:",o:["Cool the tool","Hold the workpiece","Feed the table","Hold the cutter"],a:3},
+{s:"c-2 Production Engineering",q:"Shell moulding uses:",o:["Water glass only","Plaster only","Resin-coated sand heated against a pattern","Wet sand only"],a:2},
+{s:"c-2 Production Engineering",q:"A dial indicator is used to:",o:["Heat metal","Check run-out and flatness","Cut metal","Weld metal"],a:1},
+// ── c-3 Automobile Engineering ──
+{s:"c-3 Automobile Engineering",q:"The firing order of a four-cylinder inline engine is commonly:",o:["1-4-3-2 only","2-1-4-3","1-2-3-4","1-3-4-2"],a:3},
+{s:"c-3 Automobile Engineering",q:"Half-shafts (axle shafts) transmit power from the:",o:["Differential to the wheels","Engine to clutch","Gearbox to differential","Wheel to brake"],a:0},
+{s:"c-3 Automobile Engineering",q:"The battery in a vehicle is mainly used for:",o:["Cooling the radiator","Starting, lighting and ignition","Pumping oil","Moving the pistons"],a:1},
+{s:"c-3 Automobile Engineering",q:"Variable valve timing improves:",o:["Efficiency and power across speed range","Door locking","Tyre wear only","Brake feel only"],a:0},
+{s:"c-3 Automobile Engineering",q:"Tyre pressure should be checked when the tyres are:",o:["Wet only","Hot","Empty","Cold"],a:3},
+{s:"c-3 Automobile Engineering",q:"The unit of torque is:",o:["Newton-metre","Newton","Joule","Watt"],a:0},
+// ── d-1 Civil Engineering ──
+{s:"d-1 Civil Engineering",q:"Quantity estimation of a work is the process of:",o:["Testing concrete","Drawing plans","Calculating quantities of items","Surveying"],a:2},
+{s:"d-1 Civil Engineering",q:"RL of benchmark is 250 m and backsight is 1.5 m. The height of instrument is:",o:["189 m","251 m","250 m","252 m"],a:3},
+{s:"d-1 Civil Engineering",q:"A plane table survey is:",o:["A graphical method of surveying in the field","Computation-only method","A photographic method","Underwater survey"],a:0},
+{s:"d-1 Civil Engineering",q:"RL of benchmark is 150 m and backsight is 1.5 m. The height of instrument is:",o:["152 m","114 m","606 m","75.8 m"],a:0},
+{s:"d-1 Civil Engineering",q:"Surveying is the art of:",o:["Drawing maps only from memory","Mixing concrete","Building roads","Determining relative positions of points on or near the earth"],a:3},
+// ── d-2 Textile Engineering ──
+{s:"d-2 Textile Engineering",q:"The 'lea' for cotton yarn measures:",o:["840 yards","1000 m","9000 m","120 yards"],a:3},
+{s:"d-2 Textile Engineering",q:"Blending of fibres is done to:",o:["Reduce strength","Remove twist","Combine the properties of different fibres","Increase cost always"],a:2},
+{s:"d-2 Textile Engineering",q:"Technical textiles are used for:",o:["Fashion only","Functional (non-aesthetic) applications","Printing only","Decoration only"],a:1},
+{s:"d-2 Textile Engineering",q:"Rib knit fabric has:",o:["Wales on both sides of fabric","No wales","Wales on one side only","Only courses"],a:0},
+{s:"d-2 Textile Engineering",q:"Raising (napping) produces:",o:["A transparent surface","A fibre-covered soft surface","A hard surface","A glossy surface"],a:1},
+// ── d-3 Chemical/Printing Engineering ──
+{s:"d-3 Chemical/Printing Engineering",q:"Saddle stitching is done with:",o:["Threaded wire spiral","Glue at spine","Rings","Staples through the fold"],a:3},
+{s:"d-3 Chemical/Printing Engineering",q:"Offset printing transfers ink from plate to:",o:["Rubber blanket then paper","Directly to paper only","Screen","Laser drum"],a:0},
+// ── d-4 Ceramic Engineering ──
+{s:"d-4 Ceramic Engineering",q:"A tunnel kiln is a ___ kiln.",o:["Intermittent","Electric hand furnace","Batch only","Continuous"],a:3},
+{s:"d-4 Ceramic Engineering",q:"Which test measures the strength of a ceramic tile?",o:["Modulus of rupture test","Vicat test","Charpy test only","Slump test"],a:0},
+// ── d-5 Food Technology ──
+{s:"d-5 Food Technology",q:"The deficiency of iodine causes:",o:["Goitre","Anaemia","Rickets","Scurvy"],a:0},
+{s:"d-5 Food Technology",q:"Milling of paddy gives:",o:["Rice and husk","Maize oil","Wheat flour","Sugar"],a:0},
+// ── d-6 Others ──
+{s:"d-6 Others",q:"Weeding in libraries means:",o:["Cleaning shelves only","Adding new books","Labelling books","Removing outdated or damaged materials"],a:3},
+{s:"d-6 Others",q:"A requisition in office means:",o:["A holiday","A meeting","A bill of sale","A formal request for supplies"],a:3},
+{s:"d-6 Others",q:"The 'fall' of fabric refers to:",o:["Its price","How it hangs","Its colour","Its width"],a:1},
+{s:"d-6 Others",q:"Stitches per inch (SPI) determines:",o:["Fabric width","Dye fastness","Fabric colour","Strength and appearance of a seam"],a:3},
+];
+
+/* ── QUIZ BUILD ── */
+var timerInterval, timeLeft = TIMER_SEC;
+
+function buildQuiz(){
+  var list = document.getElementById('questions-list');
+  var html = '';
+  var curSection = '';
+  var LETTERS = ['A','B','C','D','E'];
+  questions.forEach(function(q,i){
+    if(q.s !== curSection){
+      curSection = q.s;
+      html += '<div class="sec-div"><span class="sec-icon">📚</span>' + q.s + '</div>';
+    }
+    html += '<div class="q-card" id="qc-'+i+'">';
+    html +=   '<div class="q-num"><span class="q-badge">Q.'+(i+1)+'</span></div>';
+    html +=   '<div class="q-text">'+q.q+'</div>';
+    html +=   '<div class="opts">';
+    q.o.forEach(function(opt,j){
+      html += '<label class="opt" id="lbl-'+i+'-'+j+'" onclick="selectOpt('+i+','+j+',this)">';
+      html +=   '<input type="radio" name="q'+i+'" value="'+j+'">';
+      html +=   '<span class="opt-letter">'+LETTERS[j]+'</span>';
+      html +=   '<span>'+opt+'</span>';
+      html += '</label>';
+    });
+    html += '</div></div>';
+  });
+  list.innerHTML = html;
+  updateProgress();
+}
+
+function selectOpt(qi,oi,el){
+  document.querySelectorAll('[id^="lbl-'+qi+'-"]').forEach(function(l){l.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('qc-'+qi).classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress(){
+  var answered = 0;
+  questions.forEach(function(_,i){if(document.querySelector('input[name="q'+i+'"]:checked'))answered++;});
+  var pct = Math.round((answered/questions.length)*100);
+  document.getElementById('progress-bar').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = answered+' of '+questions.length+' answered';
+}
+
+function startTimer(){
+  var el = document.getElementById('timer');
+  timerInterval = setInterval(function(){
+    timeLeft--;
+    var m=Math.floor(timeLeft/60), s=timeLeft%60;
+    el.textContent = m+':'+(s<10?'0':'')+s;
+    if(timeLeft<=300) el.classList.add('danger');
+    if(timeLeft<=0){clearInterval(timerInterval);submitExam();}
+  },1000);
+}
+
+function submitExam(){
+  clearInterval(timerInterval);
+  var cor=0,wro=0,skp=0;
+  var reviewHTML = '';
+  var LETTERS=['A','B','C','D','E'];
+
+  questions.forEach(function(q,i){
+    var sel = document.querySelector('input[name="q'+i+'"]:checked');
+    var ans = sel ? parseInt(sel.value) : -1;
+    if(ans===-1) skp++;
+    else if(ans===q.a) cor++;
+    else wro++;
+
+    var cls = ans===-1?'r-skip':ans===q.a?'r-correct':'r-wrong';
+    var badge = ans===-1?'<span class="r-badge b-s">⏭ Skipped</span>':
+                ans===q.a?'<span class="r-badge b-c">✅ Correct</span>':
+                          '<span class="r-badge b-w">❌ Wrong</span>';
+    reviewHTML += '<div class="r-card '+cls+'">';
+    reviewHTML += badge;
+    reviewHTML += '<div class="r-qnum">Q.'+(i+1)+' · '+q.s+'</div>';
+    reviewHTML += '<div class="r-q">'+q.q+'</div>';
+    if(ans!==-1&&ans!==q.a){
+      reviewHTML += '<div class="r-ans-wrong">✗ Your answer: '+LETTERS[ans]+'. '+q.o[ans]+'</div>';
+    }
+    reviewHTML += '<div class="r-ans-correct">✓ Correct: '+LETTERS[q.a]+'. '+q.o[q.a]+'</div>';
+    reviewHTML += '</div>';
+  });
+
+  var att = cor+wro;
+  var scr = cor*4 - wro;
+  document.getElementById('res-cor').textContent = cor;
+  document.getElementById('res-wro').textContent = wro;
+  document.getElementById('res-skp').textContent = skp;
+  document.getElementById('res-att').textContent = att;
+  document.getElementById('res-scr').textContent = scr;
+
+  var pct = questions.length>0?Math.round((cor/questions.length)*100):0;
+  document.getElementById('score-subtitle').textContent =
+    'Score: '+scr+' | Accuracy: '+pct+'% | hsbteleet.com';
+
+  document.getElementById('review-area').innerHTML = reviewHTML;
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('results').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── INIT ── */
+verifyAccess();
+</script>
+<section class="seo-related-links" data-seo-related-links="1" aria-label="Related Haryana LEET resources">
+  <div class="seo-related-inner">
+    <div class="seo-related-head">
+      <span class="seo-related-badge"><i class="fas fa-compass" aria-hidden="true"></i> Explore</span>
+      <h2>Related Haryana LEET 2027 Resources</h2>
+      <p>Useful links for diploma students preparing for B.Tech lateral entry in Haryana.</p>
+    </div>
+    <div class="seo-related-grid">
+      <a class="seo-related-card" href="/haryanaleet"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Haryana LEET 2027 guide</span></a>
+      <a class="seo-related-card" href="/leet-syllabus"><i class="fas fa-book-open" aria-hidden="true"></i><span>Haryana LEET syllabus</span></a>
+      <a class="seo-related-card" href="/leet-sample-paper"><i class="fas fa-file-lines" aria-hidden="true"></i><span>LEET sample papers</span></a>
+      <a class="seo-related-card" href="/haryana-leet-exam-pattern"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span>LEET exam pattern</span></a>
+      <a class="seo-related-card" href="/last-year-cutoff"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Haryana LEET cutoff</span></a>
+      <a class="seo-related-card" href="/haryana-leet-counselling"><i class="fas fa-users" aria-hidden="true"></i><span>LEET counselling process</span></a>
+      <a class="seo-related-card" href="/btech-leet-premium"><i class="fas fa-crown" aria-hidden="true"></i><span>Premium LEET papers</span></a>
+      <a class="seo-related-card" href="/counseling"><i class="fas fa-headset" aria-hidden="true"></i><span>Personalized counselling help</span></a>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="/js/premium-security.js"></script>
+</body>
+</html>

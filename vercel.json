@@ -92,9 +92,23 @@
       "source": "/syllabus/syllabus.html",
       "destination": "/hsbte-syllabus",
       "permanent": true
+    },
+    {
+      "source": "/haryana-leet-2026",
+      "destination": "/haryanaleet",
+      "permanent": true
+    },
+    {
+      "source": "/html/haryana-leet-2026.html",
+      "destination": "/haryanaleet",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/author/nishant",
+      "destination": "/html/author-nishant.html"
+    },
     {
       "source": "/(?!html/|css/|js/|image/|partials/|api/|paper/|pdf/|syllabus/|404)([^.]+)",
       "destination": "/html/$1.html"
