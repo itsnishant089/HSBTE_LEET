@@ -154,6 +154,7 @@
       }
       state.user = d.user; BOOK.setUser(d.user);
       if (d.user.status !== 'active') return showRestricted({ code: d.user.status, error: d.user.status === 'banned' ? 'This account has been banned.' : 'This account is suspended pending review.', reason: d.user.reason });
+      document.title = 'Haryana LEET Book 2027 – ' + (kind === 'master' ? 'Full Book' : 'Free Sample') + ' | HSBTE LEET';
       $('title').textContent = kind === 'master' ? 'Haryana LEET 2027 — Complete Study Guide' : 'Free Sample — Haryana LEET 2027';
       if (!d.user.hasFull) { var bb = $('b-buy'); bb.hidden = false; bb.onclick = openBuy; }
       if (kind === 'master' && !d.user.hasFull) { $('tot').textContent = '/ 1633'; return showBuyGate(); }
@@ -212,6 +213,36 @@
   function hideOn(on) { document.documentElement.classList[on ? 'add' : 'remove']('bkr-hide'); }
   window.addEventListener('blur', function () { hideOn(true); }); window.addEventListener('focus', function () { hideOn(false); });
   document.addEventListener('visibilitychange', function () { hideOn(document.hidden); });
+
+  // mobile / extra capture hooks: hide the page the moment it may leave the screen (app switch, share sheet, screen-share)
+  window.addEventListener('pagehide', function () { hideOn(true); });
+  window.addEventListener('pageshow', function () { if (document.hasFocus()) hideOn(false); });
+  try { // screen-sharing / recording through getDisplayMedia (other tabs, extensions)
+    var md = navigator.mediaDevices;
+    if (md && md.getDisplayMedia) {
+      var orig = md.getDisplayMedia.bind(md);
+      md.getDisplayMedia = function () { return Promise.reject(new DOMException('Blocked', 'NotAllowedError')); };
+      void orig;
+    }
+  } catch (_) {}
+
+  // anti-overlay: nothing but our own markup may live in <body> (extensions / injected fake layers / iframes)
+  var OURS = ['top', 'toc', 'stage', 'gate', 'menu', 'toast', 'bkr-dt'];
+  function isOurs(n) { return n.nodeType !== 1 || n.tagName === 'SCRIPT' || OURS.indexOf(n.id) > -1; }
+  new MutationObserver(function (list) {
+    list.forEach(function (m) {
+      Array.prototype.forEach.call(m.addedNodes, function (n) {
+        if (!isOurs(n)) { try { n.remove(); } catch (_) {} }
+      });
+    });
+  }).observe(document.body, { childList: true });
+  // canvas must stay visible and on top: if its style/position is tampered with, repaint from scratch
+  new MutationObserver(function () {
+    var cs = getComputedStyle(canvas);
+    if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity < 0.9) { canvas.removeAttribute('style'); }
+  }).observe(canvas, { attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
+  // never allow being framed by another site (clickjacking / invisible overlay frames)
+  if (window.top !== window.self) { try { window.top.location = location.href; } catch (_) { document.documentElement.innerHTML = ''; } }
 
   // developer tools: docked window-size change + console-inspection probe
   var dtOpen = false, probe = new Image();

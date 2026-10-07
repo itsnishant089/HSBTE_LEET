@@ -6,7 +6,7 @@
  * Env: MAIN_SUPABASE_URL, MAIN_SUPABASE_SERVICE_KEY, SESSION_SECRET, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET,
  *      RAZORPAY_WEBHOOK_SECRET (optional prices: PREMIUM_PRICE, ULTRA_PRICE, COUNSELING_PRICE)
  */
-import { mailOrderDone } from './mail.js';
+import { mailOrderDone, mailEnabled } from './mail.js';
 import {
   rest, rpc, one, insert, patch, eq, clean, normMobile, validMobile, validEmail,
   findCoupon, couponDiscount, couponLabel, signToken, verifyToken, hmacHex, safeEqual, b64u
@@ -200,6 +200,8 @@ export async function finalizeOrder(env, order, { paymentId, signature, redeemed
   if (claimed) {
     try { emailed = await mailOrderDone(env, order, { paymentId: payRef, free }); } catch (e) { emailed = false; }
     if (order.id && emailed) await patch(env, 'pay_orders', 'id=' + eq(order.id), { result: { ...result, emailed: true } });
+  } else if (mailEnabled(env)) {
+    emailed = true; // the other caller (webhook / browser) owns the e-mails — the page must not send its own EmailJS copy
   }
   return { ...result, emailed };
 }

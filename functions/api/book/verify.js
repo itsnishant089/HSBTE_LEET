@@ -26,7 +26,9 @@ export async function onRequestPost(context) {
     return fail('Payment could not be verified. If money was deducted, contact support with payment id ' + payId + '.', 400, 'payment');
   }
 
-  await patch(env, 'book_purchases', 'id=' + eq(p.id), { status: 'paid', rzp_payment_id: payId, paid_at: new Date().toISOString() });
+  // claim the purchase: the webhook may arrive at the same moment — only the first one grants access + sends the e-mails
+  const claim = await patch(env, 'book_purchases', 'id=' + eq(p.id) + '&status=neq.paid', { status: 'paid', rzp_payment_id: payId, paid_at: new Date().toISOString() });
+  if (claim.ok && Array.isArray(claim.data) && !claim.data.length) return json({ ok: true, already: true, plan: p.plan, emailed: true });
   if (p.coupon) await rpc(env, 'redeem_coupon', { p_code: p.coupon, p_product: 'book', p_mobile: u.mobile, p_before: p.base_amount, p_after: p.final_amount });
   await grantAccess(env, c, u.id, p.plan);
   let emailed = false;

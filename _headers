@@ -50,6 +50,8 @@
 /book-reader
   Cache-Control: no-store
   X-Robots-Tag: noindex, noarchive
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
 
 /book-login
   X-Robots-Tag: noindex

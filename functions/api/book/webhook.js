@@ -35,7 +35,8 @@ export async function onRequestPost(context) {
   if (pay.amount !== p.final_amount * 100 || !['captured', 'authorized'].includes(pay.status)) return json({ ok: true, ignored: true });
 
   const user = await one(env, 'book_users', 'id=' + eq(p.user_id) + '&select=full_name,mobile,email');
-  await patch(env, 'book_purchases', 'id=' + eq(p.id), { status: 'paid', rzp_payment_id: pay.id, paid_at: new Date().toISOString() });
+  const claim = await patch(env, 'book_purchases', 'id=' + eq(p.id) + '&status=neq.paid', { status: 'paid', rzp_payment_id: pay.id, paid_at: new Date().toISOString() });
+  if (claim.ok && Array.isArray(claim.data) && !claim.data.length) return json({ ok: true, ignored: true }); // browser verify got there first
   if (p.coupon && user) await rpc(env, 'redeem_coupon', { p_code: p.coupon, p_product: 'book', p_mobile: user.mobile, p_before: p.base_amount, p_after: p.final_amount });
   await grantAccess(env, c, p.user_id, p.plan);
   try { if (user) await mailBookDone(env, user, p, { free: false }); } catch (e) { /* ignore */ }
