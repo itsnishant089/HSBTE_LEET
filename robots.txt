@@ -3,6 +3,9 @@ Allow: /
 Allow: /ads.txt
 
 # Admin and internal dashboards
+Disallow: /api/
+Disallow: /book-reader
+Disallow: /book-login
 Disallow: /admin
 Disallow: /premium-admin
 Disallow: /counseling-admin

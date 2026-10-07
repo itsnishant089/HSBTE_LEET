@@ -15,7 +15,11 @@
   css.textContent = [
     /* Disable text selection everywhere inside .quiz-body / body */
     'body { -webkit-user-select:none!important; -moz-user-select:none!important;',
-    '       -ms-user-select:none!important; user-select:none!important; }',
+    '       -ms-user-select:none!important; user-select:none!important; -webkit-touch-callout:none!important; }',
+    'input, textarea, select, [contenteditable="true"] { -webkit-user-select:text!important; user-select:text!important; }',
+    '::selection { background:transparent!important; color:inherit!important; }',
+    /* Screenshot deterrent: content is blurred whenever the window loses focus or is hidden */
+    'html.sec-blur body > *:not(#sec-violation-overlay):not(#sec-devtools-overlay) { filter:blur(22px)!important; pointer-events:none!important; }',
 
     /* Print — hide everything */
     '@media print { html,body { display:none!important; visibility:hidden!important; } }',
@@ -107,18 +111,18 @@
       attempts++;
       /* Get Supabase credentials from window (set by premium-sample-paper pages) */
       var supabaseLib = window.supabase;
-      var url  = window.SUPA_URL;
-      var key  = window.SUPA_KEY;
+      var url  = window.SUPA_URL || 'https://vzfpltvchsxsfqlldafd.supabase.co';
+      var key  = window.SUPA_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
 
-      if (!supabaseLib || !url || !key) {
+      if (!supabaseLib) {
         if (attempts < 10) { setTimeout(tryLog, 500); } /* retry for 5s */
         return;
       }
 
       try {
-        var sb = supabaseLib.createClient ? supabaseLib.createClient(url, key) : null;
-        /* If sb is already created on window, use it */
-        if (!sb && window.sb) { sb = window.sb; }
+        var sb = window.sb && typeof window.sb.from === 'function'
+          ? window.sb
+          : (supabaseLib.createClient ? supabaseLib.createClient(url, key) : null);
         if (!sb) return;
 
         /* Get user info from sessionStorage */
@@ -141,7 +145,8 @@
           created_at:     new Date().toISOString()
         }]).then(function(res) {
           if (res && res.error) {
-            /* Silent fail — never alert user that logging failed */
+            /* Never alert the user, but keep a trace so the owner can debug RLS/table problems */
+            try { console.warn('[security] violation log failed:', res.error.message); localStorage.setItem('sec_log_err', res.error.message); } catch (_) {}
           }
         }).catch(function() { /* silent */ });
 
@@ -175,15 +180,13 @@
     /* ---- Copy / Cut / Paste / Select-all ---- */
     if (ctrl && ['c','C','x','X','v','V','a','A'].includes(k)) {
       e.preventDefault(); e.stopPropagation();
-      var t = (k==='c'||k==='C') ? 'copy' : (k==='x'||k==='X') ? 'cut' : (k==='v'||k==='V') ? 'paste' : 'select-all';
-      flashViolation(t); return;
+      return; /* silently blocked: no popup, no log */
     }
 
     /* ---- Save / Print / View-source ---- */
     if (ctrl && ['s','S','p','P','u','U'].includes(k)) {
       e.preventDefault(); e.stopPropagation();
-      var t2 = (k==='p'||k==='P') ? 'print' : (k==='s'||k==='S') ? 'save' : 'view-source';
-      flashViolation(t2); return;
+      return; /* silently blocked: no popup, no log */
     }
 
     /* ---- DevTools shortcuts ---- */
@@ -211,9 +214,12 @@
   }, true);
 
   /* ── 7. MOUSE / TOUCH EVENTS ───────────────────────────────────── */
+  document.addEventListener('keyup', function (e) {
+    if (e.key === 'PrintScreen') { flashViolation('printscreen'); try { navigator.clipboard.writeText(''); } catch (_) {} }
+  }, true);
   document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }, true);
-  document.addEventListener('copy',   function (e) { e.preventDefault(); e.stopPropagation(); flashViolation('copy'); }, true);
-  document.addEventListener('cut',    function (e) { e.preventDefault(); e.stopPropagation(); flashViolation('cut'); }, true);
+  document.addEventListener('copy',   function (e) { e.preventDefault(); e.stopPropagation(); if (e.clipboardData) e.clipboardData.setData('text/plain', ''); }, true);
+  document.addEventListener('cut',    function (e) { e.preventDefault(); e.stopPropagation(); }, true);
   document.addEventListener('paste',  function (e) { e.preventDefault(); e.stopPropagation(); }, true);
   document.addEventListener('dragstart', function (e) { e.preventDefault(); }, true);
   document.addEventListener('drag',      function (e) { e.preventDefault(); }, true);
@@ -275,6 +281,17 @@
     }
   });
 
+  /* ── 9b. BLUR WHEN WINDOW LOSES FOCUS (snipping tools, other apps) ─ */
+  function setBlur(on) { document.documentElement.classList[on ? 'add' : 'remove']('sec-blur'); }
+  window.addEventListener('blur', function () { setBlur(true); });
+  window.addEventListener('focus', function () { setBlur(false); });
+  document.addEventListener('visibilitychange', function () { setBlur(document.hidden); });
+  document.addEventListener('selectstart', function (e) {
+    var t = e.target && e.target.nodeType === 1 ? e.target : (e.target && e.target.parentElement);
+    if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    e.preventDefault();
+  }, true);
+
   /* ── 10. PRINT BUTTON INTERCEPTION ────────────────────────────── */
   window.addEventListener('beforeprint', function () {
     logViolation('print-attempt');
@@ -289,219 +306,6 @@
   window.__secLogViolation = logViolation;
 
   /* ── 12. INIT ────────────────────────────────────────────────────── */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', buildOverlays);
-  } else {
-    buildOverlays();
-  }
-
-})();
-(function () {
-  'use strict';
-
-  /* ── 1. INJECT SECURITY STYLES ────────────────────────────────── */
-  var css = document.createElement('style');
-  css.textContent = [
-    /* Disable text selection everywhere inside .quiz-body / body */
-    'body { -webkit-user-select:none!important; -moz-user-select:none!important;',
-    '       -ms-user-select:none!important; user-select:none!important; }',
-
-    /* Print — hide everything */
-    '@media print { html,body { display:none!important; visibility:hidden!important; } }',
-
-    /* Violation overlay */
-    '#sec-violation-overlay {',
-    '  display:none; position:fixed; inset:0; z-index:2147483647;',
-    '  background:rgba(0,0,0,.92); align-items:center; justify-content:center;',
-    '}',
-    '#sec-violation-overlay.show { display:flex; }',
-    '.sec-vio-box {',
-    '  background:#dc2626; border-radius:14px; padding:32px 36px;',
-    '  text-align:center; max-width:420px; animation:secShake .4s ease;',
-    '}',
-    '.sec-vio-box h2 { color:#fff; font-size:1.35rem; font-weight:800; margin-bottom:10px; }',
-    '.sec-vio-box p  { color:#fecaca; font-size:.95rem; margin-bottom:8px; line-height:1.6; }',
-    '.sec-vio-box small { color:#fca5a5; font-size:.82rem; }',
-    '@keyframes secShake {',
-    '  0%,100%{transform:translateX(0)}',
-    '  20%,60%{transform:translateX(-8px)}',
-    '  40%,80%{transform:translateX(8px)}',
-    '}',
-
-    /* DevTools overlay */
-    '#sec-devtools-overlay {',
-    '  display:none; position:fixed; inset:0; z-index:2147483646;',
-    '  background:#0f172a; align-items:center; justify-content:center;',
-    '}',
-    '#sec-devtools-overlay.show { display:flex; }',
-    '.sec-dt-box {',
-    '  background:#1e293b; border:1px solid #334155; border-radius:18px;',
-    '  padding:40px 44px; text-align:center; max-width:480px;',
-    '}',
-    '.sec-dt-icon { font-size:2.8rem; margin-bottom:16px; }',
-    '.sec-dt-box h2 { color:#ef4444; font-size:1.5rem; font-weight:800; margin-bottom:14px; }',
-    '.sec-dt-box p  { color:#cbd5e1; font-size:.97rem; line-height:1.7; margin-bottom:10px; }',
-    '.sec-dt-box small { color:#64748b; font-size:.85rem; }',
-  ].join('\n');
-  document.head.appendChild(css);
-
-  /* ── 2. CREATE OVERLAYS ────────────────────────────────────────── */
-  function buildOverlays() {
-    // Violation overlay
-    var vo = document.createElement('div');
-    vo.id = 'sec-violation-overlay';
-    vo.innerHTML =
-      '<div class="sec-vio-box">' +
-        '<h2>🚫 Security Violation Detected</h2>' +
-        '<p>Screenshots and copying are strictly prohibited.</p>' +
-        '<small>This action has been logged on our servers.</small>' +
-      '</div>';
-    document.body.appendChild(vo);
-
-    // DevTools overlay
-    var dto = document.createElement('div');
-    dto.id = 'sec-devtools-overlay';
-    dto.innerHTML =
-      '<div class="sec-dt-box">' +
-        '<div class="sec-dt-icon">🛡️</div>' +
-        '<h2>Developer Tools Detected</h2>' +
-        '<p>Access to this application is restricted while developer tools are active.' +
-           ' We enforce strict security measures to maintain the integrity of our platform and mock tests.</p>' +
-        '<small>This page will automatically unlock when you close the developer tools.</small>' +
-      '</div>';
-    document.body.appendChild(dto);
-  }
-
-  /* ── 3. SHOW / HIDE VIOLATION ──────────────────────────────────── */
-  var vioTimer = null;
-  function flashViolation() {
-    var el = document.getElementById('sec-violation-overlay');
-    if (!el) return;
-    el.classList.add('show');
-    clearTimeout(vioTimer);
-    vioTimer = setTimeout(function () { el.classList.remove('show'); }, 2500);
-  }
-
-  /* ── 4. KEYBOARD BLOCK ─────────────────────────────────────────── */
-  document.addEventListener('keydown', function (e) {
-    var k = e.key;
-    var ctrl = e.ctrlKey || e.metaKey;
-    var shift = e.shiftKey;
-
-    /* ---- Copy / Cut / Paste / Select-all ---- */
-    if (ctrl && ['c','C','x','X','v','V','a','A'].includes(k)) {
-      e.preventDefault(); e.stopPropagation(); flashViolation(); return;
-    }
-
-    /* ---- Save / Print / View-source ---- */
-    if (ctrl && ['s','S','p','P','u','U'].includes(k)) {
-      e.preventDefault(); e.stopPropagation(); flashViolation(); return;
-    }
-
-    /* ---- DevTools shortcuts ---- */
-    if (k === 'F12') { e.preventDefault(); e.stopPropagation(); return; }
-    if (ctrl && shift && ['i','I','j','J','c','C','k','K','s','S','m','M','e','E'].includes(k)) {
-      e.preventDefault(); e.stopPropagation(); return;
-    }
-
-    /* ---- PrintScreen ---- */
-    if (k === 'PrintScreen' || k === 'Print') {
-      e.preventDefault(); e.stopPropagation();
-      flashViolation();
-      /* Briefly blank clipboard to frustrate partial screenshot paste */
-      try { navigator.clipboard.writeText(''); } catch (_) {}
-      return;
-    }
-
-    /* ---- Windows Snipping: Win+Shift+S  (key = 'S', metaKey+shift) ---- */
-    if (e.metaKey && shift && (k === 's' || k === 'S')) {
-      e.preventDefault(); e.stopPropagation(); flashViolation(); return;
-    }
-
-    /* ---- Drag ---- */
-    if (k === 'F2' || k === 'F1') { e.preventDefault(); return; }
-  }, true); /* useCapture so it fires before quiz logic */
-
-  /* ── 5. MOUSE / TOUCH EVENTS ───────────────────────────────────── */
-  document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }, true);
-  document.addEventListener('copy',        function (e) { e.preventDefault(); e.stopPropagation(); flashViolation(); }, true);
-  document.addEventListener('cut',         function (e) { e.preventDefault(); e.stopPropagation(); flashViolation(); }, true);
-  document.addEventListener('paste',       function (e) { e.preventDefault(); e.stopPropagation(); }, true);
-
-  /* Block drag-to-copy of text */
-  document.addEventListener('dragstart',   function (e) { e.preventDefault(); }, true);
-
-  /* Block image dragging/saving */
-  document.addEventListener('drag',        function (e) { e.preventDefault(); }, true);
-
-  /* ── 6. DEVTOOLS DETECTION ─────────────────────────────────────── */
-  var devtoolsOpen = false;
-
-  function checkDevTools() {
-    var threshold = 160;
-    var widthDiff  = window.outerWidth  - window.innerWidth;
-    var heightDiff = window.outerHeight - window.innerHeight;
-    var isOpen = widthDiff > threshold || heightDiff > threshold;
-
-    /* Firebug / older detection via toString timing */
-    var t = new Date();
-    // eslint-disable-next-line no-console
-    if (window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) {
-      isOpen = true;
-    }
-
-    var dtOverlay = document.getElementById('sec-devtools-overlay');
-    var mainPage  = document.getElementById('main-page');
-
-    if (isOpen && !devtoolsOpen) {
-      devtoolsOpen = true;
-      if (dtOverlay) dtOverlay.classList.add('show');
-      if (mainPage)  mainPage.style.visibility = 'hidden';
-    } else if (!isOpen && devtoolsOpen) {
-      devtoolsOpen = false;
-      if (dtOverlay) dtOverlay.classList.remove('show');
-      if (mainPage)  mainPage.style.visibility = 'visible';
-    }
-  }
-
-  /* Secondary devtools detection via debugger timing */
-  function devtoolsTimingCheck() {
-    var start = performance.now();
-    // eslint-disable-next-line no-debugger
-    debugger;
-    var elapsed = performance.now() - start;
-    if (elapsed > 100) {
-      var dtOverlay = document.getElementById('sec-devtools-overlay');
-      var mainPage  = document.getElementById('main-page');
-      devtoolsOpen = true;
-      if (dtOverlay) dtOverlay.classList.add('show');
-      if (mainPage)  mainPage.style.visibility = 'hidden';
-    }
-  }
-
-  setInterval(checkDevTools, 800);
-  setInterval(devtoolsTimingCheck, 3000);
-
-  /* ── 7. VISIBILITY CHANGE — blur/focus guard ───────────────────── */
-  document.addEventListener('visibilitychange', function () {
-    /* If user switches to another app (like Snipping Tool) and comes back */
-    if (!document.hidden) {
-      /* Re-inject watermark on return */
-      if (typeof injectWatermark === 'function') { injectWatermark(); }
-    }
-  });
-
-  /* ── 8. PRINT BUTTON INTERCEPTION ─────────────────────────────── */
-  window.addEventListener('beforeprint', function (e) {
-    /* Hide body via CSS already; belt-and-suspenders: also blank it */
-    document.body.innerHTML +=
-      '<div style="position:fixed;inset:0;background:#000;z-index:9999999;color:#fff;' +
-      'display:flex;align-items:center;justify-content:center;font-size:1.5rem">' +
-      'Printing is not allowed on premium pages.</div>';
-  });
-
-  /* ── 9. INIT ────────────────────────────────────────────────────── */
-  /* Wait for DOM then inject overlays */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', buildOverlays);
   } else {

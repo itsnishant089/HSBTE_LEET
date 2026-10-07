@@ -66,15 +66,15 @@
 
 ## Premium Plans Details (Updated October 2026)
 
-### Premium Plan — ₹69 (one-time, 365 days)
+### Premium Plan — ₹69 (one-time, access until LEET 2027)
 - 46 full-syllabus sample papers (plus 8 section-wise papers)
 - Official LEET syllabus + prospectus PDFs
 - Section-wise formula sheets and cheat sheets
 - Rank Analysis Tool
 - Ad-free experience
-- 365-day access from purchase date; no auto-renewal
+- access until LEET 2027 (30 September 2027); no auto-renewal
 
-### Ultra Premium Plan — ₹99 (one-time, 365 days)
+### Ultra Premium Plan — ₹99 (one-time, access until LEET 2027)
 - Everything in Premium (54 papers + PDFs + Rank Analysis)
 - AI College Predictor (2027 data)
 - Rank Predictor by marks
@@ -114,3 +114,7 @@ Haryana LEET Notes cover the complete official HSTES syllabus across all section
 
 ---
 Last Updated: 2026-10-06
+
+## Haryana LEET Book 2027
+
+- [Haryana LEET Book — Complete Study Guide (1,633 pages)](https://hsbteleet.com/haryana-leet-book): independent preparation book by Nishant. Free 20-page sample; online reader ₹399 (MRP ₹999); Ultra Premium members ₹299; Reader + PDF copy by email ₹499 (₹399 for Ultra). Premium & Ultra members get 50% off counselling. Access until 30 September 2027; max 2 devices; no download, copy or screenshots (see terms section 13).

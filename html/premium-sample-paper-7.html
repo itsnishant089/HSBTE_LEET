@@ -150,7 +150,7 @@
         <div class="score-card s-wrong"><span class="s-val" id="res-wro">0</span><span class="s-lbl">❌ Wrong</span></div>
         <div class="score-card s-skip"><span class="s-val" id="res-skp">0</span><span class="s-lbl">⏭ Skipped</span></div>
         <div class="score-card s-att"><span class="s-val" id="res-att">0</span><span class="s-lbl">📝 Attempted</span></div>
-        <div class="score-card s-score"><span class="s-val" id="res-scr">0</span><span class="s-lbl">🏅 Score (4,−1)</span></div>
+        <div class="score-card s-score"><span class="s-val" id="res-scr">0</span><span class="s-lbl">🏅 Score (+1, 0)</span></div>
         <div class="score-card s-total"><span class="s-val" id="res-tot">90</span><span class="s-lbl">📋 Total Qs</span></div>
       </div>
       <div class="result-actions">
@@ -377,7 +377,7 @@ function submitExam(){
     reviewHTML+='<div class="r-ans-correct">✓ Correct: '+LETTERS[q.a]+'. '+q.o[q.a]+'</div>';
     reviewHTML+='</div>';
   });
-  var att=cor+wro;var scr=cor*4-wro;
+  var att=cor+wro;var scr=cor;
   document.getElementById('res-cor').textContent=cor;
   document.getElementById('res-wro').textContent=wro;
   document.getElementById('res-skp').textContent=skp;
@@ -412,6 +412,7 @@ verifyAccess();
   </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="/js/premium-security.js"></script>
+<script src="/js/premium-security.js?v=20261014"></script>
+<script src="/js/premium-report.js?v=20261014"></script>
 </body>
 </html>

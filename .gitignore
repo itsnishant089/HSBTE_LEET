@@ -89,3 +89,14 @@ image/converted-images.zip
 # Uncomment below if you don't want skills in repo:
 # .agents/
 
+
+# private reports / SQL / setup notes (never deploy)
+docs/
+sql/
+
+# local-only tooling
+scratchpad/
+.kiro/
+.agents/
+skills-lock.json
+whatsapp-bot-kit/

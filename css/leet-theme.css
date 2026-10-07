@@ -1,0 +1,92 @@
+/* LEET pages theme — same look & feel as the Haryana LEET Book page.
+   Loaded by include.js on every LEET page (body.leet-themed). Pure restyle: no content changes. */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+body.leet-themed{--lt-navy:#0a1330;--lt-blue:#1a56db;--lt-violet:#7c3aed;--lt-gold:#fbbf24;--lt-line:#e2e8f0}
+
+/* ───────── typography ───────── */
+body.leet-themed h1,body.leet-themed h2,body.leet-themed h3,body.leet-themed h4,
+body.leet-themed .page-hero,body.leet-themed .hl-hero,body.leet-themed .lp-hero,body.leet-themed .dh-hero,
+body.leet-themed .adm-hero,body.leet-themed .guide-hero,body.leet-themed .seat-hero,body.leet-themed .ch-hero{font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,sans-serif}
+body.leet-themed h1{letter-spacing:-.02em}
+
+/* ───────── hero banners (all variants) ───────── */
+body.leet-themed .page-hero,body.leet-themed .hl-hero,body.leet-themed .lp-hero,body.leet-themed .dh-hero,
+body.leet-themed .adm-hero,body.leet-themed .guide-hero,body.leet-themed .seat-hero,body.leet-themed .ch-hero,body.leet-themed .topic-hero{
+  background:
+    radial-gradient(rgba(255,255,255,.30) 1px,transparent 1.6px) 0 0/46px 46px,
+    radial-gradient(900px 420px at 82% 0%,rgba(37,99,235,.85),transparent 62%),
+    radial-gradient(760px 420px at 0% 100%,rgba(124,58,237,.7),transparent 58%),
+    linear-gradient(160deg,#050a1f,#0a1330 55%,#101c47) !important;
+  color:#fff;animation:ltDots 70s linear infinite;
+}
+@keyframes ltDots{to{background-position:460px 230px,0 0,0 0,0 0}}
+body.leet-themed .page-hero h1,body.leet-themed .hl-hero h1,body.leet-themed .lp-hero h1,body.leet-themed .dh-hero h1,
+body.leet-themed .adm-hero h1,body.leet-themed .guide-hero h1,body.leet-themed .seat-hero h1,body.leet-themed .ch-hero h1{font-weight:800;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.35)}
+body.leet-themed .page-hero h1 .gold,body.leet-themed .hl-hero h1 .gold,body.leet-themed .lp-hero h1 .gold,body.leet-themed .dh-hero h1 .gold,
+body.leet-themed .page-hero h1 span.gold{background:linear-gradient(90deg,#fbbf24,#fb923c);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.leet-themed .page-hero-pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);color:#fff;border-radius:999px;transition:transform .2s,background .2s}
+body.leet-themed .page-hero-pill:hover{transform:translateY(-3px);background:rgba(255,255,255,.2)}
+body.leet-themed .page-hero-badge{background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.45);color:#fbbf24}
+body.leet-themed .page-hero .page-hero-sub,body.leet-themed .page-hero p{color:#cbd5f5}
+
+/* ───────── cards ───────── */
+body.leet-themed .content-card,body.leet-themed .sample-card,body.leet-themed .sample-paper-card,body.leet-themed .adm-card,
+body.leet-themed .dh-card,body.leet-themed .lp-card,body.leet-themed .hl-card,body.leet-themed .guide-card,body.leet-themed .seat-card,
+body.leet-themed .btech-card,body.leet-themed .syllabus-card,body.leet-themed .doc-item-card,body.leet-themed .leet-quick-card,
+body.leet-themed .ch-card,body.leet-themed .feat-card,body.leet-themed .resource-link-card,body.leet-themed .selector-box,
+body.leet-themed .seo-related-card{
+  border-radius:20px !important;border:1px solid var(--lt-line) !important;
+  box-shadow:0 8px 28px rgba(15,23,42,.06) !important;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+body.leet-themed .content-card:hover,body.leet-themed .adm-card:hover,body.leet-themed .dh-card:hover,body.leet-themed .lp-card:hover,
+body.leet-themed .hl-card:hover,body.leet-themed .guide-card:hover,body.leet-themed .seat-card:hover,body.leet-themed .syllabus-card:hover{
+  transform:translateY(-3px);box-shadow:0 18px 44px rgba(26,86,219,.12) !important;border-color:#c7d7fb !important}
+body.leet-themed .sample-card:hover,body.leet-themed .sample-paper-card:hover,body.leet-themed .btech-card:hover,body.leet-themed .doc-item-card:hover,
+body.leet-themed .leet-quick-card:hover,body.leet-themed .ch-card:hover,body.leet-themed .feat-card:hover,body.leet-themed .resource-link-card:hover,
+body.leet-themed .seo-related-card:hover{box-shadow:0 22px 50px rgba(26,86,219,.18) !important;border-color:#a9c1fa !important}
+
+/* 3D tilt (set by leet-theme.js) on the small, clickable cards */
+body.leet-themed .lt-tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ly,0px));will-change:transform}
+body.leet-themed .lt-tilt:hover{--ly:-6px}
+
+/* headings inside content cards get an accent bar */
+body.leet-themed .content-card h2,body.leet-themed .lp-card h2,body.leet-themed .dh-card h2,body.leet-themed .adm-card h2,body.leet-themed .guide-card h2,body.leet-themed .seat-card h2{
+  position:relative;padding-left:16px;color:#0f172a}
+body.leet-themed .content-card h2::before,body.leet-themed .lp-card h2::before,body.leet-themed .dh-card h2::before,body.leet-themed .adm-card h2::before,body.leet-themed .guide-card h2::before,body.leet-themed .seat-card h2::before{
+  content:"";position:absolute;left:0;top:.12em;bottom:.12em;width:5px;border-radius:4px;background:linear-gradient(#2563eb,#7c3aed)}
+
+/* tables */
+body.leet-themed .content-card table,body.leet-themed .lp-card table,body.leet-themed .dh-card table,body.leet-themed .adm-card table{border-collapse:separate;border-spacing:0;border-radius:14px;overflow:hidden}
+body.leet-themed .content-card table th,body.leet-themed .lp-card table th,body.leet-themed .dh-card table th{background:linear-gradient(135deg,#0a1330,#13204f) !important;color:#fff !important}
+body.leet-themed .content-card table tr:nth-child(even) td{background:#f8fafc}
+
+/* buttons that look like CTAs get the same lift */
+body.leet-themed .btn-hero,body.leet-themed .btn-tier,body.leet-themed .lp-cta-btn,body.leet-themed .ch-btn,body.leet-themed .download-btn{transition:transform .18s,box-shadow .18s}
+body.leet-themed .btn-hero:hover,body.leet-themed .btn-tier:hover,body.leet-themed .lp-cta-btn:hover,body.leet-themed .ch-btn:hover{transform:translateY(-3px)}
+
+/* scroll reveal */
+body.leet-themed .lt-rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+body.leet-themed .lt-rev.lt-in{opacity:1;transform:none}
+body.leet-themed .lt-tilt.lt-rev.lt-in{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ly,0px));transition:transform .18s ease-out,opacity .7s ease,box-shadow .25s}
+
+/* ───────── Premium / Ultra plans page ───────── */
+body.leet-themed section.hero{position:relative;overflow:hidden}
+body.leet-themed section.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.32) 1px,transparent 1.6px);background-size:46px 46px;opacity:.14;animation:ltDrift 60s linear infinite;pointer-events:none}
+@keyframes ltDrift{to{background-position:460px 230px}}
+.lt-float3d{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;perspective:1000px;margin:34px auto 6px;position:relative;z-index:2}
+.lt-float3d .c{width:150px;padding:16px 14px;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);color:#fff;text-align:center;box-shadow:0 20px 44px rgba(0,0,0,.35);animation:ltBob 6s ease-in-out infinite;transform-style:preserve-3d}
+.lt-float3d .c:nth-child(1){transform:rotateY(14deg) rotateX(4deg);animation-delay:-1s}
+.lt-float3d .c:nth-child(2){transform:translateZ(40px) scale(1.08);animation-delay:-3s;background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.5)}
+.lt-float3d .c:nth-child(3){transform:rotateY(-14deg) rotateX(4deg);animation-delay:-5s}
+.lt-float3d .c b{display:block;font-size:1.7rem;font-weight:800;color:#fbbf24;line-height:1.1}
+.lt-float3d .c span{font-size:.78rem;font-weight:600;color:#dbe4ff}
+.lt-float3d .c i{display:block;font-size:1.3rem;margin-bottom:6px}
+@keyframes ltBob{50%{margin-top:-14px}}
+body.leet-themed .tier-card,body.leet-themed .feat-card{position:relative}
+body.leet-themed .section-alt{background:#f4f7ff}
+
+body.dark-mode.leet-themed .content-card,body.dark-mode.leet-themed .adm-card,body.dark-mode.leet-themed .dh-card,body.dark-mode.leet-themed .lp-card,body.dark-mode.leet-themed .hl-card{border-color:#1e293b !important}
+@media (prefers-reduced-motion:reduce){body.leet-themed *{animation:none !important}body.leet-themed .lt-rev{opacity:1;transform:none}}
+@media (max-width:700px){.lt-float3d .c{width:44%}.lt-float3d .c:nth-child(2){transform:none}}

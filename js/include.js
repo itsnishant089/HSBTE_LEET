@@ -40,7 +40,7 @@
       return partialCache.get(url);
     }
 
-    const res = await fetch(url + (url.indexOf('?') === -1 ? '?v=20261012' : ''), {
+    const res = await fetch(url + (url.indexOf('?') === -1 ? '?v=20261018' : ''), {
       cache: "force-cache"
     });
 
@@ -251,6 +251,21 @@
     }
   }
 
+  /**
+   * LEET look & feel (same design language as the Haryana LEET Book page) on every LEET page.
+   */
+  function autoLeetTheme() {
+    var path = window.location.pathname.toLowerCase().replace(/\.html$/, "").replace(/\/$/, "").replace(/^\/html/, "");
+    var isLeet = LEET_NAV_EXACT.indexOf(path) !== -1 || path === "/premium-login" ||
+      (path.indexOf("/haryana-leet-") === 0 && path.indexOf("admin") === -1);
+    if (!isLeet || path === "/haryana-leet-book") return;
+    document.body.classList.add("leet-themed");
+    if (!document.querySelector('link[href*="leet-theme.css"]')) {
+      var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "/css/leet-theme.css?v=20261019"; document.head.appendChild(l);
+    }
+    var sc = document.createElement("script"); sc.src = "/js/leet-theme.js?v=20261019"; sc.defer = true; document.body.appendChild(sc);
+  }
+
   var leetNavPath = "";
   function markLeetNavActive() {
     if (!leetNavPath) return;
@@ -278,6 +293,7 @@
     autoInjectBottomNav();
     autoInjectSeoRelatedLinks();
     autoInjectLeetNav();
+    autoLeetTheme();
 
     // Get ALL includes AFTER nav injection
     const includes = [

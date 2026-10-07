@@ -89,7 +89,7 @@ document.onkeydown = function(e) {
   </div>
   <h1>LEET <span class="gold">Counseling Help</span><br>Expert Admission Guidance</h1>
   <p class="sub">Confused about branch selection, college choices, or counseling strategy? Share your rank, category, diploma branch and preferences — our experts explain <em>why</em> each college/branch is recommended for you.</p>
-  <div class="ch-price-tag"><span class="old">₹199</span> ₹99 Only • Access Until LEET 2027</div>
+  <div class="ch-price-tag"><span class="old">₹199</span> ₹99 Only • Access Until LEET 2027</div><div style="margin-top:8px;font-size:13px;font-weight:700;color:#16a34a">🎖 Premium &amp; Ultra Premium members get an extra 50% OFF — log in to see your price.</div>
   <div style="margin-top:24px;">
     <a href="/html/user-counseling.html" class="ch-btn ch-btn-gold" style="display:inline-flex; width:auto; padding:12px 24px; font-size:15px; border-radius:50px; align-items:center; gap:8px; text-decoration:none;"><i class="fas fa-search"></i> Track Your Request</a>
   </div>
@@ -317,11 +317,11 @@ document.onkeydown = function(e) {
 var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
 var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
 var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
-var RZP_KEY='rzp_live_SPbBEutqahnSN4';
+var RZP_KEY='rzp_live_TkvjF6mUBGzwCT';
 var EJS_SVC='service_zlxv3q4', EJS_PUB='byFleJ2hV770O_Mni', EJS_TPL='template_w2fdh1s';
 emailjs.init(EJS_PUB);
 var PRICE=99, PAISE=9900;
-var COUPONS={'NISHANT2007':{label:'NISHANT2007 — 100% FREE!',type:'free'},'LEET123':{label:'LEET123 — 50% OFF!',type:'percent',percent:50}};
+/* Coupons are created in the admin portal and checked by the server (/api/coupon/validate) — none are stored here. */
 var pending=null, applied=null, curUser=null;
 
 function doLogout() {
@@ -431,7 +431,7 @@ function populateForm(u) {
     document.getElementById('st-2').className = 'step done';
     document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
     document.getElementById('st-3').className = 'step active';
-    var {data} = await sb.from('counseling_users').select('*').eq('id', uid).maybeSingle();
+    var {data} = await sb.from('counseling_users').select('id,full_name,email,mobile,rank,category,gender,diploma_haryana,resident_haryana,created_at').eq('id', uid).maybeSingle();
     if(data) populateForm(data);
   }
 })();
@@ -491,7 +491,7 @@ async function doLogin(){
   var btn=document.getElementById('btn-login');
   btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Logging in...';
   try{
-    var{data:u,error}=await sb.from('counseling_users').select('*').eq('email',email).eq('password_hash',pass).maybeSingle();
+    var rp=await sb.rpc('counseling_login',{p_email:email,p_pass:pass});var u=rp.data,error=null;if(rp.error){var old=await sb.from('counseling_users').select('*').eq('email',email).eq('password_hash',pass).maybeSingle();u=old.data;error=old.error;}
     if(error||!u){showAlert('l-err','<i class="fas fa-times-circle"></i> Invalid email or password.','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Secure Login';return;}
     
     var{data:pay}=await sb.from('counseling_payments').select('id').eq('user_id',u.id).maybeSingle();
@@ -568,28 +568,36 @@ async function doRegister(){
   btn.disabled=false;btn.innerHTML='<i class="fas fa-user-plus"></i> Register & Continue to Payment';
 }
 
-function applyCoupon(){
-  var code=(document.getElementById('c-input').value||'').trim().toUpperCase();
+async function applyCoupon(){
+  var code=(document.getElementById('c-input').value||'').trim().toUpperCase().replace(/[^A-Z0-9_-]/g,'');
+  document.getElementById('c-input').value=code;
   var msg=document.getElementById('c-msg');
   if(!code){msg.style.color='#92400e';msg.textContent='Enter a code first.';return;}
-  if(!COUPONS[code]){msg.style.color='#991b1b';msg.textContent='❌ Invalid code.';applied=null;resetPrice();return;}
-  var c=COUPONS[code];
-  var disc,final;
-  if(c.type==='free'){disc=PRICE;final=0;}else{disc=Math.round(PRICE*c.percent/100);final=PRICE-disc;}
-  applied={discount:disc,finalRs:final,finalPaise:final*100,type:c.type};
+  msg.style.color='#1e40af';msg.textContent='Checking coupon…';
+  var res;
+  try{
+    res=await fetch('/api/coupon/validate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:code,product:'counseling',amount:Math.round(PRICE),mobile:(pending&&pending.mobile)||''})}).then(function(r){return r.json();});
+  }catch(e){res={ok:false,error:'Network error. Please try again.'};}
+  if(!res||!res.ok){msg.style.color='#991b1b';msg.textContent='❌ '+((res&&res.error)||'Invalid code.');applied=null;resetPrice();return;}
+  var disc=res.discount, final=res.final, free=!!res.free;
+  applied={discount:disc,finalRs:final,finalPaise:final*100,type:free?'free':'discount',code:res.code};
   document.getElementById('disc-row').style.display='flex';
-  document.getElementById('disc-lbl').textContent='🏷 '+c.label;
+  document.getElementById('disc-lbl').textContent='🏷 '+res.code+' — '+res.label;
   document.getElementById('disc-val').textContent='-₹'+disc;
-  if(c.type==='free'){
+  if(free){
     document.getElementById('total-p').textContent='₹0 (FREE!)';
     document.getElementById('pay-wrap').style.display='none';
     document.getElementById('free-wrap').style.display='block';
-    msg.style.color='#15803d';msg.textContent='🎉 NISHANT2007 — 100% FREE ACCESS APPLIED!';
+    msg.style.color='#15803d';msg.textContent='🎉 '+res.code+' — 100% FREE ACCESS APPLIED!';
   }else{
     document.getElementById('total-p').textContent='₹'+final;
     document.getElementById('pay-txt').textContent='Pay ₹'+final+' & Get Counseling';
-    msg.style.color='#15803d';msg.textContent='✅ LEET123 — 50% OFF! SAVE ₹'+disc;
+    msg.style.color='#15803d';msg.textContent='✅ '+res.code+' — '+res.label+'! SAVE ₹'+disc;
   }
+}
+function redeemCoupon(before,after){
+  if(!applied||!applied.code||!pending)return;
+  try{fetch('/api/coupon/redeem',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:applied.code,product:'counseling',mobile:pending.mobile,before:before,after:after})});}catch(e){}
 }
 function resetPrice(){
   document.getElementById('disc-row').style.display='none';
@@ -605,6 +613,7 @@ async function doFree(){
   btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Activating...';
   try{
     await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:'COUPON_FREE',amount:0,status:'free_coupon',coupon_used:document.getElementById('c-input').value.trim().toUpperCase()}]);
+    redeemCoupon(Math.round(PRICE),0);
     sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});
     document.getElementById('payCard').style.display='none';
     document.getElementById('formCard').style.display='block';
@@ -645,6 +654,7 @@ async function completePayment(r){
     var coupon=(document.getElementById('c-input').value||'').trim().toUpperCase();
     var amt=(applied?applied.finalPaise:PAISE);
     await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:r.razorpay_payment_id,amount:amt,status:'paid',coupon_used:coupon||null}]);
+    redeemCoupon(Math.round(PRICE),Math.round(amt/100));
     sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:r.razorpay_payment_id,amount:Math.round(amt/100)});
     document.getElementById('payCard').style.display='none';
     document.getElementById('formCard').style.display='block';
@@ -757,5 +767,41 @@ async function submitRequest(){
     </div>
   </div>
 </section>
+<script>
+/* Premium / Ultra members get 50% off counselling automatically (matched by mobile number). */
+(function(){
+  var MEMBER_PERCENT = 50, BASE = 99, isMember = false, checked = false;
+  function money(n){ n = Math.round(n * 100) / 100; return '₹' + (n % 1 ? n.toFixed(2) : n); }
+  function paint(){
+    var disc = BASE - PRICE;
+    var row = document.getElementById('disc-row');
+    if (row) { row.style.display = 'flex'; }
+    var lbl = document.getElementById('disc-lbl'); if (lbl) lbl.textContent = '🎖 Premium/Ultra member — ' + MEMBER_PERCENT + '% OFF';
+    var val = document.getElementById('disc-val'); if (val) val.textContent = '-' + money(disc);
+    var tot = document.getElementById('total-p'); if (tot) tot.textContent = money(PRICE);
+    var pt = document.getElementById('pay-txt'); if (pt) pt.textContent = 'Pay ' + money(PRICE) + ' & Get Counseling';
+    var orig = document.getElementById('orig-p'); if (orig) orig.textContent = money(BASE);
+  }
+  async function check(){
+    if (checked || !window.pending || !pending.mobile) return;
+    checked = true;
+    try {
+      var u = await sb.from('ultra_premium_users').select('id').eq('mobile', pending.mobile).maybeSingle();
+      var found = u && u.data;
+      if (!found) { var p = await sb.from('premium_users').select('id').eq('mobile', pending.mobile).maybeSingle(); found = p && p.data; }
+      if (!found) return;
+      isMember = true;
+      PRICE = BASE * (100 - MEMBER_PERCENT) / 100;
+      PAISE = Math.round(PRICE * 100);
+      paint();
+    } catch (e) {}
+  }
+  var _reset = window.resetPrice;
+  if (typeof _reset === 'function') { window.resetPrice = function(){ _reset(); if (isMember) paint(); }; }
+  var pc = document.getElementById('payCard');
+  if (pc) new MutationObserver(function(){ if (pc.style.display === 'block') check(); }).observe(pc, { attributes: true, attributeFilter: ['style'] });
+})();
+</script>
+<script src="/js/device-log.js?v=20261018" defer></script>
 </body>
 </html>

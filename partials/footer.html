@@ -57,6 +57,7 @@
       <ul>
         <li><a class="sf-hot" href="/btech-leet-premium">&#11088; Premium Papers</a></li>
         <li><a class="sf-hot" href="/counseling">&#127919; Counselling Help &#8377;99</a></li>
+        <li><a href="/terms">Terms &amp; Conditions</a></li>
         <li><a href="/about">About &amp; Editorial Policy</a></li>
         <li><a href="/author/nishant">Author Profile</a></li>
         <li><a href="/contact">Contact &amp; Support</a></li>
@@ -66,7 +67,7 @@
   <div class="sf-disclaimer"><strong>Disclaimer:</strong> This website is an independent educational platform and is not affiliated with the Haryana State Board of Technical Education (HSBTE), HSTES, or any government authority. All official exam schedules and rules are published on <a href="https://hstes.org.in" target="_blank" rel="noopener noreferrer">hstes.org.in</a>.</div>
   <div class="sf-bottom"><div>
     <span>&copy; <span id="currentYear">2026</span> HSBTELEET.com. All rights reserved.</span>
-    <span>Maintained by <a href="/author/nishant">Nishant</a></span>
+    <span><a href="/terms">Terms &amp; Conditions</a> · <a href="/terms#s6">Refunds</a> · <a href="/terms#s13">Book licence</a> · Maintained by <a href="/author/nishant">Nishant</a></span>
   </div></div>
 </footer>
 
@@ -79,7 +80,8 @@
 
     // Deferred lead capture loading
     const loadLeadCapture = () => {
-      if (localStorage.getItem("leetLeadCaptured") !== "1") {
+      var skip = /^\/(book-|haryana-leet-book|premium|ultra|counseling|terms)/.test(location.pathname.replace(/^\/html/, ""));
+      if (!skip && localStorage.getItem("leetLeadCaptured") !== "1") {
         var s = document.createElement("script");
         s.src = "/js/lead-capture.js";
         s.defer = true;

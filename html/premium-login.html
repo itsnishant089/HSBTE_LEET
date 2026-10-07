@@ -976,12 +976,59 @@
     .page-foot a:hover {
       color: var(--v)
     }
+
+    /* ── DESKTOP PITCH PANEL (book-style design) ── */
+    .pl-pitch{display:none}
+    @media (min-width:1000px){
+      .page{display:grid;grid-template-columns:minmax(380px,1fr) 480px;column-gap:56px;max-width:1140px;margin:0 auto;align-items:start;justify-content:center;padding:36px 24px}
+      .page>*:not(.pl-pitch){grid-column:2;width:100%}
+      .pl-pitch{display:block;grid-column:1;grid-row:1 / span 8;position:sticky;top:24px;border-radius:30px;overflow:hidden;color:#fff;padding:40px 36px;
+        background:radial-gradient(rgba(255,255,255,.28) 1px,transparent 1.6px) 0 0/44px 44px,radial-gradient(700px 380px at 90% 0%,rgba(37,99,235,.85),transparent 62%),radial-gradient(600px 380px at 0% 100%,rgba(124,58,237,.75),transparent 58%),linear-gradient(160deg,#050a1f,#0a1330 55%,#101c47);
+        box-shadow:0 30px 70px rgba(10,19,48,.35);font-family:'Plus Jakarta Sans','DM Sans',system-ui,sans-serif}
+      .pl-pitch .pl-pill{display:inline-flex;gap:8px;align-items:center;padding:6px 14px;border-radius:999px;background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.45);color:#fbbf24;font-weight:700;font-size:12.5px}
+      .pl-pitch h2{font-size:2.15rem;line-height:1.12;margin:16px 0 10px;font-weight:800;letter-spacing:-.02em}
+      .pl-pitch h2 em{font-style:normal;background:linear-gradient(90deg,#fbbf24,#fb923c);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .pl-pitch p.lead{color:#cbd5f5;margin:0 0 22px;font-size:1rem;line-height:1.6}
+      .pl-chips{display:flex;gap:12px;perspective:900px;margin:0 0 24px}
+      .pl-chips div{flex:1;text-align:center;padding:14px 8px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);animation:plBob 6s ease-in-out infinite}
+      .pl-chips div:nth-child(1){transform:rotateY(12deg)}.pl-chips div:nth-child(2){animation-delay:-2s;background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.5)}.pl-chips div:nth-child(3){transform:rotateY(-12deg);animation-delay:-4s}
+      .pl-chips b{display:block;font-size:1.5rem;color:#fbbf24;line-height:1.1}.pl-chips span{font-size:.75rem;color:#dbe4ff;font-weight:600}
+      @keyframes plBob{50%{margin-top:-10px}}
+      .pl-list{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}
+      .pl-list li{display:flex;gap:10px;color:#dbe4ff;font-size:.95rem}.pl-list li::before{content:"✓";color:#fbbf24;font-weight:800}
+      .pl-book{display:flex;gap:16px;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:14px 16px;text-decoration:none;color:#fff;transition:transform .2s,background .2s}
+      .pl-book:hover{transform:translateY(-3px);background:rgba(255,255,255,.14)}
+      .pl-book img{width:78px;border-radius:6px;box-shadow:12px 14px 28px rgba(0,0,0,.5);transform:perspective(500px) rotateY(-22deg);transition:transform .4s}
+      .pl-book:hover img{transform:perspective(500px) rotateY(-6deg)}
+      .pl-book b{display:block;font-size:1rem}.pl-book span{font-size:.85rem;color:#cbd5f5}
+      .pl-foot{margin-top:18px;font-size:.78rem;color:#93a5d8}
+    }
   </style>
   <link rel="stylesheet" href="/css/seo-related.css"/>
 </head>
 
 <body>
   <div class="page">
+
+    <!-- DESKTOP PITCH (hidden on phones) -->
+    <aside class="pl-pitch" aria-label="What you get">
+      <span class="pl-pill">🔒 Secure checkout · Access until LEET 2027</span>
+      <h2>Unlock your <em>Haryana LEET 2027</em> edge</h2>
+      <p class="lead">One login for 54 exclusive sample papers, rank analysis, AI college tools and discounts on counselling and the LEET Book.</p>
+      <div class="pl-chips"><div><b>₹69</b><span>Premium</span></div><div><b>₹99</b><span>Ultra Premium</span></div><div><b>50%</b><span>off counselling</span></div></div>
+      <ul class="pl-list">
+        <li>54 papers — 46 full-length + 8 section-wise, auto-scored with section reports</li>
+        <li>Rank Analysis tool · syllabus &amp; prospectus PDFs · 100% ad-free</li>
+        <li><b>Ultra:</b> AI College Predictor, Rank Predictor, Cutoff Analyzer, Study Planner</li>
+        <li><b>Ultra:</b> Haryana LEET Book for ₹299 (others ₹399)</li>
+        <li>Coupon codes are applied automatically at payment</li>
+      </ul>
+      <a class="pl-book" href="/haryana-leet-book" target="_blank" rel="noopener">
+        <img src="/image/haryana-leet-book-cover.webp" alt="Haryana LEET Book cover" loading="lazy" width="78">
+        <div><b>Haryana LEET Book 2027</b><span>1,633 pages · free 20-page sample · ₹399 (Ultra ₹299)</span></div>
+      </a>
+      <div class="pl-foot">One-time payment · no auto-renewal · up to 3 devices · see <a href="/terms" style="color:#fbbf24">Terms</a></div>
+    </aside>
 
     <!-- TOP STRIP -->
     <div class="strip">
@@ -999,7 +1046,7 @@
         <div class="tier-icon">👑</div>
         <div class="tier-name">Premium</div>
         <div class="tier-price">₹69</div>
-        <div class="tier-desc">54 Papers + Syllabus + Prospectus</div>
+        <div class="tier-desc">54 Papers + Syllabus + 50% off counselling</div>
         <div class="tier-save">Launch Price</div>
       </div>
       <div class="tier-card" id="opt-ultra" onclick="selectTier('ultra')">
@@ -1007,7 +1054,7 @@
         <div class="tier-icon">🚀</div>
         <div class="tier-name">Ultra Premium</div>
         <div class="tier-price">₹99</div>
-        <div class="tier-desc">Papers + All AI Tools</div>
+        <div class="tier-desc">Papers + AI Tools + Book ₹299 + 50% off counselling</div>
         <div class="tier-save">Best Value</div>
       </div>
     </div>
@@ -1175,7 +1222,7 @@
             <div id="free-wrap" style="display:none">
               <button class="btn btn-g" id="btn-free" onclick="doFreeAccess()"><i class="fas fa-gift"></i> Claim FREE
                 Access — ₹0</button>
-              <p style="text-align:center;font-size:12px;color:var(--mu);margin-top:8px">🎉 NISHANT2007 APPLIED — Access Until LEET 2027
+              <p style="text-align:center;font-size:12px;color:var(--mu);margin-top:8px">🎉 FREE COUPON APPLIED — Access Until LEET 2027
                 ACCESS COMPLETELY FREE!</p>
             </div>
           </div>
@@ -1215,7 +1262,7 @@
     // ── CONFIG ──
     var SUPA_URL = 'https://vzfpltvchsxsfqlldafd.supabase.co';
     var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
-    var RZP_KEY = 'rzp_live_SPbBEutqahnSN4';
+    var RZP_KEY = 'rzp_live_TkvjF6mUBGzwCT';
     var EJS_SVC = 'service_zlxv3q4';
     var EJS_TPL = 'template_j4m5ute';
     var EJS_PUB = 'byFleJ2hV770O_Mni';
@@ -1230,10 +1277,7 @@
       premium: { label: 'Premium', price: 69, paise: 6900, icon: '👑', color: '#d97706', hdr: 'hdr-prem' },
       ultra: { label: 'Ultra Premium', price: 99, paise: 9900, icon: '🚀', color: '#7c3aed', hdr: 'hdr-ultra' }
     };
-    var COUPONS = {
-      'NISHANT2007': { label: 'NISHANT2007 — 100% FREE!', type: 'free' },
-      'LEET123': { label: 'LEET123 — 50% OFF!', type: 'percent', percent: 50 }
-    };
+    // Coupons are NOT stored in this page. They are created in the admin portal (Coupons) and checked by the server (/api/coupon/validate).
 
     var curTier = 'premium';
     var pending = null;
@@ -1339,9 +1383,12 @@
 
       setBtn('btn-login', true, '');
       try {
-        var { data: user, error } = await sb.from('premium_users')
-          .select('id,mobile,email,full_name')
-          .eq('mobile', mob).eq('password_hash', pass).maybeSingle();
+        var rp = await sb.rpc('premium_login', { p_mobile: mob, p_pass: pass });
+        var user = rp.data, error = null;
+        if (rp.error) { // login function not installed yet -> old way
+          var old = await sb.from('premium_users').select('id,mobile,email,full_name').eq('mobile', mob).eq('password_hash', pass).maybeSingle();
+          user = old.data; error = old.error;
+        }
 
         if (error || !user) {
           setAlert('lerr', '<i class="fas fa-times-circle"></i> Invalid mobile or password. Contact admin at <strong>nishant@hsbteleet.com</strong>.', 'err');
@@ -1426,8 +1473,8 @@
     }
 
     // ── COUPON ──
-    function applyCoupon() {
-      var code = (document.getElementById('c-input').value || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+    async function applyCoupon() {
+      var code = (document.getElementById('c-input').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
       document.getElementById('c-input').value = code;
       var msgEl = document.getElementById('c-msg');
       var input = document.getElementById('c-input');
@@ -1439,22 +1486,29 @@
       }
 
       if (!code) { showCMsg('Please enter a coupon code first.', '#fffbeb', '#fde68a', '#92400e'); return; }
-      if (!COUPONS[code]) {
-        showCMsg('❌ Invalid coupon code "' + code + '". Please check and try again.', '#fff1f2', '#fca5a5', '#991b1b');
+      showCMsg('Checking coupon…', '#eff6ff', '#bfdbfe', '#1e40af');
+
+      var res;
+      try {
+        res = await fetch('/api/coupon/validate', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: code, product: curTier, amount: T.price, mobile: (pending && pending.mobile) || '' })
+        }).then(function (r) { return r.json(); });
+      } catch (e) { res = { ok: false, error: 'Network error. Please try again.' }; }
+
+      if (!res || !res.ok) {
+        showCMsg('❌ ' + ((res && res.error) || 'Invalid coupon code.'), '#fff1f2', '#fca5a5', '#991b1b');
         input.style.borderColor = '#fca5a5'; applied = null; resetCouponUI(); return;
       }
 
-      var c = COUPONS[code];
-      var orig = T.price, disc, final;
-      if (c.type === 'free') { disc = orig; final = 0; }
-      else { disc = Math.round(orig * c.percent / 100); final = orig - disc; }
-      applied = Object.assign({}, c, { code: code, discount: disc, finalRs: final, finalPaise: final * 100 });
+      var disc = res.discount, final = res.final, isFree = !!res.free;
+      applied = { type: isFree ? 'free' : 'discount', code: res.code, label: res.label, discount: disc, finalRs: final, finalPaise: final * 100 };
 
       document.getElementById('disc-row').style.display = 'flex';
-      document.getElementById('disc-lbl').textContent = '🏷 ' + c.label;
+      document.getElementById('disc-lbl').textContent = '🏷 ' + res.code + ' — ' + res.label;
       document.getElementById('disc-val').textContent = '-₹' + disc;
 
-      if (c.type === 'free') {
+      if (isFree) {
         document.getElementById('total-p').textContent = '₹0 (FREE!)';
         document.getElementById('total-p').style.color = '#16a34a';
         document.getElementById('s2price').textContent = 'FREE 🎉';
@@ -1468,9 +1522,21 @@
         document.getElementById('pay-txt').textContent = 'Pay ₹' + final + ' and Unlock Access';
         document.getElementById('pay-wrap').style.display = 'block';
         document.getElementById('free-wrap').style.display = 'none';
-        showCMsg('✅ COUPON APPLIED! ' + c.percent + '% OFF — SAVE ₹' + disc + ' — PAY ONLY ₹' + final + '.', '#f0fdf4', '#86efac', '#15803d');
+        payPaise = final * 100;
+        showCMsg('✅ COUPON APPLIED! ' + res.label + ' — SAVE ₹' + disc + ' — PAY ONLY ₹' + final + '.', '#f0fdf4', '#86efac', '#15803d');
       }
       input.style.borderColor = '#86efac';
+    }
+
+    // tell the server a coupon was really used (counts towards its usage limit)
+    function redeemCoupon(mobile, before, after) {
+      if (!applied || !applied.code) return;
+      try {
+        fetch('/api/coupon/redeem', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: applied.code, product: curTier, mobile: mobile, before: before, after: after })
+        });
+      } catch (e) {}
     }
 
     function resetCouponUI() {
@@ -1487,10 +1553,10 @@
       if (msgEl) msgEl.style.display = 'none';
     }
 
-    // ── FREE ACCESS (NISHANT2007 — works for Premium + Ultra) ──
+    // ── FREE ACCESS (100%-off coupon from the admin portal — works for Premium + Ultra) ──
     async function doFreeAccess() {
       if (!pending) { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.', 'err'); return; }
-      if (!applied || applied.type !== 'free') { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> No free coupon applied. Enter <strong>NISHANT2007</strong> and click Apply.', 'err'); return; }
+      if (!applied || applied.type !== 'free') { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> No free coupon applied. Enter your free coupon code and click Apply.', 'err'); return; }
 
       // Keep selected tier in sync (Premium or Ultra)
       pending.tier = curTier;
@@ -1499,7 +1565,7 @@
       btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Activating free access…';
       clearAlert('rerr');
 
-      var couponCode = (applied.code || document.getElementById('c-input').value || 'NISHANT2007').trim().toUpperCase();
+      var couponCode = (applied.code || document.getElementById('c-input').value || '').trim().toUpperCase();
       var uniq = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
       try {
@@ -1559,6 +1625,7 @@
           }
         }
 
+        redeemCoupon(pending.mobile, TIERS[curTier].price, 0);
         sendRegistrationEmails({
           name: pending.full_name,
           email: pending.email,
@@ -1666,6 +1733,7 @@
         }
 
         // Registration emails: welcome to user + alert to admin
+        redeemCoupon(pending.mobile, TIERS[curTier].price, applied ? applied.finalRs : TIERS[curTier].price);
         sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: rzp.razorpay_payment_id, tier: pending.tier, amount: Math.round(payPaise / 100), coupon: applied ? document.getElementById('c-input').value.trim().toUpperCase() : null });
 
         setSession(nu.id);

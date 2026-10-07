@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Register – Haryana LEET Book | HSBTE LEET</title>
+  <meta name="description" content="Create a free account to read the Haryana LEET Book sample, or log in to continue reading and buy the full 1,633-page study guide." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://hsbteleet.com/haryana-leet-book" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="/css/book.css?v=20261017" />
+</head>
+<body class="bk">
+  <div data-include="/partials/header.html"></div>
+  <main class="bk-auth">
+    <aside class="bk-auth-side">
+      <img src="/image/haryana-leet-book-cover.webp" alt="Haryana LEET Book cover" width="720" height="1018">
+      <h1>Haryana LEET Book 2027</h1>
+      <ul>
+        <li>Free 20-page sample — instantly after sign-up</li>
+        <li>Full 1,633-page edition for ₹399 (Ultra Premium: ₹299)</li>
+        <li>Read on up to 2 of your devices</li>
+        <li>Access until the Haryana LEET 2027 cycle ends</li>
+      </ul>
+    </aside>
+
+    <section class="bk-auth-main">
+      <div class="bk-card">
+        <div class="bk-tabs" role="tablist">
+          <button type="button" id="t-reg" class="on" role="tab">Create account</button>
+          <button type="button" id="t-log" role="tab">I have an account</button>
+        </div>
+        <div class="bk-err" id="err" role="alert"></div>
+
+        <!-- REGISTER -->
+        <form id="f-reg" autocomplete="on" novalidate>
+          <div class="bk-field"><label for="r-name">Full name *</label><input id="r-name" name="name" autocomplete="name" required maxlength="80"></div>
+          <div class="bk-two">
+            <div class="bk-field"><label for="r-mobile">Mobile (10 digits) *</label><input id="r-mobile" name="mobile" inputmode="numeric" autocomplete="tel-national" maxlength="10" required></div>
+            <div class="bk-field"><label for="r-email">Email *</label><input id="r-email" name="email" type="email" autocomplete="email" required maxlength="120"></div>
+          </div>
+          <div class="bk-two">
+            <div class="bk-field"><label for="r-city">City</label><input id="r-city" name="city" maxlength="60"></div>
+            <div class="bk-field"><label for="r-branch">Diploma branch</label>
+              <select id="r-branch"><option value="">Select</option><option>Civil</option><option>Mechanical</option><option>Electrical</option><option>Electronics / ECE</option><option>Computer / IT</option><option>Automobile</option><option>Production</option><option>Textile</option><option>Chemical / Printing</option><option>Ceramic</option><option>Food Technology</option><option>Agriculture</option><option>Architecture</option><option>Fashion</option><option>Other</option></select></div>
+          </div>
+          <div class="bk-field"><label for="r-college">Polytechnic / college</label><input id="r-college" maxlength="100"></div>
+          <div class="bk-field"><label for="r-pass">Create password * (min 6)</label><input id="r-pass" type="password" autocomplete="new-password" minlength="6" maxlength="100" required></div>
+          <label class="bk-check"><input type="checkbox" id="r-terms"><span>I accept the <a href="/terms#s13" target="_blank" rel="noopener">Terms &amp; Conditions</a>: the book is for my personal reading only — no copying, screenshots, sharing or leaking; my devices and activity are logged; violations can lead to a ban and recovery of damages.</span></label>
+          <button class="bk-submit" id="b-reg" type="submit">Create account &amp; continue</button>
+        </form>
+
+        <!-- LOGIN -->
+        <form id="f-log" autocomplete="on" novalidate hidden>
+          <div class="bk-field"><label for="l-id">Mobile or email</label><input id="l-id" autocomplete="username" required></div>
+          <div class="bk-field"><label for="l-pass">Password</label><input id="l-pass" type="password" autocomplete="current-password" required></div>
+          <div id="dev-box" hidden>
+            <p style="font-size:.86rem;color:#b45309;margin:0 0 6px"><b>Device limit reached.</b> Choose a device to sign out, then log in here:</p>
+            <div class="bk-dev" id="dev-list"></div>
+          </div>
+          <button class="bk-submit" id="b-log" type="submit">Log in</button>
+        </form>
+        <p style="font-size:.8rem;color:#94a3b8;text-align:center;margin:14px 0 0">Your details are used for your account, support and abuse prevention. See <a href="/terms#s11">Privacy</a>.</p>
+      </div>
+    </section>
+  </main>
+  <div data-include="/partials/footer.html"></div>
+
+  <script src="/js/book-client.js?v=20261015"></script>
+  <script src="/js/include.js" defer></script>
+  <script>
+  (function () {
+    var $ = function (id) { return document.getElementById(id); };
+    var next = new URLSearchParams(location.search).get('next') || 'sample';
+    var replaceDevice = null;
+
+    function show(msg) { var e = $('err'); e.textContent = msg; e.classList.add('show'); e.scrollIntoView({ block: 'nearest' }); }
+    function hide() { $('err').classList.remove('show'); }
+    function tab(reg) {
+      $('t-reg').classList.toggle('on', reg); $('t-log').classList.toggle('on', !reg);
+      $('f-reg').hidden = !reg; $('f-log').hidden = reg; hide();
+    }
+    $('t-reg').onclick = function () { tab(true); }; $('t-log').onclick = function () { tab(false); };
+    if (new URLSearchParams(location.search).get('mode') === 'login') tab(false);
+
+    function done(d) {
+      BOOK.setSession(d.token, d.user);
+      if (next === 'buy' || next === 'buypdf') location.href = '/haryana-leet-book?checkout=' + (next === 'buypdf' ? 'pdf' : 'reader');
+      else if (d.user.hasFull) location.href = '/book-reader?b=master';
+      else location.href = '/book-reader?b=sample';
+    }
+
+    $('f-reg').addEventListener('submit', function (e) {
+      e.preventDefault(); hide();
+      var b = {
+        name: $('r-name').value, mobile: $('r-mobile').value.replace(/\D/g, ''), email: $('r-email').value, password: $('r-pass').value,
+        city: $('r-city').value, branch: $('r-branch').value, college: $('r-college').value, accept: $('r-terms').checked,
+        deviceId: BOOK.deviceId(), fp: BOOK.fingerprint()
+      };
+      if (!b.accept) { show('Please accept the Terms & Conditions to continue.'); return; }
+      var btn = $('b-reg'); btn.disabled = true; btn.textContent = 'Creating account…';
+      BOOK.api('register', { body: b, auth: false }).then(function (d) {
+        btn.disabled = false; btn.textContent = 'Create account & continue';
+        if (d.ok) done(d); else if (d.code === 'exists') { show(d.error); tab(false); $('l-id').value = b.mobile; } else show(d.error || 'Could not register.');
+      });
+    });
+
+    $('f-log').addEventListener('submit', function (e) {
+      e.preventDefault(); hide();
+      var btn = $('b-log'); btn.disabled = true; btn.textContent = 'Logging in…';
+      var body = { id: $('l-id').value, password: $('l-pass').value, deviceId: BOOK.deviceId(), fp: BOOK.fingerprint() };
+      var sel = document.querySelector('input[name="repl"]:checked'); if (sel) body.replaceDevice = sel.value;
+      BOOK.api('login', { body: body, auth: false }).then(function (d) {
+        btn.disabled = false; btn.textContent = 'Log in';
+        if (d.ok) return done(d);
+        if (d.code === 'device_limit') {
+          $('dev-box').hidden = false;
+          $('dev-list').innerHTML = d.devices.map(function (x, i) {
+            return '<label><input type="radio" name="repl" value="' + x.id + '"' + (i === 0 ? ' checked' : '') + '> <span>' + BOOK.esc(x.label || 'Device') + ' · last used ' + new Date(x.lastSeen).toLocaleString() + '</span></label>';
+          }).join('');
+          show(d.error);
+        } else show(d.error || 'Could not log in.');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

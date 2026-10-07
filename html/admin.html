@@ -649,9 +649,6 @@ table.tbl{width:100%;border-collapse:collapse;font-size:.79rem;min-width:960px}
 (function(){
 'use strict';
 
-var SUPABASE_URL      = 'https://jnsowbnkccddcrkuonan.supabase.co';
-var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impuc293Ym5rY2NkZGNya3VvbmFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjY0MzksImV4cCI6MjA4NzcwMjQzOX0.PbiJI8SOxjgDPAP0njNN8aIW3yArJmstxi_VRhPuM5k';
-var ADMIN_PASSWORD    = 'Nishant@089';
 var PER_PAGE          = 50;
 
 var allLeads=[],filtered=[],selected=new Set(),sortCol='created_at',sortAsc=false;
@@ -693,8 +690,6 @@ function countUp(el,n){var t0=performance.now(),dur=780;el.classList.add('counti
 function copyText(txt,label){navigator.clipboard.writeText(txt).then(function(){toast((label||'Copied')+'!','success',1600);}).catch(function(){toast('Copy failed - try again.','error');});}
 
 /* -- SUPABASE -- */
-function loadSB(cb){if(window.supabase){cb(null);return;}var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js';s.async=true;s.onload=function(){cb(null);};s.onerror=function(){cb(new Error('load_fail'));};document.head.appendChild(s);}
-function getClient(){if(!sbClient&&window.supabase)sbClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);return sbClient;}
 
 /* -- AUTH -- */
 function showDash(){loginEl.classList.add('hidden');dashEl.classList.remove('hidden');}
@@ -703,11 +698,19 @@ function showLogin(){dashEl.classList.add('hidden');loginEl.classList.remove('hi
 $id('login-form').addEventListener('submit',function(e){
   e.preventDefault();
   var pwd=$id('la-pwd').value||'';$id('login-err').textContent='';
-  if(pwd===ADMIN_PASSWORD){try{sessionStorage.setItem('laAuth','1');}catch(_){}showDash();fetchLeads();}
-  else{$id('login-err').textContent='Incorrect password. Try again.';$id('la-pwd').value='';$id('la-pwd').focus();}
+  fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pwd})})
+    .then(function(r){return r.json().catch(function(){return {};}).then(function(d){d.httpStatus=r.status;return d;});})
+    .then(function(d){
+      if(d.ok){try{sessionStorage.setItem('laAuth','1');sessionStorage.setItem('adm_api_token',d.token);}catch(_){}showDash();fetchLeads();}
+      else{
+        $id('login-err').textContent=(d.httpStatus===503||d.httpStatus===404)?'Admin login is not set up on the server yet (run set_admin_password in Supabase).':(d.httpStatus===429?'Too many attempts. Wait a few minutes.':'Incorrect password. Try again.');
+        $id('la-pwd').value='';$id('la-pwd').focus();
+      }
+    })
+    .catch(function(){$id('login-err').textContent='Network error. Try again.';});
 });
 $id('btn-logout').addEventListener('click',function(){
-  try{sessionStorage.removeItem('laAuth');}catch(_){}
+  try{sessionStorage.removeItem('laAuth');sessionStorage.removeItem('adm_api_token');}catch(_){}
   allLeads=[];filtered=[];selected.clear();tbody.innerHTML='';
   stopAutoRefresh();showLogin();toast('Logged out.','info');
 });
@@ -716,61 +719,20 @@ $id('btn-logout').addEventListener('click',function(){
 async function fetchLeads() {
   renderSkeleton();
   footEl.textContent = 'Loading...';
-
-  loadSB(async function(err) {
-    if (err) {
-      toast('Failed to load Supabase SDK.', 'error');
-      return;
-    }
-
-    const c = getClient();
-    if (!c) {
-      toast('Client unavailable.', 'error');
-      return;
-    }
-
-    try {
-      let allData = [];
-      let from = 0;
-      let batchSize = 1000;
-      let done = false;
-
-      while (!done) {
-        const { data, error } = await c
-          .from('leet_leads')
-          .select('*')
-          .order('created_at', { ascending: false })
-          .range(from, from + batchSize - 1);
-
-        if (error) throw error;
-
-        allData = allData.concat(data || []);
-
-        if (!data || data.length < batchSize) {
-          done = true;
-        } else {
-          from += batchSize;
-        }
-      }
-
-      allLeads = allData;
-
-      console.log('Fetched Leads:', allLeads.length);
-
-      updEl.textContent =
-        'Updated ' + fmtDate(new Date().toISOString());
-
-      updateStats();
-      updateCharts();
-      populateDropdowns();
-      applyFilters();
-
-      toast('Loaded ' + allLeads.length + ' leads.', 'success');
-
-    } catch (e) {
-      toast('Error: ' + e.message, 'error');
-    }
-  });
+  try {
+    var t = sessionStorage.getItem('adm_api_token') || '';
+    var r = await fetch('/api/admin/leads', {headers: {Authorization: 'Bearer ' + t}, cache: 'no-store'});
+    var d = await r.json().catch(function(){ return {}; });
+    if (r.status === 401) { try{sessionStorage.removeItem('laAuth');sessionStorage.removeItem('adm_api_token');}catch(_){} showLogin(); toast('Session expired. Please log in again.', 'error'); return; }
+    if (!d.ok) throw new Error(d.error || 'Could not load leads');
+    allLeads = d.leads || [];
+    updEl.textContent = 'Updated ' + fmtDate(new Date().toISOString());
+    updateStats(); updateCharts(); populateDropdowns(); applyFilters();
+    toast('Loaded ' + allLeads.length + ' leads.', 'success');
+  } catch (e) {
+    toast('Error: ' + e.message, 'error');
+    footEl.textContent = e.message;
+  }
 }
 function renderSkeleton(){var h='';for(var i=0;i<8;i++){h+='<tr><td></td><td></td>';[90,130,80,110,140,90,150,110,70].forEach(function(w){h+='<td><div class="sk-bar" style="width:'+w+'px"></div></td>';});h+='</tr>';}tbody.innerHTML=h;}
 
@@ -1178,46 +1140,27 @@ function exportRows(rows,suffix){
 }
 
 /* -- DELETE DUPLICATES -- */
-function deleteDuplicates(){
+async function deleteDuplicates(){
   if(!allLeads.length){toast('No data to scan.','error');return;}
-  if(!confirm('Are you sure you want to delete all duplicate leads? (Keeps only the most recent entry for each mobile/email)')) return;
-
-  var seenMobile = {}, seenEmail = {}, toDelete = [];
-  // allLeads is sorted by created_at DESC from fetchLeads
-  allLeads.forEach(function(r){
-    var isDup = false;
-    if(r.mobile){
-      if(seenMobile[r.mobile]) isDup = true;
-      else seenMobile[r.mobile] = true;
-    }
-    if(r.email){
-      if(seenEmail[r.email]) isDup = true;
-      else seenEmail[r.email] = true;
-    }
-    if(isDup && r.id) toDelete.push(r.id);
-  });
-
-  if(!toDelete.length){toast('No duplicates found!','info');return;}
-
+  if(!confirm('Delete all duplicate leads? (Same mobile or same email — keeps only the most recent entry)')) return;
   var btn = $id('btn-del-dupes');
   var oldHtml = btn.innerHTML;
   btn.innerHTML = '<span class="spin-ico">?</span><span>Deleting...</span>';
   btn.disabled = true;
-
-  var c = getClient();
-  c.from('leet_leads').delete().in('id', toDelete)
-    .then(function(res){
-      if(res.error) throw res.error;
-      toast('Deleted '+toDelete.length+' duplicates successfully!','success');
-      fetchLeads();
-    })
-    .catch(function(err){
-      toast('Delete failed: '+err.message,'error');
-    })
-    .finally(function(){
-      btn.innerHTML = oldHtml;
-      btn.disabled = false;
-    });
+  try {
+    var t = sessionStorage.getItem('adm_api_token') || '';
+    var r = await fetch('/api/admin/leads', {method:'POST', headers:{'Content-Type':'application/json', Authorization:'Bearer ' + t}, body: JSON.stringify({action:'dedupe'})});
+    var d = await r.json().catch(function(){ return {}; });
+    if(!d.ok) throw new Error(d.error || 'Request failed');
+    if(!d.found){ toast('No duplicates found!','info'); }
+    else if(d.deleted < d.found){ toast('Only '+d.deleted+' of '+d.found+' duplicates were deleted — check the database permissions.','error'); fetchLeads(); }
+    else { toast('Deleted '+d.deleted+' duplicates successfully!','success'); fetchLeads(); }
+  } catch(err) {
+    toast('Delete failed: '+err.message,'error');
+  } finally {
+    btn.innerHTML = oldHtml;
+    btn.disabled = false;
+  }
 }
 $id('btn-del-dupes').addEventListener('click', deleteDuplicates);
 
@@ -1266,7 +1209,7 @@ document.addEventListener('keydown',function(e){
 });
 
 /* -- SESSION RESTORE -- */
-try{if(sessionStorage.getItem('laAuth')==='1'){showDash();fetchLeads();}else showLogin();}catch(_){showLogin();}
+try{if(sessionStorage.getItem('laAuth')==='1'&&sessionStorage.getItem('adm_api_token')){showDash();fetchLeads();}else showLogin();}catch(_){showLogin();}
 
 })();
 </script>

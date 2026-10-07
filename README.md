@@ -13,7 +13,7 @@
 
 - **Branch-Wise & Semester-Wise HSBTE PYQs**: Curated question papers for 10+ polytechnic branches (Computer Science, Civil, Mechanical, Electrical, Electronics, AI-ML, Automobile, etc.) covering Semesters 1 through 6.
 - **Haryana LEET Preparation Track**: Dedicated hubs for B.Tech and B.Pharmacy lateral entry, featuring syllabus breakdowns, exam patterns, cutoff trends, and tentative key dates.
-- **📚 Haryana LEET Book (New)**: Comprehensive preparation textbook with 1,500+ solved practice MCQs, 10 full-length mock exams, and formula revision sheets.
+- **📚 Haryana LEET Book 2027**: 1,633-page complete study guide read in a secure online reader (free 20-page sample, ₹399 / Ultra Premium ₹299, PDF copy by email ₹499).
 - **Tiered Preparation Services**:
   - **Normal Premium (₹69)**: 54 exclusive Haryana LEET mock tests, Rank Analysis tools, and 100% ad-free experience.
   - **Ultra Premium (₹99)**: AI College Predictor, Cutoff Analyzer, Rank Predictor, and Smart Counseling Advisor.
