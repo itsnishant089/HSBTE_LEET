@@ -1,4 +1,58 @@
+import { verifyToken, rest, eq } from './_lib/book-core.js';
+import { readCookie } from './_lib/pay-core.js';
+
+/**
+ * Premium papers (questions + answers are inside the HTML) are only served to a logged-in student whose access
+ * is active. The login cookie is issued by /api/premium/session and /api/pay/*. Not configured yet → unchanged.
+ */
+const GATED = /^\/(?:html\/)?(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|rank-analysis|study-plan|college-predictor)(?:\.html)?\/?$/i;
+// Ultra-only tools (Premium members are sent to the Ultra page instead of the login page)
+const ULTRA_ONLY = new Set(['study-plan', 'college-predictor']);
+
+async function premiumGate(context, url) {
+  let pn = url.pathname;
+  try { pn = decodeURIComponent(pn); } catch (e) { return new Response('Bad request', { status: 400 }); }
+  const m = GATED.exec(pn.replace(/\/{2,}/g, '/'));  // %33 / double slashes must not slip past the gate
+  if (!m) return null;
+  const env = context.env;
+  if (!env.SESSION_SECRET || !env.MAIN_SUPABASE_URL || !env.MAIN_SUPABASE_SERVICE_KEY) return null;
+  const p = await verifyToken(env.SESSION_SECRET, readCookie(context.request));
+  let ok = !!(p && p.k === 'prem');
+  if (ok) {
+    try { // access can be revoked by the admin at any time
+      const r = await rest(env, 'premium_access', 'user_id=' + eq(p.uid) + '&select=is_active&limit=1');
+      if (r.ok && Array.isArray(r.data)) ok = !!(r.data[0] && r.data[0].is_active === true);
+    } catch (e) { /* database hiccup: keep the signed cookie's verdict */ }
+    if (ok && ULTRA_ONLY.has(m[1].toLowerCase())) {
+      try {
+        let u = await rest(env, 'ultra_premium_users', 'user_id=' + eq(p.uid) + '&select=id&limit=1');
+        let has = u.ok && Array.isArray(u.data) && u.data.length > 0;
+        if (!has && p.m) { u = await rest(env, 'ultra_premium_users', 'mobile=' + eq(p.m) + '&select=id&limit=1'); has = u.ok && Array.isArray(u.data) && u.data.length > 0; }
+        if (u.ok && !has) return new Response(null, { status: 302, headers: { location: new URL('/ultra-premium', url.origin).toString(), 'cache-control': 'private, no-store' } });
+      } catch (e) { /* keep verdict */ }
+    }
+  }
+  if (ok) return 'allow';
+  const dest = new URL('/premium-login', url.origin);
+  dest.searchParams.set('next', '/' + m[1].toLowerCase());
+  return new Response(null, { status: 302, headers: { location: dest.toString(), 'cache-control': 'private, no-store' } });
+}
+
 export async function onRequest(context) {
+  const url = new URL(context.request.url);
+  const gate = await premiumGate(context, url);
+  if (gate instanceof Response) return gate;
+  const res = await route(context);
+  if (gate === 'allow') {
+    const out = new Response(res.body, res);
+    out.headers.set('cache-control', 'private, no-store');
+    out.headers.set('x-robots-tag', 'noindex, nofollow, noarchive');
+    return out;
+  }
+  return res;
+}
+
+async function route(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
 

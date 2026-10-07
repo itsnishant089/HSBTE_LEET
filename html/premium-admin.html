@@ -503,13 +503,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+<script src="/js/admin-sb.js?v=2"></script>
 <script>
 'use strict';
 var EJS_SVC='service_zlxv3q4', EJS_PUB='byFleJ2hV770O_Mni', EJS_TPL='template_w2fdh1s';
-var SUPA_URL='https://vzfpltvchsxsfqlldafd.supabase.co';
-var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6ZnBsdHZjaHN4c2ZxbGxkYWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNTY3NzksImV4cCI6MjA4ODczMjc3OX0.u9oVBYup_-OdTuY2i14sHGQIvZ4gKReMS919_7zxqCA';
-var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
+var sb=window.createAdminClient();
 emailjs.init(EJS_PUB);
 var curPage='dashboard';
 var usersCache=[];

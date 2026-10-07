@@ -447,3 +447,6 @@ body.dark-mode .seo-related-links a.seo-related-card{
   z-index:2;
   color:currentColor;
 }
+
+/* Google auto-ads must never be injected into the site header / nav (caused a 0.7 layout shift) */
+.main-nav .google-auto-placed,header .google-auto-placed{display:none!important}

@@ -1383,6 +1383,36 @@
 
       setBtn('btn-login', true, '');
       try {
+        // 1) server login (sets the secure cookie that unlocks the premium papers)
+        var srv = null;
+        try {
+          var sr = await fetch('/api/premium/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ mobile: mob, password: pass }) });
+          var sj = await sr.json().catch(function () { return null; });
+          if (!sj || sr.status === 404 || sr.status === 503 || sr.status >= 500) srv = null;
+          else if (sj.ok) srv = sj;
+          else {
+            var m = sj.code === 'inactive' ? 'Account not active. <a href="/btech-leet-premium" style="color:var(--v);font-weight:700">Get Access →</a>'
+              : sj.code === 'rate' ? (sj.error || 'Too many attempts. Please wait a minute.')
+              : 'Invalid mobile or password. Contact admin at <strong>nishant@hsbteleet.com</strong>.';
+            setAlert('lerr', '<i class="fas fa-times-circle"></i> ' + m, 'err');
+            setBtn('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
+            return;
+          }
+        } catch (e) { srv = null; }
+        if (srv) {
+          sessionStorage.setItem('prem_uid', srv.user.id);
+          sessionStorage.setItem('prem_mob', mob);
+          sessionStorage.setItem('prem_name', srv.user.full_name || '');
+          sessionStorage.setItem('prem_tier', srv.tier);
+          sessionStorage.setItem('prem_ts', Date.now().toString());
+          setAlert('lok', '<i class="fas fa-check-circle"></i> Welcome back, <strong>' + (srv.user.full_name || 'Student') + '</strong>! Redirecting to ' + srv.tier + ' portal…', 'ok');
+          var nx = new URLSearchParams(location.search).get('next') || '';
+          var okNext = /^\/(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|premium-papers)$/.test(nx);
+          var to = okNext ? nx : (srv.tier === 'ultra' ? './ultra-premium.html' : './premium-papers.html');
+          setTimeout(function () { window.location.href = to; }, 1000);
+          return;
+        }
+        // 2) server not available yet → the old browser login (only works until sql/supabase_lockdown.sql is run)
         var rp = await sb.rpc('premium_login', { p_mobile: mob, p_pass: pass });
         var user = rp.data, error = null;
         if (rp.error) { // login function not installed yet -> old way
@@ -1569,6 +1599,17 @@
       var uniq = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
       try {
+        var sres = await payStart();
+        if (!sres.unavailable) {
+          if (!sres.ok) throw new Error(sres.error || 'Could not activate free access');
+          if (sres.free) {
+            sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: 'FREE via ' + couponCode, tier: pending.tier, amount: 0, coupon: couponCode });
+            setSession(sres.result.userId);
+            showSuccess(pending.full_name, 'FREE ' + TIERS[pending.tier].label + ' access via ' + couponCode + '! Welcome email sent to ' + pending.email + '. Account is now active.', pending.tier);
+            return;
+          }
+          throw new Error('This coupon does not make the plan free.');
+        }
         var { data: nu, error: uE } = await sb.from('premium_users').insert([{
           mobile: pending.mobile,
           email: pending.email,
@@ -1659,6 +1700,19 @@
       document.head.appendChild(s);
     }
 
+    // asks the server for the price + a Razorpay order (the server decides the amount)
+    async function payStart() {
+      try {
+        var r = await fetch('/api/pay/start', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
+          body: JSON.stringify({ product: curTier, name: pending.full_name, mobile: pending.mobile, email: pending.email, password: pending.password_hash, coupon: applied ? applied.code : '' })
+        });
+        var j = await r.json().catch(function () { return null; });
+        if (!j || r.status === 404 || r.status === 503 || r.status >= 500) return { unavailable: true };
+        return j;
+      } catch (e) { return { unavailable: true }; }
+    }
+
     function doPayment() {
       if (!pending) { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Session expired. Please start again.', 'err'); return; }
       clearAlert('rerr');
@@ -1666,30 +1720,66 @@
       var btn = document.getElementById('btn-pay');
       btn.disabled = true; btn.innerHTML = '<span class="spin spin-dk"></span> Loading payment…';
 
-      loadRZP(function (err) {
+      loadRZP(async function (err) {
         var resetTxt = '<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹' + T.price + ' and Unlock Access</span>';
         if (err) { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> ' + err.message, 'err'); btn.disabled = false; btn.innerHTML = resetTxt; return; }
-        btn.disabled = false; btn.innerHTML = resetTxt;
 
         payPaise = (applied && applied.finalPaise !== undefined) ? applied.finalPaise : T.paise;
+        var sres = await payStart();
+        btn.disabled = false; btn.innerHTML = resetTxt;
+        var serverMode = !sres.unavailable;
+        if (serverMode && !sres.ok) {
+          setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> ' + (sres.error || 'Could not start the payment.') + (sres.code === 'exists' ? ' <button onclick="switchTab(\'login\')" style="background:none;border:none;color:var(--v);cursor:pointer;font-weight:700;text-decoration:underline">Login here</button>' : ''), 'err');
+          return;
+        }
+        if (serverMode && sres.free) {
+          sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: 'FREE via ' + (applied && applied.code), tier: pending.tier, amount: 0, coupon: applied && applied.code });
+          setSession(sres.result.userId);
+          showSuccess(pending.full_name, 'FREE ' + T.label + ' access. Account is now active.', pending.tier);
+          return;
+        }
+        if (serverMode) payPaise = sres.amount;
 
         var opts = {
-          key: RZP_KEY, amount: payPaise, currency: 'INR',
+          key: serverMode ? sres.key : RZP_KEY, amount: payPaise, currency: 'INR',
           name: 'HSBTE LEET ' + T.label,
           description: T.label + ' Access — hsbteleet.com',
           image: 'https://hsbteleet.com/image/favicon.webp',
           prefill: { contact: pending.mobile, email: pending.email },
           notes: { mobile: pending.mobile, tier: curTier },
           theme: { color: curTier === 'ultra' ? '#7c3aed' : '#1a56db' },
-          handler: function (r) { completeReg(r); },
+          handler: function (r) { serverMode ? completeSrv(r) : completeReg(r); },
           modal: { ondismiss: function () { setAlert('rerr', '<i class="fas fa-info-circle"></i> Payment cancelled. Click again to retry.', 'err'); } }
         };
+        if (serverMode) opts.order_id = sres.orderId;
         try {
           var rzp = new window.Razorpay(opts);
           rzp.on('payment.failed', function (r) { setAlert('rerr', '<i class="fas fa-times-circle"></i> Payment failed: ' + ((r.error && r.error.description) || 'Unknown error') + '.', 'err'); });
           rzp.open();
         } catch (e) { setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Could not open payment: ' + e.message, 'err'); }
       });
+    }
+
+    // payment done → the SERVER verifies it with Razorpay and creates the account / access
+    async function completeSrv(rzp) {
+      var T = TIERS[curTier];
+      var btn = document.getElementById('btn-pay');
+      btn.disabled = true; btn.innerHTML = '<span class="spin spin-dk"></span> Confirming payment…';
+      try {
+        var r = await fetch('/api/pay/complete', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
+          body: JSON.stringify({ razorpay_order_id: rzp.razorpay_order_id, razorpay_payment_id: rzp.razorpay_payment_id, razorpay_signature: rzp.razorpay_signature })
+        });
+        var j = await r.json().catch(function () { return null; });
+        if (!j || !j.ok) throw new Error((j && j.error) || 'Could not confirm the payment.');
+        sendRegistrationEmails({ name: pending.full_name, email: pending.email, mobile: pending.mobile, payId: rzp.razorpay_payment_id, tier: pending.tier, amount: Math.round((j.amount || payPaise) / 100), coupon: applied ? applied.code : null });
+        setSession(j.result.userId);
+        var couponNote = applied ? ' You saved ₹' + applied.discount + '!' : '';
+        showSuccess(pending.full_name, 'Payment confirmed!' + couponNote + ' Welcome email sent to ' + pending.email + '. Account active — ' + T.label + '.', pending.tier);
+      } catch (e) {
+        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> ' + e.message + ' Payment ID: <code style="font-size:11px;background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px">' + (rzp.razorpay_payment_id || 'N/A') + '</code>', 'err');
+        btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹' + T.price + ' and Unlock Access</span>';
+      }
     }
 
     // ── COMPLETE REGISTRATION ──

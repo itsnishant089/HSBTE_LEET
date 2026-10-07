@@ -1,4 +1,6 @@
-const CACHE_NAME = 'hsbte-leet-v6';
+const CACHE_NAME = 'hsbte-leet-v7';
+// premium papers are protected on the server → never cache them (a cached copy would outlive logout / revoked access)
+const GATED_PATH = /\/(?:html\/)?(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|rank-analysis|study-plan|college-predictor)(?:\.html)?\/?$/i;
 const NETWORK_ONLY_PATHS = [
   '/counseling',
   '/counseling-admin',
@@ -54,7 +56,7 @@ self.addEventListener('activate', event => {
 /** Fetch Event: Stale-While-Revalidate Strategy */
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
-  const shouldBypassCache = NETWORK_ONLY_PATHS.some(path => url.pathname === path || url.pathname.endsWith(path));
+  const shouldBypassCache = GATED_PATH.test(url.pathname) || NETWORK_ONLY_PATHS.some(path => url.pathname === path || url.pathname.endsWith(path));
 
   // We don't cache API calls or Google Analytics/Clarity in SW (they have their own logic)
   if (url.origin !== self.location.origin || url.pathname.startsWith('/api/')) {

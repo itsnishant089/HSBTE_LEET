@@ -2,7 +2,9 @@
  * Razorpay webhook (safety net when the buyer closes the tab right after paying).
  * Razorpay Dashboard → Webhooks → URL: https://hsbteleet.com/api/book/webhook
  * Events: payment.captured, order.paid     Secret = RAZORPAY_WEBHOOK_SECRET
+ * Handles Book orders AND Premium / Ultra / Counselling orders (pay_orders).
  */
+import { finalizeOrder, rzpCheckPayment } from '../../_lib/pay-core.js';
 import { cfg, json, fail, requireEnv, hmacHex, safeEqual, one, patch, rpc, eq, grantAccess } from '../../_lib/book-core.js';
 
 export async function onRequestPost(context) {
@@ -17,6 +19,15 @@ export async function onRequestPost(context) {
   try { evt = JSON.parse(raw); } catch (e) { return fail('bad json'); }
   const pay = evt.payload && evt.payload.payment && evt.payload.payment.entity;
   if (!pay || !pay.order_id) return json({ ok: true, ignored: true });
+
+  // Premium / Ultra / Counselling orders (created by /api/pay/start)
+  const po = await one(env, 'pay_orders', 'order_id=' + eq(pay.order_id) + '&select=*');
+  if (po) {
+    if (po.status === 'paid' || pay.amount !== po.final_paise || !['captured', 'authorized'].includes(pay.status)) return json({ ok: true, ignored: true });
+    if (!(await rzpCheckPayment(env, pay.order_id, pay.id, po.final_paise))) return json({ ok: true, ignored: true });
+    try { await finalizeOrder(env, po, { paymentId: pay.id }); } catch (e) { return fail('could not finalize', 500, 'finalize'); }
+    return json({ ok: true, payOrder: true });
+  }
 
   const p = await one(env, 'book_purchases', 'rzp_order_id=' + eq(pay.order_id) + '&select=*');
   if (!p || p.status === 'paid' || p.status === 'free') return json({ ok: true, ignored: true });

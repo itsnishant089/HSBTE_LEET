@@ -76,6 +76,7 @@ document.onkeydown = function(e) {
 </script>
   <link rel="stylesheet" href="/css/seo-related.css"/>
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://hsbteleet.com/counseling#webpage", "url": "https://hsbteleet.com/counseling", "name": "LEET Counseling Help 2027 – Expert Admission Guidance & Rank Analysis | HSBTE LEET", "description": "Official Haryana LEET 2027 counseling help – get rank-based college recommendations, branch selection guidance, and personalized admission strategy from.", "inLanguage": "en-IN", "isPartOf": {"@type": "WebSite", "name": "HSBTE PYQ", "url": "https://hsbteleet.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://hsbteleet.com/"}, {"@type": "ListItem", "position": 2, "name": "LEET Counseling Help 2027 – Expert Admission Guidance & Rank Analysis", "item": "https://hsbteleet.com/counseling"}]}]}</script>
+<style id="hdr-reserve">[data-include$="header.html"]{min-height:247px}@media(max-width:768px){[data-include$="header.html"]{min-height:334px}}.main-nav .google-auto-placed,header .google-auto-placed{display:none!important}</style>
 </head>
 <body style="background:#f8fafc">
 <div data-include="/partials/header.html"></div>
@@ -328,6 +329,7 @@ function doLogout() {
   sessionStorage.removeItem('counsel_uid');
   sessionStorage.removeItem('counsel_name');
   sessionStorage.removeItem('counsel_email');
+  sessionStorage.removeItem('counsel_token');
   curUser = null;
   document.getElementById('formCard').style.display='none';
   document.getElementById('authCard').style.display='block';
@@ -410,6 +412,18 @@ function cSwitch(t){
 function showAlert(id,html,type){var e=document.getElementById(id);if(!e)return;e.className='ch-alert ch-alert-'+type+' on';e.innerHTML=html;}
 function clearAlert(id){var e=document.getElementById(id);if(e){e.classList.remove('on');e.innerHTML='';}}
 
+function cnsTok(){return sessionStorage.getItem('counsel_token')||'';}
+function cnsClear(){['counsel_uid','counsel_name','counsel_email','counsel_token'].forEach(function(k){sessionStorage.removeItem(k);});}
+// talks to the server (/api/counseling/*). { unavailable:true } = server part not deployed yet -> old browser flow
+async function cnsApi(path,method,bodyObj){
+  try{
+    var r=await fetch('/api/counseling/'+path,{method:method||'GET',headers:{'Content-Type':'application/json','Authorization':'Bearer '+cnsTok()},body:bodyObj?JSON.stringify(bodyObj):undefined});
+    var j=await r.json().catch(function(){return null;});
+    if(!j||r.status===404||r.status===503||r.status>=500)return{unavailable:true};
+    j.httpStatus=r.status;return j;
+  }catch(e){return{unavailable:true};}
+}
+
 function populateForm(u) {
   document.getElementById('prefilled-section').style.display='block';
   document.getElementById('pf-name').textContent = u.full_name || '—';
@@ -431,8 +445,13 @@ function populateForm(u) {
     document.getElementById('st-2').className = 'step done';
     document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
     document.getElementById('st-3').className = 'step active';
-    var {data} = await sb.from('counseling_users').select('id,full_name,email,mobile,rank,category,gender,diploma_haryana,resident_haryana,created_at').eq('id', uid).maybeSingle();
-    if(data) populateForm(data);
+    var me = cnsTok() ? await cnsApi('me') : { unavailable: true };
+    if (me.ok) { populateForm(me.user); }
+    else if (me.httpStatus === 401) { cnsClear(); location.reload(); }
+    else {
+      var {data} = await sb.from('counseling_users').select('id,full_name,email,mobile,rank,category,gender,diploma_haryana,resident_haryana,created_at').eq('id', uid).maybeSingle();
+      if(data) populateForm(data);
+    }
   }
 })();
 
@@ -491,10 +510,16 @@ async function doLogin(){
   var btn=document.getElementById('btn-login');
   btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Logging in...';
   try{
-    var rp=await sb.rpc('counseling_login',{p_email:email,p_pass:pass});var u=rp.data,error=null;if(rp.error){var old=await sb.from('counseling_users').select('*').eq('email',email).eq('password_hash',pass).maybeSingle();u=old.data;error=old.error;}
-    if(error||!u){showAlert('l-err','<i class="fas fa-times-circle"></i> Invalid email or password.','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Secure Login';return;}
-    
-    var{data:pay}=await sb.from('counseling_payments').select('id').eq('user_id',u.id).maybeSingle();
+    var u=null,error=null,pay=null;
+    var sl=await cnsApi('login','POST',{email:email,password:pass});
+    if(!sl.unavailable){
+      if(!sl.ok){showAlert('l-err','<i class="fas fa-times-circle"></i> '+(sl.error||'Invalid email or password.'),'err');btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Secure Login';return;}
+      u=sl.user;pay=sl.paid?{id:1}:null;sessionStorage.setItem('counsel_token',sl.token);
+    }else{
+      var rp=await sb.rpc('counseling_login',{p_email:email,p_pass:pass});u=rp.data;if(rp.error){var old=await sb.from('counseling_users').select('*').eq('email',email).eq('password_hash',pass).maybeSingle();u=old.data;error=old.error;}
+      if(error||!u){showAlert('l-err','<i class="fas fa-times-circle"></i> Invalid email or password.','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Secure Login';return;}
+      var pq=await sb.from('counseling_payments').select('id').eq('user_id',u.id).maybeSingle();pay=pq.data;
+    }
     curUser={id:u.id,name:u.full_name,email:u.email};
     sessionStorage.setItem('counsel_uid',u.id);
     sessionStorage.setItem('counsel_name',u.full_name);
@@ -540,18 +565,27 @@ async function doRegister(){
   var btn=document.getElementById('btn-reg');
   btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Registering...';
   try{
-    var{data:ex}=await sb.from('counseling_users').select('id').eq('email',email).maybeSingle();
-    if(ex){showAlert('r-err','<i class="fas fa-user-check"></i> Email already registered. <button onclick="cSwitch(\'login\')" style="background:none;border:none;color:var(--c-blue);cursor:pointer;font-weight:700;text-decoration:underline">Login here →</button>','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-user-plus"></i> Register & Continue to Payment';return;}
-    
-    var payload = {
-      full_name:name, email:email, mobile:mob, password_hash:pass,
-      dob:dob, gender:gender, category:cat, diploma_haryana:dip, resident_haryana:res,
-      rank: parseInt(rank)
-    };
-    
-    var{data:nu,error:uE}=await sb.from('counseling_users').insert([payload]).select('id, full_name, category, diploma_haryana, resident_haryana').single();
-    if(uE)throw new Error(uE.message);
-    
+    var nu=null;
+    var sr=await cnsApi('register','POST',{name:name,email:email,mobile:mob,password:pass,dob:dob,gender:gender,category:cat,diploma_haryana:dip,resident_haryana:res,rank:parseInt(rank)});
+    if(!sr.unavailable){
+      if(!sr.ok){
+        if(sr.code==='exists'){showAlert('r-err','<i class="fas fa-user-check"></i> Email already registered. <button onclick="cSwitch(\'login\')" style="background:none;border:none;color:var(--c-blue);cursor:pointer;font-weight:700;text-decoration:underline">Login here →</button>','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-user-plus"></i> Register & Continue to Payment';return;}
+        throw new Error(sr.error||'Registration failed');
+      }
+      nu=sr.user;sessionStorage.setItem('counsel_token',sr.token);
+    }else{
+      var{data:ex}=await sb.from('counseling_users').select('id').eq('email',email).maybeSingle();
+      if(ex){showAlert('r-err','<i class="fas fa-user-check"></i> Email already registered. <button onclick="cSwitch(\'login\')" style="background:none;border:none;color:var(--c-blue);cursor:pointer;font-weight:700;text-decoration:underline">Login here →</button>','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-user-plus"></i> Register & Continue to Payment';return;}
+      var payload = {
+        full_name:name, email:email, mobile:mob, password_hash:pass,
+        dob:dob, gender:gender, category:cat, diploma_haryana:dip, resident_haryana:res,
+        rank: parseInt(rank)
+      };
+      var ins=await sb.from('counseling_users').insert([payload]).select('id, full_name, category, diploma_haryana, resident_haryana').single();
+      if(ins.error)throw new Error(ins.error.message);
+      nu=ins.data;
+    }
+
     pending={full_name:name,mobile:mob,email:email,id:nu.id};
     curUser={id:nu.id,name:name,email:email};
     sessionStorage.setItem('counsel_uid',nu.id);
@@ -612,8 +646,13 @@ async function doFree(){
   var btn=document.getElementById('btn-free');
   btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Activating...';
   try{
-    await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:'COUPON_FREE',amount:0,status:'free_coupon',coupon_used:document.getElementById('c-input').value.trim().toUpperCase()}]);
-    redeemCoupon(Math.round(PRICE),0);
+    var sr=await cStart();
+    if(!sr.unavailable){
+      if(!sr.ok||!sr.free)throw new Error(sr.error||'Could not activate free access.');
+    }else{
+      await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:'COUPON_FREE',amount:0,status:'free_coupon',coupon_used:document.getElementById('c-input').value.trim().toUpperCase()}]);
+      redeemCoupon(Math.round(PRICE),0);
+    }
     sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});
     document.getElementById('payCard').style.display='none';
     document.getElementById('formCard').style.display='block';
@@ -624,30 +663,63 @@ async function doFree(){
   }catch(e){showAlert('pay-err','<i class="fas fa-exclamation-triangle"></i> '+e.message,'err');btn.disabled=false;btn.innerHTML='<i class="fas fa-gift"></i> Claim FREE Access';}
 }
 
+// asks the server for the price (member discount + coupon) and a Razorpay order
+async function cStart(){
+  try{
+    var r=await fetch('/api/pay/start',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+cnsTok()},credentials:'same-origin',body:JSON.stringify({product:'counseling',userId:pending.id,coupon:applied?applied.code:''})});
+    var j=await r.json().catch(function(){return null;});
+    if(!j||r.status===404||r.status===503||r.status>=500)return{unavailable:true};
+    return j;
+  }catch(e){return{unavailable:true};}
+}
+function showFormStep(){
+  document.getElementById('payCard').style.display='none';
+  document.getElementById('formCard').style.display='block';
+  document.getElementById('st-2').className = 'step done';
+  document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
+  document.getElementById('st-3').className = 'step active';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function doPay(){
   if(!pending){showAlert('pay-err','Session expired. Please reload.','err');return;}
   clearAlert('pay-err');
   var btn=document.getElementById('btn-pay');
   btn.disabled=true;btn.innerHTML='<span class="ch-spin"></span> Loading...';
   var paise=(applied&&applied.finalPaise!==undefined)?applied.finalPaise:PAISE;
-  function go(){
+  function resetBtn(){btn.disabled=false;btn.innerHTML='<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹'+PRICE+' & Get Counseling</span>';}
+  async function go(){
+    var sr=await cStart(), serverMode=!sr.unavailable;
+    if(serverMode&&!sr.ok){showAlert('pay-err','<i class="fas fa-exclamation-triangle"></i> '+(sr.error||'Could not start the payment.'),'err');resetBtn();return;}
+    if(serverMode&&sr.free){sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});showFormStep();resetBtn();return;}
     var opts={
-      key:RZP_KEY,amount:paise,currency:'INR',
+      key:serverMode?sr.key:RZP_KEY,amount:serverMode?sr.amount:paise,currency:'INR',
       name:'HSBTE LEET Counseling',description:'Counseling Help — hsbteleet.com',
       image:'https://hsbteleet.com/image/favicon.webp',
       prefill:{contact:pending.mobile,email:pending.email},
       theme:{color:'#1a56db'},
-      handler:function(r){completePayment(r);},
-      modal:{ondismiss:function(){showAlert('pay-err','<i class="fas fa-info-circle"></i> Payment cancelled.','err');btn.disabled=false;btn.innerHTML='<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹'+PRICE+' & Get Counseling</span>';}}
+      handler:function(r){serverMode?completeSrv(r):completePayment(r);},
+      modal:{ondismiss:function(){showAlert('pay-err','<i class="fas fa-info-circle"></i> Payment cancelled.','err');resetBtn();}}
     };
+    if(serverMode)opts.order_id=sr.orderId;
     try{var rzp=new window.Razorpay(opts);rzp.open();}catch(e){showAlert('pay-err',e.message,'err');}
-    btn.disabled=false;btn.innerHTML='<i class="fas fa-lock"></i> <span id="pay-txt">Pay ₹'+PRICE+' & Get Counseling</span>';
+    resetBtn();
   }
   if(typeof window.Razorpay==='function'){go();}else{
     var s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';
-    s.onload=go;s.onerror=function(){showAlert('pay-err','Failed to load payment gateway.','err');};
+    s.onload=go;s.onerror=function(){showAlert('pay-err','Failed to load payment gateway.','err');resetBtn();};
     document.head.appendChild(s);
   }
+}
+// payment done -> the SERVER verifies it with Razorpay and records it
+async function completeSrv(r){
+  try{
+    var res=await fetch('/api/pay/complete',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({razorpay_order_id:r.razorpay_order_id,razorpay_payment_id:r.razorpay_payment_id,razorpay_signature:r.razorpay_signature})});
+    var j=await res.json().catch(function(){return null;});
+    if(!j||!j.ok)throw new Error((j&&j.error)||'Could not confirm the payment.');
+    sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:r.razorpay_payment_id,amount:Math.round((j.amount||0)/100)});
+    showFormStep();
+  }catch(e){showAlert('pay-err','<i class="fas fa-exclamation-triangle"></i> '+e.message+' Payment ID: '+(r.razorpay_payment_id||'N/A'),'err');}
 }
 async function completePayment(r){
   try{
@@ -656,12 +728,7 @@ async function completePayment(r){
     await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:r.razorpay_payment_id,amount:amt,status:'paid',coupon_used:coupon||null}]);
     redeemCoupon(Math.round(PRICE),Math.round(amt/100));
     sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:r.razorpay_payment_id,amount:Math.round(amt/100)});
-    document.getElementById('payCard').style.display='none';
-    document.getElementById('formCard').style.display='block';
-    document.getElementById('st-2').className = 'step done';
-    document.getElementById('st-2').innerHTML = '<i class="fas fa-check"></i><div class="step-label">Payment</div>';
-    document.getElementById('st-3').className = 'step active';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showFormStep();
   }catch(e){showAlert('pay-err','Payment recorded on gateway but failed to save in our system. Please contact support.','err');}
 }
 
@@ -713,8 +780,13 @@ async function submitRequest(){
       status: 'pending'
     };
     
-    var{error}=await sb.from('counseling_requests').insert([payload]);
-    if(error)throw new Error(error.message);
+    var rq=await cnsApi('requests','POST',{rank:payload.rank,branch_1:payload.branch_1,branch_2:payload.branch_2,branch_3:payload.branch_3,branch_4:payload.branch_4,branch_5:payload.branch_5,college_preferences:payload.college_preferences,notes:payload.notes});
+    if(!rq.unavailable){
+      if(!rq.ok)throw new Error(rq.error||'Could not submit your request.');
+    }else{
+      var{error}=await sb.from('counseling_requests').insert([payload]);
+      if(error)throw new Error(error.message);
+    }
     showAlert('f-ok','<i class="fas fa-check-circle"></i> Application submitted successfully! Redirecting to your dashboard...','ok');
     setTimeout(() => { window.location.href = '/user-counseling'; }, 1000);
     
@@ -786,10 +858,27 @@ async function submitRequest(){
     if (checked || !window.pending || !pending.mobile) return;
     checked = true;
     try {
-      var u = await sb.from('ultra_premium_users').select('id').eq('mobile', pending.mobile).maybeSingle();
-      var found = u && u.data;
-      if (!found) { var p = await sb.from('premium_users').select('id').eq('mobile', pending.mobile).maybeSingle(); found = p && p.data; }
-      if (!found) return;
+      var found = false;
+      try {
+        var qr = await fetch('/api/pay/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ product: 'counseling', mobile: pending.mobile, email: pending.email }) });
+        var qj = await qr.json().catch(function () { return null; });
+        if (qj && qj.ok) found = !!qj.member;
+        else throw new Error('server quote unavailable');
+      } catch (e2) {
+        var u = await sb.from('ultra_premium_users').select('id').eq('mobile', pending.mobile).maybeSingle();
+        found = u && u.data;
+        if (!found) { var p = await sb.from('premium_users').select('id').eq('mobile', pending.mobile).maybeSingle(); found = p && p.data; }
+      }
+      if (!found) {
+        var pw = document.getElementById('pay-wrap');
+        if (pw && !document.getElementById('member-hint')) {
+          var h = document.createElement('div'); h.id = 'member-hint';
+          h.style.cssText = 'font-size:12px;color:#475569;background:#f1f5f9;border-radius:10px;padding:8px 12px;margin:0 0 10px';
+          h.innerHTML = '🎖 <b>Premium / Ultra member?</b> Register here with the <b>same mobile and e-mail</b> as your Premium account to get 50% OFF automatically.';
+          pw.parentNode.insertBefore(h, pw);
+        }
+        return;
+      }
       isMember = true;
       PRICE = BASE * (100 - MEMBER_PERCENT) / 100;
       PAISE = Math.round(PRICE * 100);
