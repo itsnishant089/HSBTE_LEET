@@ -2,9 +2,9 @@
  * Admin: Book accounts, purchases, devices, violations and the Premium/Ultra device log.
  *   GET  /api/admin/book?view=overview|users|purchases|violations|devices|logins&q=
  *   POST /api/admin/book { action, ... }
- *        actions: ban, suspend, unban, reset_devices, revoke_device, grant_full, revoke_full, fine, note, mark_delivered, reset_points
+ *        actions: ban, suspend, unban, reset_devices, revoke_device, grant_full, revoke_full, fine, note, mark_delivered, reset_points, set_password, delete_user
  */
-import { cfg, json, fail, body, adminAuth, rest, patch, insert, eq, clean, normMobile } from '../../_lib/book-core.js';
+import { hashPassword, cfg, json, fail, body, adminAuth, rest, patch, insert, eq, clean, normMobile } from '../../_lib/book-core.js';
 
 const count = async (env, table, q = '') => {
   const r = await rest(env, table, (q ? q + '&' : '') + 'select=id', { headers: { prefer: 'count=exact', range: '0-0' } });
@@ -68,6 +68,22 @@ export async function onRequest(context) {
       case 'fine': await patch(env, 'book_users', uq, { fine_amount: Math.max(0, Math.round(+b.amount || 0)) }); break;
       case 'note': await patch(env, 'book_users', uq, { admin_note: clean(b.note, 500) }); break;
       case 'mark_delivered': await patch(env, 'book_purchases', 'id=' + eq(b.purchaseId || ''), { delivered: b.delivered !== false }); break;
+      case 'set_password': {
+        const pw = String(b.password || '');
+        if (pw.length < 6 || pw.length > 100) return fail('Password must be 6 to 100 characters.');
+        const r = await patch(env, 'book_users', uq, { pass_hash: await hashPassword(pw) });
+        if (!r.ok || !r.data || !r.data.length) return fail('User not found.', 404);
+        await patch(env, 'book_devices', 'user_id=' + eq(id || ''), { active: false }); // sign out everywhere
+        break;
+      }
+      case 'delete_user': {
+        const u = await rest(env, 'book_users', uq + '&select=id,has_full');
+        if (!u.ok || !u.data || !u.data[0]) return fail('User not found.', 404);
+        const pur = await rest(env, 'book_purchases', 'user_id=' + eq(id || '') + '&select=id&limit=1');
+        if (u.data[0].has_full || (pur.data && pur.data.length)) return fail('This user has bought the book. Revoke access instead of deleting (purchase records are kept).');
+        await rest(env, 'book_users', uq, { method: 'DELETE' });
+        break;
+      }
       default: return fail('Unknown action.');
     }
     return json({ ok: true });

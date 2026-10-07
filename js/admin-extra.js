@@ -134,7 +134,7 @@
           '<td>' + (u.violation_points || 0) + '</td><td>' + devs + '</td><td>' + fmtDate(u.created_at) + '<br><small>' + fmtDate(u.last_login) + '</small></td>' +
           '<td><div class="xk-act"><button class="xk-b r" data-a="ban" data-u="' + u.id + '">Ban</button><button class="xk-b" data-a="suspend" data-u="' + u.id + '">Suspend</button><button class="xk-b g" data-a="unban" data-u="' + u.id + '">Unban</button>' +
           '<button class="xk-b" data-a="reset_devices" data-u="' + u.id + '">Reset devices</button><button class="xk-b g" data-a="grant_full" data-u="' + u.id + '">Grant book</button><button class="xk-b r" data-a="revoke_full" data-u="' + u.id + '">Revoke</button>' +
-          '<button class="xk-b" data-a="fine" data-u="' + u.id + '">Fine</button><button class="xk-b" data-a="note" data-u="' + u.id + '">Note</button></div></td></tr>';
+          '<button class="xk-b" data-a="fine" data-u="' + u.id + '">Fine</button><button class="xk-b" data-a="note" data-u="' + u.id + '">Note</button><button class="xk-b" data-a="set_password" data-u="' + u.id + '">Set password</button><button class="xk-b r" data-a="delete_user" data-u="' + u.id + '">Delete</button></div></td></tr>';
       }).join('');
       tb.querySelectorAll('[data-a]').forEach(function (b) {
         b.onclick = function () {
@@ -143,6 +143,8 @@
           if (a === 'fine') { var f = prompt('Compensation amount recorded against this account (₹):', '0'); if (f === null) return; body.amount = f; }
           if (a === 'note') { var n = prompt('Admin note:', ''); if (n === null) return; body.note = n; }
           if (a === 'grant_full') { body.plan = confirm('OK = Reader + PDF copy plan\nCancel = Reader plan') ? 'pdf' : 'reader'; }
+          if (a === 'set_password') { var pw = prompt('NEW password for this student (min 6 characters). It signs them out of all devices:', ''); if (pw === null) return; pw = pw.trim(); if (pw.length < 6) { alert('Minimum 6 characters.'); return; } body.password = pw; }
+          if (a === 'delete_user' && !confirm('Delete this account permanently? (Only possible if they have not bought the book.)')) return;
           if (a === 'revoke_full' && !confirm('Remove full-book access?')) return;
           api('book', { body: body }).then(function (d) { note($('bku-msg'), d.ok ? '✅ Done' : '❌ ' + (d.error || 'Failed'), !d.ok); loadUsers(); });
         };

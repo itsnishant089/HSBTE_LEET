@@ -63,15 +63,16 @@
     canvas.style.width = cssW + 'px'; canvas.style.height = cssH + 'px';
     ctx.drawImage(bmp, 0, 0, canvas.width, canvas.height);
     // personal watermark — drawn into the pixels, so screenshots and photos carry it
-    var s = stamp();
+    var s = stamp(), fs = Math.max(11, Math.round(canvas.width / 46));
     ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2); ctx.rotate(-28 * Math.PI / 180);
-    ctx.font = '600 ' + Math.round(canvas.width / 38) + 'px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    var step = canvas.width / 7, reach = Math.hypot(canvas.width, canvas.height);
-    for (var y = -reach; y < reach; y += step) {
-      for (var x = -reach + ((y / step) % 2 ? step : 0); x < reach; x += step * 2.6) {
-        ctx.fillStyle = 'rgba(26,86,219,0.085)'; ctx.fillText(s, x, y);
-        ctx.fillStyle = 'rgba(0,0,0,0.045)'; ctx.fillText(s, x + 2, y + 2);
+    ctx.translate(canvas.width / 2, canvas.height / 2); ctx.rotate(-30 * Math.PI / 180);
+    ctx.font = '700 ' + fs + 'px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    var tw = ctx.measureText(s).width, gapX = tw + fs * 3, gapY = fs * 5.2, reach = Math.hypot(canvas.width, canvas.height) / 2 + gapX, row = 0;
+    ctx.lineJoin = 'round'; ctx.lineWidth = Math.max(2, fs / 5);
+    for (var y = -reach; y <= reach; y += gapY, row++) {
+      for (var x = -reach + (row % 2 ? gapX / 2 : 0); x <= reach; x += gapX) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.strokeText(s, x, y);   // light halo so it shows on dark areas too
+        ctx.fillStyle = 'rgba(30,64,175,0.20)'; ctx.fillText(s, x, y);
       }
     }
     ctx.restore();
