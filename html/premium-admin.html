@@ -1122,7 +1122,7 @@ async function loadSecurity(){
     // Enrich with user info
     secCache = viols.map(function(v){
       var u = uMap[v.user_id]||{};
-      return Object.assign({}, v, { user_name: u.full_name||'Unknown', user_mobile: u.mobile||v.user_id||'—' });
+      return Object.assign({}, v, { user_name: u.full_name || (v.user_id ? 'Unknown / deleted user' : 'Not logged in'), user_mobile: u.mobile || (v.user_id ? '' : '—') });
     });
 
     // Stats
@@ -1162,7 +1162,7 @@ function renderSec(data){
       '<td><code style="font-size:12px">'+mob+'</code></td>' +
       '<td>'+typeBadge+'</td>' +
       '<td style="font-size:12px;color:var(--mu)">'+paper+'</td>' +
-      '<td style="font-size:11px;color:var(--mu);max-width:150px;overflow:hidden;text-overflow:ellipsis" title="'+e(v.device_info||'')+'">'+e((v.device_info||'—').substring(0,55))+'</td>' +
+      '<td style="font-size:11px;color:var(--mu);max-width:150px;overflow:hidden;text-overflow:ellipsis" title="'+e((v.ip_address||'')+' '+(v.device_info||''))+'">'+(v.ip_address&&v.ip_address!=='client-side'?'<b>IP '+e(v.ip_address)+'</b><br>':'')+e((v.device_info||'—').substring(0,55))+'</td>' +
       '<td style="color:var(--mu);font-size:12px">'+vtime+'</td>' +
       '<td><div style="display:flex;gap:4px;flex-wrap:wrap">' +
         /* 1. Send Warning Email */

@@ -105,6 +105,27 @@
       return;
     }
 
+    /* 1) Server log (real IP + identity from the secure login cookie). 2) old direct insert if the server cannot do it. */
+    var pageCtx0 = (typeof window.PAPER_TITLE !== 'undefined' ? window.PAPER_TITLE : document.title) || 'Unknown Page';
+    var attempts = 0;
+    var hasSess = false;
+    try { hasSess = !!sessionStorage.getItem('prem_uid'); } catch (_) {}
+    try {
+      fetch('/api/premium/violation', {
+        method: 'POST', credentials: 'same-origin', keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: violationType, page: pageCtx0, hasSession: hasSess })
+      }).then(function (r) { return r.json().catch(function () { return null; }).then(function (j) { return { r: r, j: j }; }); })
+        .then(function (x) {
+          if (x.j && x.j.ok && !x.j.skipped) return;          /* logged by the server */
+          directInsert();                                      /* skipped (old session) / server not ready → old way */
+        })
+        .catch(function () { directInsert(); });
+    } catch (_) { directInsert(); }
+    return;
+
+    function directInsert() { setTimeout(tryLog, 100); }
+
     /* Direct Supabase insert — wait for supabase client to be available */
     var attempts = 0;
     function tryLog() {
@@ -153,7 +174,6 @@
       } catch(e) { /* silent */ }
     }
 
-    setTimeout(tryLog, 100); /* slight delay to let page scripts initialize */
   }
 
   /* ── 4. (EMAIL REMOVED) — Admin can manually send warning/ban from admin portal ── */

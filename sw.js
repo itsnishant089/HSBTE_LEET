@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hsbte-leet-v7';
+const CACHE_NAME = 'hsbte-leet-v8';
 // premium papers are protected on the server → never cache them (a cached copy would outlive logout / revoked access)
 const GATED_PATH = /\/(?:html\/)?(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|rank-analysis|study-plan|college-predictor)(?:\.html)?\/?$/i;
 const NETWORK_ONLY_PATHS = [

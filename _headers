@@ -19,6 +19,12 @@
 /js/main.js
   Cache-Control: public, max-age=0, must-revalidate
 
+/js/premium-security.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/js/chatbot.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /image/*
   Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
 
