@@ -653,7 +653,7 @@ async function doFree(){
       await sb.from('counseling_payments').insert([{user_id:pending.id,razorpay_payment_id:'COUPON_FREE',amount:0,status:'free_coupon',coupon_used:document.getElementById('c-input').value.trim().toUpperCase()}]);
       redeemCoupon(Math.round(PRICE),0);
     }
-    sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});
+    if(sr.unavailable||!(sr.result&&sr.result.emailed))sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});
     document.getElementById('payCard').style.display='none';
     document.getElementById('formCard').style.display='block';
     document.getElementById('st-2').className = 'step done';
@@ -691,7 +691,7 @@ function doPay(){
   async function go(){
     var sr=await cStart(), serverMode=!sr.unavailable;
     if(serverMode&&!sr.ok){showAlert('pay-err','<i class="fas fa-exclamation-triangle"></i> '+(sr.error||'Could not start the payment.'),'err');resetBtn();return;}
-    if(serverMode&&sr.free){sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});showFormStep();resetBtn();return;}
+    if(serverMode&&sr.free){if(!(sr.result&&sr.result.emailed))sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:'FREE_COUPON',amount:0});showFormStep();resetBtn();return;}
     var opts={
       key:serverMode?sr.key:RZP_KEY,amount:serverMode?sr.amount:paise,currency:'INR',
       name:'HSBTE LEET Counseling',description:'Counseling Help — hsbteleet.com',
@@ -717,7 +717,7 @@ async function completeSrv(r){
     var res=await fetch('/api/pay/complete',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({razorpay_order_id:r.razorpay_order_id,razorpay_payment_id:r.razorpay_payment_id,razorpay_signature:r.razorpay_signature})});
     var j=await res.json().catch(function(){return null;});
     if(!j||!j.ok)throw new Error((j&&j.error)||'Could not confirm the payment.');
-    sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:r.razorpay_payment_id,amount:Math.round((j.amount||0)/100)});
+    if(!(j.result&&j.result.emailed))sendCounselingEmails({name:pending.full_name,email:pending.email,mobile:pending.mobile,payId:r.razorpay_payment_id,amount:Math.round((j.amount||0)/100)});
     showFormStep();
   }catch(e){showAlert('pay-err','<i class="fas fa-exclamation-triangle"></i> '+e.message+' Payment ID: '+(r.razorpay_payment_id||'N/A'),'err');}
 }

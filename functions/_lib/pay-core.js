@@ -6,6 +6,7 @@
  * Env: MAIN_SUPABASE_URL, MAIN_SUPABASE_SERVICE_KEY, SESSION_SECRET, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET,
  *      RAZORPAY_WEBHOOK_SECRET (optional prices: PREMIUM_PRICE, ULTRA_PRICE, COUNSELING_PRICE)
  */
+import { mailOrderDone } from './mail.js';
 import {
   rest, rpc, one, insert, patch, eq, clean, normMobile, validMobile, validEmail,
   findCoupon, couponDiscount, couponLabel, signToken, verifyToken, hmacHex, safeEqual, b64u
@@ -189,8 +190,18 @@ export async function finalizeOrder(env, order, { paymentId, signature, redeemed
   if (order.coupon && !redeemed) {
     await rpc(env, 'redeem_coupon', { p_code: order.coupon, p_product: order.product, p_mobile: order.mobile || null, p_before: Math.round((order.base_paise || 0) / 100), p_after: Math.round(order.final_paise / 100) });
   }
-  if (order.id) await patch(env, 'pay_orders', 'id=' + eq(order.id), { status: 'paid', payment_id: payRef, paid_at: new Date().toISOString(), result, enc_pass: null });
-  return result;
+  // claim the order (browser + webhook may both arrive: only the first one sends the e-mails)
+  let claimed = true;
+  if (order.id) {
+    const up = await patch(env, 'pay_orders', 'id=' + eq(order.id) + '&status=neq.paid', { status: 'paid', payment_id: payRef, paid_at: new Date().toISOString(), result, enc_pass: null });
+    claimed = !!(up.ok && up.data && up.data.length);
+  }
+  let emailed = false;
+  if (claimed) {
+    try { emailed = await mailOrderDone(env, order, { paymentId: payRef, free }); } catch (e) { emailed = false; }
+    if (order.id && emailed) await patch(env, 'pay_orders', 'id=' + eq(order.id), { result: { ...result, emailed: true } });
+  }
+  return { ...result, emailed };
 }
 
 export { rest, one, insert, patch, eq, clean, normMobile, validMobile, validEmail, verifyToken };

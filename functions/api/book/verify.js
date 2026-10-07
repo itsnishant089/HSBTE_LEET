@@ -1,3 +1,4 @@
+import { mailBookDone } from '../../_lib/mail.js';
 import { cfg, json, fail, body, bookAuth, hmacHex, safeEqual, one, patch, rpc, eq, grantAccess, requireEnv } from '../../_lib/book-core.js';
 
 export async function onRequestPost(context) {
@@ -28,5 +29,7 @@ export async function onRequestPost(context) {
   await patch(env, 'book_purchases', 'id=' + eq(p.id), { status: 'paid', rzp_payment_id: payId, paid_at: new Date().toISOString() });
   if (p.coupon) await rpc(env, 'redeem_coupon', { p_code: p.coupon, p_product: 'book', p_mobile: u.mobile, p_before: p.base_amount, p_after: p.final_amount });
   await grantAccess(env, c, u.id, p.plan);
-  return json({ ok: true, plan: p.plan });
+  let emailed = false;
+  try { emailed = await mailBookDone(env, u, p, { free: false }); } catch (e) { /* mail must never break a purchase */ }
+  return json({ ok: true, plan: p.plan, emailed });
 }

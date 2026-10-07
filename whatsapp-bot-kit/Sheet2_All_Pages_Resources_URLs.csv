@@ -1,4 +1,4 @@
-Category,Name,Description,URL,Keywords,Notes
+﻿Category,Name,Description,URL,Keywords,Notes
 Main,Home,Website homepage,https://hsbteleet.com/,"home, hsbteleet",Start here
 Main,HSBTE PYQ Hub,All diploma previous year papers,https://hsbteleet.com/hsbte-pyq,"pyq, previous year, diploma papers",FREE
 Main,HSBTE Diploma Syllabus,All branch syllabus PDF cards,https://hsbteleet.com/hsbte-syllabus,"diploma syllabus, hsbte syllabus",FREE PDFs
@@ -9,10 +9,10 @@ Main,Contact,Email + WhatsApp contact,https://hsbteleet.com/contact,"contact, su
 Main,HSBTE Result,Result related page,https://hsbteleet.com/hsbte-result,result,
 Main,Haryana Diploma Info,Diploma info page,https://hsbteleet.com/haryana-diploma-info,diploma info,
 Premium,Premium Landing,Plans compare Premium vs Ultra,https://hsbteleet.com/btech-leet-premium,"premium, ultra, plans",Marketing page
-Premium,Buy / Login Premium,Register + Razorpay for Premium ₹99,https://hsbteleet.com/premium-login?tier=premium,"buy premium, login, pay 99",BUY LINK
-Premium,Buy / Login Ultra,Register + Razorpay for Ultra ₹149,https://hsbteleet.com/premium-login?tier=ultra,"buy ultra, login, pay 149",BUY LINK
+Premium,Buy / Login Premium,Register + Razorpay for Premium ₹69,https://hsbteleet.com/premium-login?tier=premium,"buy premium, login, pay 99",BUY LINK
+Premium,Buy / Login Ultra,Register + Razorpay for Ultra ₹99,https://hsbteleet.com/premium-login?tier=ultra,"buy ultra, login, pay 99",BUY LINK
 Premium,Premium Login (default),Login/register page,https://hsbteleet.com/premium-login,login premium,
-Premium,Premium Papers Dashboard,All 34 papers + PDFs (login required),https://hsbteleet.com/premium-papers,"premium papers, mocks",Login required
+Premium,Premium Papers Dashboard,All 54 papers + PDFs (login required),https://hsbteleet.com/premium-papers,"premium papers, mocks",Login required
 Premium,Ultra Premium Tools,College/rank/counselling tools,https://hsbteleet.com/ultra-premium,"ultra tools, predictor",Ultra login required
 Premium,Rank Analysis,Rank analysis tool,https://hsbteleet.com/rank-analysis,rank analysis,Premium+
 Premium,College Predictor,AI college predictor,https://hsbteleet.com/college-predictor,college predictor,Ultra only
@@ -61,7 +61,7 @@ LEET Info,Key Dates B.Tech,Public LEET information page,https://hsbteleet.com/bt
 LEET Info,LEET Overview,Public LEET information page,https://hsbteleet.com/leet-overview,overview,FREE
 LEET Info,LEET Preparation Guide,Public LEET information page,https://hsbteleet.com/leet-preparation-guide,preparation,FREE
 LEET Info,Tentative Dates,Public LEET information page,https://hsbteleet.com/leet-tentative-dates,dates,FREE
-LEET Info,Haryana LEET Guide,Public LEET information page,https://hsbteleet.com/haryanaleet,"leet 2026, leet 2027",FREE
+LEET Info,Haryana LEET Complete Guide,Public LEET information page,https://hsbteleet.com/haryanaleet,"leet 2026, leet 2027",FREE
 LEET Info,Free B.Tech Sample Hub,Public LEET information page,https://hsbteleet.com/btech-leet-sample-paper,free sample,FREE
 LEET Info,Free LEET Sample Hub,Public LEET information page,https://hsbteleet.com/leet-sample-paper,sample paper,FREE
 LEET PDF,B.Tech LEET Syllabus PDF,Official entrance syllabus PDF,https://hsbteleet.com/pdf/B.Tech-LEET-Syllabus-2026.pdf,leet syllabus pdf,SEND THIS for LEET syllabus
@@ -80,6 +80,10 @@ LEET PDF,Cheat Sheet Section C,Cheat sheet PDF,https://hsbteleet.com/pdf/cheat-s
 LEET PDF,Formula Sheet Section D,Premium formula sheet,https://hsbteleet.com/pdf/formula-sheet-LEET2026_Section_D.pdf,formula D,Premium
 LEET PDF,Important Topics Section D,Important topics PDF,https://hsbteleet.com/pdf/important-topic-LEET2026_Section_d.pdf,important topics D,Premium
 LEET PDF,Cheat Sheet Section D,Cheat sheet PDF,https://hsbteleet.com/pdf/cheat-sheat-LEET2026_Section_d.pdf,cheat sheet D,Premium
+Book,Haryana LEET Book (landing + buy),"1,633-page study guide · Reader ₹399 · PDF plan ₹499 · Ultra ₹299",https://hsbteleet.com/haryana-leet-book,"book, leet book, haryana leet book",BUY LINK ₹399
+Book,Book Free Sample,Free 20-page sample (free sign-up),https://hsbteleet.com/book-login?next=sample,"book sample, free sample",FREE
+Book,Book Login / Register,Create account or log in to the reader,https://hsbteleet.com/book-login,book login,Login
+Support,Terms & Conditions,"Rules, refunds, security violations, discounts",https://hsbteleet.com/terms,"terms, refund, policy",
 Counseling,Counseling Help Buy,₹99 personalized counselling request,https://hsbteleet.com/counseling,"counseling help, 99 counselling",BUY LINK ₹99
 Counseling,User Counseling Dashboard,Track admin suggestions,https://hsbteleet.com/user-counseling,dashboard counseling,After payment
 B.Pharmacy,B.Pharmacy LEET,B.Pharm lateral entry page,https://hsbteleet.com/B-Pharmacy-leet,bpharmacy leet,
@@ -330,4 +334,4 @@ Support,WhatsApp Chat Link,Direct WhatsApp to admin,https://wa.me/919992507270,"
 Support,Email,Support email,mailto:nishant@hsbteleet.com,email,nishant@hsbteleet.com
 Official,HSTES,Official counselling site,https://hstes.org.in,hstes official,Government
 Official,DTE Haryana,Directorate of Technical Education,http://techeduhry.gov.in/,dte haryana,Government
-BOT RULE,Unknown / Custom Doubt Template,If user question not matched OR payment issue OR personal doubt,https://hsbteleet.com/contact,"doubt, unknown, custom",Your message is marked HIGH PRIORITY ✅ |  | Our admin will contact you soon on WhatsApp. |  | Meanwhile you can also: | • Email: nishant@hsbteleet.com | • WhatsApp: https://wa.me/919992507270 | • Contact page: https://hsbteleet.com/contact |  | Thank you for choosing hsbteleet.com 🙏
+BOT RULE,Unknown / Custom Doubt Template,If user question not matched OR payment issue OR personal doubt,https://hsbteleet.com/contact,"doubt, unknown, custom",Your message is marked HIGH PRIORITY ✅ |  | Our admin will contact you soon. |  | Meanwhile you can also: | • Email: nishant@hsbteleet.com | • WhatsApp: https://wa.me/919992507270 | • Contact page: https://hsbteleet.com/contact |  | Thank you for choosing hsbteleet.com 🙏

@@ -51,8 +51,8 @@ PRODUCTS (UPDATED OCTOBER 2026)
 ════════════════════════════════════════
 • FREE: HSBTE diploma PYQ (branch+semester), diploma syllabus PDFs, LEET info pages, 1 free LEET sample paper.
 • Premium ₹69: 46 full-syllabus + 8 section-wise sample papers, official LEET syllabus+prospectus PDFs, formula/topic/cheat sheets, Rank Analysis, ad-free, access until LEET 2027 (30 Sep 2027).
-• Ultra ₹99: Everything in Premium + AI College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling Advisor, Choice Filling Generator, Study Planner, College Comparison, Mock Counselling, 50% OFF on personalized counselling (₹199→₹99), Chapter-wise Notes.
-• Counseling Help ₹99 (separate): personalized human expert counselling on college/branch strategy. Ultra users get 50% off (pay only ₹99 instead of ₹199).
+• Ultra ₹99: Everything in Premium + AI College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling Advisor, Choice Filling Generator, Study Planner, College Comparison, Mock Counselling, 50% OFF on personalized counselling (₹99→₹49.50, Premium also gets it), Chapter-wise Notes.
+• Counseling Help ₹99 (separate): personalized human expert counselling on college/branch strategy. Premium AND Ultra members get 50% off (₹49.50) with the same mobile + e-mail.
 • Haryana LEET Book 2027 (${BASE}/haryana-leet-book): 1,633-page complete study guide read in a secure online reader (no download/copy/screenshot). Free 20-page sample after a free sign-up. Launch price ₹399 (MRP ₹999); Ultra Premium members pay ₹299; Reader + personal PDF copy by email ₹499 (₹399 for Ultra). Max 2 devices, access until 30 Sep 2027. Coupons are applied at checkout. Premium & Ultra members also get 50% off counselling (₹99 → ₹49.50). General Awareness (a-5) not in the first edition.
 • No auto-renewal on any plan. One-time payment only.
 BUY / ACCESS LINKS:
@@ -146,7 +146,14 @@ Subscription validity? Access until LEET 2027 (30 Sep 2027). No auto-renewal. Po
 Refund policy? Within 24 hours if less than 2 papers accessed. After that, no refund. See ${BASE}/terms
 How many papers? Premium: 46 full-syllabus + 8 section-wise sample papers. Plus 1 free paper available without login.
 Security violations? Premium papers are watermarked + screenshot/copy/devtools blocked. Violations auto-logged. Account may be suspended. See ${BASE}/terms
-Counselling discount? Ultra Premium users get 50% off personalized counselling (₹199 → ₹99). See ${BASE}/terms section 7.
+Counselling price? ₹99 one-time. Premium AND Ultra members get 50% off (₹49.50) automatically when they register for counselling with the SAME mobile number + e-mail as their Premium/Ultra account (or while logged in to Premium). Others pay ₹99. Link: ${BASE}/counseling
+Book price? Online Reader ₹399 (MRP ₹999), Reader + personal PDF by e-mail ₹499. Ultra Premium members: ₹299 / ₹399 automatically. Free 20-page sample after a free sign-up: ${BASE}/book-login?next=sample · Details: ${BASE}/haryana-leet-book
+Book download / copy? Reader is read-only: no download, copy, print or screenshot. PDF-plan buyers get a personal watermarked PDF by e-mail within 24 hours. Violations can suspend/ban the account (see ${BASE}/terms).
+Devices? Book reader works on up to 2 devices per account. A 3rd device shows a list so the user can remove one.
+Coupon? Admin-created codes (Premium/Ultra/Counselling/Book). Enter at payment step and press Apply; price is calculated by the server; usually one use per mobile.
+Forgot password? Passwords are stored securely and cannot be read by anyone, but admin can set a NEW one. Ask user to WhatsApp 9992507270 / mail nishant@hsbteleet.com with product + registered mobile. Premium login = mobile number; Counselling login = e-mail; Book login = mobile or e-mail.
+Payment done but no access? Do not pay again — server records payments automatically (may take a few minutes). If still nothing: send Razorpay Payment ID (pay_...) + registered mobile to WhatsApp 9992507270 / nishant@hsbteleet.com. Mark HIGH PRIORITY.
+Premium papers link opens login? Premium papers are served only to logged-in members. Log in at ${BASE}/premium-login with the mobile + password, then open /premium-papers.
 Unknown doubt template:
 "Your message is marked HIGH PRIORITY ✅
 Our admin will contact you soon.

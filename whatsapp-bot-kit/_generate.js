@@ -37,7 +37,7 @@ const faqRows = [
     Category: 'Greeting',
     Trigger_Keywords: 'hi, hello, namaste, hii, hey, start, help',
     Full_Answer:
-      'Namaste! 🙏 Main *hsbteleet.com chatbot* hoon.\n\nMain help kar sakta hoon:\n1️⃣ HSBTE Diploma PYQ (branch + semester)\n2️⃣ Diploma Syllabus PDF (branch-wise)\n3️⃣ Haryana LEET Syllabus / Exam Pattern\n4️⃣ Free LEET sample papers\n5️⃣ Premium ₹69 & Ultra Premium ₹99 details\n6️⃣ Counseling help ₹99\n\nLikho jaise:\n• "CSE 1st semester PYQ"\n• "LEET syllabus"\n• "Computer syllabus PDF"\n• "Buy Premium"\n• "Ultra Premium kya milta hai"',
+      'Namaste! 🙏 Main *hsbteleet.com chatbot* hoon.\n\nMain help kar sakta hoon:\n1️⃣ HSBTE Diploma PYQ (branch + semester)\n2️⃣ Diploma Syllabus PDF (branch-wise)\n3️⃣ Haryana LEET Syllabus / Exam Pattern\n4️⃣ Free LEET sample papers\n5️⃣ Premium ₹69 & Ultra Premium ₹99 details\n6️⃣ Counseling help ₹99 (Premium/Ultra members: 50% OFF)\n7️⃣ Haryana LEET Book 2027 (1,633 pages, free sample)\n\nLikho jaise:\n• "CSE 1st semester PYQ"\n• "LEET syllabus"\n• "Computer syllabus PDF"\n• "Buy Premium"\n• "Ultra Premium kya milta hai"',
     Links_To_Send: BASE + '/',
     Priority: 'Normal'
   },
@@ -52,7 +52,7 @@ const faqRows = [
     Category: 'Why Buy Premium',
     Trigger_Keywords: 'why premium, why buy, kyun buy, premium kyu, worth, free vs premium, difference free',
     Full_Answer:
-      '*Why buy Premium on hsbteleet.com?*\n\nFree site pe HSBTE diploma PYQ + basic LEET info milti hai.\n\n*Premium (₹69 one-time)* unlock karta hai:\n✅ *34 exclusive* full-syllabus LEET sample papers (free papers se alag unique questions)\n✅ Official Haryana LEET Syllabus PDF + B.Tech LEET Prospectus\n✅ Formula sheets + important topics + cheat sheets (Section A–D)\n✅ Rank Analysis tool\n✅ 100% Ad-free + *Access Until LEET 2027*\n\nLEET 90 Q / 90 min pattern pe practice karne ke liye ye papers real exam jaisi difficulty pe banaye gaye hain.\n\n👉 Buy / Login: ' +
+      '*Why buy Premium on hsbteleet.com?*\n\nFree site pe HSBTE diploma PYQ + basic LEET info milti hai.\n\n*Premium (₹69 one-time)* unlock karta hai:\n✅ *54 exclusive* full-syllabus LEET sample papers (free papers se alag unique questions)\n✅ Official Haryana LEET Syllabus PDF + B.Tech LEET Prospectus\n✅ Formula sheets + important topics + cheat sheets (Section A–D)\n✅ Rank Analysis tool\n✅ 100% Ad-free + *Access Until LEET 2027*\n\nLEET 90 Q / 90 min pattern pe practice karne ke liye ye papers real exam jaisi difficulty pe banaye gaye hain.\n\n👉 Buy / Login: ' +
       BASE +
       '/premium-login?tier=premium\n👉 Plans detail: ' +
       BASE +
@@ -66,7 +66,7 @@ const faqRows = [
     Category: 'Premium Plan',
     Trigger_Keywords: 'premium, buy premium, premium 69, get premium, premium price, premium kya hai',
     Full_Answer:
-      '*HSBTE LEET Premium — ₹99 (one-time, Access Until LEET 2027)*\n\n*Includes:*\n• 34 exclusive LEET sample papers (section-wise + full syllabus)\n• Official LEET Syllabus PDF\n• Official B.Tech LEET Prospectus 2027\n• Formula sheets (A/B/C/D)\n• Important topics PDFs\n• Cheat sheets\n• Rank Analysis tool\n• Zero ads\n• Access Until LEET 2027 (pay once)\n\n*Does NOT include:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling tools (wo Ultra Premium mein hain).\n\n🛒 Buy now: ' +
+      '*HSBTE LEET Premium — ₹69 (one-time, Access Until LEET 2027)*\n\n*Includes:*\n• 54 exclusive LEET sample papers (section-wise + full syllabus)\n• Official LEET Syllabus PDF\n• Official B.Tech LEET Prospectus 2027\n• Formula sheets (A/B/C/D)\n• Important topics PDFs\n• Cheat sheets\n• Rank Analysis tool\n• Zero ads\n• Access Until LEET 2027 (pay once)\n\n*Does NOT include:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling tools (wo Ultra Premium mein hain).\n\n🛒 Buy now: ' +
       BASE +
       '/premium-login?tier=premium\n📄 See all features: ' +
       BASE +
@@ -92,7 +92,7 @@ const faqRows = [
     Category: 'Premium vs Ultra',
     Trigger_Keywords: 'premium vs ultra, difference premium ultra, which plan, konsa plan, compare plans',
     Full_Answer:
-      '*Premium ₹69 vs Ultra Premium ₹99*\n\n*Both get:* 34 exclusive papers, syllabus PDF, prospectus, formula/topic sheets, Rank Analysis, ad-free, Access Until LEET 2027.\n\n*Only Ultra ₹99 gets:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling Advisor, Choice Filling tools, Study Planner, Mock Counselling, College Comparison.\n\n*Recommendation:*\n• Sirf papers practice chahiye → *Premium ₹69*\n• College/rank/counselling strategy bhi chahiye → *Ultra ₹99*\n\nBuy Premium: ' +
+      '*Premium ₹69 vs Ultra Premium ₹99*\n\n*Both get:* 54 exclusive papers, syllabus PDF, prospectus, formula/topic sheets, Rank Analysis, ad-free, Access Until LEET 2027.\n\n*Only Ultra ₹99 gets:* College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling Advisor, Choice Filling tools, Study Planner, Mock Counselling, College Comparison.\n\n*Recommendation:*\n• Sirf papers practice chahiye → *Premium ₹69*\n• College/rank/counselling strategy bhi chahiye → *Ultra ₹99*\n\nBuy Premium: ' +
       BASE +
       '/premium-login?tier=premium\nBuy Ultra: ' +
       BASE +
@@ -116,9 +116,9 @@ const faqRows = [
   },
   {
     Category: 'Premium Papers Access',
-    Trigger_Keywords: 'premium papers, sample paper premium, mock test, paper 17, 34 papers, where papers',
+    Trigger_Keywords: 'premium papers, sample paper premium, mock test, paper 17, 54 papers, where papers',
     Full_Answer:
-      '*34 Premium LEET Sample Papers*\n\nPattern: 90 MCQ · 90 minutes · No negative marking (official LEET scheme)\nSections: Basic Sciences, Electronics stream, Mechanical stream, Other Engg streams.\n\nAccess (login required):\n👉 ' +
+      '*54 Premium LEET Sample Papers*\n\nPattern: 90 MCQ · 90 minutes · No negative marking (official LEET scheme)\nSections: Basic Sciences, Electronics stream, Mechanical stream, Other Engg streams.\n\nAccess (login required):\n👉 ' +
       BASE +
       '/premium-papers\n\nDirect paper examples:\n• Paper 1: ' +
       BASE +
@@ -184,7 +184,7 @@ const faqRows = [
       BASE +
       '/btech-sample-paper-1\n• ' +
       BASE +
-      '/btech-sample-paper-2\n(… up to free sample sets on site)\n\n*Want harder exclusive papers?* 34 Premium papers → ' +
+      '/btech-sample-paper-2\n(… up to free sample sets on site)\n\n*Want harder exclusive papers?* 54 Premium papers → ' +
       BASE +
       '/premium-login?tier=premium',
     Links_To_Send: BASE + '/btech-leet-sample-paper',
@@ -280,7 +280,7 @@ const faqRows = [
     Category: 'Counseling Help',
     Trigger_Keywords: 'counseling, counselling, choice filling help, college recommend, counseling 99',
     Full_Answer:
-      '*Personalized LEET Counseling Help — ₹99*\n\nExpert reviews your rank, category, diploma branch & preferences and suggests colleges/branches with reasons.\n\n👉 Submit: ' +
+      '*Personalized LEET Counseling Help — ₹99*\n🎖 *Premium / Ultra members get 50% OFF (₹49.50)* — register with the *same mobile + email* as your Premium account.\n\nExpert reviews your rank, category, diploma branch & preferences and suggests colleges/branches with reasons.\n\n👉 Submit: ' +
       BASE +
       '/counseling\n👉 Track replies: ' +
       BASE +
@@ -362,7 +362,7 @@ const faqRows = [
     Category: 'Website Overview',
     Trigger_Keywords: 'website, about, kya hai site, hsbteleet, what is this',
     Full_Answer:
-      '*hsbteleet.com* — Haryana Polytechnic (HSBTE) PYQ + Haryana LEET (B.Tech / B.Pharm lateral entry) preparation platform.\n\n*FREE:* Diploma PYQ all branches, diploma syllabus PDFs, LEET info pages, some free sample papers.\n*Premium ₹69:* 34 exclusive LEET mocks + PDFs + Rank Analysis.\n*Ultra ₹99:* Premium + AI college/rank/counselling tools.\n*Counseling ₹99:* Personal expert suggestions.\n\nHome: ' +
+      '*hsbteleet.com* — Haryana Polytechnic (HSBTE) PYQ + Haryana LEET (B.Tech / B.Pharm lateral entry) preparation platform.\n\n*FREE:* Diploma PYQ all branches, diploma syllabus PDFs, LEET info pages, some free sample papers.\n*Premium ₹69:* 54 exclusive LEET mocks + PDFs + Rank Analysis.\n*Ultra ₹99:* Premium + AI college/rank/counselling tools.\n*Counseling ₹99:* Personal expert suggestions.\n\nHome: ' +
       BASE +
       '/\nLEET hub: ' +
       BASE +
@@ -388,7 +388,47 @@ const faqRows = [
       'Official portals:\n• HSTES: https://hstes.org.in\n• Technical Education Haryana: http://techeduhry.gov.in/\n\nhsbteleet.com helps with PYQ, syllabus PDFs, LEET practice & counselling tools — always cross-check dates/rules on official HSTES brochure.',
     Links_To_Send: 'https://hstes.org.in',
     Priority: 'Normal'
-  }
+  },
+  {
+    Category: 'Haryana LEET Book',
+    Trigger_Keywords: 'book, leet book, haryana leet book, study guide, book price, book kitne ka, book pdf, haryana leet book 2027',
+    Full_Answer:
+      '*Haryana LEET Book 2027 — Complete Study Guide* 📘\n\n• 1,633 pages: theory + chapter-wise practice + previous-year questions + mock tests\n• *Online Reader ₹399* (MRP ₹999) — read in our secure reader, up to 2 devices, access until 30 Sep 2027\n• *Reader + personal PDF by email ₹499* (name + mobile watermarked on every page)\n• *Ultra Premium members: ₹299 / PDF plan ₹399* — discount is automatic\n• *FREE 20-page sample* after a free sign-up\n\nNote: the reader is read-only (no download, copy, print or screenshot — violations can suspend the account).\n\n👉 Details & buy: ' + BASE + '/haryana-leet-book\n👉 Free sample: ' + BASE + '/book-login?next=sample\n👉 Terms: ' + BASE + '/terms',
+    Links_To_Send: BASE + '/haryana-leet-book',
+    Priority: 'Normal'
+  },
+  {
+    Category: 'Book Coupon / Problem',
+    Trigger_Keywords: 'book coupon, book login, book not opening, book device limit, book suspended, book banned, book blocked, device limit',
+    Full_Answer:
+      '*Book help* 🛠\n\n• Coupons: enter the code on the checkout screen (admin-created, one use per mobile).\n• Device limit: max *2 devices*. Log in on a 3rd device and you will see the list — remove one there.\n• Account suspended/banned: it is automatic after security violations (screenshots, copying, devtools). Message us with your registered mobile number and we will review.\n• Forgot password: we reset it from the admin portal.\n\nWhatsApp / mail us (with your registered mobile): https://wa.me/919992507270 · nishant@hsbteleet.com',
+    Links_To_Send: BASE + '/contact',
+    Priority: 'High'
+  },
+  {
+    Category: 'Forgot Password / Login Problem',
+    Trigger_Keywords: 'forgot password, password bhul gaya, password reset, login nahi ho raha, cannot login, login problem, invalid password',
+    Full_Answer:
+      '*Password / login help* 🔐\n\nPasswords are stored securely, so nobody (even we) can read them — but we can *set a new one* for you.\n\nSend us on WhatsApp 9992507270 or nishant@hsbteleet.com:\n• Product (Premium / Ultra / Counselling / Book)\n• Registered *mobile number* and name\n\nWe will set a new password and tell you. Premium login uses your *mobile number*, Counselling login uses your *email*.',
+    Links_To_Send: 'https://wa.me/919992507270 | ' + BASE + '/contact',
+    Priority: 'High'
+  },
+  {
+    Category: 'Payment Problem',
+    Trigger_Keywords: 'payment failed, paisa kat gaya, money deducted, payment done access nahi, payment ho gaya, refund, payment stuck',
+    Full_Answer:
+      '*Payment problem?* 💳\n\nIf money was deducted but access is not active, do not pay again — our server records the payment automatically (it can take a few minutes).\n\nStill nothing? Send us:\n• Registered mobile / email\n• Razorpay Payment ID (starts with pay_) or a screenshot\n\nWhatsApp 9992507270 · nishant@hsbteleet.com\nRefund policy: ' + BASE + '/terms',
+    Links_To_Send: BASE + '/terms | https://wa.me/919992507270',
+    Priority: 'High'
+  },
+  {
+    Category: 'Coupon Code',
+    Trigger_Keywords: 'coupon, coupon code, promo, discount code, offer code, free access code',
+    Full_Answer:
+      '*Coupon codes* 🏷\n\nCoupons are created by admin and work for Premium, Ultra, Counselling or the Book (each coupon says where it is valid).\nEnter the code on the payment step and tap *Apply* — the final price is calculated by our server. One use per mobile number unless stated.\n\nPremium: ' + BASE + '/premium-login?tier=premium\nCounselling: ' + BASE + '/counseling\nBook: ' + BASE + '/haryana-leet-book',
+    Links_To_Send: BASE + '/btech-leet-premium',
+    Priority: 'Normal'
+  },
 ];
 
 writeCsv(
@@ -421,7 +461,7 @@ addRes('Premium', 'Premium Landing', 'Plans compare Premium vs Ultra', BASE + '/
 addRes('Premium', 'Buy / Login Premium', 'Register + Razorpay for Premium ₹69', BASE + '/premium-login?tier=premium', 'buy premium, login, pay 99', 'BUY LINK');
 addRes('Premium', 'Buy / Login Ultra', 'Register + Razorpay for Ultra ₹99', BASE + '/premium-login?tier=ultra', 'buy ultra, login, pay 99', 'BUY LINK');
 addRes('Premium', 'Premium Login (default)', 'Login/register page', BASE + '/premium-login', 'login premium', '');
-addRes('Premium', 'Premium Papers Dashboard', 'All 34 papers + PDFs (login required)', BASE + '/premium-papers', 'premium papers, mocks', 'Login required');
+addRes('Premium', 'Premium Papers Dashboard', 'All 54 papers + PDFs (login required)', BASE + '/premium-papers', 'premium papers, mocks', 'Login required');
 addRes('Premium', 'Ultra Premium Tools', 'College/rank/counselling tools', BASE + '/ultra-premium', 'ultra tools, predictor', 'Ultra login required');
 addRes('Premium', 'Rank Analysis', 'Rank analysis tool', BASE + '/rank-analysis', 'rank analysis', 'Premium+');
 addRes('Premium', 'College Predictor', 'AI college predictor', BASE + '/college-predictor', 'college predictor', 'Ultra only');
@@ -478,6 +518,10 @@ addRes('LEET PDF', 'B.Pharm Prospectus', 'B.Pharmacy prospectus', BASE + '/pdf/B
 });
 
 // Counseling
+addRes('Book', 'Haryana LEET Book (landing + buy)', '1,633-page study guide · Reader ₹399 · PDF plan ₹499 · Ultra ₹299', BASE + '/haryana-leet-book', 'book, leet book, haryana leet book', 'BUY LINK ₹399');
+addRes('Book', 'Book Free Sample', 'Free 20-page sample (free sign-up)', BASE + '/book-login?next=sample', 'book sample, free sample', 'FREE');
+addRes('Book', 'Book Login / Register', 'Create account or log in to the reader', BASE + '/book-login', 'book login', 'Login');
+addRes('Support', 'Terms & Conditions', 'Rules, refunds, security violations, discounts', BASE + '/terms', 'terms, refund, policy', '');
 addRes('Counseling', 'Counseling Help Buy', '₹99 personalized counselling request', BASE + '/counseling', 'counseling help, 99 counselling', 'BUY LINK ₹99');
 addRes('Counseling', 'User Counseling Dashboard', 'Track admin suggestions', BASE + '/user-counseling', 'dashboard counseling', 'After payment');
 
@@ -654,18 +698,19 @@ const html = `<!DOCTYPE html>
     <p><strong>hsbteleet.com</strong> helps Haryana diploma students with:</p>
     <ul>
       <li><strong>FREE:</strong> HSBTE previous year question papers (all major branches, semester-wise), diploma syllabus PDFs, LEET information pages, some free sample papers.</li>
-      <li><strong>Premium ₹69:</strong> 34 exclusive LEET full-syllabus mock papers + official syllabus/prospectus PDFs + formula/topic sheets + Rank Analysis + ad-free + Access Until LEET 2027.</li>
+      <li><strong>Premium ₹69:</strong> 54 exclusive LEET full-syllabus mock papers + official syllabus/prospectus PDFs + formula/topic sheets + Rank Analysis + ad-free + Access Until LEET 2027.</li>
       <li><strong>Ultra Premium ₹99:</strong> Everything in Premium + AI College Predictor, Rank Predictor, Cutoff tools, AI counselling/choice-filling tools, Study Planner.</li>
-      <li><strong>Counseling Help ₹99:</strong> Human expert recommendations on dashboard (separate from Premium).</li>
+      <li><strong>Counseling Help ₹99:</strong> Human expert recommendations on dashboard (separate from Premium). Premium/Ultra members get 50% off (₹49.50) with the same mobile + email.</li>
+      <li><strong>Haryana LEET Book 2027:</strong> 1,633-page study guide · Online Reader ₹399 (MRP ₹999) · Reader + PDF by email ₹499 · Ultra Premium ₹299 / ₹399 · free 20-page sample · up to 2 devices · access until 30 Sep 2027.</li>
     </ul>
   </div>
 
   <h2>2. Paid plans — what is included</h2>
   <div class="grid">
     <div class="box gold">
-      <h3>Premium — ₹99 (one-time, Access Until LEET 2027)</h3>
+      <h3>Premium — ₹69 (one-time, Access Until LEET 2027)</h3>
       <ul>
-        <li>34 exclusive LEET sample papers</li>
+        <li>54 exclusive LEET sample papers</li>
         <li>Official Haryana LEET Syllabus PDF</li>
         <li>Official B.Tech LE Prospectus</li>
         <li>Formula sheets + important topics + cheat sheets (A–D)</li>

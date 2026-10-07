@@ -4,6 +4,7 @@
  * Events: payment.captured, order.paid     Secret = RAZORPAY_WEBHOOK_SECRET
  * Handles Book orders AND Premium / Ultra / Counselling orders (pay_orders).
  */
+import { mailBookDone } from '../../_lib/mail.js';
 import { finalizeOrder, rzpCheckPayment } from '../../_lib/pay-core.js';
 import { cfg, json, fail, requireEnv, hmacHex, safeEqual, one, patch, rpc, eq, grantAccess } from '../../_lib/book-core.js';
 
@@ -33,9 +34,10 @@ export async function onRequestPost(context) {
   if (!p || p.status === 'paid' || p.status === 'free') return json({ ok: true, ignored: true });
   if (pay.amount !== p.final_amount * 100 || !['captured', 'authorized'].includes(pay.status)) return json({ ok: true, ignored: true });
 
-  const user = await one(env, 'book_users', 'id=' + eq(p.user_id) + '&select=mobile');
+  const user = await one(env, 'book_users', 'id=' + eq(p.user_id) + '&select=full_name,mobile,email');
   await patch(env, 'book_purchases', 'id=' + eq(p.id), { status: 'paid', rzp_payment_id: pay.id, paid_at: new Date().toISOString() });
   if (p.coupon && user) await rpc(env, 'redeem_coupon', { p_code: p.coupon, p_product: 'book', p_mobile: user.mobile, p_before: p.base_amount, p_after: p.final_amount });
   await grantAccess(env, c, p.user_id, p.plan);
+  try { if (user) await mailBookDone(env, user, p, { free: false }); } catch (e) { /* ignore */ }
   return json({ ok: true });
 }

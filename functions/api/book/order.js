@@ -1,3 +1,4 @@
+import { mailBookDone } from '../../_lib/mail.js';
 import { cfg, json, fail, body, bookAuth, quote, hasFull, insert, patch, rpc, eq, grantAccess, requireEnv, throttle } from '../../_lib/book-core.js';
 
 export async function onRequestPost(context) {
@@ -17,7 +18,9 @@ export async function onRequestPost(context) {
     if (coupon && ok.data !== true) return fail('This coupon can no longer be used.', 400, 'coupon');
     await insert(env, 'book_purchases', { user_id: u.id, plan: q.plan, base_amount: q.base, discount: q.base, final_amount: 0, coupon: coupon && coupon.code, ultra_discount: q.ultra, status: 'free', paid_at: new Date().toISOString() });
     await grantAccess(env, c, u.id, q.plan);
-    return json({ ok: true, free: true });
+    let emailed = false;
+    try { emailed = await mailBookDone(env, u, { plan: q.plan, final_amount: 0, coupon: coupon && coupon.code, ultra_discount: q.ultra }, { free: true }); } catch (e) { /* ignore */ }
+    return json({ ok: true, free: true, emailed });
   }
 
   const notCfg = requireEnv(env, ['RAZORPAY_KEY_ID', 'RAZORPAY_KEY_SECRET']);
