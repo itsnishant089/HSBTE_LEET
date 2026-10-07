@@ -169,7 +169,7 @@
       "section-c", "section-d", "404",
       "rank-analysis", "study-plan", "college-comparison",
       "college-predictor", "cutoff-analytics", "last-year-cutoff",
-      "counseling", "user-counseling"
+      "counseling", "user-counseling", "terms", "book", "privacy"
     ];
 
     for (var i = 0; i < skipPatterns.length; i++) {

@@ -5,7 +5,7 @@
  * Environment variables (Cloudflare Pages → Settings → Environment variables):
  *   MAIN_SUPABASE_URL, MAIN_SUPABASE_SERVICE_KEY   service_role key — NEVER put it in browser code
  *   SESSION_SECRET                       long random string (signs login tokens)
- *   ADMIN_PASSWORD                       admin portal password
+ *   (admin password lives in the database: select public.set_admin_password(...))
  *   RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET (+ optional RAZORPAY_WEBHOOK_SECRET)
  * Optional: BOOK_MAX_DEVICES (2), BOOK_ACCESS_UNTIL (2027-09-30), BOOK_MRP (999), BOOK_PRICE (399),
  *           BOOK_ULTRA_PRICE (299), BOOK_PDF_PRICE (499), BOOK_PDF_ULTRA_PRICE (399)
@@ -311,7 +311,7 @@ export async function recordViolation(env, c, user, { type, detail, deviceId }, 
 /* ------------------------------------------------------------ admin helper */
 export async function adminAuth(context) {
   const { request, env } = context;
-  const notCfg = requireEnv(env, ['SESSION_SECRET', 'ADMIN_PASSWORD', 'MAIN_SUPABASE_URL', 'MAIN_SUPABASE_SERVICE_KEY']);
+  const notCfg = requireEnv(env, ['SESSION_SECRET', 'MAIN_SUPABASE_URL', 'MAIN_SUPABASE_SERVICE_KEY']);
   if (notCfg) throw notCfg;
   const p = await verifyToken(env.SESSION_SECRET, (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, ''));
   if (!p || p.k !== 'admin') throw fail('Admin login required.', 401, 'auth');
