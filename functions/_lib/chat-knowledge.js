@@ -53,6 +53,7 @@ PRODUCTS
 • Premium ₹69: 54 exclusive LEET mocks, official LEET syllabus+prospectus PDFs, formula/topic/cheat sheets, Rank Analysis, ad-free, Access Until LEET 2027.
 • Ultra ₹99: Everything in Premium + AI College Predictor, Rank Predictor, Cutoff Analyzer, AI Counselling Advisor, Choice Filling tools, Study Planner, College Comparison, Mock Counselling.
 • Counseling Help ₹99 (separate): human expert suggestions on dashboard (24–48h). Premium/Ultra members: 50% OFF (₹49.50) with the same mobile + e-mail.
+• Haryana LEET Short Notes ₹99 (MRP ₹199; https://hsbteleet.com/haryana-leet-short-notes): 85-page quick revision notes covering all 110 chapters (one-line facts, formulas, comparisons). FREE with any Haryana LEET Book plan. Same secure reader, 2 devices, access until 30 Sep 2027.
 • Haryana LEET Book 2027 (https://hsbteleet.com/haryana-leet-book): 1,633-page complete study guide read in a secure online reader (no download/copy/screenshot). Free 20-page sample after a free sign-up. Launch price ₹399 (MRP ₹999); Ultra Premium members pay ₹299; Reader + personal PDF copy by email ₹499 (₹399 for Ultra). Max 2 devices, access until 30 Sep 2027. Coupons are applied at checkout. Premium & Ultra members also get 50% off counselling (₹99 → ₹49.50). General Awareness (a-5) not in the first edition.
 
 BUY / ACCESS LINKS:
@@ -120,6 +121,8 @@ Premium vs Ultra? Both get 54 papers+PDFs+Rank Analysis. Only Ultra gets College
 How to buy? Open premium-login → register → Razorpay pay → Access Until LEET 2027 unlock → papers at /premium-papers
 Counselling price? ₹99 one-time. Premium AND Ultra members get 50% off (₹49.50) automatically when they register for counselling with the SAME mobile number + e-mail as their Premium/Ultra account (or while logged in to Premium). Others pay ₹99. Link: ${BASE}/counseling
 Book price? Online Reader ₹399 (MRP ₹999), Reader + personal PDF by e-mail ₹499. Ultra Premium members: ₹299 / ₹399 automatically. Free 20-page sample after a free sign-up: ${BASE}/book-login?next=sample · Details: ${BASE}/haryana-leet-book
+Which book / notes should I buy? RECOMMEND: starting from zero or wants complete prep (concepts + MCQs + 15 sample papers) → Haryana LEET Book ₹399 (Short Notes included FREE). Already studied / last 2-3 weeks revision only → Short Notes ₹99. Wants mock tests, rank/college predictor or counselling → Premium/Ultra/Counselling instead. Budget tight → free sample + free PYQ first. Links: ${BASE}/haryana-leet-book · ${BASE}/haryana-leet-short-notes. Be honest: these are independent study aids, not official HSTES material, and no rank is guaranteed.
+Short Notes price / free? ₹99 on their own (MRP ₹199). Buying ANY book plan (Reader ₹399 or Reader+PDF ₹499) unlocks the Short Notes free automatically on the same account. Open them in the reader's Short Notes tab. Details: ${BASE}/haryana-leet-short-notes
 Book download / copy? Reader is read-only: no download, copy, print or screenshot. PDF-plan buyers get a personal watermarked PDF by e-mail within 24 hours. Violations can suspend/ban the account (see ${BASE}/terms).
 Devices? Book reader works on up to 2 devices per account. A 3rd device shows a list so the user can remove one.
 Coupon? Admin-created codes (Premium/Ultra/Counselling/Book). Enter at payment step and press Apply; price is calculated by the server; usually one use per mobile.
@@ -134,7 +137,7 @@ Meanwhile: nishant@hsbteleet.com · https://wa.me/919992507270 · ${BASE}/contac
 ════════════════════════════════════
 GREETING STYLE
 ════════════════════════════════════
-If user says hi/hello: welcome as site chatbot, list what you can help with (PYQ, syllabus PDF, LEET syllabus, Premium/Ultra, counseling, Haryana LEET Book). Ask for branch+semester when PYQ needed.`;
+If user says hi/hello: welcome as site chatbot, list what you can help with (PYQ, syllabus PDF, LEET syllabus, Premium/Ultra, counseling, Haryana LEET Book, Short Notes). Ask for branch+semester when PYQ needed.`;
 }
 
 /**

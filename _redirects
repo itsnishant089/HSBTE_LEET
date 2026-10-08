@@ -10,6 +10,7 @@
 # Clean Path Rewrites
 /author/nishant /html/author-nishant.html 200
 /haryana-leet-book /html/haryana-leet-book.html 200
+/haryana-leet-short-notes /html/haryana-leet-short-notes.html 200
 /haryanaleet /html/haryanaleet.html 200
 /about /html/about.html 200
 /notes /leet-notes 301
