@@ -196,6 +196,15 @@
             <button class="bk-btn bk-btn-blue" data-buy="pdf">Buy for ₹499</button>
           </div>
         </div>
+        <div class="bk-plans3" style="margin-top:22px;grid-template-columns:minmax(0,520px);justify-content:center">
+          <div class="bk-plan-card bk-rev" id="bk-notes-card">
+            <span class="bk-badge">FREE WITH ANY BOOK PLAN</span>
+            <h3>Haryana LEET Short Notes</h3>
+            <div class="amt">₹99<s>₹199</s></div>
+            <ul><li>Quick-revision short notes &amp; formulas</li><li>Read in the same secure reader (2 devices)</li><li><b>Buy any book plan above and get these Short Notes free</b></li></ul>
+            <button class="bk-btn bk-btn-blue" data-buy="notes">Buy Short Notes for ₹99</button>
+          </div>
+        </div>
         <div class="bk-ultra-banner bk-rev"><i class="fas fa-crown"></i> Own Ultra Premium? The book is <b>₹299</b> (PDF copy ₹399) — and counselling is <b>50% off</b> for Premium &amp; Ultra members. Have a coupon? Apply it at checkout.</div>
       </div>
     </section>
@@ -290,8 +299,8 @@
 
     // buy buttons
     function buy(plan) {
-      if (!BOOK.loggedIn()) { location.href = '/book-login?next=buy' + (plan === 'pdf' ? 'pdf' : ''); return; }
-      BOOK.openCheckout(plan, function (granted) { if (granted) location.href = '/book-reader?b=master'; else location.href = '/book-reader?b=master'; });
+      if (!BOOK.loggedIn()) { location.href = '/book-login?next=buy' + (plan === 'pdf' ? 'pdf' : plan === 'notes' ? 'notes' : ''); return; }
+      BOOK.openCheckout(plan, function (granted, got) { location.href = '/book-reader?b=' + (got === 'notes' ? 'notes' : 'master'); });
     }
     document.getElementById('bk-buy').addEventListener('click', function () { buy('reader'); });
     document.querySelectorAll('[data-buy]').forEach(function (b) { b.addEventListener('click', function () { buy(b.getAttribute('data-buy')); }); });
@@ -302,10 +311,14 @@
         if (!d.ok) return;
         BOOK.setUser(d.user);
         var sample = document.getElementById('bk-sample'); sample.href = '/book-reader?b=sample';
+        if (d.user.hasNotes) {
+          var nb = document.querySelector('[data-buy="notes"]');
+          if (nb) { nb.textContent = 'Open the Short Notes'; nb.onclick = function (e) { e.stopImmediatePropagation(); location.href = '/book-reader?b=notes'; }; }
+        }
         if (d.user.hasFull) {
           var b = document.getElementById('bk-buy'); b.innerHTML = '<i class="fas fa-book-reader"></i> Continue reading'; b.onclick = null;
           b.replaceWith(b.cloneNode(true)); document.getElementById('bk-buy').addEventListener('click', function () { location.href = '/book-reader?b=master'; });
-          document.querySelectorAll('[data-buy]').forEach(function (x) { x.textContent = 'Open the book'; x.onclick = function (e) { e.stopImmediatePropagation(); location.href = '/book-reader?b=master'; }; });
+          document.querySelectorAll('[data-buy]:not([data-buy="notes"])').forEach(function (x) { x.textContent = 'Open the book'; x.onclick = function (e) { e.stopImmediatePropagation(); location.href = '/book-reader?b=master'; }; });
         } else if (d.ultra) {
           document.getElementById('bk-price').innerHTML = '₹299<small>Ultra Premium price</small>';
           var bb = document.getElementById('bk-buy'); bb.innerHTML = '<i class="fas fa-book-open"></i> Buy the book — ₹299';
@@ -314,7 +327,7 @@
     }
 
     var co = new URLSearchParams(location.search).get('checkout');
-    if (co && BOOK.loggedIn()) setTimeout(function () { buy(co === 'pdf' ? 'pdf' : 'reader'); }, 500);
+    if (co && BOOK.loggedIn()) setTimeout(function () { buy(co === 'pdf' ? 'pdf' : co === 'notes' ? 'notes' : 'reader'); }, 500);
 
     // 3D book follows the pointer
     var book = document.getElementById('bk3d'), stage = document.querySelector('.bk3d-stage');

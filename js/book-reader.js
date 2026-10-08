@@ -7,14 +7,15 @@
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
   var params = new URLSearchParams(location.search);
-  var kind = params.get('b') === 'master' ? 'master' : 'sample';
+  var kind = params.get('b') === 'master' ? 'master' : params.get('b') === 'notes' ? 'notes' : 'sample';
+  var NEXT = { master: 'read', notes: 'notes', sample: 'sample' };
   var state = { user: null, pages: 0, toc: [], page: 1, zoom: 1, token: BOOK.token(), cache: new Map(), loading: false, locked: false };
   var canvas = $('bkr-canvas'), ctx = canvas.getContext('2d');
   var SAMPLE_TOC = [{ t: 'Cover', p: 1, k: 'section' }, { t: 'Copyright & legal notice', p: 3, k: 'chapter' }, { t: 'About this free sample', p: 4, k: 'chapter' },
     { t: 'Contents (full book)', p: 5, k: 'chapter' }, { t: 'Sample chapter — Complex Numbers', p: 10, k: 'chapter' }, { t: 'Sample MCQs', p: 12, k: 'chapter' },
     { t: 'Sample Paper 1', p: 17, k: 'chapter' }, { t: 'Answer keys', p: 18, k: 'chapter' }, { t: 'Get the complete book', p: 19, k: 'chapter' }];
 
-  if (!state.token) { location.replace('/book-login?next=' + (kind === 'master' ? 'read' : 'sample')); return; }
+  if (!state.token) { location.replace('/book-login?next=' + NEXT[kind]); return; }
 
   /* ───────────── helpers ───────────── */
   function toast(msg, ms) { var t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show'); }, ms || 3500); }
@@ -28,6 +29,13 @@
 
   /* ───────────── gating screens ───────────── */
   function showBuyGate() {
+    if (kind === 'notes') {
+      gate('<h3>Unlock the Short Notes</h3><p>Quick revision notes for Haryana LEET — just ₹99, or <b>free with any book plan</b>.</p>' +
+        '<button class="bk-btn bk-btn-gold" id="g-buy" style="width:100%">Get Short Notes — ₹99</button>' +
+        '<p style="margin:10px 0 0"><a href="/haryana-leet-book#pricing" style="color:#1a56db;font-weight:700">Or get the full book (notes included free)</a></p>');
+      $('g-buy').onclick = function () { BOOK.openCheckout('notes', function () { location.href = '/book-reader?b=notes'; }); };
+      return;
+    }
     gate('<h3>Unlock the full book</h3><p>The complete 1,633-page edition is available for ₹399 (₹299 for Ultra Premium members).</p>' +
       '<button class="bk-btn bk-btn-gold" id="g-buy" style="width:100%">Buy the book</button>' +
       '<p style="margin:14px 0 0"><a href="#" id="g-sample" style="color:#1a56db;font-weight:700">Continue with the free sample</a></p>');
@@ -96,7 +104,7 @@
     }).catch(function (d) {
       if (d && d.code === 'rate') { $('load').textContent = 'Reading too fast — please wait a few seconds.'; setTimeout(function () { state.loading = false; go(n); }, 6000); return; }
       if (d && (d.code === 'banned' || d.code === 'suspended')) return showRestricted(d);
-      if (d && (d.code === 'auth' || d.code === 'device_revoked')) { BOOK.logout(); location.replace('/book-login?mode=login&next=' + (kind === 'master' ? 'read' : 'sample')); return; }
+      if (d && (d.code === 'auth' || d.code === 'device_revoked')) { BOOK.logout(); location.replace('/book-login?mode=login&next=' + NEXT[kind]); return; }
       if (d && d.code === 'not_purchased') return showBuyGate();
       $('load').textContent = (d && d.error) || 'Could not load this page. Check your connection.';
     }).then(function () { state.loading = false; });
@@ -104,7 +112,7 @@
 
   /* ───────────── contents panel ───────────── */
   function buildToc() {
-    var list = kind === 'master' ? state.toc : SAMPLE_TOC;
+    var list = kind === 'sample' ? SAMPLE_TOC : state.toc;
     $('toc').innerHTML = list.map(function (x) {
       return '<a class="k-' + x.k + '" data-p="' + x.p + '">' + BOOK.esc(x.t) + '<small>' + x.p + '</small></a>';
     }).join('');
@@ -149,14 +157,15 @@
     $('seg').querySelectorAll('button').forEach(function (b) { b.onclick = function () { var t = b.getAttribute('data-b'); if (t !== kind) location.href = '/book-reader?b=' + t; }; });
     BOOK.api('me').then(function (d) {
       if (!d.ok) {
-        if (d.code === 'auth' || d.code === 'device_revoked') { location.replace('/book-login?mode=login&next=' + (kind === 'master' ? 'read' : 'sample')); return; }
+        if (d.code === 'auth' || d.code === 'device_revoked') { location.replace('/book-login?mode=login&next=' + NEXT[kind]); return; }
         $('load').textContent = d.error || 'Could not load your account.'; return;
       }
       state.user = d.user; BOOK.setUser(d.user);
       if (d.user.status !== 'active') return showRestricted({ code: d.user.status, error: d.user.status === 'banned' ? 'This account has been banned.' : 'This account is suspended pending review.', reason: d.user.reason });
-      document.title = 'Haryana LEET Book 2027 – ' + (kind === 'master' ? 'Full Book' : 'Free Sample') + ' | HSBTE LEET';
-      $('title').textContent = kind === 'master' ? 'Haryana LEET 2027 — Complete Study Guide' : 'Free Sample — Haryana LEET 2027';
+      document.title = 'Haryana LEET Book 2027 – ' + (kind === 'master' ? 'Full Book' : kind === 'notes' ? 'Short Notes' : 'Free Sample') + ' | HSBTE LEET';
+      $('title').textContent = kind === 'master' ? 'Haryana LEET 2027 — Complete Study Guide' : kind === 'notes' ? 'Haryana LEET 2027 — Short Notes' : 'Free Sample — Haryana LEET 2027';
       if (!d.user.hasFull) { var bb = $('b-buy'); bb.hidden = false; bb.onclick = openBuy; }
+      if (kind === 'notes' && !d.user.hasNotes) return showBuyGate();
       if (kind === 'master' && !d.user.hasFull) { $('tot').textContent = '/ 1633'; return showBuyGate(); }
       BOOK.api('manifest?b=' + kind).then(function (m) {
         if (!m.ok) { if (m.code === 'not_purchased') return showBuyGate(); $('load').textContent = m.error || 'Book is not available yet.'; return; }
@@ -164,7 +173,7 @@
         buildToc();
         var start = parseInt(params.get('p') || localStorage.getItem('bk_last_' + kind) || '1', 10) || 1;
         go(start);
-        if (innerWidth > 900 && kind === 'master') toggleToc(true);
+        if (innerWidth > 900 && kind !== 'sample') toggleToc(true);
       });
     });
   }

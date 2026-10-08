@@ -1,11 +1,11 @@
 import { mailBookDone } from '../../_lib/mail.js';
-import { cfg, json, fail, body, bookAuth, quote, hasFull, insert, patch, rpc, eq, grantAccess, requireEnv, throttle } from '../../_lib/book-core.js';
+import { cfg, json, fail, body, bookAuth, quote, hasFull, hasNotes, insert, patch, rpc, eq, grantAccess, requireEnv, throttle } from '../../_lib/book-core.js';
 
 export async function onRequestPost(context) {
   let a;
   try { a = await bookAuth(context); } catch (r) { return r; }
   const { env, request } = context, c = cfg(env), b = await body(request), u = a.user;
-  if (hasFull(u)) return fail('You already have full access to the book.', 409, 'owned');
+  if (b.plan === 'notes' ? hasNotes(u) : hasFull(u)) return fail('You already have access.', 409, 'owned');
   if (!(await throttle(env, 'order:' + u.id, 6, 30))) return fail('Too many attempts. Please wait.', 429, 'rate');
 
   const q = await quote(env, c, u, b.plan, b.coupon);

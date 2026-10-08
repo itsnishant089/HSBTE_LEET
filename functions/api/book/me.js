@@ -11,7 +11,7 @@ export async function onRequestGet(context) {
   return json({
     ok: true, user: publicUser(u, c), ultra, devices: (devs.data || []).filter(d => d.active),
     maxDevices: c.maxDevices,
-    prices: { mrp: c.mrp, price: c.price, ultraPrice: c.ultraPrice, pdfPrice: c.pdfPrice, pdfUltraPrice: c.pdfUltraPrice },
+    prices: { mrp: c.mrp, price: c.price, ultraPrice: c.ultraPrice, pdfPrice: c.pdfPrice, pdfUltraPrice: c.pdfUltraPrice, notesPrice: c.notesPrice, notesMrp: c.notesMrp },
     currentDevice: a.payload.did
   });
 }

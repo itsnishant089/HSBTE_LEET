@@ -63,8 +63,8 @@ export async function onRequest(context) {
       case 'reset_points': await patch(env, 'book_users', uq, { violation_points: 0 }); break;
       case 'reset_devices': await patch(env, 'book_devices', 'user_id=' + eq(id || ''), { active: false }); break;
       case 'revoke_device': await patch(env, 'book_devices', 'id=' + eq(b.deviceId || '') , { active: false }); break;
-      case 'grant_full': await patch(env, 'book_users', uq, { has_full: true, plan: b.plan === 'pdf' ? 'pdf' : 'reader', access_until: new Date(c.accessUntil + 'T23:59:59+05:30').toISOString() }); break;
-      case 'revoke_full': await patch(env, 'book_users', uq, { has_full: false }); break;
+      case 'grant_full': await patch(env, 'book_users', uq, { has_full: true, has_notes: true, plan: b.plan === 'pdf' ? 'pdf' : 'reader', access_until: new Date(c.accessUntil + 'T23:59:59+05:30').toISOString() }); break;
+      case 'revoke_full': await patch(env, 'book_users', uq, { has_full: false, has_notes: false }); break;
       case 'fine': await patch(env, 'book_users', uq, { fine_amount: Math.max(0, Math.round(+b.amount || 0)) }); break;
       case 'note': await patch(env, 'book_users', uq, { admin_note: clean(b.note, 500) }); break;
       case 'mark_delivered': await patch(env, 'book_purchases', 'id=' + eq(b.purchaseId || ''), { delivered: b.delivered !== false }); break;

@@ -64,8 +64,8 @@
 
     /** Checkout modal: plan choice, coupon, price breakdown, Razorpay. onDone() after access is granted. */
     openCheckout: function (defaultPlan, onDone) {
-      if (!BOOK.loggedIn()) { location.href = '/book-login?next=buy'; return; }
-      var plan = defaultPlan === 'pdf' ? 'pdf' : 'reader', couponApplied = '', busy = false, prices = null;
+      if (!BOOK.loggedIn()) { location.href = '/book-login?next=buy' + (defaultPlan === 'notes' ? 'notes' : ''); return; }
+      var plan = defaultPlan === 'pdf' ? 'pdf' : defaultPlan === 'notes' ? 'notes' : 'reader', couponApplied = '', busy = false, prices = null;
       var host = document.createElement('div');
       host.className = 'bk-modal';
       host.innerHTML =
@@ -75,6 +75,7 @@
         '<div class="bk-plans">' +
         '<label class="bk-plan"><input type="radio" name="bkplan" value="reader"><span><b>Online Reader</b><small>Read on hsbteleet.com · access until LEET 2027 cycle ends</small></span><em data-p="reader"></em></label>' +
         '<label class="bk-plan"><input type="radio" name="bkplan" value="pdf"><span><b>Reader + PDF copy by email</b><small>Personal watermarked PDF sent to your email within 24 hours</small></span><em data-p="pdf"></em></label>' +
+        '<label class="bk-plan"><input type="radio" name="bkplan" value="notes"><span><b>Short Notes only</b><small>Quick-revision notes · <u>free with the two plans above</u></small></span><em data-p="notes"></em></label>' +
         '</div>' +
         '<div class="bk-coupon"><input id="bkc" placeholder="Coupon code" autocomplete="off" maxlength="40"><button type="button" id="bkca">Apply</button></div>' +
         '<div class="bk-msg" id="bkmsg"></div>' +
@@ -97,22 +98,23 @@
             $('#bkpay').textContent = 'Unavailable'; $('#bkmsg').textContent = d.error || 'Could not load the price.'; $('#bkmsg').className = 'bk-msg err'; return;
           }
           var q = d.quote; lastQuote = q;
-          ['reader', 'pdf'].forEach(function (p) {
+          ['reader', 'pdf', 'notes'].forEach(function (p) {
             var el = host.querySelector('[data-p="' + p + '"]'); if (!el) return;
-            var pr = prices || {}, list = p === 'pdf' ? (q.ultra ? pr.pdfUltraPrice : pr.pdfPrice) : (q.ultra ? pr.ultraPrice : pr.price);
-            el.innerHTML = '<s>' + BOOK.rupee(q.mrp) + '</s> ' + BOOK.rupee(p === q.plan && !couponApplied ? q.final : (list || q.final));
+            var pr = prices || {}, list = p === 'notes' ? pr.notesPrice : p === 'pdf' ? (q.ultra ? pr.pdfUltraPrice : pr.pdfPrice) : (q.ultra ? pr.ultraPrice : pr.price);
+            el.innerHTML = '<s>' + BOOK.rupee(p === 'notes' ? pr.notesMrp : (pr.mrp || q.mrp)) + '</s> ' + BOOK.rupee(p === q.plan && !couponApplied ? q.final : (list || q.final));
           });
-          var rows = '<div><span>Book MRP</span><span><s>' + BOOK.rupee(q.mrp) + '</s></span></div>' +
+          var nt = q.plan === 'notes';
+          var rows = '<div><span>' + (nt ? 'Short Notes MRP' : 'Book MRP') + '</span><span><s>' + BOOK.rupee(q.mrp) + '</s></span></div>' +
             '<div><span>Launch price</span><span>' + BOOK.rupee(q.base) + '</span></div>';
           if (q.ultra) rows += '<div class="ok"><span>Ultra Premium member discount</span><span>−' + BOOK.rupee(q.ultraOff) + '</span></div>';
           if (q.coupon) rows += '<div class="ok"><span>Coupon ' + BOOK.esc(q.coupon.code) + ' (' + BOOK.esc(q.coupon.label) + ')</span><span>−' + BOOK.rupee(q.couponOff) + '</span></div>';
           rows += '<div class="tot"><span>You pay</span><span>' + (q.final ? BOOK.rupee(q.final) : 'FREE') + '</span></div>';
           $('#bkrows').innerHTML = rows;
-          $('#bkpay').textContent = q.final ? 'Pay ' + BOOK.rupee(q.final) + ' securely' : 'Get the book free';
+          $('#bkpay').textContent = q.final ? 'Pay ' + BOOK.rupee(q.final) + ' securely' : 'Get it free';
           if (q.couponError) { $('#bkmsg').textContent = q.couponError; $('#bkmsg').className = 'bk-msg err'; }
           else if (q.coupon) { $('#bkmsg').textContent = '✅ Coupon applied: ' + q.coupon.label; $('#bkmsg').className = 'bk-msg good'; }
           else if (q.ultra) { $('#bkmsg').textContent = '🎖 Ultra Premium discount applied automatically.'; $('#bkmsg').className = 'bk-msg good'; }
-          else { $('#bkmsg').textContent = 'Ultra Premium members get the book for ₹299. Have a coupon? Enter it above.'; $('#bkmsg').className = 'bk-msg'; }
+          else { $('#bkmsg').textContent = 'Short Notes are free with any book plan. Ultra Premium members get the book for ₹299. Have a coupon? Enter it above.'; $('#bkmsg').className = 'bk-msg'; }
         });
       }
       host.querySelectorAll('input[name="bkplan"]').forEach(function (r) { r.onchange = function () { plan = r.value; render(); }; });
@@ -123,10 +125,10 @@
         if (busy || !lastQuote) return; busy = true; $('#bkpay').textContent = 'Please wait…';
         BOOK.api('order', { body: { plan: plan, coupon: couponApplied } }).then(function (o) {
           if (!o.ok) { busy = false; render(); $('#bkmsg').textContent = o.error || 'Could not start payment.'; $('#bkmsg').className = 'bk-msg err'; return; }
-          if (o.free) { close(); onDone && onDone(true); return; }
+          if (o.free) { close(); onDone && onDone(true, plan); return; }
           BOOK.loadRazorpay().then(function () {
             var rz = new w.Razorpay({
-              key: o.key, amount: o.amount, currency: 'INR', order_id: o.orderId, name: 'HSBTE LEET', description: 'Haryana LEET Complete Study Guide',
+              key: o.key, amount: o.amount, currency: 'INR', order_id: o.orderId, name: 'HSBTE LEET', description: plan === 'notes' ? 'Haryana LEET Short Notes' : 'Haryana LEET Complete Study Guide',
               prefill: { name: o.name, email: o.email, contact: o.contact }, theme: { color: '#1a56db' },
               handler: function (r) {
                 $('#bkpay').textContent = 'Confirming payment…';

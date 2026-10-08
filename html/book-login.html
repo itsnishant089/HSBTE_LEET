@@ -94,7 +94,8 @@
 
     function done(d) {
       BOOK.setSession(d.token, d.user);
-      if (next === 'buy' || next === 'buypdf') location.href = '/haryana-leet-book?checkout=' + (next === 'buypdf' ? 'pdf' : 'reader');
+      if (next === 'buy' || next === 'buypdf' || next === 'buynotes') location.href = '/haryana-leet-book?checkout=' + (next === 'buypdf' ? 'pdf' : next === 'buynotes' ? 'notes' : 'reader');
+      else if (next === 'notes') location.href = '/book-reader?b=notes';
       else if (d.user.hasFull) location.href = '/book-reader?b=master';
       else location.href = '/book-reader?b=sample';
     }

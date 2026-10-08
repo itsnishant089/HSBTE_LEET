@@ -1,4 +1,4 @@
-import { cfg, fail, bookAuth, hasFull, fetchBookObject, rpc, recordViolation, clientInfo, pseudoUuid } from '../../_lib/book-core.js';
+import { cfg, fail, bookAuth, hasFull, hasNotes, fetchBookObject, rpc, recordViolation, clientInfo, pseudoUuid } from '../../_lib/book-core.js';
 
 export async function onRequestGet(context) {
   let a;
@@ -10,10 +10,12 @@ export async function onRequestGet(context) {
   if (mode === 'navigate' || (site && site !== 'same-origin')) return fail('Not allowed.', 403, 'forbidden');
 
   const url = new URL(request.url);
-  const kind = url.searchParams.get('b') === 'master' ? 'master' : 'sample';
+  const bk = url.searchParams.get('b');
+  const kind = bk === 'master' ? 'master' : bk === 'notes' ? 'notes' : 'sample';
   const n = parseInt(url.searchParams.get('n') || '0', 10);
   if (!(n >= 1 && n <= 5000)) return fail('Bad page.', 400, 'page');
   if (kind === 'master' && !hasFull(u)) return fail('Buy the book to read the full edition.', 402, 'not_purchased');
+  if (kind === 'notes' && !hasNotes(u)) return fail('Get the Short Notes to read them.', 402, 'not_purchased');
 
   // scraping protection: pages per minute / per day, and the same account hammering from many IPs is logged
   const hit = await rpc(env, 'book_hit', { p_user: u.id, p_min_limit: c.pageMinLimit, p_day_limit: c.pageDayLimit });

@@ -8,7 +8,7 @@
  *   (admin password lives in the database: select public.set_admin_password(...))
  *   RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET (+ optional RAZORPAY_WEBHOOK_SECRET)
  * Optional: BOOK_MAX_DEVICES (2), BOOK_ACCESS_UNTIL (2027-09-30), BOOK_MRP (999), BOOK_PRICE (399),
- *           BOOK_ULTRA_PRICE (299), BOOK_PDF_PRICE (499), BOOK_PDF_ULTRA_PRICE (399)
+ *           BOOK_ULTRA_PRICE (299), BOOK_PDF_PRICE (499), BOOK_PDF_ULTRA_PRICE (399), BOOK_NOTES_PRICE (99), BOOK_NOTES_MRP (199)
  * Optional R2 binding BOOK_R2 (preferred for page images; Supabase Storage is the fallback).
  */
 
@@ -21,6 +21,8 @@ export function cfg(env) {
     ultraPrice: n(env.BOOK_ULTRA_PRICE, 299),
     pdfPrice: n(env.BOOK_PDF_PRICE, 499),
     pdfUltraPrice: n(env.BOOK_PDF_ULTRA_PRICE, 399),
+    notesPrice: n(env.BOOK_NOTES_PRICE, 99),
+    notesMrp: n(env.BOOK_NOTES_MRP, 199),
     maxDevices: n(env.BOOK_MAX_DEVICES, 2),
     accessUntil: env.BOOK_ACCESS_UNTIL || '2027-09-30',
     pageMinLimit: n(env.BOOK_PAGES_PER_MIN, 45),
@@ -169,7 +171,7 @@ export function publicUser(u, c) {
   const full = !!u.has_full && (!u.access_until || new Date(u.access_until).getTime() > now);
   return {
     id: u.id, name: u.full_name, mobile: maskMobile(u.mobile), email: u.email, status: u.status, reason: u.status_reason || '',
-    hasFull: full, plan: u.plan || null, accessUntil: u.access_until || null, points: u.violation_points || 0,
+    hasFull: full, hasNotes: full || (!!u.has_notes && (!u.access_until || new Date(u.access_until).getTime() > now)), plan: u.plan || null, accessUntil: u.access_until || null, points: u.violation_points || 0,
     suspendAt: c.suspendAt, banAt: c.banAt
   };
 }
@@ -196,6 +198,10 @@ export async function bookAuth(context, { allowRestricted = false } = {}) {
 
 export function hasFull(user) {
   return !!user.has_full && (!user.access_until || new Date(user.access_until).getTime() > Date.now());
+}
+/** Short Notes: bought on its own (₹99) OR included free with any full-book plan. */
+export function hasNotes(user) {
+  return hasFull(user) || (!!user.has_notes && (!user.access_until || new Date(user.access_until).getTime() > Date.now()));
 }
 
 export async function registerDevice(env, c, user, { deviceId, fp, replaceDevice }, info) {
@@ -272,9 +278,9 @@ export async function isUltra(env, user) {
 }
 
 export async function quote(env, c, user, plan, couponCode) {
-  plan = plan === 'pdf' ? 'pdf' : 'reader';
-  const ultra = await isUltra(env, user);
-  const base = plan === 'pdf' ? c.pdfPrice : c.price;
+  plan = plan === 'pdf' ? 'pdf' : plan === 'notes' ? 'notes' : 'reader';
+  const ultra = plan === 'notes' ? false : await isUltra(env, user);   // Short Notes: one flat price
+  const base = plan === 'pdf' ? c.pdfPrice : plan === 'notes' ? c.notesPrice : c.price;
   const afterUltra = ultra ? (plan === 'pdf' ? c.pdfUltraPrice : c.ultraPrice) : base;
   let coupon = null, couponOff = 0, reason = '';
   if (couponCode) {
@@ -282,14 +288,17 @@ export async function quote(env, c, user, plan, couponCode) {
     if (f.ok) { coupon = f.coupon; couponOff = couponDiscount(f.coupon, afterUltra); } else reason = f.reason;
   }
   return {
-    plan, mrp: c.mrp, base, ultra, ultraOff: base - afterUltra, afterUltra,
+    plan, mrp: plan === 'notes' ? c.notesMrp : c.mrp, base, ultra, ultraOff: base - afterUltra, afterUltra,
     coupon: coupon ? { code: coupon.code, label: couponLabel(coupon) } : null, couponOff, couponError: reason,
     final: Math.max(0, afterUltra - couponOff), _coupon: coupon
   };
 }
 
 export async function grantAccess(env, c, userId, plan) {
-  return patch(env, 'book_users', 'id=' + eq(userId), { has_full: true, plan, access_until: new Date(c.accessUntil + 'T23:59:59+05:30').toISOString() });
+  const until = new Date(c.accessUntil + 'T23:59:59+05:30').toISOString();
+  // Short Notes alone → only the notes; any real book plan → full book + the notes free
+  if (plan === 'notes') return patch(env, 'book_users', 'id=' + eq(userId), { has_notes: true, access_until: until });
+  return patch(env, 'book_users', 'id=' + eq(userId), { has_full: true, has_notes: true, plan, access_until: until });
 }
 
 /* -------------------------------------------------------------- violations */

@@ -57,23 +57,23 @@ export async function mailOrderDone(env, order, { paymentId, free }) {
 /** Book purchase finished (paid or free coupon). */
 export async function mailBookDone(env, user, purchase, { free }) {
   if (!mailEnabled(env)) return false;
-  const pdf = purchase.plan === 'pdf';
+  const pdf = purchase.plan === 'pdf', notes = purchase.plan === 'notes';
   const details = rows([
     ['Name', user.full_name], ['Mobile', user.mobile], ['Email', user.email],
-    ['Plan', pdf ? 'Reader + PDF copy by e-mail' : 'Online Reader'],
+    ['Plan', pdf ? 'Reader + PDF copy by e-mail' : notes ? 'Short Notes (Online Reader)' : 'Online Reader'],
     ['Amount paid', free ? '₹0 (free coupon)' : '₹' + purchase.final_amount + (purchase.coupon ? ' · coupon ' + purchase.coupon : '')],
     ['Ultra discount', purchase.ultra_discount ? 'yes' : '']
   ]);
-  const customer = shell('Your Haryana LEET Book is unlocked 📘',
-    '<p>Hi <b>' + esc(user.full_name) + '</b>,</p><p>Thank you! You can now read all <b>1,633 pages</b> in our secure reader (up to 2 devices).</p>' + details +
-    btn('https://hsbteleet.com/book-login?next=read', 'Open the book') +
+  const customer = shell(notes ? 'Your Haryana LEET Short Notes are unlocked 📝' : 'Your Haryana LEET Book is unlocked 📘',
+    '<p>Hi <b>' + esc(user.full_name) + '</b>,</p>' + (notes ? '<p>Thank you! Your <b>Short Notes</b> are ready in our secure reader (up to 2 devices).</p>' : '<p>Thank you! You can now read all <b>1,633 pages</b> in our secure reader (up to 2 devices). Your <b>Short Notes</b> are included free.</p>') + details +
+    btn(notes ? 'https://hsbteleet.com/book-login?next=notes' : 'https://hsbteleet.com/book-login?next=read', notes ? 'Open the Short Notes' : 'Open the book') +
     (pdf ? '<p><b>Your personal PDF copy</b> (with your name &amp; mobile on every page) will be e-mailed to you within 24 hours.</p>' : '') +
     '<p style="font-size:12px;color:#64748b">The book is licensed to you for personal use only. Copying, screenshots or sharing lead to suspension (see Terms &amp; Conditions).</p>');
   const adminHtml = shell(pdf ? '📕 New book order — SEND THE PDF' : 'New book order', details +
     (pdf ? '<p><b>Action needed:</b> make the personal PDF (<code>scripts/make_watermarked_pdf.py</code>), e-mail it to the student and press “Mark delivered” in Admin → Book Purchases.</p>' : ''));
   const [sent] = await Promise.all([
-    sendMail(env, { to: user.email, subject: 'Your Haryana LEET Book is unlocked', html: customer, replyTo: adminTo(env) }),
-    sendMail(env, { to: adminTo(env), subject: (pdf ? '📕 PDF TO SEND — ' : '💰 Book purchase — ') + user.full_name + (free ? ' (free coupon)' : ' (₹' + purchase.final_amount + ')'), html: adminHtml, replyTo: user.email })
+    sendMail(env, { to: user.email, subject: notes ? 'Your Haryana LEET Short Notes are unlocked' : 'Your Haryana LEET Book is unlocked', html: customer, replyTo: adminTo(env) }),
+    sendMail(env, { to: adminTo(env), subject: (pdf ? '📕 PDF TO SEND — ' : notes ? '📝 Short Notes purchase — ' : '💰 Book purchase — ') + user.full_name + (free ? ' (free coupon)' : ' (₹' + purchase.final_amount + ')'), html: adminHtml, replyTo: user.email })
   ]);
   return sent;
 }
