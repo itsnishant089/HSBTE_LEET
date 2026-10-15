@@ -1320,7 +1320,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
     try {
       if (sb) {
         var res = await sb.from('premium_access').select('is_active').eq('user_id', uid).maybeSingle();
-        if (res.error || !res.data || !res.data.is_active) {
+        if ((res.error || !res.data || !res.data.is_active) && sessionStorage.getItem('prem_tier') !== 'free') {
           showDenied();
           return;
         }

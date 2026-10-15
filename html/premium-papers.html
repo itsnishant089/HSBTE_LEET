@@ -531,6 +531,11 @@
         <a href="/ultra-premium" style="flex-shrink:0;background:#fbbf24;color:#1e1b4b;font-weight:900;font-size:13px;padding:10px 18px;border-radius:999px;text-decoration:none;">Open Ultra Tools →</a>
       </div>
     </div>
+    <div id="trial-banner" style="display:none;background:linear-gradient(135deg,#ecfdf5,#eff6ff);border:1.5px solid #86efac;border-radius:16px;padding:18px 20px;margin-bottom:26px;">
+      <div style="font-weight:800;font-size:1.02rem;color:#14532d;margin-bottom:4px"><i class="fas fa-gift"></i> You are on the FREE trial</div>
+      <p id="trial-text" style="margin:0 0 12px;color:#334155;font-size:14px;line-height:1.55">Loading your free trial…</p>
+      <a href="/premium-login?upgrade=1" style="display:inline-block;background:#1a56db;color:#fff;font-weight:800;padding:10px 18px;border-radius:10px;text-decoration:none;font-size:14px"><i class="fas fa-lock-open"></i> Unlock all 54 papers &amp; tools — &#8377;69</a>
+    </div>
     <div id="upgrade-ultra-banner" style="display:none;background:#eef2ff;border:1.5px solid #c7d2fe;border-radius:16px;padding:16px 20px;margin-bottom:26px;">
       <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
         <div>
@@ -1272,8 +1277,19 @@ async function verifyAccess(){
   if(!uid||(Date.now()-ts)>8*60*60*1000){ showDenied(); return; }
   try{
     var {data, error} = await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
-    if(error||!data||!data.is_active){ showDenied(); return; }
+    var isFree = sessionStorage.getItem('prem_tier')==='free';
+    if((error||!data||!data.is_active) && !isFree){ showDenied(); return; }
     sessionStorage.setItem('prem_ts', Date.now().toString());
+    if(isFree && !(data && data.is_active)){
+      var nm = sessionStorage.getItem('prem_name') || '';
+      document.getElementById('welcome-msg').textContent = 'Welcome'+(nm?', '+nm:'')+'! Your free trial is active.';
+      document.getElementById('trial-banner').style.display = 'block';
+      document.getElementById('page-loader').style.display='none';
+      document.getElementById('main-page').style.display='block';
+      injectWatermark();
+      loadTrialStatus();
+      return;
+    }
     var name = sessionStorage.getItem('prem_name') || '';
     if(name){
       document.getElementById('welcome-msg').textContent =
@@ -1302,6 +1318,21 @@ async function verifyAccess(){
     injectWatermark();
     loadAnnouncements();  // Load admin announcements after access verified
   }catch(e){ showDenied(); }
+}
+
+async function loadTrialStatus(){
+  try{
+    var r = await fetch('/api/premium/session',{credentials:'same-origin',cache:'no-store'});
+    var j = await r.json();
+    if(!j || !j.ok) return;
+    if(j.tier==='paid'){ sessionStorage.setItem('prem_tier','premium'); location.reload(); return; }
+    var t = j.trial; if(!t) return;
+    var pl = t.papersLeft, tl = t.toolsLeft;
+    var txt = pl>0 ? ('You can open <b>'+pl+' free paper'+(pl>1?'s':'')+'</b> — pick any one below. ') : 'Your free paper is used (you can reopen it). ';
+    txt += tl>0 ? ('Plus <b>'+tl+' free tool use'+(tl>1?'s':'')+'</b> (Rank Analysis, notes, planners). ') : 'Your free tool uses are finished. ';
+    txt += 'Everything else unlocks for a one-time &#8377;69.';
+    document.getElementById('trial-text').innerHTML = txt;
+  }catch(e){}
 }
 
 function showDenied(){

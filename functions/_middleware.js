@@ -1,5 +1,5 @@
 import { verifyToken, rest, eq } from './_lib/book-core.js';
-import { readCookie } from './_lib/pay-core.js';
+import { readCookie, trialKind, trialConsume } from './_lib/pay-core.js';
 
 /**
  * Premium papers (questions + answers are inside the HTML) are only served to a logged-in student whose access
@@ -8,6 +8,14 @@ import { readCookie } from './_lib/pay-core.js';
 const GATED = /^\/(?:html\/)?(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|rank-analysis|study-plan|college-predictor)(?:\.html)?\/?$/i;
 // Ultra-only tools (Premium members are sent to the Ultra page instead of the login page)
 const ULTRA_ONLY = new Set(['study-plan', 'college-predictor']);
+
+function upgradeRedirect(url, slug, ended) {
+  const dest = new URL('/premium-login', url.origin);
+  dest.searchParams.set('upgrade', '1');
+  if (ended) dest.searchParams.set('trial', 'ended');
+  dest.searchParams.set('next', '/' + slug.toLowerCase());
+  return new Response(null, { status: 302, headers: { location: dest.toString(), 'cache-control': 'private, no-store' } });
+}
 
 async function premiumGate(context, url) {
   let pn = url.pathname;
@@ -18,11 +26,22 @@ async function premiumGate(context, url) {
   if (!env.SESSION_SECRET || !env.MAIN_SUPABASE_URL || !env.MAIN_SUPABASE_SERVICE_KEY) return null;
   const p = await verifyToken(env.SESSION_SECRET, readCookie(context.request));
   let ok = !!(p && p.k === 'prem');
+  let trialEnded = false;
   if (ok) {
+    let row;        // undefined = unknown, null = no access row (free-trial account)
     try { // access can be revoked by the admin at any time
       const r = await rest(env, 'premium_access', 'user_id=' + eq(p.uid) + '&select=is_active&limit=1');
-      if (r.ok && Array.isArray(r.data)) ok = !!(r.data[0] && r.data[0].is_active === true);
+      if (r.ok && Array.isArray(r.data)) row = r.data[0] || null;
     } catch (e) { /* database hiccup: keep the signed cookie's verdict */ }
+    if (row === null) {
+      // registered through the free trial and has not bought anything: 1 paper + 2 tools, then the upgrade page
+      try {
+        const t = await trialConsume(env, p.uid, trialKind(m[1].toLowerCase()), m[1].toLowerCase());
+        ok = !!t.allowed; trialEnded = !t.allowed && !t.error;
+      } catch (e) { ok = false; }
+      return ok ? 'allow' : upgradeRedirect(url, m[1], trialEnded);
+    }
+    if (row !== undefined) ok = row.is_active === true;
     if (ok && ULTRA_ONLY.has(m[1].toLowerCase())) {
       try {
         let u = await rest(env, 'ultra_premium_users', 'user_id=' + eq(p.uid) + '&select=id&limit=1');
@@ -75,6 +94,11 @@ async function route(context) {
   // 2b. Canonical 301 Migration: /haryana-leet-2026 -> /haryanaleet
   if (path === '/haryana-leet-2026' || path === '/haryana-leet-2026.html' || path === '/html/haryana-leet-2026.html') {
     return Response.redirect(new URL('/haryanaleet', url.origin), 301);
+  }
+
+  // 2c. Short Notes now live inside the Book page (one page, one URL for SEO)
+  if (path === '/haryana-leet-short-notes' || path === '/haryana-leet-short-notes.html' || path === '/html/haryana-leet-short-notes.html') {
+    return Response.redirect(new URL('/haryana-leet-book#short-notes', url.origin), 301);
   }
 
   // 3. Handle legacy /html/ path access by redirecting to clean URLs

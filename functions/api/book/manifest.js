@@ -1,4 +1,4 @@
-import { cfg, json, fail, bookAuth, hasFull, hasNotes, fetchBookObject } from '../../_lib/book-core.js';
+import { cfg, json, fail, bookAuth, hasFull, hasNotes, fetchBookObject, insert } from '../../_lib/book-core.js';
 
 const cache = new Map(); // kind -> { at, data }
 
@@ -25,5 +25,7 @@ export async function onRequestGet(context) {
     hit = { at: Date.now(), data: { pages: meta.pages, toc: (toc && toc.toc) || [] } };
     cache.set(kind, hit);
   }
+  // reader-open log for the admin analytics (Short Notes / Book / Sample) — must never break reading
+  try { await insert(env, 'book_opens', { user_id: a.user.id, kind }); } catch (e) { /* ignore */ }
   return json({ ok: true, kind, ...hit.data });
 }

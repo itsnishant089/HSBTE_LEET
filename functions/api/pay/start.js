@@ -1,6 +1,7 @@
 /**
  * POST /api/pay/start
  *   premium / ultra : { product, name, mobile, email, password, coupon? }
+ *   free-trial upgrade : { product, upgrade:true, coupon? } — identity comes from the login cookie
  *   counseling      : { product:'counseling', userId, coupon? }
  * The SERVER decides the price (member discount + coupon), creates the Razorpay order and remembers the
  * registration data (password encrypted). 100%-off coupons are completed right here.
@@ -8,7 +9,7 @@
  */
 import { json, fail, body, requireEnv, throttle, clientInfo, rpc, verifyToken } from '../../_lib/book-core.js';
 import {
-  priceQuote, rzpCreateOrder, sealText, finalizeOrder, issuePremiumCookie,
+  priceQuote, rzpCreateOrder, sealText, finalizeOrder, issuePremiumCookie, accessRow,
   one, insert, eq, clean, normMobile, validMobile, validEmail, readCookie
 } from '../../_lib/pay-core.js';
 
@@ -31,6 +32,15 @@ export async function onRequestPost(context) {
     const cid = tk && tk.k === 'cns' ? tk.uid : clean(b.userId, 64);
     const u = await one(env, 'counseling_users', 'id=' + eq(cid) + '&select=id,full_name,email,mobile');
     if (!u) return fail('Account not found. Please register again.', 404, 'user');
+    Object.assign(order, { user_id: String(u.id), full_name: u.full_name, email: u.email, mobile: normMobile(u.mobile) });
+  } else if (b.upgrade === true) {
+    // free-trial student buying Premium / Ultra: the signed login cookie says who they are
+    const pk = await verifyToken(env.SESSION_SECRET, readCookie(request));
+    if (!pk || pk.k !== 'prem') return fail('Please log in to upgrade.', 401, 'auth');
+    const u = await one(env, 'premium_users', 'id=' + eq(pk.uid) + '&select=id,mobile,email,full_name');
+    if (!u) return fail('Account not found. Please log in again.', 404, 'user');
+    const acc = await accessRow(env, u.id);
+    if (acc && acc.is_active) return fail('Your account already has full access.', 409, 'active');
     Object.assign(order, { user_id: String(u.id), full_name: u.full_name, email: u.email, mobile: normMobile(u.mobile) });
   } else {
     const mobile = normMobile(b.mobile), email = clean(b.email, 120), name = clean(b.name || b.full_name, 80), pass = String(b.password || '');

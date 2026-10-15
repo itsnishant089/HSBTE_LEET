@@ -32,9 +32,10 @@
   /* ───────────── markup ───────────── */
   var PAGES = [
     ['bkcoupons', 'fa-ticket', 'Coupons'], ['bkusers', 'fa-book-open-reader', 'Book Users'], ['bkbuy', 'fa-cart-shopping', 'Book Purchases'],
+    ['bknotes', 'fa-bolt', 'Short Notes'], ['bktrial', 'fa-gift', 'Free Trials'],
     ['bkvio', 'fa-user-shield', 'Book Violations'], ['bkdev', 'fa-laptop-mobile', 'Devices']
   ];
-  var TITLES = { bkcoupons: 'Coupons (Premium · Ultra · Counselling · Book)', bkusers: 'Book Users & Free-Sample Sign-ups', bkbuy: 'Book Purchases & PDF Deliveries', bkvio: 'Book Security Violations', bkdev: 'Devices — Book, Premium & Ultra' };
+  var TITLES = { bkcoupons: 'Coupons (Premium · Ultra · Counselling · Book)', bkusers: 'Book Users & Free-Sample Sign-ups', bkbuy: 'Book Purchases & PDF Deliveries', bknotes: 'Short Notes — sales, owners & reader analytics', bktrial: 'Premium Free-Trial Sign-ups', bkvio: 'Book Security Violations', bkdev: 'Devices — Book, Premium & Ultra' };
 
   function build() {
     var nav = document.querySelector('.sb-nav'); if (!nav || $('page-bkcoupons')) return;
@@ -69,6 +70,13 @@
       // purchases
       '<div class="page" id="page-bkbuy"><div id="bkb-msg"></div><div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-envelope" style="color:var(--bl)"></i> PDF copies to email (pending first)</div></div><div class="card-body" style="font-size:13px;color:var(--mu)">Run <code>python scripts/make_watermarked_pdf.py "&lt;master.pdf&gt;" "&lt;student name&gt;" &lt;mobile&gt;</code> to make the personal PDF, email it to the student, then tap <b>Mark delivered</b>.</div></div>' +
       '<div class="card"><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th></tr></thead><tbody id="tb-bkb"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div></div>' +
+      // short notes analytics
+      '<div class="page" id="page-bknotes"><div class="xk-grid" id="nt-kpi"></div><div id="nt-msg"></div>' +
+      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-chart-line" style="color:var(--gr)"></i> Sales by day (last 30 days with sales)</div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Day</th><th>Sales</th><th>Revenue</th></tr></thead><tbody id="tb-ntd"><tr class="lr"><td colspan="3">Loading…</td></tr></tbody></table></div></div></div>' +
+      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-cart-shopping" style="color:var(--bl)"></i> Short Notes purchases (₹99 plan)</div><button class="btn btn-ghost" id="nt-csv-p"><i class="fas fa-download"></i> Export</button></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>College</th><th>Paid</th><th>Coupon</th><th>Status</th><th>Payment id</th></tr></thead><tbody id="tb-ntp"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div>' +
+      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-users" style="color:var(--p)"></i> Everyone with Short Notes access</div><button class="btn btn-ghost" id="nt-csv-o"><i class="fas fa-download"></i> Export</button></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Student</th><th>Contact</th><th>City / College / Branch</th><th>Got notes via</th><th>Reader opens</th><th>Joined / last login</th><th>Actions</th></tr></thead><tbody id="tb-nto"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div></div>' +
+      // free trials
+      '<div class="page" id="page-bktrial"><div class="xk-grid" id="tr-kpi"></div><div id="tr-msg"></div><div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-gift" style="color:var(--gr)"></i> Students who started the Premium free trial</div><button class="btn btn-ghost" id="tr-csv"><i class="fas fa-download"></i> Export</button></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Student</th><th>Contact</th><th>College</th><th>Free paper used</th><th>Free tools used</th><th>Joined</th><th>Bought?</th></tr></thead><tbody id="tb-tr"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // violations
       '<div class="page" id="page-bkvio"><div id="bkv-msg"></div><div class="card"><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>When</th><th>Student</th><th>Type</th><th>Points</th><th>Detail</th><th>IP</th><th>Account</th></tr></thead><tbody id="tb-bkv"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // devices
@@ -118,7 +126,7 @@
   function loadUsers() {
     api('book?view=overview').then(function (o) {
       if (!o.ok) { note($('bku-msg'), o.error || 'Could not load', true); $('tb-bku').innerHTML = ''; return; }
-      $('bk-kpi').innerHTML = [['Book accounts', o.users], ['Full-book owners', o.full], ['PDF to deliver', o.pendingPdf], ['Suspended / banned', o.restricted], ['Violations (24h)', o.violations24h], ['Book revenue', rupee(o.revenue)]]
+      $('bk-kpi').innerHTML = [['Book accounts', o.users], ['Full-book owners', o.full], ['With Short Notes', o.notesUsers], ['PDF to deliver', o.pendingPdf], ['Suspended / banned', o.restricted], ['Violations (24h)', o.violations24h], ['Book revenue', rupee(o.revenue)]]
         .map(function (k) { return '<div class="xk-kpi"><b>' + k[1] + '</b><span>' + k[0] + '</span></div>'; }).join('');
       var bd = $('bdg-pdf'); if (bd) bd.textContent = o.pendingPdf || 0;
     });
@@ -130,7 +138,7 @@
         var devs = (u.book_devices || []).filter(function (x) { return x.active; }).length, full = u.has_full && (!u.access_until || new Date(u.access_until) > new Date());
         return '<tr><td><b>' + esc(u.full_name) + '</b>' + (u.admin_note ? '<br><small style="color:var(--mu)">' + esc(u.admin_note) + '</small>' : '') + (u.fine_amount ? '<br><small style="color:#b91c1c">Fine recorded: ' + rupee(u.fine_amount) + '</small>' : '') + '</td>' +
           '<td>' + esc(u.mobile) + '<br><small>' + esc(u.email) + '</small></td><td>' + esc([u.city, u.college, u.branch].filter(Boolean).join(' · ') || '—') + '</td>' +
-          '<td>' + (full ? '<span class="xk-pill ok">Full · ' + esc(u.plan) + '</span>' : '<span class="xk-pill gray">Sample</span>') + '</td><td>' + statusPill(u.status) + (u.status_reason ? '<br><small>' + esc(u.status_reason) + '</small>' : '') + '</td>' +
+          '<td>' + (full ? '<span class="xk-pill ok">Full · ' + esc(u.plan) + '</span>' : u.has_notes ? '<span class="xk-pill warn">Short Notes only</span>' : '<span class="xk-pill gray">Sample</span>') + '</td><td>' + statusPill(u.status) + (u.status_reason ? '<br><small>' + esc(u.status_reason) + '</small>' : '') + '</td>' +
           '<td>' + (u.violation_points || 0) + '</td><td>' + devs + '</td><td>' + fmtDate(u.created_at) + '<br><small>' + fmtDate(u.last_login) + '</small></td>' +
           '<td><div class="xk-act"><button class="xk-b r" data-a="ban" data-u="' + u.id + '">Ban</button><button class="xk-b" data-a="suspend" data-u="' + u.id + '">Suspend</button><button class="xk-b g" data-a="unban" data-u="' + u.id + '">Unban</button>' +
           '<button class="xk-b" data-a="reset_devices" data-u="' + u.id + '">Reset devices</button><button class="xk-b g" data-a="grant_full" data-u="' + u.id + '">Grant book</button><button class="xk-b r" data-a="revoke_full" data-u="' + u.id + '">Revoke</button>' +
@@ -166,7 +174,7 @@
       tb.innerHTML = list.map(function (p) {
         var u = p.book_users || {}, paid = p.status === 'paid' || p.status === 'free';
         var pdf = p.plan !== 'pdf' ? '—' : !paid ? '—' : p.delivered ? '<span class="xk-pill ok">Delivered</span>' : '<button class="xk-b g" data-d="' + p.id + '">Mark delivered</button> <span class="xk-pill warn">Send PDF</span>';
-        return '<tr><td>' + fmtDate(p.created_at) + '</td><td><b>' + esc(u.full_name || '') + '</b><br><small>' + esc(u.mobile || '') + ' · ' + esc(u.email || '') + '</small></td><td>' + (p.plan === 'pdf' ? 'Reader + PDF' : 'Reader') + '</td><td>' + rupee(p.final_amount) + '</td><td>' + rupee(p.discount) + '</td><td>' + esc(p.coupon || '—') + (p.ultra_discount ? ' <span class="xk-pill ok">Ultra</span>' : '') + '</td>' +
+        return '<tr><td>' + fmtDate(p.created_at) + '</td><td><b>' + esc(u.full_name || '') + '</b><br><small>' + esc(u.mobile || '') + ' · ' + esc(u.email || '') + '</small></td><td>' + (p.plan === 'pdf' ? 'Reader + PDF' : p.plan === 'notes' ? 'Short Notes' : 'Reader') + '</td><td>' + rupee(p.final_amount) + '</td><td>' + rupee(p.discount) + '</td><td>' + esc(p.coupon || '—') + (p.ultra_discount ? ' <span class="xk-pill ok">Ultra</span>' : '') + '</td>' +
           '<td><span class="xk-pill ' + (paid ? 'ok' : p.status === 'created' ? 'gray' : 'bad') + '">' + p.status + '</span></td><td>' + pdf + '</td><td><small>' + esc(p.rzp_payment_id || '—') + '</small></td></tr>';
       }).join('');
       tb.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { api('book', { body: { action: 'mark_delivered', purchaseId: b.getAttribute('data-d') } }).then(loadPurchases); }; });
@@ -199,6 +207,53 @@
     });
   }
 
+  /* ───────────── short notes analytics ───────────── */
+  var notesCache = { purchases: [], owners: [] };
+  function csvOut(name, rows) {
+    var csv = rows.map(function (r) { return r.map(function (c) { return '"' + String(c == null ? '' : c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = name + '_' + new Date().toISOString().slice(0, 10) + '.csv'; a.click();
+  }
+  function loadNotes() {
+    api('book?view=notes').then(function (d) {
+      if (!d.ok) { note($('nt-msg'), d.error || 'Could not load', true); return; }
+      var k = d.kpis;
+      $('nt-kpi').innerHTML = [['Accounts (all)', k.accounts], ['Bought Notes alone', k.standaloneBuyers], ['Got Notes free with Book', k.includedWithBook], ['Total with Notes', k.totalWithNotes],
+        ['Notes revenue', rupee(k.revenue)], ['Checkout attempts', k.attempts], ['Abandoned', k.abandoned], ['Account → Notes %', k.conversion + '%'],
+        ['Reader opens', d.trackingReady ? k.opens : 'run SQL'], ['Opens (7 days)', d.trackingReady ? k.opens7d : '—'], ['Unique readers', d.trackingReady ? k.uniqueReaders : '—']]
+        .map(function (x) { return '<div class="xk-kpi"><b>' + x[1] + '</b><span>' + x[0] + '</span></div>'; }).join('');
+      notesCache = d;
+      $('tb-ntd').innerHTML = d.daily.length ? d.daily.map(function (r) { return '<tr><td>' + esc(r.day) + '</td><td>' + r.sales + '</td><td>' + rupee(r.revenue) + '</td></tr>'; }).join('') : '<tr><td colspan="3" style="color:var(--mu)">No Short Notes sales yet.</td></tr>';
+      $('tb-ntp').innerHTML = d.purchases.length ? d.purchases.map(function (p) {
+        var u = p.book_users || {}, paid = p.status === 'paid' || p.status === 'free';
+        return '<tr><td>' + fmtDate(p.created_at) + '</td><td><b>' + esc(u.full_name || '') + '</b><br><small>' + esc(u.mobile || '') + ' · ' + esc(u.email || '') + '</small></td><td>' + esc(u.college || '—') + '</td><td>' + rupee(p.final_amount) + '</td><td>' + esc(p.coupon || '—') + '</td><td><span class="xk-pill ' + (paid ? 'ok' : p.status === 'created' ? 'gray' : 'bad') + '">' + p.status + '</span></td><td><small>' + esc(p.rzp_payment_id || '—') + '</small></td></tr>';
+      }).join('') : '<tr><td colspan="7" style="color:var(--mu)">No Short Notes purchases yet.</td></tr>';
+      $('tb-nto').innerHTML = d.owners.length ? d.owners.map(function (u) {
+        var via = u.via === 'notes' ? '<span class="xk-pill warn">₹99 Notes</span>' : u.via === 'book' ? '<span class="xk-pill ok">Free with Book</span>' : '<span class="xk-pill gray">Admin grant</span>';
+        return '<tr><td><b>' + esc(u.full_name) + '</b></td><td>' + esc(u.mobile) + '<br><small>' + esc(u.email) + '</small></td><td>' + esc([u.city, u.college, u.branch].filter(Boolean).join(' · ') || '—') + '</td><td>' + via + '</td><td>' + u.opens + '</td><td>' + fmtDate(u.created_at) + '<br><small>' + fmtDate(u.last_login) + '</small></td>' +
+          '<td><div class="xk-act"><button class="xk-b g" data-na="grant_notes" data-u="' + u.id + '">Grant</button><button class="xk-b r" data-na="revoke_notes" data-u="' + u.id + '">Revoke</button></div></td></tr>';
+      }).join('') : '<tr><td colspan="7" style="color:var(--mu)">Nobody has Short Notes access yet.</td></tr>';
+      $('tb-nto').querySelectorAll('[data-na]').forEach(function (b) {
+        b.onclick = function () {
+          if (b.getAttribute('data-na') === 'revoke_notes' && !confirm('Remove Short Notes access? (Book owners keep it through their book plan.)')) return;
+          api('book', { body: { action: b.getAttribute('data-na'), userId: b.getAttribute('data-u') } }).then(function (r) { note($('nt-msg'), r.ok ? '✅ Done' : '❌ ' + (r.error || 'Failed'), !r.ok); loadNotes(); });
+        };
+      });
+    });
+  }
+  function loadTrials() {
+    api('book?view=trials').then(function (d) {
+      var tb = $('tb-tr');
+      if (!d.ok) { tb.innerHTML = '<tr><td colspan="7" style="color:#b91c1c">' + esc(d.error || 'Could not load') + '</td></tr>'; return; }
+      var k = d.kpis;
+      $('tr-kpi').innerHTML = [['Free-trial sign-ups', k.total], ['Used their free paper', k.usedPaper], ['Used a free tool', k.usedTool], ['Converted to paid', k.converted], ['Conversion %', k.total ? Math.round(k.converted * 1000 / k.total) / 10 + '%' : '—']]
+        .map(function (x) { return '<div class="xk-kpi"><b>' + x[1] + '</b><span>' + x[0] + '</span></div>'; }).join('');
+      window.__trials = d.trials;
+      tb.innerHTML = d.trials.length ? d.trials.map(function (t) {
+        return '<tr><td><b>' + esc(t.name) + '</b></td><td>' + esc(t.mobile) + '<br><small>' + esc(t.email) + '</small></td><td>' + esc(t.college || '—') + '</td><td>' + (t.papers.length ? esc(t.papers.join(', ')) : '—') + '</td><td>' + (t.tools.length ? esc(t.tools.join(', ')) : '—') + '</td><td>' + fmtDate(t.joined) + '</td><td>' + (t.converted ? '<span class="xk-pill ok">Paid</span>' : '<span class="xk-pill gray">Not yet</span>') + '</td></tr>';
+      }).join('') : '<tr><td colspan="7" style="color:var(--mu)">No free-trial sign-ups yet.</td></tr>';
+    });
+  }
+
   /* ───────────── wiring ───────────── */
   function wire() {
     $('cp-kind').onchange = kindHint; kindHint();
@@ -206,9 +261,12 @@
       var prods = Array.prototype.filter.call(document.querySelectorAll('#cp-prods input'), function (i) { return i.checked; }).map(function (i) { return i.value; });
       saveCoupon({ code: $('cp-code').value.trim(), kind: $('cp-kind').value, value: $('cp-val').value, max_uses: $('cp-max').value, per_mobile: $('cp-per').value, expires_at: $('cp-exp').value ? $('cp-exp').value + 'T23:59:59+05:30' : null, products: prods, note: $('cp-note').value, active: true });
     };
+    $('nt-csv-p').onclick = function () { csvOut('short_notes_purchases', [['Date', 'Name', 'Mobile', 'Email', 'College', 'Paid', 'Coupon', 'Status', 'Payment id']].concat((notesCache.purchases || []).map(function (p) { var u = p.book_users || {}; return [p.created_at, u.full_name, u.mobile, u.email, u.college, p.final_amount, p.coupon, p.status, p.rzp_payment_id]; }))); };
+    $('nt-csv-o').onclick = function () { csvOut('short_notes_owners', [['Name', 'Mobile', 'Email', 'City', 'College', 'Branch', 'Via', 'Reader opens', 'Joined']].concat((notesCache.owners || []).map(function (u) { return [u.full_name, u.mobile, u.email, u.city, u.college, u.branch, u.via, u.opens, u.created_at]; }))); };
+    $('tr-csv').onclick = function () { csvOut('premium_free_trials', [['Name', 'Mobile', 'Email', 'College', 'Paper used', 'Tools used', 'Joined', 'Paid']].concat((window.__trials || []).map(function (t) { return [t.name, t.mobile, t.email, t.college, t.papers.join(' '), t.tools.join(' '), t.joined, t.converted]; }))); };
     $('bku-go').onclick = loadUsers; $('bku-q').addEventListener('keydown', function (e) { if (e.key === 'Enter') loadUsers(); }); $('bku-csv').onclick = exportUsers;
   }
-  var LOADERS = { bkcoupons: loadCoupons, bkusers: loadUsers, bkbuy: loadPurchases, bkvio: loadViolations, bkdev: loadDevices };
+  var LOADERS = { bkcoupons: loadCoupons, bkusers: loadUsers, bkbuy: loadPurchases, bknotes: loadNotes, bktrial: loadTrials, bkvio: loadViolations, bkdev: loadDevices };
   function hook() {
     var orig = window.loadPage;
     window.loadPage = function (n) {

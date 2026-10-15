@@ -203,7 +203,7 @@ async function verifyAccess(){
   try{
     var sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);
     var {data,error}=await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
-    if(error||!data||!data.is_active){showDenied();return;}
+    if(error||!data||!data.is_active){if(sessionStorage.getItem('prem_tier')!=='free'){showDenied();return;}}
     sessionStorage.setItem('prem_ts',Date.now().toString());
     document.getElementById('page-loader').style.display='none';
     document.getElementById('main-page').style.display='block';

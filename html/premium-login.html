@@ -1169,10 +1169,17 @@
 
 
 
+            <div class="fg">
+              <label class="fl" for="r-college">College / Polytechnic <span style="font-weight:500;color:var(--mu)">(optional)</span></label>
+              <input type="text" class="fi" id="r-college" placeholder="Your college name" maxlength="100" autocomplete="organization" />
+            </div>
+
             <div class="alert alert-warn on" style="margin-bottom:14px">
               <i class="fas fa-shield-alt"></i> Forgot password? Contact admin at <strong>nishant@hsbteleet.com</strong>.
             </div>
 
+            <button class="btn btn-g" id="btn-trial" onclick="doTrial()"><i class="fas fa-gift"></i> Start FREE trial — 1 paper + 2 tools</button>
+            <p style="text-align:center;font-size:12px;color:var(--mu);margin:8px 0 14px">No payment needed. Upgrade to all 54 papers anytime.</p>
             <button class="btn btn-v" id="btn-s1" onclick="doStep1()">Continue to Payment <i
                 class="fas fa-arrow-right"></i></button>
           </div>
@@ -1289,6 +1296,7 @@
       var t = new URLSearchParams(window.location.search).get('tier');
       if (t === 'ultra') curTier = 'ultra';
       updateUI();
+      if (new URLSearchParams(window.location.search).get('trial') === '1') { switchTab('register'); }
     })();
 
     function selectTier(t) {
@@ -1335,6 +1343,32 @@
         : '<li><i class="fas fa-check-circle"></i> 54 exclusive papers (section-wise + full)</li><li><i class="fas fa-check-circle"></i> Rank Analysis Tool</li><li><i class="fas fa-check-circle"></i> 100% Ad-Free experience</li><li><i class="fas fa-check-circle"></i> Secure Razorpay checkout</li>';
       payPaise = T.paise;
     }
+
+    // ── FREE-TRIAL STUDENT UPGRADING (arrives from the papers page / a locked paper) ──
+    (async function initUpgrade() {
+      var q = new URLSearchParams(window.location.search);
+      if (q.get('upgrade') !== '1') return;
+      try {
+        var r = await fetch('/api/premium/session', { credentials: 'same-origin', cache: 'no-store' });
+        var j = await r.json().catch(function () { return null; });
+        if (!j || !j.ok) {
+          setAlert('lerr', '<i class="fas fa-info-circle"></i> Log in with your free-trial account to upgrade.', 'warn');
+          return;
+        }
+        if (j.tier === 'paid') { window.location.href = './premium-papers.html'; return; }
+        pending = { full_name: j.user.full_name, mobile: j.user.mobile, email: j.user.email, password_hash: '', tier: curTier, upgrade: true };
+        switchTab('register');
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        var s1 = document.getElementById('s1-dot'); s1.classList.remove('act'); s1.classList.add('done'); s1.textContent = '✓';
+        document.getElementById('line1').classList.add('done');
+        document.getElementById('s2-dot').classList.add('act');
+        updateUI();
+        document.getElementById('hdrSub').textContent = q.get('trial') === 'ended'
+          ? 'Your free trial is used up — unlock every paper and tool with a one-time payment'
+          : 'Upgrade your free trial — unlock all 54 papers and tools';
+      } catch (e) { /* stay on the normal screen */ }
+    })();
 
     // ── TOGGLE PASSWORD VISIBILITY ──
     function togglePw(id, btn) {
@@ -1405,7 +1439,7 @@
           sessionStorage.setItem('prem_name', srv.user.full_name || '');
           sessionStorage.setItem('prem_tier', srv.tier);
           sessionStorage.setItem('prem_ts', Date.now().toString());
-          setAlert('lok', '<i class="fas fa-check-circle"></i> Welcome back, <strong>' + (srv.user.full_name || 'Student') + '</strong>! Redirecting to ' + srv.tier + ' portal…', 'ok');
+          setAlert('lok', '<i class="fas fa-check-circle"></i> Welcome back, <strong>' + (srv.user.full_name || 'Student') + '</strong>! ' + (srv.tier === 'free' ? 'Opening your free trial…' : 'Redirecting to ' + srv.tier + ' portal…'), 'ok');
           var nx = new URLSearchParams(location.search).get('next') || '';
           var okNext = /^\/(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|premium-papers)$/.test(nx);
           var to = okNext ? nx : (srv.tier === 'ultra' ? './ultra-premium.html' : './premium-papers.html');
@@ -1460,6 +1494,50 @@
       } catch (e) {
         setAlert('lerr', '<i class="fas fa-exclamation-triangle"></i> Login failed. Please check your connection or try again.', 'err');
         setBtn('btn-login', false, '<i class="fas fa-sign-in-alt"></i> Login to My Account');
+      }
+    }
+
+    // ── FREE TRIAL SIGN-UP ──
+    async function doTrial() {
+      clearAlert('rerr');
+      var name = document.getElementById('r-name').value.trim();
+      var mob = document.getElementById('r-mob').value.trim();
+      var email = document.getElementById('r-email').value.trim();
+      var pass = document.getElementById('r-pass').value;
+      var college = (document.getElementById('r-college').value || '').trim();
+      var ok = true;
+      if (!name) { setFI('r-name', true); showFE('r-name-err', true); ok = false; } else { setFI('r-name', false); showFE('r-name-err', false); }
+      if (!isMob(mob)) { setFI('r-mob', true); showFE('r-mob-err', true); ok = false; } else { setFI('r-mob', false); showFE('r-mob-err', false); }
+      if (!isEmail(email)) { setFI('r-email', true); showFE('r-email-err', true); ok = false; } else { setFI('r-email', false); showFE('r-email-err', false); }
+      if (!pass || pass.length < 6) { setFI('r-pass', true); showFE('r-pass-err', true); ok = false; } else { setFI('r-pass', false); showFE('r-pass-err', false); }
+      if (!ok) return;
+
+      var label = '<i class="fas fa-gift"></i> Start FREE trial — 1 paper + 2 tools';
+      setBtn('btn-trial', true, '');
+      try {
+        var r = await fetch('/api/premium/trial', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
+          body: JSON.stringify({ name: name, mobile: mob, email: email, password: pass, college: college })
+        });
+        var j = await r.json().catch(function () { return null; });
+        if (!j || !j.ok) {
+          var m = !j ? 'Could not start the free trial. Please try again.' : (j.error || 'Could not start the free trial.');
+          if (j && j.code === 'exists') m += ' <button onclick="switchTab(\'login\')" style="background:none;border:none;color:var(--v);cursor:pointer;font-weight:700;text-decoration:underline;font-size:13px">Login here →</button>';
+          setAlert('rerr', '<i class="fas fa-times-circle"></i> ' + m, 'err');
+          setBtn('btn-trial', false, label);
+          return;
+        }
+        sessionStorage.setItem('prem_uid', j.user.id);
+        sessionStorage.setItem('prem_mob', mob);
+        sessionStorage.setItem('prem_name', name);
+        sessionStorage.setItem('prem_tier', 'free');
+        sessionStorage.setItem('prem_ts', Date.now().toString());
+        document.getElementById('step1').style.display = 'none';
+        showSuccess(name, 'Your free trial is active: open any 1 paper and 2 tools from My Papers. Love it? Unlock all 54 papers and tools anytime for a one-time ₹69.', 'premium');
+        document.getElementById('suc-msg').textContent = 'Your free trial is active: open any 1 paper and 2 tools from My Papers. Love it? Unlock all 54 papers and tools anytime for a one-time ₹69.';
+      } catch (e) {
+        setAlert('rerr', '<i class="fas fa-exclamation-triangle"></i> Network error. Please try again.', 'err');
+        setBtn('btn-trial', false, label);
       }
     }
 
@@ -1705,7 +1783,7 @@
       try {
         var r = await fetch('/api/pay/start', {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
-          body: JSON.stringify({ product: curTier, name: pending.full_name, mobile: pending.mobile, email: pending.email, password: pending.password_hash, coupon: applied ? applied.code : '' })
+          body: JSON.stringify({ product: curTier, name: pending.full_name, mobile: pending.mobile, email: pending.email, password: pending.password_hash, coupon: applied ? applied.code : '', upgrade: !!pending.upgrade })
         });
         var j = await r.json().catch(function () { return null; });
         if (!j || r.status === 404 || r.status === 503 || r.status >= 500) return { unavailable: true };

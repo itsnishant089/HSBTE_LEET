@@ -359,7 +359,7 @@ async function verifyAccess(){
   if(!uid||(Date.now()-ts)>8*60*60*1000){showDenied();return;}
   try{
     var {data,error}=await sb.from('premium_access').select('is_active').eq('user_id',uid).maybeSingle();
-    if(error||!data||!data.is_active){showDenied();return;}
+    if(error||!data||!data.is_active){if(sessionStorage.getItem('prem_tier')!=='free'){showDenied();return;}}
     var ultra=null;
     if(mob){
       var uRes=await sb.from('ultra_premium_users').select('id').eq('mobile',mob).maybeSingle();
@@ -369,12 +369,13 @@ async function verifyAccess(){
       var u2=await sb.from('ultra_premium_users').select('id').eq('user_id',uid).maybeSingle();
       ultra=u2.data;
     }
-    if(!ultra){
+    var isFree=sessionStorage.getItem('prem_tier')==='free';   // free-trial student: the server already let this tool open
+    if(!ultra&&!isFree){
       sessionStorage.setItem('prem_tier','premium');
       showDenied();
       return;
     }
-    sessionStorage.setItem('prem_tier','ultra');
+    if(!isFree)sessionStorage.setItem('prem_tier','ultra');
     sessionStorage.setItem('prem_ts',Date.now().toString());
     document.getElementById('page-loader').style.display='none';
     document.getElementById('main-page').style.display='block';

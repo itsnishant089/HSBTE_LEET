@@ -237,3 +237,11 @@ html.bkr-hide #bkr-canvas,html.bkr-hide .bkr-toc{filter:blur(30px) brightness(.4
 @media (prefers-reduced-motion:reduce){.bk *,.bk3d,.bk3d-float,.bk3d-glow,.bk-chip,.bk-hero::before{animation:none!important}.bk-rev{opacity:1;transform:none}}
 
 [hidden]{display:none!important}
+
+/* Short Notes merged into the book page */
+.bk-notes-hint{margin:16px 0 0;color:#dbe4ff;font-size:14.5px;line-height:1.5}
+.bk-notes-hint a{color:#fbbf24;font-weight:700}
+#short-notes{scroll-margin-top:84px}
+.bk-sn-cta{margin:34px auto 0;max-width:720px;padding:26px 22px;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);text-align:center}
+.bk-sn-which{color:#b6c4ee;font-size:.9rem;margin:16px 0 0;line-height:1.6}
+.bk-sn-which a{color:#fbbf24}

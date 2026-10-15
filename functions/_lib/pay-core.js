@@ -46,6 +46,47 @@ export async function hasActiveAccess(env, userId) {
   const a = await one(env, 'premium_access', 'user_id=' + eq(userId) + '&select=is_active');
   return !!(a && a.is_active);
 }
+/* ------------------------------------------------------------ free trial */
+/** Free-trial allowance per account (env TRIAL_PAPERS / TRIAL_TOOLS). Papers = full or section paper, tools = rank analysis, notes, planners. */
+const nonNeg = (v, d) => (v !== undefined && v !== '' && !isNaN(+v) && +v >= 0 ? +v : d);
+export const trialLimits = env => ({ paper: nonNeg(env.TRIAL_PAPERS, 1), tool: nonNeg(env.TRIAL_TOOLS, 2) });
+const TOOL_SLUGS = new Set(['rank-analysis', 'study-plan', 'college-predictor', 'premium-notes']);
+export const trialKind = slug => (TOOL_SLUGS.has(slug) ? 'tool' : 'paper');
+/** A student with no premium_access row at all is a free-trial account (a row with is_active=false means revoked). */
+export async function accessRow(env, userId) {
+  const r = await rest(env, 'premium_access', 'user_id=' + eq(userId) + '&select=is_active&limit=1');
+  if (!r.ok || !Array.isArray(r.data)) return undefined;   // database hiccup → unknown
+  return r.data[0] || null;
+}
+export async function trialStatus(env, userId) {
+  const L = trialLimits(env);
+  const r = await rest(env, 'premium_trial_uses', 'user_id=' + eq(userId) + '&select=kind,resource');
+  const rows = r.ok && Array.isArray(r.data) ? r.data : [];
+  const papers = rows.filter(x => x.kind === 'paper').map(x => x.resource);
+  const tools = rows.filter(x => x.kind === 'tool').map(x => x.resource);
+  return { limits: L, papers, tools, papersLeft: Math.max(0, L.paper - papers.length), toolsLeft: Math.max(0, L.tool - tools.length), ready: r.ok };
+}
+/** Unlock one paper/tool for a trial student. Re-opening something already unlocked is always allowed. */
+export async function trialConsume(env, userId, kind, resource) {
+  const L = trialLimits(env), lim = L[kind] != null ? L[kind] : 0, uid = String(userId);
+  const r = await rest(env, 'premium_trial_uses', 'user_id=' + eq(uid) + '&kind=' + eq(kind) + '&select=id,resource');
+  if (!r.ok || !Array.isArray(r.data)) return { allowed: false, error: true };
+  if (r.data.some(x => x.resource === resource)) return { allowed: true, already: true, used: r.data.length, limit: lim };
+  if (r.data.length >= lim) return { allowed: false, used: r.data.length, limit: lim };
+  const ins = await insert(env, 'premium_trial_uses', { user_id: uid, kind, resource });
+  if (!ins.ok) return { allowed: false, error: true };
+  // two tabs opened at once must not both win the last slot
+  const again = await rest(env, 'premium_trial_uses', 'user_id=' + eq(uid) + '&kind=' + eq(kind) + '&select=id&order=id.asc');
+  if (again.ok && Array.isArray(again.data) && again.data.length > lim) {
+    const mine = ins.data && ins.data[0] && ins.data[0].id;
+    if (!again.data.slice(0, lim).some(x => x.id === mine)) {
+      await rest(env, 'premium_trial_uses', 'id=' + eq(mine), { method: 'DELETE' });
+      return { allowed: false, used: lim, limit: lim };
+    }
+  }
+  return { allowed: true, used: r.data.length + 1, limit: lim };
+}
+
 export async function isUltraUser(env, user) {
   let u = await one(env, 'ultra_premium_users', 'user_id=' + eq(user.id) + '&select=id');
   if (!u && user.mobile) u = await one(env, 'ultra_premium_users', 'mobile=' + eq(user.mobile) + '&select=id');
