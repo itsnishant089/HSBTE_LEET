@@ -298,7 +298,8 @@ runWhenReady(() => {
   setTimeout(() => {
     const mainContent = document.getElementById('main-content') || document.querySelector('main');
     if (mainContent) {
-      mainContent.insertAdjacentHTML('beforebegin', quickLinksHTML);
+      // Inside a flex layout (notes reader) place the banner above the whole layout, not as a flex column
+      (mainContent.closest('.notes-container') || mainContent).insertAdjacentHTML('beforebegin', quickLinksHTML);
     } else {
       document.body.insertAdjacentHTML('afterbegin', quickLinksHTML);
     }
