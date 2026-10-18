@@ -4,8 +4,10 @@
  *   GET  /api/admin/users?view=duplicates&product=premium|counseling      preview of what would be removed
  *   POST /api/admin/users { action:'dedupe', product }                      remove duplicates (keeps the best account of each person)
  *   POST /api/admin/users { action:'reset_password', product, userId, password }   admin sets a new password (never shown anywhere)
+ *   POST /api/admin/users { action:'set_active', userId, active }              block / unblock a Premium student (service key, so RLS can't block it)
  */
 import { json, fail, body, adminAuth, rest, patch, eq, clean, normMobile } from '../../_lib/book-core.js';
+import { insert } from '../../_lib/pay-core.js';
 
 const TABLES = {
   premium: { users: 'premium_users', cols: 'id,full_name,mobile,email,created_at' },
@@ -99,6 +101,18 @@ export async function onRequest(context) {
         }
       }
       return json({ ok: true, removed, groups: groups.length });
+    }
+
+    if (b.action === 'set_active') {
+      const uid = clean(b.userId, 64), active = b.active === true || b.active === 'true';
+      if (!uid) return fail('Missing user.');
+      const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: active });
+      if (r.ok && r.data && r.data.length) return json({ ok: true, active });
+      if (r.ok && !active) {   // free-trial account with no access row yet: a row with is_active=false revokes the trial too
+        const ins = await insert(env, 'premium_access', { user_id: uid, is_active: false });
+        if (ins.ok) return json({ ok: true, active });
+      }
+      return fail(r.ok ? 'This student has no Premium access row to restore.' : 'Database error while updating access.', r.ok ? 404 : 500);
     }
 
     if (b.action === 'reset_password') {

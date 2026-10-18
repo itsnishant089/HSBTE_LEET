@@ -8,6 +8,8 @@ import { readCookie, trialKind, trialConsume } from './_lib/pay-core.js';
 const GATED = /^\/(?:html\/)?(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|rank-analysis|study-plan|college-predictor)(?:\.html)?\/?$/i;
 // Ultra-only tools (Premium members are sent to the Ultra page instead of the login page)
 const ULTRA_ONLY = new Set(['study-plan', 'college-predictor']);
+// The single paper every free-trial account can open (override with the TRIAL_FREE_PAPER env var)
+const freePaperSlug = env => String(env.TRIAL_FREE_PAPER || 'premium-sample-paper-1').toLowerCase();
 
 function upgradeRedirect(url, slug, ended) {
   const dest = new URL('/premium-login', url.origin);
@@ -34,9 +36,14 @@ async function premiumGate(context, url) {
       if (r.ok && Array.isArray(r.data)) row = r.data[0] || null;
     } catch (e) { /* database hiccup: keep the signed cookie's verdict */ }
     if (row === null) {
-      // registered through the free trial and has not bought anything: 1 paper + 2 tools, then the upgrade page
+      // registered through the free trial and has not bought anything: ONE fixed free paper + 2 non-Ultra tools, then the upgrade page
+      const slug = m[1].toLowerCase();
+      // Ultra tools are never free (new throw-away accounts must not be able to use them)
+      if (ULTRA_ONLY.has(slug)) return new Response(null, { status: 302, headers: { location: new URL('/ultra-premium', url.origin).toString(), 'cache-control': 'private, no-store' } });
+      // Only the one designated free paper is open; every other paper needs Premium
+      if (trialKind(slug) === 'paper' && slug !== freePaperSlug(env)) return upgradeRedirect(url, m[1], false);
       try {
-        const t = await trialConsume(env, p.uid, trialKind(m[1].toLowerCase()), m[1].toLowerCase());
+        const t = await trialConsume(env, p.uid, trialKind(slug), slug);
         ok = !!t.allowed; trialEnded = !t.allowed && !t.error;
       } catch (e) { ok = false; }
       return ok ? 'allow' : upgradeRedirect(url, m[1], trialEnded);

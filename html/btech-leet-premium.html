@@ -34,7 +34,7 @@
     content="Premium Rs 69 or Ultra Premium Rs 99. 54 exclusive papers + AI College Predictor + Counselling tools." />
   <meta name="twitter:image" content="https://hsbteleet.com/image/hsbte-pyq.webp" />
 
-  <script type="application/ld+json">
+  <script type="application/ld+json" id="product-ld">
   {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -1780,6 +1780,22 @@
       });
     });
 
+    // Add rating + review markup to the Product schema from the REAL approved reviews shown on this page
+    function addReviewSchema(rows) {
+      try {
+        var good = rows.filter(function (x) { return x && x.rating >= 1 && x.rating <= 5 && x.message && x.name; });
+        if (!good.length) return;
+        var el = document.getElementById('product-ld');
+        var ld = JSON.parse(el.textContent);
+        var sum = good.reduce(function (s, x) { return s + Number(x.rating); }, 0);
+        ld.aggregateRating = { '@type': 'AggregateRating', ratingValue: (sum / good.length).toFixed(1), bestRating: '5', worstRating: '1', reviewCount: String(good.length) };
+        ld.review = good.slice(0, 5).map(function (x) {
+          return { '@type': 'Review', reviewRating: { '@type': 'Rating', ratingValue: String(x.rating), bestRating: '5', worstRating: '1' }, author: { '@type': 'Person', name: String(x.name).slice(0, 60) }, reviewBody: String(x.message).slice(0, 400) };
+        });
+        el.textContent = JSON.stringify(ld);
+      } catch (e) { /* markup is optional */ }
+    }
+
     // Load reviews from Supabase
     async function loadReviews() {
       try {
@@ -1787,6 +1803,7 @@
         var container = document.getElementById('reviews-container');
         if (error) { console.warn('Error loading reviews:', error.message); return; }
         if (!data || !data.length) { return; }
+        addReviewSchema(data);
         if (data.length > 0) {
           container.innerHTML = data.map(function (r) {
             var stars = '\u2605'.repeat(r.rating) + '\u2606'.repeat(5 - r.rating);

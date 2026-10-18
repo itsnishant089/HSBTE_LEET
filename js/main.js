@@ -267,8 +267,9 @@ runWhenReady(() => {
   const showQuickLinks = path.includes('btech') || path.includes('b-pharmacy') || path.includes('bpharma') || path.includes('haryana-leet') || path.includes('haryanaleet') || path.includes('leet-') || path.includes('premium') || path.includes('section-') || path.includes('sample-paper');
   if (!showQuickLinks) return;
 
+  if (document.getElementById("leet-quick-banner")) return;
   const quickLinksHTML = `
-    <div style="background: linear-gradient(90deg, #1e3a8a, #3b82f6); padding: 12px 20px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+    <div id="leet-quick-banner" style="background: linear-gradient(90deg, #1e3a8a, #3b82f6); padding: 12px 20px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
       <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 15px; max-width: 1200px; margin: 0 auto;">
         <span style="color: #fff; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 6px;">
           <i class="fas fa-bell" style="color: #fcd34d; animation: swing 2s infinite;"></i> 

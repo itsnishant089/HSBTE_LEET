@@ -1328,8 +1328,8 @@ async function loadTrialStatus(){
     if(j.tier==='paid'){ sessionStorage.setItem('prem_tier','premium'); location.reload(); return; }
     var t = j.trial; if(!t) return;
     var pl = t.papersLeft, tl = t.toolsLeft;
-    var txt = pl>0 ? ('You can open <b>'+pl+' free paper'+(pl>1?'s':'')+'</b> — pick any one below. ') : 'Your free paper is used (you can reopen it). ';
-    txt += tl>0 ? ('Plus <b>'+tl+' free tool use'+(tl>1?'s':'')+'</b> (Rank Analysis, notes, planners). ') : 'Your free tool uses are finished. ';
+    var txt = pl>0 ? ('Your free paper is <b>Sample Paper 1</b> — open it below. ') : 'Your free paper is used (you can reopen Sample Paper 1). ';
+    txt += tl>0 ? ('Plus <b>'+tl+' free tool use'+(tl>1?'s':'')+'</b> (Rank Analysis and Premium Notes). ') : 'Your free tool uses are finished. ';
     txt += 'Everything else unlocks for a one-time &#8377;69.';
     document.getElementById('trial-text').innerHTML = txt;
   }catch(e){}

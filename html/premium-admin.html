@@ -660,9 +660,8 @@ function renderU(users){
 }
 async function toggleActive(uid,val,name){
   confCb=async function(){
-    var {data, error} = await sb.from('premium_access').update({is_active:val}).eq('user_id',uid).select();
-    if(error) { toast('Error: ' + error.message, 'err'); return; }
-    if(!data || data.length===0) { toast('Action blocked by Database Security Policies (RLS). Please contact developer.', 'err'); return; }
+    try{ await admApi('users', {action:'set_active', userId:uid, active:val}); }
+    catch(err){ toast('Error: ' + err.message, 'err'); return; }
     toast((val?'Activated':'Blocked')+': '+name);loadUsers();
   };
   openConf((val?'Activate':'Block')+' User','Are you sure you want to '+(val?'restore access for':'block')+' '+name+'?');
@@ -851,13 +850,11 @@ async function doAction(){
     var{data:usr}=await sb.from('premium_users').select('id,full_name,tier').eq('mobile',mob).maybeSingle();
     if(!usr){alrt.className='alert alert-danger show';alrt.textContent='No user found with mobile '+mob+'.';btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Execute Action';return;}
     if(act==='deactivate'){
-      var{data, error} = await sb.from('premium_access').update({is_active:false}).eq('user_id',usr.id).select();
-      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error blocking account (RLS or DB issue).';return;}
+      try{ await admApi('users',{action:'set_active',userId:usr.id,active:false}); }catch(er){alrt.className='alert alert-danger show';alrt.textContent='Error blocking account: '+er.message;return;}
       alrt.className='alert alert-success show';alrt.textContent='Account blocked for '+usr.full_name+'.';
     }
     else if(act==='activate'){
-      var{data, error} = await sb.from('premium_access').update({is_active:true}).eq('user_id',usr.id).select();
-      if(error || !data || data.length===0){alrt.className='alert alert-danger show';alrt.textContent='Error activating account (RLS or DB issue).';return;}
+      try{ await admApi('users',{action:'set_active',userId:usr.id,active:true}); }catch(er){alrt.className='alert alert-danger show';alrt.textContent='Error activating account: '+er.message;return;}
       alrt.className='alert alert-success show';alrt.textContent='Account activated for '+usr.full_name+'.';
     }
     else if(act==='upgrade'){
@@ -1307,8 +1304,7 @@ async function doPermanentBan(uid, uname, mob) {
 
   try {
     /* Step 1: Block account in premium_access */
-    var {data: accData, error: accErr} = await sb.from('premium_access').update({is_active: false}).eq('user_id', uid).select();
-    if (accErr) throw new Error('Block failed: ' + accErr.message);
+    await admApi('users', {action:'set_active', userId: uid, active: false});
 
     /* Step 2: Delete from security_violations (optional clean-up) — keep for now */
 
