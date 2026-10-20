@@ -78,6 +78,18 @@ export async function onRequest(context) {
 
   if (request.method === 'POST') {
     const b = await body(request), product = b.product;
+    if (b.action === 'set_active') {
+      const uid = clean(b.userId, 64), active = b.active === true || b.active === 'true';
+      if (!uid) return fail('Missing user.');
+      const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: active });
+      if (r.ok && r.data && r.data.length) return json({ ok: true, active });
+      if (r.ok && !active) {   // free-trial account with no access row yet: a row with is_active=false revokes the trial too
+        const ins = await insert(env, 'premium_access', { user_id: uid, is_active: false });
+        if (ins.ok) return json({ ok: true, active });
+      }
+      return fail(r.ok ? 'This student has no Premium access row to restore.' : 'Database error while updating access.', r.ok ? 404 : 500);
+    }
+
     if (!TABLES[product]) return fail('Unknown product.');
 
     if (b.action === 'dedupe') {
@@ -101,18 +113,6 @@ export async function onRequest(context) {
         }
       }
       return json({ ok: true, removed, groups: groups.length });
-    }
-
-    if (b.action === 'set_active') {
-      const uid = clean(b.userId, 64), active = b.active === true || b.active === 'true';
-      if (!uid) return fail('Missing user.');
-      const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: active });
-      if (r.ok && r.data && r.data.length) return json({ ok: true, active });
-      if (r.ok && !active) {   // free-trial account with no access row yet: a row with is_active=false revokes the trial too
-        const ins = await insert(env, 'premium_access', { user_id: uid, is_active: false });
-        if (ins.ok) return json({ ok: true, active });
-      }
-      return fail(r.ok ? 'This student has no Premium access row to restore.' : 'Database error while updating access.', r.ok ? 404 : 500);
     }
 
     if (b.action === 'reset_password') {
