@@ -5,9 +5,9 @@
  *   POST /api/admin/users { action:'dedupe', product }                      remove duplicates (keeps the best account of each person)
  *   POST /api/admin/users { action:'reset_password', product, userId, password }   admin sets a new password (never shown anywhere)
  *   POST /api/admin/users { action:'set_active', userId, active }              block / unblock a Premium student (service key, so RLS can't block it)
+ *   POST /api/admin/users { action:'record_payment', userId, amount, reference }   student paid by UPI directly: mark the payment as paid so revenue counts it
  */
-import { json, fail, body, adminAuth, rest, patch, eq, clean, normMobile } from '../../_lib/book-core.js';
-import { insert } from '../../_lib/pay-core.js';
+import { json, fail, body, adminAuth, rest, patch, insert, eq, clean, normMobile } from '../../_lib/book-core.js';
 
 const TABLES = {
   premium: { users: 'premium_users', cols: 'id,full_name,mobile,email,created_at' },
@@ -81,13 +81,50 @@ export async function onRequest(context) {
     if (b.action === 'set_active') {
       const uid = clean(b.userId, 64), active = b.active === true || b.active === 'true';
       if (!uid) return fail('Missing user.');
-      const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: active });
+      if (!active) {
+        const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: false });
+        if (r.ok && r.data && r.data.length) return json({ ok: true, active });
+        if (r.ok) {   // free-trial account with no access row yet: a row with is_active=false revokes the trial too
+          const ins = await insert(env, 'premium_access', { user_id: uid, is_active: false });
+          if (ins.ok) return json({ ok: true, active });
+        }
+        return fail('Database error while updating access.', 500);
+      }
+      // Unblock: a student who never paid goes back to the free trial (row removed); a paying student gets the row switched back on
+      const pays = await rest(env, 'premium_payments', 'user_id=' + eq(uid) + '&status=in.(paid,free_coupon)&select=id&limit=1');
+      const ultra = await rest(env, 'ultra_premium_users', 'user_id=' + eq(uid) + '&select=id&limit=1');
+      const paying = (pays.ok && Array.isArray(pays.data) && pays.data.length > 0) || (ultra.ok && Array.isArray(ultra.data) && ultra.data.length > 0);
+      if (!paying) {
+        const d = await rest(env, 'premium_access', 'user_id=' + eq(uid), { method: 'DELETE' });
+        return d.ok ? json({ ok: true, active, trial: true }) : fail('Database error while updating access.', 500);
+      }
+      const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: true });
       if (r.ok && r.data && r.data.length) return json({ ok: true, active });
-      if (r.ok && !active) {   // free-trial account with no access row yet: a row with is_active=false revokes the trial too
-        const ins = await insert(env, 'premium_access', { user_id: uid, is_active: false });
+      if (r.ok) {
+        const ins = await insert(env, 'premium_access', { user_id: uid, is_active: true });
         if (ins.ok) return json({ ok: true, active });
       }
-      return fail(r.ok ? 'This student has no Premium access row to restore.' : 'Database error while updating access.', r.ok ? 404 : 500);
+      return fail('Database error while updating access.', 500);
+    }
+
+    if (b.action === 'record_payment') {   // student paid the admin directly (UPI): turn their free-coupon row into a real paid row so revenue is right
+      const uid = clean(b.userId, 64), rs = Math.round(Number(b.amount));
+      if (!uid) return fail('Missing user.');
+      if (!(rs > 0 && rs <= 100000)) return fail('Enter the amount you received in rupees.');
+      const ref = 'UPI_' + (clean(b.reference, 40) || 'MANUAL') + '_' + Date.now().toString(36);
+      const existing = await rest(env, 'premium_payments', 'user_id=' + eq(uid) + '&select=id,status&order=created_at.desc&limit=1');
+      let pay = existing.ok && Array.isArray(existing.data) ? existing.data[0] : null;
+      if (pay) {
+        const r = await patch(env, 'premium_payments', 'id=' + eq(pay.id), { amount: rs * 100, status: 'paid', razorpay_payment_id: ref, receipt: ref });
+        if (!r.ok) return fail('Could not update the payment.', 500);
+      } else {
+        const r = await insert(env, 'premium_payments', { user_id: uid, razorpay_payment_id: ref, amount: rs * 100, status: 'paid', receipt: ref });
+        if (!r.ok || !r.data || !r.data[0]) return fail('Could not record the payment.', 500);
+        pay = r.data[0];
+      }
+      const acc = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: true, payment_id: pay.id });
+      if (!(acc.ok && acc.data && acc.data.length)) await insert(env, 'premium_access', { user_id: uid, payment_id: pay.id, is_active: true });
+      return json({ ok: true, amount: rs });
     }
 
     if (!TABLES[product]) return fail('Unknown product.');

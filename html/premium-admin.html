@@ -568,7 +568,7 @@ async function loadDash(){
     document.getElementById('s-ultra').textContent=ultraCount;document.getElementById('s-today').textContent='+'+today+' today';
     document.getElementById('bdg-u').textContent=total;
     var rev=py.filter(function(p){return p.status==='paid';}).reduce(function(s,p){return s+Math.round((p.amount||0)/100);},0);
-    document.getElementById('s-rev').textContent='₹'+rev;
+    document.getElementById('s-rev').textContent='₹'+rev;if(window.xkRevenue)window.xkRevenue();
     var pc=(prRes.data||[]).length;document.getElementById('s-pend-rev').textContent=pc;if(pc)document.getElementById('bdg-rev').textContent=pc;
     var payMap={};py.forEach(function(p){if(!payMap[p.user_id])payMap[p.user_id]=p;});
     var recent=u.slice(0,10);
@@ -619,9 +619,12 @@ async function loadUsers(){
         coupon_used:null,
         refer_by:null,
         tier:ulSet.has(u.id)?'ultra':'premium',
-        is_active:a.is_active!==undefined?a.is_active:false
+        is_active:a.is_active!==undefined?a.is_active:(p.status?false:null),
+        pay_status:p.status||null
       });
     });
+    var paidRank=function(u){return u.pay_status==='paid'?0:1;};
+    usersCache.sort(function(a,b){return paidRank(a)-paidRank(b)||new Date(b.created_at)-new Date(a.created_at);});
     document.getElementById('u-count').textContent=usersCache.length+' users';
     renderU(usersCache);
   }catch(err){document.getElementById('tb-users').innerHTML='<tr class="lr"><td colspan="10">Unable to load users. Please try again.</td></tr>';}
@@ -640,23 +643,37 @@ function escInline(s){if(!s)return'';return String(s).replace(/\\/g,'\\\\').repl
 function renderU(users){
   var tb=document.getElementById('tb-users');
   if(!users.length){tb.innerHTML='<tr class="lr"><td colspan="10">No users found.</td></tr>';return;}
+  var nPaid=users.filter(function(u){return u.pay_status==='paid';}).length;
+  var sec=function(t,n,c){return'<tr><td colspan="10" style="background:'+c+';font-weight:800;font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding:8px 14px">'+t+' ('+n+')</td></tr>';};
+  var prevPaid=null;
   tb.innerHTML=users.map(function(u){
-    return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code><br><span style="font-size:11px;color:var(--mu)">'+e(u.email||'—')+'</span></td>' +
+    var isPaid=u.pay_status==='paid',head='';
+    if(isPaid!==prevPaid){head=isPaid?sec('Paid users',nPaid,'#ecfdf5'):sec('Not paid (free coupon / free trial)',users.length-nPaid,'#fff7ed');prevPaid=isPaid;}
+    return head+'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code><br><span style="font-size:11px;color:var(--mu)">'+e(u.email||'—')+'</span></td>' +
     '<td>'+(u.tier==='ultra'?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+'</td>' +
     '<td>₹'+(u.paid_rs||'—')+'</td>' +
     '<td>'+(u.coupon_used?'<span class="badge b-blue">'+e(u.coupon_used)+'</span>':'—')+'</td>' +
     
-    '<td>'+(u.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+'</td>' +
+    '<td>'+(u.is_active===null?'<span class="badge b-gray">Free Trial</span>':u.is_active!==false?'<span class="badge b-green">Active</span>':'<span class="badge b-red">Blocked</span>')+'</td>' +
     '<td style="color:var(--mu);font-size:12px">'+fd(u.created_at)+'</td>' +
     '<td><div style="display:flex;gap:4px;flex-wrap:wrap">' +
       '<button class="btn btn-sm btn-ghost" onclick="quickLk(\''+escInline(u.mobile)+'\')" title="Lookup"><i class="fas fa-eye"></i></button>' +
       '<a class="btn btn-sm btn-ghost" href="https://wa.me/91'+e(u.mobile)+'" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366"></i></a>' +
+      (u.pay_status!=='paid'?'<button class="btn btn-sm btn-green" onclick="recordPayment(\''+escInline(u.id)+'\',\''+escInline(u.full_name)+'\')" title="Record a UPI payment you received directly"><i class="fas fa-indian-rupee-sign"></i></button>':'') +
       (u.tier!=='ultra'?'<button class="btn btn-sm btn-ultra" onclick="upgradeToUltra(\''+escInline(u.id)+'\',\''+escInline(u.mobile)+'\',\''+escInline(u.full_name)+'\',\''+escInline(u.email||'')+'\')" title="Upgrade to Ultra"><i class="fas fa-rocket"></i> Ultra</button>':'') +
       (u.is_active!==false?'<button class="btn btn-sm btn-red" onclick="toggleActive(\''+escInline(u.id)+'\',false,\''+escInline(u.full_name)+'\')"><i class="fas fa-ban"></i></button>':'<button class="btn btn-sm btn-green" onclick="toggleActive(\''+escInline(u.id)+'\',true,\''+escInline(u.full_name)+'\')"><i class="fas fa-check"></i></button>') +
       '<button class="btn btn-sm btn-ghost" onclick="resetUserPassword(\''+escInline(u.id)+'\',\''+escInline(u.full_name)+'\')" title="Set a new password"><i class="fas fa-key"></i></button>' +
       '<button class="btn btn-sm btn-danger" onclick="removeUser(\''+escInline(u.id)+'\',\''+escInline(u.full_name)+'\')" title="Delete User"><i class="fas fa-trash"></i></button>' +
     '</div></td></tr>';
   }).join('');
+}
+async function recordPayment(uid,name){
+  var amt=prompt('Amount (in rupees) that '+name+' paid you directly on UPI:','69');
+  if(amt===null)return;
+  var ref=prompt('UPI reference / note (optional):','')||'';
+  try{ await admApi('users',{action:'record_payment',userId:uid,amount:Number(amt),reference:ref}); }
+  catch(err){ toast('Error: '+err.message,'err'); return; }
+  toast('Recorded Rs '+amt+' from '+name+' - counted in revenue');loadUsers();loadDash();
 }
 async function toggleActive(uid,val,name){
   confCb=async function(){
@@ -710,23 +727,26 @@ function exportCSV(){
 
 async function loadPay(){
   try{
-    var[pyRes,uRes2]=await Promise.all([
+    var[pyRes,uRes2,ulRes2]=await Promise.all([
       sb.from('premium_payments').select('id,user_id,amount,status,created_at').order('created_at',{ascending:false}),
-      sb.from('premium_users').select('id,full_name,mobile')
+      sb.from('premium_users').select('id,full_name,mobile'),
+      safe(sb.from('ultra_premium_users').select('user_id'))
     ]);
     var data=pyRes.data||[],uList=uRes2.data||[];
+    var ultraSet=new Set((ulRes2.data||[]).map(function(x){return x.user_id;}));
     var uMap2={};uList.forEach(function(u){uMap2[u.id]=u;});
     var paid=data.filter(function(p){return p.status==='paid';});
     var tot=paid.reduce(function(s,p){return s+Math.round((p.amount||0)/100);},0);
     document.getElementById('py-tot').textContent='₹'+tot;document.getElementById('py-cnt').textContent=data.length;
-    document.getElementById('py-pr').textContent='₹'+tot;document.getElementById('py-ul').textContent='₹0';
+    var ulTot=paid.filter(function(p){return ultraSet.has(p.user_id);}).reduce(function(s,p){return s+Math.round((p.amount||0)/100);},0);
+    document.getElementById('py-pr').textContent='₹'+(tot-ulTot);document.getElementById('py-ul').textContent='₹'+ulTot;if(window.xkRevenue)window.xkRevenue();
     var tb=document.getElementById('tb-pay');
     if(!data.length){tb.innerHTML='<tr class="lr"><td colspan="8">No payments yet.</td></tr>';return;}
     tb.innerHTML=data.map(function(p){
       var u=uMap2[p.user_id]||{};
       var amtRs=Math.round((p.amount||0)/100);
       var sb2=p.status==='paid'?'<span class="badge b-green">Paid</span>':p.status==='free_coupon'?'<span class="badge b-blue">Free</span>':'<span class="badge b-red">'+p.status+'</span>';
-      return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td><td style="font-weight:700">₹'+amtRs+'</td><td><span class="badge b-gold">Premium</span></td><td><code style="font-size:10px">'+e(p.id||'—')+'</code></td><td>—</td><td>'+sb2+'</td><td style="color:var(--mu);font-size:12px">'+fd(p.created_at)+'</td></tr>';
+      return'<tr><td><strong>'+e(u.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(u.mobile||'—')+'</code></td><td style="font-weight:700">₹'+amtRs+'</td><td>'+(ultraSet.has(p.user_id)?'<span class="badge b-purple">Ultra</span>':'<span class="badge b-gold">Premium</span>')+'</td><td><code style="font-size:10px">'+e(p.id||'—')+'</code></td><td>—</td><td>'+sb2+'</td><td style="color:var(--mu);font-size:12px">'+fd(p.created_at)+'</td></tr>';
     }).join('');
   }catch(err){document.getElementById('tb-pay').innerHTML='<tr class="lr"><td colspan="8">Error</td></tr>';}
 }
@@ -1584,7 +1604,7 @@ setInterval(function(){
   setTimeout(refresh, 1500); setInterval(refresh, 60000);
 })();
 </script>
-<script src="/js/admin-extra.js?v=20261021"></script>
+<script src="/js/admin-extra.js?v=20261022"></script>
 </body>
 </html>
 

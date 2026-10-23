@@ -1,6 +1,18 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+/* Counselling now lives inside the main admin (premium-admin) as an embedded view. Opened on its own it sends you there. */
+(function(){
+  var embed=/[?&]embed=1/.test(location.search);
+  if(!embed){ location.replace('/premium-admin'); return; }
+  document.documentElement.className+=' embed';
+  try{ if(sessionStorage.getItem('adm_api_token')) sessionStorage.setItem('counsel_admin','1'); }catch(e){}
+  var st=document.createElement('style');
+  st.textContent='.embed #sidebar,.embed .topbar,.embed #login-screen{display:none!important}.embed .layout{min-height:0}.embed body{background:transparent}';
+  document.head.appendChild(st);
+})();
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Counseling Admin Portal | HSBTE LEET</title>
@@ -356,6 +368,10 @@ function doLogout(){sessionStorage.removeItem('counsel_admin');sessionStorage.re
     document.getElementById('main-layout').style.display='flex';
     loadDash();
     setInterval(updateChatBadge, 30000);
+    if(/[?&]embed=1/.test(location.search)){
+      var go=function(){ var h=(location.hash||'#pending').slice(1); if(h) gotoPage(h,null); };
+      go(); window.addEventListener('hashchange',go);
+    }
   }
 })();
 

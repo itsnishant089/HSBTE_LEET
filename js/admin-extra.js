@@ -69,7 +69,8 @@
       '<div class="card"><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Student</th><th>Contact</th><th>City / College / Branch</th><th>Access</th><th>Status</th><th>Points</th><th>Devices</th><th>Joined / last login</th><th>Actions</th></tr></thead><tbody id="tb-bku"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // purchases
       '<div class="page" id="page-bkbuy"><div id="bkb-msg"></div><div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-envelope" style="color:var(--bl)"></i> PDF copies to email (pending first)</div></div><div class="card-body" style="font-size:13px;color:var(--mu)">Run <code>python scripts/make_watermarked_pdf.py "&lt;master.pdf&gt;" "&lt;student name&gt;" &lt;mobile&gt;</code> to make the personal PDF, email it to the student, then tap <b>Mark delivered</b>.</div></div>' +
-      '<div class="card"><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th></tr></thead><tbody id="tb-bkb"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div></div>' +
+      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-circle-check" style="color:var(--gr)"></i> Paid <span id="bkb-npaid" style="font-weight:600;color:var(--mu);font-size:12px"></span></div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th></tr></thead><tbody id="tb-bkb"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div>' +
+      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-hourglass-half" style="color:var(--go)"></i> Not paid yet (checkout started / failed) <span id="bkb-nunpaid" style="font-weight:600;color:var(--mu);font-size:12px"></span></div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th></tr></thead><tbody id="tb-bku"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // short notes analytics
       '<div class="page" id="page-bknotes"><div class="xk-grid" id="nt-kpi"></div><div id="nt-msg"></div>' +
       '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-chart-line" style="color:var(--gr)"></i> Sales by day (last 30 days with sales)</div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Day</th><th>Sales</th><th>Revenue</th></tr></thead><tbody id="tb-ntd"><tr class="lr"><td colspan="3">Loading…</td></tr></tbody></table></div></div></div>' +
@@ -168,15 +169,21 @@
   /* ───────────── purchases / violations / devices ───────────── */
   function loadPurchases() {
     api('book?view=purchases').then(function (d) {
-      var tb = $('tb-bkb'); if (!d.ok) { tb.innerHTML = '<tr><td colspan="9" style="color:#b91c1c">' + esc(d.error || '') + '</td></tr>'; return; }
-      var list = d.purchases.slice().sort(function (a, b) { var pa = a.plan === 'pdf' && !a.delivered && a.status !== 'created' ? 0 : 1, pb = b.plan === 'pdf' && !b.delivered && b.status !== 'created' ? 0 : 1; return pa - pb || new Date(b.created_at) - new Date(a.created_at); });
-      if (!list.length) { tb.innerHTML = '<tr><td colspan="9" style="color:var(--mu)">No purchases yet.</td></tr>'; return; }
-      tb.innerHTML = list.map(function (p) {
-        var u = p.book_users || {}, paid = p.status === 'paid' || p.status === 'free';
+      var tb = $('tb-bkb'), tu = $('tb-bku');
+      if (!d.ok) { tb.innerHTML = '<tr><td colspan="9" style="color:#b91c1c">' + esc(d.error || '') + '</td></tr>'; tu.innerHTML = ''; return; }
+      var isPaid = function (p) { return p.status === 'paid' || p.status === 'free'; };
+      var byDate = function (a, b) { return new Date(b.created_at) - new Date(a.created_at); };
+      var paidList = d.purchases.filter(isPaid).sort(function (a, b) { var pa = a.plan === 'pdf' && !a.delivered ? 0 : 1, pb = b.plan === 'pdf' && !b.delivered ? 0 : 1; return pa - pb || byDate(a, b); });
+      var unpaidList = d.purchases.filter(function (p) { return !isPaid(p); }).sort(byDate);
+      $('bkb-npaid').textContent = '(' + paidList.length + ')'; $('bkb-nunpaid').textContent = '(' + unpaidList.length + ')';
+      var row = function (p) {
+        var u = p.book_users || {}, paid = isPaid(p);
         var pdf = p.plan !== 'pdf' ? '—' : !paid ? '—' : p.delivered ? '<span class="xk-pill ok">Delivered</span>' : '<button class="xk-b g" data-d="' + p.id + '">Mark delivered</button> <span class="xk-pill warn">Send PDF</span>';
         return '<tr><td>' + fmtDate(p.created_at) + '</td><td><b>' + esc(u.full_name || '') + '</b><br><small>' + esc(u.mobile || '') + ' · ' + esc(u.email || '') + '</small></td><td>' + (p.plan === 'pdf' ? 'Reader + PDF' : p.plan === 'notes' ? 'Short Notes' : 'Reader') + '</td><td>' + rupee(p.final_amount) + '</td><td>' + rupee(p.discount) + '</td><td>' + esc(p.coupon || '—') + (p.ultra_discount ? ' <span class="xk-pill ok">Ultra</span>' : '') + '</td>' +
           '<td><span class="xk-pill ' + (paid ? 'ok' : p.status === 'created' ? 'gray' : 'bad') + '">' + p.status + '</span></td><td>' + pdf + '</td><td><small>' + esc(p.rzp_payment_id || '—') + '</small></td></tr>';
-      }).join('');
+      };
+      tb.innerHTML = paidList.length ? paidList.map(row).join('') : '<tr><td colspan="9" style="color:var(--mu)">No paid purchases yet.</td></tr>';
+      tu.innerHTML = unpaidList.length ? unpaidList.map(row).join('') : '<tr><td colspan="9" style="color:var(--mu)">Nothing pending.</td></tr>';
       tb.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { api('book', { body: { action: 'mark_delivered', purchaseId: b.getAttribute('data-d') } }).then(loadPurchases); }; });
     });
   }
@@ -254,6 +261,57 @@
     });
   }
 
+  /* ───────────── revenue breakdown (dashboard + payments) ───────────── */
+  function loadRevenue() {
+    var host = $('rev-break');
+    if (!host) {
+      var dash = $('page-dashboard'); if (!dash) return;
+      dash.insertAdjacentHTML('afterbegin', '<div class="card" style="margin-bottom:16px"><div class="card-hdr"><div class="card-title"><i class="fas fa-indian-rupee-sign" style="color:var(--gr)"></i> Revenue by product</div></div><div class="card-body"><div class="xk-grid" id="rev-break">Loading…</div></div></div>');
+      host = $('rev-break');
+    }
+    var sbc = window.sb;
+    var q = function (p) { return Promise.resolve(p).then(function (r) { return (r && r.data) || []; }).catch(function () { return []; }); };
+    Promise.all([
+      sbc ? q(sbc.from('premium_payments').select('user_id,amount,status')) : [],
+      sbc ? q(sbc.from('ultra_premium_users').select('user_id')) : [],
+      sbc ? q(sbc.from('counseling_payments').select('amount,status')) : [],
+      api('book?view=purchases')
+    ]).then(function (r) {
+      var ultra = {}; r[1].forEach(function (u) { ultra[u.user_id] = 1; });
+      var prem = { rs: 0, n: 0 }, ult = { rs: 0, n: 0 }, cns = { rs: 0, n: 0 }, book = { rs: 0, n: 0 }, notes = { rs: 0, n: 0 };
+      r[0].forEach(function (p) { if (p.status !== 'paid') return; var t = ultra[p.user_id] ? ult : prem; t.rs += Math.round((p.amount || 0) / 100); t.n++; });
+      r[2].forEach(function (p) { if (p.status !== 'paid') return; cns.rs += Math.round((p.amount || 0) / 100); cns.n++; });
+      ((r[3] && r[3].purchases) || []).forEach(function (p) { if (p.status !== 'paid') return; var t = p.plan === 'notes' ? notes : book; t.rs += p.final_amount || 0; t.n++; });
+      var parts = [['Premium', prem], ['Ultra Premium', ult], ['Book', book], ['Short Notes', notes], ['Counselling', cns]];
+      var total = parts.reduce(function (t, x) { return t + x[1].rs; }, 0), count = parts.reduce(function (t, x) { return t + x[1].n; }, 0);
+      host.innerHTML = parts.map(function (x) { return '<div class="xk-kpi"><b>' + rupee(x[1].rs) + '</b><span>' + x[0] + ' · ' + x[1].n + ' paid</span></div>'; }).join('') +
+        '<div class="xk-kpi" style="background:#ecfdf5;border-color:#6ee7b7"><b style="color:#047857">' + rupee(total) + '</b><span>TOTAL · ' + count + ' paid</span></div>';
+      ['s-rev', 'py-tot'].forEach(function (id) { if ($(id)) $(id).textContent = rupee(total); });
+      if ($('py-cnt')) $('py-cnt').textContent = count;
+      if ($('py-pr')) $('py-pr').textContent = rupee(prem.rs);
+      if ($('py-ul')) $('py-ul').textContent = rupee(ult.rs);
+    });
+  }
+
+  /* ───────────── Counselling (the counseling-admin page, embedded) ───────────── */
+  var CNS = [['cnspending', 'pending', 'fa-hourglass-half', 'Pending Requests'], ['cnsreviewed', 'reviewed', 'fa-eye', 'Reviewed Requests'], ['cnssent', 'sent', 'fa-check-circle', 'Sent & Approved'],
+    ['cnschats', 'chats', 'fa-comments', 'Student Chats'], ['cnsstudents', 'students', 'fa-users', 'Counselling Students'], ['cnsadd', 'adduser', 'fa-user-plus', 'Add Counselling User']];
+  function buildCns() {
+    var nav = document.querySelector('.sb-nav'), main = document.querySelector('.main'); if (!nav || !main || $('page-cnspending')) return;
+    var h = '<div class="sb-section">Counselling</div>';
+    CNS.forEach(function (c) { h += '<button class="sb-link" onclick="gotoPage(' + "'" + c[0] + "'" + ',this)"><i class="fas ' + c[2] + '"></i> ' + c[3] + '</button>'; });
+    nav.insertAdjacentHTML('beforeend', h);
+    CNS.forEach(function (c) {
+      main.insertAdjacentHTML('beforeend', '<div class="page" id="page-' + c[0] + '" style="padding:0"><iframe id="fr-' + c[0] + '" title="' + c[3] + '" style="width:100%;height:calc(100vh - 70px);border:0;display:block"></iframe></div>');
+      TITLES[c[0]] = c[3];
+      LOADERS[c[0]] = function () {
+        var f = $('fr-' + c[0]), src = '/counseling-admin?embed=1#' + c[1];
+        if (!f.getAttribute('data-ok')) { f.setAttribute('data-ok', '1'); f.src = src; return; }
+        try { f.contentWindow.location.hash = c[1]; if (f.contentWindow.reloadCurrent) f.contentWindow.reloadCurrent(); } catch (e) { f.src = src; }
+      };
+    });
+  }
+
   /* ───────────── wiring ───────────── */
   function wire() {
     $('cp-kind').onchange = kindHint; kindHint();
@@ -271,10 +329,13 @@
     var orig = window.loadPage;
     window.loadPage = function (n) {
       if (LOADERS[n]) { var t = $('page-ttl'); if (t) t.textContent = TITLES[n]; LOADERS[n](); return; }
-      if (typeof orig === 'function') return orig.apply(this, arguments);
+      var out = typeof orig === 'function' ? orig.apply(this, arguments) : undefined;
+      if (n === 'dashboard' || n === 'payments') setTimeout(loadRevenue, 600);
+      return out;
     };
   }
-  build(); wire(); hook();
+  window.xkRevenue = loadRevenue;
+  build(); buildCns(); wire(); hook();
   // fill the "PDF to deliver" badge once the admin is in
   setTimeout(function () { api('book?view=overview').then(function (o) { if (o.ok && $('bdg-pdf')) $('bdg-pdf').textContent = o.pendingPdf || 0; }); }, 2500);
 })();

@@ -225,7 +225,6 @@ Features:
 - Premium Hub: https://hsbteleet.com/btech-leet-premium
 - Premium Login: https://hsbteleet.com/premium-login
 - Premium Papers: https://hsbteleet.com/premium-papers
-- Premium Notes: https://hsbteleet.com/premium-notes
 - Ultra Premium: https://hsbteleet.com/ultra-premium
 - Premium Admin: https://hsbteleet.com/premium-admin
 - Premium Papers 1-46: https://hsbteleet.com/premium-sample-paper-1 through -46
