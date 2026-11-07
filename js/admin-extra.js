@@ -32,10 +32,10 @@
   /* ───────────── markup ───────────── */
   var PAGES = [
     ['bkcoupons', 'fa-ticket', 'Coupons'], ['bkusers', 'fa-book-open-reader', 'Book Users'], ['bkbuy', 'fa-cart-shopping', 'Book Purchases'],
-    ['bknotes', 'fa-bolt', 'Short Notes'], ['bktrial', 'fa-gift', 'Free Trials'],
+    ['bknotes', 'fa-bolt', 'Short Notes'],
     ['bkvio', 'fa-user-shield', 'Book Violations'], ['bkdev', 'fa-laptop-mobile', 'Devices']
   ];
-  var TITLES = { bkcoupons: 'Coupons (Premium · Ultra · Counselling · Book)', bkusers: 'Book Users & Free-Sample Sign-ups', bkbuy: 'Book Purchases & PDF Deliveries', bknotes: 'Short Notes — sales, owners & reader analytics', bktrial: 'Premium Free-Trial Sign-ups', bkvio: 'Book Security Violations', bkdev: 'Devices — Book, Premium & Ultra' };
+  var TITLES = { bkcoupons: 'Coupons (Premium · Ultra · Counselling · Book)', bkusers: 'Book Users & Free-Sample Sign-ups', bkbuy: 'Book Purchases & PDF Deliveries', bknotes: 'Short Notes — sales, owners & reader analytics', bkvio: 'Book Security Violations', bkdev: 'Devices — Book, Premium & Ultra' };
 
   function build() {
     var nav = document.querySelector('.sb-nav'); if (!nav || $('page-bkcoupons')) return;
@@ -69,15 +69,13 @@
       '<div class="card"><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Student</th><th>Contact</th><th>City / College / Branch</th><th>Access</th><th>Status</th><th>Points</th><th>Devices</th><th>Joined / last login</th><th>Actions</th></tr></thead><tbody id="tb-bku"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // purchases
       '<div class="page" id="page-bkbuy"><div id="bkb-msg"></div><div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-envelope" style="color:var(--bl)"></i> PDF copies to email (pending first)</div></div><div class="card-body" style="font-size:13px;color:var(--mu)">Run <code>python scripts/make_watermarked_pdf.py "&lt;master.pdf&gt;" "&lt;student name&gt;" &lt;mobile&gt;</code> to make the personal PDF, email it to the student, then tap <b>Mark delivered</b>.</div></div>' +
-      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-circle-check" style="color:var(--gr)"></i> Paid <span id="bkb-npaid" style="font-weight:600;color:var(--mu);font-size:12px"></span></div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th></tr></thead><tbody id="tb-bkb"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div>' +
-      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-hourglass-half" style="color:var(--go)"></i> Not paid yet (checkout started / failed) <span id="bkb-nunpaid" style="font-weight:600;color:var(--mu);font-size:12px"></span></div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th></tr></thead><tbody id="tb-bku"><tr class="lr"><td colspan="9">Loading…</td></tr></tbody></table></div></div></div></div>' +
+      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-circle-check" style="color:var(--gr)"></i> Paid <span id="bkb-npaid" style="font-weight:600;color:var(--mu);font-size:12px"></span></div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th><th>Actions</th></tr></thead><tbody id="tb-bkb"><tr class="lr"><td colspan="10">Loading…</td></tr></tbody></table></div></div></div>' +
+      '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-hourglass-half" style="color:var(--go)"></i> Not paid yet (checkout started / failed) <span id="bkb-nunpaid" style="font-weight:600;color:var(--mu);font-size:12px"></span></div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>Plan</th><th>Paid</th><th>Discount</th><th>Coupon / Ultra</th><th>Status</th><th>PDF</th><th>Payment id</th><th>Actions</th></tr></thead><tbody id="tb-bkunpaid"><tr class="lr"><td colspan="10">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // short notes analytics
       '<div class="page" id="page-bknotes"><div class="xk-grid" id="nt-kpi"></div><div id="nt-msg"></div>' +
       '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-chart-line" style="color:var(--gr)"></i> Sales by day (last 30 days with sales)</div></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Day</th><th>Sales</th><th>Revenue</th></tr></thead><tbody id="tb-ntd"><tr class="lr"><td colspan="3">Loading…</td></tr></tbody></table></div></div></div>' +
       '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-cart-shopping" style="color:var(--bl)"></i> Short Notes purchases (₹99 plan)</div><button class="btn btn-ghost" id="nt-csv-p"><i class="fas fa-download"></i> Export</button></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Date</th><th>Student</th><th>College</th><th>Paid</th><th>Coupon</th><th>Status</th><th>Payment id</th></tr></thead><tbody id="tb-ntp"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div>' +
       '<div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-users" style="color:var(--p)"></i> Everyone with Short Notes access</div><button class="btn btn-ghost" id="nt-csv-o"><i class="fas fa-download"></i> Export</button></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Student</th><th>Contact</th><th>City / College / Branch</th><th>Got notes via</th><th>Reader opens</th><th>Joined / last login</th><th>Actions</th></tr></thead><tbody id="tb-nto"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div></div>' +
-      // free trials
-      '<div class="page" id="page-bktrial"><div class="xk-grid" id="tr-kpi"></div><div id="tr-msg"></div><div class="card"><div class="card-hdr"><div class="card-title"><i class="fas fa-gift" style="color:var(--gr)"></i> Students who started the Premium free trial</div><button class="btn btn-ghost" id="tr-csv"><i class="fas fa-download"></i> Export</button></div><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Student</th><th>Contact</th><th>College</th><th>Free paper used</th><th>Free tools used</th><th>Joined</th><th>Bought?</th></tr></thead><tbody id="tb-tr"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // violations
       '<div class="page" id="page-bkvio"><div id="bkv-msg"></div><div class="card"><div class="card-body np"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>When</th><th>Student</th><th>Type</th><th>Points</th><th>Detail</th><th>IP</th><th>Account</th></tr></thead><tbody id="tb-bkv"><tr class="lr"><td colspan="7">Loading…</td></tr></tbody></table></div></div></div></div>' +
       // devices
@@ -169,8 +167,8 @@
   /* ───────────── purchases / violations / devices ───────────── */
   function loadPurchases() {
     api('book?view=purchases').then(function (d) {
-      var tb = $('tb-bkb'), tu = $('tb-bku');
-      if (!d.ok) { tb.innerHTML = '<tr><td colspan="9" style="color:#b91c1c">' + esc(d.error || '') + '</td></tr>'; tu.innerHTML = ''; return; }
+      var tb = $('tb-bkb'), tu = $('tb-bkunpaid');
+      if (!d.ok) { tb.innerHTML = '<tr><td colspan="10" style="color:#b91c1c">' + esc(d.error || '') + '</td></tr>'; if (tu) tu.innerHTML = ''; return; }
       var isPaid = function (p) { return p.status === 'paid' || p.status === 'free'; };
       var byDate = function (a, b) { return new Date(b.created_at) - new Date(a.created_at); };
       var paidList = d.purchases.filter(isPaid).sort(function (a, b) { var pa = a.plan === 'pdf' && !a.delivered ? 0 : 1, pb = b.plan === 'pdf' && !b.delivered ? 0 : 1; return pa - pb || byDate(a, b); });
@@ -179,12 +177,38 @@
       var row = function (p) {
         var u = p.book_users || {}, paid = isPaid(p);
         var pdf = p.plan !== 'pdf' ? '—' : !paid ? '—' : p.delivered ? '<span class="xk-pill ok">Delivered</span>' : '<button class="xk-b g" data-d="' + p.id + '">Mark delivered</button> <span class="xk-pill warn">Send PDF</span>';
+        var acts = '<div class="xk-act">' +
+          '<button class="xk-b" data-ea="' + p.id + '" data-amt="' + (p.final_amount || 0) + '" title="Edit amount paid (UPI)">✏️ Amount</button>' +
+          (u.id ? '<button class="xk-b r" data-du="' + u.id + '" data-dn="' + esc(u.full_name || '') + '">🗑 Delete</button>' : '') +
+          '</div>';
         return '<tr><td>' + fmtDate(p.created_at) + '</td><td><b>' + esc(u.full_name || '') + '</b><br><small>' + esc(u.mobile || '') + ' · ' + esc(u.email || '') + '</small></td><td>' + (p.plan === 'pdf' ? 'Reader + PDF' : p.plan === 'notes' ? 'Short Notes' : 'Reader') + '</td><td>' + rupee(p.final_amount) + '</td><td>' + rupee(p.discount) + '</td><td>' + esc(p.coupon || '—') + (p.ultra_discount ? ' <span class="xk-pill ok">Ultra</span>' : '') + '</td>' +
-          '<td><span class="xk-pill ' + (paid ? 'ok' : p.status === 'created' ? 'gray' : 'bad') + '">' + p.status + '</span></td><td>' + pdf + '</td><td><small>' + esc(p.rzp_payment_id || '—') + '</small></td></tr>';
+          '<td><span class="xk-pill ' + (paid ? 'ok' : p.status === 'created' ? 'gray' : 'bad') + '">' + p.status + '</span></td><td>' + pdf + '</td><td><small>' + esc(p.rzp_payment_id || '—') + '</small></td><td>' + acts + '</td></tr>';
       };
-      tb.innerHTML = paidList.length ? paidList.map(row).join('') : '<tr><td colspan="9" style="color:var(--mu)">No paid purchases yet.</td></tr>';
-      tu.innerHTML = unpaidList.length ? unpaidList.map(row).join('') : '<tr><td colspan="9" style="color:var(--mu)">Nothing pending.</td></tr>';
+      tb.innerHTML = paidList.length ? paidList.map(row).join('') : '<tr><td colspan="10" style="color:var(--mu)">No paid purchases yet.</td></tr>';
+      if (tu) tu.innerHTML = unpaidList.length ? unpaidList.map(row).join('') : '<tr><td colspan="10" style="color:var(--mu)">Nothing pending.</td></tr>';
+      // Wire Mark delivered buttons
       tb.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { api('book', { body: { action: 'mark_delivered', purchaseId: b.getAttribute('data-d') } }).then(loadPurchases); }; });
+      // Wire Edit Amount buttons
+      [tb, tu].forEach(function (t) { if (!t) return; t.querySelectorAll('[data-ea]').forEach(function (b) {
+        b.onclick = function () {
+          var cur = b.getAttribute('data-amt');
+          var nv = prompt('New final amount (₹) for this purchase (UPI/direct payment):', cur);
+          if (nv === null) return;
+          var amt = parseInt(nv);
+          if (isNaN(amt) || amt < 0) { alert('Invalid amount.'); return; }
+          api('book', { body: { action: 'edit_amount', purchaseId: b.getAttribute('data-ea'), amount: amt } })
+            .then(function (r) { note($('bkb-msg'), r.ok ? '✅ Amount updated to ₹' + amt : '❌ ' + (r.error || 'Failed'), !r.ok); if (r.ok) loadPurchases(); });
+        };
+      }); });
+      // Wire Delete User buttons
+      [tb, tu].forEach(function (t) { if (!t) return; t.querySelectorAll('[data-du]').forEach(function (b) {
+        b.onclick = function () {
+          var nm = b.getAttribute('data-dn') || 'this user';
+          if (!confirm('Delete book account for ' + nm + '? (Only works if they have not bought the book.)')) return;
+          api('book', { body: { action: 'delete_user', userId: b.getAttribute('data-du') } })
+            .then(function (r) { note($('bkb-msg'), r.ok ? '✅ User deleted' : '❌ ' + (r.error || 'Failed'), !r.ok); if (r.ok) loadPurchases(); });
+        };
+      }); });
     });
   }
   function loadViolations() {
@@ -247,71 +271,111 @@
       });
     });
   }
-  function loadTrials() {
-    api('book?view=trials').then(function (d) {
-      var tb = $('tb-tr');
-      if (!d.ok) { tb.innerHTML = '<tr><td colspan="7" style="color:#b91c1c">' + esc(d.error || 'Could not load') + '</td></tr>'; return; }
-      var k = d.kpis;
-      $('tr-kpi').innerHTML = [['Free-trial sign-ups', k.total], ['Used their free paper', k.usedPaper], ['Used a free tool', k.usedTool], ['Converted to paid', k.converted], ['Conversion %', k.total ? Math.round(k.converted * 1000 / k.total) / 10 + '%' : '—']]
-        .map(function (x) { return '<div class="xk-kpi"><b>' + x[1] + '</b><span>' + x[0] + '</span></div>'; }).join('');
-      window.__trials = d.trials;
-      tb.innerHTML = d.trials.length ? d.trials.map(function (t) {
-        return '<tr><td><b>' + esc(t.name) + '</b></td><td>' + esc(t.mobile) + '<br><small>' + esc(t.email) + '</small></td><td>' + esc(t.college || '—') + '</td><td>' + (t.papers.length ? esc(t.papers.join(', ')) : '—') + '</td><td>' + (t.tools.length ? esc(t.tools.join(', ')) : '—') + '</td><td>' + fmtDate(t.joined) + '</td><td>' + (t.converted ? '<span class="xk-pill ok">Paid</span>' : '<span class="xk-pill gray">Not yet</span>') + '</td></tr>';
-      }).join('') : '<tr><td colspan="7" style="color:var(--mu)">No free-trial sign-ups yet.</td></tr>';
+  /* ───────────── revenue breakdown (dashboard + payments) ───────────── */
+
+  function loadRevenue() {
+
+    var host = $('rev-break');
+
+    if (!host) {
+
+      var dash = $('page-dashboard'); if (!dash) return;
+
+      dash.insertAdjacentHTML('afterbegin', '<div class="card" style="margin-bottom:16px"><div class="card-hdr"><div class="card-title"><i class="fas fa-indian-rupee-sign" style="color:var(--gr)"></i> Revenue by product</div></div><div class="card-body"><div class="xk-grid" id="rev-break">Loading…</div></div></div>');
+
+      host = $('rev-break');
+
+    }
+
+    var sbc = window.sb;
+
+    var q = function (p) { return Promise.resolve(p).then(function (r) { return (r && r.data) || []; }).catch(function () { return []; }); };
+
+    Promise.all([
+
+      sbc ? q(sbc.from('premium_payments').select('user_id,amount,status')) : [],
+
+      sbc ? q(sbc.from('ultra_premium_users').select('user_id')) : [],
+
+      sbc ? q(sbc.from('counseling_payments').select('amount,status')) : [],
+
+      api('book?view=purchases')
+
+    ]).then(function (r) {
+
+      var ultra = {}; r[1].forEach(function (u) { ultra[u.user_id] = 1; });
+
+      var prem = { rs: 0, n: 0 }, ult = { rs: 0, n: 0 }, cns = { rs: 0, n: 0 }, book = { rs: 0, n: 0 }, notes = { rs: 0, n: 0 };
+
+      r[0].forEach(function (p) { if (p.status !== 'paid') return; var t = ultra[p.user_id] ? ult : prem; t.rs += Math.round((p.amount || 0) / 100); t.n++; });
+
+      r[2].forEach(function (p) { if (p.status !== 'paid') return; cns.rs += Math.round((p.amount || 0) / 100); cns.n++; });
+
+      ((r[3] && r[3].purchases) || []).forEach(function (p) { if (p.status !== 'paid') return; var t = p.plan === 'notes' ? notes : book; t.rs += p.final_amount || 0; t.n++; });
+
+      var parts = [['Premium', prem], ['Ultra Premium', ult], ['Book', book], ['Short Notes', notes], ['Counselling', cns]];
+
+      var total = parts.reduce(function (t, x) { return t + x[1].rs; }, 0), count = parts.reduce(function (t, x) { return t + x[1].n; }, 0);
+
+      host.innerHTML = parts.map(function (x) { return '<div class="xk-kpi"><b>' + rupee(x[1].rs) + '</b><span>' + x[0] + ' · ' + x[1].n + ' paid</span></div>'; }).join('') +
+
+        '<div class="xk-kpi" style="background:#ecfdf5;border-color:#6ee7b7"><b style="color:#047857">' + rupee(total) + '</b><span>TOTAL · ' + count + ' paid</span></div>';
+
+      ['s-rev', 'py-tot'].forEach(function (id) { if ($(id)) $(id).textContent = rupee(total); });
+
+      if ($('py-cnt')) $('py-cnt').textContent = count;
+
+      if ($('py-pr')) $('py-pr').textContent = rupee(prem.rs);
+
+      if ($('py-ul')) $('py-ul').textContent = rupee(ult.rs);
+      // Update new dashboard stat cards for Book and Notes
+      if ($('s-book')) $('s-book').textContent = rupee(book.rs) + ' · ' + book.n + ' paid';
+      if ($('s-notes')) $('s-notes').textContent = rupee(notes.rs) + ' · ' + notes.n + ' sold';
+
     });
+
   }
 
-  /* ───────────── revenue breakdown (dashboard + payments) ───────────── */
-  function loadRevenue() {
-    var host = $('rev-break');
-    if (!host) {
-      var dash = $('page-dashboard'); if (!dash) return;
-      dash.insertAdjacentHTML('afterbegin', '<div class="card" style="margin-bottom:16px"><div class="card-hdr"><div class="card-title"><i class="fas fa-indian-rupee-sign" style="color:var(--gr)"></i> Revenue by product</div></div><div class="card-body"><div class="xk-grid" id="rev-break">Loading…</div></div></div>');
-      host = $('rev-break');
-    }
-    var sbc = window.sb;
-    var q = function (p) { return Promise.resolve(p).then(function (r) { return (r && r.data) || []; }).catch(function () { return []; }); };
-    Promise.all([
-      sbc ? q(sbc.from('premium_payments').select('user_id,amount,status')) : [],
-      sbc ? q(sbc.from('ultra_premium_users').select('user_id')) : [],
-      sbc ? q(sbc.from('counseling_payments').select('amount,status')) : [],
-      api('book?view=purchases')
-    ]).then(function (r) {
-      var ultra = {}; r[1].forEach(function (u) { ultra[u.user_id] = 1; });
-      var prem = { rs: 0, n: 0 }, ult = { rs: 0, n: 0 }, cns = { rs: 0, n: 0 }, book = { rs: 0, n: 0 }, notes = { rs: 0, n: 0 };
-      r[0].forEach(function (p) { if (p.status !== 'paid') return; var t = ultra[p.user_id] ? ult : prem; t.rs += Math.round((p.amount || 0) / 100); t.n++; });
-      r[2].forEach(function (p) { if (p.status !== 'paid') return; cns.rs += Math.round((p.amount || 0) / 100); cns.n++; });
-      ((r[3] && r[3].purchases) || []).forEach(function (p) { if (p.status !== 'paid') return; var t = p.plan === 'notes' ? notes : book; t.rs += p.final_amount || 0; t.n++; });
-      var parts = [['Premium', prem], ['Ultra Premium', ult], ['Book', book], ['Short Notes', notes], ['Counselling', cns]];
-      var total = parts.reduce(function (t, x) { return t + x[1].rs; }, 0), count = parts.reduce(function (t, x) { return t + x[1].n; }, 0);
-      host.innerHTML = parts.map(function (x) { return '<div class="xk-kpi"><b>' + rupee(x[1].rs) + '</b><span>' + x[0] + ' · ' + x[1].n + ' paid</span></div>'; }).join('') +
-        '<div class="xk-kpi" style="background:#ecfdf5;border-color:#6ee7b7"><b style="color:#047857">' + rupee(total) + '</b><span>TOTAL · ' + count + ' paid</span></div>';
-      ['s-rev', 'py-tot'].forEach(function (id) { if ($(id)) $(id).textContent = rupee(total); });
-      if ($('py-cnt')) $('py-cnt').textContent = count;
-      if ($('py-pr')) $('py-pr').textContent = rupee(prem.rs);
-      if ($('py-ul')) $('py-ul').textContent = rupee(ult.rs);
-    });
-  }
-
-  /* ───────────── Counselling (the counseling-admin page, embedded) ───────────── */
-  var CNS = [['cnspending', 'pending', 'fa-hourglass-half', 'Pending Requests'], ['cnsreviewed', 'reviewed', 'fa-eye', 'Reviewed Requests'], ['cnssent', 'sent', 'fa-check-circle', 'Sent & Approved'],
-    ['cnschats', 'chats', 'fa-comments', 'Student Chats'], ['cnsstudents', 'students', 'fa-users', 'Counselling Students'], ['cnsadd', 'adduser', 'fa-user-plus', 'Add Counselling User']];
-  function buildCns() {
-    var nav = document.querySelector('.sb-nav'), main = document.querySelector('.main'); if (!nav || !main || $('page-cnspending')) return;
-    var h = '<div class="sb-section">Counselling</div>';
-    CNS.forEach(function (c) { h += '<button class="sb-link" onclick="gotoPage(' + "'" + c[0] + "'" + ',this)"><i class="fas ' + c[2] + '"></i> ' + c[3] + '</button>'; });
-    nav.insertAdjacentHTML('beforeend', h);
-    CNS.forEach(function (c) {
-      main.insertAdjacentHTML('beforeend', '<div class="page" id="page-' + c[0] + '" style="padding:0"><iframe id="fr-' + c[0] + '" title="' + c[3] + '" style="width:100%;height:calc(100vh - 70px);border:0;display:block"></iframe></div>');
-      TITLES[c[0]] = c[3];
-      LOADERS[c[0]] = function () {
-        var f = $('fr-' + c[0]), src = '/counseling-admin?embed=1#' + c[1];
-        if (!f.getAttribute('data-ok')) { f.setAttribute('data-ok', '1'); f.src = src; return; }
-        try { f.contentWindow.location.hash = c[1]; if (f.contentWindow.reloadCurrent) f.contentWindow.reloadCurrent(); } catch (e) { f.src = src; }
-      };
-    });
-  }
-
+
+
+  /* ───────────── Counselling (the counseling-admin page, embedded) ───────────── */
+
+  var CNS = [['cnspending', 'pending', 'fa-hourglass-half', 'Pending Requests'], ['cnsreviewed', 'reviewed', 'fa-eye', 'Reviewed Requests'], ['cnssent', 'sent', 'fa-check-circle', 'Sent & Approved'],
+
+    ['cnschats', 'chats', 'fa-comments', 'Student Chats'], ['cnsstudents', 'students', 'fa-users', 'Counselling Students'], ['cnsadd', 'adduser', 'fa-user-plus', 'Add Counselling User']];
+
+  function buildCns() {
+
+    var nav = document.querySelector('.sb-nav'), main = document.querySelector('.main'); if (!nav || !main || $('page-cnspending')) return;
+
+    var h = '<div class="sb-section">Counselling</div>';
+
+    CNS.forEach(function (c) { h += '<button class="sb-link" onclick="gotoPage(' + "'" + c[0] + "'" + ',this)"><i class="fas ' + c[2] + '"></i> ' + c[3] + '</button>'; });
+
+    nav.insertAdjacentHTML('beforeend', h);
+
+    CNS.forEach(function (c) {
+
+      main.insertAdjacentHTML('beforeend', '<div class="page" id="page-' + c[0] + '" style="padding:0"><iframe id="fr-' + c[0] + '" title="' + c[3] + '" style="width:100%;height:calc(100vh - 70px);border:0;display:block"></iframe></div>');
+
+      TITLES[c[0]] = c[3];
+
+      LOADERS[c[0]] = function () {
+
+        var f = $('fr-' + c[0]), src = '/counseling-admin?embed=1#' + c[1];
+
+        if (!f.getAttribute('data-ok')) { f.setAttribute('data-ok', '1'); f.src = src; return; }
+
+        try { f.contentWindow.location.hash = c[1]; if (f.contentWindow.reloadCurrent) f.contentWindow.reloadCurrent(); } catch (e) { f.src = src; }
+
+      };
+
+    });
+
+  }
+
+
+
   /* ───────────── wiring ───────────── */
   function wire() {
     $('cp-kind').onchange = kindHint; kindHint();
@@ -321,10 +385,9 @@
     };
     $('nt-csv-p').onclick = function () { csvOut('short_notes_purchases', [['Date', 'Name', 'Mobile', 'Email', 'College', 'Paid', 'Coupon', 'Status', 'Payment id']].concat((notesCache.purchases || []).map(function (p) { var u = p.book_users || {}; return [p.created_at, u.full_name, u.mobile, u.email, u.college, p.final_amount, p.coupon, p.status, p.rzp_payment_id]; }))); };
     $('nt-csv-o').onclick = function () { csvOut('short_notes_owners', [['Name', 'Mobile', 'Email', 'City', 'College', 'Branch', 'Via', 'Reader opens', 'Joined']].concat((notesCache.owners || []).map(function (u) { return [u.full_name, u.mobile, u.email, u.city, u.college, u.branch, u.via, u.opens, u.created_at]; }))); };
-    $('tr-csv').onclick = function () { csvOut('premium_free_trials', [['Name', 'Mobile', 'Email', 'College', 'Paper used', 'Tools used', 'Joined', 'Paid']].concat((window.__trials || []).map(function (t) { return [t.name, t.mobile, t.email, t.college, t.papers.join(' '), t.tools.join(' '), t.joined, t.converted]; }))); };
     $('bku-go').onclick = loadUsers; $('bku-q').addEventListener('keydown', function (e) { if (e.key === 'Enter') loadUsers(); }); $('bku-csv').onclick = exportUsers;
   }
-  var LOADERS = { bkcoupons: loadCoupons, bkusers: loadUsers, bkbuy: loadPurchases, bknotes: loadNotes, bktrial: loadTrials, bkvio: loadViolations, bkdev: loadDevices };
+  var LOADERS = { bkcoupons: loadCoupons, bkusers: loadUsers, bkbuy: loadPurchases, bknotes: loadNotes, bkvio: loadViolations, bkdev: loadDevices };
   function hook() {
     var orig = window.loadPage;
     window.loadPage = function (n) {

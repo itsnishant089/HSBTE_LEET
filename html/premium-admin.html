@@ -115,6 +115,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 @media(max-width:700px){#sidebar{display:none}.layout{flex-direction:column}.page{padding:16px}.form-row{grid-template-columns:1fr}}
   </style>
   <link rel="stylesheet" href="/css/seo-related.css"/>
+  <!-- EmailJS SDK — needed for violation warning emails and ban notices -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <!-- Favicon & Icons -->
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
@@ -175,12 +177,38 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="stats-grid">
-        <div class="stat-card sc-blue"><div class="stat-icon">👥</div><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Total Users</div><div class="stat-sub" id="s-today">+0 today</div></div>
+      <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+        <div class="stat-card sc-blue"><div class="stat-icon">👥</div><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Total Premium Users</div><div class="stat-sub" id="s-today">+0 today</div></div>
         <div class="stat-card sc-gold"><div class="stat-icon">👑</div><div class="stat-val" id="s-prem">—</div><div class="stat-lbl">Premium (₹69)</div></div>
         <div class="stat-card sc-purple"><div class="stat-icon">🚀</div><div class="stat-val" id="s-ultra">—</div><div class="stat-lbl">Ultra Premium (₹99)</div></div>
+        <div class="stat-card sc-blue"><div class="stat-icon">📚</div><div class="stat-val" id="s-book">—</div><div class="stat-lbl">Book Accounts</div></div>
+        <div class="stat-card sc-purple"><div class="stat-icon">⚡</div><div class="stat-val" id="s-notes">—</div><div class="stat-lbl">Short Notes Owners</div></div>
         <div class="stat-card sc-green"><div class="stat-icon">💰</div><div class="stat-val" id="s-rev">—</div><div class="stat-lbl">Total Revenue</div></div>
+        <div class="stat-card sc-gold"><div class="stat-icon">📱</div><div class="stat-val" id="s-devices">—</div><div class="stat-lbl">Book Active Devices</div></div>
         <div class="stat-card sc-red"><div class="stat-icon">⭐</div><div class="stat-val" id="s-pend-rev">—</div><div class="stat-lbl">Pending Reviews</div></div>
+      </div>
+
+      <!-- Quick UPI Payment Recorder -->
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-hdr"><div class="card-title"><i class="fas fa-indian-rupee-sign" style="color:#10b981"></i> Record UPI / Direct Payment</div></div>
+        <div class="card-body">
+          <div class="form-row">
+            <div>
+              <label class="fl">Mobile Number</label>
+              <input type="tel" class="form-input" id="upi-mob" placeholder="10-digit mobile" maxlength="10"/>
+            </div>
+            <div>
+              <label class="fl">Amount Paid (₹)</label>
+              <input type="number" class="form-input" id="upi-amt" placeholder="e.g. 69"/>
+            </div>
+            <div>
+              <label class="fl">UPI Ref / Transaction Note</label>
+              <input type="text" class="form-input" id="upi-ref" placeholder="optional — e.g. UPI_12345"/>
+            </div>
+          </div>
+          <div id="upi-msg" class="alert" style="margin-top:10px"></div>
+          <button class="btn btn-green" style="margin-top:12px" onclick="recordUpiPayment()" id="upi-btn"><i class="fas fa-check-circle"></i> Record Payment</button>
+        </div>
       </div>
       <div class="card">
         <div class="card-hdr"><div class="card-title"><i class="fas fa-user-plus" style="color:var(--gr)"></i> Recent Signups</div></div>
@@ -550,7 +578,10 @@ function gotoPage(name,btn){
 function reloadPage(){loadPage(curPage);}
 function loadPage(n){if(n==='dashboard')loadDash();else if(n==='users')loadUsers();else if(n==='payments')loadPay();else if(n==='referrals')loadRefs();else if(n==='reviews')loadRevs();else if(n==='security')loadSecurity();else if(n==='activity')loadActivity();else if(n==='notify')loadNotifications();else if(n==='leetleads')loadLeads();}
 function safe(q){return q.then(function(r){return r.error?{data:[],error:r.error}:r;}).catch(function(){return{data:[]};});}
-function initAdmin(){loadDash();document.getElementById('wm-type').addEventListener('change',toggleCustom);}
+function initAdmin(){
+  if(!sessionStorage.getItem('adm_api_token')){return;}
+  loadDash();document.getElementById('wm-type').addEventListener('change',toggleCustom);
+}
 
 async function loadDash(){
   try{
@@ -579,6 +610,39 @@ async function loadDash(){
       return'<tr><td><strong>'+e(r.full_name||'—')+'</strong></td><td><code style="font-size:12px">'+e(r.mobile||'—')+'</code></td><td><span class="badge b-gold">Premium</span></td><td>₹'+(amtRs||'—')+'</td><td style="color:var(--mu);font-size:12px">'+fd(r.created_at)+'</td></tr>';
     }).join('');
   }catch(err){console.error(err);}
+  // Load Book stats for dashboard cards
+  try{
+    var t=sessionStorage.getItem('adm_api_token');
+    if(t){
+      var bRes=await fetch('/api/admin/book?view=overview',{headers:{'Authorization':'Bearer '+t}});
+      var bData=await bRes.json().catch(function(){return{};});
+      if(bData.ok){
+        var sBook=document.getElementById('s-book');var sNotes=document.getElementById('s-notes');var sDevices=document.getElementById('s-devices');
+        if(sBook)sBook.textContent=bData.users||0;
+        if(sNotes)sNotes.textContent=bData.notesUsers||0;
+        if(sDevices)sDevices.textContent=bData.full||0;
+      }
+    }
+  }catch(be){console.warn('Book stats:',be);}
+}
+
+async function recordUpiPayment(){
+  var mob=(document.getElementById('upi-mob').value||'').trim();
+  var amt=parseInt(document.getElementById('upi-amt').value)||0;
+  var ref=(document.getElementById('upi-ref').value||'').trim()||'UPI_DIRECT_'+Date.now();
+  var alrt=document.getElementById('upi-msg'),btn=document.getElementById('upi-btn');
+  if(!/^\d{10}$/.test(mob)){alrt.className='alert alert-danger show';alrt.textContent='Enter valid 10-digit mobile.';return;}
+  if(amt<=0){alrt.className='alert alert-danger show';alrt.textContent='Enter amount greater than 0.';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Recording…';alrt.className='alert';
+  try{
+    var{data:usr}=await sb.from('premium_users').select('id,full_name').eq('mobile',mob).maybeSingle();
+    if(!usr){alrt.className='alert alert-danger show';alrt.textContent='No premium user found with mobile '+mob+'. Use "Add User Manually" to create one first.';btn.disabled=false;btn.innerHTML='<i class="fas fa-check-circle"></i> Record Payment';return;}
+    await admApi('users',{action:'record_payment',userId:usr.id,amount:amt,reference:ref});
+    alrt.className='alert alert-success show';alrt.textContent='✅ Recorded ₹'+amt+' from '+usr.full_name+' ('+mob+') — ref: '+ref;
+    document.getElementById('upi-mob').value='';document.getElementById('upi-amt').value='';document.getElementById('upi-ref').value='';
+    loadDash();
+  }catch(err){alrt.className='alert alert-danger show';alrt.textContent='Error: '+err.message;}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-check-circle"></i> Record Payment';
 }
 
 async function loadLeads(){
@@ -1604,7 +1668,7 @@ setInterval(function(){
   setTimeout(refresh, 1500); setInterval(refresh, 60000);
 })();
 </script>
-<script src="/js/admin-extra.js?v=20261022"></script>
+<script src="/js/admin-extra.js?v=20261107"></script>
 </body>
 </html>
 

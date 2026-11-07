@@ -121,6 +121,12 @@ export async function onRequest(context) {
       case 'fine': await patch(env, 'book_users', uq, { fine_amount: Math.max(0, Math.round(+b.amount || 0)) }); break;
       case 'note': await patch(env, 'book_users', uq, { admin_note: clean(b.note, 500) }); break;
       case 'mark_delivered': await patch(env, 'book_purchases', 'id=' + eq(b.purchaseId || ''), { delivered: b.delivered !== false }); break;
+      case 'edit_amount': {
+        const amt = Math.max(0, Math.round(+b.amount || 0));
+        const r = await patch(env, 'book_purchases', 'id=' + eq(b.purchaseId || ''), { final_amount: amt, status: amt > 0 ? 'paid' : 'free', paid_at: new Date().toISOString() });
+        if (!r.ok) return fail('Could not update amount.', 500);
+        break;
+      }
       case 'set_password': {
         const pw = String(b.password || '');
         if (pw.length < 6 || pw.length > 100) return fail('Password must be 6 to 100 characters.');
