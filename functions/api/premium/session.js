@@ -1,13 +1,13 @@
 /**
  * Premium / Ultra login session (cookie checked by functions/_middleware.js before any premium paper is served).
  *   POST   /api/premium/session { mobile, password }  → verifies, sets the HttpOnly cookie, returns { user, tier }
- *          tier = 'ultra' | 'premium' | 'free' (free-trial account: registered, no purchase yet)
- *   GET    /api/premium/session                       → { ok, user, tier, trial } if the cookie is valid
+ *          tier = 'ultra' | 'premium'
+ *   GET    /api/premium/session                       → { ok, user, tier } if the cookie is valid
  *   DELETE /api/premium/session                       → logout
  */
 import { json, fail, body, requireEnv, throttle, clientInfo } from '../../_lib/book-core.js';
 import {
-  verifyStudent, accessRow, trialStatus, isUltraUser, issuePremiumCookie, clearCookieHeader, readCookie,
+  verifyStudent, accessRow, isUltraUser, issuePremiumCookie, clearCookieHeader, readCookie,
   verifyToken, normMobile, one, eq
 } from '../../_lib/pay-core.js';
 
@@ -23,11 +23,13 @@ export async function onRequest(context) {
     if (!p || p.k !== 'prem') return fail('Not logged in.', 401, 'auth');
     const u = await one(env, 'premium_users', 'id=' + eq(p.uid) + '&select=id,mobile,email,full_name');
     const acc = await accessRow(env, p.uid);
-    const free = acc === null;           // no access row at all → free-trial account
+    // acc === null means no purchase row — block (free trial removed)
+    if (acc === null || !acc || !acc.is_active) return fail('Account not active.', 403, 'inactive');
+    const ultra = await isUltraUser(env, { id: p.uid, mobile: p.m });
     return json({
-      ok: true, user: { id: p.uid, mobile: p.m, email: u ? u.email : '', full_name: u ? u.full_name : '' },
-      tier: free ? 'free' : (acc && acc.is_active ? 'paid' : 'inactive'),
-      trial: free ? await trialStatus(env, p.uid) : null
+      ok: true,
+      user: { id: p.uid, mobile: p.m, email: u ? u.email : '', full_name: u ? u.full_name : '' },
+      tier: ultra ? 'ultra' : 'premium'
     });
   }
 
@@ -39,12 +41,10 @@ export async function onRequest(context) {
     const user = await verifyStudent(env, mobile, pass);
     if (!user) return fail('Invalid mobile or password.', 401, 'credentials');
     const acc = await accessRow(env, user.id);
-    const out = { id: user.id, mobile: user.mobile, email: user.email, full_name: user.full_name };
-    if (acc === null) { // registered through the free trial, nothing bought yet
-      return json({ ok: true, user: out, tier: 'free', trial: await trialStatus(env, user.id) }, 200, { 'set-cookie': await issuePremiumCookie(env, user) });
-    }
-    if (!acc || !acc.is_active) return fail('Account not active.', 403, 'inactive');
+    // acc === null means registered but no purchase — deny login
+    if (acc === null || !acc || !acc.is_active) return fail('Account not active. Please purchase Premium access to continue.', 403, 'inactive');
     const ultra = await isUltraUser(env, user);
+    const out = { id: user.id, mobile: user.mobile, email: user.email, full_name: user.full_name };
     return json({ ok: true, user: out, tier: ultra ? 'ultra' : 'premium' }, 200, { 'set-cookie': await issuePremiumCookie(env, user) });
   }
   return fail('Method not allowed.', 405);

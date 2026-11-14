@@ -1,5 +1,5 @@
 import { verifyToken, rest, eq } from './_lib/book-core.js';
-import { readCookie, trialKind, trialConsume } from './_lib/pay-core.js';
+import { readCookie } from './_lib/pay-core.js';
 
 /**
  * Premium papers (questions + answers are inside the HTML) are only served to a logged-in student whose access
@@ -8,16 +8,6 @@ import { readCookie, trialKind, trialConsume } from './_lib/pay-core.js';
 const GATED = /^\/(?:html\/)?(premium-sample-paper-\d+|section-[a-d]-[12]|premium-notes|rank-analysis|study-plan|college-predictor)(?:\.html)?\/?$/i;
 // Ultra-only tools (Premium members are sent to the Ultra page instead of the login page)
 const ULTRA_ONLY = new Set(['study-plan', 'college-predictor']);
-// The single paper every free-trial account can open (override with the TRIAL_FREE_PAPER env var)
-const freePaperSlug = env => String(env.TRIAL_FREE_PAPER || 'premium-sample-paper-1').toLowerCase();
-
-function upgradeRedirect(url, slug, ended) {
-  const dest = new URL('/premium-login', url.origin);
-  dest.searchParams.set('upgrade', '1');
-  if (ended) dest.searchParams.set('trial', 'ended');
-  dest.searchParams.set('next', '/' + slug.toLowerCase());
-  return new Response(null, { status: 302, headers: { location: dest.toString(), 'cache-control': 'private, no-store' } });
-}
 
 async function premiumGate(context, url) {
   let pn = url.pathname;
@@ -28,27 +18,15 @@ async function premiumGate(context, url) {
   if (!env.SESSION_SECRET || !env.MAIN_SUPABASE_URL || !env.MAIN_SUPABASE_SERVICE_KEY) return null;
   const p = await verifyToken(env.SESSION_SECRET, readCookie(context.request));
   let ok = !!(p && p.k === 'prem');
-  let trialEnded = false;
   if (ok) {
-    let row;        // undefined = unknown, null = no access row (free-trial account)
+    let row;        // undefined = unknown, null = no access row → no free trial, deny immediately
     try { // access can be revoked by the admin at any time
       const r = await rest(env, 'premium_access', 'user_id=' + eq(p.uid) + '&select=is_active&limit=1');
       if (r.ok && Array.isArray(r.data)) row = r.data[0] || null;
     } catch (e) { /* database hiccup: keep the signed cookie's verdict */ }
-    if (row === null) {
-      // registered through the free trial and has not bought anything: ONE fixed free paper + 2 non-Ultra tools, then the upgrade page
-      const slug = m[1].toLowerCase();
-      // Ultra tools are never free (new throw-away accounts must not be able to use them)
-      if (ULTRA_ONLY.has(slug)) return new Response(null, { status: 302, headers: { location: new URL('/ultra-premium', url.origin).toString(), 'cache-control': 'private, no-store' } });
-      // Only the one designated free paper is open; every other paper needs Premium
-      if (trialKind(slug) === 'paper' && slug !== freePaperSlug(env)) return upgradeRedirect(url, m[1], false);
-      try {
-        const t = await trialConsume(env, p.uid, trialKind(slug), slug);
-        ok = !!t.allowed; trialEnded = !t.allowed && !t.error;
-      } catch (e) { ok = false; }
-      return ok ? 'allow' : upgradeRedirect(url, m[1], trialEnded);
-    }
-    if (row !== undefined) ok = row.is_active === true;
+    // row === null means registered but no purchase — deny, redirect to login/upgrade
+    if (row === null) ok = false;
+    if (row !== undefined && row !== null) ok = row.is_active === true;
     if (ok && ULTRA_ONLY.has(m[1].toLowerCase())) {
       try {
         let u = await rest(env, 'ultra_premium_users', 'user_id=' + eq(p.uid) + '&select=id&limit=1');

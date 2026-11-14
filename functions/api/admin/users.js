@@ -84,20 +84,13 @@ export async function onRequest(context) {
       if (!active) {
         const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: false });
         if (r.ok && r.data && r.data.length) return json({ ok: true, active });
-        if (r.ok) {   // free-trial account with no access row yet: a row with is_active=false revokes the trial too
+        if (r.ok) {   // account may have no access row yet — insert one to block them
           const ins = await insert(env, 'premium_access', { user_id: uid, is_active: false });
           if (ins.ok) return json({ ok: true, active });
         }
         return fail('Database error while updating access.', 500);
       }
-      // Unblock: a student who never paid goes back to the free trial (row removed); a paying student gets the row switched back on
-      const pays = await rest(env, 'premium_payments', 'user_id=' + eq(uid) + '&status=in.(paid,free_coupon)&select=id&limit=1');
-      const ultra = await rest(env, 'ultra_premium_users', 'user_id=' + eq(uid) + '&select=id&limit=1');
-      const paying = (pays.ok && Array.isArray(pays.data) && pays.data.length > 0) || (ultra.ok && Array.isArray(ultra.data) && ultra.data.length > 0);
-      if (!paying) {
-        const d = await rest(env, 'premium_access', 'user_id=' + eq(uid), { method: 'DELETE' });
-        return d.ok ? json({ ok: true, active, trial: true }) : fail('Database error while updating access.', 500);
-      }
+      // Unblock: switch the access row back on
       const r = await patch(env, 'premium_access', 'user_id=' + eq(uid), { is_active: true });
       if (r.ok && r.data && r.data.length) return json({ ok: true, active });
       if (r.ok) {
